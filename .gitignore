@@ -39,6 +39,8 @@ data-source/
 scrollcraft/lab/
 scrollcraft/builds/*/lab/
 reports/
+# research reports are written by hand and belong in git (research/raw/ stays ignored)
+!research/reports/
 lab/
 playwright-report/
 test-results/
