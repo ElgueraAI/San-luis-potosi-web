@@ -1,0 +1,20 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { href } from '@/i18n/routes';
+---
+<BaseLayout title="Página no encontrada">
+  <section class="slp-404" data-ground="light" data-chrome="solid">
+    <div class="sc-wrap">
+      <p class="slp-label">404</p>
+      <h1 class="sc-display">Este camino no está en la línea.</h1>
+      <p class="sc-lede">La página que buscas no existe o todavía está en preparación.</p>
+      <a class="slp-btn" href={href('home')}>Volver al inicio</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .slp-404 { min-height: 100svh; display: grid; align-items: center; padding-block: calc(var(--slp-header-h) + var(--sc-8)) var(--sc-9); }
+  .slp-404 .sc-wrap { display: grid; gap: var(--sc-5); justify-items: start; }
+  .slp-404 h1 { font-size: var(--sc-t-3xl); max-width: 16ch; }
+</style>

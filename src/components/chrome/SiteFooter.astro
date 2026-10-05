@@ -1,0 +1,48 @@
+---
+import { t, type Locale } from '@/i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="slp-footer" data-ground="dark" data-chrome="solid">
+  <div class="sc-wrap slp-footer__inner">
+    <p class="slp-footer__mark">{t(locale, 'site.tagline')}</p>
+    <div class="slp-footer__notes">
+      <p>{t(locale, 'footer.note')}</p>
+      <p>{t(locale, 'footer.demo')}</p>
+      <p>© {year} San Luis Potosí · Cuatro mundos</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .slp-footer {
+    padding-block: var(--sc-9) calc(var(--sc-8) + var(--slp-line-h));
+    border-top: 1px solid var(--sc-hairline);
+  }
+  .slp-footer__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: var(--sc-7);
+    align-items: end;
+  }
+  .slp-footer__mark {
+    font-family: var(--sc-font-display);
+    font-size: var(--sc-t-2xl);
+    font-weight: 600;
+    line-height: 1.02;
+    max-width: 14ch;
+  }
+  .slp-footer__notes {
+    display: grid;
+    gap: var(--sc-2);
+    font-size: var(--sc-t-sm);
+    color: var(--sc-ink-soft);
+  }
+  @media (max-width: 860px) {
+    .slp-footer__inner { grid-template-columns: 1fr; }
+  }
+</style>

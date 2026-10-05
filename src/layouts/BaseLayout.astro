@@ -1,0 +1,75 @@
+---
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource/cormorant-garamond/500-italic.css';
+import '@fontsource-variable/manrope';
+import '@/vendor/scrollcraft/scrollcraft.css';
+import '@/styles/tokens.css';
+import '@/styles/base.css';
+
+import SiteHeader from '@/components/chrome/SiteHeader.astro';
+import TheLine from '@/components/chrome/TheLine.astro';
+import MenuSheet from '@/components/chrome/MenuSheet.astro';
+import SiteFooter from '@/components/chrome/SiteFooter.astro';
+import { t, langTag, type Locale } from '@/i18n';
+import { asset } from '@/i18n/routes';
+import { getRegions } from '@/lib/regions';
+
+interface Props {
+  title?: string;
+  description?: string;
+  locale?: Locale;
+}
+
+const { title, description, locale = 'es' } = Astro.props;
+const pageTitle = title ? `${title} · ${t(locale, 'site.name')}` : `${t(locale, 'site.name')} · ${t(locale, 'site.tagline')}`;
+const pageDescription = description ?? t(locale, 'site.description');
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const regions = await getRegions();
+---
+<!doctype html>
+<html lang={langTag[locale]} style={`--slp-contours: url("${asset('placeholders/contours.svg')}")`}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#1f2524" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:locale" content="es_MX" />
+    <link rel="icon" href={asset('favicon.svg')} type="image/svg+xml" />
+
+    <!-- Motion tier, decided before first paint so the layout never jumps.
+         No JavaScript means no attribute, which the CSS treats as static. -->
+    <script is:inline>
+      (function () {
+        var d = document.documentElement, tier = 'full';
+        try {
+          var c = navigator.connection || {};
+          if (matchMedia('(prefers-reduced-motion: reduce)').matches) tier = 'static';
+          else if (c.saveData || /(^|-)2g$/.test(c.effectiveType || '') || (navigator.deviceMemory && navigator.deviceMemory <= 2)) tier = 'lite';
+        } catch (e) {}
+        d.setAttribute('data-motion', tier);
+      })();
+    </script>
+    <script is:inline defer src={asset('vendor/scrollcraft/scrollcraft.js')}></script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="slp-skip slp-btn" href="#contenido">{t(locale, 'a11y.skip')}</a>
+    <SiteHeader locale={locale} regions={regions} />
+    <TheLine locale={locale} regions={regions} />
+    <main id="contenido" tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter locale={locale} />
+    <MenuSheet locale={locale} regions={regions} />
+    <div class="sc-grain" aria-hidden="true"></div>
+    <script>
+      import '@/motion/boot';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+id: altiplano
+order: 1
+published: false
+name: { es: Altiplano, en: Altiplano }
+# Name as it reads inside a sentence ("Explora la Huasteca").
+nameInSentence: { es: el Altiplano, en: the Altiplano }
+officialName: { es: Zona Altiplano, en: Altiplano Region }
+# The client's own words for this region (creative brief).
+keywords:
+  - { es: místico, en: mystical }
+  - { es: desierto, en: desert }
+  - { es: silencio, en: silence }
+  - { es: historia, en: history }
+  - { es: minería, en: mining }
+  - { es: inmensidad, en: vastness }
+  - { es: estrellas, en: stars }
+ground: dark
+transition: shadow
+light: { es: Amanecer, en: Dawn }
+anchor: lead
+descent:
+  lede:
+    es: Desierto, minas y silencio. Pueblos de piedra que guardan su historia bajo un cielo enorme.
+    en: Desert, mines and silence. Stone towns that keep their history under an enormous sky.
+  fill: altiplano-descent-fill
+altitudeRange: { value: null, status: pending, note: Pendiente del transecto INEGI CEM. }
+municipalities: { value: null, status: pending, note: Pendiente de la asignación oficial del Gobierno del Estado. }

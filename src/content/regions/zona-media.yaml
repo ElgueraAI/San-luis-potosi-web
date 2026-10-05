@@ -1,0 +1,24 @@
+id: zona-media
+order: 3
+published: false
+name: { es: Zona Media, en: Zona Media }
+# Name as it reads inside a sentence ("Explora la Huasteca").
+nameInSentence: { es: la Zona Media, en: the Zona Media }
+officialName: { es: Zona Media, en: Middle Region }
+keywords:
+  - { es: agua, en: water }
+  - { es: calma, en: calm }
+  - { es: frescura, en: freshness }
+  - { es: descubrimiento, en: discovery }
+  - { es: lugares escondidos, en: hidden places }
+ground: light
+transition: waterline
+light: { es: Mediodía, en: Midday }
+anchor: center
+descent:
+  lede:
+    es: Agua clara, frescura y lugares escondidos. Aquí el viaje cambia de ritmo.
+    en: Clear water, freshness and hidden places. Here the journey changes pace.
+  fill: zona-media-descent-fill
+altitudeRange: { value: null, status: pending, note: Pendiente del transecto INEGI CEM. }
+municipalities: { value: null, status: pending, note: Pendiente de la asignación oficial del Gobierno del Estado. }

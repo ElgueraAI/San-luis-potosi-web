@@ -1,0 +1,198 @@
+---
+import { t, pick, type Locale } from '@/i18n';
+import { href, homeAnchor } from '@/i18n/routes';
+import { primaryNav, planNav } from '@/data/nav';
+import { profile, worldPath } from '@/data/geo';
+import type { RegionWithBounds } from '@/lib/regions';
+
+interface Props {
+  locale: Locale;
+  regions: RegionWithBounds[];
+}
+const { locale, regions } = Astro.props;
+const sections = [...primaryNav.filter((i) => i.key !== 'nav.regions'), planNav].filter((i) => i.ready);
+---
+<dialog id="slp-menu" class="slp-menu" data-ground="dark" aria-labelledby="slp-menu-title">
+  <div class="slp-menu__inner">
+    <div class="slp-menu__bar">
+      <p id="slp-menu-title" class="slp-menu__title">{t(locale, 'menu.title')}</p>
+      <button class="slp-menu__close" type="button" data-menu-close>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+        </svg>
+        <span class="visually-hidden">{t(locale, 'a11y.menuClose')}</span>
+      </button>
+    </div>
+
+    <nav class="slp-menu__regions" aria-labelledby="slp-menu-regions">
+      <h2 id="slp-menu-regions" class="slp-label">{t(locale, 'menu.regions')}</h2>
+      <ol role="list">
+        {regions.map((r) => (
+          <li data-region={r.id} data-ground="dark">
+            <a href={homeAnchor(`descenso-${r.id}`, locale)} data-menu-link>
+              <svg class="slp-menu__seg" viewBox={`${r.bounds.from * 1000} 0 ${(r.bounds.to - r.bounds.from) * 1000} 300`} preserveAspectRatio="none" aria-hidden="true">
+                <path d={worldPath(profile.points, r.bounds.from, r.bounds.to)} vector-effect="non-scaling-stroke" />
+              </svg>
+              <span class="slp-menu__name">{pick(r.name, locale)}</span>
+              <span class="slp-menu__light">{pick(r.light, locale)}</span>
+            </a>
+            {r.published ? (
+              <a class="slp-link slp-link--tap slp-menu__page" href={href('region', { region: r.id }, locale)} data-menu-link>
+                {t(locale, 'descent.explore', { region: pick(r.nameInSentence, locale) })}
+              </a>
+            ) : (
+              <span class="slp-menu__soon">{t(locale, 'descent.soon')}</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+
+    {sections.length > 0 && (
+      <nav class="slp-menu__sections" aria-labelledby="slp-menu-sections">
+        <h2 id="slp-menu-sections" class="slp-label">{t(locale, 'menu.sections')}</h2>
+        <ul role="list">
+          {sections.map((s) => (
+            <li><a href={homeAnchor(s.anchor, locale)} data-menu-link>{t(locale, s.key)}</a></li>
+          ))}
+        </ul>
+      </nav>
+    )}
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('slp-menu') as HTMLDialogElement | null;
+  if (dialog) {
+    let opener: HTMLElement | null = null;
+    document.querySelectorAll<HTMLElement>('[data-menu-open]').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        opener = btn;
+        dialog.showModal();
+        btn.setAttribute('aria-expanded', 'true');
+      }),
+    );
+    const close = () => dialog.close();
+    dialog.querySelector('[data-menu-close]')?.addEventListener('click', close);
+    dialog.querySelectorAll('[data-menu-link]').forEach((a) => a.addEventListener('click', close));
+    // A click on the backdrop lands on the dialog element itself.
+    dialog.addEventListener('click', (e) => { if (e.target === dialog) close(); });
+    dialog.addEventListener('close', () => {
+      opener?.setAttribute('aria-expanded', 'false');
+      opener?.focus();
+    });
+  }
+</script>
+
+<style>
+  .slp-menu {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: var(--sc-ink);
+    background: var(--sc-canvas);
+    overscroll-behavior: contain;
+  }
+  .slp-menu::backdrop { background: color-mix(in oklab, var(--slp-charcoal) 60%, transparent); }
+  .slp-menu[open] { animation: slp-menu-in var(--sc-d-slow) var(--sc-ease-drawer); }
+  @keyframes slp-menu-in {
+    from { opacity: 0; transform: translateY(-1.5rem); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .slp-menu[open] { animation: none; }
+  }
+
+  .slp-menu__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    gap: var(--sc-7) var(--sc-9);
+    max-width: var(--sc-maxw);
+    min-height: 100%;
+    margin-inline: auto;
+    padding: 0 var(--sc-gutter) var(--sc-8);
+  }
+  .slp-menu__bar {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--slp-header-h);
+  }
+  .slp-menu__title {
+    font-family: var(--sc-font-display);
+    font-size: var(--sc-t-lg);
+    font-weight: 600;
+  }
+  .slp-menu__close {
+    display: inline-grid;
+    place-items: center;
+    width: var(--slp-tap);
+    height: var(--slp-tap);
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .slp-menu ol, .slp-menu ul { margin: var(--sc-4) 0 0; padding: 0; list-style: none; }
+
+  .slp-menu__regions li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0 var(--sc-5);
+    padding-block: var(--sc-4);
+    border-top: 1px solid var(--sc-hairline);
+  }
+  .slp-menu__regions li > a:first-child {
+    display: grid;
+    grid-template-columns: 7rem auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    column-gap: var(--sc-5);
+    min-height: var(--slp-tap);
+    color: inherit;
+    text-decoration: none;
+  }
+  .slp-menu__seg {
+    grid-row: 1 / span 2;
+    width: 7rem;
+    height: 2.4rem;
+    overflow: visible;
+  }
+  .slp-menu__seg path { fill: none; stroke: var(--slp-region-dark); stroke-width: 2; }
+  .slp-menu__name {
+    font-family: var(--sc-font-display);
+    font-size: var(--sc-t-2xl);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .slp-menu__light { font-size: var(--sc-t-xs); letter-spacing: var(--slp-track-label); text-transform: uppercase; color: var(--sc-ink-soft); font-weight: 650; }
+  .slp-menu__soon { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+  @media (hover: hover) and (pointer: fine) {
+    .slp-menu__regions li > a:first-child:hover .slp-menu__name { font-style: italic; }
+  }
+
+  .slp-menu__sections a {
+    display: flex;
+    align-items: center;
+    min-height: 3.25rem;
+    border-top: 1px solid var(--sc-hairline);
+    color: inherit;
+    font-size: var(--sc-t-lg);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  @media (max-width: 860px) {
+    .slp-menu__inner { grid-template-columns: 1fr; gap: var(--sc-6); }
+    .slp-menu__regions li > a:first-child { grid-template-columns: 4.5rem auto; column-gap: var(--sc-4); }
+    .slp-menu__seg { width: 4.5rem; }
+  }
+</style>

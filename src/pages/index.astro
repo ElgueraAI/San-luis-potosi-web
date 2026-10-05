@@ -1,7 +1,15 @@
 ---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HomeHero from '@/components/home/HomeHero.astro';
+import Intro from '@/components/home/Intro.astro';
+import Descent from '@/components/home/Descent.astro';
+import { getRegions } from '@/lib/regions';
+
+const locale = 'es';
+const regions = await getRegions();
 ---
-<!doctype html>
-<html lang="es-MX">
-  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>San Luis Potosí</title></head>
-  <body><h1>Cuatro mundos. Un San Luis Potosí.</h1></body>
-</html>
+<BaseLayout locale={locale}>
+  <HomeHero locale={locale} regions={regions} />
+  <Intro locale={locale} regions={regions} />
+  <Descent locale={locale} regions={regions} />
+</BaseLayout>

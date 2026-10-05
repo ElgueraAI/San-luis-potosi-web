@@ -1,0 +1,11 @@
+# Keep LF everywhere so vendored files stay byte-identical to the skill's engine.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.mp4 binary
+*.webm binary
+*.pmtiles binary
+*.woff2 binary

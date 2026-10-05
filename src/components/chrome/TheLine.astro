@@ -1,0 +1,154 @@
+---
+/**
+ * The Line: the state's terrain profile as persistent navigation (desktop).
+ * Each segment is a real link to that region in the Descent. motion/line.ts
+ * moves the marker, highlights the current region and docks/collapses the bar.
+ * Phones get the same drawing inside the header (SiteHeader.astro).
+ */
+import { t, pick, type Locale } from '@/i18n';
+import { homeAnchor } from '@/i18n/routes';
+import { profile, worldPath } from '@/data/geo';
+import type { RegionWithBounds } from '@/lib/regions';
+
+interface Props {
+  locale: Locale;
+  regions: RegionWithBounds[];
+}
+const { locale, regions } = Astro.props;
+---
+<nav class="slp-line" aria-label={t(locale, 'a11y.lineNav')} data-line>
+  <div class="slp-line__inner">
+    <div class="slp-line__plot" aria-hidden="true">
+      <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
+        {regions.map((r) => (
+          <path class="slp-line__seg" data-region={r.id} d={worldPath(profile.points, r.bounds.from, r.bounds.to)} vector-effect="non-scaling-stroke" />
+        ))}
+      </svg>
+      <span class="slp-line__marker"></span>
+    </div>
+    <ol class="slp-line__regions" role="list">
+      {regions.map((r) => (
+        <li style={`--from:${r.bounds.from};--to:${r.bounds.to}`} data-region={r.id}>
+          <a href={homeAnchor(`descenso-${r.id}`, locale)} data-line-jump={r.id}>
+            <span class="slp-line__name">{pick(r.name, locale)}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</nav>
+
+<style>
+  .slp-line {
+    --plot-h: 1.7rem;
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: var(--sc-z-chrome);
+    height: var(--slp-line-h);
+    color: var(--slp-ivory);
+    --ink: var(--slp-ivory);
+    --ground: var(--slp-charcoal);
+    background: color-mix(in oklab, var(--ground) 94%, transparent);
+    box-shadow: 0 -1px 0 color-mix(in oklab, var(--ink) 14%, transparent);
+    transform: translateY(var(--slp-line-ty, 100%));
+    opacity: var(--slp-line-o, 0);
+    transition: transform var(--sc-d-slow) var(--sc-ease-out), opacity var(--sc-d-slow) var(--sc-ease-out),
+      background-color var(--sc-d-base) var(--sc-ease-out), color var(--sc-d-base) var(--sc-ease-out);
+  }
+  :global(html[data-chrome-bottom="light"]) .slp-line {
+    color: var(--slp-charcoal);
+    --ink: var(--slp-charcoal);
+    --ground: var(--slp-ivory);
+  }
+  :global(html[data-line-state="full"]) .slp-line { --slp-line-ty: 0%; --slp-line-o: 1; }
+  /* Practical sections: the line shrinks to a hairline and comes back on intent. */
+  :global(html[data-line-state="collapsed"]) .slp-line { --slp-line-ty: calc(100% - 4px); --slp-line-o: 1; }
+  :global(html[data-line-state="collapsed"]) .slp-line:is(:hover, :focus-within) { --slp-line-ty: 0%; }
+  /* A focused link must be visible, whatever the scroll state. */
+  .slp-line:focus-within { --slp-line-ty: 0% !important; --slp-line-o: 1 !important; }
+
+  .slp-line__inner {
+    position: relative;
+    height: 100%;
+    margin-inline: var(--sc-gutter);
+  }
+  .slp-line__plot {
+    position: absolute;
+    inset: 0.45rem 0 auto 0;
+    height: var(--plot-h);
+  }
+  .slp-line__plot svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .slp-line__seg {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+    opacity: 0.42;
+    transition: opacity var(--sc-d-base) var(--sc-ease-out), stroke-width var(--sc-d-base) var(--sc-ease-out);
+  }
+  .slp-line__seg[data-active] { opacity: 1; stroke-width: 2.2; }
+
+  .slp-line__marker {
+    position: absolute;
+    left: calc(var(--slp-x, 0) * 100%);
+    top: calc((1 - var(--slp-e, 0.8)) * 100%);
+    width: 11px;
+    height: 11px;
+    margin: -5.5px 0 0 -5.5px;
+    border-radius: 50%;
+    background: var(--ground);
+    border: 2px solid var(--ink);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--ground) 80%, transparent);
+  }
+
+  .slp-line__regions {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .slp-line__regions li {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--from) * 100%);
+    width: calc((var(--to) - var(--from)) * 100%);
+  }
+  .slp-line__regions li + li { border-left: 1px solid color-mix(in oklab, var(--ink) 22%, transparent); }
+  .slp-line__regions a {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    padding: 0 0.6rem 0.4rem;
+    color: inherit;
+    text-decoration: none;
+  }
+  .slp-line__name {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: var(--slp-track-label);
+    text-transform: uppercase;
+    opacity: 0.72;
+    transition: opacity var(--sc-d-fast) var(--sc-ease-out);
+  }
+  .slp-line__regions a[aria-current="true"] .slp-line__name,
+  .slp-line__regions a:hover .slp-line__name { opacity: 1; }
+  .slp-line__regions li { --deco: var(--slp-region-dark); }
+  :global(html[data-chrome-bottom="light"]) .slp-line__regions li { --deco: var(--slp-region-light); }
+  .slp-line__regions a[aria-current="true"] .slp-line__name {
+    text-decoration: underline;
+    text-decoration-color: var(--deco);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.4em;
+  }
+  .slp-line__regions a:focus-visible { outline-offset: -3px; }
+
+  @media (max-width: 860px) {
+    .slp-line { display: none; }
+  }
+</style>

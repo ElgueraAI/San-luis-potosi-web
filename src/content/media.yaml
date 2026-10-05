@@ -1,0 +1,107 @@
+# Media slot manifest. Every image or video on the site is a slot here.
+# To replace a placeholder: put the optimized file in src/assets/media/<region>/
+# (images) or public/media/video/<region>/ (video), set src, alt, credit and
+# license, and move status to "provided" (or "approved" after review).
+# A replaced file always gets a NEW filename so phones never keep stale bytes.
+#
+# kind: image | video | plane (a transparent layer of a layered scene)
+
+# ---------------------------------------------------------- home hero ------
+# Layered scene, top of the line: the Altiplano at first light.
+# Shoot note: tripod, locked off, one frame WITH and one WITHOUT the focal ruin
+# (clean plate), same lens and framing for every plane.
+- id: altiplano-hero-far
+  kind: plane
+  region: altiplano
+  role: hero
+  aspect: { desktop: "16:9", mobile: "9:16" }
+  focal: { x: 0.5, y: 0.62 }
+  subject: { es: "Placa limpia: sierra y cielo al amanecer, sin la ruina" }
+  decorative: true
+  src: { desktop: null, mobile: null }
+  status: placeholder
+- id: altiplano-hero-mid
+  kind: plane
+  region: altiplano
+  role: hero
+  aspect: { desktop: "16:9", mobile: "9:16" }
+  subject: { es: "Llanura desértica con palmas yuca, recorte con transparencia" }
+  decorative: true
+  src: { desktop: null, mobile: null }
+  status: placeholder
+- id: altiplano-hero-focal
+  kind: plane
+  region: altiplano
+  role: hero
+  aspect: { desktop: "16:9", mobile: "9:16" }
+  subject: { es: "Muro de hacienda minera en ruinas, recorte con transparencia" }
+  decorative: true
+  src: { desktop: null, mobile: null }
+  status: placeholder
+- id: altiplano-hero-near
+  kind: plane
+  region: altiplano
+  role: hero
+  aspect: { desktop: "16:9", mobile: "9:16" }
+  subject: { es: "Primer plano: agaves y piedra, recorte con transparencia" }
+  decorative: true
+  src: { desktop: null, mobile: null }
+  status: placeholder
+- id: altiplano-hero-atmos
+  kind: plane
+  region: altiplano
+  role: hero
+  aspect: { desktop: "16:9", mobile: "9:16" }
+  subject: { es: "Polvo y bruma baja a contraluz, capa translúcida" }
+  decorative: true
+  src: { desktop: null, mobile: null }
+  status: placeholder
+
+# ---------------------------------------------------------- the descent ----
+# One fill per region, shown below the terrain line. Keep the horizon in the
+# upper third so the shape of the land reads under the line.
+- id: altiplano-descent-fill
+  kind: image
+  region: altiplano
+  role: descent
+  aspect: { desktop: "16:9", mobile: "9:16" }
+  subject: { es: "Valle desértico del Altiplano con palmas yuca, amanecer" }
+  alt: { es: "Valle desértico del Altiplano al amanecer, con palmas yuca y sierra al fondo." }
+  src: { desktop: null, mobile: null }
+  status: placeholder
+- id: centro-descent-fill
+  kind: image
+  region: centro
+  role: descent
+  aspect: { desktop: "16:9", mobile: "9:16" }
+  subject: { es: "Centro Histórico de San Luis Potosí, fachadas de cantera, mañana" }
+  alt: { es: "Fachadas de cantera del Centro Histórico de San Luis Potosí con luz de mañana." }
+  src: { desktop: null, mobile: null }
+  status: placeholder
+- id: zona-media-descent-fill
+  kind: image
+  region: zona-media
+  role: descent
+  aspect: { desktop: "16:9", mobile: "9:16" }
+  subject: { es: "Laguna de la Media Luna, agua turquesa y vegetación, mediodía" }
+  alt: { es: "Agua turquesa y vegetación en la Laguna de la Media Luna al mediodía." }
+  src: { desktop: null, mobile: null }
+  status: placeholder
+- id: huasteca-descent-fill
+  kind: image
+  region: huasteca
+  role: descent
+  aspect: { desktop: "16:9", mobile: "9:16" }
+  subject: { es: "Cascada de Tamul desde el cañón, tarde con bruma" }
+  alt: { es: "La cascada de Tamul cae al cañón entre selva y bruma por la tarde." }
+  src: { desktop: null, mobile: null }
+  status: placeholder
+- id: huasteca-drop-video
+  kind: video
+  region: huasteca
+  role: descent
+  aspect: { desktop: "16:9", mobile: "9:16" }
+  subject: { es: "Toma de dron descendiendo al cañón de Tamul, un solo movimiento continuo" }
+  alt: { es: "Descenso aéreo al cañón de Tamul, entre paredes de selva hasta el río." }
+  src: { desktop: null, mobile: null }
+  status: placeholder

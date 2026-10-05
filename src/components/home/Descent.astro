@@ -1,0 +1,373 @@
+---
+/**
+ * Act 3 · The Descent. Wonder: the peak of the page.
+ *
+ * One pinned stage. Four worlds stacked inside it, one per region. Each world
+ * is a photograph (or its placeholder) below the terrain line and its own sky
+ * above it. The camera (an SVG viewBox, see motion/camera.ts) travels the line
+ * west to east; at each region boundary the next world cuts in with its own
+ * transition. One San Luis Potosí is the line, which never breaks. Four
+ * worlds are the cuts. The last phase is the drop: the camera dives below the
+ * line into the Huasteca and the page's only video takes the frame.
+ *
+ * Without motion (reduced motion, no JS) the same markup lays out as four
+ * full-screen compositions in reading order, framed at build time.
+ */
+import MediaSlot from '@/components/primitives/MediaSlot.astro';
+import FactValue from '@/components/primitives/FactValue.astro';
+import SlotLabel from '@/components/primitives/SlotLabel.astro';
+import { getSlot } from '@/lib/media';
+import { profile, worldPath, skyPath, elevationAt, altitudesEnabled, WORLD } from '@/data/geo';
+import { camera, viewBoxAttr, CAMERA_DESKTOP } from '@/motion/camera';
+import { t, pick, type Locale } from '@/i18n';
+import { href, asset } from '@/i18n/routes';
+import type { RegionWithBounds } from '@/lib/regions';
+
+interface Props {
+  locale: Locale;
+  regions: RegionWithBounds[];
+}
+const { locale, regions } = Astro.props;
+
+const sky = skyPath(profile.points);
+const line = worldPath(profile.points, 0, 1, 2000);
+const staticCam = { ...CAMERA_DESKTOP, mx: 0.5 };
+const ticks = regions.slice(1).map((r) => ({ x: r.bounds.from * WORLD.X, y: (1 - elevationAt(r.bounds.from)) * WORLD.YR }));
+
+const dropSlot = await getSlot('huasteca-drop-video');
+const huasteca = regions.find((r) => r.id === 'huasteca');
+const showReadout = altitudesEnabled || import.meta.env.DEV;
+---
+<section
+  id="descenso"
+  class="slp-descent"
+  data-descent
+  data-chrome="overlay"
+  data-chrome-ground="dark"
+  data-sc-act="pin"
+  data-sc-span="6"
+  data-slp-span-m="4.6"
+  data-slp-collapse
+  aria-labelledby="descenso-title"
+  style="--span:6;--span-m:4.6;--drop:0"
+>
+  <h2 id="descenso-title" class="visually-hidden">{t(locale, 'descent.title')}</h2>
+
+  <div class="slp-descent__stage" data-sc-stage>
+    {regions.map((r, i) => {
+      const mid = (r.bounds.from + r.bounds.to) / 2;
+      const cam = camera(mid, 16 / 9, staticCam);
+      const my = (1 - elevationAt(mid)) * WORLD.YR;
+      return (
+        <article
+          id={`descenso-${r.id}`}
+          class="slp-world"
+          data-world={i}
+          data-region={r.id}
+          data-ground={r.ground}
+          data-transition={i === 0 ? 'none' : r.transition}
+          data-from={r.bounds.from}
+          data-to={r.bounds.to}
+          aria-labelledby={`world-${r.id}-title`}
+        >
+          <div class="slp-world__fill">
+            <MediaSlot id={r.descent.fill} locale={locale} label="none" eager={i === 0} />
+          </div>
+
+          <svg class="slp-world__sky" viewBox={viewBoxAttr(cam)} preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+            <defs>
+              <clipPath id={`done-${r.id}`}>
+                <rect x="-3000" y="-6000" width={mid * WORLD.X + 3000} height="12000" />
+              </clipPath>
+            </defs>
+            <path class="slp-world__skyfill" d={sky} />
+            <path class="slp-world__ahead" d={line} vector-effect="non-scaling-stroke" />
+            <path class="slp-world__done" d={line} clip-path={`url(#done-${r.id})`} vector-effect="non-scaling-stroke" />
+            {ticks.map((tk) => (
+              <path class="slp-world__tick" d={`M${tk.x} ${tk.y - 14}L${tk.x} ${tk.y + 14}`} vector-effect="non-scaling-stroke" />
+            ))}
+            <circle class="slp-world__marker" cx={mid * WORLD.X} cy={my} r="1.7" />
+          </svg>
+
+          <SlotLabel id={r.descent.fill} locale={locale} position="br" />
+
+          <div class={`slp-world__copy slp-world__copy--${r.anchor}`}>
+            <p class="slp-label slp-world__light">{pick(r.light, locale)}</p>
+            <h3 id={`world-${r.id}-title`} class="slp-display-region">{pick(r.name, locale)}</h3>
+            <div class="slp-world__body">
+              <p class="sc-lede">{pick(r.descent.lede, locale)}</p>
+              {r.published ? (
+                <a class="slp-link slp-link--tap" href={href('region', { region: r.id }, locale)}>
+                  {t(locale, 'descent.explore', { region: pick(r.nameInSentence, locale) })}
+                </a>
+              ) : (
+                <p class="slp-world__soon">{t(locale, 'descent.soon')}</p>
+              )}
+            </div>
+          </div>
+        </article>
+      );
+    })}
+
+    <div class="slp-descent__drop" data-drop data-region="huasteca" data-ground="dark">
+      {dropSlot.src.desktop ? (
+        <video
+          data-sc-scrub
+          data-sc-src={asset(dropSlot.src.desktop)}
+          data-sc-src-mobile={dropSlot.src.mobile ? asset(dropSlot.src.mobile) : undefined}
+          playsinline
+          muted
+          aria-hidden="true"
+        ></video>
+      ) : (
+        <MediaSlot id={dropSlot.id} locale={locale} label="none" />
+      )}
+      <div class="slp-descent__scrim" aria-hidden="true"></div>
+      <SlotLabel id={dropSlot.id} locale={locale} position="tr" />
+      <div class="slp-descent__finale" data-sc-cue="0.86 1 0.3 0.04">
+        <p class="sc-display slp-descent__finale-title">{t(locale, 'descent.finale')}</p>
+        <p class="sc-lede">{t(locale, 'descent.finaleBody')}</p>
+        {huasteca?.published && (
+          <a class="slp-link slp-link--tap" href={href('region', { region: 'huasteca' }, locale)}>
+            {t(locale, 'descent.explore', { region: pick(huasteca.nameInSentence, locale) })}
+          </a>
+        )}
+      </div>
+    </div>
+
+    {showReadout && (
+      <p class="slp-descent__readout" data-readout data-ground="dark">
+        <span class="slp-label">{t(locale, 'descent.altitude')}</span>
+        {altitudesEnabled ? <span data-readout-value></span> : <FactValue fact={{ value: null, status: 'pending', note: 'Transecto INEGI CEM sin verificar' }} locale={locale} />}
+      </p>
+    )}
+  </div>
+</section>
+
+<style>
+  .slp-descent { position: relative; background: var(--slp-charcoal); }
+  .slp-descent__stage { position: relative; }
+
+  /* ---- a world ---------------------------------------------------------- */
+  .slp-world {
+    position: relative;
+    height: 100vh;
+    height: 100svh;
+    min-height: 34rem;
+    overflow: clip;
+    color: var(--sc-ink);
+    background: var(--sc-canvas);
+  }
+  .slp-world__fill { position: absolute; inset: 0; z-index: 0; }
+  .slp-world__sky {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .slp-world__skyfill { fill: var(--sc-canvas); }
+  .slp-world__ahead {
+    fill: none;
+    stroke: var(--sc-ink);
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+    opacity: 0.38;
+  }
+  .slp-world__done {
+    fill: none;
+    stroke: var(--slp-region-ui);
+    stroke-width: 3;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .slp-world__tick { stroke: var(--sc-ink); stroke-width: 1; opacity: 0.5; }
+  .slp-world__marker { fill: var(--sc-canvas); stroke: var(--sc-ink); stroke-width: 0.7; }
+
+  .slp-world__copy {
+    position: absolute;
+    z-index: 2;
+    top: calc(var(--slp-header-h) + 6vh);
+    left: var(--sc-gutter);
+    right: var(--sc-gutter);
+    display: grid;
+    gap: var(--sc-3);
+    max-width: 44rem;
+  }
+  .slp-world__copy--trail { left: auto; text-align: right; justify-items: end; }
+  .slp-world__copy--center { margin-inline: auto; text-align: center; justify-items: center; }
+  .slp-world__copy--split {
+    max-width: none;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
+    align-items: end;
+    column-gap: var(--sc-8);
+  }
+  .slp-world__copy--split .slp-world__light { grid-column: 1 / -1; }
+  .slp-world__copy--split .slp-world__body { align-self: end; padding-bottom: 0.6rem; }
+  /* Small text never takes the accent (it cannot hold 4.5:1 on both grounds);
+     the accent rides on a short rule beside it instead. */
+  .slp-world__light {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--sc-ink-soft);
+  }
+  .slp-world__light::before {
+    content: '';
+    width: 1.75rem;
+    height: 2px;
+    background: var(--slp-region-ui);
+  }
+  .slp-world__body { display: grid; gap: var(--sc-3); justify-items: inherit; }
+  .slp-world__body > a, .slp-descent__finale > a { justify-self: start; }
+  .slp-world__copy--trail .slp-world__body > a { justify-self: end; }
+  .slp-world__copy--center .slp-world__body > a { justify-self: center; }
+  .slp-world__body .sc-lede { max-width: 30ch; }
+  .slp-world__soon {
+    font-size: var(--sc-t-sm);
+    font-weight: 600;
+    color: var(--sc-ink-soft);
+    min-height: var(--slp-tap);
+    display: flex;
+    align-items: center;
+  }
+
+  /* ---- the drop and the finale ----------------------------------------- */
+  .slp-descent__drop {
+    position: relative;
+    height: 100vh;
+    height: 100svh;
+    min-height: 34rem;
+    overflow: clip;
+    background: var(--slp-charcoal);
+  }
+  .slp-descent__drop :global(video) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .slp-descent__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(to top right,
+      color-mix(in oklab, var(--slp-charcoal) 92%, transparent) 0%,
+      color-mix(in oklab, var(--slp-charcoal) 62%, transparent) 30%,
+      transparent 62%);
+  }
+  .slp-descent__finale {
+    position: absolute;
+    z-index: 2;
+    left: var(--sc-gutter);
+    right: var(--sc-gutter);
+    bottom: calc(var(--slp-line-h) + 9vh);
+    display: grid;
+    gap: var(--sc-4);
+    max-width: 40rem;
+    color: var(--slp-ivory);
+  }
+  .slp-descent__finale-title { font-size: var(--sc-t-3xl); }
+
+  /* The readout rides just above the marker, in the sky, so it always sits on
+     the world's own ground. Positioned by motion/descent.ts. */
+  .slp-descent__readout {
+    position: absolute;
+    z-index: 5;
+    left: 0;
+    top: 0;
+    display: none;
+    align-items: baseline;
+    gap: var(--sc-3);
+    margin: 0;
+    background: none;
+    white-space: nowrap;
+    transform: translate3d(var(--rx, 0px), var(--ry, 0px), 0);
+    opacity: var(--ro, 1);
+    pointer-events: none;
+  }
+
+  /* ---- motion: worlds stack inside one pinned stage ---------------------- */
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent { height: calc(var(--span) * 100vh); }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent__stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: clip;
+  }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world,
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent__drop {
+    position: absolute;
+    inset: 0;
+    height: auto;
+    min-height: 0;
+  }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world {
+    --q: 0;
+    will-change: clip-path;
+  }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='none'] { --q: 1; }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='shadow'] {
+    clip-path: inset(0 calc((1 - var(--q)) * 100%) 0 0);
+  }
+  /* An arch opening from the ground up: the colonial doorway. */
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='arch'] {
+    clip-path: inset(calc((1 - var(--q)) * 100%) calc((1 - var(--q)) * 42%) 0 round calc((1 - var(--q)) * 100vw) calc((1 - var(--q)) * 100vw) 0 0);
+  }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='waterline'] {
+    clip-path: inset(calc((1 - var(--q)) * 100%) 0 0 0);
+  }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='curtain'] {
+    clip-path: inset(0 0 calc((1 - var(--q)) * 100%) 0);
+  }
+  /* The leading edge of a cut: a water surface rising, a curtain of water
+     falling, a shadow crossing the plain. Visible only while the cut runs. */
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world:is([data-transition='waterline'], [data-transition='curtain'], [data-transition='shadow'])::after {
+    content: '';
+    position: absolute;
+    z-index: 6;
+    background: var(--slp-region-ui);
+    opacity: calc((1 - var(--q)) * 40);
+    pointer-events: none;
+  }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='waterline']::after {
+    left: 0; right: 0; height: 3px; top: calc((1 - var(--q)) * 100%);
+  }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='curtain']::after {
+    left: 0; right: 0; height: 3px; top: calc(var(--q) * 100% - 3px);
+  }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='shadow']::after {
+    top: 0; bottom: 0; width: 3px; left: calc(var(--q) * 100% - 3px);
+  }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world__copy {
+    transform: translate3d(0, calc((1 - var(--q)) * 3vh), 0);
+    opacity: var(--copy-o, 1);
+  }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world__fill {
+    transform: scale(calc(1.06 - var(--q) * 0.06));
+    transform-origin: 50% 70%;
+  }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent__drop {
+    z-index: 4;
+    opacity: var(--drop);
+    pointer-events: none;
+  }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent[data-dropped] .slp-descent__drop { pointer-events: auto; }
+  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent__readout { display: flex; }
+
+  @media (max-width: 860px) {
+    :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent { height: calc(var(--span-m) * 100vh); }
+    .slp-world__copy,
+    .slp-world__copy--trail,
+    .slp-world__copy--center {
+      top: calc(var(--slp-header-h) + 4vh);
+      left: var(--sc-gutter);
+      right: var(--sc-gutter);
+      margin: 0;
+      text-align: left;
+      justify-items: start;
+    }
+    .slp-world__copy--split { grid-template-columns: 1fr; }
+    .slp-display-region { font-size: clamp(3rem, 2rem + 8vw, 4.4rem); }
+    .slp-world__body .sc-lede { font-size: var(--sc-t-base); }
+    .slp-descent__finale { bottom: 12vh; }
+  }
+</style>

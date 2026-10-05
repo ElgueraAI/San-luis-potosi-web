@@ -1,0 +1,23 @@
+---
+/**
+ * The only way a fact may reach the page.
+ * verified → the formatted value; pending → a "pendiente" badge in development,
+ * nothing at all in production. Never renders a pending value as information.
+ */
+import { viewFact, type Fact } from '@/lib/fact';
+import { t, type Locale } from '@/i18n';
+
+interface Props {
+  fact: Fact<unknown> | null | undefined;
+  format?: (value: any) => string;
+  locale?: Locale;
+}
+const { fact, format = (v: unknown) => String(v), locale = 'es' } = Astro.props;
+const view = viewFact(fact);
+---
+{view.kind === 'verified' && <span class="slp-fact" data-source={view.source}>{format(view.value)}</span>}
+{view.kind === 'pending' && (
+  <span class="slp-fact--pending" title={`${t(locale, 'fact.pendingTitle')}${view.note ? `: ${view.note}` : ''}`}>
+    {t(locale, 'fact.pending')}
+  </span>
+)}

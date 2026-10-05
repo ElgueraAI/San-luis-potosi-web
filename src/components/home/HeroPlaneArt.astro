@@ -1,0 +1,147 @@
+---
+/**
+ * Designed placeholder art for one plane of the layered Altiplano hero.
+ * Flat tonal silhouettes in the manner of a topographic print: they show the
+ * intended depth and composition without pretending to be photography.
+ * Replaced plane by plane as real transparent cut-outs arrive.
+ */
+interface Props {
+  plane: 'far' | 'mid' | 'focal' | 'near' | 'atmos';
+}
+const { plane } = Astro.props;
+
+// Deterministic ridge generator so the art is stable between builds.
+function ridge(base: number, amp: number[], freq: number[], phase: number[], step = 20, x0 = -40, x1 = 1640) {
+  const pts: string[] = [];
+  for (let x = x0; x <= x1; x += step) {
+    let y = base;
+    for (let i = 0; i < amp.length; i++) y -= amp[i] * Math.sin((x / 1600) * Math.PI * freq[i] + phase[i]);
+    pts.push(`${x} ${y.toFixed(1)}`);
+  }
+  return pts;
+}
+const farRidge = ridge(560, [70, 28, 9], [1.3, 3.7, 11], [0.35, 1.2, 0.4]).map((p) => {
+  // The western sierra stands higher than the east, falling toward the sunrise.
+  const [x, y] = p.split(' ').map(Number);
+  return `${x} ${(y + (x / 1600) * 70 - 40).toFixed(1)}`;
+});
+const farPath = `M-40 1000L${farRidge.join('L')}L1640 1000Z`;
+const backRidge = ridge(520, [46, 22, 7], [2.1, 5.3, 13], [1.1, 0.2, 2]).map((p) => {
+  const [x, y] = p.split(' ').map(Number);
+  return `${x} ${(y + (x / 1600) * 90 - 60).toFixed(1)}`;
+});
+const backPath = `M-40 1000L${backRidge.join('L')}L1640 1000Z`;
+const plain = ridge(652, [6, 3], [2, 7], [0.4, 1.9], 40);
+const plainPath = `M-40 1000L${plain.join('L')}L1640 1000Z`;
+
+// Yucca palms: trunk plus a spiky crown.
+// Kept low on the left, where the headline sits; the tall ones stand east.
+const yuccas = [
+  { x: 120, h: 46, s: 0.6 }, { x: 640, h: 58, s: 0.65 },
+  { x: 1240, h: 88, s: 0.85 }, { x: 1420, h: 132, s: 1.15 }, { x: 1530, h: 64, s: 0.65 },
+];
+function yucca({ x, h, s }: { x: number; h: number; s: number }) {
+  const base = 660;
+  const top = base - h;
+  const trunk = `M${x - 3 * s} ${base}L${x - 2 * s} ${top}L${x + 2 * s} ${top}L${x + 3 * s} ${base}Z`;
+  const leaves = Array.from({ length: 11 }, (_, i) => {
+    const a = -Math.PI / 2 + ((i - 5) / 5) * 1.25;
+    const l = (18 + (i % 3) * 5) * s;
+    const tx = x + Math.cos(a) * l, ty = top + Math.sin(a) * l;
+    return `M${x} ${top}L${tx.toFixed(1)} ${ty.toFixed(1)}`;
+  }).join('');
+  return { trunk, leaves };
+}
+
+// The ruin of a mining hacienda: broken wall, two arched openings, a stack.
+const wallTop = ridge(0, [7, 4], [9, 23], [0.3, 1.1], 12, 0, 252).map((p, i) => {
+  const [x, y] = p.split(' ').map(Number);
+  return `${x + 760} ${(568 + y + (i % 4 === 0 ? 10 : 0)).toFixed(1)}`;
+});
+const arch = (cx: number, w: number, top: number) =>
+  `M${cx - w / 2} 724L${cx - w / 2} ${top + w / 2}A${w / 2} ${w / 2} 0 0 1 ${cx + w / 2} ${top + w / 2}L${cx + w / 2} 724Z`;
+const ruinPath = `M760 724L${wallTop.join('L')}L1012 724Z ${arch(818, 46, 612)} ${arch(896, 46, 606)} ${arch(966, 34, 640)}`;
+const stack = 'M1030 724L1036 470L1060 470L1066 724Z';
+
+// Foreground agaves: rosettes of long pointed leaves, dipping in the centre.
+function agave(cx: number, cy: number, r: number, n: number, seed: number) {
+  let d = '';
+  for (let i = 0; i < n; i++) {
+    const a = Math.PI + (i / (n - 1)) * Math.PI;
+    const len = r * (0.65 + 0.35 * Math.abs(Math.sin(i * 1.7 + seed)));
+    const w = r * 0.09;
+    const tx = cx + Math.cos(a) * len, ty = cy + Math.sin(a) * len;
+    const nx = -Math.sin(a) * w, ny = Math.cos(a) * w;
+    d += `M${(cx + nx).toFixed(1)} ${(cy + ny).toFixed(1)}L${tx.toFixed(1)} ${ty.toFixed(1)}L${(cx - nx).toFixed(1)} ${(cy - ny).toFixed(1)}Z`;
+  }
+  return d;
+}
+const ground = 'M-40 1000L-40 880C200 860 420 900 640 948C780 972 900 974 1040 950C1200 920 1380 868 1640 872L1640 1000Z';
+const agaves = agave(150, 930, 190, 13, 1) + agave(420, 960, 120, 11, 2.4) + agave(1360, 920, 170, 13, 0.7) + agave(1560, 900, 140, 11, 3.1);
+const stones = 'M600 960C640 930 700 932 730 962Z M1090 955C1120 925 1180 928 1200 952Z';
+---
+<svg class={`slp-hero__art slp-hero__art--${plane}`} viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+  {plane === 'far' && (
+    <>
+      <defs>
+        <linearGradient id="hero-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#141817" />
+          <stop offset="0.5" stop-color="#1f2120" />
+          <stop offset="0.7" stop-color="#3a2b22" />
+          <stop offset="0.8" stop-color="#5a3b26" />
+        </linearGradient>
+        <radialGradient id="hero-sun" cx="0.74" cy="0.62" r="0.42">
+          <stop offset="0" stop-color="#c7a35a" stop-opacity="0.42" />
+          <stop offset="0.35" stop-color="#b66a32" stop-opacity="0.16" />
+          <stop offset="1" stop-color="#b66a32" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+      <rect x="-40" y="0" width="1680" height="1000" fill="url(#hero-sky)" />
+      <rect x="-40" y="0" width="1680" height="1000" fill="url(#hero-sun)" />
+      <path d={backPath} fill="#2c2621" />
+      <path d={farPath} fill="#332a22" />
+      <path d={`M${farRidge.join('L')}`} fill="none" stroke="#b66a32" stroke-opacity="0.35" stroke-width="1.2" />
+    </>
+  )}
+  {plane === 'mid' && (
+    <>
+      <path d={plainPath} fill="#3c2d22" />
+      <path d={`M${plain.join('L')}`} fill="none" stroke="#c7a35a" stroke-opacity="0.22" stroke-width="1" />
+      {yuccas.map((y) => {
+        const { trunk, leaves } = yucca(y);
+        return (
+          <g fill="#271f19" stroke="#271f19">
+            <path d={trunk} />
+            <path d={leaves} fill="none" stroke-width={3 * y.s} stroke-linecap="round" />
+          </g>
+        );
+      })}
+    </>
+  )}
+  {plane === 'focal' && (
+    <g fill="#211a15">
+      <path d={ruinPath} fill-rule="evenodd" />
+      <path d={stack} />
+      <path d="M740 724L1090 724L1100 742L730 742Z" fill="#2a211a" />
+    </g>
+  )}
+  {plane === 'near' && (
+    <g>
+      <path d={ground} fill="#16120f" />
+      <path d={agaves} fill="#120f0c" />
+      <path d={stones} fill="#1d1813" />
+    </g>
+  )}
+  {plane === 'atmos' && (
+    <>
+      <defs>
+        <radialGradient id="hero-haze" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stop-color="#f6f1e7" stop-opacity="0.16" />
+          <stop offset="1" stop-color="#f6f1e7" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+      <ellipse cx="900" cy="690" rx="980" ry="70" fill="url(#hero-haze)" />
+      <ellipse cx="300" cy="760" rx="620" ry="46" fill="url(#hero-haze)" opacity="0.7" />
+    </>
+  )}
+</svg>

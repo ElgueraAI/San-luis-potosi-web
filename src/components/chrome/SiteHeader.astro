@@ -1,0 +1,216 @@
+---
+import { t, type Locale } from '@/i18n';
+import { href, homeAnchor } from '@/i18n/routes';
+import { primaryNav, planNav } from '@/data/nav';
+import { profile, worldPath } from '@/data/geo';
+import type { RegionWithBounds } from '@/lib/regions';
+
+interface Props {
+  locale: Locale;
+  regions: RegionWithBounds[];
+}
+const { locale, regions } = Astro.props;
+---
+<header class="slp-header" data-header>
+  <div class="slp-header__inner">
+    <a class="slp-wordmark" href={href('home', {}, locale)} aria-label={t(locale, 'a11y.home')}>
+      <span class="slp-wordmark__name">San Luis Potosí</span>
+    </a>
+
+    <nav class="slp-header__nav" aria-label={t(locale, 'a11y.mainNav')}>
+      <ul role="list">
+        {primaryNav.filter((i) => i.ready).map((item) => (
+          <li><a href={homeAnchor(item.anchor, locale)}>{t(locale, item.key)}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="slp-header__tools">
+      <span class="slp-lang">
+        <span class="slp-lang__on" lang="es" aria-current="true">ES</span>
+        <span class="slp-lang__off" lang="en" title={t(locale, 'nav.lang.enPending')}>
+          EN<span class="visually-hidden"> ({t(locale, 'nav.lang.enPending')})</span>
+        </span>
+      </span>
+      {planNav.ready && (
+        <a class="slp-btn slp-header__plan" href={homeAnchor(planNav.anchor, locale)}>{t(locale, planNav.key)}</a>
+      )}
+      <button class="slp-header__menu" type="button" data-menu-open aria-haspopup="dialog" aria-controls="slp-menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M3 8.5h18M3 15.5h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+        </svg>
+        <span class="slp-header__menu-label">Menú</span>
+        <span class="visually-hidden">: {t(locale, 'a11y.menuOpen')}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Phones: the Line lives in the header as a progress strip. Navigation by
+       region is in the menu sheet, so this drawing is purely visual. -->
+  <div class="slp-header__line" aria-hidden="true" data-line-strip>
+    <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
+      {regions.map((r) => (
+        <path data-region={r.id} d={worldPath(profile.points, r.bounds.from, r.bounds.to)} vector-effect="non-scaling-stroke" />
+      ))}
+    </svg>
+    <span class="slp-header__marker"></span>
+  </div>
+</header>
+
+<style>
+  .slp-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: var(--sc-z-chrome);
+    color: var(--sc-ink);
+    transition: background-color var(--sc-d-base) var(--sc-ease-out), color var(--sc-d-base) var(--sc-ease-out),
+      box-shadow var(--sc-d-base) var(--sc-ease-out);
+  }
+  /* The header takes the ground of whatever is under it (set by chrome.ts). */
+  .slp-header {
+    --sc-ink: var(--slp-ivory);
+    --sc-canvas: var(--slp-charcoal);
+    --slp-line-ink: var(--slp-ivory);
+    --sc-accent: var(--slp-gold);
+  }
+  :global(html[data-chrome-top="light"]) .slp-header {
+    --sc-ink: var(--slp-charcoal);
+    --sc-canvas: var(--slp-ivory);
+    --slp-line-ink: var(--slp-charcoal);
+    --sc-accent: var(--slp-gold-deep);
+  }
+  :global(html[data-chrome-mode="solid"]) .slp-header {
+    background: color-mix(in oklab, var(--sc-canvas) 96%, transparent);
+    box-shadow: 0 1px 0 color-mix(in oklab, var(--sc-ink) 12%, transparent);
+  }
+
+  .slp-header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--sc-5);
+    height: var(--slp-header-h);
+    padding-inline: var(--sc-gutter);
+  }
+
+  .slp-wordmark {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--slp-tap);
+    color: inherit;
+    text-decoration: none;
+    margin-right: auto;
+  }
+  .slp-wordmark__name {
+    font-family: var(--sc-font-display);
+    font-size: clamp(1.35rem, 1.1rem + 0.6vw, 1.65rem);
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .slp-header__nav ul {
+    display: flex;
+    gap: clamp(0.25rem, 1.2vw, 1.25rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .slp-header__nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--slp-tap);
+    padding-inline: 0.35rem;
+    color: inherit;
+    font-size: var(--sc-t-sm);
+    font-weight: 600;
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0 1px;
+    background-position: 0.35rem calc(50% + 0.85em);
+    background-repeat: no-repeat;
+    transition: background-size var(--sc-d-fast) var(--sc-ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .slp-header__nav a:hover { background-size: calc(100% - 0.7rem) 1px; }
+  }
+
+  .slp-header__tools {
+    display: flex;
+    align-items: center;
+    gap: var(--sc-4);
+  }
+  .slp-lang {
+    display: inline-flex;
+    gap: 0.6rem;
+    font-size: var(--sc-t-xs);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+  .slp-lang__on {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.35em;
+  }
+  .slp-lang__off { opacity: 0.55; cursor: not-allowed; }
+
+  .slp-header__menu {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: var(--slp-tap);
+    min-width: var(--slp-tap);
+    padding: 0 0.5rem;
+    border: 0;
+    background: none;
+    color: inherit;
+    font-size: var(--sc-t-sm);
+    font-weight: 650;
+    cursor: pointer;
+  }
+  .slp-header__menu:active { transform: translateY(1px); }
+
+  .slp-header__line { display: none; }
+
+  @media (max-width: 860px) {
+    .slp-header__nav, .slp-lang, .slp-header__plan { display: none; }
+    .slp-header__menu-label { display: none; }
+    .slp-header__line {
+      display: block;
+      position: absolute;
+      left: var(--sc-gutter);
+      right: var(--sc-gutter);
+      top: calc(100% - 0.35rem);
+      height: var(--slp-line-h);
+      pointer-events: none;
+      opacity: var(--slp-strip-o, 0);
+      transition: opacity var(--sc-d-slow) var(--sc-ease-out);
+    }
+    :global(html[data-line-state="full"]) .slp-header__line,
+    :global(html[data-line-state="collapsed"]) .slp-header__line { --slp-strip-o: 1; }
+    .slp-header__line svg {
+      position: absolute;
+      inset: 0.3rem 0;
+      width: 100%;
+      height: calc(100% - 0.6rem);
+      overflow: visible;
+    }
+    .slp-header__line path {
+      fill: none;
+      stroke: var(--slp-line-ink);
+      stroke-width: 1.4;
+      opacity: 0.5;
+    }
+    .slp-header__line path[data-active] { opacity: 1; stroke-width: 2; }
+    .slp-header__marker {
+      position: absolute;
+      left: calc(var(--slp-x, 0) * 100%);
+      top: calc(0.3rem + (1 - var(--slp-e, 0.8)) * (100% - 0.6rem));
+      width: 7px;
+      height: 7px;
+      margin: -3.5px 0 0 -3.5px;
+      border-radius: 50%;
+      background: var(--slp-line-ink);
+    }
+  }
+</style>

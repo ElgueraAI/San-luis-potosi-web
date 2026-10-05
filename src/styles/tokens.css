@@ -1,0 +1,101 @@
+/* =============================================================================
+   San Luis Potosí design tokens
+   Brand values first, then the mapping onto Scroll Craft's six colour roles.
+   Contrast notes are measured on flat colour; re-measure on the render.
+   ========================================================================== */
+:root {
+  /* ---- brand ------------------------------------------------------------ */
+  --slp-charcoal: #1f2524;
+  --slp-charcoal-2: #262d2c;
+  --slp-charcoal-3: #313937;
+  --slp-ivory: #f6f1e7;
+  --slp-ivory-2: #ede6d8;
+  --slp-ivory-3: #ddd3c1;
+
+  /* Regional accents. For large type, rules, markers and controls only
+     (3:1 or more). Body text is never set in an accent. */
+  --slp-altiplano: #b66a32; /* ~3.7:1 on ivory, ~3.8:1 on charcoal */
+  --slp-centro: #9e5f67;    /* ~4.4:1 on ivory, ~3.2:1 on charcoal */
+  --slp-media: #3d8f8a;     /* ~3.4:1 on ivory, ~4.1:1 on charcoal */
+  --slp-huasteca: #176b57;  /* ~5.7:1 on ivory, fails on charcoal   */
+  --slp-huasteca-lift: #3fa383; /* same hue, lifted for dark grounds, ~5:1 */
+
+  --slp-aqua: #68b9b0;      /* dark grounds only (~6.8:1)            */
+  --slp-gold: #c7a35a;      /* dark grounds only (~6.5:1)            */
+  --slp-gold-deep: #7a5f22; /* gold hue for light grounds (~5.4:1)    */
+
+  /* ---- type ------------------------------------------------------------- */
+  --sc-font-display: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sc-font-text: "Manrope Variable", "Manrope", "Segoe UI", system-ui, sans-serif;
+  --sc-font-mono: var(--sc-font-text);
+
+  /* Cormorant has a small x-height and fine hairlines: it runs one step larger
+     than a grotesque would and never below ~24px. */
+  --sc-t-2xl: clamp(2.3rem, 1.7rem + 2.6vw, 3.8rem);
+  --sc-t-3xl: clamp(3rem, 2rem + 4.6vw, 5.6rem);
+  --sc-t-4xl: clamp(3.4rem, 1.6rem + 7.4vw, 8.6rem);
+  --slp-t-region: clamp(3.6rem, 1.4rem + 9vw, 10.5rem);
+
+  --sc-track-tight: -0.012em;
+  --sc-track-snug: -0.006em;
+  --slp-track-label: 0.16em;
+  --sc-leading-none: 0.96;
+  --sc-leading-tight: 1.08;
+
+  /* ---- shape and depth --------------------------------------------------- */
+  /* One radius scale for the whole site: editorial, nearly square. */
+  --sc-r-sm: 2px;
+  --sc-r-md: 3px;
+  --sc-r-lg: 4px;
+  --sc-shadow-color: 168 9% 6%;
+
+  /* ---- chrome ------------------------------------------------------------ */
+  --slp-header-h: 4.25rem;
+  --slp-line-h: 3.5rem;
+  --slp-tap: 44px;
+
+  --sc-grain-opacity: 0.045;
+}
+
+@media (max-width: 860px) {
+  :root {
+    --slp-header-h: 3.5rem;
+    --slp-line-h: 1.375rem;
+  }
+}
+
+/* ---- grounds: each one restates `color` (inherited values are computed) - */
+:root,
+[data-ground="dark"] {
+  --sc-canvas: var(--slp-charcoal);
+  --sc-surface: var(--slp-charcoal-2);
+  --sc-ink: var(--slp-ivory);
+  --sc-ink-soft: #bab8b0;
+  --sc-accent: var(--slp-gold);
+  --sc-accent-ink: var(--slp-charcoal);
+  --slp-region-ui: var(--slp-region-dark, var(--slp-gold));
+  --slp-line-ink: var(--slp-ivory);
+}
+[data-ground="light"] {
+  --sc-canvas: var(--slp-ivory);
+  --sc-surface: var(--slp-ivory-2);
+  --sc-ink: var(--slp-charcoal);
+  --sc-ink-soft: #4e524f;
+  --sc-accent: var(--slp-gold-deep);
+  --sc-accent-ink: var(--slp-ivory);
+  --slp-region-ui: var(--slp-region-light, var(--slp-gold-deep));
+  --slp-line-ink: var(--slp-charcoal);
+  --sc-shadow-color: 38 30% 40%;
+}
+[data-ground] {
+  color: var(--sc-ink);
+  background-color: var(--sc-canvas);
+}
+
+/* ---- regions: one accent per region, resolved for the ground it sits on -- */
+[data-region="altiplano"]  { --slp-region: var(--slp-altiplano); --slp-region-light: var(--slp-altiplano); --slp-region-dark: var(--slp-altiplano); }
+[data-region="centro"]     { --slp-region: var(--slp-centro);    --slp-region-light: var(--slp-centro);    --slp-region-dark: #c08890; }
+[data-region="zona-media"] { --slp-region: var(--slp-media);     --slp-region-light: var(--slp-media);     --slp-region-dark: var(--slp-media); }
+[data-region="huasteca"]   { --slp-region: var(--slp-huasteca);  --slp-region-light: var(--slp-huasteca);  --slp-region-dark: var(--slp-huasteca-lift); }
+[data-region][data-ground="dark"]  { --slp-region-ui: var(--slp-region-dark); }
+[data-region][data-ground="light"] { --slp-region-ui: var(--slp-region-light); }

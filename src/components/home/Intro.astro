@@ -1,0 +1,121 @@
+---
+/**
+ * Act 2 · Introduction. Discovery, and the authored silence before the peak.
+ * Ivory paper, one sentence, and the whole line drawing itself region by region
+ * from the act's --sc-p. No photography on purpose.
+ */
+import { profile, worldPath, elevationAt } from '@/data/geo';
+import { t, pick, type Locale } from '@/i18n';
+import type { RegionWithBounds } from '@/lib/regions';
+
+interface Props {
+  locale: Locale;
+  regions: RegionWithBounds[];
+}
+const { locale, regions } = Astro.props;
+---
+<section id="introduccion" class="slp-intro" data-ground="light" data-chrome="solid" data-sc-act="flow" aria-labelledby="intro-title">
+  <div class="sc-wrap slp-intro__text" data-sc-in data-sc-stagger="80">
+    <h2 id="intro-title" class="sc-display slp-intro__title">{t(locale, 'intro.title')}</h2>
+    <p class="sc-lede slp-intro__body">{t(locale, 'intro.body')}</p>
+  </div>
+
+  <figure class="slp-intro__line" aria-hidden="true">
+    <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
+      {regions.map((r) => (
+        <path
+          data-region={r.id}
+          data-ground="light"
+          d={worldPath(profile.points, r.bounds.from, r.bounds.to)}
+          vector-effect="non-scaling-stroke"
+          style={`--from:${r.bounds.from};--to:${r.bounds.to}`}
+        />
+      ))}
+    </svg>
+    <ol class="slp-intro__regions" role="list">
+      {regions.map((r) => (
+        <li
+          data-region={r.id}
+          data-ground="light"
+          style={`--from:${r.bounds.from};--to:${r.bounds.to};--e:${elevationAt((r.bounds.from + r.bounds.to) / 2).toFixed(3)}`}
+        >
+          <span class="slp-intro__name">{pick(r.name, locale)}</span>
+          <span class="slp-intro__light">{pick(r.light, locale)}</span>
+        </li>
+      ))}
+    </ol>
+  </figure>
+</section>
+
+<style>
+  .slp-intro {
+    position: relative;
+    padding-block: calc(var(--sc-section) + var(--slp-header-h)) var(--sc-section);
+    overflow: clip;
+  }
+  .slp-intro__text { display: grid; gap: var(--sc-5); }
+  .slp-intro__title {
+    font-size: var(--sc-t-3xl);
+    max-width: 14ch;
+  }
+  .slp-intro__body {
+    max-width: 38ch;
+    font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
+    line-height: 1.42;
+    color: var(--sc-ink-soft);
+    margin-left: clamp(0rem, 18vw, 22rem);
+  }
+
+  .slp-intro__line {
+    --draw: clamp(0, (var(--sc-p, 1) - 0.18) / 0.42, 1);
+    position: relative;
+    height: clamp(11rem, 26vw, 22rem);
+    margin: var(--sc-9) var(--sc-gutter) 0;
+  }
+  .slp-intro__line svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .slp-intro__line path {
+    --local: clamp(0, (var(--draw) - var(--from)) / (var(--to) - var(--from)), 1);
+    fill: none;
+    stroke: var(--slp-region-ui);
+    stroke-width: 2.6;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    /* Drawn west to east by uncovering the segment's own box. (A dash offset
+       misbehaves with non-scaling strokes, so it is not used here.) */
+    clip-path: inset(-20% calc((1 - var(--local)) * 100%) -20% -2%);
+  }
+
+  .slp-intro__regions { margin: 0; padding: 0; list-style: none; }
+  .slp-intro__regions li {
+    --local: clamp(0, (var(--draw) - var(--from)) / (var(--to) - var(--from)), 1);
+    position: absolute;
+    left: calc(var(--from) * 100%);
+    top: calc((1 - var(--e)) * 100% + 1.6rem);
+    display: grid;
+    gap: 0.15rem;
+    padding-left: 0.7rem;
+    border-left: 2px solid var(--slp-region-ui);
+    opacity: calc(0.2 + var(--local) * 0.8);
+  }
+  .slp-intro__name {
+    font-family: var(--sc-font-display);
+    font-size: var(--sc-t-xl);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .slp-intro__light {
+    font-size: var(--sc-t-xs);
+    font-weight: 650;
+    letter-spacing: var(--slp-track-label);
+    text-transform: uppercase;
+    color: var(--sc-ink-soft);
+  }
+
+  @media (max-width: 860px) {
+    .slp-intro__body { margin-left: 0; }
+    .slp-intro__line { height: 12rem; margin-inline: var(--sc-gutter); margin-bottom: 6rem; }
+    .slp-intro__regions li { padding-left: 0.45rem; }
+    .slp-intro__name { font-size: 1.15rem; }
+    .slp-intro__light { display: none; }
+  }
+</style>

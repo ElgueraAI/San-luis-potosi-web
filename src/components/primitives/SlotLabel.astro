@@ -1,0 +1,68 @@
+---
+/**
+ * The visible card that says what belongs in a placeholder slot: region, slot
+ * id, media type, aspect ratios and the required subject. Renders nothing once
+ * the slot has a real file. Visual only (aria-hidden): the slot's alt text is
+ * what assistive technology hears.
+ */
+import { getSlot } from '@/lib/media';
+import { t, pick, type Locale } from '@/i18n';
+
+interface Props {
+  id: string;
+  locale?: Locale;
+  position?: 'bl' | 'br' | 'tl' | 'tr';
+  class?: string;
+}
+const { id, locale = 'es', position = 'bl', class: cls } = Astro.props;
+const slot = await getSlot(id);
+const regionName: Record<string, string> = {
+  altiplano: 'Altiplano', centro: 'Centro', 'zona-media': 'Zona Media', huasteca: 'Huasteca', global: 'San Luis Potosí',
+};
+const kind = { image: t(locale, 'placeholder.image'), video: t(locale, 'placeholder.video'), plane: t(locale, 'placeholder.plane') }[slot.kind];
+const aspect = slot.aspect.mobile ? `${slot.aspect.desktop} escritorio / ${slot.aspect.mobile} móvil` : slot.aspect.desktop;
+---
+{slot.status === 'placeholder' && (
+  <p class:list={['slp-slot', `slp-slot--${position}`, cls]} data-region={slot.region} aria-hidden="true">
+    <span class="slp-slot__region">{regionName[slot.region]}</span>
+    <span class="slp-slot__id">{slot.id}</span>
+    <span class="slp-slot__meta">{kind} · {aspect}</span>
+    <span class="slp-slot__need"><b>{t(locale, 'placeholder.required')}:</b> {pick(slot.subject, locale)}</span>
+  </p>
+)}
+
+<style>
+  .slp-slot {
+    --slot-ink: var(--slp-ivory);
+    --slot-bg: #141a18;
+    position: absolute;
+    z-index: 3;
+    display: grid;
+    gap: 0.2rem;
+    max-width: min(26rem, calc(100% - 2 * var(--sc-gutter)));
+    margin: 0;
+    padding: 0.8rem 0.95rem 0.85rem;
+    border: 1px solid color-mix(in oklab, var(--slot-ink) 30%, transparent);
+    border-radius: var(--sc-r-sm);
+    background: color-mix(in oklab, var(--slot-bg) 88%, transparent);
+    color: var(--slot-ink);
+    font-size: 0.74rem;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    pointer-events: none;
+  }
+  .slp-slot[data-region='centro'],
+  .slp-slot[data-region='zona-media'] { --slot-ink: var(--slp-charcoal); --slot-bg: var(--slp-ivory); }
+  .slp-slot--bl { left: var(--sc-gutter); bottom: calc(var(--slp-line-h) + var(--sc-5)); }
+  .slp-slot--br { right: var(--sc-gutter); bottom: calc(var(--slp-line-h) + var(--sc-5)); }
+  .slp-slot--tl { left: var(--sc-gutter); top: calc(var(--slp-header-h) + var(--sc-5)); }
+  .slp-slot--tr { right: var(--sc-gutter); top: calc(var(--slp-header-h) + var(--sc-5)); }
+  .slp-slot__region { font-size: 0.66rem; font-weight: 750; letter-spacing: var(--slp-track-label); text-transform: uppercase; }
+  .slp-slot__id { font-size: 0.82rem; font-weight: 700; }
+  .slp-slot__meta, .slp-slot__need { opacity: 0.86; }
+  .slp-slot__need b { font-weight: 700; }
+  @media (max-width: 860px) {
+    .slp-slot { font-size: 0.68rem; padding: 0.6rem 0.75rem; max-width: min(19rem, calc(100% - 2 * var(--sc-gutter))); }
+    .slp-slot--bl, .slp-slot--br { bottom: var(--sc-5); }
+  }
+</style>

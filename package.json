@@ -23,6 +23,8 @@
     "pmtiles": "^4.5.0"
   },
   "devDependencies": {
-    "playwright-core": "^1.63.0"
+    "@astrojs/check": "^0.9.10",
+    "playwright-core": "^1.63.0",
+    "typescript": "^6.0.3"
   }
 }

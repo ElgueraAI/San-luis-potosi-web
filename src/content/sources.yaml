@@ -1,0 +1,25 @@
+# Registry of official sources. A Fact may only be "verified" if its `source`
+# is an id listed here. Nothing is approved yet: every source is still requested.
+- id: inegi-cem
+  institution: INEGI
+  document: Continuo de Elevaciones Mexicano (CEM), transecto oeste-este del estado
+  url: https://www.inegi.org.mx/app/geo2/elevacionesmex/
+  status: requested
+- id: inegi-mg
+  institution: INEGI
+  document: Marco Geoestadístico, límites municipales de San Luis Potosí
+  url: https://www.inegi.org.mx/temas/mg/
+  status: requested
+- id: gob-slp-regiones
+  institution: Gobierno del Estado de San Luis Potosí
+  document: Asignación oficial de municipios a las cuatro zonas (Altiplano, Centro, Media, Huasteca)
+  status: requested
+- id: sectur-slp
+  institution: Secretaría de Turismo de San Luis Potosí
+  document: Inventario turístico, destinos, eventos y temporadas
+  status: requested
+- id: sectur-datatur
+  institution: SECTUR / DataTur
+  document: Estadística turística oficial
+  url: https://www.datatur.sectur.gob.mx/
+  status: requested

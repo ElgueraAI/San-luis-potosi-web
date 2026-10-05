@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 
 // GitHub Pages serves a project site from /<repo>/. Local development runs at
