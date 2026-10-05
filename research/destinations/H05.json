@@ -1,0 +1,91 @@
+{
+  "place_id": "H05",
+  "name": "Sótano de las Huahuas",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Sima / fauna",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/"
+  },
+  "municipality": {
+    "value": "Aquismón",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Sima / fauna",
+  "description": {
+    "value": "Hoya de las Huahuas: sitio para espeleología, senderismo y observación de aves al amanecer y al caer la tarde.",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "naturaleza",
+      "aves",
+      "espeleologia"
+    ],
+    "status": "editorial"
+  },
+  "facts": {
+    "official_name": {
+      "value": "Hoya de las Huahuas",
+      "status": "verified",
+      "source": "brochure-huasteca",
+      "verifiedAt": "2026-10-05",
+      "note": "Workbook says 'Sótano de las Huahuas'; SEGAM also 'Hoya'."
+    },
+    "protected_area": {
+      "value": "Área natural protegida estatal (decreto multisitio)",
+      "status": "verified",
+      "source": "segam-anp",
+      "verifiedAt": "2026-10-05"
+    }
+  },
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "huasteca",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Huasteca Centro; municipality Aquismón"
+  },
+  "coordinates": {
+    "latitude": 21.531254,
+    "longitude": -99.033554,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap node/6290255759 (tourism/viewpoint, \"Hoya de las Huahuas\")",
+    "source_url": "https://www.openstreetmap.org/node/6290255759",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Aquismón, Aquismón",
+    "crosscheck_distance_m": 10124,
+    "notes": null
+  },
+  "coordinate_source": "OpenStreetMap node/6290255759 (tourism/viewpoint, \"Hoya de las Huahuas\")",
+  "map_status": "provisional",
+  "seasonal_tags": [
+    "amanecer-atardecer"
+  ],
+  "priority": "B",
+  "media_status": "partial",
+  "official_source": [],
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [
+    "wc-66633932"
+  ],
+  "media_card": "wc-66633932"
+}

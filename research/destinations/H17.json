@@ -1,0 +1,72 @@
+{
+  "place_id": "H17",
+  "name": "Ciudad Valles",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Ciudad base",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-huasteca/"
+  },
+  "municipality": {
+    "value": "Ciudad Valles",
+    "status": "verified",
+    "source": "turismo-slp-lugar-ciudad-valles",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Ciudad base",
+  "description": {
+    "value": "'La Puerta Grande de la Huasteca': segundo municipio más importante del estado y punto de partida hacia el resto de la Huasteca.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-ciudad-valles",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "ciudad-base",
+      "gastronomia"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "huasteca",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Huasteca Norte; municipality Ciudad Valles"
+  },
+  "coordinates": {
+    "latitude": 21.986537,
+    "longitude": -99.018721,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: Ciudad Valles, Ciudad Valles (cve 240130001)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 1038,
+    "notes": null
+  },
+  "coordinate_source": "INEGI ITER 2020: Ciudad Valles, Ciudad Valles (cve 240130001)",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "needs_manual_asset",
+  "official_source": [],
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

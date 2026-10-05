@@ -10,9 +10,10 @@
   },
   "region": {
     "value": "huasteca",
-    "status": "pending",
-    "source": "brochure-huasteca",
-    "note": "Conflicting official brochures; see conflicts."
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Huasteca Norte; municipality El Naranjo"
   },
   "municipality": {
     "value": "El Naranjo",
@@ -29,17 +30,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 22.3755482,
-      "lon": -99.3176448
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "node/3956070924",
-    "osm_feature": "tourism/attraction",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 22.375548,
+    "longitude": -99.317645,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap node/3956070924 (tourism/attraction, \"Cascadas De Minas Viejas\")",
+    "source_url": "https://www.openstreetmap.org/node/3956070924",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Minas Viejas, El Naranjo",
+    "crosscheck_distance_m": 3743,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "OpenStreetMap node/3956070924 (tourism/attraction, \"Cascadas De Minas Viejas\")",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -71,7 +72,7 @@
     "map-huasteca"
   ],
   "conflicts": [
-    "Listed in the Huasteca brochure, but the Región Media brochure map also marks this municipality's sites. Region assignment pending the official state regionalisation (gob-slp-regiones)."
+    "Resolved: region Huasteca (PDU-SLP Huasteca Norte + Huasteca brochure). The Media brochure map shows these sites as context."
   ],
   "ethics": null,
   "media": {
@@ -79,6 +80,20 @@
     "commons_approved_candidates": 7,
     "pexels": 0
   },
-  "verified_core_fields": "2/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "map_status": "provisional",
+  "seasonal_tags": [
+    "noviembre-marzo"
+  ],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-98007105",
+    "wc-98007106",
+    "wc-98007108",
+    "wc-75414206"
+  ],
+  "media_card": "wc-75414206"
 }

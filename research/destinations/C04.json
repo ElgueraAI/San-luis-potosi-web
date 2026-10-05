@@ -1,0 +1,75 @@
+{
+  "place_id": "C04",
+  "name": "Templo del Carmen",
+  "workbook": {
+    "region_label": "Centro",
+    "type": "Barroco",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-centro/"
+  },
+  "municipality": {
+    "value": "San Luis Potosí",
+    "status": "verified",
+    "source": "brochure-capital",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Barroco",
+  "description": {
+    "value": null,
+    "status": "pending",
+    "source": "brochure-capital",
+    "note": "Labelled on the official Centro Histórico map; no descriptive official text found."
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "arquitectura",
+      "barroco",
+      "fe"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "centro",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "San Luis Norte; municipality San Luis Potosí"
+  },
+  "coordinates": {
+    "latitude": 22.151879,
+    "longitude": -100.973563,
+    "precision": "site",
+    "coordinate_source": "INEGI DENUE: TEMPLO DEL CARMEN (Asociaciones y organizaciones religiosas)",
+    "source_url": "https://www.inegi.org.mx/contenidos/masiva/denue/denue_24_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 41114,
+    "notes": "OSM cross-check is 41114 m away (> 600 m); official point kept, OSM match may be a different feature."
+  },
+  "coordinate_source": "INEGI DENUE: TEMPLO DEL CARMEN (Asociaciones y organizaciones religiosas)",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "partial",
+  "official_source": [],
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [
+    "wc-75414140"
+  ],
+  "media_card": "wc-75414140"
+}

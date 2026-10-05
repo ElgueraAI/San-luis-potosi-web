@@ -10,9 +10,8 @@
   },
   "region": {
     "value": "altiplano",
-    "status": "verified",
-    "source": "brochure-altiplano",
-    "verifiedAt": "2026-10-04"
+    "status": "pending",
+    "note": "Region from workbook; no single municipality."
   },
   "municipality": {
     "value": null,
@@ -28,9 +27,15 @@
     "note": "Landscape theme, not a destination. Only a regional climate note is official."
   },
   "coordinates": {
-    "value": null,
-    "status": "unavailable",
-    "note": "A landscape, not a single point."
+    "latitude": null,
+    "longitude": null,
+    "precision": null,
+    "coordinate_source": null,
+    "source_url": null,
+    "verification_status": "unavailable",
+    "crosscheck_source": null,
+    "crosscheck_distance_m": null,
+    "notes": "Landscape theme across the Altiplano, not a point."
   },
   "coordinate_source": null,
   "pueblo_magico": {
@@ -68,6 +73,16 @@
     "commons_approved_candidates": 0,
     "pexels": 0
   },
-  "verified_core_fields": "1/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verified_core_fields": "0/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "map_status": "not-a-point",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-42373253",
+    "wc-145400200"
+  ],
+  "media_card": "wc-42373253"
 }

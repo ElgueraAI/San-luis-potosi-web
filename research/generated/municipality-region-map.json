@@ -1,0 +1,872 @@
+{
+  "generated": "2026-10-05",
+  "regions": [
+    "altiplano",
+    "centro",
+    "zona-media",
+    "huasteca"
+  ],
+  "authority": "1. Plan Estatal de Desarrollo Urbano de San Luis Potosí (PDU-SLP), Gobierno del Estado — region and\n     microregion of every municipality (read 2026-10-05 at ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm).\n  2. Plan Estatal de Desarrollo 2021–2027 (Decreto 0286, 21 Mar 2022): confirms 4 regions (Altiplano, Centro,\n     Media, Huasteca) and 58 municipalities; no per-municipality list in its text.\n  3. The 4 official regional tourism brochures (Secretaría de Turismo 2021–2027): the municipalities each one\n     describes in its texts and activities table.\nMunicipality names: INEGI ITER 2020 (official spelling).",
+  "summary": {
+    "verified": 58,
+    "pending": 1,
+    "conflict": 0,
+    "altiplano": 15,
+    "centro": 11,
+    "zona-media": 12,
+    "huasteca": 20
+  },
+  "municipalities": [
+    {
+      "municipality": "Ahualulco",
+      "inegi_cve": "24001",
+      "region": "centro",
+      "microregion": "San Luis Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-centro",
+          "region": "centro"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Alaquines",
+      "inegi_cve": "24002",
+      "region": "zona-media",
+      "microregion": "Media Este",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Aquismón",
+      "inegi_cve": "24003",
+      "region": "huasteca",
+      "microregion": "Huasteca Centro",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-huasteca",
+          "region": "huasteca"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Armadillo de los Infante",
+      "inegi_cve": "24004",
+      "region": "centro",
+      "microregion": "San Luis Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-centro",
+          "region": "centro"
+        }
+      ],
+      "notes": "PDU-SLP spells it 'Armadillo'."
+    },
+    {
+      "municipality": "Cárdenas",
+      "inegi_cve": "24005",
+      "region": "zona-media",
+      "microregion": "Media Este",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-media",
+          "region": "zona-media"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Catorce",
+      "inegi_cve": "24006",
+      "region": "altiplano",
+      "microregion": "Altiplano Este",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-altiplano",
+          "region": "altiplano"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Cedral",
+      "inegi_cve": "24007",
+      "region": "altiplano",
+      "microregion": "Altiplano Este",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-altiplano",
+          "region": "altiplano"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Cerritos",
+      "inegi_cve": "24008",
+      "region": "zona-media",
+      "microregion": "Media Oeste",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-media",
+          "region": "zona-media"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Cerro de San Pedro",
+      "inegi_cve": "24009",
+      "region": "centro",
+      "microregion": "San Luis Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-centro",
+          "region": "centro"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Ciudad del Maíz",
+      "inegi_cve": "24010",
+      "region": "zona-media",
+      "microregion": "Media Este",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-media",
+          "region": "zona-media"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Ciudad Fernández",
+      "inegi_cve": "24011",
+      "region": "zona-media",
+      "microregion": "Media Oeste",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-media",
+          "region": "zona-media"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Tancanhuitz",
+      "inegi_cve": "24012",
+      "region": "huasteca",
+      "microregion": "Huasteca Centro",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-huasteca",
+          "region": "huasteca"
+        }
+      ],
+      "notes": "PDU-SLP spells it 'Tancanhuitz de Santos'."
+    },
+    {
+      "municipality": "Ciudad Valles",
+      "inegi_cve": "24013",
+      "region": "huasteca",
+      "microregion": "Huasteca Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-huasteca",
+          "region": "huasteca"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Coxcatlán",
+      "inegi_cve": "24014",
+      "region": "huasteca",
+      "microregion": "Huasteca Sur",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Charcas",
+      "inegi_cve": "24015",
+      "region": "altiplano",
+      "microregion": "Altiplano Centro",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-altiplano",
+          "region": "altiplano"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Ebano",
+      "inegi_cve": "24016",
+      "region": "huasteca",
+      "microregion": "Huasteca Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Guadalcázar",
+      "inegi_cve": "24017",
+      "region": "altiplano",
+      "microregion": "Altiplano Este",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-altiplano",
+          "region": "altiplano"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Huehuetlán",
+      "inegi_cve": "24018",
+      "region": "huasteca",
+      "microregion": "Huasteca Centro",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-huasteca",
+          "region": "huasteca"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Lagunillas",
+      "inegi_cve": "24019",
+      "region": "zona-media",
+      "microregion": "Media Este",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-media",
+          "region": "zona-media"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Matehuala",
+      "inegi_cve": "24020",
+      "region": "altiplano",
+      "microregion": "Altiplano Este",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-altiplano",
+          "region": "altiplano"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Mexquitic de Carmona",
+      "inegi_cve": "24021",
+      "region": "centro",
+      "microregion": "San Luis Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-centro",
+          "region": "centro"
+        }
+      ],
+      "notes": "PDU-SLP spells it 'Mexquitic'."
+    },
+    {
+      "municipality": "Moctezuma",
+      "inegi_cve": "24022",
+      "region": "altiplano",
+      "microregion": "Altiplano Centro",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-altiplano",
+          "region": "altiplano"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Rayón",
+      "inegi_cve": "24023",
+      "region": "zona-media",
+      "microregion": "Media Este",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-media",
+          "region": "zona-media"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Rioverde",
+      "inegi_cve": "24024",
+      "region": "zona-media",
+      "microregion": "Media Oeste",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-media",
+          "region": "zona-media"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Salinas",
+      "inegi_cve": "24025",
+      "region": "altiplano",
+      "microregion": "Altiplano Oeste",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-altiplano",
+          "region": "altiplano"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "San Antonio",
+      "inegi_cve": "24026",
+      "region": "huasteca",
+      "microregion": "Huasteca Centro",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "San Ciro de Acosta",
+      "inegi_cve": "24027",
+      "region": "zona-media",
+      "microregion": "Media Oeste",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "San Luis Potosí",
+      "inegi_cve": "24028",
+      "region": "centro",
+      "microregion": "San Luis Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-centro",
+          "region": "centro"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "San Martín Chalchicuautla",
+      "inegi_cve": "24029",
+      "region": "huasteca",
+      "microregion": "Huasteca Sur",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "San Nicolás Tolentino",
+      "inegi_cve": "24030",
+      "region": "zona-media",
+      "microregion": "Media Oeste",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-media",
+          "region": "zona-media"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Santa Catarina",
+      "inegi_cve": "24031",
+      "region": "zona-media",
+      "microregion": "Media Este",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Santa María del Río",
+      "inegi_cve": "24032",
+      "region": "centro",
+      "microregion": "San Luis Sur",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-centro",
+          "region": "centro"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Santo Domingo",
+      "inegi_cve": "24033",
+      "region": "altiplano",
+      "microregion": "Altiplano Oeste",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "San Vicente Tancuayalab",
+      "inegi_cve": "24034",
+      "region": "huasteca",
+      "microregion": "Huasteca Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Soledad de Graciano Sánchez",
+      "inegi_cve": "24035",
+      "region": "centro",
+      "microregion": "San Luis Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-centro",
+          "region": "centro"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Tamasopo",
+      "inegi_cve": "24036",
+      "region": "huasteca",
+      "microregion": "Huasteca Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-huasteca",
+          "region": "huasteca"
+        },
+        {
+          "source": "brochure-media",
+          "region": "zona-media",
+          "kind": "map context only"
+        }
+      ],
+      "notes": "Border case. The Región Media brochure map draws this municipality and marks its sites, but the Media brochure does not describe it in its texts, activities table or distance table. The Huasteca brochure describes it in all three, and PDU-SLP places it in the Huasteca Norte microregion. Resolved by authority (state planning document + the brochure that actually describes it): Huasteca.",
+      "border_case": true
+    },
+    {
+      "municipality": "Tamazunchale",
+      "inegi_cve": "24037",
+      "region": "huasteca",
+      "microregion": "Huasteca Sur",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Tampacán",
+      "inegi_cve": "24038",
+      "region": "huasteca",
+      "microregion": "Huasteca Sur",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Tampamolón Corona",
+      "inegi_cve": "24039",
+      "region": "huasteca",
+      "microregion": "Huasteca Centro",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": "PDU-SLP spells it 'Tampamolón'."
+    },
+    {
+      "municipality": "Tamuín",
+      "inegi_cve": "24040",
+      "region": "huasteca",
+      "microregion": "Huasteca Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-huasteca",
+          "region": "huasteca"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Tanlajás",
+      "inegi_cve": "24041",
+      "region": "huasteca",
+      "microregion": "Huasteca Centro",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Tanquián de Escobedo",
+      "inegi_cve": "24042",
+      "region": "huasteca",
+      "microregion": "Huasteca Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Tierra Nueva",
+      "inegi_cve": "24043",
+      "region": "centro",
+      "microregion": "San Luis Sur",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-centro",
+          "region": "centro"
+        }
+      ],
+      "notes": "PDU-SLP spells it 'Tierranueva'."
+    },
+    {
+      "municipality": "Vanegas",
+      "inegi_cve": "24044",
+      "region": "altiplano",
+      "microregion": "Altiplano Este",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Venado",
+      "inegi_cve": "24045",
+      "region": "altiplano",
+      "microregion": "Altiplano Centro",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-altiplano",
+          "region": "altiplano"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Villa de Arriaga",
+      "inegi_cve": "24046",
+      "region": "centro",
+      "microregion": "San Luis Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Villa de Guadalupe",
+      "inegi_cve": "24047",
+      "region": "altiplano",
+      "microregion": "Altiplano Este",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-altiplano",
+          "region": "altiplano"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Villa de la Paz",
+      "inegi_cve": "24048",
+      "region": "altiplano",
+      "microregion": "Altiplano Este",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-altiplano",
+          "region": "altiplano"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Villa de Ramos",
+      "inegi_cve": "24049",
+      "region": "altiplano",
+      "microregion": "Altiplano Oeste",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Villa de Reyes",
+      "inegi_cve": "24050",
+      "region": "centro",
+      "microregion": "San Luis Sur",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-centro",
+          "region": "centro"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Villa Hidalgo",
+      "inegi_cve": "24051",
+      "region": "altiplano",
+      "microregion": "Altiplano Centro",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Villa Juárez",
+      "inegi_cve": "24052",
+      "region": "zona-media",
+      "microregion": "Media Oeste",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-media",
+          "region": "zona-media"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Axtla de Terrazas",
+      "inegi_cve": "24053",
+      "region": "huasteca",
+      "microregion": "Huasteca Sur",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-huasteca",
+          "region": "huasteca"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Xilitla",
+      "inegi_cve": "24054",
+      "region": "huasteca",
+      "microregion": "Huasteca Sur",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-huasteca",
+          "region": "huasteca"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Zaragoza",
+      "inegi_cve": "24055",
+      "region": "centro",
+      "microregion": "San Luis Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-centro",
+          "region": "centro"
+        }
+      ],
+      "notes": null
+    },
+    {
+      "municipality": "Villa de Arista",
+      "inegi_cve": "24056",
+      "region": "altiplano",
+      "microregion": "Altiplano Centro",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "Matlapa",
+      "inegi_cve": "24057",
+      "region": "huasteca",
+      "microregion": "Huasteca Sur",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [],
+      "notes": null
+    },
+    {
+      "municipality": "El Naranjo",
+      "inegi_cve": "24058",
+      "region": "huasteca",
+      "microregion": "Huasteca Norte",
+      "source": "pdu-slp",
+      "source_url": "https://ambiental.uaslp.mx/historico/productos/pduslp/21_regio.htm",
+      "verification_status": "verified",
+      "corroboration": [
+        {
+          "source": "brochure-huasteca",
+          "region": "huasteca"
+        },
+        {
+          "source": "brochure-media",
+          "region": "zona-media",
+          "kind": "map context only"
+        }
+      ],
+      "notes": "Border case. The Región Media brochure map draws this municipality and marks its sites, but the Media brochure does not describe it in its texts, activities table or distance table. The Huasteca brochure describes it in all three, and PDU-SLP places it in the Huasteca Norte microregion. Resolved by authority (state planning document + the brochure that actually describes it): Huasteca.",
+      "border_case": true
+    },
+    {
+      "municipality": "Villa de Pozos",
+      "inegi_cve": null,
+      "region": null,
+      "microregion": null,
+      "source": null,
+      "source_url": null,
+      "verification_status": "pending",
+      "corroboration": [],
+      "notes": "Municipality no. 59, created by the state congress on 23 Jul 2024 from territory of San Luis Potosí (Centro). No official tourism-region assignment found yet; geographically inside the Centro region."
+    }
+  ]
+}

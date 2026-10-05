@@ -1,0 +1,700 @@
+{
+ "generated": "2026-10-05",
+ "source": "Open-Meteo Historical Weather API (archive-api.open-meteo.com), daily 2016-01-01..2025-12-31",
+ "licence": "CC BY 4.0 — attribution: Open-Meteo.com",
+ "label_es": "Promedio modelado 2016–2025 (reanálisis), no normal climatológica oficial",
+ "label_en": "Modelled 2016–2025 average (reanalysis), not an official climate normal",
+ "verification_status": "supporting-data",
+ "points": {
+  "altiplano": {
+   "place_id": "A06",
+   "name": "Matehuala – Centro Histórico",
+   "region": "altiplano",
+   "role": "region",
+   "latitude": 23.646359,
+   "longitude": -100.644198,
+   "coordinate_source": "INEGI ITER 2020: Matehuala, Matehuala (cve 240200001)",
+   "grid_elevation_m": 1585.0,
+   "months": [
+    {
+     "month": 1,
+     "name_es": "enero",
+     "tmax_mean_c": 21.1,
+     "tmin_mean_c": 7.1,
+     "precip_mm": 13.0,
+     "rain_days": 2.8
+    },
+    {
+     "month": 2,
+     "name_es": "febrero",
+     "tmax_mean_c": 24.3,
+     "tmin_mean_c": 9.0,
+     "precip_mm": 13.0,
+     "rain_days": 1.9
+    },
+    {
+     "month": 3,
+     "name_es": "marzo",
+     "tmax_mean_c": 27.5,
+     "tmin_mean_c": 11.4,
+     "precip_mm": 14.0,
+     "rain_days": 3.0
+    },
+    {
+     "month": 4,
+     "name_es": "abril",
+     "tmax_mean_c": 29.6,
+     "tmin_mean_c": 14.0,
+     "precip_mm": 19.0,
+     "rain_days": 4.0
+    },
+    {
+     "month": 5,
+     "name_es": "mayo",
+     "tmax_mean_c": 30.9,
+     "tmin_mean_c": 16.8,
+     "precip_mm": 35.0,
+     "rain_days": 5.9
+    },
+    {
+     "month": 6,
+     "name_es": "junio",
+     "tmax_mean_c": 29.9,
+     "tmin_mean_c": 17.2,
+     "precip_mm": 61.0,
+     "rain_days": 10.3
+    },
+    {
+     "month": 7,
+     "name_es": "julio",
+     "tmax_mean_c": 29.1,
+     "tmin_mean_c": 17.0,
+     "precip_mm": 59.0,
+     "rain_days": 9.5
+    },
+    {
+     "month": 8,
+     "name_es": "agosto",
+     "tmax_mean_c": 29.9,
+     "tmin_mean_c": 17.3,
+     "precip_mm": 41.0,
+     "rain_days": 7.6
+    },
+    {
+     "month": 9,
+     "name_es": "septiembre",
+     "tmax_mean_c": 27.1,
+     "tmin_mean_c": 16.5,
+     "precip_mm": 74.0,
+     "rain_days": 11.5
+    },
+    {
+     "month": 10,
+     "name_es": "octubre",
+     "tmax_mean_c": 26.0,
+     "tmin_mean_c": 14.0,
+     "precip_mm": 39.0,
+     "rain_days": 6.6
+    },
+    {
+     "month": 11,
+     "name_es": "noviembre",
+     "tmax_mean_c": 23.8,
+     "tmin_mean_c": 10.9,
+     "precip_mm": 21.0,
+     "rain_days": 3.4
+    },
+    {
+     "month": 12,
+     "name_es": "diciembre",
+     "tmax_mean_c": 21.3,
+     "tmin_mean_c": 8.3,
+     "precip_mm": 13.0,
+     "rain_days": 2.4
+    }
+   ],
+   "wettest_months": [
+    9,
+    6,
+    7,
+    8
+   ],
+   "annual_precip_mm": 402
+  },
+  "centro": {
+   "place_id": "C01",
+   "name": "Centro Histórico de San Luis Potosí",
+   "region": "centro",
+   "role": "region",
+   "latitude": 22.151655,
+   "longitude": -100.976958,
+   "coordinate_source": "INEGI ITER 2020: San Luis Potosí, San Luis Potosí (cve 240280001)",
+   "grid_elevation_m": 1877.0,
+   "months": [
+    {
+     "month": 1,
+     "name_es": "enero",
+     "tmax_mean_c": 21.5,
+     "tmin_mean_c": 7.1,
+     "precip_mm": 8.0,
+     "rain_days": 1.9
+    },
+    {
+     "month": 2,
+     "name_es": "febrero",
+     "tmax_mean_c": 24.1,
+     "tmin_mean_c": 8.6,
+     "precip_mm": 10.0,
+     "rain_days": 1.8
+    },
+    {
+     "month": 3,
+     "name_es": "marzo",
+     "tmax_mean_c": 27.2,
+     "tmin_mean_c": 10.6,
+     "precip_mm": 6.0,
+     "rain_days": 1.9
+    },
+    {
+     "month": 4,
+     "name_es": "abril",
+     "tmax_mean_c": 29.0,
+     "tmin_mean_c": 12.9,
+     "precip_mm": 16.0,
+     "rain_days": 3.7
+    },
+    {
+     "month": 5,
+     "name_es": "mayo",
+     "tmax_mean_c": 30.1,
+     "tmin_mean_c": 15.0,
+     "precip_mm": 40.0,
+     "rain_days": 6.4
+    },
+    {
+     "month": 6,
+     "name_es": "junio",
+     "tmax_mean_c": 27.2,
+     "tmin_mean_c": 15.2,
+     "precip_mm": 75.0,
+     "rain_days": 13.0
+    },
+    {
+     "month": 7,
+     "name_es": "julio",
+     "tmax_mean_c": 26.1,
+     "tmin_mean_c": 14.7,
+     "precip_mm": 71.0,
+     "rain_days": 11.3
+    },
+    {
+     "month": 8,
+     "name_es": "agosto",
+     "tmax_mean_c": 26.4,
+     "tmin_mean_c": 14.8,
+     "precip_mm": 55.0,
+     "rain_days": 10.4
+    },
+    {
+     "month": 9,
+     "name_es": "septiembre",
+     "tmax_mean_c": 24.8,
+     "tmin_mean_c": 14.3,
+     "precip_mm": 84.0,
+     "rain_days": 12.9
+    },
+    {
+     "month": 10,
+     "name_es": "octubre",
+     "tmax_mean_c": 23.9,
+     "tmin_mean_c": 12.2,
+     "precip_mm": 41.0,
+     "rain_days": 7.4
+    },
+    {
+     "month": 11,
+     "name_es": "noviembre",
+     "tmax_mean_c": 23.0,
+     "tmin_mean_c": 9.8,
+     "precip_mm": 17.0,
+     "rain_days": 3.3
+    },
+    {
+     "month": 12,
+     "name_es": "diciembre",
+     "tmax_mean_c": 21.4,
+     "tmin_mean_c": 8.0,
+     "precip_mm": 11.0,
+     "rain_days": 2.3
+    }
+   ],
+   "wettest_months": [
+    9,
+    6,
+    7,
+    8
+   ],
+   "annual_precip_mm": 434
+  },
+  "zona-media": {
+   "place_id": "M02",
+   "name": "Rioverde – Centro",
+   "region": "zona-media",
+   "role": "region",
+   "latitude": 21.932378,
+   "longitude": -99.992923,
+   "coordinate_source": "INEGI ITER 2020: Rioverde, Rioverde (cve 240240001)",
+   "grid_elevation_m": 996.0,
+   "months": [
+    {
+     "month": 1,
+     "name_es": "enero",
+     "tmax_mean_c": 22.9,
+     "tmin_mean_c": 10.9,
+     "precip_mm": 18.0,
+     "rain_days": 4.8
+    },
+    {
+     "month": 2,
+     "name_es": "febrero",
+     "tmax_mean_c": 26.6,
+     "tmin_mean_c": 12.5,
+     "precip_mm": 10.0,
+     "rain_days": 2.3
+    },
+    {
+     "month": 3,
+     "name_es": "marzo",
+     "tmax_mean_c": 30.3,
+     "tmin_mean_c": 15.1,
+     "precip_mm": 16.0,
+     "rain_days": 4.8
+    },
+    {
+     "month": 4,
+     "name_es": "abril",
+     "tmax_mean_c": 32.4,
+     "tmin_mean_c": 17.7,
+     "precip_mm": 36.0,
+     "rain_days": 6.2
+    },
+    {
+     "month": 5,
+     "name_es": "mayo",
+     "tmax_mean_c": 33.5,
+     "tmin_mean_c": 20.4,
+     "precip_mm": 67.0,
+     "rain_days": 10.4
+    },
+    {
+     "month": 6,
+     "name_es": "junio",
+     "tmax_mean_c": 30.9,
+     "tmin_mean_c": 20.5,
+     "precip_mm": 126.0,
+     "rain_days": 17.4
+    },
+    {
+     "month": 7,
+     "name_es": "julio",
+     "tmax_mean_c": 29.7,
+     "tmin_mean_c": 20.2,
+     "precip_mm": 114.0,
+     "rain_days": 18.7
+    },
+    {
+     "month": 8,
+     "name_es": "agosto",
+     "tmax_mean_c": 30.2,
+     "tmin_mean_c": 20.2,
+     "precip_mm": 94.0,
+     "rain_days": 18.3
+    },
+    {
+     "month": 9,
+     "name_es": "septiembre",
+     "tmax_mean_c": 28.6,
+     "tmin_mean_c": 19.6,
+     "precip_mm": 134.0,
+     "rain_days": 20.1
+    },
+    {
+     "month": 10,
+     "name_es": "octubre",
+     "tmax_mean_c": 26.6,
+     "tmin_mean_c": 17.2,
+     "precip_mm": 99.0,
+     "rain_days": 12.8
+    },
+    {
+     "month": 11,
+     "name_es": "noviembre",
+     "tmax_mean_c": 25.0,
+     "tmin_mean_c": 14.4,
+     "precip_mm": 33.0,
+     "rain_days": 5.5
+    },
+    {
+     "month": 12,
+     "name_es": "diciembre",
+     "tmax_mean_c": 23.2,
+     "tmin_mean_c": 12.2,
+     "precip_mm": 21.0,
+     "rain_days": 5.0
+    }
+   ],
+   "wettest_months": [
+    9,
+    6,
+    7,
+    10
+   ],
+   "annual_precip_mm": 768
+  },
+  "huasteca": {
+   "place_id": "H17",
+   "name": "Ciudad Valles",
+   "region": "huasteca",
+   "role": "region",
+   "latitude": 21.986537,
+   "longitude": -99.018721,
+   "coordinate_source": "INEGI ITER 2020: Ciudad Valles, Ciudad Valles (cve 240130001)",
+   "grid_elevation_m": 82.0,
+   "months": [
+    {
+     "month": 1,
+     "name_es": "enero",
+     "tmax_mean_c": 23.6,
+     "tmin_mean_c": 14.6,
+     "precip_mm": 42.0,
+     "rain_days": 6.9
+    },
+    {
+     "month": 2,
+     "name_es": "febrero",
+     "tmax_mean_c": 26.6,
+     "tmin_mean_c": 16.2,
+     "precip_mm": 21.0,
+     "rain_days": 5.1
+    },
+    {
+     "month": 3,
+     "name_es": "marzo",
+     "tmax_mean_c": 30.4,
+     "tmin_mean_c": 19.0,
+     "precip_mm": 39.0,
+     "rain_days": 6.8
+    },
+    {
+     "month": 4,
+     "name_es": "abril",
+     "tmax_mean_c": 33.1,
+     "tmin_mean_c": 21.6,
+     "precip_mm": 65.0,
+     "rain_days": 8.5
+    },
+    {
+     "month": 5,
+     "name_es": "mayo",
+     "tmax_mean_c": 34.8,
+     "tmin_mean_c": 24.2,
+     "precip_mm": 102.0,
+     "rain_days": 14.1
+    },
+    {
+     "month": 6,
+     "name_es": "junio",
+     "tmax_mean_c": 33.5,
+     "tmin_mean_c": 24.0,
+     "precip_mm": 269.0,
+     "rain_days": 19.8
+    },
+    {
+     "month": 7,
+     "name_es": "julio",
+     "tmax_mean_c": 32.2,
+     "tmin_mean_c": 23.4,
+     "precip_mm": 192.0,
+     "rain_days": 20.8
+    },
+    {
+     "month": 8,
+     "name_es": "agosto",
+     "tmax_mean_c": 32.7,
+     "tmin_mean_c": 23.5,
+     "precip_mm": 163.0,
+     "rain_days": 21.0
+    },
+    {
+     "month": 9,
+     "name_es": "septiembre",
+     "tmax_mean_c": 31.3,
+     "tmin_mean_c": 23.0,
+     "precip_mm": 259.0,
+     "rain_days": 21.0
+    },
+    {
+     "month": 10,
+     "name_es": "octubre",
+     "tmax_mean_c": 28.9,
+     "tmin_mean_c": 20.9,
+     "precip_mm": 167.0,
+     "rain_days": 15.0
+    },
+    {
+     "month": 11,
+     "name_es": "noviembre",
+     "tmax_mean_c": 26.1,
+     "tmin_mean_c": 18.0,
+     "precip_mm": 60.0,
+     "rain_days": 9.5
+    },
+    {
+     "month": 12,
+     "name_es": "diciembre",
+     "tmax_mean_c": 24.7,
+     "tmin_mean_c": 15.8,
+     "precip_mm": 45.0,
+     "rain_days": 7.4
+    }
+   ],
+   "wettest_months": [
+    6,
+    9,
+    7,
+    10
+   ],
+   "annual_precip_mm": 1424
+  },
+  "real-de-catorce": {
+   "place_id": "A01",
+   "name": "Real de Catorce",
+   "region": "altiplano",
+   "role": "destination",
+   "latitude": 23.690449,
+   "longitude": -100.886253,
+   "coordinate_source": "INEGI ITER 2020: Real de Catorce, Catorce (cve 240060001)",
+   "grid_elevation_m": 2694.0,
+   "months": [
+    {
+     "month": 1,
+     "name_es": "enero",
+     "tmax_mean_c": 13.8,
+     "tmin_mean_c": 3.6,
+     "precip_mm": 26.0,
+     "rain_days": 4.7
+    },
+    {
+     "month": 2,
+     "name_es": "febrero",
+     "tmax_mean_c": 16.6,
+     "tmin_mean_c": 5.2,
+     "precip_mm": 21.0,
+     "rain_days": 4.5
+    },
+    {
+     "month": 3,
+     "name_es": "marzo",
+     "tmax_mean_c": 19.3,
+     "tmin_mean_c": 6.8,
+     "precip_mm": 30.0,
+     "rain_days": 5.9
+    },
+    {
+     "month": 4,
+     "name_es": "abril",
+     "tmax_mean_c": 21.2,
+     "tmin_mean_c": 8.6,
+     "precip_mm": 52.0,
+     "rain_days": 8.4
+    },
+    {
+     "month": 5,
+     "name_es": "mayo",
+     "tmax_mean_c": 22.2,
+     "tmin_mean_c": 10.6,
+     "precip_mm": 89.0,
+     "rain_days": 14.3
+    },
+    {
+     "month": 6,
+     "name_es": "junio",
+     "tmax_mean_c": 20.7,
+     "tmin_mean_c": 10.4,
+     "precip_mm": 125.0,
+     "rain_days": 15.2
+    },
+    {
+     "month": 7,
+     "name_es": "julio",
+     "tmax_mean_c": 19.7,
+     "tmin_mean_c": 9.9,
+     "precip_mm": 117.0,
+     "rain_days": 14.2
+    },
+    {
+     "month": 8,
+     "name_es": "agosto",
+     "tmax_mean_c": 20.3,
+     "tmin_mean_c": 10.1,
+     "precip_mm": 78.0,
+     "rain_days": 14.0
+    },
+    {
+     "month": 9,
+     "name_es": "septiembre",
+     "tmax_mean_c": 18.4,
+     "tmin_mean_c": 9.7,
+     "precip_mm": 125.0,
+     "rain_days": 18.1
+    },
+    {
+     "month": 10,
+     "name_es": "octubre",
+     "tmax_mean_c": 17.5,
+     "tmin_mean_c": 8.2,
+     "precip_mm": 68.0,
+     "rain_days": 10.4
+    },
+    {
+     "month": 11,
+     "name_es": "noviembre",
+     "tmax_mean_c": 16.0,
+     "tmin_mean_c": 6.5,
+     "precip_mm": 44.0,
+     "rain_days": 5.2
+    },
+    {
+     "month": 12,
+     "name_es": "diciembre",
+     "tmax_mean_c": 14.1,
+     "tmin_mean_c": 4.9,
+     "precip_mm": 22.0,
+     "rain_days": 4.2
+    }
+   ],
+   "wettest_months": [
+    6,
+    9,
+    7,
+    5
+   ],
+   "annual_precip_mm": 797
+  },
+  "xilitla": {
+   "place_id": "H07",
+   "name": "Xilitla – Pueblo Mágico",
+   "region": "huasteca",
+   "role": "destination",
+   "latitude": 21.385193,
+   "longitude": -98.989573,
+   "coordinate_source": "INEGI ITER 2020: Xilitla, Xilitla (cve 240540001)",
+   "grid_elevation_m": 670.0,
+   "months": [
+    {
+     "month": 1,
+     "name_es": "enero",
+     "tmax_mean_c": 20.0,
+     "tmin_mean_c": 13.4,
+     "precip_mm": 106.0,
+     "rain_days": 12.7
+    },
+    {
+     "month": 2,
+     "name_es": "febrero",
+     "tmax_mean_c": 22.0,
+     "tmin_mean_c": 14.9,
+     "precip_mm": 82.0,
+     "rain_days": 10.9
+    },
+    {
+     "month": 3,
+     "name_es": "marzo",
+     "tmax_mean_c": 24.5,
+     "tmin_mean_c": 17.0,
+     "precip_mm": 129.0,
+     "rain_days": 13.3
+    },
+    {
+     "month": 4,
+     "name_es": "abril",
+     "tmax_mean_c": 26.6,
+     "tmin_mean_c": 19.1,
+     "precip_mm": 206.0,
+     "rain_days": 14.3
+    },
+    {
+     "month": 5,
+     "name_es": "mayo",
+     "tmax_mean_c": 28.2,
+     "tmin_mean_c": 21.4,
+     "precip_mm": 228.0,
+     "rain_days": 18.8
+    },
+    {
+     "month": 6,
+     "name_es": "junio",
+     "tmax_mean_c": 27.6,
+     "tmin_mean_c": 21.5,
+     "precip_mm": 242.0,
+     "rain_days": 21.1
+    },
+    {
+     "month": 7,
+     "name_es": "julio",
+     "tmax_mean_c": 27.0,
+     "tmin_mean_c": 21.2,
+     "precip_mm": 133.0,
+     "rain_days": 19.0
+    },
+    {
+     "month": 8,
+     "name_es": "agosto",
+     "tmax_mean_c": 27.6,
+     "tmin_mean_c": 21.5,
+     "precip_mm": 111.0,
+     "rain_days": 18.9
+    },
+    {
+     "month": 9,
+     "name_es": "septiembre",
+     "tmax_mean_c": 26.7,
+     "tmin_mean_c": 21.1,
+     "precip_mm": 205.0,
+     "rain_days": 20.3
+    },
+    {
+     "month": 10,
+     "name_es": "octubre",
+     "tmax_mean_c": 24.7,
+     "tmin_mean_c": 19.1,
+     "precip_mm": 227.0,
+     "rain_days": 16.4
+    },
+    {
+     "month": 11,
+     "name_es": "noviembre",
+     "tmax_mean_c": 22.4,
+     "tmin_mean_c": 16.6,
+     "precip_mm": 100.0,
+     "rain_days": 11.9
+    },
+    {
+     "month": 12,
+     "name_es": "diciembre",
+     "tmax_mean_c": 21.3,
+     "tmin_mean_c": 15.0,
+     "precip_mm": 115.0,
+     "rain_days": 11.7
+    }
+   ],
+   "wettest_months": [
+    6,
+    5,
+    10,
+    4
+   ],
+   "annual_precip_mm": 1884
+  }
+ }
+}

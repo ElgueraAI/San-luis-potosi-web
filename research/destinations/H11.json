@@ -10,9 +10,10 @@
   },
   "region": {
     "value": "huasteca",
-    "status": "pending",
-    "source": "brochure-huasteca",
-    "note": "Conflicting official brochures; see conflicts."
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Huasteca Norte; municipality Tamasopo"
   },
   "municipality": {
     "value": "Tamasopo",
@@ -29,17 +30,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 21.9291897,
-      "lon": -99.4140601
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "node/7658769477",
-    "osm_feature": "place/hamlet",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 21.92919,
+    "longitude": -99.41406,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap node/7658769477 (place/hamlet, \"Puente de Dios\")",
+    "source_url": "https://www.openstreetmap.org/node/7658769477",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Tamasopo, Tamasopo",
+    "crosscheck_distance_m": 2334,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "OpenStreetMap node/7658769477 (place/hamlet, \"Puente de Dios\")",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -70,9 +71,9 @@
     "map-huasteca"
   ],
   "conflicts": [
-    "Listed in the Huasteca brochure, but the Región Media brochure map also marks this municipality's sites. Region assignment pending the official state regionalisation (gob-slp-regiones).",
-    "The Huasteca activities table also lists a 'Puente de Dios' under Aquismón; possibly a second site of the same name.",
-    "A Pexels photo titled 'Puente de Dios' is in Querétaro, not here."
+    "A Pexels photo titled 'Puente de Dios' is in Querétaro, not here.",
+    "Resolved: region Huasteca (PDU-SLP Huasteca Norte + Huasteca brochure). The Media brochure map shows these sites as context.",
+    "Resolved: two places share the name. INEGI lists a locality 'Puente de Dios (Paso Alto)' in Aquismón; this record is the Tamasopo site described by the brochure."
   ],
   "ethics": null,
   "media": {
@@ -80,6 +81,17 @@
     "commons_approved_candidates": 7,
     "pexels": 1
   },
-  "verified_core_fields": "2/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "map_status": "provisional",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-89848894",
+    "wc-45072628",
+    "wc-45072664"
+  ],
+  "media_card": "wc-45072628"
 }

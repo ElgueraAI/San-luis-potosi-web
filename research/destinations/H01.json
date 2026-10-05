@@ -11,8 +11,9 @@
   "region": {
     "value": "huasteca",
     "status": "verified",
-    "source": "brochure-huasteca",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Huasteca Centro; municipality Aquismón"
   },
   "municipality": {
     "value": "Aquismón",
@@ -29,17 +30,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 21.8012657,
-      "lon": -99.1800193
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "node/2794816185",
-    "osm_feature": "waterway/waterfall",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 21.801266,
+    "longitude": -99.180019,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap node/2794816185 (waterway/waterfall, \"Cascada de Tamul\")",
+    "source_url": "https://www.openstreetmap.org/node/2794816185",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: La Morena, Aquismón",
+    "crosscheck_distance_m": 4370,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "OpenStreetMap node/2794816185 (waterway/waterfall, \"Cascada de Tamul\")",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -93,5 +94,20 @@
     "pexels": 1
   },
   "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verification_status": "pending",
+  "map_status": "provisional",
+  "seasonal_tags": [
+    "noviembre-marzo"
+  ],
+  "priority": "A",
+  "media_status": "ready",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "px-14842050",
+    "px-11775031",
+    "wc-48806929",
+    "wc-45072519",
+    "wc-48806880"
+  ],
+  "media_card": "wc-48806929"
 }

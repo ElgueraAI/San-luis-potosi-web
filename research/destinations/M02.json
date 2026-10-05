@@ -11,8 +11,9 @@
   "region": {
     "value": "zona-media",
     "status": "verified",
-    "source": "brochure-media",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Media Oeste; municipality Rioverde"
   },
   "municipality": {
     "value": "Rioverde",
@@ -29,17 +30,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 21.9318566,
-      "lon": -99.9928621
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "node/299677634",
-    "osm_feature": "place/town",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 21.932378,
+    "longitude": -99.992923,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: Rioverde, Rioverde (cve 240240001)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 58,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "INEGI ITER 2020: Rioverde, Rioverde (cve 240240001)",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -75,6 +76,17 @@
     "commons_approved_candidates": 4,
     "pexels": 0
   },
-  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-43657425",
+    "wc-43657320",
+    "wc-145121025"
+  ],
+  "media_card": "wc-43657425"
 }

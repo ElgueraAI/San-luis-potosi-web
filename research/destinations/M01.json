@@ -11,8 +11,9 @@
   "region": {
     "value": "zona-media",
     "status": "verified",
-    "source": "brochure-media",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Media Oeste; municipality Rioverde"
   },
   "municipality": {
     "value": "Rioverde",
@@ -30,17 +31,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 21.8606265,
-      "lon": -100.0278954
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "node/4085575483",
-    "osm_feature": "natural/spring",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 21.860626,
+    "longitude": -100.027895,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap node/4085575483 (natural/spring, \"Manantial de la Media Luna\")",
+    "source_url": "https://www.openstreetmap.org/node/4085575483",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Rioverde, Rioverde",
+    "crosscheck_distance_m": 8756,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "OpenStreetMap node/4085575483 (natural/spring, \"Manantial de la Media Luna\")",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -69,10 +70,10 @@
   "access": [],
   "facts": {
     "protected_area": {
-      "value": "Área Natural Protegida / Parque Estatal",
-      "status": "pending",
-      "source": "brochure-media",
-      "note": "Stated by the tourism brochure. Confirm the decree with the state environmental authority."
+      "value": "Parque Estatal Manantial de la Media Luna (decreto 7 Jun 2003)",
+      "status": "verified",
+      "source": "segam-anp",
+      "verifiedAt": "2026-10-05"
     }
   },
   "official_resources": [
@@ -87,5 +88,16 @@
     "pexels": 0
   },
   "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verification_status": "pending",
+  "map_status": "provisional",
+  "seasonal_tags": [
+    "todo-el-ano"
+  ],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-76389273"
+  ],
+  "media_card": "wc-76389273"
 }

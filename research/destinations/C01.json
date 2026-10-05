@@ -11,8 +11,9 @@
   "region": {
     "value": "centro",
     "status": "verified",
-    "source": "brochure-centro",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "San Luis Norte; municipality San Luis Potosí"
   },
   "municipality": {
     "value": "San Luis Potosí",
@@ -29,17 +30,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 22.1528423,
-      "lon": -100.9769493
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "relation/14464122",
-    "osm_feature": "boundary/administrative",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 22.151655,
+    "longitude": -100.976958,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: San Luis Potosí, San Luis Potosí (cve 240280001)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 58,
+    "notes": "INEGI city point, which falls in the Centro Histórico."
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "INEGI ITER 2020: San Luis Potosí, San Luis Potosí (cve 240280001)",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -93,6 +94,17 @@
     "commons_approved_candidates": 5,
     "pexels": 0
   },
-  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "map_status": "ready",
+  "seasonal_tags": [
+    "julio-agosto"
+  ],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-63495269"
+  ],
+  "media_card": "wc-63495269"
 }

@@ -1,0 +1,74 @@
+{
+  "place_id": "M05",
+  "name": "La Taza",
+  "workbook": {
+    "region_label": "Media",
+    "type": "Naturaleza / agua",
+    "priority": "B",
+    "official_source": "https://turismo.slp.gob.mx/lugares/?page=2"
+  },
+  "municipality": {
+    "value": "Ciudad Fernández",
+    "status": "verified",
+    "source": "turismo-slp-lugar-la-taza",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Naturaleza / agua",
+  "description": {
+    "value": "Nacimiento de agua cristalina entre el ejido La Reformita y Ojo de Agua de Solano, visitado sobre todo por la población local en temporada de calor.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-la-taza",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "agua",
+      "naturaleza"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": "Official page frames it as a locally kept site: promote gently, if at all.",
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "zona-media",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Media Oeste; municipality Ciudad Fernández"
+  },
+  "coordinates": {
+    "latitude": null,
+    "longitude": null,
+    "precision": null,
+    "coordinate_source": null,
+    "source_url": null,
+    "verification_status": "pending",
+    "crosscheck_source": null,
+    "crosscheck_distance_m": null,
+    "notes": "No OSM feature found."
+  },
+  "coordinate_source": null,
+  "map_status": "pending",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "needs_manual_asset",
+  "official_source": [
+    "turismo-slp-lugar-la-taza"
+  ],
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

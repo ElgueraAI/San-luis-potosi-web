@@ -1,0 +1,77 @@
+{
+  "place_id": "C09",
+  "name": "Barrio Mágico de Tlaxcala",
+  "workbook": {
+    "region_label": "Centro",
+    "type": "Barrio / identidad",
+    "priority": "B",
+    "official_source": "https://turismo.slp.gob.mx/lugares/?page=3"
+  },
+  "municipality": {
+    "value": "San Luis Potosí",
+    "status": "verified",
+    "source": "turismo-slp-lugar-barrio-magico-de-tlaxcala",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Barrio / identidad",
+  "description": {
+    "value": "Barrio Mágico fundado en 1592 por familias tlaxcaltecas, con la Parroquia de Nuestra Señora de la Asunción y el mercado República; en agosto celebra a la Virgen de la Asunción.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-barrio-magico-de-tlaxcala",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "cultura-viva",
+      "patrimonio",
+      "gastronomia"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "centro",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "San Luis Norte; municipality San Luis Potosí"
+  },
+  "coordinates": {
+    "latitude": 22.165858,
+    "longitude": -100.974834,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap way/53473849 (leisure/park, \"Barrio de Tlaxcala\")",
+    "source_url": "https://www.openstreetmap.org/way/53473849",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: San Luis Potosí, San Luis Potosí",
+    "crosscheck_distance_m": 1594,
+    "notes": null
+  },
+  "coordinate_source": "OpenStreetMap way/53473849 (leisure/park, \"Barrio de Tlaxcala\")",
+  "map_status": "provisional",
+  "seasonal_tags": [
+    "agosto"
+  ],
+  "priority": "B",
+  "media_status": "needs_manual_asset",
+  "official_source": [
+    "turismo-slp-lugar-barrio-magico-de-tlaxcala"
+  ],
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

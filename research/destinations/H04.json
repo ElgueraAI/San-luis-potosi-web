@@ -11,8 +11,9 @@
   "region": {
     "value": "huasteca",
     "status": "verified",
-    "source": "brochure-huasteca",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Huasteca Centro; municipality Aquismón"
   },
   "municipality": {
     "value": "Aquismón",
@@ -29,17 +30,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 21.5999041,
-      "lon": -99.0989336
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "node/2883943605",
-    "osm_feature": "natural/cave_entrance",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 21.599904,
+    "longitude": -99.098934,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap node/2883943605 (natural/cave_entrance, \"Sótano de las Golondrinas\")",
+    "source_url": "https://www.openstreetmap.org/node/2883943605",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Aquismón, Aquismón",
+    "crosscheck_distance_m": 8548,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "OpenStreetMap node/2883943605 (natural/cave_entrance, \"Sótano de las Golondrinas\")",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -68,9 +69,11 @@
   "access": [],
   "facts": {
     "protected_area": {
-      "value": null,
-      "status": "pending",
-      "note": "Not stated in any source read in this pass."
+      "value": "Área natural protegida estatal (decreto multisitio con Hoya de las Huahuas)",
+      "status": "verified",
+      "source": "segam-anp",
+      "verifiedAt": "2026-10-05",
+      "note": "Category (Monumento Natural) reported by secondary sources, not read on SEGAM's page."
     }
   },
   "official_resources": [
@@ -85,5 +88,17 @@
     "pexels": 0
   },
   "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verification_status": "pending",
+  "map_status": "provisional",
+  "seasonal_tags": [
+    "amanecer-atardecer"
+  ],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-2008166",
+    "wc-2005486"
+  ],
+  "media_card": "wc-2005486"
 }

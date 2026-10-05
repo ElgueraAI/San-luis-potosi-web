@@ -1,0 +1,2729 @@
+{
+  "generated": "2026-10-05",
+  "method": "Pages rendered at 300–400 % with Edge's built-in PDF viewer (render-pdf.mjs) and read visually. The brochures are vector/outlined text (no text layer).",
+  "not_transcribed": [
+    "Activity icons in the 'Actividades turísticas' tables (legend matching is error-prone; activities are taken from the brochure prose instead).",
+    "Map labels other than those cited."
+  ],
+  "inconsistencies": [
+    "Capital → Ciudad Valles: 290 km / 3h 27m (Centro) vs Ciudad Valles → Capital 291 km / 3h 21m (Huasteca).",
+    "Matehuala ↔ Rioverde: 233 km / 2h 16m (Altiplano) vs 227 km / 2h 24m (Media).",
+    "Matehuala ↔ Capital: 2h (Altiplano) vs 2h 20m (Centro), both 194 km.",
+    "Matehuala → Salinas printed as 359 km / 3h; implausibly long for the stated time. Kept as printed, flagged.",
+    "Altiplano brochure repeats the Huasteca gastronomy box."
+  ],
+  "counts": {
+    "facts": 145,
+    "distance_rows": 75,
+    "attraction_rows": 36
+  },
+  "facts": [
+    {
+      "fact_id": "bt-001",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "San Luis Potosí Capital",
+        "highway": "57",
+        "distance_km": 291,
+        "unpaved_km": null,
+        "time_approx": "3h 21m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-002",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Rioverde",
+        "highway": "70",
+        "distance_km": 122,
+        "unpaved_km": null,
+        "time_approx": "1h 35m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-003",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Matehuala",
+        "highway": "75D",
+        "distance_km": 348,
+        "unpaved_km": null,
+        "time_approx": "3h 41m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-004",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Cascada de Micos",
+        "highway": "70",
+        "distance_km": 23,
+        "unpaved_km": 1,
+        "time_approx": "30m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-005",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "El Naranjo",
+        "highway": "85",
+        "distance_km": 101,
+        "unpaved_km": null,
+        "time_approx": "1h 36m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-006",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Cascada de Minas Viejas",
+        "highway": "70",
+        "distance_km": 71,
+        "unpaved_km": 1,
+        "time_approx": "1h 37m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-007",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "El Meco",
+        "highway": "85",
+        "distance_km": 104,
+        "unpaved_km": null,
+        "time_approx": "1h 41m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-008",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Tamasopo",
+        "highway": "70D",
+        "distance_km": 52,
+        "unpaved_km": null,
+        "time_approx": "50m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-009",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Cascadas de Tamasopo",
+        "highway": "70D",
+        "distance_km": 55,
+        "unpaved_km": null,
+        "time_approx": "57m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-010",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Puente de Dios, Tamasopo",
+        "highway": "70D",
+        "distance_km": 56,
+        "unpaved_km": 0.5,
+        "time_approx": "58m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-011",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Aquismón",
+        "highway": "85",
+        "distance_km": 50,
+        "unpaved_km": null,
+        "time_approx": "58m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-012",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Cascada de Tamul",
+        "highway": "70",
+        "distance_km": 41,
+        "unpaved_km": null,
+        "time_approx": "53m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-013",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "La Morena",
+        "highway": "70",
+        "distance_km": 46,
+        "unpaved_km": null,
+        "time_approx": "1h 02m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-014",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Tanchachin",
+        "highway": "70",
+        "distance_km": 42,
+        "unpaved_km": null,
+        "time_approx": "53m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-015",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Cuevas de Mantetzulel",
+        "highway": "85",
+        "distance_km": 57,
+        "unpaved_km": 4,
+        "time_approx": "1h 20m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-016",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Sótano de las Golondrinas",
+        "highway": "85",
+        "distance_km": 51,
+        "unpaved_km": null,
+        "time_approx": "1h 06m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-017",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Sótano de las Huahuas",
+        "highway": "85",
+        "distance_km": 62,
+        "unpaved_km": null,
+        "time_approx": "1h 15m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-018",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Xilitla",
+        "highway": "85",
+        "distance_km": 87,
+        "unpaved_km": null,
+        "time_approx": "1h 45m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-019",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Jardín Escultórico Edward James",
+        "highway": "85",
+        "distance_km": 85,
+        "unpaved_km": 1,
+        "time_approx": "1h 45m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-020",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Axtla de Terrazas",
+        "highway": "85",
+        "distance_km": 81,
+        "unpaved_km": null,
+        "time_approx": "1h 30m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-021",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Castillo de la Salud",
+        "highway": "85",
+        "distance_km": 82,
+        "unpaved_km": null,
+        "time_approx": "1h 35m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-022",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Tamuín",
+        "highway": "70",
+        "distance_km": 30,
+        "unpaved_km": null,
+        "time_approx": "32m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-023",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Tamtoc",
+        "highway": "70D",
+        "distance_km": 52,
+        "unpaved_km": 10,
+        "time_approx": "1h 10m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-024",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Tamohi (El Consuelo)",
+        "highway": "70D",
+        "distance_km": 41,
+        "unpaved_km": 1,
+        "time_approx": "35m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-025",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Tancanhuitz",
+        "highway": "85",
+        "distance_km": 55,
+        "unpaved_km": null,
+        "time_approx": "1h 02m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-026",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Centro Ceremonial Tamaletom",
+        "highway": "85",
+        "distance_km": 57,
+        "unpaved_km": null,
+        "time_approx": "1h 09m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-027",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Nacimiento del Río Huichihuayán",
+        "highway": "85",
+        "distance_km": 68,
+        "unpaved_km": null,
+        "time_approx": "1h 22m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-028",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Huehuetlán",
+        "highway": "85",
+        "distance_km": 63,
+        "unpaved_km": null,
+        "time_approx": "1h 23m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-029",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "distance",
+      "table": "Distancias de Ciudad Valles a:",
+      "value": {
+        "from": "Ciudad Valles",
+        "to": "Huichihuayán",
+        "highway": "85",
+        "distance_km": 65,
+        "unpaved_km": null,
+        "time_approx": "1h 13m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-030",
+      "brochure": "brochure-altiplano",
+      "page": 4,
+      "region": "altiplano",
+      "field": "distance",
+      "table": "Distancias de Matehuala a:",
+      "value": {
+        "from": "Matehuala",
+        "to": "San Luis Potosí Capital",
+        "highway": "57",
+        "distance_km": 194,
+        "unpaved_km": null,
+        "time_approx": "2h"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-031",
+      "brochure": "brochure-altiplano",
+      "page": 4,
+      "region": "altiplano",
+      "field": "distance",
+      "table": "Distancias de Matehuala a:",
+      "value": {
+        "from": "Matehuala",
+        "to": "Rioverde",
+        "highway": "57",
+        "distance_km": 233,
+        "unpaved_km": null,
+        "time_approx": "2h 16m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-032",
+      "brochure": "brochure-altiplano",
+      "page": 4,
+      "region": "altiplano",
+      "field": "distance",
+      "table": "Distancias de Matehuala a:",
+      "value": {
+        "from": "Matehuala",
+        "to": "Ciudad Valles",
+        "highway": "57",
+        "distance_km": 379,
+        "unpaved_km": null,
+        "time_approx": "3h 43m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-033",
+      "brochure": "brochure-altiplano",
+      "page": 4,
+      "region": "altiplano",
+      "field": "distance",
+      "table": "Distancias de Matehuala a:",
+      "value": {
+        "from": "Matehuala",
+        "to": "Catorce",
+        "highway": "62",
+        "distance_km": 60.7,
+        "unpaved_km": 25,
+        "time_approx": "1h 15m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-034",
+      "brochure": "brochure-altiplano",
+      "page": 4,
+      "region": "altiplano",
+      "field": "distance",
+      "table": "Distancias de Matehuala a:",
+      "value": {
+        "from": "Matehuala",
+        "to": "Estación Catorce",
+        "highway": "62",
+        "distance_km": 76.4,
+        "unpaved_km": null,
+        "time_approx": "1h 10m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-035",
+      "brochure": "brochure-altiplano",
+      "page": 4,
+      "region": "altiplano",
+      "field": "distance",
+      "table": "Distancias de Matehuala a:",
+      "value": {
+        "from": "Matehuala",
+        "to": "Charcas",
+        "highway": "63",
+        "distance_km": 90,
+        "unpaved_km": null,
+        "time_approx": "1h 15m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-036",
+      "brochure": "brochure-altiplano",
+      "page": 4,
+      "region": "altiplano",
+      "field": "distance",
+      "table": "Distancias de Matehuala a:",
+      "value": {
+        "from": "Matehuala",
+        "to": "Venado",
+        "highway": "63",
+        "distance_km": 112,
+        "unpaved_km": null,
+        "time_approx": "1h 34m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-037",
+      "brochure": "brochure-altiplano",
+      "page": 4,
+      "region": "altiplano",
+      "field": "distance",
+      "table": "Distancias de Matehuala a:",
+      "value": {
+        "from": "Matehuala",
+        "to": "Guadalcázar",
+        "highway": "57",
+        "distance_km": 132,
+        "unpaved_km": null,
+        "time_approx": "1h 26m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-038",
+      "brochure": "brochure-altiplano",
+      "page": 4,
+      "region": "altiplano",
+      "field": "distance",
+      "table": "Distancias de Matehuala a:",
+      "value": {
+        "from": "Matehuala",
+        "to": "El Realejo",
+        "highway": "57",
+        "distance_km": 135,
+        "unpaved_km": null,
+        "time_approx": "1h 31m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-039",
+      "brochure": "brochure-altiplano",
+      "page": 4,
+      "region": "altiplano",
+      "field": "distance",
+      "table": "Distancias de Matehuala a:",
+      "value": {
+        "from": "Matehuala",
+        "to": "Salinas",
+        "highway": "57",
+        "distance_km": 359,
+        "unpaved_km": null,
+        "time_approx": "3h"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-040",
+      "brochure": "brochure-altiplano",
+      "page": 4,
+      "region": "altiplano",
+      "field": "distance",
+      "table": "Distancias de Matehuala a:",
+      "value": {
+        "from": "Matehuala",
+        "to": "Moctezuma",
+        "highway": "63",
+        "distance_km": 225,
+        "unpaved_km": null,
+        "time_approx": "1h 48m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-041",
+      "brochure": "brochure-altiplano",
+      "page": 4,
+      "region": "altiplano",
+      "field": "distance",
+      "table": "Distancias de Matehuala a:",
+      "value": {
+        "from": "Matehuala",
+        "to": "Cedral",
+        "highway": "57",
+        "distance_km": 15,
+        "unpaved_km": null,
+        "time_approx": "27m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-042",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Matehuala",
+        "highway": "57",
+        "distance_km": 194,
+        "unpaved_km": null,
+        "time_approx": "2h 20m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-043",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Rioverde (libre)",
+        "highway": "70",
+        "distance_km": 139,
+        "unpaved_km": null,
+        "time_approx": "2h 20m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-044",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Rioverde (cuota)",
+        "highway": null,
+        "distance_km": 175,
+        "unpaved_km": null,
+        "time_approx": "1h 58m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-045",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Ciudad Valles",
+        "highway": "75D",
+        "distance_km": 290,
+        "unpaved_km": null,
+        "time_approx": "3h 27m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-046",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Santa María del Río",
+        "highway": "57",
+        "distance_km": 55.6,
+        "unpaved_km": null,
+        "time_approx": "46m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-047",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Cerro de San Pedro",
+        "highway": "57",
+        "distance_km": 24.8,
+        "unpaved_km": null,
+        "time_approx": "41m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-048",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Armadillo de los Infante",
+        "highway": "57",
+        "distance_km": 51.8,
+        "unpaved_km": null,
+        "time_approx": "1h 5m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-049",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Mexquitic",
+        "highway": "49",
+        "distance_km": 23,
+        "unpaved_km": null,
+        "time_approx": "30m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-050",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Villa de Reyes",
+        "highway": "57",
+        "distance_km": 50.7,
+        "unpaved_km": null,
+        "time_approx": "46m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-051",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Villa de Zaragoza",
+        "highway": "70",
+        "distance_km": 34.7,
+        "unpaved_km": null,
+        "time_approx": "41m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-052",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Soledad de Graciano Sánchez",
+        "highway": "57",
+        "distance_km": 8.5,
+        "unpaved_km": null,
+        "time_approx": "16m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-053",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Ahualulco",
+        "highway": "49",
+        "distance_km": 38,
+        "unpaved_km": null,
+        "time_approx": "30m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-054",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Tierra Nueva",
+        "highway": "57",
+        "distance_km": 80,
+        "unpaved_km": null,
+        "time_approx": "1h 8m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-055",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Villa de Arriaga",
+        "highway": "80",
+        "distance_km": 59.3,
+        "unpaved_km": null,
+        "time_approx": "43m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-056",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "San Nicolás Tolentino",
+        "highway": "57",
+        "distance_km": 70.5,
+        "unpaved_km": null,
+        "time_approx": "1h 8m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-057",
+      "brochure": "brochure-centro",
+      "page": 4,
+      "region": "centro",
+      "field": "distance",
+      "table": "Distancias de Capital (San Luis Potosí) a:",
+      "value": {
+        "from": "Capital (San Luis Potosí)",
+        "to": "Santo Domingo",
+        "highway": "57",
+        "distance_km": 131.9,
+        "unpaved_km": null,
+        "time_approx": "2h 47m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-058",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "San Luis Potosí (cuota)",
+        "highway": "57",
+        "distance_km": 168,
+        "unpaved_km": null,
+        "time_approx": "1h 58m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-059",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "San Luis Potosí (libre)",
+        "highway": "70",
+        "distance_km": 139,
+        "unpaved_km": null,
+        "time_approx": "2h 20m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-060",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Ciudad Valles (cuota)",
+        "highway": null,
+        "distance_km": 124,
+        "unpaved_km": null,
+        "time_approx": "1h 38m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-061",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Ciudad Valles",
+        "highway": "70",
+        "distance_km": 136,
+        "unpaved_km": null,
+        "time_approx": "2h 6m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-062",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Matehuala",
+        "highway": "75D",
+        "distance_km": 227,
+        "unpaved_km": null,
+        "time_approx": "2h 24m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-063",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Cd. Fernández",
+        "highway": "75D",
+        "distance_km": 3.6,
+        "unpaved_km": null,
+        "time_approx": "8m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-064",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Manantial Media Luna",
+        "highway": "70",
+        "distance_km": 14,
+        "unpaved_km": null,
+        "time_approx": "28m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-065",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Progreso",
+        "highway": "70",
+        "distance_km": 44.5,
+        "unpaved_km": null,
+        "time_approx": "42m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-066",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Pastora",
+        "highway": "75D",
+        "distance_km": 27,
+        "unpaved_km": null,
+        "time_approx": "31m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-067",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Cd. del Maíz",
+        "highway": "75D",
+        "distance_km": 113,
+        "unpaved_km": null,
+        "time_approx": "1h 46m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-068",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Cerritos",
+        "highway": "70",
+        "distance_km": 72,
+        "unpaved_km": null,
+        "time_approx": "54m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-069",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Rayón",
+        "highway": "75D",
+        "distance_km": 41,
+        "unpaved_km": null,
+        "time_approx": "39m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-070",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Lagunillas",
+        "highway": "69",
+        "distance_km": 79,
+        "unpaved_km": null,
+        "time_approx": "1h 29m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-071",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Villa Juárez",
+        "highway": "75D",
+        "distance_km": 58,
+        "unpaved_km": null,
+        "time_approx": "42m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-072",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "San Nicolás Tolentino",
+        "highway": "75D",
+        "distance_km": 117,
+        "unpaved_km": null,
+        "time_approx": "2h 19m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-073",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Manantial San Sebastián",
+        "highway": "69",
+        "distance_km": 40,
+        "unpaved_km": null,
+        "time_approx": "50m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-074",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Grutas de la Catedral",
+        "highway": "70",
+        "distance_km": 30,
+        "unpaved_km": null,
+        "time_approx": "56m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-075",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "distance",
+      "table": "Distancias de Rioverde a:",
+      "value": {
+        "from": "Rioverde",
+        "to": "Cañón Pinihuán",
+        "highway": "70",
+        "distance_km": 62,
+        "unpaved_km": null,
+        "time_approx": "58m"
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Approximate road distance and time as printed; not re-measured."
+    },
+    {
+      "fact_id": "bt-076",
+      "brochure": "brochure-huasteca",
+      "page": 3,
+      "region": "huasteca",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Ciudad Valles",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Río Valles",
+          "Cascadas de Pago Pago (Micos)"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-077",
+      "brochure": "brochure-huasteca",
+      "page": 3,
+      "region": "huasteca",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Aquismón",
+        "pueblo_magico_icon": true,
+        "attractions": [
+          "Cabecera Municipal",
+          "Cascada de Tamul",
+          "Río Tampaón",
+          "Sótano de las Golondrinas",
+          "Hoya de las Huahuas",
+          "Cuevas de Mantetzulel",
+          "Puente de Dios"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-078",
+      "brochure": "brochure-huasteca",
+      "page": 3,
+      "region": "huasteca",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Xilitla",
+        "pueblo_magico_icon": true,
+        "attractions": [
+          "Cabecera Municipal",
+          "Museo Leonora Carrington",
+          "Museo Edward James",
+          "Jardín Escultórico Edward James, Las Pozas",
+          "Cascada Los Comales",
+          "Bosque de la Trinidad"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-079",
+      "brochure": "brochure-huasteca",
+      "page": 3,
+      "region": "huasteca",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Tamasopo",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cabecera Municipal",
+          "Cascadas de Tamasopo",
+          "Puente de Dios",
+          "El Trampolín",
+          "Cascada El Aguacate"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-080",
+      "brochure": "brochure-huasteca",
+      "page": 3,
+      "region": "huasteca",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "El Naranjo",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cascada El Meco",
+          "Cascadas de Minas Viejas",
+          "Cascada El Salto"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-081",
+      "brochure": "brochure-huasteca",
+      "page": 3,
+      "region": "huasteca",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Axtla de Terrazas",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cabecera Municipal",
+          "Río Axtla",
+          "Castillo de la Salud"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-082",
+      "brochure": "brochure-huasteca",
+      "page": 3,
+      "region": "huasteca",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Tamuín",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Sitios Arqueológicos de Tamtoc y Tamohi",
+          "Nacimiento de Tamuín"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-083",
+      "brochure": "brochure-huasteca",
+      "page": 3,
+      "region": "huasteca",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Tancanhuitz",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Centro Ceremonial Tamaletom"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-084",
+      "brochure": "brochure-huasteca",
+      "page": 3,
+      "region": "huasteca",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Huehuetlán",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Nacimiento de Huichihuayán",
+          "El Vado"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-085",
+      "brochure": "brochure-altiplano",
+      "page": 3,
+      "region": "altiplano",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Matehuala",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Catedral",
+          "Mercado",
+          "Gastronomía Tradicional"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-086",
+      "brochure": "brochure-altiplano",
+      "page": 3,
+      "region": "altiplano",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Real de Catorce",
+        "pueblo_magico_icon": true,
+        "attractions": [
+          "Real de Catorce",
+          "Potrero",
+          "La Luz",
+          "Estación Catorce",
+          "San Antonio",
+          "San José Coronados"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-087",
+      "brochure": "brochure-altiplano",
+      "page": 3,
+      "region": "altiplano",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Charcas",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cabecera Municipal"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-088",
+      "brochure": "brochure-altiplano",
+      "page": 3,
+      "region": "altiplano",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Venado",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Ex Hacienda Guanamé",
+          "Centro Cultural Roberto Donis",
+          "Parras del Altiplano"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-089",
+      "brochure": "brochure-altiplano",
+      "page": 3,
+      "region": "altiplano",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Guadalcázar",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cabecera Municipal",
+          "Museo de Arte Sacro",
+          "El Realejo"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-090",
+      "brochure": "brochure-altiplano",
+      "page": 3,
+      "region": "altiplano",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Salinas",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cabecera Municipal",
+          "Centro Cultural",
+          "La Salinera"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-091",
+      "brochure": "brochure-altiplano",
+      "page": 3,
+      "region": "altiplano",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Villa de la Paz",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Jaquis, Laureles",
+          "Cabecera Municipal"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-092",
+      "brochure": "brochure-altiplano",
+      "page": 3,
+      "region": "altiplano",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Cedral",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cabecera Municipal"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-093",
+      "brochure": "brochure-altiplano",
+      "page": 3,
+      "region": "altiplano",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Moctezuma",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cabecera Municipal"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-094",
+      "brochure": "brochure-altiplano",
+      "page": 3,
+      "region": "altiplano",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Villa de Guadalupe",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Vivero La Ilusión"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-095",
+      "brochure": "brochure-centro",
+      "page": 3,
+      "region": "centro",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "San Luis Potosí",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Centro Histórico",
+          "Museo Leonora Carrington",
+          "CEART",
+          "Museo Laberinto de las Ciencias y las Artes",
+          "Parque Tangamanga",
+          "Club de Golf",
+          "Hacienda de Peñasco"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-096",
+      "brochure": "brochure-centro",
+      "page": 3,
+      "region": "centro",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Santa María del Río",
+        "pueblo_magico_icon": true,
+        "attractions": [
+          "Cabecera",
+          "Escuela del Rebozo",
+          "Cascada del Amparito",
+          "Ex Hacienda La Labor del Río"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-097",
+      "brochure": "brochure-centro",
+      "page": 3,
+      "region": "centro",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Soledad de Graciano Sánchez",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Joya Honda",
+          "Pueblo"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-098",
+      "brochure": "brochure-centro",
+      "page": 3,
+      "region": "centro",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Armadillo de los Infante",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Pueblo",
+          "Pozo del Carmen",
+          "Hacienda de Corcovada",
+          "Cráter Encantado"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-099",
+      "brochure": "brochure-centro",
+      "page": 3,
+      "region": "centro",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Cerro de San Pedro",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Pueblo",
+          "Monte Caldera",
+          "Sendero 'El Capitán'"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-100",
+      "brochure": "brochure-centro",
+      "page": 3,
+      "region": "centro",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Villa de Reyes",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Pueblo",
+          "Centro Vacacional Gogorrón",
+          "Hacienda Jesús María"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-101",
+      "brochure": "brochure-centro",
+      "page": 3,
+      "region": "centro",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Mexquitic",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Ruta del Mezcal",
+          "Pueblo",
+          "Ruta del Pulque"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-102",
+      "brochure": "brochure-centro",
+      "page": 3,
+      "region": "centro",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Villa de Zaragoza",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Sierra de Álvarez"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-103",
+      "brochure": "brochure-centro",
+      "page": 3,
+      "region": "centro",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Ahualulco",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Pueblo",
+          "Fábrica de Mezcal Santa Teresa",
+          "Fábrica de Mezcal Ipiña"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-104",
+      "brochure": "brochure-media",
+      "page": 3,
+      "region": "zona-media",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Rioverde",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cabecera Municipal",
+          "Manantial de la Media Luna",
+          "Grutas de la Catedral",
+          "Los Peroles",
+          "Progreso",
+          "Templo de la Divina Pastora",
+          "San Bartolo",
+          "La Malanca",
+          "Lumbreras"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-105",
+      "brochure": "brochure-media",
+      "page": 3,
+      "region": "zona-media",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Rayón / Cárdenas",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Sabinito",
+          "Canoas",
+          "Ex Hacienda Vaqueros",
+          "Río Vaqueros",
+          "Cascada los Chorros"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-106",
+      "brochure": "brochure-media",
+      "page": 3,
+      "region": "zona-media",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Ciudad del Maíz",
+        "pueblo_magico_icon": true,
+        "attractions": [
+          "Cabecera Municipal",
+          "Colonia Italiana",
+          "Murales de Jorge Pasquel",
+          "Festividad de la quema de diablos"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-107",
+      "brochure": "brochure-media",
+      "page": 3,
+      "region": "zona-media",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Ciudad Fernández",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cabecera Municipal",
+          "Ruta del Arroyo de órganos",
+          "Ruta Agroturística",
+          "El Sermón"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-108",
+      "brochure": "brochure-media",
+      "page": 3,
+      "region": "zona-media",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Cerritos",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cabecera Municipal"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-109",
+      "brochure": "brochure-media",
+      "page": 3,
+      "region": "zona-media",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Lagunillas",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cañón de Pinihuán",
+          "Cascada de la Lloviznosa",
+          "Presa las Coloradas"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-110",
+      "brochure": "brochure-media",
+      "page": 3,
+      "region": "zona-media",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "Villa Juárez",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cabecera Municipal",
+          "Hacienda de Guaxcamá",
+          "Manantial San Tiburcio"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-111",
+      "brochure": "brochure-media",
+      "page": 3,
+      "region": "zona-media",
+      "field": "attractions",
+      "table": "Actividades turísticas",
+      "value": {
+        "municipality": "San Nicolás Tolentino",
+        "pueblo_magico_icon": false,
+        "attractions": [
+          "Cabecera Municipal",
+          "Presa de las Golondrinas",
+          "Hacienda los Moreno"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Attraction names transcribed; activity icons not transcribed (see report)."
+    },
+    {
+      "fact_id": "bt-112",
+      "brochure": "brochure-huasteca",
+      "page": 1,
+      "region": "huasteca",
+      "field": "season",
+      "table": null,
+      "value": {
+        "place": "Cascada de Tamul",
+        "months": [
+          11,
+          12,
+          1,
+          2,
+          3
+        ],
+        "text": "La mejor temporada para apreciarla es de noviembre a marzo."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-113",
+      "brochure": "brochure-huasteca",
+      "page": 1,
+      "region": "huasteca",
+      "field": "season",
+      "table": null,
+      "value": {
+        "place": "El Naranjo (Cascada El Salto, El Meco, Minas Viejas)",
+        "months": [
+          11,
+          12,
+          1,
+          2,
+          3
+        ],
+        "text": "Una buena temporada para visitar estos sitios es de noviembre a marzo."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-114",
+      "brochure": "brochure-huasteca",
+      "page": 3,
+      "region": "huasteca",
+      "field": "season",
+      "table": null,
+      "value": {
+        "place": "Cascada El Salto",
+        "text": "*Cascada de temporada, lluvias y Semana Santa."
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "Footnote in the activities table. Implies El Salto flows seasonally; no months given."
+    },
+    {
+      "fact_id": "bt-115",
+      "brochure": "brochure-huasteca",
+      "page": 1,
+      "region": "huasteca",
+      "field": "physical",
+      "table": null,
+      "value": {
+        "place": "Cascada de Tamul",
+        "drop_m": 105
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-116",
+      "brochure": "brochure-huasteca",
+      "page": 1,
+      "region": "huasteca",
+      "field": "physical",
+      "table": null,
+      "value": {
+        "place": "Cascada El Salto",
+        "drop_m": 70
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-117",
+      "brochure": "brochure-huasteca",
+      "page": 1,
+      "region": "huasteca",
+      "field": "physical",
+      "table": null,
+      "value": {
+        "place": "Cascada El Meco",
+        "drop_m": 35
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-118",
+      "brochure": "brochure-huasteca",
+      "page": 1,
+      "region": "huasteca",
+      "field": "physical",
+      "table": null,
+      "value": {
+        "place": "Cascadas de Pago Pago (Micos)",
+        "falls": 7,
+        "drop_m_range": [
+          2,
+          20
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-119",
+      "brochure": "brochure-huasteca",
+      "page": 2,
+      "region": "huasteca",
+      "field": "physical",
+      "table": null,
+      "value": {
+        "place": "Jardín Escultórico de Edward James",
+        "area_ha": 30,
+        "structures": 36,
+        "waterfall_m": 37
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-120",
+      "brochure": "brochure-huasteca",
+      "page": 2,
+      "region": "huasteca",
+      "field": "culture",
+      "table": null,
+      "value": {
+        "place": "Tancanhuitz",
+        "text": "Semana Santa y Día de Muertos o Xantolo; fiestas patronales en honor a San Miguel Arcángel en septiembre."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-121",
+      "brochure": "brochure-huasteca",
+      "page": 2,
+      "region": "huasteca",
+      "field": "culture",
+      "table": null,
+      "value": {
+        "place": "Tancanhuitz",
+        "text": "Centro Ceremonial Maam ts'itsin inik: Danza del Gavilán de los Voladores de Tamaletom, reconocidos dentro de la declaratoria de la UNESCO como Patrimonio Intangible de la Humanidad."
+      },
+      "confidence": "high",
+      "verification_status": "pending",
+      "note": "Brochure wording; the UNESCO inscription itself ('Ritual ceremony of the Voladores', 2009) was not checked this pass."
+    },
+    {
+      "fact_id": "bt-122",
+      "brochure": "brochure-huasteca",
+      "page": 2,
+      "region": "huasteca",
+      "field": "culture",
+      "table": null,
+      "value": {
+        "place": "Axtla de Terrazas",
+        "text": "Castillo de la Salud de Beto Ramón en Ahuacatitla: curanderos náhuatl y plantas medicinales."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-123",
+      "brochure": "brochure-huasteca",
+      "page": 2,
+      "region": "huasteca",
+      "field": "culture",
+      "table": null,
+      "value": {
+        "place": "Tamuín",
+        "text": "Tamtoc ('Lugar de las nubes de agua', en Tének): más de setenta edificaciones prehispánicas; Tamohi (El Consuelo), donde se encontró el Adolescente Huasteco."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-124",
+      "brochure": "brochure-huasteca",
+      "page": 1,
+      "region": "huasteca",
+      "field": "gastronomy",
+      "table": null,
+      "value": {
+        "dishes": [
+          "enchiladas huastecas",
+          "bocoles",
+          "zacahuil",
+          "huevos enhojados",
+          "nieves artesanales",
+          "café",
+          "pan artesanal"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-125",
+      "brochure": "brochure-huasteca",
+      "page": 2,
+      "region": "huasteca",
+      "field": "gastronomy",
+      "table": null,
+      "value": {
+        "place": "Axtla de Terrazas",
+        "dishes": [
+          "cecina",
+          "bocoles",
+          "dulce de pipián y de chayote",
+          "pacholes",
+          "zacahuil",
+          "enchiladas",
+          "vino de capulín, jobo y ciruela",
+          "atole de piña"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-126",
+      "brochure": "brochure-altiplano",
+      "page": 2,
+      "region": "altiplano",
+      "field": "gastronomy",
+      "table": null,
+      "value": {
+        "dishes": [
+          "enchiladas huastecas",
+          "bocoles",
+          "zacahuil",
+          "huevos enhojados",
+          "nieves artesanales",
+          "café",
+          "pan artesanal"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "conflict",
+      "note": "The Altiplano brochure repeats the Huasteca gastronomy box verbatim (layout reuse). Not Altiplano gastronomy."
+    },
+    {
+      "fact_id": "bt-127",
+      "brochure": "brochure-altiplano",
+      "page": 1,
+      "region": "altiplano",
+      "field": "gastronomy",
+      "table": null,
+      "value": {
+        "place": "Matehuala",
+        "dishes": [
+          "chorizo",
+          "cabrito",
+          "dulces de leche quemada",
+          "obleas",
+          "cajeta"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-128",
+      "brochure": "brochure-altiplano",
+      "page": 2,
+      "region": "altiplano",
+      "field": "gastronomy",
+      "table": null,
+      "value": {
+        "place": "Charcas",
+        "dishes": [
+          "quesos estilo gourmet",
+          "escamoles",
+          "gorditas ferrocarrileras"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-129",
+      "brochure": "brochure-centro",
+      "page": 2,
+      "region": "centro",
+      "field": "gastronomy",
+      "table": null,
+      "value": {
+        "dishes": [
+          "enchiladas potosinas",
+          "chiles ventilla",
+          "tacos rojos",
+          "campechanas",
+          "queso de tuna",
+          "vinos"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-130",
+      "brochure": "brochure-centro",
+      "page": 1,
+      "region": "centro",
+      "field": "gastronomy",
+      "table": null,
+      "value": {
+        "place": "San Luis Potosí",
+        "dishes": [
+          "enchiladas potosinas",
+          "gorditas rellenas",
+          "asado de boda",
+          "tacos rojos",
+          "colonche",
+          "aguamiel",
+          "queso de tuna",
+          "chocolates Costanzo y La Frontera"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-131",
+      "brochure": "brochure-media",
+      "page": 2,
+      "region": "zona-media",
+      "field": "gastronomy",
+      "table": null,
+      "value": {
+        "dishes": [
+          "enchiladas rioverdenses",
+          "guiso borracho",
+          "chancaquillas",
+          "pulque"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-132",
+      "brochure": "brochure-media",
+      "page": 1,
+      "region": "zona-media",
+      "field": "gastronomy",
+      "table": null,
+      "value": {
+        "place": "Ciudad Fernández",
+        "dishes": [
+          "birria",
+          "barbacoa de borrego",
+          "nopales",
+          "tamales",
+          "choriza",
+          "carnitas",
+          "dulces de piloncillo, calabaza y biznaga"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-133",
+      "brochure": "brochure-altiplano",
+      "page": 2,
+      "region": "altiplano",
+      "field": "climate",
+      "table": null,
+      "value": {
+        "text": "El clima del Altiplano es extremo: días muy soleados, calurosos y secos en el verano. Y frío extremo en el invierno."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-134",
+      "brochure": "brochure-altiplano",
+      "page": 1,
+      "region": "altiplano",
+      "field": "recommendation",
+      "table": null,
+      "value": {
+        "text": "Consulta la oferta hotelera y reserva con tiempo. Se recomienda contratar los servicios de un guía certificado y reservar tours con anticipación."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-135",
+      "brochure": "brochure-altiplano",
+      "page": 2,
+      "region": "altiplano",
+      "field": "recommendation",
+      "table": null,
+      "value": {
+        "text": "Los sitios turísticos y parajes tienen una capacidad de carga limitada. Consulta el estatus en visitasanluispotosi.com."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-136",
+      "brochure": "brochure-centro",
+      "page": 1,
+      "region": "centro",
+      "field": "recommendation",
+      "table": null,
+      "value": {
+        "text": "Consulta la oferta hotelera y reserva con tiempo. Se recomienda contratar los servicios de un guía certificado y reservar tours con anticipación."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-137",
+      "brochure": "brochure-centro",
+      "page": 2,
+      "region": "centro",
+      "field": "recommendation",
+      "table": null,
+      "value": {
+        "text": "Los sitios turísticos y parajes tienen una capacidad de carga limitada. Consulta el estatus en visitasanluispotosi.com."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-138",
+      "brochure": "brochure-huasteca",
+      "page": 1,
+      "region": "huasteca",
+      "field": "recommendation",
+      "table": null,
+      "value": {
+        "text": "Consulta la oferta hotelera y reserva con tiempo. Se recomienda contratar los servicios de un guía certificado y reservar tours con anticipación."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-139",
+      "brochure": "brochure-huasteca",
+      "page": 2,
+      "region": "huasteca",
+      "field": "recommendation",
+      "table": null,
+      "value": {
+        "text": "Los sitios turísticos y parajes tienen una capacidad de carga limitada. Consulta el estatus en visitasanluispotosi.com."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-140",
+      "brochure": "brochure-media",
+      "page": 1,
+      "region": "zona-media",
+      "field": "recommendation",
+      "table": null,
+      "value": {
+        "text": "Consulta la oferta hotelera y reserva con tiempo. Se recomienda contratar los servicios de un guía certificado y reservar tours con anticipación."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-141",
+      "brochure": "brochure-media",
+      "page": 2,
+      "region": "zona-media",
+      "field": "recommendation",
+      "table": null,
+      "value": {
+        "text": "Los sitios turísticos y parajes tienen una capacidad de carga limitada. Consulta el estatus en visitasanluispotosi.com."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-142",
+      "brochure": "brochure-huasteca",
+      "page": 1,
+      "region": "huasteca",
+      "field": "recommendation",
+      "table": null,
+      "value": {
+        "text": "Usar siempre chaleco salvavidas (rentables en los parajes), no rebasar áreas restringidas, no perder de vista a los niños."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-143",
+      "brochure": "brochure-huasteca",
+      "page": 1,
+      "region": "huasteca",
+      "field": "packing",
+      "table": null,
+      "value": {
+        "items": [
+          "repelente para mosquitos y bloqueador solar",
+          "zapato cómodo",
+          "gorra y/o pañuelo",
+          "lentes de sol",
+          "cámara fotográfica (pide permiso)"
+        ]
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-144",
+      "brochure": "brochure-huasteca",
+      "page": 4,
+      "region": "huasteca",
+      "field": "practical",
+      "table": null,
+      "value": {
+        "text": "SEDE Secretaría de Turismo: Manuel J. Othón 516, Ciudad Valles, tel. 481 385 1490; SUBSEDE: Manuel J. Othón 130, S.L.P., tel. 444 812 9939."
+      },
+      "confidence": "high",
+      "verification_status": "verified"
+    },
+    {
+      "fact_id": "bt-145",
+      "brochure": "brochure-media",
+      "page": 4,
+      "region": "zona-media",
+      "field": "map_note",
+      "table": null,
+      "value": {
+        "text": "The Media map also draws El Naranjo and Tamasopo with their sites (red markers) as neighbouring context."
+      },
+      "confidence": "high",
+      "verification_status": "verified",
+      "note": "See municipality-region-map.json (border case)."
+    }
+  ]
+}

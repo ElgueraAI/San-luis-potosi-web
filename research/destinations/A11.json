@@ -1,0 +1,73 @@
+{
+  "place_id": "A11",
+  "name": "Charcas – Centro Histórico",
+  "workbook": {
+    "region_label": "Altiplano",
+    "type": "Pueblo minero",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-altiplano/"
+  },
+  "municipality": {
+    "value": "Charcas",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Pueblo minero",
+  "description": {
+    "value": "Pueblo minero que conserva su traza original; destacan la Alhóndiga, la parroquia de San Francisco de Asís, la Ermita de Cristo Rey (Cruz del Siglo), el centro cultural El Refugio y el Museo Interactivo El Meteorito.",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "patrimonio",
+      "mineria",
+      "gastronomia"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "altiplano",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Altiplano Centro; municipality Charcas"
+  },
+  "coordinates": {
+    "latitude": 23.129818,
+    "longitude": -101.113352,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: Charcas, Charcas (cve 240150001)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 70,
+    "notes": null
+  },
+  "coordinate_source": "INEGI ITER 2020: Charcas, Charcas (cve 240150001)",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "needs_manual_asset",
+  "official_source": [],
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

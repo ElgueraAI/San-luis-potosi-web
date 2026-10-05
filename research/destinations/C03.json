@@ -11,8 +11,9 @@
   "region": {
     "value": "centro",
     "status": "verified",
-    "source": "brochure-centro",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "San Luis Norte; municipality San Luis Potosí"
   },
   "municipality": {
     "value": "San Luis Potosí",
@@ -31,17 +32,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 22.1511173,
-      "lon": -100.9738942
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "relation/14398253",
-    "osm_feature": "place/square",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 22.151117,
+    "longitude": -100.973894,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap relation/14398253 (place/square, \"Plaza del Carmen\")",
+    "source_url": "https://www.openstreetmap.org/relation/14398253",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: San Luis Potosí, San Luis Potosí",
+    "crosscheck_distance_m": 321,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "OpenStreetMap relation/14398253 (place/square, \"Plaza del Carmen\")",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -79,5 +80,18 @@
     "pexels": 0
   },
   "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verification_status": "pending",
+  "map_status": "provisional",
+  "seasonal_tags": [
+    "semana-santa"
+  ],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-81112902",
+    "wc-77789645",
+    "wc-21525467"
+  ],
+  "media_card": "wc-77789645"
 }

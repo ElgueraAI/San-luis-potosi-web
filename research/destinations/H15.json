@@ -1,0 +1,82 @@
+{
+  "place_id": "H15",
+  "name": "Cascada El Salto",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Cascada",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-huasteca/"
+  },
+  "municipality": {
+    "value": "El Naranjo",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Cascada",
+  "description": {
+    "value": "Cascada de 70 metros que forma enormes pozas azules; es una cascada de temporada (lluvias y Semana Santa).",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "agua",
+      "cascadas"
+    ],
+    "status": "editorial"
+  },
+  "facts": {
+    "height_m": {
+      "value": 70,
+      "status": "verified",
+      "source": "brochure-huasteca",
+      "verifiedAt": "2026-10-05"
+    }
+  },
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "huasteca",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Huasteca Norte; municipality El Naranjo"
+  },
+  "coordinates": {
+    "latitude": 22.585777,
+    "longitude": -99.383553,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap node/5391196955 (waterway/waterfall, \"Cascada El Salto\")",
+    "source_url": "https://www.openstreetmap.org/node/5391196955",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Colonia Salto del Agua, El Naranjo",
+    "crosscheck_distance_m": 2075,
+    "notes": null
+  },
+  "coordinate_source": "OpenStreetMap node/5391196955 (waterway/waterfall, \"Cascada El Salto\")",
+  "map_status": "provisional",
+  "seasonal_tags": [
+    "temporada-lluvias",
+    "semana-santa"
+  ],
+  "priority": "B",
+  "media_status": "needs_manual_asset",
+  "official_source": [],
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

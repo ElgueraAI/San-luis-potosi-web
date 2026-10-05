@@ -1,0 +1,1099 @@
+{
+  "generated": "2026-10-05",
+  "seasons_definition": "Meteorological seasons (Dec–Feb invierno, Mar–May primavera, Jun–Aug verano, Sep–Nov otoño).",
+  "rule": "Recommendations come only from official sources. Open-Meteo climate is attached per month as quantitative context (label: modelled 2016–2025 average), never as a recommendation on its own.",
+  "climate_source": "generated/climate-monthly.json",
+  "records": [
+    {
+      "record_id": "se-tamul",
+      "destination": "H01",
+      "region": "huasteca",
+      "months": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "seasons": [
+        "primavera",
+        "otoño",
+        "invierno"
+      ],
+      "recommended_activities": [
+        "visita en panga",
+        "kayak en el río Tampaón"
+      ],
+      "water_conditions": "Brochure names Nov–Mar as the best season to appreciate the falls.",
+      "rain_dry_context": "Supporting data: Ciudad Valles point is wettest Jun–Oct (Open-Meteo 2016–2025).",
+      "festivals": null,
+      "cultural_periods": null,
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "brochure-huasteca",
+      "verification_status": "verified",
+      "notes": null
+    },
+    {
+      "record_id": "se-el-naranjo",
+      "destination": "H13|H14|H15",
+      "region": "huasteca",
+      "months": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "seasons": [
+        "primavera",
+        "otoño",
+        "invierno"
+      ],
+      "recommended_activities": [
+        "natación",
+        "paddle",
+        "kayak",
+        "rapel",
+        "campismo",
+        "observación de fauna"
+      ],
+      "water_conditions": null,
+      "rain_dry_context": null,
+      "festivals": null,
+      "cultural_periods": null,
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "brochure-huasteca",
+      "verification_status": "verified",
+      "notes": "'Una buena temporada para visitar estos sitios es de noviembre a marzo' (El Naranjo)."
+    },
+    {
+      "record_id": "se-el-salto",
+      "destination": "H15",
+      "region": "huasteca",
+      "months": [],
+      "seasons": [],
+      "recommended_activities": [
+        "contemplar la caída cuando hay temporada"
+      ],
+      "water_conditions": "Seasonal waterfall: flows in the rainy season and during Semana Santa (brochure footnote). No months given.",
+      "rain_dry_context": null,
+      "festivals": null,
+      "cultural_periods": null,
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "brochure-huasteca",
+      "verification_status": "verified",
+      "notes": "Months intentionally empty: the source names periods, not months."
+    },
+    {
+      "record_id": "se-media-luna",
+      "destination": "M01",
+      "region": "zona-media",
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "seasons": [
+        "primavera",
+        "verano",
+        "otoño",
+        "invierno"
+      ],
+      "recommended_activities": [
+        "natación",
+        "buceo recreativo y deportivo",
+        "campismo"
+      ],
+      "water_conditions": "Corrientes tranquilas; segura todo el año para natación y buceo.",
+      "rain_dry_context": null,
+      "festivals": null,
+      "cultural_periods": null,
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "brochure-media",
+      "verification_status": "verified",
+      "notes": null
+    },
+    {
+      "record_id": "se-golondrinas",
+      "destination": "H04|H05",
+      "region": "huasteca",
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "seasons": [
+        "primavera",
+        "verano",
+        "otoño",
+        "invierno"
+      ],
+      "recommended_activities": [
+        "observación de aves al amanecer y al caer la tarde",
+        "senderismo",
+        "espeleología"
+      ],
+      "water_conditions": null,
+      "rain_dry_context": null,
+      "festivals": null,
+      "cultural_periods": null,
+      "nature_conditions": "Loros y vencejos, sobre todo al amanecer y al caer la tarde (time of day, all year).",
+      "photography_opportunities": "Salida/entrada de aves al amanecer y atardecer.",
+      "gastronomy_relevance": null,
+      "source_id": "brochure-huasteca",
+      "verification_status": "verified",
+      "notes": null
+    },
+    {
+      "record_id": "se-procesion",
+      "destination": "C03",
+      "region": "centro",
+      "months": [
+        3,
+        4
+      ],
+      "seasons": [
+        "primavera"
+      ],
+      "recommended_activities": [
+        "Procesión del Silencio (Viernes Santo)"
+      ],
+      "water_conditions": null,
+      "rain_dry_context": null,
+      "festivals": [
+        "ev-procesion-silencio"
+      ],
+      "cultural_periods": "Semana Santa",
+      "nature_conditions": null,
+      "photography_opportunities": "Procesión nocturna en el Centro Histórico.",
+      "gastronomy_relevance": null,
+      "source_id": "cultura-slp-procesion-2026",
+      "verification_status": "verified",
+      "notes": null
+    },
+    {
+      "record_id": "se-fenapo",
+      "destination": "C01",
+      "region": "centro",
+      "months": [
+        8
+      ],
+      "seasons": [
+        "verano"
+      ],
+      "recommended_activities": [
+        "FENAPO"
+      ],
+      "water_conditions": null,
+      "rain_dry_context": null,
+      "festivals": [
+        "ev-fenapo"
+      ],
+      "cultural_periods": null,
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "fenapo-2026",
+      "verification_status": "verified",
+      "notes": null
+    },
+    {
+      "record_id": "se-lila-lopez",
+      "destination": "C01",
+      "region": "centro",
+      "months": [
+        7,
+        8
+      ],
+      "seasons": [
+        "verano"
+      ],
+      "recommended_activities": [
+        "Festival de danza contemporánea"
+      ],
+      "water_conditions": null,
+      "rain_dry_context": null,
+      "festivals": [
+        "ev-lila-lopez"
+      ],
+      "cultural_periods": null,
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "cultura-gob-lila-lopez-2026",
+      "verification_status": "verified",
+      "notes": null
+    },
+    {
+      "record_id": "se-xantolo",
+      "destination": "H18",
+      "region": "huasteca",
+      "months": [
+        10,
+        11
+      ],
+      "seasons": [
+        "otoño"
+      ],
+      "recommended_activities": [
+        "altares",
+        "comparsas",
+        "danzas tének y nahuas"
+      ],
+      "water_conditions": null,
+      "rain_dry_context": null,
+      "festivals": [
+        "ev-xantolo"
+      ],
+      "cultural_periods": "Xantolo / Día de Muertos",
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": "Zacahuil and Huasteca dishes (brochure-huasteca) — season link not stated by source.",
+      "source_id": "slp-gob-xantolo-2025",
+      "verification_status": "verified",
+      "notes": "2026 dates not yet official."
+    },
+    {
+      "record_id": "se-catorce-oct",
+      "destination": "A01",
+      "region": "altiplano",
+      "months": [
+        10
+      ],
+      "seasons": [
+        "otoño"
+      ],
+      "recommended_activities": [
+        "peregrinación de San Francisco (4 de octubre)"
+      ],
+      "water_conditions": null,
+      "rain_dry_context": null,
+      "festivals": [
+        "ev-san-francisco-catorce"
+      ],
+      "cultural_periods": "Peregrinación",
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "turismo-slp-lugar-real-de-catorce",
+      "verification_status": "verified",
+      "notes": null
+    },
+    {
+      "record_id": "se-altiplano-clima",
+      "destination": "A01|A06|A15",
+      "region": "altiplano",
+      "months": [
+        6,
+        7,
+        8,
+        12,
+        1,
+        2
+      ],
+      "seasons": [
+        "verano",
+        "invierno"
+      ],
+      "recommended_activities": [],
+      "water_conditions": null,
+      "rain_dry_context": "Verano muy soleado, caluroso y seco; invierno de frío extremo (brochure). Supporting data: Real de Catorce point averages 3.6 °C minimum in January (Open-Meteo).",
+      "festivals": null,
+      "cultural_periods": null,
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "brochure-altiplano",
+      "verification_status": "verified",
+      "notes": "Climate caution, not a recommendation."
+    },
+    {
+      "record_id": "se-tlaxcala",
+      "destination": "C09",
+      "region": "centro",
+      "months": [
+        8
+      ],
+      "seasons": [
+        "verano"
+      ],
+      "recommended_activities": [
+        "Fiestas de la Virgen de la Asunción"
+      ],
+      "water_conditions": null,
+      "rain_dry_context": null,
+      "festivals": [
+        "ev-asuncion-tlaxcala"
+      ],
+      "cultural_periods": null,
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "turismo-slp-lugar-barrio-magico-de-tlaxcala",
+      "verification_status": "verified",
+      "notes": null
+    },
+    {
+      "record_id": "se-tancanhuitz",
+      "destination": "Tancanhuitz",
+      "region": "huasteca",
+      "months": [
+        9
+      ],
+      "seasons": [
+        "otoño"
+      ],
+      "recommended_activities": [
+        "fiestas de San Miguel Arcángel"
+      ],
+      "water_conditions": null,
+      "rain_dry_context": null,
+      "festivals": [
+        "ev-san-miguel-tancanhuitz"
+      ],
+      "cultural_periods": null,
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "brochure-huasteca",
+      "verification_status": "verified",
+      "notes": null
+    },
+    {
+      "record_id": "se-xiiui",
+      "destination": "M09",
+      "region": "zona-media",
+      "months": [
+        3,
+        4
+      ],
+      "seasons": [
+        "primavera"
+      ],
+      "recommended_activities": [
+        "Semana Santa indígena xi'iui"
+      ],
+      "water_conditions": null,
+      "rain_dry_context": null,
+      "festivals": [
+        "ev-semana-santa-xiiui"
+      ],
+      "cultural_periods": "Semana Santa",
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "brochure-media",
+      "verification_status": "verified",
+      "notes": null
+    },
+    {
+      "record_id": "se-cerritos",
+      "destination": "Cerritos",
+      "region": "zona-media",
+      "months": [
+        6
+      ],
+      "seasons": [
+        "verano"
+      ],
+      "recommended_activities": [
+        "fiesta de San Juan Bautista y feria regional"
+      ],
+      "water_conditions": null,
+      "rain_dry_context": null,
+      "festivals": [
+        "ev-san-juan-cerritos"
+      ],
+      "cultural_periods": null,
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "brochure-media",
+      "verification_status": "verified",
+      "notes": null
+    },
+    {
+      "record_id": "se-tolentino",
+      "destination": "San Nicolás Tolentino",
+      "region": "zona-media",
+      "months": [
+        12
+      ],
+      "seasons": [
+        "invierno"
+      ],
+      "recommended_activities": [
+        "fiesta patronal"
+      ],
+      "water_conditions": null,
+      "rain_dry_context": null,
+      "festivals": [
+        "ev-san-nicolas-tolentino"
+      ],
+      "cultural_periods": null,
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "brochure-media",
+      "verification_status": "verified",
+      "notes": null
+    },
+    {
+      "record_id": "se-tierra-nueva",
+      "destination": "C13",
+      "region": "centro",
+      "months": [
+        9
+      ],
+      "seasons": [
+        "otoño"
+      ],
+      "recommended_activities": [
+        "jaripeos y bailes"
+      ],
+      "water_conditions": null,
+      "rain_dry_context": null,
+      "festivals": [
+        "ev-fiestas-tierra-nueva"
+      ],
+      "cultural_periods": null,
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "turismo-slp-lugar-tierra-nueva",
+      "verification_status": "verified",
+      "notes": null
+    },
+    {
+      "record_id": "se-la-taza",
+      "destination": "M05",
+      "region": "zona-media",
+      "months": [],
+      "seasons": [],
+      "recommended_activities": [
+        "nacimiento de agua cristalina"
+      ],
+      "water_conditions": "Visited by locals 'en temporada de calor' (no months given).",
+      "rain_dry_context": null,
+      "festivals": null,
+      "cultural_periods": null,
+      "nature_conditions": null,
+      "photography_opportunities": null,
+      "gastronomy_relevance": null,
+      "source_id": "turismo-slp-lugar-la-taza",
+      "verification_status": "verified",
+      "notes": "Official page says it is visited mostly by local people: low-key promotion recommended."
+    }
+  ],
+  "by_month": [
+    {
+      "month": 1,
+      "name_es": "enero",
+      "season": "invierno",
+      "records": [
+        "se-tamul",
+        "se-el-naranjo",
+        "se-media-luna",
+        "se-golondrinas",
+        "se-altiplano-clima"
+      ],
+      "events": [],
+      "climate": {
+        "altiplano": {
+          "month": 1,
+          "name_es": "enero",
+          "tmax_mean_c": 21.1,
+          "tmin_mean_c": 7.1,
+          "precip_mm": 13.0,
+          "rain_days": 2.8
+        },
+        "centro": {
+          "month": 1,
+          "name_es": "enero",
+          "tmax_mean_c": 21.5,
+          "tmin_mean_c": 7.1,
+          "precip_mm": 8.0,
+          "rain_days": 1.9
+        },
+        "zona-media": {
+          "month": 1,
+          "name_es": "enero",
+          "tmax_mean_c": 22.9,
+          "tmin_mean_c": 10.9,
+          "precip_mm": 18.0,
+          "rain_days": 4.8
+        },
+        "huasteca": {
+          "month": 1,
+          "name_es": "enero",
+          "tmax_mean_c": 23.6,
+          "tmin_mean_c": 14.6,
+          "precip_mm": 42.0,
+          "rain_days": 6.9
+        }
+      }
+    },
+    {
+      "month": 2,
+      "name_es": "febrero",
+      "season": "invierno",
+      "records": [
+        "se-tamul",
+        "se-el-naranjo",
+        "se-media-luna",
+        "se-golondrinas",
+        "se-altiplano-clima"
+      ],
+      "events": [],
+      "climate": {
+        "altiplano": {
+          "month": 2,
+          "name_es": "febrero",
+          "tmax_mean_c": 24.3,
+          "tmin_mean_c": 9.0,
+          "precip_mm": 13.0,
+          "rain_days": 1.9
+        },
+        "centro": {
+          "month": 2,
+          "name_es": "febrero",
+          "tmax_mean_c": 24.1,
+          "tmin_mean_c": 8.6,
+          "precip_mm": 10.0,
+          "rain_days": 1.8
+        },
+        "zona-media": {
+          "month": 2,
+          "name_es": "febrero",
+          "tmax_mean_c": 26.6,
+          "tmin_mean_c": 12.5,
+          "precip_mm": 10.0,
+          "rain_days": 2.3
+        },
+        "huasteca": {
+          "month": 2,
+          "name_es": "febrero",
+          "tmax_mean_c": 26.6,
+          "tmin_mean_c": 16.2,
+          "precip_mm": 21.0,
+          "rain_days": 5.1
+        }
+      }
+    },
+    {
+      "month": 3,
+      "name_es": "marzo",
+      "season": "primavera",
+      "records": [
+        "se-tamul",
+        "se-el-naranjo",
+        "se-media-luna",
+        "se-golondrinas",
+        "se-procesion",
+        "se-xiiui"
+      ],
+      "events": [
+        "ev-procesion-silencio",
+        "ev-semana-santa-xiiui"
+      ],
+      "climate": {
+        "altiplano": {
+          "month": 3,
+          "name_es": "marzo",
+          "tmax_mean_c": 27.5,
+          "tmin_mean_c": 11.4,
+          "precip_mm": 14.0,
+          "rain_days": 3.0
+        },
+        "centro": {
+          "month": 3,
+          "name_es": "marzo",
+          "tmax_mean_c": 27.2,
+          "tmin_mean_c": 10.6,
+          "precip_mm": 6.0,
+          "rain_days": 1.9
+        },
+        "zona-media": {
+          "month": 3,
+          "name_es": "marzo",
+          "tmax_mean_c": 30.3,
+          "tmin_mean_c": 15.1,
+          "precip_mm": 16.0,
+          "rain_days": 4.8
+        },
+        "huasteca": {
+          "month": 3,
+          "name_es": "marzo",
+          "tmax_mean_c": 30.4,
+          "tmin_mean_c": 19.0,
+          "precip_mm": 39.0,
+          "rain_days": 6.8
+        }
+      }
+    },
+    {
+      "month": 4,
+      "name_es": "abril",
+      "season": "primavera",
+      "records": [
+        "se-media-luna",
+        "se-golondrinas",
+        "se-procesion",
+        "se-xiiui"
+      ],
+      "events": [
+        "ev-procesion-silencio",
+        "ev-semana-santa-xiiui"
+      ],
+      "climate": {
+        "altiplano": {
+          "month": 4,
+          "name_es": "abril",
+          "tmax_mean_c": 29.6,
+          "tmin_mean_c": 14.0,
+          "precip_mm": 19.0,
+          "rain_days": 4.0
+        },
+        "centro": {
+          "month": 4,
+          "name_es": "abril",
+          "tmax_mean_c": 29.0,
+          "tmin_mean_c": 12.9,
+          "precip_mm": 16.0,
+          "rain_days": 3.7
+        },
+        "zona-media": {
+          "month": 4,
+          "name_es": "abril",
+          "tmax_mean_c": 32.4,
+          "tmin_mean_c": 17.7,
+          "precip_mm": 36.0,
+          "rain_days": 6.2
+        },
+        "huasteca": {
+          "month": 4,
+          "name_es": "abril",
+          "tmax_mean_c": 33.1,
+          "tmin_mean_c": 21.6,
+          "precip_mm": 65.0,
+          "rain_days": 8.5
+        }
+      }
+    },
+    {
+      "month": 5,
+      "name_es": "mayo",
+      "season": "primavera",
+      "records": [
+        "se-media-luna",
+        "se-golondrinas"
+      ],
+      "events": [],
+      "climate": {
+        "altiplano": {
+          "month": 5,
+          "name_es": "mayo",
+          "tmax_mean_c": 30.9,
+          "tmin_mean_c": 16.8,
+          "precip_mm": 35.0,
+          "rain_days": 5.9
+        },
+        "centro": {
+          "month": 5,
+          "name_es": "mayo",
+          "tmax_mean_c": 30.1,
+          "tmin_mean_c": 15.0,
+          "precip_mm": 40.0,
+          "rain_days": 6.4
+        },
+        "zona-media": {
+          "month": 5,
+          "name_es": "mayo",
+          "tmax_mean_c": 33.5,
+          "tmin_mean_c": 20.4,
+          "precip_mm": 67.0,
+          "rain_days": 10.4
+        },
+        "huasteca": {
+          "month": 5,
+          "name_es": "mayo",
+          "tmax_mean_c": 34.8,
+          "tmin_mean_c": 24.2,
+          "precip_mm": 102.0,
+          "rain_days": 14.1
+        }
+      }
+    },
+    {
+      "month": 6,
+      "name_es": "junio",
+      "season": "verano",
+      "records": [
+        "se-media-luna",
+        "se-golondrinas",
+        "se-altiplano-clima",
+        "se-cerritos"
+      ],
+      "events": [
+        "ev-san-juan-cerritos"
+      ],
+      "climate": {
+        "altiplano": {
+          "month": 6,
+          "name_es": "junio",
+          "tmax_mean_c": 29.9,
+          "tmin_mean_c": 17.2,
+          "precip_mm": 61.0,
+          "rain_days": 10.3
+        },
+        "centro": {
+          "month": 6,
+          "name_es": "junio",
+          "tmax_mean_c": 27.2,
+          "tmin_mean_c": 15.2,
+          "precip_mm": 75.0,
+          "rain_days": 13.0
+        },
+        "zona-media": {
+          "month": 6,
+          "name_es": "junio",
+          "tmax_mean_c": 30.9,
+          "tmin_mean_c": 20.5,
+          "precip_mm": 126.0,
+          "rain_days": 17.4
+        },
+        "huasteca": {
+          "month": 6,
+          "name_es": "junio",
+          "tmax_mean_c": 33.5,
+          "tmin_mean_c": 24.0,
+          "precip_mm": 269.0,
+          "rain_days": 19.8
+        }
+      }
+    },
+    {
+      "month": 7,
+      "name_es": "julio",
+      "season": "verano",
+      "records": [
+        "se-media-luna",
+        "se-golondrinas",
+        "se-lila-lopez",
+        "se-altiplano-clima"
+      ],
+      "events": [
+        "ev-lila-lopez"
+      ],
+      "climate": {
+        "altiplano": {
+          "month": 7,
+          "name_es": "julio",
+          "tmax_mean_c": 29.1,
+          "tmin_mean_c": 17.0,
+          "precip_mm": 59.0,
+          "rain_days": 9.5
+        },
+        "centro": {
+          "month": 7,
+          "name_es": "julio",
+          "tmax_mean_c": 26.1,
+          "tmin_mean_c": 14.7,
+          "precip_mm": 71.0,
+          "rain_days": 11.3
+        },
+        "zona-media": {
+          "month": 7,
+          "name_es": "julio",
+          "tmax_mean_c": 29.7,
+          "tmin_mean_c": 20.2,
+          "precip_mm": 114.0,
+          "rain_days": 18.7
+        },
+        "huasteca": {
+          "month": 7,
+          "name_es": "julio",
+          "tmax_mean_c": 32.2,
+          "tmin_mean_c": 23.4,
+          "precip_mm": 192.0,
+          "rain_days": 20.8
+        }
+      }
+    },
+    {
+      "month": 8,
+      "name_es": "agosto",
+      "season": "verano",
+      "records": [
+        "se-media-luna",
+        "se-golondrinas",
+        "se-fenapo",
+        "se-lila-lopez",
+        "se-altiplano-clima",
+        "se-tlaxcala"
+      ],
+      "events": [
+        "ev-asuncion-tlaxcala",
+        "ev-fenapo",
+        "ev-lila-lopez"
+      ],
+      "climate": {
+        "altiplano": {
+          "month": 8,
+          "name_es": "agosto",
+          "tmax_mean_c": 29.9,
+          "tmin_mean_c": 17.3,
+          "precip_mm": 41.0,
+          "rain_days": 7.6
+        },
+        "centro": {
+          "month": 8,
+          "name_es": "agosto",
+          "tmax_mean_c": 26.4,
+          "tmin_mean_c": 14.8,
+          "precip_mm": 55.0,
+          "rain_days": 10.4
+        },
+        "zona-media": {
+          "month": 8,
+          "name_es": "agosto",
+          "tmax_mean_c": 30.2,
+          "tmin_mean_c": 20.2,
+          "precip_mm": 94.0,
+          "rain_days": 18.3
+        },
+        "huasteca": {
+          "month": 8,
+          "name_es": "agosto",
+          "tmax_mean_c": 32.7,
+          "tmin_mean_c": 23.5,
+          "precip_mm": 163.0,
+          "rain_days": 21.0
+        }
+      }
+    },
+    {
+      "month": 9,
+      "name_es": "septiembre",
+      "season": "otoño",
+      "records": [
+        "se-media-luna",
+        "se-golondrinas",
+        "se-tancanhuitz",
+        "se-tierra-nueva"
+      ],
+      "events": [
+        "ev-fiestas-tierra-nueva",
+        "ev-san-miguel-tancanhuitz"
+      ],
+      "climate": {
+        "altiplano": {
+          "month": 9,
+          "name_es": "septiembre",
+          "tmax_mean_c": 27.1,
+          "tmin_mean_c": 16.5,
+          "precip_mm": 74.0,
+          "rain_days": 11.5
+        },
+        "centro": {
+          "month": 9,
+          "name_es": "septiembre",
+          "tmax_mean_c": 24.8,
+          "tmin_mean_c": 14.3,
+          "precip_mm": 84.0,
+          "rain_days": 12.9
+        },
+        "zona-media": {
+          "month": 9,
+          "name_es": "septiembre",
+          "tmax_mean_c": 28.6,
+          "tmin_mean_c": 19.6,
+          "precip_mm": 134.0,
+          "rain_days": 20.1
+        },
+        "huasteca": {
+          "month": 9,
+          "name_es": "septiembre",
+          "tmax_mean_c": 31.3,
+          "tmin_mean_c": 23.0,
+          "precip_mm": 259.0,
+          "rain_days": 21.0
+        }
+      }
+    },
+    {
+      "month": 10,
+      "name_es": "octubre",
+      "season": "otoño",
+      "records": [
+        "se-media-luna",
+        "se-golondrinas",
+        "se-xantolo",
+        "se-catorce-oct"
+      ],
+      "events": [
+        "ev-san-francisco-catorce",
+        "ev-xantolo"
+      ],
+      "climate": {
+        "altiplano": {
+          "month": 10,
+          "name_es": "octubre",
+          "tmax_mean_c": 26.0,
+          "tmin_mean_c": 14.0,
+          "precip_mm": 39.0,
+          "rain_days": 6.6
+        },
+        "centro": {
+          "month": 10,
+          "name_es": "octubre",
+          "tmax_mean_c": 23.9,
+          "tmin_mean_c": 12.2,
+          "precip_mm": 41.0,
+          "rain_days": 7.4
+        },
+        "zona-media": {
+          "month": 10,
+          "name_es": "octubre",
+          "tmax_mean_c": 26.6,
+          "tmin_mean_c": 17.2,
+          "precip_mm": 99.0,
+          "rain_days": 12.8
+        },
+        "huasteca": {
+          "month": 10,
+          "name_es": "octubre",
+          "tmax_mean_c": 28.9,
+          "tmin_mean_c": 20.9,
+          "precip_mm": 167.0,
+          "rain_days": 15.0
+        }
+      }
+    },
+    {
+      "month": 11,
+      "name_es": "noviembre",
+      "season": "otoño",
+      "records": [
+        "se-tamul",
+        "se-el-naranjo",
+        "se-media-luna",
+        "se-golondrinas",
+        "se-xantolo"
+      ],
+      "events": [
+        "ev-xantolo"
+      ],
+      "climate": {
+        "altiplano": {
+          "month": 11,
+          "name_es": "noviembre",
+          "tmax_mean_c": 23.8,
+          "tmin_mean_c": 10.9,
+          "precip_mm": 21.0,
+          "rain_days": 3.4
+        },
+        "centro": {
+          "month": 11,
+          "name_es": "noviembre",
+          "tmax_mean_c": 23.0,
+          "tmin_mean_c": 9.8,
+          "precip_mm": 17.0,
+          "rain_days": 3.3
+        },
+        "zona-media": {
+          "month": 11,
+          "name_es": "noviembre",
+          "tmax_mean_c": 25.0,
+          "tmin_mean_c": 14.4,
+          "precip_mm": 33.0,
+          "rain_days": 5.5
+        },
+        "huasteca": {
+          "month": 11,
+          "name_es": "noviembre",
+          "tmax_mean_c": 26.1,
+          "tmin_mean_c": 18.0,
+          "precip_mm": 60.0,
+          "rain_days": 9.5
+        }
+      }
+    },
+    {
+      "month": 12,
+      "name_es": "diciembre",
+      "season": "invierno",
+      "records": [
+        "se-tamul",
+        "se-el-naranjo",
+        "se-media-luna",
+        "se-golondrinas",
+        "se-altiplano-clima",
+        "se-tolentino"
+      ],
+      "events": [
+        "ev-san-nicolas-tolentino"
+      ],
+      "climate": {
+        "altiplano": {
+          "month": 12,
+          "name_es": "diciembre",
+          "tmax_mean_c": 21.3,
+          "tmin_mean_c": 8.3,
+          "precip_mm": 13.0,
+          "rain_days": 2.4
+        },
+        "centro": {
+          "month": 12,
+          "name_es": "diciembre",
+          "tmax_mean_c": 21.4,
+          "tmin_mean_c": 8.0,
+          "precip_mm": 11.0,
+          "rain_days": 2.3
+        },
+        "zona-media": {
+          "month": 12,
+          "name_es": "diciembre",
+          "tmax_mean_c": 23.2,
+          "tmin_mean_c": 12.2,
+          "precip_mm": 21.0,
+          "rain_days": 5.0
+        },
+        "huasteca": {
+          "month": 12,
+          "name_es": "diciembre",
+          "tmax_mean_c": 24.7,
+          "tmin_mean_c": 15.8,
+          "precip_mm": 45.0,
+          "rain_days": 7.4
+        }
+      }
+    }
+  ]
+}

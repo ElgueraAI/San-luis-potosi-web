@@ -11,8 +11,9 @@
   "region": {
     "value": "huasteca",
     "status": "verified",
-    "source": "brochure-huasteca",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Huasteca Centro; municipality Aquismón"
   },
   "municipality": {
     "value": "Aquismón",
@@ -29,9 +30,15 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": null,
-    "status": "unavailable",
-    "note": "A river is a line; the visitor access point needs an official source."
+    "latitude": null,
+    "longitude": null,
+    "precision": null,
+    "coordinate_source": null,
+    "source_url": null,
+    "verification_status": "unavailable",
+    "crosscheck_source": null,
+    "crosscheck_distance_m": null,
+    "notes": "A river is a line; the visitor access point needs an official source."
   },
   "coordinate_source": null,
   "pueblo_magico": {
@@ -71,5 +78,16 @@
     "pexels": 0
   },
   "verified_core_fields": "2/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verification_status": "pending",
+  "map_status": "not-a-point",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-45072511",
+    "wc-45072553",
+    "wc-45072509"
+  ],
+  "media_card": "wc-45072511"
 }

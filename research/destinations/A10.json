@@ -1,0 +1,74 @@
+{
+  "place_id": "A10",
+  "name": "Zona de escalada de Guadalcázar",
+  "workbook": {
+    "region_label": "Altiplano",
+    "type": "Aventura",
+    "priority": "C",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-altiplano/"
+  },
+  "municipality": {
+    "value": "Guadalcázar",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Aventura",
+  "description": {
+    "value": "En la comunidad de El Realejo, a los pies del Cerro de las Comadres, paisajes de pino-encino y formaciones rocosas aptas para bicicleta de montaña, senderismo, cabalgata y escalada deportiva.",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "escalada",
+      "aventura",
+      "senderismo",
+      "ciclismo"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "altiplano",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Altiplano Este; municipality Guadalcázar"
+  },
+  "coordinates": {
+    "latitude": 22.668914,
+    "longitude": -100.424309,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: Realejo, Guadalcázar (cve 240170048)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": null,
+    "crosscheck_distance_m": null,
+    "notes": "Climbing area named by the brochure at El Realejo / Cerro de las Comadres; point is the community."
+  },
+  "coordinate_source": "INEGI ITER 2020: Realejo, Guadalcázar (cve 240170048)",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "C",
+  "media_status": "needs_manual_asset",
+  "official_source": [],
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

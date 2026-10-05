@@ -1,0 +1,74 @@
+{
+  "place_id": "M04",
+  "name": "Manantial Ojito de Agua",
+  "workbook": {
+    "region_label": "Media",
+    "type": "Naturaleza / historia",
+    "priority": "B",
+    "official_source": "https://turismo.slp.gob.mx/lugares/manantial-ojito-de-agua/"
+  },
+  "municipality": {
+    "value": "Ciudad Fernández",
+    "status": "verified",
+    "source": "turismo-slp-lugar-manantial-ojito-de-agua",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Naturaleza / historia",
+  "description": {
+    "value": "Manantial donde se fundó la misión de Santa Catarina Mártir del Rioverde (1617) y referencia de la fundación de Ciudad Fernández.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-manantial-ojito-de-agua",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "mixed",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "agua",
+      "historia"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "zona-media",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Media Oeste; municipality Ciudad Fernández"
+  },
+  "coordinates": {
+    "latitude": 21.946196,
+    "longitude": -100.010051,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap way/1388418429 (leisure/park, \"El Ojito de Agua\")",
+    "source_url": "https://www.openstreetmap.org/way/1388418429",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Ciudad Fernández, Ciudad Fernández",
+    "crosscheck_distance_m": 315,
+    "notes": null
+  },
+  "coordinate_source": "OpenStreetMap way/1388418429 (leisure/park, \"El Ojito de Agua\")",
+  "map_status": "provisional",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "needs_manual_asset",
+  "official_source": [
+    "turismo-slp-lugar-manantial-ojito-de-agua"
+  ],
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

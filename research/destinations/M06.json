@@ -1,0 +1,74 @@
+{
+  "place_id": "M06",
+  "name": "Museo Arqueológico La Mezclita",
+  "workbook": {
+    "region_label": "Media",
+    "type": "Arqueología",
+    "priority": "C",
+    "official_source": "https://turismo.slp.gob.mx/lugares/museo-arqueologico-la-mezclita/"
+  },
+  "municipality": {
+    "value": "Ciudad Fernández",
+    "status": "verified",
+    "source": "turismo-slp-lugar-museo-arqueologico-la-mezclita",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Arqueología",
+  "description": {
+    "value": "Museo con cerca de mil piezas prehispánicas de la antigua zona pame, a unos 20 minutos de la plaza de Ciudad Fernández.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-museo-arqueologico-la-mezclita",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "arqueologia",
+      "museos"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "zona-media",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Media Oeste; municipality Ciudad Fernández"
+  },
+  "coordinates": {
+    "latitude": null,
+    "longitude": null,
+    "precision": null,
+    "coordinate_source": null,
+    "source_url": null,
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Ciudad Fernández, Ciudad Fernández",
+    "crosscheck_distance_m": 134142,
+    "notes": "Rejected OSM match 134142 m from the access locality (limit 10 km): a different feature."
+  },
+  "coordinate_source": null,
+  "map_status": "pending",
+  "seasonal_tags": [],
+  "priority": "C",
+  "media_status": "needs_manual_asset",
+  "official_source": [
+    "turismo-slp-lugar-museo-arqueologico-la-mezclita"
+  ],
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

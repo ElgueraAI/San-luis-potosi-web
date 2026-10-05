@@ -1,0 +1,76 @@
+{
+  "place_id": "A07",
+  "name": "Catedral de la Inmaculada Concepción",
+  "workbook": {
+    "region_label": "Altiplano",
+    "type": "Arquitectura religiosa",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-altiplano/"
+  },
+  "municipality": {
+    "value": "Matehuala",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Arquitectura religiosa",
+  "description": {
+    "value": "Catedral de Matehuala, joya arquitectónica que es una réplica de la iglesia de San José de Lyon, Francia.",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "arquitectura",
+      "patrimonio",
+      "fe"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "altiplano",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Altiplano Este; municipality Matehuala"
+  },
+  "coordinates": {
+    "latitude": 23.646398,
+    "longitude": -100.643769,
+    "precision": "site",
+    "coordinate_source": "INEGI DENUE: IGLESIA CATEDRAL DE LA INMACULADA CONCEPCION (Asociaciones y organizaciones religiosas)",
+    "source_url": "https://www.inegi.org.mx/contenidos/masiva/denue/denue_24_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 37,
+    "notes": null
+  },
+  "coordinate_source": "INEGI DENUE: IGLESIA CATEDRAL DE LA INMACULADA CONCEPCION (Asociaciones y organizaciones religiosas)",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "partial",
+  "official_source": [],
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "researched_in_pass": 2,
+  "media_selected": [
+    "wc-43679590",
+    "wc-129510016"
+  ],
+  "media_card": "wc-43679590"
+}

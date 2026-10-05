@@ -11,8 +11,9 @@
   "region": {
     "value": "huasteca",
     "status": "verified",
-    "source": "brochure-huasteca",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Huasteca Norte; municipality Tamuín"
   },
   "municipality": {
     "value": "Tamuín",
@@ -31,22 +32,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 21.924445,
-      "lon": -98.812866
-    },
-    "status": "verified",
-    "source": "inah-lugares-tamtoc",
-    "verifiedAt": "2026-10-04",
-    "cross_check": {
-      "source": "osm-nominatim",
-      "osm": "way/27038659",
-      "lat": 21.9242259,
-      "lon": -98.8142578,
-      "distance_m": 146
-    }
+    "latitude": 21.924445,
+    "longitude": -98.812866,
+    "precision": "site",
+    "coordinate_source": "INAH ficha Tamtoc",
+    "source_url": "https://lugares.inah.gob.mx/es/node/4460",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 146,
+    "notes": null
   },
-  "coordinate_source": "inah-lugares-tamtoc",
+  "coordinate_source": "INAH ficha Tamtoc",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -114,5 +110,16 @@
     "pexels": 0
   },
   "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
-  "verification_status": "verified"
+  "verification_status": "verified",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-60066386",
+    "wc-30478447",
+    "wc-30478452"
+  ],
+  "media_card": "wc-60066386"
 }

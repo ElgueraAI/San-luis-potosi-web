@@ -11,8 +11,9 @@
   "region": {
     "value": "centro",
     "status": "verified",
-    "source": "brochure-centro",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "San Luis Sur; municipality Santa María del Río"
   },
   "municipality": {
     "value": "Santa María del Río",
@@ -30,9 +31,15 @@
     "note": "Also brochure-centro (Museo Casa del Rebozo)."
   },
   "coordinates": {
-    "value": null,
-    "status": "unavailable",
-    "note": "Workshops are spread across the town; use C11."
+    "latitude": null,
+    "longitude": null,
+    "precision": null,
+    "coordinate_source": null,
+    "source_url": null,
+    "verification_status": "unavailable",
+    "crosscheck_source": null,
+    "crosscheck_distance_m": null,
+    "notes": "Workshops are spread across Santa María del Río; use C11."
   },
   "coordinate_source": null,
   "pueblo_magico": {
@@ -70,5 +77,15 @@
     "pexels": 0
   },
   "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verification_status": "pending",
+  "map_status": "not-a-point",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-58139971",
+    "wc-58139975"
+  ],
+  "media_card": "wc-58139971"
 }

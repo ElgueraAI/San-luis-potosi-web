@@ -11,8 +11,9 @@
   "region": {
     "value": "centro",
     "status": "verified",
-    "source": "brochure-centro",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "San Luis Sur; municipality Santa María del Río"
   },
   "municipality": {
     "value": "Santa María del Río",
@@ -31,17 +32,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 21.7985605,
-      "lon": -100.7369915
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "node/4442589288",
-    "osm_feature": "place/town",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 21.800439,
+    "longitude": -100.737109,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: Santa María del Río, Santa María del Río (cve 240320001)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 209,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "INEGI ITER 2020: Santa María del Río, Santa María del Río (cve 240320001)",
   "pueblo_magico": {
     "value": true,
     "status": "verified",
@@ -96,6 +97,16 @@
     "commons_approved_candidates": 4,
     "pexels": 0
   },
-  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-58118619",
+    "wc-58139974"
+  ],
+  "media_card": "wc-58118619"
 }

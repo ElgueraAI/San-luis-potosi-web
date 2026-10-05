@@ -1,0 +1,79 @@
+{
+  "place_id": "C05",
+  "name": "Teatro de la Paz",
+  "workbook": {
+    "region_label": "Centro",
+    "type": "Cultura / arquitectura",
+    "priority": "B",
+    "official_source": "https://turismo.slp.gob.mx/lugares/?page=3"
+  },
+  "municipality": {
+    "value": "San Luis Potosí",
+    "status": "verified",
+    "source": "turismo-slp-lugar-teatro-de-la-paz-slp",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Cultura / arquitectura",
+  "description": {
+    "value": "Recinto con la sala principal del Teatro de la Paz, la Galería Germán Gedovius y la sala Flavio F. Carlos.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-teatro-de-la-paz-slp",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "arquitectura",
+      "artes-escenicas"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "centro",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "San Luis Norte; municipality San Luis Potosí"
+  },
+  "coordinates": {
+    "latitude": 22.150701,
+    "longitude": -100.97388,
+    "precision": "site",
+    "coordinate_source": "INEGI DENUE: TEATRO DE LA PAZ (Promotores del sector público de espectáculos artísticos, culturales, deportivos y similares que cuentan con instalaciones para presentarlos)",
+    "source_url": "https://www.inegi.org.mx/contenidos/masiva/denue/denue_24_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 57,
+    "notes": null
+  },
+  "coordinate_source": "INEGI DENUE: TEATRO DE LA PAZ (Promotores del sector público de espectáculos artísticos, culturales, deportivos y similares que cuentan con instalaciones para presentarlos)",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "ready",
+  "official_source": [
+    "turismo-slp-lugar-teatro-de-la-paz-slp"
+  ],
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "researched_in_pass": 2,
+  "media_selected": [
+    "wc-41833060",
+    "wc-30504652",
+    "wc-28794550",
+    "wc-108267867"
+  ],
+  "media_card": "wc-30504652"
+}

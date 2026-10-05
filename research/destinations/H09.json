@@ -1,0 +1,72 @@
+{
+  "place_id": "H09",
+  "name": "Convento de San Agustín",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Patrimonio",
+    "priority": "B",
+    "official_source": "https://turismo.slp.gob.mx/lugares/xilitla/"
+  },
+  "municipality": {
+    "value": "Xilitla",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Patrimonio",
+  "description": {
+    "value": "Ex convento de San Agustín, del siglo XVI, en el centro de Xilitla.",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "patrimonio",
+      "arquitectura"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "huasteca",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Huasteca Sur; municipality Xilitla"
+  },
+  "coordinates": {
+    "latitude": null,
+    "longitude": null,
+    "precision": null,
+    "coordinate_source": null,
+    "source_url": null,
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Xilitla, Xilitla",
+    "crosscheck_distance_m": 350416,
+    "notes": "Rejected OSM match 350416 m from the access locality (limit 2 km): a different feature."
+  },
+  "coordinate_source": null,
+  "map_status": "pending",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "needs_manual_asset",
+  "official_source": [],
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

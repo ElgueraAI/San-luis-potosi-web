@@ -11,8 +11,9 @@
   "region": {
     "value": "centro",
     "status": "verified",
-    "source": "brochure-centro",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "San Luis Norte; municipality Cerro de San Pedro"
   },
   "municipality": {
     "value": "Cerro de San Pedro",
@@ -29,17 +30,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 22.216971,
-      "lon": -100.799577
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "node/679625237",
-    "osm_feature": "place/village",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 22.217785,
+    "longitude": -100.800462,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: Cerro de San Pedro, Cerro de San Pedro (cve 240090001)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 128,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "INEGI ITER 2020: Cerro de San Pedro, Cerro de San Pedro (cve 240090001)",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -84,6 +85,18 @@
     "commons_approved_candidates": 5,
     "pexels": 0
   },
-  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-50604767",
+    "wc-50604761",
+    "wc-158635553",
+    "wc-50604759"
+  ],
+  "media_card": "wc-50604767"
 }

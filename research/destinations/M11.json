@@ -1,0 +1,74 @@
+{
+  "place_id": "M11",
+  "name": "Parroquia de la Purísima Concepción",
+  "workbook": {
+    "region_label": "Media",
+    "type": "Arquitectura religiosa",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/lugares/ciudad-del-maiz/"
+  },
+  "municipality": {
+    "value": "Ciudad del Maíz",
+    "status": "verified",
+    "source": "turismo-slp-lugar-ciudad-del-maiz",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Arquitectura religiosa",
+  "description": {
+    "value": "Parroquia neoclásica del siglo XVIII en el centro de Ciudad del Maíz.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-ciudad-del-maiz",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "arquitectura",
+      "fe"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "zona-media",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Media Este; municipality Ciudad del Maíz"
+  },
+  "coordinates": {
+    "latitude": 22.404699,
+    "longitude": -99.597083,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap way/1041309936 (highway/residential, \"Calle Purísima Concepción\")",
+    "source_url": "https://www.openstreetmap.org/way/1041309936",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Ciudad del Maíz, Ciudad del Maíz",
+    "crosscheck_distance_m": 648,
+    "notes": null
+  },
+  "coordinate_source": "OpenStreetMap way/1041309936 (highway/residential, \"Calle Purísima Concepción\")",
+  "map_status": "provisional",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "partial",
+  "official_source": [],
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [
+    "wc-72476440"
+  ],
+  "media_card": "wc-72476440"
+}

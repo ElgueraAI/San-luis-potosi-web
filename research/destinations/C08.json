@@ -11,8 +11,9 @@
   "region": {
     "value": "centro",
     "status": "verified",
-    "source": "brochure-centro",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "San Luis Norte; municipality San Luis Potosí"
   },
   "municipality": {
     "value": "San Luis Potosí",
@@ -22,7 +23,6 @@
   },
   "type": "Arte",
   "official_source": [
-    "turismo-slp-lugar-centro-de-las-artes-de-san-luis-potosi",
     "turismo-slp-lugar-museo-leonora-carrinton-slp"
   ],
   "description": {
@@ -32,17 +32,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 22.1383403,
-      "lon": -100.9706035
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "way/744748243",
-    "osm_feature": "tourism/museum",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 22.138247,
+    "longitude": -100.970873,
+    "precision": "site",
+    "coordinate_source": "INEGI DENUE: MUSEO LEONORA CARRINGTON SAN LUIS POTOSI (Museos del sector público)",
+    "source_url": "https://www.inegi.org.mx/contenidos/masiva/denue/denue_24_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 30,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "INEGI DENUE: MUSEO LEONORA CARRINGTON SAN LUIS POTOSI (Museos del sector público)",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -87,6 +87,16 @@
     "commons_approved_candidates": 3,
     "pexels": 0
   },
-  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-79606411",
+    "wc-81089617"
+  ],
+  "media_card": "wc-79606411"
 }

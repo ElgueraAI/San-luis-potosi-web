@@ -11,8 +11,9 @@
   "region": {
     "value": "huasteca",
     "status": "verified",
-    "source": "brochure-huasteca",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Huasteca Sur; municipality Xilitla"
   },
   "municipality": {
     "value": "Xilitla",
@@ -34,17 +35,17 @@
     "note": "Museum mention from brochure-huasteca."
   },
   "coordinates": {
-    "value": {
-      "lat": 21.3865084,
-      "lon": -98.9919608
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "node/1703068009",
-    "osm_feature": "place/town",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 21.385193,
+    "longitude": -98.989573,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: Xilitla, Xilitla (cve 240540001)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 287,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "INEGI ITER 2020: Xilitla, Xilitla (cve 240540001)",
   "pueblo_magico": {
     "value": true,
     "status": "verified",
@@ -84,13 +85,25 @@
     "pdf-brochure-huasteca",
     "map-huasteca"
   ],
-  "conflicts": [],
+  "conflicts": [
+    "Unresolved: Edward James described as 'escocés' (brochure-huasteca; laspozas-xilitla-org: 'nació en Escocia') and as 'inglés' (turismo-slp-lugar-xilitla). Recommended wording: 'Edward James (1907–1984), poeta y mecenas del surrealismo'."
+  ],
   "ethics": null,
   "media": {
     "commons": 8,
     "commons_approved_candidates": 7,
     "pexels": 0
   },
-  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-128308393",
+    "wc-112989200"
+  ],
+  "media_card": "wc-112989200"
 }

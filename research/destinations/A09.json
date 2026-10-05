@@ -1,0 +1,73 @@
+{
+  "place_id": "A09",
+  "name": "Gruta de las Candelas",
+  "workbook": {
+    "region_label": "Altiplano",
+    "type": "Naturaleza / cueva",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-altiplano/"
+  },
+  "municipality": {
+    "value": "Guadalcázar",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Naturaleza / cueva",
+  "description": {
+    "value": "Gruta poco profunda pero muy atractiva y enigmática, ideal para una sesión fotográfica.",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "cuevas",
+      "naturaleza",
+      "fotografia"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "altiplano",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Altiplano Este; municipality Guadalcázar"
+  },
+  "coordinates": {
+    "latitude": null,
+    "longitude": null,
+    "precision": null,
+    "coordinate_source": null,
+    "source_url": null,
+    "verification_status": "pending",
+    "crosscheck_source": null,
+    "crosscheck_distance_m": null,
+    "notes": "No OSM feature found."
+  },
+  "coordinate_source": null,
+  "map_status": "pending",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "needs_manual_asset",
+  "official_source": [],
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

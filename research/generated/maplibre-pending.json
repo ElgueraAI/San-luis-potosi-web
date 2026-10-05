@@ -1,0 +1,307 @@
+{
+  "generated": "2026-10-05",
+  "count": 14,
+  "places": [
+    {
+      "place_id": "A03",
+      "name": "Pueblo Fantasma",
+      "region": "altiplano",
+      "municipality": "Catorce",
+      "category": "cultural",
+      "interest_tags": [
+        "mineria",
+        "aventura",
+        "patrimonio"
+      ],
+      "priority": "A",
+      "description_short": null,
+      "description_status": "unavailable",
+      "verification_status": "pending",
+      "coordinate_status": "pending",
+      "coordinate_precision": null,
+      "map_status": "pending",
+      "media_candidate_id": null,
+      "official_source": null,
+      "reason": "Rejected OSM match 172735 m from the access locality (limit 8 km): a different feature."
+    },
+    {
+      "place_id": "A09",
+      "name": "Gruta de las Candelas",
+      "region": "altiplano",
+      "municipality": "Guadalcázar",
+      "category": "natural",
+      "interest_tags": [
+        "cuevas",
+        "naturaleza",
+        "fotografia"
+      ],
+      "priority": "B",
+      "description_short": "Gruta poco profunda pero muy atractiva y enigmática, ideal para una sesión fotográfica.",
+      "description_status": "verified",
+      "verification_status": "pending",
+      "coordinate_status": "pending",
+      "coordinate_precision": null,
+      "map_status": "pending",
+      "media_candidate_id": null,
+      "official_source": "brochure-altiplano",
+      "reason": "No OSM feature found."
+    },
+    {
+      "place_id": "A15",
+      "name": "Paisaje del semidesierto potosino",
+      "region": "altiplano",
+      "municipality": null,
+      "category": "natural",
+      "interest_tags": [
+        "naturaleza",
+        "paisaje",
+        "fotografia"
+      ],
+      "priority": "A",
+      "description_short": null,
+      "description_status": "pending",
+      "verification_status": "pending",
+      "coordinate_status": "unavailable",
+      "coordinate_precision": null,
+      "map_status": "not-a-point",
+      "media_candidate_id": "wc-42373253",
+      "official_source": "brochure-altiplano",
+      "reason": "Landscape theme across the Altiplano, not a point."
+    },
+    {
+      "place_id": "C12",
+      "name": "Talleres de rebozo",
+      "region": "centro",
+      "municipality": "Santa María del Río",
+      "category": "cultural",
+      "interest_tags": [
+        "artesania",
+        "cultura-viva",
+        "textiles"
+      ],
+      "priority": "A",
+      "description_short": "Artesanas y artesanos elaboran rebozos con ikat y telar de cintura —entre ellos el rebozo de bolita—; el Museo Casa del Rebozo difunde este arte y varios domicilios particulares trabajan a diario.",
+      "description_status": "verified",
+      "verification_status": "pending",
+      "coordinate_status": "unavailable",
+      "coordinate_precision": null,
+      "map_status": "not-a-point",
+      "media_candidate_id": "wc-58139971",
+      "official_source": "turismo-slp-lugar-santa-maria-del-rio",
+      "reason": "Workshops are spread across Santa María del Río; use C11."
+    },
+    {
+      "place_id": "C14",
+      "name": "Sierra de San Miguelito",
+      "region": "centro",
+      "municipality": "San Luis Potosí",
+      "category": "natural",
+      "interest_tags": [
+        "naturaleza",
+        "senderismo"
+      ],
+      "priority": "B",
+      "description_short": null,
+      "description_status": "pending",
+      "verification_status": "pending",
+      "coordinate_status": "unavailable",
+      "coordinate_precision": null,
+      "map_status": "not-a-point",
+      "media_candidate_id": null,
+      "official_source": null,
+      "reason": "A mountain range (area), not a point."
+    },
+    {
+      "place_id": "M05",
+      "name": "La Taza",
+      "region": "zona-media",
+      "municipality": "Ciudad Fernández",
+      "category": "natural",
+      "interest_tags": [
+        "agua",
+        "naturaleza"
+      ],
+      "priority": "B",
+      "description_short": "Nacimiento de agua cristalina entre el ejido La Reformita y Ojo de Agua de Solano, visitado sobre todo por la población local en temporada de calor.",
+      "description_status": "verified",
+      "verification_status": "pending",
+      "coordinate_status": "pending",
+      "coordinate_precision": null,
+      "map_status": "pending",
+      "media_candidate_id": null,
+      "official_source": "turismo-slp-lugar-la-taza",
+      "reason": "No OSM feature found."
+    },
+    {
+      "place_id": "M06",
+      "name": "Museo Arqueológico La Mezclita",
+      "region": "zona-media",
+      "municipality": "Ciudad Fernández",
+      "category": "cultural",
+      "interest_tags": [
+        "arqueologia",
+        "museos"
+      ],
+      "priority": "C",
+      "description_short": "Museo con cerca de mil piezas prehispánicas de la antigua zona pame, a unos 20 minutos de la plaza de Ciudad Fernández.",
+      "description_status": "verified",
+      "verification_status": "pending",
+      "coordinate_status": "pending",
+      "coordinate_precision": null,
+      "map_status": "pending",
+      "media_candidate_id": null,
+      "official_source": "turismo-slp-lugar-museo-arqueologico-la-mezclita",
+      "reason": "Rejected OSM match 134142 m from the access locality (limit 10 km): a different feature."
+    },
+    {
+      "place_id": "M08",
+      "name": "El Balandrán",
+      "region": "zona-media",
+      "municipality": "Ciudad Fernández",
+      "category": "cultural",
+      "interest_tags": [
+        "arquitectura",
+        "patrimonio"
+      ],
+      "priority": "C",
+      "description_short": "Inmueble porfiriano de arquitectura neoclásica francesa construido entre 1906 y 1921 como estación agrícola experimental; hoy centro de investigación de la UASLP.",
+      "description_status": "verified",
+      "verification_status": "pending",
+      "coordinate_status": "pending",
+      "coordinate_precision": null,
+      "map_status": "pending",
+      "media_candidate_id": null,
+      "official_source": "turismo-slp-lugar-el-balandran-uaslp",
+      "reason": "No OSM feature found."
+    },
+    {
+      "place_id": "M10",
+      "name": "Casa Barraganeña",
+      "region": "zona-media",
+      "municipality": "Ciudad del Maíz",
+      "category": "cultural",
+      "interest_tags": [
+        "patrimonio",
+        "arquitectura"
+      ],
+      "priority": "B",
+      "description_short": "Casa Barraganeña, sede actual del gobierno municipal de Ciudad del Maíz.",
+      "description_status": "verified",
+      "verification_status": "pending",
+      "coordinate_status": "pending",
+      "coordinate_precision": null,
+      "map_status": "pending",
+      "media_candidate_id": "wc-43619684",
+      "official_source": "turismo-slp-lugar-ciudad-del-maiz",
+      "reason": "No OSM feature found."
+    },
+    {
+      "place_id": "M14",
+      "name": "Grutas de la Catedral – Alamitos",
+      "region": "zona-media",
+      "municipality": "Rioverde",
+      "category": "natural",
+      "interest_tags": [
+        "cuevas",
+        "naturaleza"
+      ],
+      "priority": "B",
+      "description_short": "En la comunidad de Alamitos, gruta con formaciones calcáreas semejantes a un púlpito, un altar y reclinatorios.",
+      "description_status": "verified",
+      "verification_status": "pending",
+      "coordinate_status": "pending",
+      "coordinate_precision": null,
+      "map_status": "pending",
+      "media_candidate_id": "wc-32612408",
+      "official_source": "brochure-media",
+      "reason": "No OSM feature found."
+    },
+    {
+      "place_id": "M15",
+      "name": "Paisaje agrícola de la cuenca de Rioverde",
+      "region": "zona-media",
+      "municipality": "Rioverde",
+      "category": "natural",
+      "interest_tags": [
+        "paisaje",
+        "agroturismo"
+      ],
+      "priority": "B",
+      "description_short": null,
+      "description_status": "pending",
+      "verification_status": "pending",
+      "coordinate_status": "unavailable",
+      "coordinate_precision": null,
+      "map_status": "not-a-point",
+      "media_candidate_id": null,
+      "official_source": "brochure-media",
+      "reason": "Agricultural landscape of the Rioverde basin, not a point."
+    },
+    {
+      "place_id": "H02",
+      "name": "Río Tampaón",
+      "region": "huasteca",
+      "municipality": "Aquismón",
+      "category": "natural",
+      "interest_tags": [
+        "agua",
+        "aventura",
+        "kayak",
+        "rafting"
+      ],
+      "priority": "A",
+      "description_short": "Río de la zona de Aquismón que se cruza en kayak y por el que se llega en panga a la Cascada de Tamul.",
+      "description_status": "verified",
+      "verification_status": "pending",
+      "coordinate_status": "unavailable",
+      "coordinate_precision": null,
+      "map_status": "not-a-point",
+      "media_candidate_id": "wc-45072511",
+      "official_source": "brochure-huasteca",
+      "reason": "A river is a line; the visitor access point needs an official source."
+    },
+    {
+      "place_id": "H09",
+      "name": "Convento de San Agustín",
+      "region": "huasteca",
+      "municipality": "Xilitla",
+      "category": "cultural",
+      "interest_tags": [
+        "patrimonio",
+        "arquitectura"
+      ],
+      "priority": "B",
+      "description_short": "Ex convento de San Agustín, del siglo XVI, en el centro de Xilitla.",
+      "description_status": "verified",
+      "verification_status": "pending",
+      "coordinate_status": "pending",
+      "coordinate_precision": null,
+      "map_status": "pending",
+      "media_candidate_id": null,
+      "official_source": "brochure-huasteca",
+      "reason": "Rejected OSM match 350416 m from the access locality (limit 2 km): a different feature."
+    },
+    {
+      "place_id": "H18",
+      "name": "Xantolo / tradiciones huastecas",
+      "region": "huasteca",
+      "municipality": null,
+      "category": "cultural",
+      "interest_tags": [
+        "cultura-viva",
+        "xantolo",
+        "tradiciones"
+      ],
+      "priority": "B",
+      "description_short": "Semana Santa y Día de Muertos o Xantolo son de las temporadas más importantes de la Huasteca, con fiestas, máscaras, altares tradicionales y comida.",
+      "description_status": "verified",
+      "verification_status": "pending",
+      "coordinate_status": "unavailable",
+      "coordinate_precision": null,
+      "map_status": "not-a-point",
+      "media_candidate_id": null,
+      "official_source": "brochure-huasteca",
+      "reason": "Intangible heritage (Xantolo) celebrated across many Huasteca communities."
+    }
+  ]
+}

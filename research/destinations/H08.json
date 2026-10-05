@@ -11,8 +11,9 @@
   "region": {
     "value": "huasteca",
     "status": "verified",
-    "source": "brochure-huasteca",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Huasteca Sur; municipality Xilitla"
   },
   "municipality": {
     "value": "Xilitla",
@@ -29,17 +30,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 21.3972729,
-      "lon": -98.9963918
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "way/661913846",
-    "osm_feature": "leisure/park",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 21.397273,
+    "longitude": -98.996392,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap way/661913846 (leisure/park, \"Las Pozas\")",
+    "source_url": "https://www.openstreetmap.org/way/661913846",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Xilitla, Xilitla",
+    "crosscheck_distance_m": 1517,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "OpenStreetMap way/661913846 (leisure/park, \"Las Pozas\")",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -70,7 +71,7 @@
     "map-huasteca"
   ],
   "conflicts": [
-    "Edward James is called 'escocés' (brochure-huasteca) and 'poeta y artista inglés' (turismo-slp-lugar-xilitla). Avoid stating nationality until checked."
+    "Unresolved: Edward James described as 'escocés' (brochure-huasteca; laspozas-xilitla-org: 'nació en Escocia') and as 'inglés' (turismo-slp-lugar-xilitla). Recommended wording: 'Edward James (1907–1984), poeta y mecenas del surrealismo'."
   ],
   "ethics": null,
   "media": {
@@ -79,5 +80,17 @@
     "pexels": 0
   },
   "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verification_status": "pending",
+  "map_status": "provisional",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "ready",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-29767255",
+    "wc-29767259",
+    "wc-2003803",
+    "wc-29767260"
+  ],
+  "media_card": "wc-29767255"
 }

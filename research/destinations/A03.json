@@ -11,8 +11,9 @@
   "region": {
     "value": "altiplano",
     "status": "verified",
-    "source": "brochure-altiplano",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Altiplano Este; municipality Catorce"
   },
   "municipality": {
     "value": "Catorce",
@@ -27,9 +28,15 @@
     "note": "No official description found. Workbook source realde14.com.mx is not official. The Altiplano brochure mentions the abandoned mines of Cerro del Quemado, not a 'Pueblo Fantasma' by name."
   },
   "coordinates": {
-    "value": null,
-    "status": "unavailable",
-    "note": "No OSM candidate found."
+    "latitude": null,
+    "longitude": null,
+    "precision": null,
+    "coordinate_source": null,
+    "source_url": null,
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Real de Catorce, Catorce",
+    "crosscheck_distance_m": 172735,
+    "notes": "Rejected OSM match 172735 m from the access locality (limit 8 km): a different feature."
   },
   "coordinate_source": null,
   "pueblo_magico": {
@@ -65,5 +72,12 @@
     "pexels": 0
   },
   "verified_core_fields": "1/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verification_status": "pending",
+  "map_status": "pending",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "needs_manual_asset",
+  "researched_in_pass": 1,
+  "media_selected": [],
+  "media_card": null
 }

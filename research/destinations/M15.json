@@ -1,0 +1,72 @@
+{
+  "place_id": "M15",
+  "name": "Paisaje agrícola de la cuenca de Rioverde",
+  "workbook": {
+    "region_label": "Media",
+    "type": "Paisaje rural",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-media/"
+  },
+  "municipality": {
+    "value": "Rioverde",
+    "status": "verified",
+    "source": "brochure-media",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Paisaje rural",
+  "description": {
+    "value": null,
+    "status": "pending",
+    "source": "brochure-media",
+    "note": "Brochure mentions agro-tourism routes and fields around Ciudad Fernández; no text for the landscape itself."
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "paisaje",
+      "agroturismo"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "zona-media",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Media Oeste; municipality Rioverde"
+  },
+  "coordinates": {
+    "latitude": null,
+    "longitude": null,
+    "precision": null,
+    "coordinate_source": null,
+    "source_url": null,
+    "verification_status": "unavailable",
+    "crosscheck_source": null,
+    "crosscheck_distance_m": null,
+    "notes": "Agricultural landscape of the Rioverde basin, not a point."
+  },
+  "coordinate_source": null,
+  "map_status": "not-a-point",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "needs_manual_asset",
+  "official_source": [],
+  "verified_core_fields": "2/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

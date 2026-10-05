@@ -11,8 +11,9 @@
   "region": {
     "value": "altiplano",
     "status": "verified",
-    "source": "brochure-altiplano",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Altiplano Este; municipality Catorce"
   },
   "municipality": {
     "value": "Catorce",
@@ -29,17 +30,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 23.6893979,
-      "lon": -100.8830883
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "way/1031371918",
-    "osm_feature": "highway/tertiary",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 23.689398,
+    "longitude": -100.883088,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap way/1031371918 (highway/tertiary, \"Calle Entrada al Túnel Ogarrio\")",
+    "source_url": "https://www.openstreetmap.org/way/1031371918",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Real de Catorce, Catorce",
+    "crosscheck_distance_m": 343,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "OpenStreetMap way/1031371918 (highway/tertiary, \"Calle Entrada al Túnel Ogarrio\")",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -75,7 +76,7 @@
     "pdf-brochure-altiplano"
   ],
   "conflicts": [
-    "Tunnel length: 2.3 km vs 2.5 km between two official sources."
+    "Unresolved: tunnel length 2.3 km (turismo-slp-lugar-real-de-catorce) vs 2.5 km (brochure-altiplano). SECTUR's article gives no length. Use wording without a number until a primary source (e.g. INAH/municipal) is found."
   ],
   "ethics": null,
   "media": {
@@ -84,5 +85,14 @@
     "pexels": 0
   },
   "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verification_status": "pending",
+  "map_status": "provisional",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-12418759"
+  ],
+  "media_card": "wc-12418759"
 }

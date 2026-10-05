@@ -11,8 +11,9 @@
   "region": {
     "value": "huasteca",
     "status": "verified",
-    "source": "brochure-huasteca",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Huasteca Centro; municipality Aquismón"
   },
   "municipality": {
     "value": "Aquismón",
@@ -31,17 +32,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 21.6243008,
-      "lon": -99.0198232
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "node/4080629097",
-    "osm_feature": "place/town",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 21.621362,
+    "longitude": -99.019535,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: Aquismón, Aquismón (cve 240030001)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 328,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "INEGI ITER 2020: Aquismón, Aquismón (cve 240030001)",
   "pueblo_magico": {
     "value": true,
     "status": "verified",
@@ -80,6 +81,16 @@
     "commons_approved_candidates": 4,
     "pexels": 0
   },
-  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-52606453",
+    "wc-21612508"
+  ],
+  "media_card": "wc-21612508"
 }

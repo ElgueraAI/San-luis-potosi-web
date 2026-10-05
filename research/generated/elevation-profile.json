@@ -1,0 +1,3872 @@
+{
+ "status": "measured",
+ "verification_status": "verified",
+ "verification_note": "Elevations are read from the official INEGI CEM 3.0 raster. The transect is an editorial choice documented in elevation-methodology.md; region labels are a nearest-locality approximation.",
+ "source": {
+  "name": "INEGI Continuo de Elevaciones Mexicano 3.0 (CEM), San Luis Potosí, 90 m",
+  "file": "CEM_V3_20170619_R90_E24.zip",
+  "url": "https://www.inegi.org.mx/app/geo2/elevacionesmex/DownloadFile.do?file=CEM_V3_20170619_R90_E24.zip&res=90&entidad=San%20Luis%20Potos%C3%AD",
+  "sha256": "c0330c5447bccbf97ad2b00cc537bd5a3e8611890fccab33554abde9aa40877b",
+  "retrieved": "2026-10-05",
+  "resolution": "3 arc-seconds (~90 m)",
+  "datum": "ITRF92 geographic (GRS80)",
+  "grid": {
+   "rows": 3998,
+   "cols": 4764,
+   "ulx": -102.295621743944,
+   "uly": 24.4914024964361,
+   "cell_deg": 0.000833332999999999,
+   "nodata": -32768
+  }
+ },
+ "transect": {
+  "anchors": [
+   {
+    "name": "Real de Catorce",
+    "municipality": "Catorce",
+    "lat": 23.690449,
+    "lon": -100.886253,
+    "inegi_altitude_m": 2699,
+    "cem_elevation_m": 2703.4
+   },
+   {
+    "name": "San Luis Potosí",
+    "municipality": "San Luis Potosí",
+    "lat": 22.151655,
+    "lon": -100.976958,
+    "inegi_altitude_m": 1864,
+    "cem_elevation_m": 1865.0
+   },
+   {
+    "name": "Rioverde",
+    "municipality": "Rioverde",
+    "lat": 21.932378,
+    "lon": -99.992923,
+    "inegi_altitude_m": 991,
+    "cem_elevation_m": 991.8
+   },
+   {
+    "name": "Ciudad Valles",
+    "municipality": "Ciudad Valles",
+    "lat": 21.986537,
+    "lon": -99.018721,
+    "inegi_altitude_m": 83,
+    "cem_elevation_m": 81.4
+   }
+  ],
+  "anchor_source": "INEGI ITER 2020 locality points",
+  "path": "great-circle segments between consecutive anchors",
+  "sample_step_km": 1.0,
+  "interpolation": "bilinear over the 4 nearest CEM cells",
+  "length_km": 376.3,
+  "samples": 377
+ },
+ "summary": {
+  "max_m": 3010.6,
+  "min_m": 57.3,
+  "start_m": 2703.4,
+  "end_m": 81.4
+ },
+ "region_segments": [
+  {
+   "region": "altiplano",
+   "from_km": 0.0,
+   "to_km": 113.24,
+   "from_order": 0,
+   "to_order": 113
+  },
+  {
+   "region": "centro",
+   "from_km": 114.24,
+   "to_km": 220.5,
+   "from_order": 114,
+   "to_order": 220
+  },
+  {
+   "region": "zona-media",
+   "from_km": 221.51,
+   "to_km": 335.46,
+   "from_order": 221,
+   "to_order": 335
+  },
+  {
+   "region": "huasteca",
+   "from_km": 336.46,
+   "to_km": 376.32,
+   "from_order": 336,
+   "to_order": 376
+  }
+ ],
+ "samples": [
+  {
+   "order": 0,
+   "distance_km": 0.0,
+   "longitude": -100.886253,
+   "latitude": 23.690449,
+   "elevation_m": 2703.4,
+   "nearest_locality": "Real de Catorce, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 1,
+   "distance_km": 1.0,
+   "longitude": -100.88679,
+   "latitude": 23.68145,
+   "elevation_m": 2846.1,
+   "nearest_locality": "Real de Catorce, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 2,
+   "distance_km": 2.0,
+   "longitude": -100.887326,
+   "latitude": 23.672452,
+   "elevation_m": 2959.0,
+   "nearest_locality": "Real de Catorce, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 3,
+   "distance_km": 3.01,
+   "longitude": -100.887862,
+   "latitude": 23.663453,
+   "elevation_m": 3010.6,
+   "nearest_locality": "San Juan de Matanzas, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 4,
+   "distance_km": 4.01,
+   "longitude": -100.888399,
+   "latitude": 23.654454,
+   "elevation_m": 2622.3,
+   "nearest_locality": "San Juan de Matanzas, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 5,
+   "distance_km": 5.01,
+   "longitude": -100.888935,
+   "latitude": 23.645456,
+   "elevation_m": 2439.6,
+   "nearest_locality": "San Juan de Matanzas, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 6,
+   "distance_km": 6.01,
+   "longitude": -100.889471,
+   "latitude": 23.636457,
+   "elevation_m": 2525.8,
+   "nearest_locality": "San Juan de Matanzas, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 7,
+   "distance_km": 7.01,
+   "longitude": -100.890007,
+   "latitude": 23.627458,
+   "elevation_m": 2637.4,
+   "nearest_locality": "Las Adjuntas, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 8,
+   "distance_km": 8.02,
+   "longitude": -100.890543,
+   "latitude": 23.61846,
+   "elevation_m": 2696.1,
+   "nearest_locality": "Jesús de Coronados, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 9,
+   "distance_km": 9.02,
+   "longitude": -100.891079,
+   "latitude": 23.609461,
+   "elevation_m": 2665.9,
+   "nearest_locality": "Jesús de Coronados, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 10,
+   "distance_km": 10.02,
+   "longitude": -100.891615,
+   "latitude": 23.600462,
+   "elevation_m": 2755.1,
+   "nearest_locality": "Jesús de Coronados, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 11,
+   "distance_km": 11.02,
+   "longitude": -100.892151,
+   "latitude": 23.591464,
+   "elevation_m": 2447.7,
+   "nearest_locality": "Tierras Negras, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 12,
+   "distance_km": 12.03,
+   "longitude": -100.892686,
+   "latitude": 23.582465,
+   "elevation_m": 2736.9,
+   "nearest_locality": "Tierras Negras, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 13,
+   "distance_km": 13.03,
+   "longitude": -100.893222,
+   "latitude": 23.573466,
+   "elevation_m": 2699.6,
+   "nearest_locality": "Cerrito de San José, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 14,
+   "distance_km": 14.03,
+   "longitude": -100.893758,
+   "latitude": 23.564468,
+   "elevation_m": 2834.8,
+   "nearest_locality": "La Cieneguita de Sosa, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 15,
+   "distance_km": 15.03,
+   "longitude": -100.894293,
+   "latitude": 23.555469,
+   "elevation_m": 2834.7,
+   "nearest_locality": "La Lagunita (Maguey Mocho), Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 16,
+   "distance_km": 16.03,
+   "longitude": -100.894829,
+   "latitude": 23.54647,
+   "elevation_m": 2826.6,
+   "nearest_locality": "La Lagunita (Maguey Mocho), Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 17,
+   "distance_km": 17.04,
+   "longitude": -100.895364,
+   "latitude": 23.537472,
+   "elevation_m": 2802.1,
+   "nearest_locality": "La Lagunita, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 18,
+   "distance_km": 18.04,
+   "longitude": -100.895899,
+   "latitude": 23.528473,
+   "elevation_m": 2887.0,
+   "nearest_locality": "Los Rayos, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 19,
+   "distance_km": 19.04,
+   "longitude": -100.896434,
+   "latitude": 23.519474,
+   "elevation_m": 2930.5,
+   "nearest_locality": "Los Rayos, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 20,
+   "distance_km": 20.04,
+   "longitude": -100.89697,
+   "latitude": 23.510476,
+   "elevation_m": 2914.5,
+   "nearest_locality": "La Milpita, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 21,
+   "distance_km": 21.04,
+   "longitude": -100.897505,
+   "latitude": 23.501477,
+   "elevation_m": 2790.8,
+   "nearest_locality": "La Milpita, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 22,
+   "distance_km": 22.05,
+   "longitude": -100.89804,
+   "latitude": 23.492478,
+   "elevation_m": 2457.0,
+   "nearest_locality": "La Milpita, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 23,
+   "distance_km": 23.05,
+   "longitude": -100.898574,
+   "latitude": 23.48348,
+   "elevation_m": 2366.6,
+   "nearest_locality": "La Milpita, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 24,
+   "distance_km": 24.05,
+   "longitude": -100.899109,
+   "latitude": 23.474481,
+   "elevation_m": 2423.8,
+   "nearest_locality": "El Astillero, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 25,
+   "distance_km": 25.05,
+   "longitude": -100.899644,
+   "latitude": 23.465482,
+   "elevation_m": 2463.8,
+   "nearest_locality": "El Astillero, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 26,
+   "distance_km": 26.05,
+   "longitude": -100.900179,
+   "latitude": 23.456484,
+   "elevation_m": 2269.9,
+   "nearest_locality": "El Astillero, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 27,
+   "distance_km": 27.06,
+   "longitude": -100.900713,
+   "latitude": 23.447485,
+   "elevation_m": 2269.4,
+   "nearest_locality": "El Astillero, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 28,
+   "distance_km": 28.06,
+   "longitude": -100.901248,
+   "latitude": 23.438486,
+   "elevation_m": 2244.8,
+   "nearest_locality": "El Astillero, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 29,
+   "distance_km": 29.06,
+   "longitude": -100.901782,
+   "latitude": 23.429488,
+   "elevation_m": 2185.9,
+   "nearest_locality": "El Arrastradero (El Barranco), Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 30,
+   "distance_km": 30.06,
+   "longitude": -100.902317,
+   "latitude": 23.420489,
+   "elevation_m": 2137.1,
+   "nearest_locality": "El Arrastradero (El Barranco), Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 31,
+   "distance_km": 31.06,
+   "longitude": -100.902851,
+   "latitude": 23.41149,
+   "elevation_m": 2070.9,
+   "nearest_locality": "El Huizachal, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 32,
+   "distance_km": 32.07,
+   "longitude": -100.903385,
+   "latitude": 23.402492,
+   "elevation_m": 2059.7,
+   "nearest_locality": "El Huizachal, Catorce",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 33,
+   "distance_km": 33.07,
+   "longitude": -100.90392,
+   "latitude": 23.393493,
+   "elevation_m": 2030.2,
+   "nearest_locality": "Tanque el Refugio, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 34,
+   "distance_km": 34.07,
+   "longitude": -100.904454,
+   "latitude": 23.384494,
+   "elevation_m": 2016.5,
+   "nearest_locality": "Tanque el Refugio, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 35,
+   "distance_km": 35.07,
+   "longitude": -100.904988,
+   "latitude": 23.375495,
+   "elevation_m": 2008.6,
+   "nearest_locality": "Tanque el Refugio, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 36,
+   "distance_km": 36.08,
+   "longitude": -100.905522,
+   "latitude": 23.366497,
+   "elevation_m": 2011.3,
+   "nearest_locality": "Tanque el Refugio, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 37,
+   "distance_km": 37.08,
+   "longitude": -100.906056,
+   "latitude": 23.357498,
+   "elevation_m": 2024.6,
+   "nearest_locality": "Tanque el Refugio, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 38,
+   "distance_km": 38.08,
+   "longitude": -100.906589,
+   "latitude": 23.348499,
+   "elevation_m": 2077.2,
+   "nearest_locality": "Tanque el Refugio, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 39,
+   "distance_km": 39.08,
+   "longitude": -100.907123,
+   "latitude": 23.339501,
+   "elevation_m": 2063.8,
+   "nearest_locality": "Tanque el Refugio, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 40,
+   "distance_km": 40.08,
+   "longitude": -100.907657,
+   "latitude": 23.330502,
+   "elevation_m": 1969.4,
+   "nearest_locality": "Aquiles Serdán, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 41,
+   "distance_km": 41.09,
+   "longitude": -100.90819,
+   "latitude": 23.321503,
+   "elevation_m": 1957.9,
+   "nearest_locality": "Aquiles Serdán, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 42,
+   "distance_km": 42.09,
+   "longitude": -100.908724,
+   "latitude": 23.312504,
+   "elevation_m": 2028.9,
+   "nearest_locality": "Aquiles Serdán, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 43,
+   "distance_km": 43.09,
+   "longitude": -100.909257,
+   "latitude": 23.303506,
+   "elevation_m": 2041.9,
+   "nearest_locality": "Aquiles Serdán, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 44,
+   "distance_km": 44.09,
+   "longitude": -100.909791,
+   "latitude": 23.294507,
+   "elevation_m": 2037.2,
+   "nearest_locality": "Aquiles Serdán, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 45,
+   "distance_km": 45.09,
+   "longitude": -100.910324,
+   "latitude": 23.285508,
+   "elevation_m": 2032.7,
+   "nearest_locality": "Aquiles Serdán, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 46,
+   "distance_km": 46.1,
+   "longitude": -100.910857,
+   "latitude": 23.27651,
+   "elevation_m": 2005.1,
+   "nearest_locality": "Aquiles Serdán, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 47,
+   "distance_km": 47.1,
+   "longitude": -100.91139,
+   "latitude": 23.267511,
+   "elevation_m": 2004.3,
+   "nearest_locality": "La Puerta de Coloradillos, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 48,
+   "distance_km": 48.1,
+   "longitude": -100.911924,
+   "latitude": 23.258512,
+   "elevation_m": 2010.2,
+   "nearest_locality": "La Puerta de Coloradillos, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 49,
+   "distance_km": 49.1,
+   "longitude": -100.912457,
+   "latitude": 23.249513,
+   "elevation_m": 2051.1,
+   "nearest_locality": "La Puerta de Coloradillos, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 50,
+   "distance_km": 50.1,
+   "longitude": -100.91299,
+   "latitude": 23.240515,
+   "elevation_m": 2089.9,
+   "nearest_locality": "La Puerta de Coloradillos, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 51,
+   "distance_km": 51.11,
+   "longitude": -100.913522,
+   "latitude": 23.231516,
+   "elevation_m": 2106.7,
+   "nearest_locality": "La Puerta de Coloradillos, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 52,
+   "distance_km": 52.11,
+   "longitude": -100.914055,
+   "latitude": 23.222517,
+   "elevation_m": 2100.9,
+   "nearest_locality": "La Puerta de Coloradillos, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 53,
+   "distance_km": 53.11,
+   "longitude": -100.914588,
+   "latitude": 23.213518,
+   "elevation_m": 2127.6,
+   "nearest_locality": "La Tinaja Colorada, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 54,
+   "distance_km": 54.11,
+   "longitude": -100.915121,
+   "latitude": 23.20452,
+   "elevation_m": 2133.0,
+   "nearest_locality": "La Tinaja Colorada, Villa de Guadalupe",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 55,
+   "distance_km": 55.12,
+   "longitude": -100.915653,
+   "latitude": 23.195521,
+   "elevation_m": 2151.2,
+   "nearest_locality": "Puerta la Verdolaga, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 56,
+   "distance_km": 56.12,
+   "longitude": -100.916186,
+   "latitude": 23.186522,
+   "elevation_m": 2201.1,
+   "nearest_locality": "Puerta la Verdolaga, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 57,
+   "distance_km": 57.12,
+   "longitude": -100.916718,
+   "latitude": 23.177523,
+   "elevation_m": 2244.2,
+   "nearest_locality": "Puerta la Verdolaga, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 58,
+   "distance_km": 58.12,
+   "longitude": -100.917251,
+   "latitude": 23.168525,
+   "elevation_m": 2297.5,
+   "nearest_locality": "Puerta la Verdolaga, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 59,
+   "distance_km": 59.12,
+   "longitude": -100.917783,
+   "latitude": 23.159526,
+   "elevation_m": 2299.7,
+   "nearest_locality": "Puerta la Verdolaga, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 60,
+   "distance_km": 60.13,
+   "longitude": -100.918315,
+   "latitude": 23.150527,
+   "elevation_m": 2506.7,
+   "nearest_locality": "Puerta la Verdolaga, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 61,
+   "distance_km": 61.13,
+   "longitude": -100.918847,
+   "latitude": 23.141528,
+   "elevation_m": 2471.8,
+   "nearest_locality": "Puerta la Verdolaga, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 62,
+   "distance_km": 62.13,
+   "longitude": -100.919379,
+   "latitude": 23.13253,
+   "elevation_m": 2423.3,
+   "nearest_locality": "Puerta la Verdolaga, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 63,
+   "distance_km": 63.13,
+   "longitude": -100.919911,
+   "latitude": 23.123531,
+   "elevation_m": 2448.8,
+   "nearest_locality": "Rancho los Álamos, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 64,
+   "distance_km": 64.13,
+   "longitude": -100.920443,
+   "latitude": 23.114532,
+   "elevation_m": 2576.5,
+   "nearest_locality": "Rancho los Álamos, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 65,
+   "distance_km": 65.14,
+   "longitude": -100.920975,
+   "latitude": 23.105533,
+   "elevation_m": 2549.1,
+   "nearest_locality": "Rancho los Álamos, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 66,
+   "distance_km": 66.14,
+   "longitude": -100.921507,
+   "latitude": 23.096535,
+   "elevation_m": 2635.3,
+   "nearest_locality": "Rancho los Álamos, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 67,
+   "distance_km": 67.14,
+   "longitude": -100.922039,
+   "latitude": 23.087536,
+   "elevation_m": 2488.9,
+   "nearest_locality": "Rancho los Álamos, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 68,
+   "distance_km": 68.14,
+   "longitude": -100.92257,
+   "latitude": 23.078537,
+   "elevation_m": 2308.3,
+   "nearest_locality": "Rancho los Álamos, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 69,
+   "distance_km": 69.14,
+   "longitude": -100.923102,
+   "latitude": 23.069538,
+   "elevation_m": 2338.9,
+   "nearest_locality": "Fátima, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 70,
+   "distance_km": 70.15,
+   "longitude": -100.923634,
+   "latitude": 23.06054,
+   "elevation_m": 2309.3,
+   "nearest_locality": "Fátima, Charcas",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 71,
+   "distance_km": 71.15,
+   "longitude": -100.924165,
+   "latitude": 23.051541,
+   "elevation_m": 2207.8,
+   "nearest_locality": "La Trinidad, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 72,
+   "distance_km": 72.15,
+   "longitude": -100.924696,
+   "latitude": 23.042542,
+   "elevation_m": 2124.6,
+   "nearest_locality": "La Trinidad, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 73,
+   "distance_km": 73.15,
+   "longitude": -100.925228,
+   "latitude": 23.033543,
+   "elevation_m": 2077.7,
+   "nearest_locality": "La Trinidad, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 74,
+   "distance_km": 74.15,
+   "longitude": -100.925759,
+   "latitude": 23.024544,
+   "elevation_m": 2012.4,
+   "nearest_locality": "La Trinidad, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 75,
+   "distance_km": 75.16,
+   "longitude": -100.92629,
+   "latitude": 23.015546,
+   "elevation_m": 1949.4,
+   "nearest_locality": "La Trinidad, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 76,
+   "distance_km": 76.16,
+   "longitude": -100.926821,
+   "latitude": 23.006547,
+   "elevation_m": 1921.5,
+   "nearest_locality": "La Trinidad, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 77,
+   "distance_km": 77.16,
+   "longitude": -100.927352,
+   "latitude": 22.997548,
+   "elevation_m": 1883.4,
+   "nearest_locality": "La Trinidad, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 78,
+   "distance_km": 78.16,
+   "longitude": -100.927883,
+   "latitude": 22.988549,
+   "elevation_m": 1844.3,
+   "nearest_locality": "La Clavellina, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 79,
+   "distance_km": 79.17,
+   "longitude": -100.928414,
+   "latitude": 22.979551,
+   "elevation_m": 1815.6,
+   "nearest_locality": "La Clavellina, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 80,
+   "distance_km": 80.17,
+   "longitude": -100.928945,
+   "latitude": 22.970552,
+   "elevation_m": 1789.0,
+   "nearest_locality": "La Clavellina, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 81,
+   "distance_km": 81.17,
+   "longitude": -100.929476,
+   "latitude": 22.961553,
+   "elevation_m": 1763.5,
+   "nearest_locality": "La Esquina Góngora, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 82,
+   "distance_km": 82.17,
+   "longitude": -100.930006,
+   "latitude": 22.952554,
+   "elevation_m": 1741.7,
+   "nearest_locality": "La Esquina Góngora, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 83,
+   "distance_km": 83.17,
+   "longitude": -100.930537,
+   "latitude": 22.943555,
+   "elevation_m": 1721.2,
+   "nearest_locality": "El Refugio, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 84,
+   "distance_km": 84.18,
+   "longitude": -100.931067,
+   "latitude": 22.934557,
+   "elevation_m": 1701.7,
+   "nearest_locality": "El Refugio, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 85,
+   "distance_km": 85.18,
+   "longitude": -100.931598,
+   "latitude": 22.925558,
+   "elevation_m": 1688.8,
+   "nearest_locality": "Coronado (Hacienda de Coronado), Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 86,
+   "distance_km": 86.18,
+   "longitude": -100.932128,
+   "latitude": 22.916559,
+   "elevation_m": 1679.5,
+   "nearest_locality": "Coronado (Hacienda de Coronado), Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 87,
+   "distance_km": 87.18,
+   "longitude": -100.932659,
+   "latitude": 22.90756,
+   "elevation_m": 1673.7,
+   "nearest_locality": "Coronado (Hacienda de Coronado), Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 88,
+   "distance_km": 88.18,
+   "longitude": -100.933189,
+   "latitude": 22.898561,
+   "elevation_m": 1665.6,
+   "nearest_locality": "Coronado (Hacienda de Coronado), Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 89,
+   "distance_km": 89.19,
+   "longitude": -100.933719,
+   "latitude": 22.889563,
+   "elevation_m": 1656.8,
+   "nearest_locality": "Coronado (Hacienda de Coronado), Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 90,
+   "distance_km": 90.19,
+   "longitude": -100.934249,
+   "latitude": 22.880564,
+   "elevation_m": 1646.3,
+   "nearest_locality": "San Joaquín de las Flores, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 91,
+   "distance_km": 91.19,
+   "longitude": -100.934779,
+   "latitude": 22.871565,
+   "elevation_m": 1639.0,
+   "nearest_locality": "San Joaquín de las Flores, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 92,
+   "distance_km": 92.19,
+   "longitude": -100.935309,
+   "latitude": 22.862566,
+   "elevation_m": 1635.8,
+   "nearest_locality": "San Joaquín de las Flores, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 93,
+   "distance_km": 93.19,
+   "longitude": -100.935839,
+   "latitude": 22.853567,
+   "elevation_m": 1634.7,
+   "nearest_locality": "El Berrendo, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 94,
+   "distance_km": 94.2,
+   "longitude": -100.936369,
+   "latitude": 22.844569,
+   "elevation_m": 1631.0,
+   "nearest_locality": "El Berrendo, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 95,
+   "distance_km": 95.2,
+   "longitude": -100.936899,
+   "latitude": 22.83557,
+   "elevation_m": 1627.0,
+   "nearest_locality": "Rancho los Pinos, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 96,
+   "distance_km": 96.2,
+   "longitude": -100.937428,
+   "latitude": 22.826571,
+   "elevation_m": 1627.0,
+   "nearest_locality": "Rancho los Pinos, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 97,
+   "distance_km": 97.2,
+   "longitude": -100.937958,
+   "latitude": 22.817572,
+   "elevation_m": 1626.0,
+   "nearest_locality": "Rancho los Pinos, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 98,
+   "distance_km": 98.21,
+   "longitude": -100.938487,
+   "latitude": 22.808573,
+   "elevation_m": 1624.0,
+   "nearest_locality": "Rancho los Pinos, Venado",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 99,
+   "distance_km": 99.21,
+   "longitude": -100.939017,
+   "latitude": 22.799575,
+   "elevation_m": 1622.8,
+   "nearest_locality": "La Purísima del Refugio, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 100,
+   "distance_km": 100.21,
+   "longitude": -100.939546,
+   "latitude": 22.790576,
+   "elevation_m": 1622.0,
+   "nearest_locality": "La Purísima del Refugio, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 101,
+   "distance_km": 101.21,
+   "longitude": -100.940076,
+   "latitude": 22.781577,
+   "elevation_m": 1623.0,
+   "nearest_locality": "La Purísima del Refugio, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 102,
+   "distance_km": 102.21,
+   "longitude": -100.940605,
+   "latitude": 22.772578,
+   "elevation_m": 1623.0,
+   "nearest_locality": "La Purísima del Refugio, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 103,
+   "distance_km": 103.22,
+   "longitude": -100.941134,
+   "latitude": 22.763579,
+   "elevation_m": 1623.4,
+   "nearest_locality": "El Porvenir, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 104,
+   "distance_km": 104.22,
+   "longitude": -100.941663,
+   "latitude": 22.75458,
+   "elevation_m": 1624.0,
+   "nearest_locality": "El Porvenir, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 105,
+   "distance_km": 105.22,
+   "longitude": -100.942192,
+   "latitude": 22.745582,
+   "elevation_m": 1624.0,
+   "nearest_locality": "San Jerónimo, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 106,
+   "distance_km": 106.22,
+   "longitude": -100.942721,
+   "latitude": 22.736583,
+   "elevation_m": 1621.5,
+   "nearest_locality": "El Sotol, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 107,
+   "distance_km": 107.22,
+   "longitude": -100.94325,
+   "latitude": 22.727584,
+   "elevation_m": 1623.6,
+   "nearest_locality": "El Sotol, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 108,
+   "distance_km": 108.23,
+   "longitude": -100.943779,
+   "latitude": 22.718585,
+   "elevation_m": 1625.0,
+   "nearest_locality": "El Carpintero, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 109,
+   "distance_km": 109.23,
+   "longitude": -100.944308,
+   "latitude": 22.709586,
+   "elevation_m": 1626.0,
+   "nearest_locality": "El Carpintero, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 110,
+   "distance_km": 110.23,
+   "longitude": -100.944837,
+   "latitude": 22.700587,
+   "elevation_m": 1627.0,
+   "nearest_locality": "La Carpa, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 111,
+   "distance_km": 111.23,
+   "longitude": -100.945365,
+   "latitude": 22.691589,
+   "elevation_m": 1626.0,
+   "nearest_locality": "La Carpa, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 112,
+   "distance_km": 112.23,
+   "longitude": -100.945894,
+   "latitude": 22.68259,
+   "elevation_m": 1628.0,
+   "nearest_locality": "La Carpa, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 113,
+   "distance_km": 113.24,
+   "longitude": -100.946422,
+   "latitude": 22.673591,
+   "elevation_m": 1629.0,
+   "nearest_locality": "La Carpa, Moctezuma",
+   "region": "altiplano",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 114,
+   "distance_km": 114.24,
+   "longitude": -100.946951,
+   "latitude": 22.664592,
+   "elevation_m": 1629.6,
+   "nearest_locality": "San Carlos, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 115,
+   "distance_km": 115.24,
+   "longitude": -100.947479,
+   "latitude": 22.655593,
+   "elevation_m": 1632.2,
+   "nearest_locality": "San Carlos, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 116,
+   "distance_km": 116.24,
+   "longitude": -100.948007,
+   "latitude": 22.646594,
+   "elevation_m": 1635.0,
+   "nearest_locality": "Rancho San Antonio, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 117,
+   "distance_km": 117.24,
+   "longitude": -100.948536,
+   "latitude": 22.637595,
+   "elevation_m": 1637.0,
+   "nearest_locality": "Rancho San Antonio, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 118,
+   "distance_km": 118.25,
+   "longitude": -100.949064,
+   "latitude": 22.628597,
+   "elevation_m": 1639.4,
+   "nearest_locality": "Rancho San Antonio, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 119,
+   "distance_km": 119.25,
+   "longitude": -100.949592,
+   "latitude": 22.619598,
+   "elevation_m": 1642.0,
+   "nearest_locality": "Pozo Cuatro Blanco de Bocas, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 120,
+   "distance_km": 120.25,
+   "longitude": -100.95012,
+   "latitude": 22.610599,
+   "elevation_m": 1646.0,
+   "nearest_locality": "Pozo Cuatro Blanco de Bocas, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 121,
+   "distance_km": 121.25,
+   "longitude": -100.950648,
+   "latitude": 22.6016,
+   "elevation_m": 1649.0,
+   "nearest_locality": "Pozo Dos, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 122,
+   "distance_km": 122.26,
+   "longitude": -100.951176,
+   "latitude": 22.592601,
+   "elevation_m": 1652.0,
+   "nearest_locality": "Pozo Dos, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 123,
+   "distance_km": 123.26,
+   "longitude": -100.951703,
+   "latitude": 22.583602,
+   "elevation_m": 1655.0,
+   "nearest_locality": "Rancho las Flores, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 124,
+   "distance_km": 124.26,
+   "longitude": -100.952231,
+   "latitude": 22.574603,
+   "elevation_m": 1659.0,
+   "nearest_locality": "Rancho las Flores, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 125,
+   "distance_km": 125.26,
+   "longitude": -100.952759,
+   "latitude": 22.565605,
+   "elevation_m": 1664.0,
+   "nearest_locality": "El Malacate, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 126,
+   "distance_km": 126.26,
+   "longitude": -100.953286,
+   "latitude": 22.556606,
+   "elevation_m": 1669.9,
+   "nearest_locality": "El Malacate, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 127,
+   "distance_km": 127.27,
+   "longitude": -100.953814,
+   "latitude": 22.547607,
+   "elevation_m": 1686.6,
+   "nearest_locality": "El Malacate, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 128,
+   "distance_km": 128.27,
+   "longitude": -100.954341,
+   "latitude": 22.538608,
+   "elevation_m": 1699.5,
+   "nearest_locality": "El Malacate, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 129,
+   "distance_km": 129.27,
+   "longitude": -100.954869,
+   "latitude": 22.529609,
+   "elevation_m": 1718.8,
+   "nearest_locality": "Cerritos de Zavala, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 130,
+   "distance_km": 130.27,
+   "longitude": -100.955396,
+   "latitude": 22.52061,
+   "elevation_m": 1749.7,
+   "nearest_locality": "Cerritos de Zavala, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 131,
+   "distance_km": 131.27,
+   "longitude": -100.955923,
+   "latitude": 22.511611,
+   "elevation_m": 1753.7,
+   "nearest_locality": "Cerritos de Zavala, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 132,
+   "distance_km": 132.28,
+   "longitude": -100.956451,
+   "latitude": 22.502613,
+   "elevation_m": 1766.6,
+   "nearest_locality": "La Melada, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 133,
+   "distance_km": 133.28,
+   "longitude": -100.956978,
+   "latitude": 22.493614,
+   "elevation_m": 1816.7,
+   "nearest_locality": "La Melada, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 134,
+   "distance_km": 134.28,
+   "longitude": -100.957505,
+   "latitude": 22.484615,
+   "elevation_m": 1789.3,
+   "nearest_locality": "La Melada, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 135,
+   "distance_km": 135.28,
+   "longitude": -100.958032,
+   "latitude": 22.475616,
+   "elevation_m": 1782.0,
+   "nearest_locality": "La Melada, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 136,
+   "distance_km": 136.28,
+   "longitude": -100.958559,
+   "latitude": 22.466617,
+   "elevation_m": 1817.8,
+   "nearest_locality": "La Melada, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 137,
+   "distance_km": 137.29,
+   "longitude": -100.959086,
+   "latitude": 22.457618,
+   "elevation_m": 1870.4,
+   "nearest_locality": "El Jacal, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 138,
+   "distance_km": 138.29,
+   "longitude": -100.959612,
+   "latitude": 22.448619,
+   "elevation_m": 1871.2,
+   "nearest_locality": "Tanque de Alemán, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 139,
+   "distance_km": 139.29,
+   "longitude": -100.960139,
+   "latitude": 22.43962,
+   "elevation_m": 1851.2,
+   "nearest_locality": "Tanque de Alemán, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 140,
+   "distance_km": 140.29,
+   "longitude": -100.960666,
+   "latitude": 22.430621,
+   "elevation_m": 1841.9,
+   "nearest_locality": "Tanquecito de Mendoza, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 141,
+   "distance_km": 141.3,
+   "longitude": -100.961192,
+   "latitude": 22.421623,
+   "elevation_m": 1842.7,
+   "nearest_locality": "Lamparito, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 142,
+   "distance_km": 142.3,
+   "longitude": -100.961719,
+   "latitude": 22.412624,
+   "elevation_m": 1836.1,
+   "nearest_locality": "Lamparito, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 143,
+   "distance_km": 143.3,
+   "longitude": -100.962245,
+   "latitude": 22.403625,
+   "elevation_m": 1823.1,
+   "nearest_locality": "Los Cajones, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 144,
+   "distance_km": 144.3,
+   "longitude": -100.962772,
+   "latitude": 22.394626,
+   "elevation_m": 1816.9,
+   "nearest_locality": "Los Cajones, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 145,
+   "distance_km": 145.3,
+   "longitude": -100.963298,
+   "latitude": 22.385627,
+   "elevation_m": 1816.0,
+   "nearest_locality": "Lechuguillas, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 146,
+   "distance_km": 146.31,
+   "longitude": -100.963824,
+   "latitude": 22.376628,
+   "elevation_m": 1814.0,
+   "nearest_locality": "Lechuguillas, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 147,
+   "distance_km": 147.31,
+   "longitude": -100.96435,
+   "latitude": 22.367629,
+   "elevation_m": 1816.0,
+   "nearest_locality": "Lechuguillas, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 148,
+   "distance_km": 148.31,
+   "longitude": -100.964876,
+   "latitude": 22.35863,
+   "elevation_m": 1819.0,
+   "nearest_locality": "Lechuguillas, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 149,
+   "distance_km": 149.31,
+   "longitude": -100.965402,
+   "latitude": 22.349631,
+   "elevation_m": 1821.0,
+   "nearest_locality": "Peñasco, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 150,
+   "distance_km": 150.31,
+   "longitude": -100.965928,
+   "latitude": 22.340632,
+   "elevation_m": 1823.4,
+   "nearest_locality": "Peñasco, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 151,
+   "distance_km": 151.32,
+   "longitude": -100.966454,
+   "latitude": 22.331634,
+   "elevation_m": 1825.0,
+   "nearest_locality": "Peñasco, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 152,
+   "distance_km": 152.32,
+   "longitude": -100.96698,
+   "latitude": 22.322635,
+   "elevation_m": 1827.0,
+   "nearest_locality": "Rancho de Fermín, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 153,
+   "distance_km": 153.32,
+   "longitude": -100.967506,
+   "latitude": 22.313636,
+   "elevation_m": 1830.5,
+   "nearest_locality": "Los Ramos (Ejido San Juanico Grande), San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 154,
+   "distance_km": 154.32,
+   "longitude": -100.968032,
+   "latitude": 22.304637,
+   "elevation_m": 1833.0,
+   "nearest_locality": "Los Ramos (Ejido San Juanico Grande), San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 155,
+   "distance_km": 155.32,
+   "longitude": -100.968557,
+   "latitude": 22.295638,
+   "elevation_m": 1836.0,
+   "nearest_locality": "Tomás Hernández (Ejido de Maravillas), San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 156,
+   "distance_km": 156.33,
+   "longitude": -100.969083,
+   "latitude": 22.286639,
+   "elevation_m": 1838.0,
+   "nearest_locality": "Tomás Hernández (Ejido de Maravillas), San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 157,
+   "distance_km": 157.33,
+   "longitude": -100.969608,
+   "latitude": 22.27764,
+   "elevation_m": 1841.9,
+   "nearest_locality": "Tomás Hernández (Ejido de Maravillas), San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 158,
+   "distance_km": 158.33,
+   "longitude": -100.970134,
+   "latitude": 22.268641,
+   "elevation_m": 1849.9,
+   "nearest_locality": "Ruperto Muñoz Hernández, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 159,
+   "distance_km": 159.33,
+   "longitude": -100.970659,
+   "latitude": 22.259642,
+   "elevation_m": 1859.7,
+   "nearest_locality": "Ruperto Muñoz Hernández, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 160,
+   "distance_km": 160.34,
+   "longitude": -100.971184,
+   "latitude": 22.250643,
+   "elevation_m": 1847.9,
+   "nearest_locality": "Los García Dos, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 161,
+   "distance_km": 161.34,
+   "longitude": -100.97171,
+   "latitude": 22.241644,
+   "elevation_m": 1848.8,
+   "nearest_locality": "Los García Dos, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 162,
+   "distance_km": 162.34,
+   "longitude": -100.972235,
+   "latitude": 22.232645,
+   "elevation_m": 1848.0,
+   "nearest_locality": "Fracción Milpillas, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 163,
+   "distance_km": 163.34,
+   "longitude": -100.97276,
+   "latitude": 22.223646,
+   "elevation_m": 1851.4,
+   "nearest_locality": "Union Antorchista, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 164,
+   "distance_km": 164.34,
+   "longitude": -100.973285,
+   "latitude": 22.214648,
+   "elevation_m": 1860.3,
+   "nearest_locality": "San Benito, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 165,
+   "distance_km": 165.35,
+   "longitude": -100.97381,
+   "latitude": 22.205649,
+   "elevation_m": 1863.0,
+   "nearest_locality": "San Benito, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 166,
+   "distance_km": 166.35,
+   "longitude": -100.974335,
+   "latitude": 22.19665,
+   "elevation_m": 1862.0,
+   "nearest_locality": "Los Vargas, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 167,
+   "distance_km": 167.35,
+   "longitude": -100.974859,
+   "latitude": 22.187651,
+   "elevation_m": 1859.5,
+   "nearest_locality": "Potrero de Adentro, Soledad de Graciano Sánchez",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 168,
+   "distance_km": 168.35,
+   "longitude": -100.975384,
+   "latitude": 22.178652,
+   "elevation_m": 1860.7,
+   "nearest_locality": "San Luis Potosí, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 169,
+   "distance_km": 169.35,
+   "longitude": -100.975909,
+   "latitude": 22.169653,
+   "elevation_m": 1860.0,
+   "nearest_locality": "San Luis Potosí, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 170,
+   "distance_km": 170.36,
+   "longitude": -100.976433,
+   "latitude": 22.160654,
+   "elevation_m": 1862.0,
+   "nearest_locality": "San Luis Potosí, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 171,
+   "distance_km": 171.36,
+   "longitude": -100.976958,
+   "latitude": 22.151655,
+   "elevation_m": 1865.0,
+   "nearest_locality": "San Luis Potosí, San Luis Potosí",
+   "region": "centro",
+   "leg": "Real de Catorce → San Luis Potosí"
+  },
+  {
+   "order": 172,
+   "distance_km": 172.36,
+   "longitude": -100.967482,
+   "latitude": 22.149575,
+   "elevation_m": 1863.0,
+   "nearest_locality": "San Luis Potosí, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 173,
+   "distance_km": 173.36,
+   "longitude": -100.958006,
+   "latitude": 22.147494,
+   "elevation_m": 1863.6,
+   "nearest_locality": "San Luis Potosí, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 174,
+   "distance_km": 174.37,
+   "longitude": -100.94853,
+   "latitude": 22.145412,
+   "elevation_m": 1857.6,
+   "nearest_locality": "San Luis Potosí, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 175,
+   "distance_km": 175.37,
+   "longitude": -100.939054,
+   "latitude": 22.14333,
+   "elevation_m": 1852.1,
+   "nearest_locality": "El Chino [Restaurante de Mariscos], Soledad de Graciano Sánchez",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 176,
+   "distance_km": 176.37,
+   "longitude": -100.929579,
+   "latitude": 22.141248,
+   "elevation_m": 1848.0,
+   "nearest_locality": "El Chino [Restaurante de Mariscos], Soledad de Graciano Sánchez",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 177,
+   "distance_km": 177.38,
+   "longitude": -100.920104,
+   "latitude": 22.139165,
+   "elevation_m": 1847.0,
+   "nearest_locality": "El Chino [Restaurante de Mariscos], Soledad de Graciano Sánchez",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 178,
+   "distance_km": 178.38,
+   "longitude": -100.910629,
+   "latitude": 22.137081,
+   "elevation_m": 1846.0,
+   "nearest_locality": "La Libertad (Pozos), San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 179,
+   "distance_km": 179.38,
+   "longitude": -100.901155,
+   "latitude": 22.134997,
+   "elevation_m": 1844.0,
+   "nearest_locality": "La Libertad (Pozos), San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 180,
+   "distance_km": 180.39,
+   "longitude": -100.891681,
+   "latitude": 22.132912,
+   "elevation_m": 1842.3,
+   "nearest_locality": "La Libertad (Pozos), San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 181,
+   "distance_km": 181.39,
+   "longitude": -100.882207,
+   "latitude": 22.130827,
+   "elevation_m": 1842.0,
+   "nearest_locality": "La Libertad (Pozos), San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 182,
+   "distance_km": 182.39,
+   "longitude": -100.872733,
+   "latitude": 22.128741,
+   "elevation_m": 1842.0,
+   "nearest_locality": "Monterreal, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 183,
+   "distance_km": 183.39,
+   "longitude": -100.86326,
+   "latitude": 22.126654,
+   "elevation_m": 1842.0,
+   "nearest_locality": "Coyonostal, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 184,
+   "distance_km": 184.4,
+   "longitude": -100.853787,
+   "latitude": 22.124567,
+   "elevation_m": 1841.2,
+   "nearest_locality": "Tanque el Jagüey, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 185,
+   "distance_km": 185.4,
+   "longitude": -100.844314,
+   "latitude": 22.12248,
+   "elevation_m": 1842.0,
+   "nearest_locality": "Laguna de Santa Rita, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 186,
+   "distance_km": 186.4,
+   "longitude": -100.834842,
+   "latitude": 22.120392,
+   "elevation_m": 1847.2,
+   "nearest_locality": "San Nicolás de los Jassos, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 187,
+   "distance_km": 187.41,
+   "longitude": -100.82537,
+   "latitude": 22.118303,
+   "elevation_m": 1861.4,
+   "nearest_locality": "San Nicolás de los Jassos, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 188,
+   "distance_km": 188.41,
+   "longitude": -100.815898,
+   "latitude": 22.116214,
+   "elevation_m": 1880.2,
+   "nearest_locality": "San Nicolás de los Jassos, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 189,
+   "distance_km": 189.41,
+   "longitude": -100.806426,
+   "latitude": 22.114125,
+   "elevation_m": 1896.6,
+   "nearest_locality": "La Presilla, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 190,
+   "distance_km": 190.41,
+   "longitude": -100.796955,
+   "latitude": 22.112034,
+   "elevation_m": 1907.7,
+   "nearest_locality": "La Presilla, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 191,
+   "distance_km": 191.42,
+   "longitude": -100.787484,
+   "latitude": 22.109944,
+   "elevation_m": 1922.3,
+   "nearest_locality": "La Presilla, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 192,
+   "distance_km": 192.42,
+   "longitude": -100.778013,
+   "latitude": 22.107852,
+   "elevation_m": 1926.6,
+   "nearest_locality": "La Presilla, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 193,
+   "distance_km": 193.42,
+   "longitude": -100.768543,
+   "latitude": 22.10576,
+   "elevation_m": 1948.3,
+   "nearest_locality": "La Presilla, San Luis Potosí",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 194,
+   "distance_km": 194.43,
+   "longitude": -100.759073,
+   "latitude": 22.103668,
+   "elevation_m": 1970.6,
+   "nearest_locality": "Corral de Palmas, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 195,
+   "distance_km": 195.43,
+   "longitude": -100.749603,
+   "latitude": 22.101575,
+   "elevation_m": 1966.4,
+   "nearest_locality": "Santo Domingo, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 196,
+   "distance_km": 196.43,
+   "longitude": -100.740133,
+   "latitude": 22.099482,
+   "elevation_m": 1992.1,
+   "nearest_locality": "Santo Domingo, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 197,
+   "distance_km": 197.44,
+   "longitude": -100.730664,
+   "latitude": 22.097388,
+   "elevation_m": 2034.1,
+   "nearest_locality": "El Llano de Santa Isabel, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 198,
+   "distance_km": 198.44,
+   "longitude": -100.721195,
+   "latitude": 22.095293,
+   "elevation_m": 2041.5,
+   "nearest_locality": "El Llano de Santa Isabel, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 199,
+   "distance_km": 199.44,
+   "longitude": -100.711726,
+   "latitude": 22.093198,
+   "elevation_m": 2073.2,
+   "nearest_locality": "Xoconoxtle, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 200,
+   "distance_km": 200.44,
+   "longitude": -100.702257,
+   "latitude": 22.091102,
+   "elevation_m": 2132.8,
+   "nearest_locality": "La Parada del Zarcido, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 201,
+   "distance_km": 201.45,
+   "longitude": -100.692789,
+   "latitude": 22.089006,
+   "elevation_m": 2206.4,
+   "nearest_locality": "La Parada del Zarcido, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 202,
+   "distance_km": 202.45,
+   "longitude": -100.683321,
+   "latitude": 22.086909,
+   "elevation_m": 2162.1,
+   "nearest_locality": "Rincón de Santa Eduwiges, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 203,
+   "distance_km": 203.45,
+   "longitude": -100.673853,
+   "latitude": 22.084812,
+   "elevation_m": 2164.4,
+   "nearest_locality": "Rincón de Santa Eduwiges, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 204,
+   "distance_km": 204.46,
+   "longitude": -100.664386,
+   "latitude": 22.082714,
+   "elevation_m": 2306.6,
+   "nearest_locality": "Rincón de la Yerbabuena, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 205,
+   "distance_km": 205.46,
+   "longitude": -100.654919,
+   "latitude": 22.080616,
+   "elevation_m": 2367.3,
+   "nearest_locality": "Rincón de la Yerbabuena, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 206,
+   "distance_km": 206.46,
+   "longitude": -100.645452,
+   "latitude": 22.078517,
+   "elevation_m": 2434.1,
+   "nearest_locality": "Las Trojes, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 207,
+   "distance_km": 207.47,
+   "longitude": -100.635986,
+   "latitude": 22.076417,
+   "elevation_m": 2443.7,
+   "nearest_locality": "Altamira, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 208,
+   "distance_km": 208.47,
+   "longitude": -100.626519,
+   "latitude": 22.074317,
+   "elevation_m": 2392.0,
+   "nearest_locality": "Las Aguilillas, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 209,
+   "distance_km": 209.47,
+   "longitude": -100.617053,
+   "latitude": 22.072217,
+   "elevation_m": 2292.5,
+   "nearest_locality": "Las Aguilillas, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 210,
+   "distance_km": 210.47,
+   "longitude": -100.607588,
+   "latitude": 22.070115,
+   "elevation_m": 2288.1,
+   "nearest_locality": "Valle de los Fantasmas, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 211,
+   "distance_km": 211.48,
+   "longitude": -100.598122,
+   "latitude": 22.068014,
+   "elevation_m": 2281.1,
+   "nearest_locality": "San Francisco, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 212,
+   "distance_km": 212.48,
+   "longitude": -100.588657,
+   "latitude": 22.065912,
+   "elevation_m": 2175.2,
+   "nearest_locality": "La Virgen, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 213,
+   "distance_km": 213.48,
+   "longitude": -100.579192,
+   "latitude": 22.063809,
+   "elevation_m": 2059.6,
+   "nearest_locality": "La Virgen, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 214,
+   "distance_km": 214.49,
+   "longitude": -100.569728,
+   "latitude": 22.061706,
+   "elevation_m": 2099.4,
+   "nearest_locality": "La Laja, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 215,
+   "distance_km": 215.49,
+   "longitude": -100.560263,
+   "latitude": 22.059602,
+   "elevation_m": 1873.4,
+   "nearest_locality": "Las Rusias, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 216,
+   "distance_km": 216.49,
+   "longitude": -100.550799,
+   "latitude": 22.057497,
+   "elevation_m": 1947.7,
+   "nearest_locality": "Las Rusias, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 217,
+   "distance_km": 217.5,
+   "longitude": -100.541336,
+   "latitude": 22.055392,
+   "elevation_m": 1962.5,
+   "nearest_locality": "Las Rusias, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 218,
+   "distance_km": 218.5,
+   "longitude": -100.531872,
+   "latitude": 22.053287,
+   "elevation_m": 1704.4,
+   "nearest_locality": "Las Rusias, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 219,
+   "distance_km": 219.5,
+   "longitude": -100.522409,
+   "latitude": 22.051181,
+   "elevation_m": 1696.4,
+   "nearest_locality": "Las Rusias, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 220,
+   "distance_km": 220.5,
+   "longitude": -100.512946,
+   "latitude": 22.049074,
+   "elevation_m": 1362.7,
+   "nearest_locality": "Las Rusias, Zaragoza",
+   "region": "centro",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 221,
+   "distance_km": 221.51,
+   "longitude": -100.503484,
+   "latitude": 22.046967,
+   "elevation_m": 1502.5,
+   "nearest_locality": "Santa Catarina, San Nicolás Tolentino",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 222,
+   "distance_km": 222.51,
+   "longitude": -100.494021,
+   "latitude": 22.04486,
+   "elevation_m": 1378.9,
+   "nearest_locality": "Santa Catarina, San Nicolás Tolentino",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 223,
+   "distance_km": 223.51,
+   "longitude": -100.484559,
+   "latitude": 22.042751,
+   "elevation_m": 1283.9,
+   "nearest_locality": "Santa Catarina, San Nicolás Tolentino",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 224,
+   "distance_km": 224.52,
+   "longitude": -100.475098,
+   "latitude": 22.040643,
+   "elevation_m": 1235.8,
+   "nearest_locality": "Santa Catarina, San Nicolás Tolentino",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 225,
+   "distance_km": 225.52,
+   "longitude": -100.465636,
+   "latitude": 22.038533,
+   "elevation_m": 1240.1,
+   "nearest_locality": "Santa Catarina, San Nicolás Tolentino",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 226,
+   "distance_km": 226.52,
+   "longitude": -100.456175,
+   "latitude": 22.036424,
+   "elevation_m": 1259.7,
+   "nearest_locality": "Santa Catarina, San Nicolás Tolentino",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 227,
+   "distance_km": 227.53,
+   "longitude": -100.446714,
+   "latitude": 22.034313,
+   "elevation_m": 1228.5,
+   "nearest_locality": "Santa Catarina, San Nicolás Tolentino",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 228,
+   "distance_km": 228.53,
+   "longitude": -100.437253,
+   "latitude": 22.032202,
+   "elevation_m": 1216.0,
+   "nearest_locality": "Santa Catarina, San Nicolás Tolentino",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 229,
+   "distance_km": 229.53,
+   "longitude": -100.427793,
+   "latitude": 22.030091,
+   "elevation_m": 1206.2,
+   "nearest_locality": "San José del Terremoto, Ciudad Fernández",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 230,
+   "distance_km": 230.53,
+   "longitude": -100.418333,
+   "latitude": 22.027979,
+   "elevation_m": 1203.2,
+   "nearest_locality": "San José del Terremoto, Ciudad Fernández",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 231,
+   "distance_km": 231.54,
+   "longitude": -100.408873,
+   "latitude": 22.025866,
+   "elevation_m": 1196.0,
+   "nearest_locality": "San José del Terremoto, Ciudad Fernández",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 232,
+   "distance_km": 232.54,
+   "longitude": -100.399414,
+   "latitude": 22.023753,
+   "elevation_m": 1202.8,
+   "nearest_locality": "Santa Efigenia, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 233,
+   "distance_km": 233.54,
+   "longitude": -100.389954,
+   "latitude": 22.02164,
+   "elevation_m": 1212.7,
+   "nearest_locality": "La Ermita, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 234,
+   "distance_km": 234.55,
+   "longitude": -100.380496,
+   "latitude": 22.019525,
+   "elevation_m": 1221.2,
+   "nearest_locality": "La Ermita, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 235,
+   "distance_km": 235.55,
+   "longitude": -100.371037,
+   "latitude": 22.017411,
+   "elevation_m": 1242.1,
+   "nearest_locality": "Paso de San Antonio, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 236,
+   "distance_km": 236.55,
+   "longitude": -100.361579,
+   "latitude": 22.015295,
+   "elevation_m": 1249.0,
+   "nearest_locality": "Paso de San Antonio, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 237,
+   "distance_km": 237.56,
+   "longitude": -100.35212,
+   "latitude": 22.01318,
+   "elevation_m": 1270.5,
+   "nearest_locality": "Agua Zarca (La Pila), Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 238,
+   "distance_km": 238.56,
+   "longitude": -100.342663,
+   "latitude": 22.011063,
+   "elevation_m": 1289.0,
+   "nearest_locality": "Agua Zarca (La Pila), Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 239,
+   "distance_km": 239.56,
+   "longitude": -100.333205,
+   "latitude": 22.008946,
+   "elevation_m": 1242.8,
+   "nearest_locality": "La Manzanilla, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 240,
+   "distance_km": 240.56,
+   "longitude": -100.323748,
+   "latitude": 22.006829,
+   "elevation_m": 1328.3,
+   "nearest_locality": "La Manzanilla, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 241,
+   "distance_km": 241.57,
+   "longitude": -100.314291,
+   "latitude": 22.004711,
+   "elevation_m": 1276.5,
+   "nearest_locality": "La Manzanilla, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 242,
+   "distance_km": 242.57,
+   "longitude": -100.304834,
+   "latitude": 22.002593,
+   "elevation_m": 1188.9,
+   "nearest_locality": "San José de Canoas, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 243,
+   "distance_km": 243.57,
+   "longitude": -100.295378,
+   "latitude": 22.000473,
+   "elevation_m": 1158.3,
+   "nearest_locality": "San José de Canoas, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 244,
+   "distance_km": 244.58,
+   "longitude": -100.285922,
+   "latitude": 21.998354,
+   "elevation_m": 1185.9,
+   "nearest_locality": "San José de Canoas, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 245,
+   "distance_km": 245.58,
+   "longitude": -100.276466,
+   "latitude": 21.996234,
+   "elevation_m": 1219.1,
+   "nearest_locality": "San José de Canoas, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 246,
+   "distance_km": 246.58,
+   "longitude": -100.26701,
+   "latitude": 21.994113,
+   "elevation_m": 1304.7,
+   "nearest_locality": "Milpitas, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 247,
+   "distance_km": 247.59,
+   "longitude": -100.257555,
+   "latitude": 21.991992,
+   "elevation_m": 1370.2,
+   "nearest_locality": "Milpitas, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 248,
+   "distance_km": 248.59,
+   "longitude": -100.2481,
+   "latitude": 21.98987,
+   "elevation_m": 1333.7,
+   "nearest_locality": "Milpitas, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 249,
+   "distance_km": 249.59,
+   "longitude": -100.238646,
+   "latitude": 21.987748,
+   "elevation_m": 1372.1,
+   "nearest_locality": "Milpitas, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 250,
+   "distance_km": 250.59,
+   "longitude": -100.229191,
+   "latitude": 21.985625,
+   "elevation_m": 1492.3,
+   "nearest_locality": "Milpitas, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 251,
+   "distance_km": 251.6,
+   "longitude": -100.219737,
+   "latitude": 21.983502,
+   "elevation_m": 1512.8,
+   "nearest_locality": "Milpitas, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 252,
+   "distance_km": 252.6,
+   "longitude": -100.210283,
+   "latitude": 21.981378,
+   "elevation_m": 1322.1,
+   "nearest_locality": "Agua de los Robles, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 253,
+   "distance_km": 253.6,
+   "longitude": -100.20083,
+   "latitude": 21.979253,
+   "elevation_m": 1327.5,
+   "nearest_locality": "Agua de los Robles, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 254,
+   "distance_km": 254.61,
+   "longitude": -100.191376,
+   "latitude": 21.977128,
+   "elevation_m": 1289.7,
+   "nearest_locality": "Agua de los Robles, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 255,
+   "distance_km": 255.61,
+   "longitude": -100.181923,
+   "latitude": 21.975003,
+   "elevation_m": 1240.0,
+   "nearest_locality": "La Tapona, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 256,
+   "distance_km": 256.61,
+   "longitude": -100.172471,
+   "latitude": 21.972876,
+   "elevation_m": 1213.5,
+   "nearest_locality": "Tecomates, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 257,
+   "distance_km": 257.62,
+   "longitude": -100.163018,
+   "latitude": 21.97075,
+   "elevation_m": 1190.6,
+   "nearest_locality": "Tecomates, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 258,
+   "distance_km": 258.62,
+   "longitude": -100.153566,
+   "latitude": 21.968623,
+   "elevation_m": 1157.0,
+   "nearest_locality": "San José de las Flores, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 259,
+   "distance_km": 259.62,
+   "longitude": -100.144114,
+   "latitude": 21.966495,
+   "elevation_m": 1112.2,
+   "nearest_locality": "San José de las Flores, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 260,
+   "distance_km": 260.62,
+   "longitude": -100.134663,
+   "latitude": 21.964367,
+   "elevation_m": 1119.3,
+   "nearest_locality": "Chupaderos, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 261,
+   "distance_km": 261.63,
+   "longitude": -100.125211,
+   "latitude": 21.962238,
+   "elevation_m": 1050.5,
+   "nearest_locality": "Chupaderos, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 262,
+   "distance_km": 262.63,
+   "longitude": -100.11576,
+   "latitude": 21.960109,
+   "elevation_m": 1040.1,
+   "nearest_locality": "Cieneguillas, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 263,
+   "distance_km": 263.63,
+   "longitude": -100.10631,
+   "latitude": 21.957979,
+   "elevation_m": 1030.7,
+   "nearest_locality": "Albino Martínez, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 264,
+   "distance_km": 264.64,
+   "longitude": -100.096859,
+   "latitude": 21.955848,
+   "elevation_m": 1020.8,
+   "nearest_locality": "Potrero el Tepetate (Cerrito del Melón), Ciudad Fernández",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 265,
+   "distance_km": 265.64,
+   "longitude": -100.087409,
+   "latitude": 21.953717,
+   "elevation_m": 1012.1,
+   "nearest_locality": "Potrero el Tepetate (Cerrito del Melón), Ciudad Fernández",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 266,
+   "distance_km": 266.64,
+   "longitude": -100.077959,
+   "latitude": 21.951586,
+   "elevation_m": 1010.7,
+   "nearest_locality": "Potrero el Tepetate (Cerrito del Melón), Ciudad Fernández",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 267,
+   "distance_km": 267.65,
+   "longitude": -100.06851,
+   "latitude": 21.949454,
+   "elevation_m": 1009.2,
+   "nearest_locality": "Potrero San Joaquín, Ciudad Fernández",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 268,
+   "distance_km": 268.65,
+   "longitude": -100.05906,
+   "latitude": 21.947321,
+   "elevation_m": 1008.0,
+   "nearest_locality": "Finca la Esperanza (Potrero el Apeloteado), Ciudad Fernández",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 269,
+   "distance_km": 269.65,
+   "longitude": -100.049611,
+   "latitude": 21.945188,
+   "elevation_m": 1007.0,
+   "nearest_locality": "Finca la Esperanza (Potrero el Apeloteado), Ciudad Fernández",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 270,
+   "distance_km": 270.65,
+   "longitude": -100.040162,
+   "latitude": 21.943054,
+   "elevation_m": 1001.5,
+   "nearest_locality": "Huerta San Blas, Ciudad Fernández",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 271,
+   "distance_km": 271.66,
+   "longitude": -100.030714,
+   "latitude": 21.94092,
+   "elevation_m": 997.5,
+   "nearest_locality": "Huerta las Carmelitas, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 272,
+   "distance_km": 272.66,
+   "longitude": -100.021266,
+   "latitude": 21.938785,
+   "elevation_m": 999.0,
+   "nearest_locality": "Ciudad Fernández, Ciudad Fernández",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 273,
+   "distance_km": 273.66,
+   "longitude": -100.011818,
+   "latitude": 21.93665,
+   "elevation_m": 995.0,
+   "nearest_locality": "Ciudad Fernández, Ciudad Fernández",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 274,
+   "distance_km": 274.67,
+   "longitude": -100.00237,
+   "latitude": 21.934514,
+   "elevation_m": 990.0,
+   "nearest_locality": "Rioverde, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 275,
+   "distance_km": 275.67,
+   "longitude": -99.992923,
+   "latitude": 21.932378,
+   "elevation_m": 991.8,
+   "nearest_locality": "Rioverde, Rioverde",
+   "region": "zona-media",
+   "leg": "San Luis Potosí → Rioverde"
+  },
+  {
+   "order": 276,
+   "distance_km": 276.67,
+   "longitude": -99.983281,
+   "latitude": 21.932942,
+   "elevation_m": 986.0,
+   "nearest_locality": "Rioverde, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 277,
+   "distance_km": 277.66,
+   "longitude": -99.973639,
+   "latitude": 21.933506,
+   "elevation_m": 971.9,
+   "nearest_locality": "Rancho Legaspi, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 278,
+   "distance_km": 278.66,
+   "longitude": -99.963997,
+   "latitude": 21.934069,
+   "elevation_m": 986.0,
+   "nearest_locality": "Domitilo Mata, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 279,
+   "distance_km": 279.66,
+   "longitude": -99.954355,
+   "latitude": 21.934632,
+   "elevation_m": 987.0,
+   "nearest_locality": "La Cenicienta (Rancho de los Pescados), Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 280,
+   "distance_km": 280.65,
+   "longitude": -99.944713,
+   "latitude": 21.935194,
+   "elevation_m": 988.9,
+   "nearest_locality": "La Cenicienta (Rancho de los Pescados), Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 281,
+   "distance_km": 281.65,
+   "longitude": -99.935071,
+   "latitude": 21.935756,
+   "elevation_m": 987.0,
+   "nearest_locality": "Centro de Readaptación Social [Penitenciaría], Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 282,
+   "distance_km": 282.65,
+   "longitude": -99.925428,
+   "latitude": 21.936317,
+   "elevation_m": 985.0,
+   "nearest_locality": "Manuel Rivera, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 283,
+   "distance_km": 283.64,
+   "longitude": -99.915786,
+   "latitude": 21.936877,
+   "elevation_m": 982.2,
+   "nearest_locality": "Manuel Rivera, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 284,
+   "distance_km": 284.64,
+   "longitude": -99.906143,
+   "latitude": 21.937437,
+   "elevation_m": 983.0,
+   "nearest_locality": "Manuel Rivera, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 285,
+   "distance_km": 285.63,
+   "longitude": -99.896501,
+   "latitude": 21.937996,
+   "elevation_m": 987.0,
+   "nearest_locality": "Charco Salado, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 286,
+   "distance_km": 286.63,
+   "longitude": -99.886858,
+   "latitude": 21.938555,
+   "elevation_m": 994.9,
+   "nearest_locality": "Ildefonso Turrubiartes (La Boquilla), Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 287,
+   "distance_km": 287.63,
+   "longitude": -99.877216,
+   "latitude": 21.939113,
+   "elevation_m": 1013.4,
+   "nearest_locality": "Ildefonso Turrubiartes (La Boquilla), Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 288,
+   "distance_km": 288.62,
+   "longitude": -99.867573,
+   "latitude": 21.939671,
+   "elevation_m": 1141.1,
+   "nearest_locality": "Ildefonso Turrubiartes (La Boquilla), Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 289,
+   "distance_km": 289.62,
+   "longitude": -99.85793,
+   "latitude": 21.940228,
+   "elevation_m": 1108.2,
+   "nearest_locality": "San Fernando, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 290,
+   "distance_km": 290.62,
+   "longitude": -99.848287,
+   "latitude": 21.940785,
+   "elevation_m": 1067.4,
+   "nearest_locality": "San Fernando, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 291,
+   "distance_km": 291.61,
+   "longitude": -99.838644,
+   "latitude": 21.94134,
+   "elevation_m": 1069.9,
+   "nearest_locality": "San Fernando, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 292,
+   "distance_km": 292.61,
+   "longitude": -99.829001,
+   "latitude": 21.941896,
+   "elevation_m": 1080.0,
+   "nearest_locality": "San Fernando, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 293,
+   "distance_km": 293.61,
+   "longitude": -99.819358,
+   "latitude": 21.942451,
+   "elevation_m": 1083.7,
+   "nearest_locality": "San Fernando, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 294,
+   "distance_km": 294.6,
+   "longitude": -99.809715,
+   "latitude": 21.943005,
+   "elevation_m": 1090.1,
+   "nearest_locality": "San Fernando, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 295,
+   "distance_km": 295.6,
+   "longitude": -99.800071,
+   "latitude": 21.943559,
+   "elevation_m": 1117.0,
+   "nearest_locality": "San Vicente, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 296,
+   "distance_km": 296.6,
+   "longitude": -99.790428,
+   "latitude": 21.944112,
+   "elevation_m": 1150.6,
+   "nearest_locality": "San Vicente, Rioverde",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 297,
+   "distance_km": 297.59,
+   "longitude": -99.780784,
+   "latitude": 21.944664,
+   "elevation_m": 1225.2,
+   "nearest_locality": "Pantano, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 298,
+   "distance_km": 298.59,
+   "longitude": -99.771141,
+   "latitude": 21.945216,
+   "elevation_m": 1279.1,
+   "nearest_locality": "Pantano, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 299,
+   "distance_km": 299.59,
+   "longitude": -99.761497,
+   "latitude": 21.945768,
+   "elevation_m": 1263.3,
+   "nearest_locality": "Pantano, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 300,
+   "distance_km": 300.58,
+   "longitude": -99.751854,
+   "latitude": 21.946319,
+   "elevation_m": 1317.6,
+   "nearest_locality": "Pantano, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 301,
+   "distance_km": 301.58,
+   "longitude": -99.74221,
+   "latitude": 21.946869,
+   "elevation_m": 1218.9,
+   "nearest_locality": "Pantano, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 302,
+   "distance_km": 302.58,
+   "longitude": -99.732566,
+   "latitude": 21.947419,
+   "elevation_m": 1212.3,
+   "nearest_locality": "Agua Zarca, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 303,
+   "distance_km": 303.57,
+   "longitude": -99.722922,
+   "latitude": 21.947968,
+   "elevation_m": 1152.6,
+   "nearest_locality": "Agua Zarca, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 304,
+   "distance_km": 304.57,
+   "longitude": -99.713278,
+   "latitude": 21.948516,
+   "elevation_m": 1139.6,
+   "nearest_locality": "Agua Zarca, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 305,
+   "distance_km": 305.56,
+   "longitude": -99.703634,
+   "latitude": 21.949064,
+   "elevation_m": 1128.8,
+   "nearest_locality": "Agua Zarca, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 306,
+   "distance_km": 306.56,
+   "longitude": -99.69399,
+   "latitude": 21.949612,
+   "elevation_m": 1122.2,
+   "nearest_locality": "Los Tovares [Rancho], Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 307,
+   "distance_km": 307.56,
+   "longitude": -99.684346,
+   "latitude": 21.950159,
+   "elevation_m": 1120.5,
+   "nearest_locality": "Los Tovares [Rancho], Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 308,
+   "distance_km": 308.55,
+   "longitude": -99.674702,
+   "latitude": 21.950705,
+   "elevation_m": 1153.1,
+   "nearest_locality": "Los Tovares [Rancho], Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 309,
+   "distance_km": 309.55,
+   "longitude": -99.665057,
+   "latitude": 21.951251,
+   "elevation_m": 1342.9,
+   "nearest_locality": "Valentina Reyes Posadas (Lobos), Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 310,
+   "distance_km": 310.55,
+   "longitude": -99.655413,
+   "latitude": 21.951796,
+   "elevation_m": 1179.4,
+   "nearest_locality": "Valentina Reyes Posadas (Lobos), Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 311,
+   "distance_km": 311.54,
+   "longitude": -99.645768,
+   "latitude": 21.952341,
+   "elevation_m": 1158.8,
+   "nearest_locality": "Lobos, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 312,
+   "distance_km": 312.54,
+   "longitude": -99.636124,
+   "latitude": 21.952885,
+   "elevation_m": 1197.6,
+   "nearest_locality": "Lobos, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 313,
+   "distance_km": 313.54,
+   "longitude": -99.626479,
+   "latitude": 21.953429,
+   "elevation_m": 1216.4,
+   "nearest_locality": "Lobos, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 314,
+   "distance_km": 314.53,
+   "longitude": -99.616834,
+   "latitude": 21.953972,
+   "elevation_m": 1238.4,
+   "nearest_locality": "Cañada de Pastores, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 315,
+   "distance_km": 315.53,
+   "longitude": -99.60719,
+   "latitude": 21.954514,
+   "elevation_m": 1308.8,
+   "nearest_locality": "Cañada de Pastores, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 316,
+   "distance_km": 316.53,
+   "longitude": -99.597545,
+   "latitude": 21.955056,
+   "elevation_m": 1282.4,
+   "nearest_locality": "Cañada de Pastores, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 317,
+   "distance_km": 317.52,
+   "longitude": -99.5879,
+   "latitude": 21.955597,
+   "elevation_m": 1379.6,
+   "nearest_locality": "Cañada de Pastores, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 318,
+   "distance_km": 318.52,
+   "longitude": -99.578255,
+   "latitude": 21.956138,
+   "elevation_m": 1421.7,
+   "nearest_locality": "Norma Martínez, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 319,
+   "distance_km": 319.52,
+   "longitude": -99.56861,
+   "latitude": 21.956678,
+   "elevation_m": 1165.5,
+   "nearest_locality": "Norma Martínez, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 320,
+   "distance_km": 320.51,
+   "longitude": -99.558965,
+   "latitude": 21.957218,
+   "elevation_m": 1116.0,
+   "nearest_locality": "Norma Martínez, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 321,
+   "distance_km": 321.51,
+   "longitude": -99.549319,
+   "latitude": 21.957757,
+   "elevation_m": 1103.9,
+   "nearest_locality": "Norma Martínez, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 322,
+   "distance_km": 322.51,
+   "longitude": -99.539674,
+   "latitude": 21.958295,
+   "elevation_m": 1130.4,
+   "nearest_locality": "Los Yáñez, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 323,
+   "distance_km": 323.5,
+   "longitude": -99.530029,
+   "latitude": 21.958833,
+   "elevation_m": 1102.7,
+   "nearest_locality": "Miramar, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 324,
+   "distance_km": 324.5,
+   "longitude": -99.520383,
+   "latitude": 21.959371,
+   "elevation_m": 1083.6,
+   "nearest_locality": "Miramar, Cárdenas",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 325,
+   "distance_km": 325.49,
+   "longitude": -99.510738,
+   "latitude": 21.959907,
+   "elevation_m": 1036.9,
+   "nearest_locality": "El Quebrantadero, Alaquines",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 326,
+   "distance_km": 326.49,
+   "longitude": -99.501092,
+   "latitude": 21.960444,
+   "elevation_m": 1276.8,
+   "nearest_locality": "El Quebrantadero, Alaquines",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 327,
+   "distance_km": 327.49,
+   "longitude": -99.491446,
+   "latitude": 21.960979,
+   "elevation_m": 1069.8,
+   "nearest_locality": "Cañón de Guerrero, Alaquines",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 328,
+   "distance_km": 328.48,
+   "longitude": -99.481801,
+   "latitude": 21.961514,
+   "elevation_m": 1180.4,
+   "nearest_locality": "Cañón de Guerrero, Alaquines",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 329,
+   "distance_km": 329.48,
+   "longitude": -99.472155,
+   "latitude": 21.962049,
+   "elevation_m": 1360.5,
+   "nearest_locality": "Cañón de Guerrero, Alaquines",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 330,
+   "distance_km": 330.48,
+   "longitude": -99.462509,
+   "latitude": 21.962583,
+   "elevation_m": 1201.4,
+   "nearest_locality": "Mesas del Durazno, Alaquines",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 331,
+   "distance_km": 331.47,
+   "longitude": -99.452863,
+   "latitude": 21.963116,
+   "elevation_m": 1282.2,
+   "nearest_locality": "Palo Hueco, Alaquines",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 332,
+   "distance_km": 332.47,
+   "longitude": -99.443217,
+   "latitude": 21.963649,
+   "elevation_m": 1306.9,
+   "nearest_locality": "Los Pocitos (Los Pozos), Alaquines",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 333,
+   "distance_km": 333.47,
+   "longitude": -99.433571,
+   "latitude": 21.964182,
+   "elevation_m": 1236.6,
+   "nearest_locality": "Los Pocitos (Los Pozos), Alaquines",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 334,
+   "distance_km": 334.46,
+   "longitude": -99.423925,
+   "latitude": 21.964713,
+   "elevation_m": 757.7,
+   "nearest_locality": "Los Pocitos (Los Pozos), Alaquines",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 335,
+   "distance_km": 335.46,
+   "longitude": -99.414278,
+   "latitude": 21.965244,
+   "elevation_m": 519.3,
+   "nearest_locality": "Los Pocitos (Los Pozos), Alaquines",
+   "region": "zona-media",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 336,
+   "distance_km": 336.46,
+   "longitude": -99.404632,
+   "latitude": 21.965775,
+   "elevation_m": 433.1,
+   "nearest_locality": "El Aserradero, Tamasopo",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 337,
+   "distance_km": 337.45,
+   "longitude": -99.394986,
+   "latitude": 21.966305,
+   "elevation_m": 407.5,
+   "nearest_locality": "José Carranza (El Cañón del Diablo), Tamasopo",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 338,
+   "distance_km": 338.45,
+   "longitude": -99.385339,
+   "latitude": 21.966835,
+   "elevation_m": 335.0,
+   "nearest_locality": "Agua Buena, Tamasopo",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 339,
+   "distance_km": 339.45,
+   "longitude": -99.375693,
+   "latitude": 21.967363,
+   "elevation_m": 319.2,
+   "nearest_locality": "Campo Colonia, Tamasopo",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 340,
+   "distance_km": 340.44,
+   "longitude": -99.366046,
+   "latitude": 21.967892,
+   "elevation_m": 331.3,
+   "nearest_locality": "Aguilares, Tamasopo",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 341,
+   "distance_km": 341.44,
+   "longitude": -99.356399,
+   "latitude": 21.96842,
+   "elevation_m": 443.8,
+   "nearest_locality": "Aguilares, Tamasopo",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 342,
+   "distance_km": 342.44,
+   "longitude": -99.346753,
+   "latitude": 21.968947,
+   "elevation_m": 497.4,
+   "nearest_locality": "Aguilares, Tamasopo",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 343,
+   "distance_km": 343.43,
+   "longitude": -99.337106,
+   "latitude": 21.969474,
+   "elevation_m": 654.3,
+   "nearest_locality": "San Jerónimo, Tamasopo",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 344,
+   "distance_km": 344.43,
+   "longitude": -99.327459,
+   "latitude": 21.97,
+   "elevation_m": 524.0,
+   "nearest_locality": "El Mirador, Tamasopo",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 345,
+   "distance_km": 345.43,
+   "longitude": -99.317812,
+   "latitude": 21.970525,
+   "elevation_m": 418.2,
+   "nearest_locality": "El Mirador, Tamasopo",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 346,
+   "distance_km": 346.42,
+   "longitude": -99.308165,
+   "latitude": 21.97105,
+   "elevation_m": 398.4,
+   "nearest_locality": "El Mirador, Tamasopo",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 347,
+   "distance_km": 347.42,
+   "longitude": -99.298518,
+   "latitude": 21.971575,
+   "elevation_m": 300.3,
+   "nearest_locality": "El Mirador, Tamasopo",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 348,
+   "distance_km": 348.41,
+   "longitude": -99.288871,
+   "latitude": 21.972098,
+   "elevation_m": 286.1,
+   "nearest_locality": "El Mirador, Tamasopo",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 349,
+   "distance_km": 349.41,
+   "longitude": -99.279223,
+   "latitude": 21.972622,
+   "elevation_m": 285.2,
+   "nearest_locality": "Campo el Arrozal, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 350,
+   "distance_km": 350.41,
+   "longitude": -99.269576,
+   "latitude": 21.973144,
+   "elevation_m": 293.9,
+   "nearest_locality": "Rascón, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 351,
+   "distance_km": 351.4,
+   "longitude": -99.259929,
+   "latitude": 21.973666,
+   "elevation_m": 283.2,
+   "nearest_locality": "Rascón, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 352,
+   "distance_km": 352.4,
+   "longitude": -99.250281,
+   "latitude": 21.974188,
+   "elevation_m": 278.4,
+   "nearest_locality": "Rascón, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 353,
+   "distance_km": 353.4,
+   "longitude": -99.240634,
+   "latitude": 21.974709,
+   "elevation_m": 356.5,
+   "nearest_locality": "Rascón, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 354,
+   "distance_km": 354.39,
+   "longitude": -99.230986,
+   "latitude": 21.97523,
+   "elevation_m": 327.1,
+   "nearest_locality": "Casa Blanca, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 355,
+   "distance_km": 355.39,
+   "longitude": -99.221338,
+   "latitude": 21.975749,
+   "elevation_m": 358.3,
+   "nearest_locality": "San Francisco, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 356,
+   "distance_km": 356.39,
+   "longitude": -99.211691,
+   "latitude": 21.976269,
+   "elevation_m": 363.9,
+   "nearest_locality": "El Nacimiento y su Anexo Fibracel II, Aquismón",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 357,
+   "distance_km": 357.38,
+   "longitude": -99.202043,
+   "latitude": 21.976788,
+   "elevation_m": 328.5,
+   "nearest_locality": "El Nacimiento y su Anexo Fibracel II, Aquismón",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 358,
+   "distance_km": 358.38,
+   "longitude": -99.192395,
+   "latitude": 21.977306,
+   "elevation_m": 182.9,
+   "nearest_locality": "Santa Anita Dos, Aquismón",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 359,
+   "distance_km": 359.38,
+   "longitude": -99.182747,
+   "latitude": 21.977823,
+   "elevation_m": 287.7,
+   "nearest_locality": "Santa Anita Dos, Aquismón",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 360,
+   "distance_km": 360.37,
+   "longitude": -99.173099,
+   "latitude": 21.97834,
+   "elevation_m": 278.9,
+   "nearest_locality": "El Brasil, Aquismón",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 361,
+   "distance_km": 361.37,
+   "longitude": -99.163451,
+   "latitude": 21.978857,
+   "elevation_m": 416.4,
+   "nearest_locality": "Segundo Campo el Palmar (Ejido Ojo de Agua), Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 362,
+   "distance_km": 362.37,
+   "longitude": -99.153803,
+   "latitude": 21.979373,
+   "elevation_m": 319.0,
+   "nearest_locality": "Segundo Campo el Palmar (Ejido Ojo de Agua), Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 363,
+   "distance_km": 363.36,
+   "longitude": -99.144154,
+   "latitude": 21.979888,
+   "elevation_m": 433.6,
+   "nearest_locality": "Segundo Campo el Palmar (Ejido Ojo de Agua), Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 364,
+   "distance_km": 364.36,
+   "longitude": -99.134506,
+   "latitude": 21.980403,
+   "elevation_m": 298.3,
+   "nearest_locality": "Segundo Campo el Palmar (Ejido Ojo de Agua), Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 365,
+   "distance_km": 365.36,
+   "longitude": -99.124858,
+   "latitude": 21.980917,
+   "elevation_m": 157.1,
+   "nearest_locality": "El Ojite, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 366,
+   "distance_km": 366.35,
+   "longitude": -99.115209,
+   "latitude": 21.981431,
+   "elevation_m": 139.5,
+   "nearest_locality": "El Ojite, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 367,
+   "distance_km": 367.35,
+   "longitude": -99.105561,
+   "latitude": 21.981944,
+   "elevation_m": 119.9,
+   "nearest_locality": "Buena Vista, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 368,
+   "distance_km": 368.34,
+   "longitude": -99.095912,
+   "latitude": 21.982457,
+   "elevation_m": 110.9,
+   "nearest_locality": "Buena Vista, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 369,
+   "distance_km": 369.34,
+   "longitude": -99.086264,
+   "latitude": 21.982969,
+   "elevation_m": 100.7,
+   "nearest_locality": "El Barajeño, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 370,
+   "distance_km": 370.34,
+   "longitude": -99.076615,
+   "latitude": 21.98348,
+   "elevation_m": 97.0,
+   "nearest_locality": "El Barajeño, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 371,
+   "distance_km": 371.33,
+   "longitude": -99.066966,
+   "latitude": 21.983991,
+   "elevation_m": 98.0,
+   "nearest_locality": "Rancho Sanjuanita, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 372,
+   "distance_km": 372.33,
+   "longitude": -99.057317,
+   "latitude": 21.984501,
+   "elevation_m": 93.8,
+   "nearest_locality": "Vista Hermosa, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 373,
+   "distance_km": 373.33,
+   "longitude": -99.047668,
+   "latitude": 21.985011,
+   "elevation_m": 85.4,
+   "nearest_locality": "La Primavera, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 374,
+   "distance_km": 374.32,
+   "longitude": -99.038019,
+   "latitude": 21.98552,
+   "elevation_m": 79.1,
+   "nearest_locality": "Sigoal, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 375,
+   "distance_km": 375.32,
+   "longitude": -99.02837,
+   "latitude": 21.986029,
+   "elevation_m": 57.3,
+   "nearest_locality": "El Corregidor, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  },
+  {
+   "order": 376,
+   "distance_km": 376.32,
+   "longitude": -99.018721,
+   "latitude": 21.986537,
+   "elevation_m": 81.4,
+   "nearest_locality": "Ciudad Valles, Ciudad Valles",
+   "region": "huasteca",
+   "leg": "Rioverde → Ciudad Valles"
+  }
+ ]
+}

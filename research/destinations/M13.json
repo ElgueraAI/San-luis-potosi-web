@@ -1,0 +1,76 @@
+{
+  "place_id": "M13",
+  "name": "Santa María Acapulco",
+  "workbook": {
+    "region_label": "Media",
+    "type": "Cultura Xi'iui / comunidad",
+    "priority": "B",
+    "official_source": "https://turismo.slp.gob.mx/lugares/?cat=atractivos-turisticos"
+  },
+  "municipality": {
+    "value": "Santa Catarina",
+    "status": "verified",
+    "source": "turismo-slp-lugar-santa-maria-acapulco",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Cultura Xi'iui / comunidad",
+  "description": {
+    "value": "Comunidad del municipio de Santa Catarina, corazón espiritual de la región media donde se entrelazan historia, fe y tradición xi'iuy.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-santa-maria-acapulco",
+    "verifiedAt": "2026-10-05",
+    "note": "Page text only partially readable."
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "cultura-viva",
+      "xi-iuy",
+      "fe"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": "Indigenous community: portraits only with consent; follow community guidance.",
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "zona-media",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Media Este; municipality Santa Catarina"
+  },
+  "coordinates": {
+    "latitude": 21.471874,
+    "longitude": -99.441255,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: Santa María Acapulco, Santa Catarina (cve 240310032)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 70,
+    "notes": null
+  },
+  "coordinate_source": "INEGI ITER 2020: Santa María Acapulco, Santa Catarina (cve 240310032)",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "needs_manual_asset",
+  "official_source": [
+    "turismo-slp-lugar-santa-maria-acapulco"
+  ],
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

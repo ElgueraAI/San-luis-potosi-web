@@ -1,0 +1,73 @@
+{
+  "place_id": "A13",
+  "name": "Salinas de Hidalgo",
+  "workbook": {
+    "region_label": "Altiplano",
+    "type": "Paisaje / patrimonio",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-altiplano/"
+  },
+  "municipality": {
+    "value": "Salinas",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Paisaje / patrimonio",
+  "description": {
+    "value": "La ciudad más importante del Altiplano oeste, conocida por sus quesos; su Centro Cultural ocupa un edificio decimonónico de imagen afrancesada, cerca de las salinas y las ruinas de las antiguas fábricas de sal.",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "patrimonio",
+      "paisaje",
+      "gastronomia"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "altiplano",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Altiplano Oeste; municipality Salinas"
+  },
+  "coordinates": {
+    "latitude": 22.628015,
+    "longitude": -101.715735,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: Salinas de Hidalgo, Salinas (cve 240250001)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 153,
+    "notes": null
+  },
+  "coordinate_source": "INEGI ITER 2020: Salinas de Hidalgo, Salinas (cve 240250001)",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "needs_manual_asset",
+  "official_source": [],
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

@@ -1,0 +1,74 @@
+{
+  "place_id": "M07",
+  "name": "Santuario del Niño de la Salud – Atotonilco",
+  "workbook": {
+    "region_label": "Media",
+    "type": "Fe / patrimonio",
+    "priority": "C",
+    "official_source": "https://turismo.slp.gob.mx/lugares/?page=2"
+  },
+  "municipality": {
+    "value": "Ciudad Fernández",
+    "status": "verified",
+    "source": "turismo-slp-lugar-santuario-del-nino-de-la-salud",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Fe / patrimonio",
+  "description": {
+    "value": "Uno de los puntos de turismo religioso más importantes del estado, en Atotonilco.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-santuario-del-nino-de-la-salud",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "fe",
+      "peregrinacion"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "zona-media",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Media Oeste; municipality Ciudad Fernández"
+  },
+  "coordinates": {
+    "latitude": 21.993754,
+    "longitude": -100.442065,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: Atotonilco, Ciudad Fernández (cve 240110002)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 22,
+    "notes": "Santuario point approximated by its community (Atotonilco)."
+  },
+  "coordinate_source": "INEGI ITER 2020: Atotonilco, Ciudad Fernández (cve 240110002)",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "C",
+  "media_status": "needs_manual_asset",
+  "official_source": [
+    "turismo-slp-lugar-santuario-del-nino-de-la-salud"
+  ],
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

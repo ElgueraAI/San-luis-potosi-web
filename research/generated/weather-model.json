@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-04",
-  "status": "design (not implemented)",
+  "generated": "2026-10-05",
+  "status": "design (not implemented); points verified",
   "provider": {
     "source_id": "open-meteo",
     "api_key": false,
@@ -23,7 +23,9 @@
     "params": {
       "current": "temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,is_day",
       "timezone": "America/Mexico_City",
-      "wind_speed_unit": "kmh"
+      "wind_speed_unit": "kmh",
+      "daily": "temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code",
+      "forecast_days": 3
     },
     "fields": {
       "temperature_2m": "°C",
@@ -34,7 +36,11 @@
       "wind_speed_10m": "km/h",
       "wind_direction_10m": "°",
       "is_day": "0/1",
-      "time": "ISO 8601 local"
+      "time": "ISO 8601 local",
+      "daily.temperature_2m_max": "°C",
+      "daily.temperature_2m_min": "°C",
+      "daily.precipitation_probability_max": "%",
+      "daily.weather_code": "WMO code"
     },
     "cache": "localStorage per point, 30 min; wrapped in try/catch.",
     "failure": "Hide the widget; never show stale data without its timestamp.",
@@ -67,26 +73,75 @@
     "tested": {
       "date": "2026-10-04",
       "result": "10 years of daily data returned; monthly aggregation works."
-    }
+    },
+    "output": "generated/climate-monthly.json (built, 6 points)"
   },
   "points": {
-    "rule": "One point per region for the region widget; destination points only once their coordinates are verified.",
-    "regions": {
+    "rule": "Region widgets use the four verified INEGI locality points; destination widgets only for verified coordinates.",
+    "locations": {
       "altiplano": {
-        "anchor": "Matehuala (A06)",
-        "coords_status": "pending"
+        "location_name": "Matehuala – Centro Histórico",
+        "place_id": "A06",
+        "latitude": 23.646359,
+        "longitude": -100.644198,
+        "region": "altiplano",
+        "reason_selected": "Largest city and gateway of the Altiplano (brochure); hub of the Altiplano distance table.",
+        "coordinate_source": "INEGI ITER 2020: Matehuala, Matehuala (cve 240200001)",
+        "verification_status": "verified",
+        "crosscheck_distance_m": 68
       },
       "centro": {
-        "anchor": "San Luis Potosí capital (C01)",
-        "coords_status": "pending"
+        "location_name": "Centro Histórico de San Luis Potosí",
+        "place_id": "C01",
+        "latitude": 22.151655,
+        "longitude": -100.976958,
+        "region": "centro",
+        "reason_selected": "State capital; hub of the Centro distance table.",
+        "coordinate_source": "INEGI ITER 2020: San Luis Potosí, San Luis Potosí (cve 240280001)",
+        "verification_status": "verified",
+        "crosscheck_distance_m": 58
       },
       "zona-media": {
-        "anchor": "Rioverde (M02)",
-        "coords_status": "pending"
+        "location_name": "Rioverde – Centro",
+        "place_id": "M02",
+        "latitude": 21.932378,
+        "longitude": -99.992923,
+        "region": "zona-media",
+        "reason_selected": "'La capital de la Región Media' (brochure); hub of the Media distance table.",
+        "coordinate_source": "INEGI ITER 2020: Rioverde, Rioverde (cve 240240001)",
+        "verification_status": "verified",
+        "crosscheck_distance_m": 58
       },
       "huasteca": {
-        "anchor": "Ciudad Valles (H17)",
-        "coords_status": "pending (not geocoded in pass 1)"
+        "location_name": "Ciudad Valles",
+        "place_id": "H17",
+        "latitude": 21.986537,
+        "longitude": -99.018721,
+        "region": "huasteca",
+        "reason_selected": "'La Puerta Grande de la Huasteca' (brochure); hub of the Huasteca distance table.",
+        "coordinate_source": "INEGI ITER 2020: Ciudad Valles, Ciudad Valles (cve 240130001)",
+        "verification_status": "verified",
+        "crosscheck_distance_m": 1038
+      },
+      "real-de-catorce": {
+        "location_name": "Real de Catorce",
+        "place_id": "A01",
+        "latitude": 23.690449,
+        "longitude": -100.886253,
+        "region": "altiplano",
+        "reason_selected": "High-altitude destination (~2,700 m) whose climate differs strongly from Matehuala.",
+        "coordinate_source": "INEGI ITER 2020: Real de Catorce, Catorce (cve 240060001)",
+        "verification_status": "verified"
+      },
+      "xilitla": {
+        "location_name": "Xilitla – Pueblo Mágico",
+        "place_id": "H07",
+        "latitude": 21.385193,
+        "longitude": -98.989573,
+        "region": "huasteca",
+        "reason_selected": "Wettest Huasteca mountain town; fog/coffee climate differs from Ciudad Valles.",
+        "coordinate_source": "INEGI ITER 2020: Xilitla, Xilitla (cve 240540001)",
+        "verification_status": "verified"
       }
     }
   },

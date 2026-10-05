@@ -1,0 +1,78 @@
+{
+  "place_id": "C14",
+  "name": "Sierra de San Miguelito",
+  "workbook": {
+    "region_label": "Centro",
+    "type": "Naturaleza / senderismo",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-centro/"
+  },
+  "municipality": {
+    "value": "San Luis Potosí",
+    "status": "verified",
+    "source": "brochure-centro",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Naturaleza / senderismo",
+  "description": {
+    "value": null,
+    "status": "pending",
+    "note": "No tourism description in the sources read."
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "naturaleza",
+      "senderismo"
+    ],
+    "status": "editorial"
+  },
+  "facts": {
+    "protected_area": {
+      "value": "Área natural protegida (decreto 20 Sep 2018)",
+      "status": "verified",
+      "source": "segam-anp",
+      "verifiedAt": "2026-10-05"
+    }
+  },
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "centro",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "San Luis Norte; municipality San Luis Potosí"
+  },
+  "coordinates": {
+    "latitude": null,
+    "longitude": null,
+    "precision": null,
+    "coordinate_source": null,
+    "source_url": null,
+    "verification_status": "unavailable",
+    "crosscheck_source": null,
+    "crosscheck_distance_m": null,
+    "notes": "A mountain range (area), not a point."
+  },
+  "coordinate_source": null,
+  "map_status": "not-a-point",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "needs_manual_asset",
+  "official_source": [],
+  "verified_core_fields": "2/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [],
+  "media_card": null
+}

@@ -11,8 +11,9 @@
   "region": {
     "value": "altiplano",
     "status": "verified",
-    "source": "brochure-altiplano",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Altiplano Este; municipality Matehuala"
   },
   "municipality": {
     "value": "Matehuala",
@@ -29,17 +30,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 23.646485,
-      "lon": -100.643544
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "node/291728489",
-    "osm_feature": "place/city",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 23.646359,
+    "longitude": -100.644198,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: Matehuala, Matehuala (cve 240200001)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 68,
+    "notes": null
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "INEGI ITER 2020: Matehuala, Matehuala (cve 240200001)",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -89,6 +90,15 @@
     "commons_approved_candidates": 4,
     "pexels": 0
   },
-  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-182004799"
+  ],
+  "media_card": "wc-182004799"
 }

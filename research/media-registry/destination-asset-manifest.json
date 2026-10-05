@@ -1,0 +1,2173 @@
+{
+ "generated": "2026-10-05",
+ "route": "/destinos/[slug]",
+ "model": {
+  "hero_desktop": "16:9 / 21:9, ≥1920 px wide",
+  "hero_mobile": "9:16 or 4:5 native vertical",
+  "gallery_landscape": "3:2",
+  "gallery_vertical": "4:5",
+  "detail": "1:1 or 4:5",
+  "card": "4:5",
+  "map_preview": "generated from MapLibre data",
+  "seasonal": "seasonal-calendar record ids",
+  "experience": "image of an activity",
+  "nearby_destination": "two nearest mapped places (straight line, not road)"
+ },
+ "counts": {
+  "READY": 4,
+  "PARTIAL": 37,
+  "NEEDS_MANUAL_ASSET": 22
+ },
+ "destinations": {
+  "A01": {
+   "place_id": "A01",
+   "name": "Real de Catorce",
+   "region": "altiplano",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-69780780",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-119874344",
+     "wc-119874435",
+     "wc-32558731"
+    ],
+    "gallery_vertical": [
+     "wc-145400211"
+    ],
+    "detail": null,
+    "card": "wc-69780780",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [
+     "se-catorce-oct",
+     "se-altiplano-clima"
+    ],
+    "experience": "wc-119874435",
+    "nearby_destination": [
+     {
+      "place_id": "A02",
+      "straight_line_km": 0.3
+     },
+     {
+      "place_id": "A04",
+      "straight_line_km": 3.3
+     }
+    ]
+   },
+   "core_filled": "2/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "A02": {
+   "place_id": "A02",
+   "name": "Túnel de Ogarrio",
+   "region": "altiplano",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": "wc-12418759",
+    "gallery_landscape": [
+     "wc-76830445"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-12418759",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "A01",
+      "straight_line_km": 0.3
+     },
+     {
+      "place_id": "A04",
+      "straight_line_km": 3.5
+     }
+    ]
+   },
+   "core_filled": "2/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "A03": {
+   "place_id": "A03",
+   "name": "Pueblo Fantasma",
+   "region": "altiplano",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "pending"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": null
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "A04": {
+   "place_id": "A04",
+   "name": "Sierra de Catorce / Cerro del Quemado",
+   "region": "altiplano",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": "wc-32558730",
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-32558730",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "A01",
+      "straight_line_km": 3.3
+     },
+     {
+      "place_id": "A02",
+      "straight_line_km": 3.5
+     }
+    ]
+   },
+   "core_filled": "2/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "A05": {
+   "place_id": "A05",
+   "name": "Estación Catorce",
+   "region": "altiplano",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": "wc-52774850",
+    "hero_mobile": "wc-145400197",
+    "gallery_landscape": [],
+    "gallery_vertical": [
+     "wc-145400195",
+     "wc-145400198"
+    ],
+    "detail": null,
+    "card": "wc-52774850",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "A04",
+      "straight_line_km": 7.8
+     },
+     {
+      "place_id": "A01",
+      "straight_line_km": 10.2
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "A06": {
+   "place_id": "A06",
+   "name": "Matehuala – Centro Histórico",
+   "region": "altiplano",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-43679216"
+    ],
+    "gallery_vertical": [
+     "wc-182004799",
+     "wc-53595891"
+    ],
+    "detail": null,
+    "card": "wc-182004799",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [
+     "se-altiplano-clima"
+    ],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "A02",
+      "straight_line_km": 24.8
+     },
+     {
+      "place_id": "A01",
+      "straight_line_km": 25.1
+     }
+    ]
+   },
+   "core_filled": "1/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "A07": {
+   "place_id": "A07",
+   "name": "Catedral de la Inmaculada Concepción",
+   "region": "altiplano",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": "wc-43679590",
+    "hero_mobile": "wc-129510016",
+    "gallery_landscape": [
+     "wc-129510111",
+     "wc-43679526"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-43679590",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "A02",
+      "straight_line_km": 24.8
+     },
+     {
+      "place_id": "A01",
+      "straight_line_km": 25.2
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "A08": {
+   "place_id": "A08",
+   "name": "Guadalcázar – Centro Histórico",
+   "region": "altiplano",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": "wc-72428429",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-43653605"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-72428429",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": "wc-43653605",
+    "nearby_destination": [
+     {
+      "place_id": "A10",
+      "straight_line_km": 6.2
+     },
+     {
+      "place_id": "M12",
+      "straight_line_km": 51.0
+     }
+    ]
+   },
+   "core_filled": "2/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "A09": {
+   "place_id": "A09",
+   "name": "Gruta de las Candelas",
+   "region": "altiplano",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "pending"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": null
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "A10": {
+   "place_id": "A10",
+   "name": "Zona de escalada de Guadalcázar",
+   "region": "altiplano",
+   "priority": "C",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "A08",
+      "straight_line_km": 6.2
+     },
+     {
+      "place_id": "M12",
+      "straight_line_km": 53.3
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "A11": {
+   "place_id": "A11",
+   "name": "Charcas – Centro Histórico",
+   "region": "altiplano",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "A14",
+      "straight_line_km": 22.2
+     },
+     {
+      "place_id": "A05",
+      "straight_line_km": 63.6
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "A12": {
+   "place_id": "A12",
+   "name": "Ruta del Mezcal – Charcas",
+   "region": "altiplano",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-66038963"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-66038963",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "A14",
+      "straight_line_km": 22.2
+     },
+     {
+      "place_id": "A05",
+      "straight_line_km": 63.6
+     }
+    ]
+   },
+   "core_filled": "1/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "A13": {
+   "place_id": "A13",
+   "name": "Salinas de Hidalgo",
+   "region": "altiplano",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "A14",
+      "straight_line_km": 72.1
+     },
+     {
+      "place_id": "A11",
+      "straight_line_km": 83.2
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "A14": {
+   "place_id": "A14",
+   "name": "Venado – Centro y tradiciones",
+   "region": "altiplano",
+   "priority": "C",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-48544817"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-48544817",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "A11",
+      "straight_line_km": 22.2
+     },
+     {
+      "place_id": "A12",
+      "straight_line_km": 22.2
+     }
+    ]
+   },
+   "core_filled": "1/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "A15": {
+   "place_id": "A15",
+   "name": "Paisaje del semidesierto potosino",
+   "region": "altiplano",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-42373253",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-98527780"
+    ],
+    "gallery_vertical": [
+     "wc-145400200"
+    ],
+    "detail": "wc-145400200",
+    "card": "wc-42373253",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "not-a-point"
+    },
+    "seasonal": [
+     "se-altiplano-clima"
+    ],
+    "experience": null,
+    "nearby_destination": null
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "C01": {
+   "place_id": "C01",
+   "name": "Centro Histórico de San Luis Potosí",
+   "region": "centro",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-63495269",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-77789641",
+     "wc-63500691"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-63495269",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [
+     "se-fenapo",
+     "se-lila-lopez"
+    ],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "C03",
+      "straight_line_km": 0.3
+     },
+     {
+      "place_id": "C05",
+      "straight_line_km": 0.3
+     }
+    ]
+   },
+   "core_filled": "2/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "C02": {
+   "place_id": "C02",
+   "name": "Plaza de Armas + Catedral",
+   "region": "centro",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-21525423",
+    "hero_mobile": "wc-50604762",
+    "gallery_landscape": [
+     "wc-116976144",
+     "wc-62994012"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-21525423",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "C06",
+      "straight_line_km": 0.7
+     },
+     {
+      "place_id": "C07",
+      "straight_line_km": 1.6
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "C03": {
+   "place_id": "C03",
+   "name": "Plaza del Carmen",
+   "region": "centro",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-77789645",
+    "hero_mobile": "wc-81112902",
+    "gallery_landscape": [
+     "wc-21525467"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-77789645",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [
+     "se-procesion"
+    ],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "C01",
+      "straight_line_km": 0.3
+     },
+     {
+      "place_id": "C06",
+      "straight_line_km": 0.6
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "C04": {
+   "place_id": "C04",
+   "name": "Templo del Carmen",
+   "region": "centro",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-75414140",
+     "wc-24677325",
+     "wc-75414138"
+    ],
+    "gallery_vertical": [
+     "wc-5783490",
+     "wc-75414136"
+    ],
+    "detail": "wc-75414140",
+    "card": "wc-75414140",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "C01",
+      "straight_line_km": 0.4
+     },
+     {
+      "place_id": "C06",
+      "straight_line_km": 0.7
+     }
+    ]
+   },
+   "core_filled": "2/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "C05": {
+   "place_id": "C05",
+   "name": "Teatro de la Paz",
+   "region": "centro",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": "wc-30504652",
+    "hero_mobile": "wc-108267867",
+    "gallery_landscape": [
+     "wc-41833060",
+     "wc-28794550"
+    ],
+    "gallery_vertical": [],
+    "detail": "wc-41833060",
+    "card": "wc-30504652",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "C01",
+      "straight_line_km": 0.3
+     },
+     {
+      "place_id": "C06",
+      "straight_line_km": 0.6
+     }
+    ]
+   },
+   "core_filled": "4/4 (hero, mobile, detail, card)",
+   "status": "READY"
+  },
+  "C06": {
+   "place_id": "C06",
+   "name": "Caja del Agua + Calzada de Guadalupe",
+   "region": "centro",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "C05",
+      "straight_line_km": 0.6
+     },
+     {
+      "place_id": "C03",
+      "straight_line_km": 0.6
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "C07": {
+   "place_id": "C07",
+   "name": "Centro de las Artes",
+   "region": "centro",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": "wc-147096098",
+    "hero_mobile": "wc-147096090",
+    "gallery_landscape": [],
+    "gallery_vertical": [
+     "wc-147096089"
+    ],
+    "detail": "wc-147096089",
+    "card": "wc-147096098",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "C06",
+      "straight_line_km": 0.8
+     },
+     {
+      "place_id": "C05",
+      "straight_line_km": 1.4
+     }
+    ]
+   },
+   "core_filled": "4/4 (hero, mobile, detail, card)",
+   "status": "READY"
+  },
+  "C08": {
+   "place_id": "C08",
+   "name": "Museo Leonora Carrington",
+   "region": "centro",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-79606411",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-81089617",
+     "wc-67983603",
+     "wc-67983604"
+    ],
+    "gallery_vertical": [
+     "wc-110842527"
+    ],
+    "detail": "wc-81089617",
+    "card": "wc-79606411",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "C06",
+      "straight_line_km": 0.9
+     },
+     {
+      "place_id": "C05",
+      "straight_line_km": 1.4
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "C09": {
+   "place_id": "C09",
+   "name": "Barrio Mágico de Tlaxcala",
+   "region": "centro",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [
+     "se-tlaxcala"
+    ],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "C04",
+      "straight_line_km": 1.6
+     },
+     {
+      "place_id": "C02",
+      "straight_line_km": 1.6
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "C10": {
+   "place_id": "C10",
+   "name": "Cerro de San Pedro",
+   "region": "centro",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-50604767",
+    "hero_mobile": "wc-50604759",
+    "gallery_landscape": [
+     "wc-50604761",
+     "wc-158635553",
+     "wc-50604760"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-50604767",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": "wc-158635553",
+    "nearby_destination": [
+     {
+      "place_id": "C09",
+      "straight_line_km": 18.9
+     },
+     {
+      "place_id": "C04",
+      "straight_line_km": 19.3
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "C11": {
+   "place_id": "C11",
+   "name": "Santa María del Río",
+   "region": "centro",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-58118619",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-58139974",
+     "wc-58138183",
+     "wc-130690556"
+    ],
+    "gallery_vertical": [],
+    "detail": "wc-58139974",
+    "card": "wc-58118619",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "C15",
+      "straight_line_km": 22.0
+     },
+     {
+      "place_id": "C13",
+      "straight_line_km": 22.4
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "C12": {
+   "place_id": "C12",
+   "name": "Talleres de rebozo",
+   "region": "centro",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-58139971",
+     "wc-58139975",
+     "wc-58139976",
+     "wc-58139972"
+    ],
+    "gallery_vertical": [],
+    "detail": "wc-58139971",
+    "card": "wc-58139971",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "not-a-point"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": null
+   },
+   "core_filled": "2/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "C13": {
+   "place_id": "C13",
+   "name": "Tierra Nueva",
+   "region": "centro",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [
+     "se-tierra-nueva"
+    ],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "C11",
+      "straight_line_km": 22.4
+     },
+     {
+      "place_id": "M07",
+      "straight_line_km": 38.8
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "C14": {
+   "place_id": "C14",
+   "name": "Sierra de San Miguelito",
+   "region": "centro",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "not-a-point"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": null
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "C15": {
+   "place_id": "C15",
+   "name": "Haciendas de Villa de Reyes",
+   "region": "centro",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "C11",
+      "straight_line_km": 22.0
+     },
+     {
+      "place_id": "C08",
+      "straight_line_km": 39.0
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "M01": {
+   "place_id": "M01",
+   "name": "Manantial de la Media Luna",
+   "region": "zona-media",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-76389273",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-2693871"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-76389273",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [
+     "se-media-luna"
+    ],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "M02",
+      "straight_line_km": 8.8
+     },
+     {
+      "place_id": "M03",
+      "straight_line_km": 9.4
+     }
+    ]
+   },
+   "core_filled": "2/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "M02": {
+   "place_id": "M02",
+   "name": "Rioverde – Centro",
+   "region": "zona-media",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-43657425",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-43657320",
+     "wc-72476949"
+    ],
+    "gallery_vertical": [
+     "wc-21412685"
+    ],
+    "detail": "wc-145121025",
+    "card": "wc-43657425",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "M03",
+      "straight_line_km": 2.2
+     },
+     {
+      "place_id": "M04",
+      "straight_line_km": 2.3
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "M03": {
+   "place_id": "M03",
+   "name": "Centro Histórico de Ciudad Fernández",
+   "region": "zona-media",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-21779359",
+     "wc-52687925",
+     "wc-52785194",
+     "wc-21780263"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-21779359",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "M04",
+      "straight_line_km": 0.3
+     },
+     {
+      "place_id": "M02",
+      "straight_line_km": 2.2
+     }
+    ]
+   },
+   "core_filled": "1/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "M04": {
+   "place_id": "M04",
+   "name": "Manantial Ojito de Agua",
+   "region": "zona-media",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "M03",
+      "straight_line_km": 0.3
+     },
+     {
+      "place_id": "M02",
+      "straight_line_km": 2.3
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "M05": {
+   "place_id": "M05",
+   "name": "La Taza",
+   "region": "zona-media",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "pending"
+    },
+    "seasonal": [
+     "se-la-taza"
+    ],
+    "experience": null,
+    "nearby_destination": null
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "M06": {
+   "place_id": "M06",
+   "name": "Museo Arqueológico La Mezclita",
+   "region": "zona-media",
+   "priority": "C",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "pending"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": null
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "M07": {
+   "place_id": "M07",
+   "name": "Santuario del Niño de la Salud – Atotonilco",
+   "region": "zona-media",
+   "priority": "C",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "C11",
+      "straight_line_km": 37.3
+     },
+     {
+      "place_id": "C13",
+      "straight_line_km": 38.8
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "M08": {
+   "place_id": "M08",
+   "name": "El Balandrán",
+   "region": "zona-media",
+   "priority": "C",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "pending"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": null
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "M09": {
+   "place_id": "M09",
+   "name": "Ciudad del Maíz",
+   "region": "zona-media",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-72476536",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-63333466"
+    ],
+    "gallery_vertical": [
+     "wc-72476489",
+     "wc-76389272"
+    ],
+    "detail": null,
+    "card": "wc-72476536",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [
+     "se-xiiui"
+    ],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "M11",
+      "straight_line_km": 0.6
+     },
+     {
+      "place_id": "H13",
+      "straight_line_km": 29.2
+     }
+    ]
+   },
+   "core_filled": "2/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "M10": {
+   "place_id": "M10",
+   "name": "Casa Barraganeña",
+   "region": "zona-media",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": "wc-43619684",
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-43619684",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "pending"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": null
+   },
+   "core_filled": "2/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "M11": {
+   "place_id": "M11",
+   "name": "Parroquia de la Purísima Concepción",
+   "region": "zona-media",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": "wc-72476440",
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-72476440",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "M09",
+      "straight_line_km": 0.6
+     },
+     {
+      "place_id": "H13",
+      "straight_line_km": 28.9
+     }
+    ]
+   },
+   "core_filled": "2/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "M12": {
+   "place_id": "M12",
+   "name": "Murales de El Tepeyac",
+   "region": "zona-media",
+   "priority": "C",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "M11",
+      "straight_line_km": 42.7
+     },
+     {
+      "place_id": "M09",
+      "straight_line_km": 42.8
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "M13": {
+   "place_id": "M13",
+   "name": "Santa María Acapulco",
+   "region": "zona-media",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H04",
+      "straight_line_km": 38.2
+     },
+     {
+      "place_id": "H05",
+      "straight_line_km": 42.7
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "M14": {
+   "place_id": "M14",
+   "name": "Grutas de la Catedral – Alamitos",
+   "region": "zona-media",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": "wc-32612408",
+    "gallery_landscape": [
+     "wc-32612423",
+     "wc-32612381"
+    ],
+    "gallery_vertical": [],
+    "detail": "wc-32612423",
+    "card": "wc-32612408",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "pending"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": null
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "M15": {
+   "place_id": "M15",
+   "name": "Paisaje agrícola de la cuenca de Rioverde",
+   "region": "zona-media",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "not-a-point"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": null
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "H01": {
+   "place_id": "H01",
+   "name": "Cascada de Tamul",
+   "region": "huasteca",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-48806929",
+    "hero_mobile": "px-14842050",
+    "gallery_landscape": [
+     "wc-45072519",
+     "wc-48806880",
+     "wc-45072507"
+    ],
+    "gallery_vertical": [
+     "px-11775031",
+     "wc-116896461",
+     "wc-45072503"
+    ],
+    "detail": "wc-48806880",
+    "card": "wc-48806929",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [
+     "se-tamul"
+    ],
+    "experience": "px-11775031",
+    "nearby_destination": [
+     {
+      "place_id": "H03",
+      "straight_line_km": 2.0
+     },
+     {
+      "place_id": "H04",
+      "straight_line_km": 23.9
+     }
+    ]
+   },
+   "core_filled": "4/4 (hero, mobile, detail, card)",
+   "status": "READY"
+  },
+  "H02": {
+   "place_id": "H02",
+   "name": "Río Tampaón",
+   "region": "huasteca",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-45072511",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-45072553",
+     "wc-45072509",
+     "wc-45072522",
+     "wc-45072530",
+     "wc-45072517",
+     "wc-45072543"
+    ],
+    "gallery_vertical": [],
+    "detail": "wc-45072509",
+    "card": "wc-45072511",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "not-a-point"
+    },
+    "seasonal": [],
+    "experience": "wc-45072553",
+    "nearby_destination": null
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "H03": {
+   "place_id": "H03",
+   "name": "Cueva del Agua",
+   "region": "huasteca",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H01",
+      "straight_line_km": 2.0
+     },
+     {
+      "place_id": "H04",
+      "straight_line_km": 22.6
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "H04": {
+   "place_id": "H04",
+   "name": "Sótano de las Golondrinas",
+   "region": "huasteca",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-2005486",
+    "hero_mobile": "wc-2008166",
+    "gallery_landscape": [
+     "wc-48931625",
+     "wc-90843616"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-2005486",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [
+     "se-golondrinas"
+    ],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H06",
+      "straight_line_km": 8.5
+     },
+     {
+      "place_id": "H05",
+      "straight_line_km": 10.2
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "H05": {
+   "place_id": "H05",
+   "name": "Sótano de las Huahuas",
+   "region": "huasteca",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-66633932"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-66633932",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [
+     "se-golondrinas"
+    ],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H06",
+      "straight_line_km": 10.1
+     },
+     {
+      "place_id": "H04",
+      "straight_line_km": 10.2
+     }
+    ]
+   },
+   "core_filled": "1/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "H06": {
+   "place_id": "H06",
+   "name": "Aquismón – Pueblo Mágico",
+   "region": "huasteca",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-52606453",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-21612508"
+    ],
+    "gallery_vertical": [
+     "wc-21612638"
+    ],
+    "detail": null,
+    "card": "wc-21612508",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H04",
+      "straight_line_km": 8.5
+     },
+     {
+      "place_id": "H05",
+      "straight_line_km": 10.1
+     }
+    ]
+   },
+   "core_filled": "2/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "H07": {
+   "place_id": "H07",
+   "name": "Xilitla – Pueblo Mágico",
+   "region": "huasteca",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-112989200",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-40384009",
+     "wc-29767217",
+     "wc-83576040"
+    ],
+    "gallery_vertical": [
+     "wc-128308393",
+     "wc-75414250"
+    ],
+    "detail": "wc-128308393",
+    "card": "wc-112989200",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H08",
+      "straight_line_km": 1.5
+     },
+     {
+      "place_id": "H05",
+      "straight_line_km": 16.9
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "H08": {
+   "place_id": "H08",
+   "name": "Las Pozas de Edward James",
+   "region": "huasteca",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-29767255",
+    "hero_mobile": "wc-29767259",
+    "gallery_landscape": [
+     "wc-2003803",
+     "wc-29767257"
+    ],
+    "gallery_vertical": [
+     "wc-29767260",
+     "wc-29767254",
+     "wc-29767881",
+     "wc-29767882"
+    ],
+    "detail": "wc-29767260",
+    "card": "wc-29767255",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H07",
+      "straight_line_km": 1.5
+     },
+     {
+      "place_id": "H05",
+      "straight_line_km": 15.4
+     }
+    ]
+   },
+   "core_filled": "4/4 (hero, mobile, detail, card)",
+   "status": "READY"
+  },
+  "H09": {
+   "place_id": "H09",
+   "name": "Convento de San Agustín",
+   "region": "huasteca",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "pending"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": null
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "H10": {
+   "place_id": "H10",
+   "name": "Cascadas de Tamasopo",
+   "region": "huasteca",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-6172324",
+     "wc-58150033",
+     "wc-2615154"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-6172324",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H11",
+      "straight_line_km": 2.1
+     },
+     {
+      "place_id": "H01",
+      "straight_line_km": 27.2
+     }
+    ]
+   },
+   "core_filled": "1/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "H11": {
+   "place_id": "H11",
+   "name": "Puente de Dios",
+   "region": "huasteca",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-45072628",
+    "hero_mobile": "wc-89848894",
+    "gallery_landscape": [
+     "wc-45072664",
+     "wc-45072640",
+     "wc-45072627",
+     "wc-45072631"
+    ],
+    "gallery_vertical": [
+     "wc-45072659"
+    ],
+    "detail": null,
+    "card": "wc-45072628",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H10",
+      "straight_line_km": 2.1
+     },
+     {
+      "place_id": "H01",
+      "straight_line_km": 28.0
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "H12": {
+   "place_id": "H12",
+   "name": "Cascadas de Micos",
+   "region": "huasteca",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-98005525",
+    "hero_mobile": "wc-98005523",
+    "gallery_landscape": [
+     "wc-98005522",
+     "wc-98005524"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-98005525",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H17",
+      "straight_line_km": 19.2
+     },
+     {
+      "place_id": "H10",
+      "straight_line_km": 30.9
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "H13": {
+   "place_id": "H13",
+   "name": "Cascada de Minas Viejas",
+   "region": "huasteca",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-98007105",
+    "hero_mobile": "wc-98007108",
+    "gallery_landscape": [
+     "wc-98007106",
+     "wc-75414206",
+     "wc-98007112",
+     "wc-98007101",
+     "wc-98007104"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-75414206",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [
+     "se-el-naranjo"
+    ],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H14",
+      "straight_line_km": 21.4
+     },
+     {
+      "place_id": "H15",
+      "straight_line_km": 24.3
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "H14": {
+   "place_id": "H14",
+   "name": "Cascada El Meco",
+   "region": "huasteca",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-93308060",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-15380133",
+     "wc-58150052"
+    ],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": "wc-93308060",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [
+     "se-el-naranjo"
+    ],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H15",
+      "straight_line_km": 3.7
+     },
+     {
+      "place_id": "H13",
+      "straight_line_km": 21.4
+     }
+    ]
+   },
+   "core_filled": "2/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "H15": {
+   "place_id": "H15",
+   "name": "Cascada El Salto",
+   "region": "huasteca",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "provisional"
+    },
+    "seasonal": [
+     "se-el-naranjo",
+     "se-el-salto"
+    ],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H14",
+      "straight_line_km": 3.7
+     },
+     {
+      "place_id": "H13",
+      "straight_line_km": 24.3
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "H16": {
+   "place_id": "H16",
+   "name": "Zona Arqueológica de Tamtoc",
+   "region": "huasteca",
+   "priority": "A",
+   "slots": {
+    "hero_desktop": "wc-60066386",
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-30478452",
+     "wc-32046305",
+     "wc-18354459"
+    ],
+    "gallery_vertical": [
+     "wc-30478447",
+     "wc-30479902",
+     "wc-30478453"
+    ],
+    "detail": "wc-30478447",
+    "card": "wc-60066386",
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H17",
+      "straight_line_km": 22.3
+     },
+     {
+      "place_id": "H03",
+      "straight_line_km": 38.9
+     }
+    ]
+   },
+   "core_filled": "3/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  },
+  "H17": {
+   "place_id": "H17",
+   "name": "Ciudad Valles",
+   "region": "huasteca",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [],
+    "gallery_vertical": [],
+    "detail": null,
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "ready"
+    },
+    "seasonal": [],
+    "experience": null,
+    "nearby_destination": [
+     {
+      "place_id": "H12",
+      "straight_line_km": 19.2
+     },
+     {
+      "place_id": "H16",
+      "straight_line_km": 22.3
+     }
+    ]
+   },
+   "core_filled": "0/4 (hero, mobile, detail, card)",
+   "status": "NEEDS_MANUAL_ASSET"
+  },
+  "H18": {
+   "place_id": "H18",
+   "name": "Xantolo / tradiciones huastecas",
+   "region": "huasteca",
+   "priority": "B",
+   "slots": {
+    "hero_desktop": null,
+    "hero_mobile": null,
+    "gallery_landscape": [
+     "wc-105308560"
+    ],
+    "gallery_vertical": [],
+    "detail": "wc-105308560",
+    "card": null,
+    "map_preview": {
+     "type": "generated",
+     "from": "maplibre-places.geojson",
+     "status": "not-a-point"
+    },
+    "seasonal": [
+     "se-xantolo"
+    ],
+    "experience": null,
+    "nearby_destination": null
+   },
+   "core_filled": "1/4 (hero, mobile, detail, card)",
+   "status": "PARTIAL"
+  }
+ }
+}

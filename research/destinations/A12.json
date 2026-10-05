@@ -11,8 +11,9 @@
   "region": {
     "value": "altiplano",
     "status": "verified",
-    "source": "brochure-altiplano",
-    "verifiedAt": "2026-10-04"
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Altiplano Centro; municipality Charcas"
   },
   "municipality": {
     "value": "Charcas",
@@ -29,17 +30,17 @@
     "verifiedAt": "2026-10-04"
   },
   "coordinates": {
-    "value": {
-      "lat": 23.13038,
-      "lon": -101.113664
-    },
-    "status": "pending",
-    "source": "osm-nominatim",
-    "osm": "node/1886707351",
-    "osm_feature": "place/town",
-    "note": "OSM candidate; needs an official cross-check before it can be verified."
+    "latitude": 23.129818,
+    "longitude": -101.113352,
+    "precision": "locality",
+    "coordinate_source": "INEGI ITER 2020: Charcas, Charcas (cve 240150001)",
+    "source_url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+    "verification_status": "verified",
+    "crosscheck_source": "osm-nominatim",
+    "crosscheck_distance_m": 70,
+    "notes": "A route, not a point: anchored on the town of Charcas."
   },
-  "coordinate_source": "osm-nominatim",
+  "coordinate_source": "INEGI ITER 2020: Charcas, Charcas (cve 240150001)",
   "pueblo_magico": {
     "value": false,
     "status": "not-applicable"
@@ -63,12 +64,19 @@
     "note": "No season or month information in the sources read."
   },
   "access": [],
-  "facts": {},
+  "facts": {
+    "mezcal_route": {
+      "value": "Ruta del Mezcal en el municipio de Charcas",
+      "status": "verified",
+      "source": "slp-gob-visita-altiplano",
+      "verifiedAt": "2026-10-05"
+    }
+  },
   "official_resources": [
     "pdf-brochure-altiplano"
   ],
   "conflicts": [
-    "Workbook frames this place as 'Ruta del Mezcal – Charcas'. The official brochures associate the mezcal route with Villa de Guadalupe (Altiplano) and Mexquitic/Ahualulco (Centro), not Charcas."
+    "Resolved: the state portal (slp-gob-visita-altiplano) places 'la ruta del Mezcal en el municipio de Charcas'. The brochures also tie mezcal routes to Villa de Guadalupe (Altiplano) and Mexquitic/Ahualulco (Centro); both are true — several mezcal routes exist."
   ],
   "ethics": null,
   "media": {
@@ -76,6 +84,15 @@
     "commons_approved_candidates": 4,
     "pexels": 0
   },
-  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
-  "verification_status": "pending"
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified",
+  "map_status": "ready",
+  "seasonal_tags": [],
+  "priority": "A",
+  "media_status": "partial",
+  "researched_in_pass": 1,
+  "media_selected": [
+    "wc-66038963"
+  ],
+  "media_card": "wc-66038963"
 }

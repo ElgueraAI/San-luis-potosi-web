@@ -1,0 +1,83 @@
+{
+  "place_id": "A04",
+  "name": "Sierra de Catorce / Cerro del Quemado",
+  "workbook": {
+    "region_label": "Altiplano",
+    "type": "Paisaje / sitio ceremonial",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-altiplano/"
+  },
+  "municipality": {
+    "value": "Catorce",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Paisaje / sitio ceremonial",
+  "description": {
+    "value": "Cerro de la sierra de Catorce que se recorre a caballo desde Real de Catorce, junto con sus minas abandonadas.",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "naturaleza",
+      "mineria",
+      "cabalgata",
+      "sitio-sagrado"
+    ],
+    "status": "editorial"
+  },
+  "facts": {
+    "protected_area_context": {
+      "value": "Wirikuta y la Ruta Histórico Cultural del Pueblo Wixárika (Sitio Sagrado Natural, 2008)",
+      "status": "pending",
+      "source": "segam-anp",
+      "note": "Inclusion of Cerro del Quemado in Wirikuta not confirmed in a source read."
+    }
+  },
+  "conflicts": [],
+  "ethics": "Sacred site of the Wixárika people: respectful framing, no staged ritual imagery.",
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "altiplano",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Altiplano Este; municipality Catorce"
+  },
+  "coordinates": {
+    "latitude": 23.672424,
+    "longitude": -100.912337,
+    "precision": "site",
+    "coordinate_source": "OpenStreetMap node/5260819519 (tourism/viewpoint, \"Cerro del quemado\")",
+    "source_url": "https://www.openstreetmap.org/node/5260819519",
+    "verification_status": "pending",
+    "crosscheck_source": "INEGI ITER 2020 access locality: Real de Catorce, Catorce",
+    "crosscheck_distance_m": 3328,
+    "notes": null
+  },
+  "coordinate_source": "OpenStreetMap node/5260819519 (tourism/viewpoint, \"Cerro del quemado\")",
+  "map_status": "provisional",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "partial",
+  "official_source": [],
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [
+    "wc-32558730"
+  ],
+  "media_card": "wc-32558730"
+}

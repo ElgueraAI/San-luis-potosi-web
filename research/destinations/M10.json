@@ -1,0 +1,74 @@
+{
+  "place_id": "M10",
+  "name": "Casa Barraganeña",
+  "workbook": {
+    "region_label": "Media",
+    "type": "Patrimonio",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/lugares/ciudad-del-maiz/"
+  },
+  "municipality": {
+    "value": "Ciudad del Maíz",
+    "status": "verified",
+    "source": "turismo-slp-lugar-ciudad-del-maiz",
+    "verifiedAt": "2026-10-05"
+  },
+  "type": "Patrimonio",
+  "description": {
+    "value": "Casa Barraganeña, sede actual del gobierno municipal de Ciudad del Maíz.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-ciudad-del-maiz",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "patrimonio",
+      "arquitectura"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": null,
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "zona-media",
+    "status": "verified",
+    "source": "pdu-slp",
+    "verifiedAt": "2026-10-05",
+    "note": "Media Este; municipality Ciudad del Maíz"
+  },
+  "coordinates": {
+    "latitude": null,
+    "longitude": null,
+    "precision": null,
+    "coordinate_source": null,
+    "source_url": null,
+    "verification_status": "pending",
+    "crosscheck_source": null,
+    "crosscheck_distance_m": null,
+    "notes": "No OSM feature found."
+  },
+  "coordinate_source": null,
+  "map_status": "pending",
+  "seasonal_tags": [],
+  "priority": "B",
+  "media_status": "partial",
+  "official_source": [],
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [
+    "wc-43619684"
+  ],
+  "media_card": "wc-43619684"
+}

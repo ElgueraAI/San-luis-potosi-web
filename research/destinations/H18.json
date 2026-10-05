@@ -1,0 +1,74 @@
+{
+  "place_id": "H18",
+  "name": "Xantolo / tradiciones huastecas",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Patrimonio inmaterial",
+    "priority": "B",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-huasteca/"
+  },
+  "municipality": {
+    "value": null,
+    "status": "unavailable",
+    "note": "Spans several municipalities."
+  },
+  "type": "Patrimonio inmaterial",
+  "description": {
+    "value": "Semana Santa y Día de Muertos o Xantolo son de las temporadas más importantes de la Huasteca, con fiestas, máscaras, altares tradicionales y comida.",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-05"
+  },
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial"
+  },
+  "interest_tags": {
+    "value": [
+      "cultura-viva",
+      "xantolo",
+      "tradiciones"
+    ],
+    "status": "editorial"
+  },
+  "facts": {},
+  "conflicts": [],
+  "ethics": "Ceremonial events: photograph with permission; no staged scenes.",
+  "official_resources": [],
+  "access": [],
+  "region": {
+    "value": "huasteca",
+    "status": "pending",
+    "note": "Region from workbook; no single municipality."
+  },
+  "coordinates": {
+    "latitude": null,
+    "longitude": null,
+    "precision": null,
+    "coordinate_source": null,
+    "source_url": null,
+    "verification_status": "unavailable",
+    "crosscheck_source": null,
+    "crosscheck_distance_m": null,
+    "notes": "Intangible heritage (Xantolo) celebrated across many Huasteca communities."
+  },
+  "coordinate_source": null,
+  "map_status": "not-a-point",
+  "seasonal_tags": [
+    "octubre-noviembre"
+  ],
+  "priority": "B",
+  "media_status": "partial",
+  "official_source": [],
+  "verified_core_fields": "1/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending",
+  "researched_in_pass": 2,
+  "media_selected": [
+    "wc-105308560"
+  ],
+  "media_card": null
+}
