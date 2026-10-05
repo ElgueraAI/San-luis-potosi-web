@@ -1,0 +1,75 @@
+{
+  "place_id": "H02",
+  "name": "Río Tampaón",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Río / aventura",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/",
+    "official_source_kind": "portal-home"
+  },
+  "region": {
+    "value": "huasteca",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Aquismón",
+    "status": "pending",
+    "source": "brochure-huasteca",
+    "note": "Listed under Aquismón; a river crosses several municipalities."
+  },
+  "type": "Río / aventura",
+  "official_source": [],
+  "description": {
+    "value": "Río de la zona de Aquismón que se cruza en kayak y por el que se llega en panga a la Cascada de Tamul.",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": null,
+    "status": "unavailable",
+    "note": "A river is a line; the visitor access point needs an official source."
+  },
+  "coordinate_source": null,
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "agua",
+      "aventura",
+      "kayak",
+      "rafting"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-huasteca",
+    "map-huasteca"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 8,
+    "pexels": 0
+  },
+  "verified_core_fields": "2/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

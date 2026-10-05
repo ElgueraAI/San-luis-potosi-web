@@ -1,0 +1,83 @@
+{
+  "place_id": "H08",
+  "name": "Las Pozas de Edward James",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Arte / jardín surrealista",
+    "priority": "A",
+    "official_source": "https://turismo.slp.gob.mx/lugares/xilitla/",
+    "official_source_kind": "destination-specific"
+  },
+  "region": {
+    "value": "huasteca",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Xilitla",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Arte / jardín surrealista",
+  "official_source": [],
+  "description": {
+    "value": "Jardín escultórico de Edward James: treinta hectáreas de vegetación con treinta y seis estructuras surrealistas y una cascada de 37 metros que desemboca en Las Pozas.",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 21.3972729,
+      "lon": -98.9963918
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "way/661913846",
+    "osm_feature": "leisure/park",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "arte",
+      "surrealismo",
+      "naturaleza",
+      "agua"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-huasteca",
+    "map-huasteca"
+  ],
+  "conflicts": [
+    "Edward James is called 'escocés' (brochure-huasteca) and 'poeta y artista inglés' (turismo-slp-lugar-xilitla). Avoid stating nationality until checked."
+  ],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 8,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

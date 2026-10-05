@@ -1,0 +1,97 @@
+{
+  "place_id": "H01",
+  "name": "Cascada de Tamul",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Cascada / icono",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/",
+    "official_source_kind": "portal-home"
+  },
+  "region": {
+    "value": "huasteca",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Aquismón",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Cascada / icono",
+  "official_source": [],
+  "description": {
+    "value": "Cascada de 105 metros de caída natural; se visita en panga y el río Tampaón puede recorrerse en kayak.",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 21.8012657,
+      "lon": -99.1800193
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/2794816185",
+    "osm_feature": "waterway/waterfall",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "agua",
+      "cascadas",
+      "aventura",
+      "naturaleza"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": "noviembre a marzo",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04",
+    "note": "'La mejor temporada para apreciarla'."
+  },
+  "access": [
+    {
+      "value": "Visita en panga.",
+      "status": "verified",
+      "source": "brochure-huasteca",
+      "verifiedAt": "2026-10-04"
+    }
+  ],
+  "facts": {
+    "height_m": {
+      "value": 105,
+      "status": "verified",
+      "source": "brochure-huasteca",
+      "verifiedAt": "2026-10-04"
+    }
+  },
+  "official_resources": [
+    "pdf-brochure-huasteca",
+    "map-huasteca"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 7,
+    "pexels": 1
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

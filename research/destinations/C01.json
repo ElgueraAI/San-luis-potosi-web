@@ -1,0 +1,98 @@
+{
+  "place_id": "C01",
+  "name": "Centro Histórico de San Luis Potosí",
+  "workbook": {
+    "region_label": "Centro",
+    "type": "Patrimonio urbano",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-centro/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "centro",
+    "status": "verified",
+    "source": "brochure-centro",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "San Luis Potosí",
+    "status": "verified",
+    "source": "brochure-centro",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Patrimonio urbano",
+  "official_source": [],
+  "description": {
+    "value": "Uno de los centros históricos más señoriales del país, con grandes mansiones, parroquias y templos; se recorre a pie, en bicicleta o en el Tranvía Turístico.",
+    "status": "verified",
+    "source": "brochure-centro",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 22.1528423,
+      "lon": -100.9769493
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "relation/14464122",
+    "osm_feature": "boundary/administrative",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "patrimonio",
+      "arquitectura",
+      "gastronomia",
+      "ciudad-base"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {
+    "gastronomy": {
+      "value": [
+        "enchiladas potosinas",
+        "gorditas rellenas",
+        "asado de boda",
+        "tacos rojos",
+        "colonche",
+        "aguamiel",
+        "queso de tuna",
+        "chocolates Costanzo y La Frontera"
+      ],
+      "status": "verified",
+      "source": "brochure-centro",
+      "verifiedAt": "2026-10-04"
+    }
+  },
+  "official_resources": [
+    "pdf-brochure-capital",
+    "pdf-brochure-centro",
+    "map-centro"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 5,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

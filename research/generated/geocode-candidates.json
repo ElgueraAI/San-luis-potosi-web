@@ -1,0 +1,618 @@
+{
+  "generated": "2026-10-04",
+  "source": "OpenStreetMap Nominatim",
+  "licence": "Data (c) OpenStreetMap contributors, ODbL 1.0, https://osm.org/copyright",
+  "note": "Candidates only. Never verified without an official cross-check.",
+  "results": {
+    "A01": {
+      "query": "Real de Catorce, San Luis Potosí",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 23.6902227,
+          "lon": -100.886165,
+          "name": "Real de Catorce",
+          "display_name": "Real de Catorce, Catorce, San Luis Potosí, México",
+          "osm": "node/294556800",
+          "class": "place",
+          "type": "town",
+          "municipality": "Catorce"
+        },
+        {
+          "lat": 22.1847611,
+          "lon": -101.0642621,
+          "name": "Real de Catorce",
+          "display_name": "Real de Catorce, San Marcos Carmona, Mexquitic de Carmona, San Luis Potosí, 78413, México",
+          "osm": "way/1317072029",
+          "class": "highway",
+          "type": "residential",
+          "municipality": "Mexquitic de Carmona"
+        },
+        {
+          "lat": 22.1839949,
+          "lon": -101.0644756,
+          "name": "Real de Catorce",
+          "display_name": "Real de Catorce, San Marcos Carmona, Mexquitic de Carmona, San Luis Potosí, 78183, México",
+          "osm": "way/834200219",
+          "class": "highway",
+          "type": "residential",
+          "municipality": "Mexquitic de Carmona"
+        }
+      ]
+    },
+    "A02": {
+      "query": "Túnel Ogarrio",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 23.6893979,
+          "lon": -100.8830883,
+          "name": "Calle Entrada al Túnel Ogarrio",
+          "display_name": "Calle Entrada al Túnel Ogarrio, Real de Catorce, Catorce, San Luis Potosí, México",
+          "osm": "way/1031371918",
+          "class": "highway",
+          "type": "tertiary",
+          "municipality": "Catorce"
+        }
+      ]
+    },
+    "A03": {
+      "query": "Real de Catorce pueblo fantasma",
+      "status": "unavailable",
+      "hits": []
+    },
+    "A06": {
+      "query": "Matehuala",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 23.646485,
+          "lon": -100.643544,
+          "name": "Matehuala",
+          "display_name": "Matehuala, San Luis Potosí, 78798, México",
+          "osm": "node/291728489",
+          "class": "place",
+          "type": "city",
+          "municipality": "Matehuala"
+        },
+        {
+          "lat": 23.5229037,
+          "lon": -100.604046,
+          "name": "Matehuala",
+          "display_name": "Matehuala, San Luis Potosí, México",
+          "osm": "relation/5606013",
+          "class": "boundary",
+          "type": "administrative",
+          "municipality": "Matehuala"
+        }
+      ]
+    },
+    "A12": {
+      "query": "Charcas",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 23.13038,
+          "lon": -101.113664,
+          "name": "Charcas",
+          "display_name": "Charcas, San Luis Potosí, 78595, México",
+          "osm": "node/1886707351",
+          "class": "place",
+          "type": "town",
+          "municipality": "Charcas"
+        },
+        {
+          "lat": 23.2730516,
+          "lon": -101.1087574,
+          "name": "Charcas",
+          "display_name": "Charcas, San Luis Potosí, México",
+          "osm": "relation/5605642",
+          "class": "boundary",
+          "type": "administrative",
+          "municipality": "Charcas"
+        }
+      ]
+    },
+    "A15": {
+      "query": null,
+      "status": "unavailable",
+      "reason": "not a single point"
+    },
+    "C01": {
+      "query": "Centro Histórico, San Luis Potosí",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 22.1528423,
+          "lon": -100.9769493,
+          "name": "Centro Histórico",
+          "display_name": "Centro Histórico, Municipio de San Luis Potosí, San Luis Potosí, 78000, México",
+          "osm": "relation/14464122",
+          "class": "boundary",
+          "type": "administrative",
+          "municipality": "Municipio de San Luis Potosí"
+        }
+      ]
+    },
+    "C02": {
+      "query": "Plaza de Armas, San Luis Potosí",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 22.1517127,
+          "lon": -100.9764034,
+          "name": "Plaza de Armas",
+          "display_name": "Plaza de Armas, San Luis Potosí, Municipio de San Luis Potosí, San Luis Potosí, México",
+          "osm": "way/1366343609",
+          "class": "leisure",
+          "type": "park",
+          "municipality": "Municipio de San Luis Potosí"
+        },
+        {
+          "lat": 23.6437563,
+          "lon": -100.642879,
+          "name": "Plaza de Armas",
+          "display_name": "Plaza de Armas, Matehuala, San Luis Potosí, México",
+          "osm": "way/154257334",
+          "class": "leisure",
+          "type": "park",
+          "municipality": "Matehuala"
+        },
+        {
+          "lat": 22.1516964,
+          "lon": -100.9765976,
+          "name": "Plaza de Armas",
+          "display_name": "Plaza de Armas, Centro Histórico, San Luis Potosí, Municipio de San Luis Potosí, San Luis Potosí, 78000, México",
+          "osm": "relation/10319464",
+          "class": "place",
+          "type": "square",
+          "municipality": "Municipio de San Luis Potosí"
+        }
+      ]
+    },
+    "C03": {
+      "query": "Plaza del Carmen, San Luis Potosí",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 22.1511173,
+          "lon": -100.9738942,
+          "name": "Plaza del Carmen",
+          "display_name": "Plaza del Carmen, Centro Histórico, San Luis Potosí, Municipio de San Luis Potosí, San Luis Potosí, 78000, México",
+          "osm": "relation/14398253",
+          "class": "place",
+          "type": "square",
+          "municipality": "Municipio de San Luis Potosí"
+        }
+      ]
+    },
+    "C08": {
+      "query": "Museo Leonora Carrington San Luis Potosí",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 22.1383403,
+          "lon": -100.9706035,
+          "name": "Museo Leonora Carrington",
+          "display_name": "Museo Leonora Carrington, Avenida de la República, Fraccionamiento San Juan de Guadalupe, San Luis Potosí, Municipio de San Luis Potosí, San Luis Potosí, 78340, México",
+          "osm": "way/744748243",
+          "class": "tourism",
+          "type": "museum",
+          "municipality": "Municipio de San Luis Potosí"
+        }
+      ]
+    },
+    "C10": {
+      "query": "Cerro de San Pedro",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 22.216971,
+          "lon": -100.799577,
+          "name": "Cerro de San Pedro",
+          "display_name": "Cerro de San Pedro, San Luis Potosí, México",
+          "osm": "node/679625237",
+          "class": "place",
+          "type": "village",
+          "municipality": "Cerro de San Pedro"
+        },
+        {
+          "lat": 22.2000458,
+          "lon": -100.7617917,
+          "name": "Cerro de San Pedro",
+          "display_name": "Cerro de San Pedro, San Luis Potosí, México",
+          "osm": "relation/5605633",
+          "class": "boundary",
+          "type": "administrative",
+          "municipality": "Cerro de San Pedro"
+        }
+      ]
+    },
+    "C11": {
+      "query": "Santa María del Río",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 21.7985605,
+          "lon": -100.7369915,
+          "name": "Santa María del Río",
+          "display_name": "Santa María del Río, San Luis Potosí, 79560, México",
+          "osm": "node/4442589288",
+          "class": "place",
+          "type": "town",
+          "municipality": "Santa María del Río"
+        },
+        {
+          "lat": 21.7352338,
+          "lon": -100.738271,
+          "name": "Santa María del Río",
+          "display_name": "Santa María del Río, San Luis Potosí, México",
+          "osm": "relation/5606308",
+          "class": "boundary",
+          "type": "administrative",
+          "municipality": "Santa María del Río"
+        }
+      ]
+    },
+    "C12": {
+      "query": null,
+      "status": "unavailable",
+      "reason": "not a single point"
+    },
+    "M01": {
+      "query": "Manantial de la Media Luna",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 21.8606265,
+          "lon": -100.0278954,
+          "name": "Manantial de la Media Luna",
+          "display_name": "Manantial de la Media Luna, Camino a la Media Luna, El Jabalí, Rioverde, San Luis Potosí, México",
+          "osm": "node/4085575483",
+          "class": "natural",
+          "type": "spring",
+          "municipality": "Rioverde"
+        }
+      ]
+    },
+    "M02": {
+      "query": "Rioverde",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 21.9318566,
+          "lon": -99.9928621,
+          "name": "Rioverde",
+          "display_name": "Rioverde, San Luis Potosí, 79610, México",
+          "osm": "node/299677634",
+          "class": "place",
+          "type": "town",
+          "municipality": "Rioverde"
+        },
+        {
+          "lat": 21.9792678,
+          "lon": -100.2481973,
+          "name": "Rioverde",
+          "display_name": "Rioverde, San Luis Potosí, México",
+          "osm": "relation/5606189",
+          "class": "boundary",
+          "type": "administrative",
+          "municipality": "Rioverde"
+        }
+      ]
+    },
+    "M03": {
+      "query": "Ciudad Fernández",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 21.9422192,
+          "lon": -100.0145268,
+          "name": "Ciudad Fernández",
+          "display_name": "Ciudad Fernández, San Luis Potosí, 79650, México",
+          "osm": "node/3502045722",
+          "class": "place",
+          "type": "town",
+          "municipality": "Ciudad Fernández"
+        },
+        {
+          "lat": 21.9909623,
+          "lon": -100.0485284,
+          "name": "Ciudad Fernández",
+          "display_name": "Ciudad Fernández, San Luis Potosí, México",
+          "osm": "relation/5605665",
+          "class": "boundary",
+          "type": "administrative",
+          "municipality": "Ciudad Fernández"
+        }
+      ]
+    },
+    "M09": {
+      "query": "Ciudad del Maíz",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 22.4023443,
+          "lon": -99.602795,
+          "name": "Ciudad del Maíz",
+          "display_name": "Ciudad del Maíz, San Luis Potosí, México",
+          "osm": "node/746968424",
+          "class": "place",
+          "type": "town",
+          "municipality": "Ciudad del Maíz"
+        },
+        {
+          "lat": 22.4309306,
+          "lon": -99.7047331,
+          "name": "Ciudad del Maíz",
+          "display_name": "Ciudad del Maíz, San Luis Potosí, México",
+          "osm": "relation/5605668",
+          "class": "boundary",
+          "type": "administrative",
+          "municipality": "Ciudad del Maíz"
+        }
+      ]
+    },
+    "H01": {
+      "query": "Cascada de Tamul, San Luis Potosí",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 21.8012657,
+          "lon": -99.1800193,
+          "name": "Cascada de Tamul",
+          "display_name": "Cascada de Tamul, Aquismón, San Luis Potosí, México",
+          "osm": "node/2794816185",
+          "class": "waterway",
+          "type": "waterfall",
+          "municipality": "Aquismón"
+        }
+      ]
+    },
+    "H02": {
+      "query": "Río Tampaón, San Luis Potosí",
+      "status": "unavailable",
+      "reason": "linear feature; visitor access point needs an official source"
+    },
+    "H04": {
+      "query": "Sótano de las Golondrinas, Aquismón",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 21.5999041,
+          "lon": -99.0989336,
+          "name": "Sótano de las Golondrinas",
+          "display_name": "Sótano de las Golondrinas, Calle Zaragoza, Barrio \"La Sagrada Familia\", El Zopope, Aquismón, San Luis Potosí, 79766, México",
+          "osm": "node/2883943605",
+          "class": "natural",
+          "type": "cave_entrance",
+          "municipality": "Aquismón"
+        }
+      ]
+    },
+    "H06": {
+      "query": "Aquismón",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 21.6243008,
+          "lon": -99.0198232,
+          "name": "Aquismón",
+          "display_name": "Aquismón, San Luis Potosí, 79760, México",
+          "osm": "node/4080629097",
+          "class": "place",
+          "type": "town",
+          "municipality": "Aquismón"
+        },
+        {
+          "lat": 21.7481115,
+          "lon": -99.0635804,
+          "name": "Aquismón",
+          "display_name": "Aquismón, San Luis Potosí, México",
+          "osm": "relation/5605526",
+          "class": "boundary",
+          "type": "administrative",
+          "municipality": "Aquismón"
+        }
+      ]
+    },
+    "H07": {
+      "query": "Xilitla",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 21.3865084,
+          "lon": -98.9919608,
+          "name": "Xilitla",
+          "display_name": "Xilitla, San Luis Potosí, México",
+          "osm": "node/1703068009",
+          "class": "place",
+          "type": "town",
+          "municipality": "Xilitla"
+        },
+        {
+          "lat": 21.3935269,
+          "lon": -99.0130347,
+          "name": "Xilitla",
+          "display_name": "Xilitla, San Luis Potosí, México",
+          "osm": "relation/5606636",
+          "class": "boundary",
+          "type": "administrative",
+          "municipality": "Xilitla"
+        }
+      ]
+    },
+    "H08": {
+      "query": "Las Pozas, Xilitla",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 21.3972729,
+          "lon": -98.9963918,
+          "name": "Las Pozas",
+          "display_name": "Las Pozas, La Conchita, Xilitla, San Luis Potosí, México",
+          "osm": "way/661913846",
+          "class": "leisure",
+          "type": "park",
+          "municipality": "Xilitla"
+        },
+        {
+          "lat": 21.3964582,
+          "lon": -98.9966931,
+          "name": "Las Pozas",
+          "display_name": "Las Pozas, La Conchita, Xilitla, San Luis Potosí, México",
+          "osm": "node/1703101156",
+          "class": "leisure",
+          "type": "park",
+          "municipality": "Xilitla"
+        }
+      ]
+    },
+    "H10": {
+      "query": "Cascadas de Tamasopo, Tamasopo",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 21.939142,
+          "lon": -99.3971944,
+          "name": "Cascada de Tamasopo",
+          "display_name": "Cascada de Tamasopo, Agua Buena, Tamasopo, San Luis Potosí, 79700, México",
+          "osm": "node/4564327722",
+          "class": "waterway",
+          "type": "waterfall",
+          "municipality": "Agua Buena"
+        },
+        {
+          "lat": 21.9397576,
+          "lon": -99.3951952,
+          "name": "Cascadas",
+          "display_name": "Cascadas, Calle Adolfo López Mateos, Agua Buena, Tamasopo, San Luis Potosí, 79700, México",
+          "osm": "node/7932894488",
+          "class": "highway",
+          "type": "bus_stop",
+          "municipality": "Agua Buena"
+        },
+        {
+          "lat": 21.9317309,
+          "lon": -99.4156632,
+          "name": "Puente de Dios",
+          "display_name": "Puente de Dios, Agua Buena, Tamasopo, San Luis Potosí, 79700, México",
+          "osm": "node/4584701606",
+          "class": "waterway",
+          "type": "waterfall",
+          "municipality": "Agua Buena"
+        }
+      ]
+    },
+    "H11": {
+      "query": "Puente de Dios, Tamasopo",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 21.9291897,
+          "lon": -99.4140601,
+          "name": "Puente de Dios",
+          "display_name": "Puente de Dios, Agua Buena, Tamasopo, San Luis Potosí, 79700, México",
+          "osm": "node/7658769477",
+          "class": "place",
+          "type": "hamlet",
+          "municipality": "Agua Buena"
+        },
+        {
+          "lat": 21.9317309,
+          "lon": -99.4156632,
+          "name": "Puente de Dios",
+          "display_name": "Puente de Dios, Agua Buena, Tamasopo, San Luis Potosí, 79700, México",
+          "osm": "node/4584701606",
+          "class": "waterway",
+          "type": "waterfall",
+          "municipality": "Agua Buena"
+        }
+      ]
+    },
+    "H12": {
+      "query": "Cascadas de Micos, Ciudad Valles",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 22.1035555,
+          "lon": -99.155968,
+          "name": "Cascadas de Micos",
+          "display_name": "Cascadas de Micos, Carretera Coyoles-Estación 500-La Hincada-El Naranjo, Rancho Nuevo, Estación 500, Ciudad Valles, San Luis Potosí, 79246, México",
+          "osm": "way/817657274",
+          "class": "tourism",
+          "type": "attraction",
+          "municipality": "Ciudad Valles"
+        },
+        {
+          "lat": 22.0996966,
+          "lon": -99.1510294,
+          "name": "Cascadas de Micos",
+          "display_name": "Cascadas de Micos, Carretera Coyoles-Estación 500-La Hincada-El Naranjo, Rancho Nuevo, Estación 500, Ciudad Valles, San Luis Potosí, 79246, México",
+          "osm": "way/158063922",
+          "class": "tourism",
+          "type": "camp_site",
+          "municipality": "Ciudad Valles"
+        }
+      ]
+    },
+    "H13": {
+      "query": "Cascada de Minas Viejas",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 22.3755482,
+          "lon": -99.3176448,
+          "name": "Cascadas De Minas Viejas",
+          "display_name": "Cascadas De Minas Viejas, Camino a Cascada de Minas Viejas, Maitínez, El Naranjo, San Luis Potosí, México",
+          "osm": "node/3956070924",
+          "class": "tourism",
+          "type": "attraction",
+          "municipality": "El Naranjo"
+        }
+      ]
+    },
+    "H14": {
+      "query": "Cascada El Meco",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 22.5641372,
+          "lon": -99.3567787,
+          "name": "Cascada el Meco",
+          "display_name": "Cascada el Meco, El Meco, El Naranjo, San Luis Potosí, México",
+          "osm": "node/3956041360",
+          "class": "waterway",
+          "type": "waterfall",
+          "municipality": "El Naranjo"
+        },
+        {
+          "lat": 22.5643655,
+          "lon": -99.356518,
+          "name": "Huasteca secreta",
+          "display_name": "Huasteca secreta, Carretera El Huizache - Antiguo Morelos, El Meco, El Naranjo, San Luis Potosí, México",
+          "osm": "node/3956043748",
+          "class": "tourism",
+          "type": "viewpoint",
+          "municipality": "El Naranjo"
+        }
+      ]
+    },
+    "H16": {
+      "query": "Tamtoc, Tamuín, San Luis Potosí",
+      "status": "pending",
+      "hits": [
+        {
+          "lat": 21.9242259,
+          "lon": -98.8142578,
+          "name": "Zona Arqueológica Tamtoc",
+          "display_name": "Zona Arqueológica Tamtoc, Calle Francisco Villa, El Aserradero, Tamuín, San Luis Potosí, México",
+          "osm": "way/27038659",
+          "class": "historic",
+          "type": "archaeological_site",
+          "municipality": "Tamuín"
+        }
+      ]
+    }
+  }
+}

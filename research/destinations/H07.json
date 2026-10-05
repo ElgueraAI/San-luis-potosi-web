@@ -1,0 +1,96 @@
+{
+  "place_id": "H07",
+  "name": "Xilitla – Pueblo Mágico",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Pueblo / montaña",
+    "priority": "A",
+    "official_source": "https://turismo.slp.gob.mx/lugares/xilitla/",
+    "official_source_kind": "destination-specific"
+  },
+  "region": {
+    "value": "huasteca",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Xilitla",
+    "status": "verified",
+    "source": "turismo-slp-lugar-xilitla",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Pueblo / montaña",
+  "official_source": [
+    "turismo-slp-lugar-xilitla",
+    "turismo-slp-lugar-museo-leonora-carrington-xilitla",
+    "sectur-art-xilitla"
+  ],
+  "description": {
+    "value": "Pueblo Mágico de niebla, selva y café, con raíces nahuas y téenek; aquí Edward James creó Las Pozas y se encuentran el Convento de San Agustín y el Museo Leonora Carrington.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-xilitla",
+    "verifiedAt": "2026-10-04",
+    "note": "Museum mention from brochure-huasteca."
+  },
+  "coordinates": {
+    "value": {
+      "lat": 21.3865084,
+      "lon": -98.9919608
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/1703068009",
+    "osm_feature": "place/town",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": true,
+    "status": "verified",
+    "source": "sectur-com-244-2023",
+    "verifiedAt": "2026-10-04"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "pueblos-magicos",
+      "arte",
+      "surrealismo",
+      "cultura-viva",
+      "cafe"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {
+    "pueblo_magico_since": {
+      "value": 2011,
+      "status": "verified",
+      "source": "sectur-art-xilitla",
+      "verifiedAt": "2026-10-04"
+    }
+  },
+  "official_resources": [
+    "pdf-brochure-huasteca",
+    "map-huasteca"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 7,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

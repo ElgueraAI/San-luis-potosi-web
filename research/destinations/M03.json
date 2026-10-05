@@ -1,0 +1,83 @@
+{
+  "place_id": "M03",
+  "name": "Centro Histórico de Ciudad Fernández",
+  "workbook": {
+    "region_label": "Media",
+    "type": "Patrimonio",
+    "priority": "A",
+    "official_source": "https://turismo.slp.gob.mx/lugares/centro-historico-de-ciudad-fernandez/",
+    "official_source_kind": "destination-specific"
+  },
+  "region": {
+    "value": "zona-media",
+    "status": "verified",
+    "source": "brochure-media",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Ciudad Fernández",
+    "status": "verified",
+    "source": "turismo-slp-lugar-centro-historico-de-ciudad-fernandez",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Patrimonio",
+  "official_source": [
+    "turismo-slp-lugar-centro-historico-de-ciudad-fernandez"
+  ],
+  "description": {
+    "value": "Corazón cultural de Ciudad Fernández, fundada oficialmente en 1694: traza en damero, plaza de árboles centenarios, parroquia del Dulce Nombre de Jesús, Capilla El Refugio y El Balandrán.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-centro-historico-de-ciudad-fernandez",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 21.9422192,
+      "lon": -100.0145268
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/3502045722",
+    "osm_feature": "place/town",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "patrimonio",
+      "arquitectura",
+      "gastronomia",
+      "ciclismo"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-media",
+    "map-media"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 2,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

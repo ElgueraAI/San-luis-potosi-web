@@ -1,0 +1,85 @@
+{
+  "place_id": "H06",
+  "name": "Aquismón – Pueblo Mágico",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Cultura / pueblo",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/",
+    "official_source_kind": "portal-home"
+  },
+  "region": {
+    "value": "huasteca",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Aquismón",
+    "status": "verified",
+    "source": "turismo-slp-lugar-aquismon",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Cultura / pueblo",
+  "official_source": [
+    "turismo-slp-lugar-aquismon"
+  ],
+  "description": {
+    "value": "Pueblo Mágico entre Xilitla y Ciudad Valles donde aún se hablan teenek, náhuatl y xi'iui; punto de partida hacia Tamul, los sótanos de Las Golondrinas y Las Huahuas y el río Tampaón.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-aquismon",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 21.6243008,
+      "lon": -99.0198232
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/4080629097",
+    "osm_feature": "place/town",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": true,
+    "status": "verified",
+    "source": "sectur-com-244-2023",
+    "verifiedAt": "2026-10-04"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "pueblos-magicos",
+      "cultura-viva",
+      "artesania",
+      "aventura"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-huasteca",
+    "map-huasteca"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 4,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

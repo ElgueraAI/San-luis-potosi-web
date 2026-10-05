@@ -1,0 +1,81 @@
+{
+  "place_id": "A12",
+  "name": "Ruta del Mezcal – Charcas",
+  "workbook": {
+    "region_label": "Altiplano",
+    "type": "Gastronomía / producción",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-altiplano/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "altiplano",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Charcas",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Gastronomía / producción",
+  "official_source": [],
+  "description": {
+    "value": "Pueblo minero que conserva gran parte de su traza original, con calles irregulares y callejones; produce quesos de estilo gourmet y es conocido por sus gorditas ferrocarrileras.",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 23.13038,
+      "lon": -101.113664
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/1886707351",
+    "osm_feature": "place/town",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "patrimonio",
+      "mineria",
+      "gastronomia"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-altiplano"
+  ],
+  "conflicts": [
+    "Workbook frames this place as 'Ruta del Mezcal – Charcas'. The official brochures associate the mezcal route with Villa de Guadalupe (Altiplano) and Mexquitic/Ahualulco (Centro), not Charcas."
+  ],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 4,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

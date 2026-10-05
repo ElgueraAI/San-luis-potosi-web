@@ -1,0 +1,84 @@
+{
+  "place_id": "H13",
+  "name": "Cascada de Minas Viejas",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Cascada",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-huasteca/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "huasteca",
+    "status": "pending",
+    "source": "brochure-huasteca",
+    "note": "Conflicting official brochures; see conflicts."
+  },
+  "municipality": {
+    "value": "El Naranjo",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Cascada",
+  "official_source": [],
+  "description": {
+    "value": "Cascada acondicionada con zonas de campismo y un mirador.",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 22.3755482,
+      "lon": -99.3176448
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/3956070924",
+    "osm_feature": "tourism/attraction",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "agua",
+      "cascadas",
+      "campismo"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": "noviembre a marzo",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04",
+    "note": "Stated for El Naranjo's sites as 'una buena temporada'."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-huasteca",
+    "map-huasteca"
+  ],
+  "conflicts": [
+    "Listed in the Huasteca brochure, but the Región Media brochure map also marks this municipality's sites. Region assignment pending the official state regionalisation (gob-slp-regiones)."
+  ],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 7,
+    "pexels": 0
+  },
+  "verified_core_fields": "2/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

@@ -1,0 +1,89 @@
+{
+  "place_id": "C10",
+  "name": "Cerro de San Pedro",
+  "workbook": {
+    "region_label": "Centro",
+    "type": "Pueblo minero",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-centro/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "centro",
+    "status": "verified",
+    "source": "brochure-centro",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Cerro de San Pedro",
+    "status": "verified",
+    "source": "brochure-centro",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Pueblo minero",
+  "official_source": [],
+  "description": {
+    "value": "Antiguo real de minas que dio origen a la fundación de la capital a finales del siglo XVI; casi un pueblo fantasma, con la Parroquia de San Pedro, la Capilla de San Nicolás y un museo de minería.",
+    "status": "verified",
+    "source": "brochure-centro",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 22.216971,
+      "lon": -100.799577
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/679625237",
+    "osm_feature": "place/village",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "mineria",
+      "patrimonio",
+      "senderismo",
+      "ciclismo"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [
+    {
+      "value": "Sendero del Capitán: parque lineal que inicia en Cerro de San Pedro y termina en Armadillo de los Infante; se recomienda recorrerlo con guía certificado.",
+      "status": "verified",
+      "source": "brochure-centro",
+      "verifiedAt": "2026-10-04",
+      "note": "The brochure gives a length; transcription pending."
+    }
+  ],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-centro",
+    "map-centro"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 5,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

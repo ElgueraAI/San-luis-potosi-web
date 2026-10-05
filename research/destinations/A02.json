@@ -1,0 +1,88 @@
+{
+  "place_id": "A02",
+  "name": "Túnel de Ogarrio",
+  "workbook": {
+    "region_label": "Altiplano",
+    "type": "Patrimonio / acceso",
+    "priority": "A",
+    "official_source": "https://www.gob.mx/sectur/articulos/real-de-catorce-san-luis-potosi",
+    "official_source_kind": "destination-specific"
+  },
+  "region": {
+    "value": "altiplano",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Catorce",
+    "status": "verified",
+    "source": "turismo-slp-lugar-real-de-catorce",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Patrimonio / acceso",
+  "official_source": [],
+  "description": {
+    "value": "Túnel perforado en roca maciza que desemboca en el pueblo; es la entrada tradicional a Real de Catorce.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-real-de-catorce",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 23.6893979,
+      "lon": -100.8830883
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "way/1031371918",
+    "osm_feature": "highway/tertiary",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "patrimonio",
+      "mineria",
+      "arquitectura"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {
+    "length": {
+      "value": null,
+      "status": "pending",
+      "source": "turismo-slp-lugar-real-de-catorce",
+      "note": "Conflict: 2.3 km (state page) vs 2.5 km (brochure-altiplano)."
+    }
+  },
+  "official_resources": [
+    "pdf-brochure-altiplano"
+  ],
+  "conflicts": [
+    "Tunnel length: 2.3 km vs 2.5 km between two official sources."
+  ],
+  "ethics": null,
+  "media": {
+    "commons": 2,
+    "commons_approved_candidates": 0,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

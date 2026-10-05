@@ -1,0 +1,113 @@
+{
+  "generated": "2026-10-04",
+  "status": "design (not implemented)",
+  "provider": {
+    "source_id": "open-meteo",
+    "api_key": false,
+    "cors": true,
+    "licence": "CC BY 4.0",
+    "terms": "Free for non-commercial use; fair use, contact above ~10,000 requests/day.",
+    "attribution": {
+      "es": "Datos meteorológicos: Open-Meteo.com (CC BY 4.0)",
+      "en": "Weather data: Open-Meteo.com (CC BY 4.0)",
+      "links": [
+        "https://open-meteo.com/",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "placement": "Next to every place weather data is shown."
+    }
+  },
+  "current": {
+    "where": "Client-side fetch, lazy (only when the widget is visible). The static build never depends on it.",
+    "endpoint": "https://api.open-meteo.com/v1/forecast",
+    "params": {
+      "current": "temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,is_day",
+      "timezone": "America/Mexico_City",
+      "wind_speed_unit": "kmh"
+    },
+    "fields": {
+      "temperature_2m": "°C",
+      "apparent_temperature": "°C",
+      "relative_humidity_2m": "%",
+      "precipitation": "mm",
+      "weather_code": "WMO code",
+      "wind_speed_10m": "km/h",
+      "wind_direction_10m": "°",
+      "is_day": "0/1",
+      "time": "ISO 8601 local"
+    },
+    "cache": "localStorage per point, 30 min; wrapped in try/catch.",
+    "failure": "Hide the widget; never show stale data without its timestamp.",
+    "tested": {
+      "date": "2026-10-04",
+      "point": "Ciudad Valles area (candidate)",
+      "result": "200 OK, all fields present"
+    }
+  },
+  "climate": {
+    "where": "Build-time script → src/data/climate/<region>.json (12 monthly rows). No runtime calls.",
+    "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+    "params": {
+      "daily": "temperature_2m_max,temperature_2m_min,precipitation_sum",
+      "start_date": "2016-01-01",
+      "end_date": "2025-12-31",
+      "timezone": "America/Mexico_City"
+    },
+    "monthly_fields": {
+      "tmax_mean_c": "mean of daily max",
+      "tmin_mean_c": "mean of daily min",
+      "precip_mm": "mean monthly total",
+      "rain_days": "mean days with ≥1 mm"
+    },
+    "label": {
+      "es": "Promedio modelado 2016–2025 (reanálisis), no normal climatológica oficial",
+      "en": "Modelled 2016–2025 average (reanalysis), not an official climate normal"
+    },
+    "official_alternative": "SMN/CONAGUA Normales Climatológicas per station (not researched yet).",
+    "tested": {
+      "date": "2026-10-04",
+      "result": "10 years of daily data returned; monthly aggregation works."
+    }
+  },
+  "points": {
+    "rule": "One point per region for the region widget; destination points only once their coordinates are verified.",
+    "regions": {
+      "altiplano": {
+        "anchor": "Matehuala (A06)",
+        "coords_status": "pending"
+      },
+      "centro": {
+        "anchor": "San Luis Potosí capital (C01)",
+        "coords_status": "pending"
+      },
+      "zona-media": {
+        "anchor": "Rioverde (M02)",
+        "coords_status": "pending"
+      },
+      "huasteca": {
+        "anchor": "Ciudad Valles (H17)",
+        "coords_status": "pending (not geocoded in pass 1)"
+      }
+    }
+  },
+  "wmo_codes_es": {
+    "0": "Despejado",
+    "1": "Mayormente despejado",
+    "2": "Parcialmente nublado",
+    "3": "Nublado",
+    "45": "Niebla",
+    "48": "Niebla con escarcha",
+    "51": "Llovizna ligera",
+    "53": "Llovizna",
+    "55": "Llovizna intensa",
+    "61": "Lluvia ligera",
+    "63": "Lluvia",
+    "65": "Lluvia intensa",
+    "80": "Chubascos ligeros",
+    "81": "Chubascos",
+    "82": "Chubascos fuertes",
+    "95": "Tormenta",
+    "96": "Tormenta con granizo ligero",
+    "99": "Tormenta con granizo"
+  }
+}

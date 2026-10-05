@@ -42,3 +42,6 @@ reports/
 lab/
 playwright-report/
 test-results/
+
+# research raw area: downloaded PDFs, cached pages, extracted text (never committed)
+research/raw/

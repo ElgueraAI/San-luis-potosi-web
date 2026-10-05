@@ -1,0 +1,78 @@
+{
+  "place_id": "C02",
+  "name": "Plaza de Armas + Catedral",
+  "workbook": {
+    "region_label": "Centro",
+    "type": "Plaza / arquitectura",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-centro/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "centro",
+    "status": "verified",
+    "source": "brochure-centro",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "San Luis Potosí",
+    "status": "verified",
+    "source": "brochure-capital",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Plaza / arquitectura",
+  "official_source": [],
+  "description": {
+    "value": null,
+    "status": "pending",
+    "source": "brochure-capital",
+    "note": "Named on the official Centro Histórico map (Plaza de Armas, Catedral, Palacio de Gobierno), but no official descriptive text was found."
+  },
+  "coordinates": {
+    "value": {
+      "lat": 22.1517127,
+      "lon": -100.9764034
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "way/1366343609",
+    "osm_feature": "leisure/park",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "patrimonio",
+      "arquitectura"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-capital"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 4,
+    "pexels": 0
+  },
+  "verified_core_fields": "2/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

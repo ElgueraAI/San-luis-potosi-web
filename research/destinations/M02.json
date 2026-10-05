@@ -1,0 +1,80 @@
+{
+  "place_id": "M02",
+  "name": "Rioverde – Centro",
+  "workbook": {
+    "region_label": "Media",
+    "type": "Ciudad / arquitectura",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-media/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "zona-media",
+    "status": "verified",
+    "source": "brochure-media",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Rioverde",
+    "status": "verified",
+    "source": "brochure-media",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Ciudad / arquitectura",
+  "official_source": [],
+  "description": {
+    "value": "'La capital de la Región Media': ciudad agrícola y comercial desde la que se practican buceo, kayak, ciclismo de montaña, espeleología y senderismo.",
+    "status": "verified",
+    "source": "brochure-media",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 21.9318566,
+      "lon": -99.9928621
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/299677634",
+    "osm_feature": "place/town",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "ciudad-base",
+      "gastronomia",
+      "aventura"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-media",
+    "map-media"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 4,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

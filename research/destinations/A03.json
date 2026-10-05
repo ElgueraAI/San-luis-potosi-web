@@ -1,0 +1,69 @@
+{
+  "place_id": "A03",
+  "name": "Pueblo Fantasma",
+  "workbook": {
+    "region_label": "Altiplano",
+    "type": "Ruinas mineras",
+    "priority": "A",
+    "official_source": "https://www.realde14.com.mx/ruta-del-pueblo-fantasma.html",
+    "official_source_kind": "non-official"
+  },
+  "region": {
+    "value": "altiplano",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Catorce",
+    "status": "pending",
+    "note": "Workbook value; no official page."
+  },
+  "type": "Ruinas mineras",
+  "official_source": [],
+  "description": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No official description found. Workbook source realde14.com.mx is not official. The Altiplano brochure mentions the abandoned mines of Cerro del Quemado, not a 'Pueblo Fantasma' by name."
+  },
+  "coordinates": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No OSM candidate found."
+  },
+  "coordinate_source": null,
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "mineria",
+      "aventura",
+      "patrimonio"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 2,
+    "commons_approved_candidates": 0,
+    "pexels": 0
+  },
+  "verified_core_fields": "1/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

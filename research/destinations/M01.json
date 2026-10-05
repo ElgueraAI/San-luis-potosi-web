@@ -1,0 +1,91 @@
+{
+  "place_id": "M01",
+  "name": "Manantial de la Media Luna",
+  "workbook": {
+    "region_label": "Media",
+    "type": "Naturaleza / agua",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-media/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "zona-media",
+    "status": "verified",
+    "source": "brochure-media",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Rioverde",
+    "status": "verified",
+    "source": "brochure-media",
+    "verifiedAt": "2026-10-04",
+    "note": "Listed under Rioverde in the activities table."
+  },
+  "type": "Naturaleza / agua",
+  "official_source": [],
+  "description": {
+    "value": "Parque Estatal con manantial de corrientes tranquilas y fauna endémica; segura para nadar y bucear todo el año, con servicios para acampar.",
+    "status": "verified",
+    "source": "brochure-media",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 21.8606265,
+      "lon": -100.0278954
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/4085575483",
+    "osm_feature": "natural/spring",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "agua",
+      "naturaleza",
+      "buceo",
+      "natacion",
+      "campismo"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": "todo el año (natación y buceo)",
+    "status": "verified",
+    "source": "brochure-media",
+    "verifiedAt": "2026-10-04"
+  },
+  "access": [],
+  "facts": {
+    "protected_area": {
+      "value": "Área Natural Protegida / Parque Estatal",
+      "status": "pending",
+      "source": "brochure-media",
+      "note": "Stated by the tourism brochure. Confirm the decree with the state environmental authority."
+    }
+  },
+  "official_resources": [
+    "pdf-brochure-media",
+    "map-media"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 2,
+    "commons_approved_candidates": 2,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

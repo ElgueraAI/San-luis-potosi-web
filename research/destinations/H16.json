@@ -1,0 +1,118 @@
+{
+  "place_id": "H16",
+  "name": "Zona Arqueológica de Tamtoc",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Arqueología",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-huasteca/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "huasteca",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Tamuín",
+    "status": "verified",
+    "source": "inah-lugares-tamtoc",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Arqueología",
+  "official_source": [
+    "inah-lugares-tamtoc"
+  ],
+  "description": {
+    "value": "Antigua ciudad de la Huasteca (900–1100), con comercio fluvial, pirámides, monolitos, estelas, pintura mural y esculturas en piedra como la Venus de Tamtoc.",
+    "status": "verified",
+    "source": "inah-lugares-tamtoc",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 21.924445,
+      "lon": -98.812866
+    },
+    "status": "verified",
+    "source": "inah-lugares-tamtoc",
+    "verifiedAt": "2026-10-04",
+    "cross_check": {
+      "source": "osm-nominatim",
+      "osm": "way/27038659",
+      "lat": 21.9242259,
+      "lon": -98.8142578,
+      "distance_m": 146
+    }
+  },
+  "coordinate_source": "inah-lugares-tamtoc",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "arqueologia",
+      "patrimonio",
+      "cultura-teenek"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {
+    "hours": {
+      "value": "Lunes a domingo, 09:00–18:00 h; último acceso 17:00 h",
+      "status": "verified",
+      "source": "inah-lugares-tamtoc",
+      "verifiedAt": "2026-10-04",
+      "note": "Volatile: re-check before publishing."
+    },
+    "admission": {
+      "value": "Sin costo (visitantes nacionales y extranjeros)",
+      "status": "verified",
+      "source": "inah-lugares-tamtoc",
+      "verifiedAt": "2026-10-04",
+      "note": "Volatile: re-check before publishing."
+    },
+    "address": {
+      "value": "Ramal de carretera a Tamtoc km 10, Municipio de Tamuín; entronque con la carretera Tamuín–San Vicente (SLP 14)",
+      "status": "verified",
+      "source": "inah-lugares-tamtoc",
+      "verifiedAt": "2026-10-04"
+    },
+    "extra": [
+      {
+        "value": "Más de setenta edificaciones prehispánicas, una plaza ceremonial y esculturas monolíticas.",
+        "status": "verified",
+        "source": "brochure-huasteca",
+        "verifiedAt": "2026-10-04"
+      }
+    ]
+  },
+  "official_resources": [
+    "inah-lugar-tamtoc",
+    "inah-guia-tamtoc",
+    "pdf-brochure-huasteca",
+    "map-huasteca"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 3,
+    "pexels": 0
+  },
+  "verified_core_fields": "4/4 (region, municipality, description, coordinates)",
+  "verification_status": "verified"
+}

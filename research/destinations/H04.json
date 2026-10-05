@@ -1,0 +1,89 @@
+{
+  "place_id": "H04",
+  "name": "Sótano de las Golondrinas",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Sima / naturaleza",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/",
+    "official_source_kind": "portal-home"
+  },
+  "region": {
+    "value": "huasteca",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Aquismón",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Sima / naturaleza",
+  "official_source": [],
+  "description": {
+    "value": "Sima ideal para espeleología y senderismo, y para observar aves como loros y vencejos, sobre todo al amanecer y al caer la tarde.",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 21.5999041,
+      "lon": -99.0989336
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/2883943605",
+    "osm_feature": "natural/cave_entrance",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "naturaleza",
+      "aves",
+      "aventura",
+      "espeleologia"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": "al amanecer y al caer la tarde (observación de aves)",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04",
+    "note": "Time of day, not season."
+  },
+  "access": [],
+  "facts": {
+    "protected_area": {
+      "value": null,
+      "status": "pending",
+      "note": "Not stated in any source read in this pass."
+    }
+  },
+  "official_resources": [
+    "pdf-brochure-huasteca",
+    "map-huasteca"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 4,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

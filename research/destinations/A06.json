@@ -1,0 +1,94 @@
+{
+  "place_id": "A06",
+  "name": "Matehuala – Centro Histórico",
+  "workbook": {
+    "region_label": "Altiplano",
+    "type": "Ciudad / arquitectura",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-altiplano/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "altiplano",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Matehuala",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Ciudad / arquitectura",
+  "official_source": [],
+  "description": {
+    "value": "La ciudad más dinámica y comercial del Altiplano y punto de partida para recorrer la región; destaca la Catedral de la Inmaculada Concepción, réplica de la iglesia de San José de Lyon, Francia.",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 23.646485,
+      "lon": -100.643544
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/291728489",
+    "osm_feature": "place/city",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "arquitectura",
+      "gastronomia",
+      "artesania",
+      "ciudad-base"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {
+    "gastronomy": {
+      "value": [
+        "chorizo",
+        "cabrito",
+        "dulces de leche quemada",
+        "obleas",
+        "cajeta"
+      ],
+      "status": "verified",
+      "source": "brochure-altiplano",
+      "verifiedAt": "2026-10-04"
+    }
+  },
+  "official_resources": [
+    "pdf-brochure-altiplano",
+    "map-altiplano"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 4,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

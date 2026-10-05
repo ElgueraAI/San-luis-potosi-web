@@ -1,0 +1,83 @@
+{
+  "place_id": "C03",
+  "name": "Plaza del Carmen",
+  "workbook": {
+    "region_label": "Centro",
+    "type": "Plaza / patrimonio",
+    "priority": "A",
+    "official_source": "https://turismo.slp.gob.mx/lugares/?page=2",
+    "official_source_kind": "destination-specific"
+  },
+  "region": {
+    "value": "centro",
+    "status": "verified",
+    "source": "brochure-centro",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "San Luis Potosí",
+    "status": "verified",
+    "source": "turismo-slp-lugar-plaza-del-carmen",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Plaza / patrimonio",
+  "official_source": [
+    "turismo-slp-lugar-plaza-del-carmen"
+  ],
+  "description": {
+    "value": "Una de las plazas más tradicionales de la ciudad, escenario de eventos artísticos y culturales; en Semana Santa es punto de inicio y término de la Procesión del Silencio.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-plaza-del-carmen",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 22.1511173,
+      "lon": -100.9738942
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "relation/14398253",
+    "osm_feature": "place/square",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "patrimonio",
+      "cultura-viva",
+      "arquitectura"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": "Semana Santa: Procesión del Silencio (inicio y término en la plaza).",
+    "status": "verified",
+    "source": "turismo-slp-lugar-plaza-del-carmen",
+    "verifiedAt": "2026-10-04",
+    "note": "Event association only; no dates."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-capital"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 7,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

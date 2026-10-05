@@ -1,0 +1,74 @@
+{
+  "place_id": "C12",
+  "name": "Talleres de rebozo",
+  "workbook": {
+    "region_label": "Centro",
+    "type": "Artesanía",
+    "priority": "A",
+    "official_source": "https://turismo.slp.gob.mx/lugares/santa-maria-del-rio/",
+    "official_source_kind": "destination-specific"
+  },
+  "region": {
+    "value": "centro",
+    "status": "verified",
+    "source": "brochure-centro",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Santa María del Río",
+    "status": "verified",
+    "source": "brochure-centro",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Artesanía",
+  "official_source": [],
+  "description": {
+    "value": "Artesanas y artesanos elaboran rebozos con ikat y telar de cintura —entre ellos el rebozo de bolita—; el Museo Casa del Rebozo difunde este arte y varios domicilios particulares trabajan a diario.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-santa-maria-del-rio",
+    "verifiedAt": "2026-10-04",
+    "note": "Also brochure-centro (Museo Casa del Rebozo)."
+  },
+  "coordinates": {
+    "value": null,
+    "status": "unavailable",
+    "note": "Workshops are spread across the town; use C11."
+  },
+  "coordinate_source": null,
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "artesania",
+      "cultura-viva",
+      "textiles"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-centro"
+  ],
+  "conflicts": [],
+  "ethics": "Portraits of artisans need informed consent.",
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 6,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

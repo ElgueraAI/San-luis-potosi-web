@@ -1,0 +1,105 @@
+{
+  "place_id": "M09",
+  "name": "Ciudad del Maíz",
+  "workbook": {
+    "region_label": "Media",
+    "type": "Pueblo Mágico",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/lugares/ciudad-del-maiz/",
+    "official_source_kind": "destination-specific"
+  },
+  "region": {
+    "value": "zona-media",
+    "status": "verified",
+    "source": "brochure-media",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Ciudad del Maíz",
+    "status": "verified",
+    "source": "turismo-slp-lugar-ciudad-del-maiz",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Pueblo Mágico",
+  "official_source": [
+    "turismo-slp-lugar-ciudad-del-maiz"
+  ],
+  "description": {
+    "value": "Pueblo Mágico de la Región Media con la Casa Barraganeña, la Parroquia neoclásica de la Purísima Concepción y los murales de El Tepeyac; su Semana Santa xi'iui es una de sus tradiciones más antiguas.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-ciudad-del-maiz",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 22.4023443,
+      "lon": -99.602795
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/746968424",
+    "osm_feature": "place/town",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": true,
+    "status": "verified",
+    "source": "sectur-com-244-2023",
+    "verifiedAt": "2026-10-04"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "pueblos-magicos",
+      "patrimonio",
+      "arte",
+      "cultura-viva"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": "Semana Santa indígena xi'iui (pames).",
+    "status": "verified",
+    "source": "brochure-media",
+    "verifiedAt": "2026-10-04",
+    "note": "Event association only; no dates."
+  },
+  "access": [],
+  "facts": {
+    "gastronomy": {
+      "value": [
+        "guiso borracho"
+      ],
+      "status": "verified",
+      "source": "brochure-media",
+      "verifiedAt": "2026-10-04"
+    },
+    "region_note": {
+      "value": "zona-media",
+      "status": "verified",
+      "source": "turismo-slp-lugar-ciudad-del-maiz",
+      "verifiedAt": "2026-10-04",
+      "note": "'Ubicado al este de la Región Media'."
+    }
+  },
+  "official_resources": [
+    "pdf-brochure-media",
+    "map-media"
+  ],
+  "conflicts": [
+    "Mural credits differ: text says designed by Diego Rivera and executed by his disciples; the brochure's activities table lists 'Murales de Jorge Pasquel'."
+  ],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 3,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

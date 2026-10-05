@@ -1,0 +1,111 @@
+{
+  "place_id": "A01",
+  "name": "Real de Catorce",
+  "workbook": {
+    "region_label": "Altiplano",
+    "type": "Pueblo mágico / minería",
+    "priority": "A",
+    "official_source": "https://turismo.slp.gob.mx/lugares/real-de-catorce/",
+    "official_source_kind": "destination-specific"
+  },
+  "region": {
+    "value": "altiplano",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Catorce",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Pueblo mágico / minería",
+  "official_source": [
+    "turismo-slp-lugar-real-de-catorce",
+    "sectur-art-real-de-catorce"
+  ],
+  "description": {
+    "value": "Antiguo real de minas del Altiplano, fundado hacia 1778; se llega cruzando el Túnel de Ogarrio y hoy es uno de los mayores atractivos turísticos del estado.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-real-de-catorce",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 23.6902227,
+      "lon": -100.886165
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/294556800",
+    "osm_feature": "place/town",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": true,
+    "status": "verified",
+    "source": "sectur-com-244-2023",
+    "verifiedAt": "2026-10-04"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "pueblos-magicos",
+      "patrimonio",
+      "mineria",
+      "aventura",
+      "fotografia"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": "Clima extremo en el Altiplano: verano muy soleado, caluroso y seco; invierno de frío extremo.",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-04",
+    "note": "Regional climate note, not destination-specific."
+  },
+  "access": [
+    {
+      "value": "Acceso por el Túnel de Ogarrio.",
+      "status": "verified",
+      "source": "turismo-slp-lugar-real-de-catorce",
+      "verifiedAt": "2026-10-04"
+    },
+    {
+      "value": "Recorridos a caballo o en vehículos Willys por los alrededores.",
+      "status": "verified",
+      "source": "turismo-slp-lugar-real-de-catorce",
+      "verifiedAt": "2026-10-04"
+    }
+  ],
+  "facts": {
+    "pueblo_magico_since": {
+      "value": 2001,
+      "status": "verified",
+      "source": "sectur-art-real-de-catorce",
+      "verifiedAt": "2026-10-04"
+    }
+  },
+  "official_resources": [
+    "pdf-brochure-altiplano",
+    "map-altiplano"
+  ],
+  "conflicts": [
+    "Tunnel length: 2.3 km (turismo-slp-lugar-real-de-catorce) vs 2.5 km (brochure-altiplano)."
+  ],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 8,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

@@ -1,0 +1,83 @@
+{
+  "place_id": "H10",
+  "name": "Cascadas de Tamasopo",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Cascadas",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-huasteca/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "huasteca",
+    "status": "pending",
+    "source": "brochure-huasteca",
+    "note": "Conflicting official brochures; see conflicts."
+  },
+  "municipality": {
+    "value": "Tamasopo",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Cascadas",
+  "official_source": [],
+  "description": {
+    "value": "Cascadas de aguas cristalinas y pozas tranquilas, acondicionadas con cabañas, tiendas de souvenirs, restaurantes y áreas recreativas.",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 21.939142,
+      "lon": -99.3971944
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/4564327722",
+    "osm_feature": "waterway/waterfall",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "agua",
+      "cascadas",
+      "familia",
+      "naturaleza"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-huasteca",
+    "map-huasteca"
+  ],
+  "conflicts": [
+    "Listed in the Huasteca brochure, but the Región Media brochure map also marks this municipality's sites. Region assignment pending the official state regionalisation (gob-slp-regiones)."
+  ],
+  "ethics": null,
+  "media": {
+    "commons": 6,
+    "commons_approved_candidates": 0,
+    "pexels": 1
+  },
+  "verified_core_fields": "2/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

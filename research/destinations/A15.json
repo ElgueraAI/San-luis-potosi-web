@@ -1,0 +1,73 @@
+{
+  "place_id": "A15",
+  "name": "Paisaje del semidesierto potosino",
+  "workbook": {
+    "region_label": "Altiplano",
+    "type": "Naturaleza",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-altiplano/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "altiplano",
+    "status": "verified",
+    "source": "brochure-altiplano",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": null,
+    "status": "unavailable",
+    "note": "Regional landscape; spans several municipalities."
+  },
+  "type": "Naturaleza",
+  "official_source": [],
+  "description": {
+    "value": null,
+    "status": "pending",
+    "source": "brochure-altiplano",
+    "note": "Landscape theme, not a destination. Only a regional climate note is official."
+  },
+  "coordinates": {
+    "value": null,
+    "status": "unavailable",
+    "note": "A landscape, not a single point."
+  },
+  "coordinate_source": null,
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "naturaleza",
+      "paisaje",
+      "fotografia"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-altiplano",
+    "map-altiplano"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 0,
+    "commons_approved_candidates": 0,
+    "pexels": 0
+  },
+  "verified_core_fields": "1/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

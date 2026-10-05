@@ -1,0 +1,87 @@
+{
+  "place_id": "H12",
+  "name": "Cascadas de Micos",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Cascadas / aventura",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-huasteca/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "huasteca",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Ciudad Valles",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Cascadas / aventura",
+  "official_source": [],
+  "description": {
+    "value": "Las Cascadas de Pago Pago (Micos): siete cascadas con caídas de dos a veinte metros, para rafting, kayak y salto en cascadas.",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 22.1035555,
+      "lon": -99.155968
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "way/817657274",
+    "osm_feature": "tourism/attraction",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "agua",
+      "cascadas",
+      "aventura"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {
+    "official_name": {
+      "value": "Cascadas de Pago Pago (Micos)",
+      "status": "verified",
+      "source": "brochure-huasteca",
+      "verifiedAt": "2026-10-04"
+    }
+  },
+  "official_resources": [
+    "pdf-brochure-huasteca",
+    "map-huasteca"
+  ],
+  "conflicts": [],
+  "ethics": null,
+  "media": {
+    "commons": 6,
+    "commons_approved_candidates": 4,
+    "pexels": 1
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

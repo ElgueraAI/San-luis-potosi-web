@@ -1,0 +1,85 @@
+{
+  "place_id": "H11",
+  "name": "Puente de Dios",
+  "workbook": {
+    "region_label": "Huasteca",
+    "type": "Poza / cueva",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-huasteca/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "huasteca",
+    "status": "pending",
+    "source": "brochure-huasteca",
+    "note": "Conflicting official brochures; see conflicts."
+  },
+  "municipality": {
+    "value": "Tamasopo",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Poza / cueva",
+  "official_source": [],
+  "description": {
+    "value": "Pozas de azul profundo con una caverna y un puente natural de roca; se puede caminar, cabalgar, nadar y bucear.",
+    "status": "verified",
+    "source": "brochure-huasteca",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 21.9291897,
+      "lon": -99.4140601
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/7658769477",
+    "osm_feature": "place/hamlet",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "natural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "agua",
+      "naturaleza",
+      "natacion",
+      "buceo"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {},
+  "official_resources": [
+    "pdf-brochure-huasteca",
+    "map-huasteca"
+  ],
+  "conflicts": [
+    "Listed in the Huasteca brochure, but the Región Media brochure map also marks this municipality's sites. Region assignment pending the official state regionalisation (gob-slp-regiones).",
+    "The Huasteca activities table also lists a 'Puente de Dios' under Aquismón; possibly a second site of the same name.",
+    "A Pexels photo titled 'Puente de Dios' is in Querétaro, not here."
+  ],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 7,
+    "pexels": 1
+  },
+  "verified_core_fields": "2/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

@@ -1,0 +1,68 @@
+{
+  "generated": "2026-10-04",
+  "question": "Is there an official registry of registered/certified tourist guides usable for San Luis Potosí?",
+  "result": "official_registry_found",
+  "summary": "SECTUR runs the official national directory of accredited guides (NOM-08-TUR-2002 / NOM-09-TUR-2002), filterable by state (San Luis Potosí), municipality, guide type and language. The state's own guide page (visitasanluispotosi.com/guias-de-turistas/) is blocked and has no archived copy.",
+  "sources": [
+    {
+      "source_id": "sectur-guias-directorio",
+      "official": true,
+      "status": "accessible",
+      "what": "Directory search form: inpEstado (24 = San Luis Potosí), inpMunicipio, inpTipoGuia, inpIdioma.",
+      "not_done": "Not queried. Results are personal data (names, credential numbers)."
+    },
+    {
+      "source_id": "sectur-guias-acreditacion",
+      "official": true,
+      "status": "accessible-via-webfetch",
+      "what": "Accreditation program: Guía General (NOM-08), Guía Especializado en temas o localidades culturales (NOM-08), Guía Especializado en actividades específicas — naturaleza/aventura (NOM-09)."
+    },
+    {
+      "source_id": "sectur-nom-08-tur-2002",
+      "official": true,
+      "status": "not-fetched"
+    },
+    {
+      "source_id": "turismo-slp-rnt",
+      "official": true,
+      "status": "accessible",
+      "what": "State RNT procedures; provider categories include 'Operadora de Aventura Naturaleza'. No public list."
+    },
+    {
+      "source_id": "visitaslp-guias",
+      "official": true,
+      "status": "blocked",
+      "what": "Unknown content."
+    },
+    {
+      "source_id": "rntsecturgob-com-mx",
+      "official": false,
+      "status": "rejected",
+      "what": "Non-gob.mx domain; do not use."
+    }
+  ],
+  "brochure_guidance": [
+    {
+      "value": "Se recomienda contratar los servicios de un guía certificado y reservar tours con anticipación.",
+      "status": "verified",
+      "source": "brochure-huasteca",
+      "verifiedAt": "2026-10-04",
+      "note": "Same tip in all four regional brochures."
+    },
+    {
+      "value": "Los sitios turísticos y parajes tienen una capacidad de carga limitada.",
+      "status": "verified",
+      "source": "brochure-huasteca",
+      "verifiedAt": "2026-10-04"
+    }
+  ],
+  "operators": {
+    "status": "pending",
+    "note": "No official public operator list found. The RNT is the registry; its official public consultation URL was not confirmed in this pass."
+  },
+  "recommendation": "On the site, link to the SECTUR directory (filtered to San Luis Potosí) and explain how to check a credential. Do not list named guides without their consent and a fresh check in the directory.",
+  "excluded": [
+    "Facebook pages",
+    "commercial directories"
+  ]
+}

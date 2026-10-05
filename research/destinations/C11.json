@@ -1,0 +1,101 @@
+{
+  "place_id": "C11",
+  "name": "Santa María del Río",
+  "workbook": {
+    "region_label": "Centro",
+    "type": "Pueblo Mágico",
+    "priority": "A",
+    "official_source": "https://turismo.slp.gob.mx/lugares/santa-maria-del-rio/",
+    "official_source_kind": "destination-specific"
+  },
+  "region": {
+    "value": "centro",
+    "status": "verified",
+    "source": "brochure-centro",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "Santa María del Río",
+    "status": "verified",
+    "source": "turismo-slp-lugar-santa-maria-del-rio",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Pueblo Mágico",
+  "official_source": [
+    "turismo-slp-lugar-santa-maria-del-rio"
+  ],
+  "description": {
+    "value": "Pueblo Mágico fundado en 1542 y conocido como la Cuna del Rebozo, cerca de la capital; sus talleres trabajan el ikat y el telar de cintura.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-santa-maria-del-rio",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 21.7985605,
+      "lon": -100.7369915
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "node/4442589288",
+    "osm_feature": "place/town",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": true,
+    "status": "verified",
+    "source": "sectur-com-244-2023",
+    "verifiedAt": "2026-10-04"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "pueblos-magicos",
+      "artesania",
+      "gastronomia",
+      "patrimonio"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {
+    "gastronomy": {
+      "value": [
+        "asado de boda",
+        "barbacoa",
+        "nopales en escabeche",
+        "queso de tuna",
+        "muéganos",
+        "dulce de membrillo"
+      ],
+      "status": "verified",
+      "source": "turismo-slp-lugar-santa-maria-del-rio",
+      "verifiedAt": "2026-10-04"
+    }
+  },
+  "official_resources": [
+    "pdf-brochure-centro",
+    "map-centro"
+  ],
+  "conflicts": [
+    "Travel time: '20 minutos' from the capital (state page) vs the brochure distance table (transcription pending)."
+  ],
+  "ethics": null,
+  "media": {
+    "commons": 8,
+    "commons_approved_candidates": 4,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}

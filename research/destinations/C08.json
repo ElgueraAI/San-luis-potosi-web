@@ -1,0 +1,92 @@
+{
+  "place_id": "C08",
+  "name": "Museo Leonora Carrington",
+  "workbook": {
+    "region_label": "Centro",
+    "type": "Arte",
+    "priority": "A",
+    "official_source": "https://slp.gob.mx/visitasanluispotosi/region-centro/",
+    "official_source_kind": "regional"
+  },
+  "region": {
+    "value": "centro",
+    "status": "verified",
+    "source": "brochure-centro",
+    "verifiedAt": "2026-10-04"
+  },
+  "municipality": {
+    "value": "San Luis Potosí",
+    "status": "verified",
+    "source": "turismo-slp-lugar-museo-leonora-carrinton-slp",
+    "verifiedAt": "2026-10-04"
+  },
+  "type": "Arte",
+  "official_source": [
+    "turismo-slp-lugar-centro-de-las-artes-de-san-luis-potosi",
+    "turismo-slp-lugar-museo-leonora-carrinton-slp"
+  ],
+  "description": {
+    "value": "Dentro del Centro de las Artes (CEART San Luis); inaugurado en 2018, es el primer espacio dedicado a Leonora Carrington y expone esculturas, joyas, grabados y objetos personales.",
+    "status": "verified",
+    "source": "turismo-slp-lugar-centro-de-las-artes-de-san-luis-potosi",
+    "verifiedAt": "2026-10-04"
+  },
+  "coordinates": {
+    "value": {
+      "lat": 22.1383403,
+      "lon": -100.9706035
+    },
+    "status": "pending",
+    "source": "osm-nominatim",
+    "osm": "way/744748243",
+    "osm_feature": "tourism/museum",
+    "note": "OSM candidate; needs an official cross-check before it can be verified."
+  },
+  "coordinate_source": "osm-nominatim",
+  "pueblo_magico": {
+    "value": false,
+    "status": "not-applicable"
+  },
+  "category": {
+    "value": "cultural",
+    "status": "editorial",
+    "note": "Classification for site navigation, not a factual claim."
+  },
+  "interest_tags": {
+    "value": [
+      "arte",
+      "museos",
+      "surrealismo"
+    ],
+    "status": "editorial"
+  },
+  "season": {
+    "value": null,
+    "status": "unavailable",
+    "note": "No season or month information in the sources read."
+  },
+  "access": [],
+  "facts": {
+    "address": {
+      "value": "Calzada de Guadalupe 705, San Luis Potosí",
+      "status": "verified",
+      "source": "turismo-slp-lugar-museo-leonora-carrinton-slp",
+      "verifiedAt": "2026-10-04"
+    }
+  },
+  "official_resources": [
+    "pdf-brochure-centro",
+    "pdf-brochure-capital"
+  ],
+  "conflicts": [
+    "Not to be confused with the Museo Leonora Carrington in Xilitla (turismo-slp-lugar-museo-leonora-carrington-xilitla)."
+  ],
+  "ethics": null,
+  "media": {
+    "commons": 7,
+    "commons_approved_candidates": 3,
+    "pexels": 0
+  },
+  "verified_core_fields": "3/4 (region, municipality, description, coordinates)",
+  "verification_status": "pending"
+}
