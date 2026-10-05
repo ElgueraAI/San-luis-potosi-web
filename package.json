@@ -1,0 +1,28 @@
+{
+  "name": "san-luis-potosi-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cuatro mundos. Un San Luis Potosí. Academic MVP of a cinematic tourism website.",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "facts:report": "node scripts/facts/report.mjs",
+    "geo:profile": "node scripts/geo/build-profile.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "astro": "^7.3.5",
+    "maplibre-gl": "^6.12.0",
+    "pmtiles": "^4.5.0"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.63.0"
+  }
+}

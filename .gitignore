@@ -1,0 +1,44 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.astro/
+
+# environment and local config
+.env
+.env.*
+!.env.example
+*.local
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# logs
+npm-debug.log*
+*.log
+
+# large original media (originals live outside git, only optimized output is committed)
+media-source/
+*.mov
+*.MOV
+*.mxf
+*.braw
+*.r3d
+*.dng
+*.tif
+*.tiff
+*.psd
+
+# raw geographic sources (INEGI DEM tiles etc.), only derived JSON is committed
+data-source/
+
+# scroll craft verification output and generated diagnostics
+scrollcraft/lab/
+scrollcraft/builds/*/lab/
+reports/
+lab/
+playwright-report/
+test-results/
