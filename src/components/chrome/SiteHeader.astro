@@ -1,216 +1,173 @@
 ---
-import { t, type Locale } from '@/i18n';
-import { href, homeAnchor } from '@/i18n/routes';
-import { primaryNav, planNav } from '@/data/nav';
-import { profile, worldPath } from '@/data/geo';
-import type { RegionWithBounds } from '@/lib/regions';
+/**
+ * Global header. Transparent over full-bleed heroes, solid paper after the
+ * first scroll (src/scripts/site.ts toggles .is-solid). Desktop: brand left;
+ * Explorar (regions panel), Mapa, Mi Ruta, language, Menú right. Phone: brand,
+ * Mi Ruta and Menú only.
+ */
+import { href, regionHref } from '@/i18n/routes';
+import { REGIONS } from '@/data/regions';
+import Photo from '@/components/media/Photo.astro';
+import Brand from './Brand.astro';
 
-interface Props {
-  locale: Locale;
-  regions: RegionWithBounds[];
-}
-const { locale, regions } = Astro.props;
+interface Props { overlay?: boolean }
+const { overlay = false } = Astro.props;
 ---
-<header class="slp-header" data-header>
-  <div class="slp-header__inner">
-    <a class="slp-wordmark" href={href('home', {}, locale)} aria-label={t(locale, 'a11y.home')}>
-      <span class="slp-wordmark__name">San Luis Potosí</span>
+<header class:list={['hdr', { 'hdr--overlay': overlay, 'is-solid': !overlay }]} data-header>
+  <div class="hdr__bar">
+    <a class="hdr__brand" href={href('home')} aria-label="San Luis Potosí, inicio">
+      <Brand />
     </a>
-
-    <nav class="slp-header__nav" aria-label={t(locale, 'a11y.mainNav')}>
-      <ul role="list">
-        {primaryNav.filter((i) => i.ready).map((item) => (
-          <li><a href={homeAnchor(item.anchor, locale)}>{t(locale, item.key)}</a></li>
-        ))}
-      </ul>
-    </nav>
-
-    <div class="slp-header__tools">
-      <span class="slp-lang">
-        <span class="slp-lang__on" lang="es" aria-current="true">ES</span>
-        <span class="slp-lang__off" lang="en" title={t(locale, 'nav.lang.enPending')}>
-          EN<span class="visually-hidden"> ({t(locale, 'nav.lang.enPending')})</span>
-        </span>
-      </span>
-      {planNav.ready && (
-        <a class="slp-btn slp-header__plan" href={homeAnchor(planNav.anchor, locale)}>{t(locale, planNav.key)}</a>
-      )}
-      <button class="slp-header__menu" type="button" data-menu-open aria-haspopup="dialog" aria-controls="slp-menu">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-          <path d="M3 8.5h18M3 15.5h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-        </svg>
-        <span class="slp-header__menu-label">Menú</span>
-        <span class="visually-hidden">: {t(locale, 'a11y.menuOpen')}</span>
+    <nav class="hdr__nav" aria-label="Navegación principal">
+      <button class="hdr__link hdr__desk" type="button" aria-expanded="false" aria-controls="explore-panel" data-explore-toggle>
+        Destinos <span class="hdr__caret" aria-hidden="true"></span>
       </button>
-    </div>
+      <a class="hdr__link hdr__desk" href={href('thingsToDo')}>Qué hacer</a>
+      <a class="hdr__link hdr__desk" href={href('events')}>Eventos</a>
+      <a class="hdr__link hdr__desk" href={href('plan')}>Planea</a>
+      <a class="hdr__link hdr__desk" href={href('map')}>Mapa</a>
+      <a class="hdr__link hdr__search" href={href('search')} aria-label="Buscar en el sitio"><span class="hdr__glass" aria-hidden="true"></span></a>
+      <a class="hdr__link hdr__route" href={href('myRoute')}>
+        <span class="hdr__route-label">Mi Ruta</span>
+        <span class="hdr__count" data-route-count aria-label="lugares guardados">0</span>
+      </a>
+      <span class="hdr__lang hdr__desk" title="Español. La versión en inglés está en preparación."><abbr title="Español">ES</abbr></span>
+      <button class="hdr__menu" type="button" aria-expanded="false" aria-controls="menu-sheet" data-menu-open>
+        <span class="hdr__menu-label">Menú</span>
+        <span class="hdr__burger" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </nav>
   </div>
 
-  <!-- Phones: the Line lives in the header as a progress strip. Navigation by
-       region is in the menu sheet, so this drawing is purely visual. -->
-  <div class="slp-header__line" aria-hidden="true" data-line-strip>
-    <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
-      {regions.map((r) => (
-        <path data-region={r.id} d={worldPath(profile.points, r.bounds.from, r.bounds.to)} vector-effect="non-scaling-stroke" />
-      ))}
-    </svg>
-    <span class="slp-header__marker"></span>
+  <div class="explore" id="explore-panel" data-explore-panel hidden>
+    <div class="explore__inner">
+      <p class="label">Cuatro regiones</p>
+      <ul class="explore__grid">
+        {REGIONS.map((r) => (
+          <li data-region={r.id}>
+            <a href={regionHref(r.slug)} class="explore__card">
+              <Photo id={r.card} ratio="4/3" sizes="240px" widths={[320, 480]} />
+              <span class="explore__name display">{r.name}</span>
+              <span class="explore__id">{r.identity}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <ul class="explore__links">
+        <li><a class="arrow" href={href('municipalities')}>Los 59 municipios</a></li>
+        <li><a class="arrow" href={href('destinations')}>Todos los destinos</a></li>
+        <li><a class="arrow" href={href('map')}>Mapa interactivo</a></li>
+        <li><a class="arrow" href={href('seasons')}>Qué hacer ahora</a></li>
+        <li><a class="arrow" href={href('routes')}>Rutas e itinerarios</a></li>
+        <li><a class="arrow" href={href('guides')}>Guías y recursos</a></li>
+        <li><a class="arrow" href={href('plan')}>Planea tu viaje</a></li>
+      </ul>
+    </div>
   </div>
 </header>
 
 <style>
-  .slp-header {
+  .hdr {
     position: fixed;
-    inset: 0 0 auto 0;
-    z-index: var(--sc-z-chrome);
-    color: var(--sc-ink);
-    transition: background-color var(--sc-d-base) var(--sc-ease-out), color var(--sc-d-base) var(--sc-ease-out),
-      box-shadow var(--sc-d-base) var(--sc-ease-out);
+    inset: 0 0 auto;
+    z-index: 80;
+    color: var(--slp-charcoal);
+    transition: background-color 260ms var(--sc-ease-out), color 260ms var(--sc-ease-out), box-shadow 260ms var(--sc-ease-out), transform 320ms var(--sc-ease-out);
   }
-  /* The header takes the ground of whatever is under it (set by chrome.ts). */
-  .slp-header {
-    --sc-ink: var(--slp-ivory);
-    --sc-canvas: var(--slp-charcoal);
-    --slp-line-ink: var(--slp-ivory);
-    --sc-accent: var(--slp-gold);
+  .hdr.is-solid {
+    background: color-mix(in oklab, var(--slp-paper) 96%, transparent);
+    box-shadow: 0 1px 0 color-mix(in oklab, var(--slp-charcoal) 10%, transparent);
+    backdrop-filter: saturate(1.2) blur(10px);
   }
-  :global(html[data-chrome-top="light"]) .slp-header {
-    --sc-ink: var(--slp-charcoal);
-    --sc-canvas: var(--slp-ivory);
-    --slp-line-ink: var(--slp-charcoal);
-    --sc-accent: var(--slp-gold-deep);
+  .hdr--overlay:not(.is-solid) { color: var(--slp-ivory); }
+  .hdr--overlay:not(.is-solid)::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 -60%;
+    z-index: -1;
+    background: linear-gradient(180deg, rgb(16 19 18 / 0.5), rgb(16 19 18 / 0));
+    pointer-events: none;
   }
-  :global(html[data-chrome-mode="solid"]) .slp-header {
-    background: color-mix(in oklab, var(--sc-canvas) 96%, transparent);
-    box-shadow: 0 1px 0 color-mix(in oklab, var(--sc-ink) 12%, transparent);
-  }
+  /* Scrolling down hides the header; scrolling up brings it back. */
+  :global(html.hdr-hidden) .hdr:not([data-open]) { transform: translateY(-100%); }
 
-  .slp-header__inner {
-    display: flex;
-    align-items: center;
-    gap: var(--sc-5);
+  .hdr__bar {
+    width: var(--slp-wrap);
+    margin-inline: auto;
     height: var(--slp-header-h);
-    padding-inline: var(--sc-gutter);
-  }
-
-  .slp-wordmark {
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--slp-tap);
-    color: inherit;
-    text-decoration: none;
-    margin-right: auto;
-  }
-  .slp-wordmark__name {
-    font-family: var(--sc-font-display);
-    font-size: clamp(1.35rem, 1.1rem + 0.6vw, 1.65rem);
-    font-weight: 600;
-    letter-spacing: -0.005em;
-    line-height: 1;
-    white-space: nowrap;
-  }
-
-  .slp-header__nav ul {
-    display: flex;
-    gap: clamp(0.25rem, 1.2vw, 1.25rem);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .slp-header__nav a {
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--slp-tap);
-    padding-inline: 0.35rem;
-    color: inherit;
-    font-size: var(--sc-t-sm);
-    font-weight: 600;
-    text-decoration: none;
-    background-image: linear-gradient(currentColor, currentColor);
-    background-size: 0 1px;
-    background-position: 0.35rem calc(50% + 0.85em);
-    background-repeat: no-repeat;
-    transition: background-size var(--sc-d-fast) var(--sc-ease-out);
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .slp-header__nav a:hover { background-size: calc(100% - 0.7rem) 1px; }
-  }
-
-  .slp-header__tools {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--sc-4);
   }
-  .slp-lang {
-    display: inline-flex;
-    gap: 0.6rem;
-    font-size: var(--sc-t-xs);
-    font-weight: 700;
-    letter-spacing: 0.12em;
-  }
-  .slp-lang__on {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.35em;
-  }
-  .slp-lang__off { opacity: 0.55; cursor: not-allowed; }
-
-  .slp-header__menu {
+  .hdr__brand { color: inherit; text-decoration: none; display: inline-flex; min-height: var(--slp-tap); align-items: center; }
+  .hdr__nav { display: flex; align-items: center; gap: clamp(0.25rem, 1.6vw, 1.5rem); }
+  .hdr__link, .hdr__menu, .hdr__lang {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
     min-height: var(--slp-tap);
-    min-width: var(--slp-tap);
-    padding: 0 0.5rem;
+    padding: 0 0.35rem;
     border: 0;
     background: none;
     color: inherit;
-    font-size: var(--sc-t-sm);
-    font-weight: 650;
-    cursor: pointer;
+    font: 650 0.76rem/1 var(--sc-font-text);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
   }
-  .slp-header__menu:active { transform: translateY(1px); }
-
-  .slp-header__line { display: none; }
+  .hdr__lang abbr { text-decoration: none; border: 1px solid currentColor; padding: 0.3rem 0.4rem; border-radius: 2px; opacity: 0.85; font-size: 0.68rem; }
+  .hdr__caret { width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 200ms var(--sc-ease-out); }
+  [aria-expanded='true'] > .hdr__caret { transform: translateY(1px) rotate(-135deg); }
+  .hdr__count {
+    min-width: 1.35rem;
+    height: 1.35rem;
+    padding: 0 0.3rem;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    font-size: 0.66rem;
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .hdr__count[data-filled] { background: var(--slp-gold); border-color: var(--slp-gold); color: var(--slp-charcoal); }
+  .hdr__burger { display: grid; gap: 5px; width: 20px; }
+  .hdr__burger i { display: block; height: 1.5px; background: currentColor; }
+  .hdr__link { position: relative; }
+  @media (hover: hover) and (pointer: fine) {
+    .hdr__link::after { content: ''; position: absolute; left: 0.35rem; right: 0.35rem; bottom: 0.7rem; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 220ms var(--sc-ease-out); }
+    .hdr__link:hover::after { transform: scaleX(1); }
+  }
 
   @media (max-width: 860px) {
-    .slp-header__nav, .slp-lang, .slp-header__plan { display: none; }
-    .slp-header__menu-label { display: none; }
-    .slp-header__line {
-      display: block;
-      position: absolute;
-      left: var(--sc-gutter);
-      right: var(--sc-gutter);
-      top: calc(100% - 0.35rem);
-      height: var(--slp-line-h);
-      pointer-events: none;
-      opacity: var(--slp-strip-o, 0);
-      transition: opacity var(--sc-d-slow) var(--sc-ease-out);
-    }
-    :global(html[data-line-state="full"]) .slp-header__line,
-    :global(html[data-line-state="collapsed"]) .slp-header__line { --slp-strip-o: 1; }
-    .slp-header__line svg {
-      position: absolute;
-      inset: 0.3rem 0;
-      width: 100%;
-      height: calc(100% - 0.6rem);
-      overflow: visible;
-    }
-    .slp-header__line path {
-      fill: none;
-      stroke: var(--slp-line-ink);
-      stroke-width: 1.4;
-      opacity: 0.5;
-    }
-    .slp-header__line path[data-active] { opacity: 1; stroke-width: 2; }
-    .slp-header__marker {
-      position: absolute;
-      left: calc(var(--slp-x, 0) * 100%);
-      top: calc(0.3rem + (1 - var(--slp-e, 0.8)) * (100% - 0.6rem));
-      width: 7px;
-      height: 7px;
-      margin: -3.5px 0 0 -3.5px;
-      border-radius: 50%;
-      background: var(--slp-line-ink);
-    }
+    .hdr__desk { display: none; }
+    .hdr__menu-label { display: none; }
+    .hdr__route-label { font-size: 0.7rem; }
   }
+
+  /* ---- Explorar panel ---------------------------------------------------- */
+  .explore {
+    position: absolute;
+    inset: 100% 0 auto;
+    background: var(--slp-paper);
+    color: var(--slp-charcoal);
+    box-shadow: var(--sc-e3);
+    border-top: 1px solid var(--sc-hairline);
+  }
+  .explore__inner { width: var(--slp-wrap); margin-inline: auto; padding: var(--sc-6) 0 var(--sc-7); display: grid; gap: var(--sc-5); grid-template-columns: 1fr; }
+  .explore__grid { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sc-5); }
+  .explore__card { display: grid; gap: 0.35rem; text-decoration: none; color: inherit; }
+  .explore__card :global(.photo) { margin-bottom: 0.4rem; }
+  .explore__name { font-size: 1.7rem; line-height: 1; border-top: 2px solid var(--slp-region); padding-top: 0.55rem; }
+  .explore__id { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); line-height: 1.45; }
+  .explore__links { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem var(--sc-6); border-top: 1px solid var(--sc-hairline); padding-top: var(--sc-3); }
+  @media (hover: hover) and (pointer: fine) {
+    .explore__card :global(img) { transition: transform 600ms var(--sc-ease-out); }
+    .explore__card:hover :global(img) { transform: scale(1.03); }
+  }
+  .hdr__search { width: var(--slp-tap); justify-content: center; }
+  .hdr__glass { position: relative; width: 15px; height: 15px; border: 1.6px solid currentColor; border-radius: 50%; }
+  .hdr__glass::after { content: ''; position: absolute; right: -5px; bottom: -4px; width: 7px; height: 1.6px; background: currentColor; transform: rotate(45deg); }
+  @media (max-width: 1180px) { .hdr__desk.hdr__link[href$="planea/"], .hdr__desk.hdr__link[href$="eventos/"] { display: none; } }
 </style>

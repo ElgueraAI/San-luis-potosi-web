@@ -1,0 +1,62 @@
+---
+/** About the project: purpose, data model, sources and truth rules, with live counts. */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import { counts } from '@/data/portal';
+import { destinations } from '@/data/research';
+import { href } from '@/i18n/routes';
+
+const rows: [string, number, string][] = [
+  ['Municipios', counts.municipalities, 'PDU-SLP (regiones) · INEGI Censo 2020 (cabecera y población)'],
+  ['Destinos investigados', destinations.length, 'Folletos oficiales, Secretaría de Turismo de SLP, Gobierno del Estado'],
+  ['Atractivos y declaratorias', counts.attractions, 'Investigación + Sistema de Información Cultural (SIC)'],
+  ['Zonas y sitios arqueológicos', counts.archaeology, 'INAH: datos abiertos, Lugares INAH, revista Arqueología'],
+  ['Museos', counts.museums, 'SIC, Secretaría de Cultura'],
+  ['Recintos culturales', counts.venues, 'SIC: teatros, centros culturales, galerías, auditorios, artesanía'],
+  ['Fiestas y eventos', counts.events, 'Gobierno del Estado, Secretaría de Cultura, folletos oficiales, SIC'],
+  ['Hospedaje', counts.lodging, 'Estadía (Secretaría de Turismo) · DENUE (INEGI)'],
+  ['Gastronomía y bebidas (visibles)', counts.foodShown, `Estadía · DENUE (INEGI); ${counts.foodAll.toLocaleString('es-MX')} investigados`],
+  ['Servicios turísticos', counts.services, 'DENUE · Directorio de guías acreditados (SECTUR)'],
+];
+---
+<BaseLayout title="Acerca del proyecto" description="Proyecto académico sobre la distribución del turismo en San Luis Potosí: fuentes, modelo de datos y reglas de verdad.">
+  <PageHeader label="Acerca del proyecto" title="Un estado, todos sus municipios" lede="Proyecto universitario sobre la distribución inteligente del turismo en San Luis Potosí: mostrar el estado completo, no solo sus lugares más conocidos, con información de fuentes oficiales." tone="stone" ground="ivory" crumbs={[{ label: 'Acerca del proyecto' }]} />
+
+  <section class="psec" data-ground="light" aria-labelledby="ab-t">
+    <div class="wrap ab">
+      <div class="ab__text">
+        <h2 id="ab-t" class="psec__title">Cómo se construye</h2>
+        <p class="body">Cada página sale de una base de conocimiento normalizada (<code>research/entities</code>) construida a partir de fuentes oficiales: la Secretaría de Turismo y el Gobierno del Estado, la Secretaría de Cultura (SIC), el INAH e INEGI (Censo 2020 y DENUE). Un libro de Excel enriquecido funciona como catálogo legible.</p>
+        <h3 class="ab__h">Reglas de verdad</h3>
+        <ul class="ab__rules">
+          <li>Un dato se publica solo si una fuente oficial lo dice; lo desconocido queda como desconocido.</li>
+          <li>No se inventan calificaciones, precios, horarios, fechas, coordenadas ni accesos.</li>
+          <li>Cada fecha de evento indica su estado: confirmada, patrón oficial, última edición o sin publicar.</li>
+          <li>Una zona arqueológica se presenta como visitable solo si el INAH la registra abierta al público.</li>
+          <li>DENUE es un registro estadístico: no confirma que un negocio opere hoy ni es una recomendación.</li>
+          <li>Las fotografías tienen licencia libre y crédito; si no hay una adecuada, no se usa una ajena.</li>
+          <li>Las estadísticas de 2022 son contexto histórico, no descripción del presente.</li>
+        </ul>
+        <p class="body"><a class="arrow" href={href('credits')}>Créditos, fuentes y licencias</a></p>
+      </div>
+      <table class="ab__table">
+        <caption class="label">La base, en números</caption>
+        <thead><tr><th scope="col">Conjunto</th><th scope="col">Registros</th><th scope="col">Fuentes</th></tr></thead>
+        <tbody>{rows.map(([a, n, s]) => <tr><th scope="row">{a}</th><td>{n.toLocaleString('es-MX')}</td><td>{s}</td></tr>)}</tbody>
+      </table>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ab { display: grid; gap: var(--sc-7); }
+  @media (min-width: 1000px) { .ab { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } }
+  .ab__text { display: grid; gap: var(--sc-4); }
+  .ab__h { font: 600 1.4rem/1.1 var(--sc-font-display); margin-top: var(--sc-3); }
+  .ab__rules { display: grid; gap: 0.5rem; padding-left: 1.1rem; max-width: 60ch; }
+  .ab__table { width: 100%; border-collapse: collapse; font-size: var(--sc-t-sm); }
+  .ab__table caption { text-align: left; margin-bottom: var(--sc-3); }
+  .ab__table th, .ab__table td { text-align: left; padding: 0.6rem 0.4rem; border-bottom: 1px solid var(--sc-hairline); vertical-align: top; }
+  .ab__table td:nth-child(2) { font: 600 1.3rem/1 var(--sc-font-display); white-space: nowrap; }
+  .ab__table thead th { font: 700 0.62rem/1 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+</style>

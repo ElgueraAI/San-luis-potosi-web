@@ -1,0 +1,48 @@
+---
+/** "+ Añadir a Mi Ruta" toggle. State comes from src/scripts/route-store.ts. */
+interface Props { id: string; name: string; variant?: 'solid' | 'quiet' | 'icon'; class?: string }
+const { id, name, variant = 'quiet', class: cls } = Astro.props;
+---
+<button
+  type="button"
+  class:list={['rbtn', `rbtn--${variant}`, cls]}
+  data-route-add={id}
+  data-route-name={name}
+  aria-pressed="false"
+  aria-label={variant === 'icon' ? `Añadir ${name} a Mi Ruta` : undefined}
+>
+  <span class="rbtn__icon" aria-hidden="true"></span>
+  {variant !== 'icon' && <span data-route-label>Añadir a Mi Ruta</span>}
+</button>
+
+<style is:global>
+  .rbtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: var(--slp-tap);
+    padding: 0 0.9rem 0 0.75rem;
+    border: 1px solid currentColor;
+    border-radius: var(--sc-r-sm);
+    background: transparent;
+    color: inherit;
+    font: 700 0.72rem/1 var(--sc-font-text);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background-color var(--sc-d-fast) var(--sc-ease-out), color var(--sc-d-fast) var(--sc-ease-out);
+  }
+  .rbtn--solid { background: var(--sc-ink); color: var(--sc-canvas); border-color: var(--sc-ink); }
+  .rbtn--quiet { border-color: var(--sc-hairline-strong); }
+  .rbtn--icon { width: var(--slp-tap); padding: 0; justify-content: center; border-radius: 50%; background: rgb(251 248 242 / 0.92); color: var(--slp-charcoal); border-color: transparent; }
+  .rbtn__icon { position: relative; width: 12px; height: 12px; flex: none; }
+  .rbtn__icon::before, .rbtn__icon::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1.5px; margin-top: -0.75px; background: currentColor; transition: transform 200ms var(--sc-ease-out); }
+  .rbtn__icon::after { transform: rotate(90deg); }
+  .rbtn[aria-pressed='true'] { background: var(--slp-gold); border-color: var(--slp-gold); color: var(--slp-charcoal); }
+  .rbtn[aria-pressed='true'] .rbtn__icon::before { transform: translate(1px, 2px) rotate(45deg) scaleX(0.5); transform-origin: left; }
+  .rbtn[aria-pressed='true'] .rbtn__icon::after { transform: translate(3px, 0) rotate(-50deg); }
+  @media (hover: hover) and (pointer: fine) {
+    .rbtn--quiet:hover, .rbtn--solid:hover { background: var(--sc-ink); color: var(--sc-canvas); border-color: var(--sc-ink); }
+    .rbtn--icon:hover { background: var(--slp-paper); }
+  }
+</style>

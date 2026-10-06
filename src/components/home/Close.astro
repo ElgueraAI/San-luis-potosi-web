@@ -1,0 +1,57 @@
+---
+/**
+ * Cinematic close: the bottom of the line. A held still of the Huasteca water
+ * (the dusk river video is NEEDS_MANUAL_ASSET), the end of the measured line,
+ * and the visitor's own saved places. It resolves and holds; no fade-out.
+ */
+import Photo from '@/components/media/Photo.astro';
+import AssetChip from '@/components/media/AssetChip.astro';
+import { href } from '@/i18n/routes';
+import { profile } from '@/data/research';
+import { profileGeometry, fmtM } from '@/lib/profile';
+
+interface Props {
+  image?: string;
+  title?: string;
+  body?: string;
+  videoSlot?: string;
+}
+const { image = 'wc-48806880', title = 'Al final de la línea, el agua.', body = 'De la sierra de Catorce al río en la Huasteca. Guarda los lugares que te llamaron y arma tu propio descenso.', videoSlot = 'vid-close' } = Astro.props;
+const g = profileGeometry(1600, 160, { tolerance: 10, ceil: 3100 });
+---
+<section class="close" data-ground="dark" aria-labelledby="close-title">
+  <Photo id={image} fill sizes="100vw" focal="50% 50%" />
+  <div class="close__shade" aria-hidden="true"></div>
+  <svg class="close__line" viewBox="0 0 1600 160" preserveAspectRatio="none" aria-hidden="true">
+    <path d={g.line} vector-effect="non-scaling-stroke" />
+    <circle cx="1600" cy={g.Y(profile.summary.end_m)} r="5" />
+  </svg>
+  <div class="wrap close__inner">
+    <p class="label close__kicker">Ciudad Valles · {fmtM(profile.summary.end_m)} · fin del transecto</p>
+    <h2 id="close-title" class="display close__title">{title}</h2>
+    <p class="close__body">{body}</p>
+    <div class="close__route">
+      <p class="close__count"><span data-route-count>0</span> <span>lugares en Mi Ruta</span></p>
+      <div class="close__ctas">
+        <a class="btn btn--light" href={href('myRoute')}>Ver Mi Ruta</a>
+        <a class="btn btn--outline-light" href={href('plan')}>Planea tu viaje</a>
+      </div>
+    </div>
+  </div>
+  <AssetChip slot={videoSlot} subject="Toma amplia casi fija de un río turquesa de la Huasteca al atardecer entre paredes de cañón." position="tr" />
+</section>
+
+<style>
+  .close { position: relative; min-height: 100svh; display: grid; align-content: center; isolation: isolate; overflow: hidden; }
+  .close__shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgb(12 18 16 / 0.86) 0%, rgb(12 18 16 / 0.5) 50%, rgb(12 18 16 / 0.3) 100%); }
+  .close__line { position: absolute; z-index: 2; left: 0; right: 0; top: 14%; width: 100%; height: 120px; fill: none; stroke: rgb(246 241 231 / 0.45); stroke-width: 1.25px; overflow: visible; }
+  .close__line circle { fill: var(--slp-ivory); stroke: none; }
+  .close__inner { position: relative; z-index: 3; display: grid; gap: var(--sc-5); justify-items: start; padding-block: var(--sc-10) var(--sc-8); }
+  .close__kicker { color: rgb(246 241 231 / 0.85); }
+  .close__title { font-size: clamp(2.8rem, 1.6rem + 5vw, 6.4rem); line-height: 0.95; max-width: 13ch; }
+  .close__body { max-width: 34rem; font-size: var(--sc-t-lg); color: rgb(246 241 231 / 0.9); }
+  .close__route { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-5); margin-top: var(--sc-4); padding-top: var(--sc-5); border-top: 1px solid rgb(246 241 231 / 0.3); }
+  .close__count { display: flex; align-items: baseline; gap: 0.6rem; font: 600 1.1rem/1 var(--sc-font-text); }
+  .close__count [data-route-count] { font: 600 3rem/1 var(--sc-font-display); border: 0; background: none; padding: 0; min-width: 0; height: auto; }
+  .close__ctas { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
+</style>

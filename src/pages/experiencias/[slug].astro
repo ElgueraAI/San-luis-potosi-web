@@ -1,0 +1,140 @@
+---
+/**
+ * Experience page: an editorial frame over one verified destination. Story is
+ * the destination's verified description; season comes from the official
+ * seasonal records; nearby places, events and lodging come from data. No
+ * duration is shown because no official source gives one.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import DestinationCard from '@/components/ui/DestinationCard.astro';
+import EntityCard from '@/components/portal/EntityCard.astro';
+import RouteButton from '@/components/ui/RouteButton.astro';
+import MapView from '@/components/map/MapView.astro';
+import Photo from '@/components/media/Photo.astro';
+import { ALL_EXPERIENCES, type Experience } from '@/data/experiences';
+import { alternativesFor, sourceLabel, sourceUrl, MONTHS_ES } from '@/data/research';
+import { recViews } from '@/data/seasons';
+import { municipalityOf, events, lodging, near, eventSlug, REGION_LABEL } from '@/data/portal';
+import { href, destHref, muniHref, eventHref, experienceHref, regionHref } from '@/i18n/routes';
+import { REGIONS } from '@/data/regions';
+
+export function getStaticPaths() {
+  return ALL_EXPERIENCES.map((x) => ({ params: { slug: x.slug }, props: { x } }));
+}
+const { x } = Astro.props as { x: Experience };
+const d = x.d;
+const muni = municipalityOf(d.municipality);
+const region = REGIONS.find((r) => r.id === d.region)!;
+const recs = recViews.filter((r) => r.places.some((p) => p.id === d.id));
+const monthsSet = [...new Set(recs.flatMap((r) => r.months))].sort((a, b) => a - b);
+const when = d.season?.value ?? (monthsSet.length >= 12 ? 'Todo el año' : monthsSet.length ? monthsSet.map((m) => MONTHS_ES[m - 1]).join(', ') : null);
+const lat = d.coords?.[1] ?? muni?.latitude ?? null, lon = d.coords?.[0] ?? muni?.longitude ?? null;
+const relEvents = events.filter((e) => (muni && e.municipality_id === muni.id) || e.related_entities.includes(d.id)).slice(0, 4);
+const regEvents = relEvents.length ? [] : events.filter((e) => e.region === d.region && e.date_status !== 'DATE_PENDING').slice(0, 3);
+const beds = near(lodging, lat, lon, 30, 6).sort((a, b) => Number(!!b.official_directory) - Number(!!a.official_directory) || a.km - b.km);
+const alts = alternativesFor(d, 4);
+const others = ALL_EXPERIENCES.filter((o) => o.slug !== x.slug && o.d.region === d.region).slice(0, 3);
+const sources = [...new Set([x.source, ...d.officialSources, ...recs.map((r) => r.source)])].filter((s) => s && s !== 'neutral');
+---
+<BaseLayout title={x.title} description={`${x.title}: ${d.name}, ${d.municipality ?? REGION_LABEL[d.region]}. ${d.description.slice(0, 120)}`} image={x.image}>
+  <PageHeader label={`Experiencia · ${x.interest}`} title={x.title} image={x.image} region={d.region} crumbs={[{ label: 'Experiencias', href: href('experiences') }, { label: x.title }]}>
+    <div class="xh__meta">
+      <span>{d.name.split(' – ')[0]}</span>
+      {muni && <a href={muniHref(muni.slug!)}>{muni.canonical_name}</a>}
+      <a href={regionHref(region.slug)}>{region.name}</a>
+    </div>
+    <RouteButton id={d.id} name={d.name} variant="solid" />
+  </PageHeader>
+
+  <section class="psec" data-ground="dark" data-tone="jungle" data-region={d.region} aria-labelledby="st-t">
+    <div class="wrap split">
+      <div class="xs__text">
+        <p class="label">La historia</p>
+        <h2 id="st-t" class="psec__title">{d.name.split(' – ')[0]}</h2>
+        <p class="lede">{d.description}</p>
+        <dl class="facts">
+          <div><dt>Dónde</dt><dd>{muni ? <a href={muniHref(muni.slug!)}>{muni.canonical_name}</a> : d.municipality ?? '—'}, {region.name}</dd></div>
+          {when && <div><dt>Cuándo ir</dt><dd>{when}</dd></div>}
+          <div><dt>Tipo</dt><dd>{d.kind}</dd></div>
+          <div><dt>Duración</dt><dd class="muted">Sin dato oficial</dd></div>
+        </dl>
+        <a class="arrow" href={destHref(d.slug)}>Toda la información de {d.name.split(' – ')[0]}</a>
+      </div>
+      {x.image && <div class="split__media"><Photo id={x.image} ratio="4/5" sizes="(max-width: 900px) 92vw, 40vw" widths={[480, 800, 1200]} /></div>}
+    </div>
+  </section>
+
+  {recs.length > 0 && (
+    <section class="psec psec--tight" data-ground="ivory" data-tone="mist" aria-labelledby="when-t">
+      <div class="wrap">
+        <div class="psec__head"><p class="label">Temporada</p><h2 id="when-t" class="psec__title">Cuándo ir</h2></div>
+        <ul class="xw">
+          {recs.map((r) => <li data-region={r.region}><p class="xw__m">{r.months.length >= 12 ? 'Todo el año' : r.months.map((m) => MONTHS_ES[m - 1]).join(' · ')}</p><p class="xw__t">{r.what}</p><p class="source">Fuente: {sourceLabel(r.source)}</p></li>)}
+        </ul>
+        <a class="arrow" href={href('seasons')}>Calendario de temporadas</a>
+      </div>
+    </section>
+  )}
+
+  {d.coords && (
+    <section class="psec psec--tight" data-ground="light" aria-labelledby="xm-t">
+      <div class="wrap">
+        <h2 id="xm-t" class="label">Mapa</h2>
+        <MapView mode="mini" focus={d.id} height="24rem" label={`Mapa: ${d.name}`} />
+      </div>
+    </section>
+  )}
+
+  <section class="psec" data-ground="light" aria-labelledby="near-t">
+    <div class="wrap">
+      <div class="psec__head"><p class="label">Cerca</p><h2 id="near-t" class="psec__title">Para combinar</h2></div>
+      {alts.length > 0 && <ul class="pgrid pgrid--rail">{alts.map((a) => <li><DestinationCard d={a} ratio="4/5" size="sm" sizes="(max-width: 640px) 78vw, 18rem" headingLevel="h3" /></li>)}</ul>}
+      {(relEvents.length > 0 || regEvents.length > 0) && (
+        <>
+          <h3 class="xsub">{relEvents.length ? 'Fiestas en el municipio' : `Fiestas en la región ${region.name}`}</h3>
+          <ul class="pgrid pgrid--ent">{[...relEvents, ...regEvents].map((e) => <li><EntityCard e={e} href={eventHref(eventSlug(e))} /></li>)}</ul>
+        </>
+      )}
+      {beds.length > 0 && (
+        <>
+          <h3 class="xsub">Dónde dormir cerca (a menos de 30 km en línea recta)</h3>
+          <ul class="pgrid pgrid--ent">{beds.map((e) => <li><EntityCard e={e} compact /></li>)}</ul>
+          <p class="truth">Directorio oficial y registros DENUE. Sin calificaciones ni precios: confirma con el establecimiento.</p>
+        </>
+      )}
+    </div>
+  </section>
+
+  {others.length > 0 && (
+    <section class="psec psec--tight" data-ground="dark" data-tone="jungle" aria-labelledby="ox-t">
+      <div class="wrap">
+        <h2 id="ox-t" class="label">Más experiencias en {region.name}</h2>
+        <ul class="pgrid xo">{others.map((o) => <li><a class="tile" href={experienceHref(o.slug)}>{o.image && <Photo id={o.image} fill sizes="(max-width: 640px) 92vw, 22rem" widths={[480, 800]} alt="" />}<span class="tile__body"><span class="tile__sub">{o.interest}</span><span class="tile__title">{o.title}</span></span></a></li>)}</ul>
+      </div>
+    </section>
+  )}
+
+  <section class="psec psec--tight" data-ground="ivory" aria-labelledby="xs-t">
+    <div class="wrap">
+      <h2 id="xs-t" class="label">Información oficial</h2>
+      <ul class="xsrc">{sources.map((s) => { const u = sourceUrl(s); return <li>{u ? <a href={u} rel="noopener" target="_blank">{sourceLabel(s)}</a> : sourceLabel(s)}</li>; })}</ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .xh__meta { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; font-weight: 650; font-size: 0.9rem; margin-bottom: var(--sc-3); }
+  .xh__meta a { color: inherit; }
+  .xs__text { display: grid; gap: var(--sc-4); justify-items: start; }
+  .xs__text .lede { max-width: 46ch; color: var(--sc-ink-soft); }
+  .xs__text .arrow { color: var(--sc-ink); }
+  .xw { list-style: none; display: grid; gap: var(--sc-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); margin-bottom: var(--sc-5); }
+  .xw li { padding: var(--sc-4); border-radius: var(--sc-r-sm); background: var(--sc-surface); box-shadow: inset 3px 0 0 var(--slp-region-ui); display: grid; gap: 0.4rem; }
+  .xw__m { font: 700 0.64rem/1.3 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--slp-region-text); }
+  .xw__t { font: 500 1.2rem/1.3 var(--sc-font-display); }
+  .xsub { font: 700 0.7rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); margin: var(--sc-6) 0 var(--sc-3); }
+  .xo { grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
+  .xsrc { list-style: none; display: grid; gap: 0.35rem; margin-top: var(--sc-3); font-size: var(--sc-t-sm); }
+  .xsrc a { color: inherit; }
+</style>

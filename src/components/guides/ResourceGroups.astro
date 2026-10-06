@@ -1,0 +1,57 @@
+---
+/**
+ * Official resources as a quiet index (title, institution, type, link).
+ * External items open the official source; nothing is mirrored here.
+ */
+import { resourceGroups } from '@/data/guides';
+import { href } from '@/i18n/routes';
+const REG: Record<string, string> = { altiplano: 'Altiplano', centro: 'Centro', 'zona-media': 'Zona Media', huasteca: 'Huasteca' };
+
+interface Props { only?: string[]; region?: string; columns?: boolean }
+const { only, region, columns = true } = Astro.props;
+let groups = resourceGroups({ routes: href('routes'), plan: href('plan'), map: href('map'), seasons: href('seasons'), museums: href('museums'), events: href('events'), lodging: href('lodging') });
+if (only) groups = groups.filter((g) => only.includes(g.id));
+if (region) groups = groups.map((g) => ({ ...g, items: g.items.filter((i) => !i.region || i.region === region) })).filter((g) => g.items.length);
+---
+<div class:list={['res', { 'res--cols': columns }]}>
+  {groups.map((g) => (
+    <section class="res__group" aria-labelledby={`res-${g.id}`} id={`recursos-${g.id}`}>
+      <h3 id={`res-${g.id}`} class="res__title display">{g.title}</h3>
+      <p class="res__intro small muted">{g.intro}</p>
+      <ul class="res__list">
+        {g.items.map((i) => (
+          <li data-region={i.region ?? undefined}>
+            <a href={i.url} target={i.external ? '_blank' : undefined} rel={i.external ? 'noopener' : undefined} class="res__link">
+              <span class="res__name">{i.title}</span>
+              <span class="res__meta">{i.institution} · {i.kind}{i.region ? ` · ${REG[i.region]}` : ''}{i.date ? ` · ${i.date}` : ''}{i.external ? ' · Fuente oficial externa' : ''}</span>
+              {i.note && <span class="res__note">{i.note}</span>}
+              <span class="res__go" aria-hidden="true">{i.external ? '↗' : '→'}</span>
+              {i.external && <span class="visually-hidden">(se abre en una pestaña nueva)</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</div>
+<p class="source res__policy">Los folletos y mapas son publicaciones oficiales de sus instituciones y se enlazan en su ubicación original; este proyecto no los produce ni los redistribuye. Si un enlace no responde, la institución pudo haberlo movido.</p>
+
+<style>
+  .res { display: grid; gap: var(--sc-7); }
+  .res--cols { grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: var(--sc-7) var(--sc-6); }
+  .res__group { display: grid; gap: var(--sc-3); align-content: start; }
+  .res__title { font-size: 1.65rem; line-height: 1.1; }
+  .res__intro { max-width: 46ch; }
+  .res__list { list-style: none; border-top: 1px solid var(--sc-hairline-strong); }
+  .res__link { position: relative; display: grid; gap: 0.2rem; padding: 0.85rem 2rem 0.85rem 0; border-bottom: 1px solid var(--sc-hairline); text-decoration: none; color: inherit; min-height: var(--slp-tap); }
+  .res__name { font-weight: 700; }
+  .res__meta { font-size: 0.76rem; color: var(--sc-ink-soft); }
+  .res__note { font-size: 0.8rem; color: var(--sc-ink-soft); }
+  .res__go { position: absolute; right: 0.2rem; top: 0.9rem; font-size: 1rem; transition: transform 180ms var(--sc-ease-out); }
+  li[data-region] .res__name::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-ui); margin-right: 0.5rem; vertical-align: 0.12em; }
+  @media (hover: hover) and (pointer: fine) {
+    .res__link:hover .res__name { text-decoration: underline; text-underline-offset: 0.25em; }
+    .res__link:hover .res__go { transform: translate(2px, -2px); }
+  }
+  .res__policy { margin-top: var(--sc-5); max-width: 70ch; }
+</style>

@@ -1,0 +1,128 @@
+---
+/**
+ * ¿Qué te mueve? Editorial interest cards in a full-bleed track that runs off
+ * the right edge: one photograph per interest (uniform 3:4), a strong title,
+ * the places that carry it and its real count. Choosing a card filters the
+ * destinations rail beneath it (src/scripts/interests.ts). Only interests with
+ * support in the research tags are offered.
+ */
+import Photo from '@/components/media/Photo.astro';
+import DestinationCard from '@/components/ui/DestinationCard.astro';
+import CarouselControls from '@/components/ui/CarouselControls.astro';
+import { INTERESTS, destinations } from '@/data/research';
+import { href } from '@/i18n/routes';
+
+const short = (name: string) => name.split(' – ')[0];
+const rank = (d: (typeof destinations)[number]) => (d.media.card ? 0 : 2) + (d.priority === 'A' ? 0 : 1);
+const tiles = INTERESTS.map((i) => {
+  const ds = destinations.filter((d) => d.interests.includes(i.id)).sort((a, b) => rank(a) - rank(b));
+  return { ...i, count: ds.length, names: ds.slice(0, 3).map((d) => short(d.name)) };
+}).filter((i) => i.count >= 2);
+const first = tiles[0].id;
+// photographed places first so the rail opens on images, not placeholders
+const list = [...destinations].sort((a, b) => (a.media.card ? 0 : 1) - (b.media.card ? 0 : 1));
+---
+<section id="intereses" class="ints section" data-ground="ivory" data-tone="sand" data-interests aria-labelledby="ints-title">
+  <div class="wrap ints__head">
+    <div>
+      <p class="label">Explora por interés</p>
+      <h2 id="ints-title" class="display display--lg">¿Qué te mueve?</h2>
+    </div>
+    <div class="ints__aside">
+      <p class="body muted">{tiles.length} maneras de recorrer el estado. Elige una y te mostramos los lugares que la tienen, en las cuatro regiones.</p>
+      <CarouselControls track="ints-track" label="Desplazar intereses" />
+    </div>
+  </div>
+
+  <ul class="ints__track" id="ints-track" role="list" aria-label="Intereses">
+    {tiles.map((t, i) => (
+      <li>
+        <button type="button" class="icard" aria-pressed={t.id === first ? 'true' : 'false'} data-interest={t.id} data-label={t.label} aria-controls="ints-results">
+          <Photo id={t.image} ratio="3/4" sizes="(max-width: 760px) 80vw, 23.5rem" widths={[420, 640, 960]} alt="" class="icard__img" />
+          <span class="icard__shade" aria-hidden="true"></span>
+          <span class="icard__top" aria-hidden="true">
+            <span class="icard__n">{String(i + 1).padStart(2, '0')}</span>
+            <span class="icard__count">{t.count} lugares</span>
+          </span>
+          <span class="icard__body">
+            <span class="icard__title">{t.label}</span>
+            <span class="icard__sub">{t.names.join(' · ')}</span>
+            <span class="icard__cta"><span class="icard__cta-off">Ver lugares</span><span class="icard__cta-on">Mostrando abajo</span></span>
+            <span class="visually-hidden">, {t.count} lugares</span>
+          </span>
+        </button>
+      </li>
+    ))}
+  </ul>
+
+  <div class="wrap ints__results" id="ints-results" aria-live="polite">
+    <div class="ints__rhead">
+      <p class="ints__summary"><span class="label">Lugares para</span> <span class="ints__sum-name" data-ints-label>{tiles[0].label}</span> <span class="ints__sum-n"><span data-ints-count>{tiles[0].count}</span> lugares</span></p>
+      <a class="arrow" href={href('map')}>Filtrar por interés en el mapa</a>
+    </div>
+    <ul class="rail ints__list">
+      {list.map((d) => (
+        <li data-interests={d.interests.join(' ')} hidden={!d.interests.includes(first)}>
+          <DestinationCard d={d} ratio="4/5" size="sm" sizes="(max-width: 760px) 62vw, 17rem" headingLevel="h3" />
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .ints__head { display: grid; gap: var(--sc-5); margin-bottom: clamp(2rem, 4vw, 3.25rem); }
+  @media (min-width: 900px) { .ints__head { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); align-items: end; gap: var(--sc-7); } }
+  .ints__aside { display: grid; gap: var(--sc-5); justify-items: start; }
+
+  /* full-bleed track aligned to the content edge on the left */
+  .ints__track {
+    --edge: max(var(--sc-gutter), (100% - var(--sc-maxw)) / 2);
+    list-style: none;
+    display: grid; grid-auto-flow: column; grid-auto-columns: clamp(16.5rem, 23vw, 23.5rem); gap: clamp(0.75rem, 1.4vw, 1.25rem);
+    overflow-x: auto; overscroll-behavior-x: contain;
+    padding: 0.35rem var(--edge) var(--sc-3);
+    scroll-padding-inline: var(--edge);
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+  }
+  .ints__track::-webkit-scrollbar { display: none; }
+  .ints__track > li { scroll-snap-align: start; }
+  @media (max-width: 760px) { .ints__track { grid-auto-columns: 80%; } }
+
+  .icard { position: relative; display: block; width: 100%; padding: 0; border: 0; border-radius: var(--sc-r-sm); overflow: hidden; background: var(--slp-charcoal); color: var(--slp-ivory); text-align: left; cursor: pointer; isolation: isolate; }
+  .icard :global(.icard__img img) { transition: transform 1.1s var(--sc-ease-out), filter 400ms; filter: saturate(1.06) contrast(1.04); }
+  .icard { box-shadow: 0 1px 0 rgb(255 255 255 / 0.4), 0 24px 40px -28px hsl(var(--sc-shadow-color) / 0.55); }
+  .icard__shade { position: absolute; inset: 0; z-index: 1; background:
+      linear-gradient(0deg, rgb(12 15 14 / 0.92) 0%, rgb(12 15 14 / 0.62) 28%, rgb(12 15 14 / 0.12) 55%, rgb(12 15 14 / 0) 66%),
+      linear-gradient(180deg, rgb(14 18 17 / 0.45) 0%, rgb(14 18 17 / 0) 22%); }
+  .icard__top { position: absolute; z-index: 2; top: 1rem; left: 1.1rem; right: 1.1rem; display: flex; justify-content: space-between; align-items: center; font: 700 0.64rem/1 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; }
+  .icard__n { font: 500 1.05rem/1 var(--sc-font-display); letter-spacing: 0.04em; opacity: 0.85; }
+  .icard__count { padding: 0.45rem 0.65rem; border: 1px solid rgb(246 241 231 / 0.45); border-radius: 999px; backdrop-filter: blur(6px); background: rgb(14 18 17 / 0.18); }
+  .icard__body { position: absolute; z-index: 2; left: 1.1rem; right: 1.1rem; bottom: 1.15rem; display: grid; gap: 0.5rem; }
+  .icard__title { font: 600 clamp(2rem, 1.55rem + 1vw, 2.6rem)/0.98 var(--sc-font-display); letter-spacing: -0.01em; text-wrap: balance; }
+  .icard__sub { font-size: 0.8rem; line-height: 1.4; color: rgb(246 241 231 / 0.82); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .icard__cta { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 0.35rem; font: 700 0.66rem/1 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; }
+  .icard__cta { padding-top: 0.75rem; border-top: 1px solid rgb(246 241 231 / 0.24); width: 100%; }
+  .icard__cta::after { content: ''; width: 1.6rem; height: 1px; background: currentColor; transition: width 260ms var(--sc-ease-out); }
+  .icard__cta-on { display: none; }
+  .icard::after { content: ''; position: absolute; inset: 0; z-index: 3; border-radius: inherit; box-shadow: inset 0 0 0 0 var(--slp-gold); transition: box-shadow 220ms var(--sc-ease-out); pointer-events: none; }
+  .icard[aria-pressed='true']::after { box-shadow: inset 0 0 0 3px var(--slp-gold); }
+  .icard[aria-pressed='true'] .icard__cta { color: var(--slp-gold); }
+  .icard[aria-pressed='true'] .icard__cta-on { display: inline; }
+  .icard[aria-pressed='true'] .icard__cta-off { display: none; }
+  .icard[aria-pressed='true'] .icard__cta::after { width: 0; }
+  .icard:focus-visible { outline: 3px solid var(--slp-gold-deep); outline-offset: 3px; }
+  @media (hover: hover) and (pointer: fine) {
+    .icard:hover :global(.icard__img img) { transform: scale(1.06); }
+    .icard:hover .icard__cta::after { width: 2.6rem; }
+  }
+
+  .ints__results { margin-top: clamp(3rem, 6vw, 4.5rem); display: grid; gap: var(--sc-5); }
+  .ints__rhead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--sc-3) var(--sc-6); padding-top: var(--sc-5); border-top: 1px solid var(--sc-hairline-strong); }
+  .ints__summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 0.9rem; }
+  .ints__sum-name { font: 600 var(--sc-t-xl)/1.05 var(--sc-font-display); }
+  .ints__sum-n { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+  .ints__list { list-style: none; grid-auto-columns: minmax(14rem, 17rem); gap: var(--sc-5); }
+  @media (max-width: 760px) { .ints__list { grid-auto-columns: 62%; } }
+  .ints__list li[hidden] { display: none; }
+</style>

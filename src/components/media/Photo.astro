@@ -1,0 +1,93 @@
+---
+/**
+ * One production photograph from the research media set, as a responsive WebP
+ * <img> with intrinsic size (no layout shift). `mobile` art-directs a separate
+ * derivative below 760px. If the id is not in the production set, renders a
+ * ManualAsset placeholder instead, so a missing file never breaks a layout.
+ */
+import { mediaImage, altFor, variants } from '@/lib/media';
+import ManualAsset from './ManualAsset.astro';
+
+interface Props {
+  id: string | null | undefined;
+  mobile?: string | null;
+  alt?: string;
+  sizes?: string;
+  widths?: number[];
+  mobileWidths?: number[];
+  /** CSS aspect-ratio for the frame, e.g. "4/5". Omit with `fill`. */
+  ratio?: string;
+  /** Fill the positioned parent (heroes, stages). */
+  fill?: boolean;
+  focal?: string;
+  mobileFocal?: string;
+  eager?: boolean;
+  class?: string;
+  /** Placeholder description used if the asset is missing. */
+  fallback?: { label: string; subject: string; region?: string; ratio?: string };
+}
+
+const {
+  id, mobile, alt, sizes = '100vw', widths = [480, 800, 1200, 1600, 2000], mobileWidths = [480, 720, 1080],
+  ratio, fill = false, focal = '50% 50%', mobileFocal, eager = false, class: cls, fallback,
+} = Astro.props;
+
+const img = mediaImage(id);
+const mImg = mediaImage(mobile);
+const text = alt ?? altFor(id);
+const d = img ? await variants(img, widths) : null;
+const m = mImg ? await variants(mImg, mobileWidths) : null;
+const style = [
+  ratio && !fill ? `aspect-ratio:${ratio}` : '',
+  `--focal:${focal}`,
+  `--focal-m:${mobileFocal ?? focal}`,
+].filter(Boolean).join(';');
+---
+{d ? (
+  <picture class:list={['photo', { 'photo--fill': fill }, cls]} style={style}>
+    {m && <source media="(max-width: 760px)" srcset={m.srcset} sizes={sizes} width={m.width} height={m.height} />}
+    <img
+      src={d.src}
+      srcset={d.srcset}
+      sizes={sizes}
+      width={d.width}
+      height={d.height}
+      alt={text}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : 'auto'}
+      decoding={eager ? 'sync' : 'async'}
+    />
+  </picture>
+) : (
+  <ManualAsset
+    class={cls}
+    fill={fill}
+    ratio={fallback?.ratio ?? ratio}
+    label={fallback?.label ?? 'Fotografía'}
+    subject={fallback?.subject ?? (text || 'Fotografía del destino')}
+    region={fallback?.region}
+  />
+)}
+
+<style>
+  .photo {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    background: var(--slp-ph, #2c2a25);
+  }
+  .photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--focal);
+  }
+  .photo--fill {
+    position: absolute;
+    inset: 0;
+  }
+  @media (max-width: 760px) {
+    .photo img { object-position: var(--focal-m); }
+  }
+</style>

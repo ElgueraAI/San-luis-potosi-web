@@ -1,0 +1,48 @@
+---
+/**
+ * Filterable directory. Server-renders the first 24 records (works without
+ * JavaScript) and hands filtering to src/scripts/directory.ts, which loads the
+ * full compact list from /data/<name>.json. Filters: text, region,
+ * municipality, type. Mirrors filters in the query string.
+ */
+import EntityCard from './EntityCard.astro';
+import { href } from '@/i18n/routes';
+import { municipalities, REGION_LABEL, type Entity } from '@/data/portal';
+
+interface Props { name: 'lodging' | 'food' | 'culture'; items: Entity[]; types?: [string, string][]; label: string; note?: string; total: number }
+const { name, items, types = [], label, note, total } = Astro.props;
+const munis = municipalities.filter((m) => items.some((i) => i.municipality_id === m.id) || true);
+---
+<div class="dir" data-dir data-dir-src={href('directoryData', { name })} data-muni-base={href('municipalities')}>
+  <form class="dir__form" data-dir-form role="search" aria-label={`Filtrar ${label}`}>
+    <label>Buscar<input type="search" name="q" placeholder="Nombre, dirección, municipio…" autocomplete="off" /></label>
+    <label>Región
+      <select name="region">
+        <option value="">Todas</option>
+        {Object.entries(REGION_LABEL).map(([id, l]) => <option value={id}>{l}</option>)}
+      </select>
+    </label>
+    <label>Municipio
+      <select name="mun">
+        <option value="">Todos</option>
+        {munis.map((m) => <option value={m.slug}>{m.canonical_name}</option>)}
+      </select>
+    </label>
+    {types.length > 0 && (
+      <label>Tipo
+        <select name="tipo">
+          <option value="">Todos</option>
+          {types.map(([v, l]) => <option value={v}>{l}</option>)}
+        </select>
+      </label>
+    )}
+  </form>
+  <div class="dir__bar">
+    <p class="psec__count" aria-live="polite" data-dir-count>{total.toLocaleString('es-MX')} resultados</p>
+    {note && <p class="dir__note">{note}</p>}
+  </div>
+  <ul class="pgrid pgrid--ent" data-dir-list>
+    {items.slice(0, 24).map((e) => <li><EntityCard e={e} compact /></li>)}
+  </ul>
+  <button type="button" class="btn btn--ghost dir__more" data-dir-more hidden={total <= 24}>Ver más</button>
+</div>

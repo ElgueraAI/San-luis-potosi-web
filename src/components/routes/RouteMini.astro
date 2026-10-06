@@ -1,0 +1,44 @@
+---
+/**
+ * Mini route: the itinerary's stops plotted by real coordinates on a small
+ * frame of the state (equirectangular, fine at this scale), joined in order.
+ * Stops without a plotted point are skipped. Regional hubs sit faintly behind
+ * for orientation.
+ */
+import { mapPlaces, weatherPoints } from '@/data/research';
+
+interface Props { stops: string[]; w?: number; h?: number; fit?: 'state' | 'stops'; label?: string }
+const { stops, w = 220, h = 150, fit = 'stops', label } = Astro.props;
+const COLORS: Record<string, string> = { altiplano: '#b66a32', centro: '#9e5f67', 'zona-media': '#3d8f8a', huasteca: '#176b57' };
+const pts = stops.map((id) => mapPlaces.find((p) => p.id === id)).filter((p): p is NonNullable<typeof p> => !!p);
+const hubs = weatherPoints.slice(0, 4);
+let [x0, y0, x1, y1] = [-102.3, 21.15, -98.35, 24.5];
+if (fit === 'stops' && pts.length > 1) {
+  const xs = pts.map((p) => p.coords[0]), ys = pts.map((p) => p.coords[1]);
+  const pad = 0.25;
+  x0 = Math.min(...xs) - pad; x1 = Math.max(...xs) + pad; y0 = Math.min(...ys) - pad; y1 = Math.max(...ys) + pad;
+  // keep aspect
+  const sx = (x1 - x0) / w, sy = (y1 - y0) / h;
+  if (sx > sy) { const c = (y0 + y1) / 2, half = (sx * h) / 2; y0 = c - half; y1 = c + half; }
+  else { const c = (x0 + x1) / 2, half = (sy * w) / 2; x0 = c - half; x1 = c + half; }
+}
+const X = (lon: number) => ((lon - x0) / (x1 - x0)) * w;
+const Y = (lat: number) => h - ((lat - y0) / (y1 - y0)) * h;
+const d = pts.map((p, i) => `${i ? 'L' : 'M'}${X(p.coords[0]).toFixed(1)} ${Y(p.coords[1]).toFixed(1)}`).join('');
+---
+<svg class="rmini" viewBox={`0 0 ${w} ${h}`} role="img" aria-label={label ?? `Recorrido: ${pts.map((p) => p.name).join(', ')}`}>
+  {hubs.map((p) => {
+    const x = X(p.lon), y = Y(p.lat);
+    return x >= 0 && x <= w && y >= 0 && y <= h ? <circle cx={x} cy={y} r="2" class="rmini__hub" /> : null;
+  })}
+  <path d={d} class="rmini__line" />
+  {pts.map((p, i) => (
+    <circle cx={X(p.coords[0])} cy={Y(p.coords[1])} r={i === 0 ? 5 : 4} fill={p.status === 'ready' ? COLORS[p.region] : '#fbf8f2'} stroke={COLORS[p.region]} stroke-width="1.8" />
+  ))}
+</svg>
+
+<style>
+  .rmini { width: 100%; height: auto; overflow: visible; }
+  .rmini__line { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-dasharray: 4 3; opacity: 0.75; }
+  .rmini__hub { fill: currentColor; opacity: 0.25; }
+</style>

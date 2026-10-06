@@ -1,0 +1,94 @@
+---
+/**
+ * Experiencias: editorial cards on a dark ground. Uniform 4:5 photographs,
+ * an interest cue on the image, region and place, an editorial title, the
+ * destination's verified description and a "Leer más" into its page.
+ * Data and sourcing rules: src/data/experiences.ts.
+ */
+import Photo from '@/components/media/Photo.astro';
+import { EXPERIENCES, type Experience } from '@/data/experiences';
+import { REGION_NAME } from '@/data/regions';
+import { experienceHref, href } from '@/i18n/routes';
+
+interface Props { items?: Experience[]; heading?: string; lede?: string; id?: string; all?: boolean }
+const { items = EXPERIENCES, heading = 'Momentos que hacen el viaje.', lede = 'Seis maneras de vivir el estado, una o más por región: agua, piedra, desierto y ciudad. Cada una con información de fuentes oficiales.', id = 'experiencias', all = true } = Astro.props;
+
+const short = (name: string) => name.split(' – ')[0];
+---
+<section id={id} class="xps section" data-ground="dark" data-tone="jungle" aria-labelledby="xps-title">
+  <div class="wrap section-head section-head--split">
+    <div>
+      <p class="label">Experiencias</p>
+      <h2 id="xps-title" class="display display--lg">{heading}</h2>
+    </div>
+    <div class="xps__aside"><p class="body muted">{lede}</p>{all && <a class="arrow xps__all" href={href('experiences')}>Todas las experiencias</a>}</div>
+  </div>
+
+  <ul class="wrap xps__grid" role="list">
+    {items.map((x, i) => (
+      <li>
+        <article class="xp" data-region={x.d.region} data-reveal style={`--d:${(i % 3) * 90}ms`}>
+          <div class="xp__media">
+            <Photo
+              id={x.image}
+              ratio="4/5"
+              sizes="(max-width: 760px) 82vw, (max-width: 1100px) 45vw, 28rem"
+              widths={[420, 640, 900, 1200]}
+              fallback={{ label: `${x.d.name} · Experiencia`, subject: x.title, region: x.d.region, ratio: '4:5' }}
+            />
+            <span class="xp__cue"><span class="xp__dot" aria-hidden="true"></span>{x.interest}</span>
+            <span class="xp__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          </div>
+          <div class="xp__body">
+            <p class="xp__meta"><span class="xp__reg">{REGION_NAME[x.d.region]}</span><span aria-hidden="true"> · </span>{short(x.d.name)}</p>
+            <h3 class="xp__title"><a href={experienceHref(x.slug)}>{x.title}</a></h3>
+            <p class="xp__text">{x.d.description}</p>
+            <p class="xp__more" aria-hidden="true">Leer más</p>
+          </div>
+        </article>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .xps { background:
+    radial-gradient(70% 55% at 100% 0%, rgb(63 163 131 / 0.16), transparent 62%),
+    radial-gradient(60% 50% at 0% 100%, rgb(199 163 90 / 0.08), transparent 60%),
+    var(--sc-canvas); }
+  .xps__grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2.5rem, 4vw, 3.5rem) clamp(1rem, 2vw, 1.75rem); }
+  @media (max-width: 1100px) { .xps__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 760px) {
+    .xps__grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 82%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: var(--sc-3); }
+    .xps__grid::-webkit-scrollbar { display: none; }
+    .xps__grid > li { scroll-snap-align: start; }
+  }
+
+  .xp { position: relative; display: grid; gap: var(--sc-4); height: 100%; grid-template-rows: auto 1fr; }
+  .xp[data-reveal] { transition-delay: var(--d, 0ms); }
+  .xp__media { position: relative; overflow: hidden; border-radius: var(--sc-r-sm); }
+  .xp__media :global(img) { transition: transform 1.2s var(--sc-ease-out); }
+  .xp__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(10 14 12 / 0.45), transparent 26%), linear-gradient(0deg, color-mix(in srgb, var(--slp-region-deep) 70%, transparent), transparent 34%); pointer-events: none; }
+  .xp__media::before { content: ''; position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 3px; background: var(--slp-region-ui); }
+  .xp__media :global(img) { filter: saturate(1.05) contrast(1.04); }
+  .xp__n { position: absolute; z-index: 1; right: 1rem; bottom: 0.8rem; font: 500 2.4rem/1 var(--sc-font-display); color: rgb(246 241 231 / 0.88); letter-spacing: 0.02em; }
+  .xp__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-light); flex: none; }
+  .xp__cue { position: absolute; z-index: 1; top: 0.9rem; left: 0.9rem; display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.75rem; border-radius: 999px; background: rgb(246 241 231 / 0.92); color: var(--slp-charcoal); font: 700 0.62rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; }
+  .xp__body { display: grid; gap: 0.6rem; align-content: start; grid-template-rows: auto auto 1fr auto; }
+  .xp__meta { font: 700 0.66rem/1.3 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .xp__reg { color: var(--slp-region-text); }
+  .xp__title { font: 600 clamp(1.7rem, 1.4rem + 0.8vw, 2.15rem)/1.05 var(--sc-font-display); letter-spacing: -0.01em; text-wrap: balance; min-height: 2.1em; }
+  .xp__title a { color: inherit; text-decoration: none; }
+  .xp__title a::after { content: ''; position: absolute; inset: 0; z-index: 2; }
+  .xp__text { font-size: var(--sc-t-sm); line-height: 1.6; color: var(--sc-ink-soft); max-width: 44ch; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .xp__more { display: inline-flex; align-items: center; gap: 0.7rem; margin-top: 0.3rem; font: 700 0.68rem/1 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; color: var(--slp-region-ui); }
+  .xp__more::after { content: ''; width: 1.6rem; height: 1px; background: currentColor; transition: width 260ms var(--sc-ease-out); }
+  .xp:has(a:focus-visible) .xp__media { outline: 3px solid var(--slp-gold); outline-offset: 3px; }
+  @media (hover: hover) and (pointer: fine) {
+    .xp:hover .xp__media :global(img) { transform: scale(1.05); }
+    .xp:hover .xp__more::after { width: 2.8rem; }
+    .xp:hover .xp__title a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
+  }
+  .xps__aside { display: grid; gap: var(--sc-4); justify-items: start; }
+  .xps__all { color: var(--sc-ink); }
+</style>

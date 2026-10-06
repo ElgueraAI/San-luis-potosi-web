@@ -1,0 +1,87 @@
+---
+/**
+ * NEEDS_MANUAL_ASSET placeholder. Holds the final layout (same ratio, same
+ * crop box) with a quiet photographic ground and a small label that tells
+ * the production team exactly what belongs here. Decorative to assistive
+ * technology unless `subject` should be announced (it never claims to be the
+ * real image).
+ */
+interface Props {
+  label: string;
+  subject: string;
+  ratio?: string;
+  region?: string;
+  kind?: 'photo' | 'video';
+  fill?: boolean;
+  class?: string;
+  compact?: boolean;
+}
+const { label, subject, ratio, region = 'global', kind = 'photo', fill = false, class: cls, compact = false } = Astro.props;
+---
+<figure
+  class:list={['ma', { 'ma--fill': fill, 'ma--compact': compact }, cls]}
+  data-ph-region={region}
+  style={ratio && !fill ? `aspect-ratio:${ratio.replace(':', '/')}` : undefined}
+  aria-hidden="true"
+>
+  <span class="ma__texture"></span>
+  <figcaption class="ma__label">
+    <span class="ma__slot">{label}{ratio ? ` · ${ratio}` : ''}</span>
+    <span class="ma__need">{kind === 'video' ? 'Video requerido' : 'Fotografía requerida'}: {subject}</span>
+    <span class="ma__status">Needs manual asset</span>
+  </figcaption>
+</figure>
+
+<style>
+  .ma {
+    --ma-a: #3a3630;
+    --ma-b: #23211d;
+    --ma-line: #8c7a62;
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 90% at 72% 18%, color-mix(in oklab, var(--ma-a) 75%, var(--ma-line)) 0%, transparent 62%),
+      linear-gradient(170deg, var(--ma-a), var(--ma-b));
+    color: #f3ede2;
+    min-height: 8rem;
+  }
+  .ma--fill { position: absolute; inset: 0; min-height: 0; }
+  .ma[data-ph-region='altiplano'] { --ma-a: #5a4332; --ma-b: #2c211a; --ma-line: #c38452; }
+  .ma[data-ph-region='centro'] { --ma-a: #59403f; --ma-b: #2b2223; --ma-line: #b9838a; }
+  .ma[data-ph-region='zona-media'] { --ma-a: #2f5552; --ma-b: #17302e; --ma-line: #6fb3ab; }
+  .ma[data-ph-region='huasteca'] { --ma-a: #23483b; --ma-b: #10261e; --ma-line: #5fae8f; }
+  .ma__texture {
+    position: absolute;
+    inset: -2%;
+    background: var(--ma-line);
+    opacity: 0.22;
+    -webkit-mask: var(--slp-contours) center / 820px auto repeat;
+    mask: var(--slp-contours) center / 820px auto repeat;
+  }
+  .ma__label {
+    position: absolute;
+    left: clamp(0.75rem, 2vw, 1.25rem);
+    bottom: clamp(0.75rem, 2vw, 1.25rem);
+    right: clamp(0.75rem, 2vw, 1.25rem);
+    display: grid;
+    gap: 0.25rem;
+    max-width: 30rem;
+    font: 500 0.72rem/1.45 var(--sc-font-text);
+    letter-spacing: 0.01em;
+  }
+  .ma__slot { font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.64rem; }
+  .ma__need { color: #e6ddcf; }
+  .ma__status {
+    justify-self: start;
+    margin-top: 0.15rem;
+    padding: 0.18rem 0.45rem;
+    border: 1px solid color-mix(in oklab, #f3ede2 45%, transparent);
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .ma--compact .ma__need { display: none; }
+</style>

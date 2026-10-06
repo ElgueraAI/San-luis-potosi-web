@@ -1,0 +1,105 @@
+---
+/**
+ * A "Qué hacer" category: hero, subcategory navigation, then one section per
+ * subcategory with its destinations (uniform 4:5 cards), entities (museums,
+ * events, protected areas…) and, for gastronomy, the regional dishes from the
+ * official brochures. Every section ends with links into the map, the
+ * directories or Mi Ruta.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import DestinationCard from '@/components/ui/DestinationCard.astro';
+import EntityCard from '@/components/portal/EntityCard.astro';
+import MuniCard from '@/components/portal/MuniCard.astro';
+import Photo from '@/components/media/Photo.astro';
+import { THINGS, type Cat } from '@/data/thingsToDo';
+import { eventSlug, archSlug, REGION_LABEL } from '@/data/portal';
+import { ALL_EXPERIENCES } from '@/data/experiences';
+import { href, tdHref, eventHref, archHref, experienceHref } from '@/i18n/routes';
+
+export function getStaticPaths() {
+  return THINGS.map((c) => ({ params: { cat: c.id }, props: { c } }));
+}
+const { c } = Astro.props as { c: Cat };
+const darkTone = ['heritage', 'night'].includes(c.tone);
+const sectionTone = (i: number) => (i % 2 ? (darkTone ? 'heritage' : c.tone === 'neutral' ? undefined : c.tone === 'huasteca' ? 'mist' : c.tone) : undefined);
+const destIds = new Set(c.subs.flatMap((s) => s.dests.map((d) => d.id)));
+const experiences = ALL_EXPERIENCES.filter((x) => destIds.has(x.d.id)).slice(0, 4);
+const linkFor = (e: { entity_type: string; id: string; canonical_name: string }) =>
+  e.entity_type === 'event' ? eventHref(eventSlug(e as never)) : e.entity_type === 'archaeological-site' ? archHref(archSlug(e as never)) : null;
+const moreHref = (m: NonNullable<Cat['subs'][number]['more']>) => `${href(m.route)}${m.query ? `?${m.query}` : ''}`;
+const others = THINGS.filter((x) => x.id !== c.id);
+---
+<BaseLayout title={c.label} description={`${c.label} en San Luis Potosí: ${c.subs.map((s) => s.label.toLowerCase()).join(', ')}.`} image={c.image}>
+  <PageHeader label="Qué hacer" title={c.label} lede={c.lede} image={c.image} crumbs={[{ label: 'Qué hacer', href: href('thingsToDo') }, { label: c.label }]} />
+
+  <nav class="pnav" aria-label={`Subtemas de ${c.label}`}>
+    <ul class="wrap">{c.subs.map((s) => <li><a href={`#${s.id}`}>{s.label}</a></li>)}</ul>
+  </nav>
+
+  {c.subs.map((s, i) => {
+    const tone = sectionTone(i);
+    const ground = tone && ['heritage', 'night', 'jungle'].includes(tone) ? 'dark' : i % 2 ? 'ivory' : 'light';
+    const munis = s.items.filter((e) => e.entity_type === 'municipality');
+    const ents = s.items.filter((e) => e.entity_type !== 'municipality');
+    return (
+      <section id={s.id} class="psec" data-ground={ground} data-tone={tone} aria-labelledby={`${s.id}-t`}>
+        <div class="wrap">
+          <div class="psec__head psec__head--split">
+            <div>
+              <p class="label">{c.short}</p>
+              <h2 id={`${s.id}-t`} class="psec__title">{s.label}</h2>
+            </div>
+            <div class="cat__aside">
+              <p class="body muted">{s.intro}</p>
+              <p class="psec__count">{[s.dests.length && `${s.dests.length} destinos`, ents.length && `${ents.length} registros`, munis.length && `${munis.length} municipios`].filter(Boolean).join(' · ')}</p>
+            </div>
+          </div>
+          {s.notes && s.notes.length > 0 && (
+            <div class="cat__notes">{s.notes.map((n) => <div class="note" data-region={n.region}><p class="note__t">{n.title}{n.region && <span class="tiny muted"> · {REGION_LABEL[n.region]}</span>}</p><p>{n.text}. <span class="tiny">{n.source}.</span></p></div>)}</div>
+          )}
+          {s.dests.length > 0 && (
+            <ul class="pgrid pgrid--rail">
+              {s.dests.map((d) => <li><DestinationCard d={d} ratio="4/5" size="sm" sizes="(max-width: 640px) 78vw, 18rem" headingLevel="h3" /></li>)}
+            </ul>
+          )}
+          {munis.length > 0 && <ul class="pgrid pgrid--rail cat__gap">{munis.map((m) => <li><MuniCard m={m} /></li>)}</ul>}
+          {ents.length > 0 && (
+            <ul class="pgrid pgrid--ent cat__gap">{ents.map((e) => <li><EntityCard e={e} href={linkFor(e)} /></li>)}</ul>
+          )}
+          <p class="cat__more">
+            {s.more && <a class="arrow" href={moreHref(s.more)}>{s.more.label}</a>}
+            {s.dests.some((d) => d.coords) && <a class="arrow" href={href('map')}>Ver en el mapa</a>}
+          </p>
+        </div>
+      </section>
+    );
+  })}
+
+  {experiences.length > 0 && (
+    <section class="psec" data-ground="dark" data-tone="jungle" aria-labelledby="cx-t">
+      <div class="wrap">
+        <div class="psec__head"><p class="label">Experiencias</p><h2 id="cx-t" class="psec__title">Para vivirlo</h2></div>
+        <ul class="pgrid">
+          {experiences.map((x) => <li><a class="tile" href={experienceHref(x.slug)}>{x.image && <Photo id={x.image} fill sizes="(max-width: 640px) 92vw, 22rem" widths={[480, 800]} alt="" />}<span class="tile__body"><span class="tile__sub">{x.interest} · {x.d.name.split(' – ')[0]}</span><span class="tile__title">{x.title}</span></span></a></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="psec psec--tight" data-ground="ivory" aria-labelledby="oth-t">
+    <div class="wrap">
+      <h2 id="oth-t" class="label">Otros temas</h2>
+      <ul class="cat__others">{others.map((o) => <li><a class="arrow" href={tdHref(o.id)}>{o.label}</a></li>)}</ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cat__aside { display: grid; gap: var(--sc-2); }
+  .cat__notes { display: grid; gap: var(--sc-3); grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); margin-bottom: var(--sc-5); }
+  .cat__notes .note { margin: 0; }
+  .cat__gap { margin-top: var(--sc-5); }
+  .cat__more { display: flex; flex-wrap: wrap; gap: var(--sc-3) var(--sc-6); margin-top: var(--sc-5); }
+  .cat__others { list-style: none; display: flex; flex-wrap: wrap; gap: var(--sc-3) var(--sc-6); margin-top: var(--sc-3); }
+</style>

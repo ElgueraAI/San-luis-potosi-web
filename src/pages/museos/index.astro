@@ -1,0 +1,60 @@
+---
+/**
+ * Museos y recintos culturales: the statewide catalogue from the Secretaría de
+ * Cultura's SIC (museums, theatres, cultural centres, galleries, auditoriums,
+ * craft houses), with featured museums from the researched destinations, a
+ * searchable directory and region/municipality filters.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import DestinationCard from '@/components/ui/DestinationCard.astro';
+import Directory from '@/components/portal/Directory.astro';
+import StateSilhouette from '@/components/season/StateSilhouette.astro';
+import { museums, venues, REGION_LABEL } from '@/data/portal';
+import { destinations } from '@/data/research';
+import { href } from '@/i18n/routes';
+
+const featured = destinations.filter((d) => ['C08', 'C07', 'C05', 'M06', 'H08'].includes(d.id));
+const all = [...museums, ...venues].sort((a, b) => Number(b.entity_type === 'museum') - Number(a.entity_type === 'museum') || a.canonical_name.localeCompare(b.canonical_name, 'es'));
+const types: [string, string][] = [['museum', 'Museos'], ['Teatro', 'Teatros'], ['Centro cultural', 'Centros culturales'], ['Galería', 'Galerías'], ['Auditorio', 'Auditorios'], ['Casa o tienda de artesanía', 'Artesanía']];
+const byRegion = Object.entries(REGION_LABEL).map(([id, l]) => ({ id, l, n: museums.filter((m) => m.region === id).length }));
+const munis = new Set(museums.map((m) => m.municipality_id)).size;
+const points = museums.filter((m) => m.latitude != null).map((m) => ({ id: m.id, name: m.canonical_name, region: m.region ?? 'centro', status: 'provisional' as const, coords: [m.longitude!, m.latitude!] as [number, number] }));
+---
+<BaseLayout title="Museos y recintos culturales" description={`${museums.length} museos y ${venues.length} recintos culturales de San Luis Potosí según el Sistema de Información Cultural.`} image="wc-79606411">
+  <PageHeader label="Arte y museos" title="Museos y recintos culturales" lede={`${museums.length} museos en ${munis} municipios y ${venues.length} teatros, centros culturales, galerías y auditorios, según el Sistema de Información Cultural de la Secretaría de Cultura.`} image="wc-79606411" crumbs={[{ label: 'Qué hacer', href: href('thingsToDo') }, { label: 'Museos' }]} />
+
+  <section class="psec" data-ground="dark" data-tone="heritage" aria-labelledby="fm-t">
+    <div class="wrap">
+      <div class="psec__head psec__head--split">
+        <div><p class="label">Destacados</p><h2 id="fm-t" class="psec__title">Arte y memoria</h2></div>
+        <ul class="mu__stats">{byRegion.map((r) => <li data-region={r.id}><b>{r.n}</b> museos · {r.l}</li>)}</ul>
+      </div>
+      <ul class="pgrid pgrid--rail">{featured.map((d) => <li><DestinationCard d={d} ratio="4/5" size="sm" sizes="(max-width: 640px) 78vw, 18rem" headingLevel="h3" /></li>)}</ul>
+    </div>
+  </section>
+
+  <section class="psec" data-ground="light" data-tone="utility" aria-labelledby="dir-t">
+    <div class="wrap mu__grid">
+      <div>
+        <div class="psec__head"><p class="label">Directorio</p><h2 id="dir-t" class="psec__title">Busca por municipio o tipo</h2></div>
+        <Directory name="culture" items={all} types={types} label="museos y recintos" total={all.length} note="Fuente: Sistema de Información Cultural (SIC), Secretaría de Cultura. Uso libre con atribución. El horario no se publica en esta fuente: confírmalo con el recinto." />
+      </div>
+      <aside class="mu__map" aria-label="Museos en el estado">
+        <p class="label">Museos en el mapa</p>
+        <StateSilhouette places={points} variant="line" />
+        <p class="tiny muted">Puntos del SIC (aproximados).</p>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .mu__stats { list-style: none; display: grid; gap: 0.4rem; font-size: 0.9rem; }
+  .mu__stats li { display: flex; gap: 0.5rem; align-items: baseline; }
+  .mu__stats b { font: 600 1.5rem/1 var(--sc-font-display); color: var(--slp-region-ui); }
+  .mu__grid { display: grid; gap: var(--sc-7); }
+  @media (min-width: 1200px) { .mu__grid { grid-template-columns: minmax(0, 1fr) 17rem; } .mu__map { position: sticky; top: calc(var(--slp-header-h) + 1rem); align-self: start; } }
+  .mu__map { display: grid; gap: var(--sc-3); }
+  .mu__map :global(.sil) { --sil-ground: var(--sc-surface); --sil-edge: var(--slp-charcoal); --sil-pin-ring: #fff; }
+</style>

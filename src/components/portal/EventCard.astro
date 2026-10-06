@@ -1,0 +1,76 @@
+---
+/**
+ * Event card for the calendar. A photograph only when it shows the event or
+ * its place (EVENT_IMAGE, or the related destination's photo); otherwise a
+ * typographic date tile in the region's tones, never an unrelated picture.
+ * Carries the municipality id so the calendar map can highlight it.
+ */
+import Photo from '@/components/media/Photo.astro';
+import { DATE_STATUS, REGION_LABEL, muniById, startDay, type Entity } from '@/data/portal';
+import { getDestination, MONTHS_ES } from '@/data/research';
+import { EVENT_IMAGE } from '@/data/eventsText';
+import { eventHref, destHref, muniHref } from '@/i18n/routes';
+
+interface Props { e: Entity & { slug?: string }; month?: number | null; seasonal?: boolean }
+const { e, month = null, seasonal = false } = Astro.props;
+const status = DATE_STATUS[e.date_status ?? 'DATE_PENDING'];
+const dest = e.related_entities.map((id) => getDestination(id)).find(Boolean) ?? null;
+const img = EVENT_IMAGE[e.id]?.id ?? (dest?.media.card ?? null);
+const muni = e.municipality_id ? muniById.get(e.municipality_id) : null;
+const m = month ?? e.months?.[0] ?? null;
+const day = m ? startDay(e, m) : 40;
+const ab = (n: number) => MONTHS_ES[n - 1].slice(0, 3);
+const win = e.seasonal_window?.from && e.seasonal_window?.to ? `${ab(e.seasonal_window.from)}–${ab(e.seasonal_window.to)}` : null;
+const link = seasonal ? (dest ? destHref(dest.slug) : muni ? muniHref(muni.slug!) : null) : eventHref(e.slug!);
+---
+<article class="evc" data-region={e.region ?? undefined} data-ev-mun={e.municipality_id ?? ''}>
+  <div class="evc__media">
+    {img ? (
+      <Photo id={img} ratio="3/2" sizes="(max-width: 640px) 90vw, 20rem" widths={[400, 640]} alt="" />
+    ) : (
+      <div class="evc__tile" aria-hidden="true">
+        {seasonal ? (e.all_year ? <span class="evc__big">12</span> : win ? <span class="evc__big evc__big--sm">{win}</span> : <span class="evc__big evc__big--sm">lluvias</span>) : <span class="evc__big">{day < 40 ? day : '·'}</span>}
+        <span class="evc__mon">{seasonal ? (e.all_year ? 'meses' : 'temporada') : m ? MONTHS_ES[m - 1] : 'por confirmar'}</span>
+      </div>
+    )}
+    <span class:list={['evc__status', `is-${status.tone}`]}>{status.short}</span>
+  </div>
+  <div class="evc__body">
+    <p class="evc__type">{e.subcategory ?? 'Evento'}</p>
+    <h3 class="evc__name">{link ? <a href={link}>{e.canonical_name}</a> : e.canonical_name}</h3>
+    {e.date_pattern && <p class="evc__when">{e.date_pattern}</p>}
+    <p class="evc__where">
+      {muni ? <span>{muni.canonical_name}</span> : <span>{e.municipality ?? 'Todo el estado'}</span>}
+      {e.region && <span class="evc__reg"><span class="evc__dot" aria-hidden="true"></span>{REGION_LABEL[e.region]}</span>}
+    </p>
+  </div>
+</article>
+
+<style>
+  .evc { position: relative; display: grid; grid-template-rows: auto 1fr; height: 100%; border-radius: var(--sc-r-sm); overflow: hidden; background: var(--sc-surface); transition: box-shadow 200ms var(--sc-ease-out), transform 200ms var(--sc-ease-out); }
+  .evc:hover, .evc:focus-within { box-shadow: 0 0 0 2px var(--slp-region-ui, var(--slp-gold)); }
+  .evc__media { position: relative; aspect-ratio: 3 / 2; overflow: hidden; }
+  .evc__media :global(.photo) { height: 100%; }
+  /* a date tile carries one number: on phones it does not need a photo-sized frame */
+  @media (max-width: 40em) { .evc__media:has(.evc__tile) { aspect-ratio: 5 / 2; } }
+  .evc__tile { height: 100%; display: grid; align-content: end; padding: 0.9rem 1rem; background:
+    radial-gradient(80% 90% at 85% 15%, var(--slp-region-glow, rgb(199 163 90 / 0.25)), transparent 60%),
+    linear-gradient(150deg, var(--slp-region-deep, var(--slp-charcoal)), color-mix(in srgb, var(--slp-region-deep, #222) 70%, #000)); color: var(--slp-ivory); }
+  .evc__big { font: 500 3.2rem/0.9 var(--sc-font-display); font-variant-numeric: lining-nums; }
+  .evc__big--sm { font-size: 2.2rem; }
+  .evc__mon { font: 700 0.62rem/1.2 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; color: var(--slp-region-dark, var(--slp-gold)); }
+  .evc__status { position: absolute; top: 0.6rem; left: 0.6rem; padding: 0.35rem 0.55rem; border-radius: 999px; background: rgb(246 241 231 / 0.94); color: var(--slp-charcoal); font: 700 0.58rem/1 var(--sc-font-text); letter-spacing: 0.1em; text-transform: uppercase; }
+  .evc__status.is-ok { background: var(--slp-gold); }
+  .evc__status.is-season { background: #cfe8df; }
+  .evc__body { display: grid; gap: 0.35rem; align-content: start; padding: 0.9rem 1rem 1rem; }
+  .evc__type { font: 700 0.6rem/1.3 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--slp-region-text, var(--sc-ink-soft)); }
+  .evc__name { font: 600 1.2rem/1.15 var(--sc-font-display); text-wrap: balance; }
+  .evc__name a { color: inherit; text-decoration: none; }
+  .evc__name a::after { content: ''; position: absolute; inset: 0; }
+  .evc__name a:focus-visible { outline: none; }
+  .evc:has(a:focus-visible) { outline: 3px solid var(--slp-region-ui, var(--slp-gold)); outline-offset: 2px; }
+  .evc__when { font-size: 0.8rem; color: var(--sc-ink-soft); line-height: 1.4; }
+  .evc__where { display: flex; flex-wrap: wrap; gap: 0.2rem 0.7rem; font-size: 0.8rem; font-weight: 650; }
+  .evc__reg { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 500; color: var(--sc-ink-soft); }
+  .evc__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-ui); }
+</style>

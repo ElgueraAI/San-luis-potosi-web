@@ -1,0 +1,142 @@
+{
+ "generated": "2026-10-06",
+ "rule": "INAH open data (zones open to the public) and INAH-documented sites. Access is never implied without INAH confirmation.",
+ "records": [
+  {
+   "id": "arq-tamohi",
+   "canonical_name": "Tamohí",
+   "alternate_names": [
+    "El Consuelo",
+    "Tamohí"
+   ],
+   "entity_type": "archaeological-site",
+   "subcategory": "Zona arqueológica",
+   "municipality": "Tamuín",
+   "municipality_id": "24040",
+   "locality": null,
+   "region": "huasteca",
+   "latitude": 21.95291,
+   "longitude": -98.74975,
+   "coordinate_status": "approximate",
+   "short_description": "Importante centro huasteco (1100-1300). Pintura mural, finos trabajos sobre concha y caracol marino, alfarería, orfebrería y esculturas como El adolescente huasteco, hablan de la refinada estética de esta cultura.",
+   "long_description": null,
+   "historical_context": "1100–1300 d. C. (según Lugares INAH)",
+   "why_visit": null,
+   "activities": [],
+   "recommended_duration": null,
+   "seasonality": null,
+   "accessibility": null,
+   "opening_hours": "Lunes a domingo de 09:00 a 18:00 h; último acceso 17:00 h",
+   "price": "Sin costo para visitantes nacionales y extranjeros (Lugares INAH, consultado el 2026-10-06)",
+   "official_contact": {
+    "address": "Camino a Tamuín Km 1, Municipio de Tamuín, San Luis Potosí.  Entronque al camino con la Carretera Tamuín-San Vicente/SLP 14, Km 5.8",
+    "responsible": "Centro INAH San Luis Potosí"
+   },
+   "official_url": "https://lugares.inah.gob.mx/es/node/4527",
+   "booking_url": null,
+   "source_ids": [
+    "inah-datos-zonas-arqueologicas",
+    "inah-lugares",
+    "sic-zona-arqueologica"
+   ],
+   "verification_status": "verified",
+   "last_verified": "2026-10-06",
+   "image_ids": [],
+   "related_entities": [],
+   "tags": [],
+   "travel_notes": null,
+   "access_status": "OPEN_TO_PUBLIC",
+   "site_museum": false,
+   "intro_room": false,
+   "services": []
+  },
+  {
+   "id": "arq-tamtoc",
+   "canonical_name": "Tamtoc",
+   "alternate_names": [],
+   "entity_type": "archaeological-site",
+   "subcategory": "Zona arqueológica",
+   "municipality": "Tamuín",
+   "municipality_id": "24040",
+   "locality": null,
+   "region": "huasteca",
+   "latitude": 21.92476,
+   "longitude": -98.81268,
+   "coordinate_status": "approximate",
+   "short_description": "En la Huasteca potosina (900-1100), con importante comercio fluvial, destacan sus pirámides, monolitos, estelas, pintura mural, uso del calendario, arquitectura de edificios circulares y asombrosas esculturas en piedra, como la Venus de Tamtoc.",
+   "long_description": null,
+   "historical_context": "900–1100 d. C. (según Lugares INAH)",
+   "why_visit": null,
+   "activities": [],
+   "recommended_duration": null,
+   "seasonality": null,
+   "accessibility": null,
+   "opening_hours": "Lunes a domingo de 09:00 a 18:00 h; último acceso 17:00 h",
+   "price": "Sin costo para visitantes nacionales y extranjeros (Lugares INAH, consultado el 2026-10-06)",
+   "official_contact": {
+    "address": "Ramal de carretera a Tamtoc Km 10, Municipio de Tamuín, San Luis Potosí. Entronque al camino con la Carretera Tamuín-San Vicente/SLP 14",
+    "responsible": "Centro INAH San Luis Potosí"
+   },
+   "official_url": "https://lugares.inah.gob.mx/es/node/4460",
+   "booking_url": null,
+   "source_ids": [
+    "inah-datos-zonas-arqueologicas",
+    "inah-lugares",
+    "sic-zona-arqueologica"
+   ],
+   "verification_status": "verified",
+   "last_verified": "2026-10-06",
+   "image_ids": [],
+   "related_entities": [
+    "H16"
+   ],
+   "tags": [],
+   "travel_notes": null,
+   "access_status": "OPEN_TO_PUBLIC",
+   "site_museum": false,
+   "intro_room": false,
+   "services": [
+    "Estacionamiento",
+    "Módulo de información",
+    "Sanitarios"
+   ]
+  },
+  {
+   "id": "arq-tanute",
+   "canonical_name": "Tanute",
+   "alternate_names": [],
+   "entity_type": "archaeological-site",
+   "subcategory": "Sitio arqueológico documentado",
+   "municipality": null,
+   "municipality_id": null,
+   "locality": null,
+   "region": "huasteca",
+   "latitude": null,
+   "longitude": null,
+   "coordinate_status": "unknown",
+   "short_description": "Asentamiento de larga duración en la Huasteca potosina, estudiado en relación con la provincia tributaria mexica de Oxitipa; alcanzó su máxima extensión a inicios del siglo XVI.",
+   "long_description": null,
+   "historical_context": "Kroefges, Schulze, Hernández Correa y García Morales, «Oxitipa y el sitio arqueológico de Tanute, Huasteca potosina», Arqueología (INAH), núm. 65.",
+   "why_visit": null,
+   "activities": [],
+   "recommended_duration": null,
+   "seasonality": null,
+   "accessibility": null,
+   "opening_hours": null,
+   "price": null,
+   "official_contact": null,
+   "official_url": "https://revistas.inah.gob.mx/index.php/arqueologia/article/view/21582",
+   "booking_url": null,
+   "source_ids": [
+    "inah-revista-arqueologia-tanute"
+   ],
+   "verification_status": "documented",
+   "last_verified": "2026-10-06",
+   "image_ids": [],
+   "related_entities": [],
+   "tags": [],
+   "travel_notes": "Documentado en una publicación del INAH. No consta que esté abierto al público: no se presenta como atractivo visitable.",
+   "access_status": "UNKNOWN_ACCESS"
+  }
+ ]
+}

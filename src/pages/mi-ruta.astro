@@ -1,0 +1,83 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import MapView from '@/components/map/MapView.astro';
+import { REGIONS } from '@/data/regions';
+import { href, regionHref } from '@/i18n/routes';
+---
+<BaseLayout title="Mi Ruta" description="Los lugares que guardaste en San Luis Potosí, ordenados en un recorrido con mapa. Se guardan solo en este navegador.">
+  <PageHeader compact label="Mi Ruta" title="Tu viaje, a tu manera." lede="Los lugares que guardaste mientras explorabas. Ordénalos, quítalos o revisa el recorrido en el mapa. Se guardan solo en este navegador; no necesitas cuenta." />
+
+  <section class="section section--tight" data-ground="light" data-my-route data-places-url={href('placesData')} aria-label="Lugares guardados">
+    <div class="wrap mr">
+      <div class="mr__col">
+        <div class="mr__summary" data-mr-summary hidden>
+          <p class="mr__count"><span class="display" data-mr-count>0</span> lugares</p>
+          <ul class="mr__regions" data-mr-regions aria-label="Regiones de tu ruta">
+            {REGIONS.map((r) => <li data-region={r.id} data-mr-region={r.id}><span aria-hidden="true"></span>{r.name} <b data-mr-region-n>0</b></li>)}
+          </ul>
+        </div>
+        <p class="mr__loading small muted" data-mr-loading>Cargando tu ruta…</p>
+        <ol class="mr__list" data-mr-list aria-label="Orden de tu recorrido"></ol>
+
+        <div class="mr__empty" data-mr-empty hidden>
+          <p class="display display--md">Tu ruta está vacía.</p>
+          <p class="body muted">Explora el mapa, las regiones o los destinos y toca «Añadir a Mi Ruta» en los lugares que te llamen. Aparecerán aquí, en orden, con su región.</p>
+          <div class="mr__empty-cta">
+            <a class="btn" href={href('map')}>Explorar el mapa</a>
+            <a class="btn btn--ghost" href={href('home', {}, 'es', 'que-hacer')}>Destinos imperdibles</a>
+          </div>
+        </div>
+
+        <div class="mr__actions" data-mr-actions hidden>
+          <button type="button" class="btn btn--ghost" data-mr-clear>Vaciar Mi Ruta</button>
+          <a class="arrow" href={href('routes')}>Ver rutas sugeridas</a>
+        </div>
+        <div class="mr__suggest" data-mr-suggest hidden>
+          <p class="label">Explora otra región</p>
+          <p class="small muted">Tu ruta aún no pasa por:</p>
+          <ul>{REGIONS.map((r) => <li data-region={r.id} data-mr-missing={r.id} hidden><a class="arrow" href={regionHref(r.slug)}>{r.name}</a></li>)}</ul>
+        </div>
+        <p class="mr__error small" data-mr-error hidden>No se pudieron cargar los datos de tus lugares. Revisa tu conexión y recarga la página; tu selección sigue guardada.</p>
+      </div>
+      <div class="mr__mapcol">
+        <MapView mode="route" label="Mapa de tu ruta" />
+        <p class="source">La línea une tus lugares en el orden de la lista, en línea recta; no es una ruta carretera. Lugares sin ubicación puntual no se dibujan.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .mr { display: grid; gap: var(--sc-7); }
+  @media (min-width: 1000px) { .mr { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); align-items: start; } .mr__mapcol { position: sticky; top: calc(var(--slp-header-h) + 1rem); } }
+  .mr__col { display: grid; gap: var(--sc-5); align-content: start; }
+  .mr__mapcol { display: grid; gap: var(--sc-3); }
+  .mr__count { display: flex; align-items: baseline; gap: 0.5rem; font-weight: 650; }
+  .mr__count .display { font-size: 3rem; line-height: 1; }
+  .mr__summary { display: grid; gap: var(--sc-3); }
+  .mr__regions { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .mr__regions li { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.4rem 0.75rem; border: 1px solid var(--sc-hairline-strong); border-radius: 999px; font-size: 0.82rem; font-weight: 600; }
+  .mr__regions li span { width: 8px; height: 8px; border-radius: 50%; background: var(--slp-region-ui); }
+  .mr__regions li[data-zero] { opacity: 0.45; }
+  .mr__list { list-style: none; display: grid; border-top: 1px solid var(--sc-hairline-strong); }
+  .mr__list :global(li) { display: grid; grid-template-columns: auto 5rem 1fr auto; gap: var(--sc-3); align-items: center; padding: var(--sc-3) 0; border-bottom: 1px solid var(--sc-hairline); }
+  .mr__list :global(.mr__n) { width: 1.8rem; height: 1.8rem; display: grid; place-items: center; border-radius: 50%; background: var(--slp-region-ui); color: #fff; font: 700 0.78rem/1 var(--sc-font-text); }
+  .mr__list :global(.mr__img) { width: 5rem; aspect-ratio: 1; object-fit: cover; border-radius: var(--sc-r-sm); background: var(--sc-surface); }
+  .mr__list :global(.mr__ph) { width: 5rem; aspect-ratio: 1; border-radius: var(--sc-r-sm); background: linear-gradient(160deg, #3a3630, #23211d); }
+  .mr__list :global(.mr__name) { font: 600 1.35rem/1.1 var(--sc-font-display); }
+  .mr__list :global(.mr__name a) { color: inherit; text-decoration: none; }
+  .mr__list :global(.mr__meta) { font-size: 0.76rem; color: var(--sc-ink-soft); }
+  .mr__list :global(.mr__ctrl) { display: flex; gap: 0.25rem; }
+  .mr__list :global(.mr__ctrl button) { width: 40px; height: 40px; border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: none; display: grid; place-items: center; font-size: 0.9rem; }
+  .mr__list :global(.mr__ctrl button:disabled) { opacity: 0.3; cursor: default; }
+  @media (max-width: 520px) {
+    .mr__list :global(li) { grid-template-columns: auto 3.5rem 1fr; }
+    .mr__list :global(.mr__img), .mr__list :global(.mr__ph) { width: 3.5rem; }
+    .mr__list :global(.mr__ctrl) { grid-column: 2 / -1; }
+  }
+  .mr__empty { display: grid; gap: var(--sc-4); padding: var(--sc-6); border: 1px dashed var(--sc-hairline-strong); border-radius: var(--sc-r-sm); }
+  .mr__empty-cta, .mr__actions { display: flex; flex-wrap: wrap; gap: var(--sc-3); align-items: center; }
+  .mr__suggest ul { list-style: none; display: flex; flex-wrap: wrap; gap: var(--sc-5); }
+  .mr__error { padding: var(--sc-3) var(--sc-4); background: var(--sc-surface); }
+</style>

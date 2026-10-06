@@ -1,0 +1,276 @@
+---
+/**
+ * Municipality page, generated for all 59 municipalities from
+ * research/entities. Each section renders only when its data exists; a
+ * municipality with little documented tourism gets a short page (identity,
+ * map, what is recorded, neighbours, sources), never filler.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import DestinationCard from '@/components/ui/DestinationCard.astro';
+import EntityCard from '@/components/portal/EntityCard.astro';
+import MuniCard from '@/components/portal/MuniCard.astro';
+import StateSilhouette from '@/components/season/StateSilhouette.astro';
+import MapView from '@/components/map/MapView.astro';
+import RouteButton from '@/components/ui/RouteButton.astro';
+import Photo from '@/components/media/Photo.astro';
+import { municipalities, muniView, richness, nearbyMunicipalities, REGION_LABEL, mobility, km, eventSlug, archSlug, type Entity } from '@/data/portal';
+import { distances, gastronomyFor, sourceLabel, sourceUrl, MONTHS_ES, type RegionId } from '@/data/research';
+import { ALL_EXPERIENCES } from '@/data/experiences';
+import { href, regionHref, eventHref, archHref, experienceHref } from '@/i18n/routes';
+import { REGIONS } from '@/data/regions';
+
+export function getStaticPaths() {
+  return municipalities.map((m) => ({ params: { slug: m.slug }, props: { m } }));
+}
+const { m } = Astro.props as { m: Entity };
+const v = muniView(m);
+const rich = richness(v) >= 6;
+const region = m.region as RegionId | null;
+const regionMeta = REGIONS.find((r) => r.id === region);
+const name = m.canonical_name;
+const seatName = m.seat?.name ?? null;
+const near = nearbyMunicipalities(m, 4);
+const experiences = ALL_EXPERIENCES.filter((x) => v.destinations.some((d) => d.id === x.d.id));
+const dishes = region ? gastronomyFor(region).filter((g) => g.place && (g.place.includes(name) || (seatName && g.place.includes(seatName)))) : [];
+const dist = distances.filter((d) => [name, seatName].some((n) => n && (d.from.includes(n) || d.to.includes(n))));
+const airports = mobility.filter((x) => /aeropuerto/i.test(x.canonical_name) && x.latitude != null && m.latitude != null)
+  .map((x) => ({ x, d: km(m.latitude!, m.longitude!, x.latitude!, x.longitude!) })).sort((a, b) => a.d - b.d);
+const terminals = v.mobility.filter((x) => /central|terminal/i.test(x.canonical_name));
+const seatPlace = m.seat ? [{ id: m.id, name: seatName!, region: region ?? 'centro', status: 'ready' as const, coords: [m.seat.longitude, m.seat.latitude] as [number, number] }] : [];
+const pointPlaces = [
+  ...seatPlace,
+  ...v.destinations.filter((d) => d.coords).map((d) => ({ id: d.id, name: d.name, region: d.region, status: d.mapStatus === 'ready' ? ('ready' as const) : ('provisional' as const), coords: d.coords! })),
+];
+const sources = [...new Set([...m.source_ids, ...v.destinations.flatMap((d) => d.officialSources), 'inegi-iter-2020'])].filter(Boolean);
+const culture = [...v.heritage, ...v.cathedrals, ...v.venues.filter((x) => /Teatro|Centro cultural|artesan/i.test(x.subcategory ?? ''))];
+const otherVenues = v.venues.filter((x) => !culture.includes(x));
+const title = `${name}, ${region ? REGION_LABEL[region] : 'San Luis Potosí'}`;
+const desc = `${name}, municipio de ${region ? `la región ${REGION_LABEL[region]}` : 'San Luis Potosí'}: ${[v.destinations.length && `${v.destinations.length} destinos`, v.museums.length && `${v.museums.length} museos`, v.events.length && 'fiestas', v.lodging.length && 'hospedaje'].filter(Boolean).join(', ') || 'datos oficiales, mapa y municipios cercanos'}.`;
+const nav = [
+  v.destinations.length && ['lugares', 'Lugares'],
+  culture.length + v.events.length && ['cultura', 'Cultura'],
+  v.protected.length + v.recreation.length && ['naturaleza', 'Naturaleza'],
+  v.museums.length + v.archaeology.length && ['museos', 'Museos'],
+  v.food.length + dishes.length && ['comer', 'Comer'],
+  v.lodging.length && ['dormir', 'Dormir'],
+  ['mapa', 'Mapa'], ['llegar', 'Cómo llegar'], ['fuentes', 'Fuentes'],
+].filter(Boolean) as [string, string][];
+---
+<BaseLayout title={title} description={desc} image={v.image}>
+  <PageHeader
+    label={`Municipio · ${region ? `Región ${REGION_LABEL[region]}` : 'Región por confirmar'}`}
+    title={name}
+    lede={rich && v.destinations[0] ? v.destinations[0].description.split('. ')[0].replace(/\.$/, '') + '.' : undefined}
+    image={rich ? v.image : null}
+    region={region}
+    tone="region"
+    ground="ivory"
+    crumbs={[{ label: 'Municipios', href: href('municipalities') }, ...(regionMeta ? [{ label: regionMeta.name, href: regionHref(regionMeta.slug) }] : []), { label: name }]}
+  >
+    {seatPlace.length > 0 && <div class="mh__route"><RouteButton id={m.id} name={`${name} (cabecera)`} variant={rich ? 'quiet' : 'solid'} /></div>}
+  </PageHeader>
+
+  {nav.length > 3 && (
+    <nav class="pnav" aria-label={`Secciones de ${name}`} data-region={region}>
+      <ul class="wrap">{nav.map(([id, l]) => <li><a href={`#${id}`}>{l}</a></li>)}</ul>
+    </nav>
+  )}
+
+  <section class="psec psec--tight" data-ground="light" data-region={region} aria-labelledby="id-t">
+    <div class="wrap mid">
+      <div class="mid__text">
+        <h2 id="id-t" class="psec__title">{rich ? `Conoce ${name}` : `${name} en datos`}</h2>
+        <p class="body">
+          Municipio de {region ? <a href={regionHref(regionMeta!.slug)}>la región {REGION_LABEL[region]}</a> : 'San Luis Potosí (creado en 2024; región turística oficial por confirmar)'}{m.subcategory && <> (microrregión {m.subcategory})</>}.
+          {seatName && <> Su cabecera es {seatName}{m.seat?.altitude_m ? `, a ${m.seat.altitude_m.toLocaleString('es-MX')} m de altitud` : ''}.</>}
+          {m.population_2020 && <> {m.population_2020.toLocaleString('es-MX')} habitantes según el Censo 2020 (INEGI).</>}
+        </p>
+        <dl class="facts">
+          <div><dt>Región</dt><dd>{region ? REGION_LABEL[region] : 'Por confirmar'}</dd></div>
+          {seatName && <div><dt>Cabecera</dt><dd>{seatName}</dd></div>}
+          {m.population_2020 && <div><dt>Población 2020</dt><dd>{m.population_2020.toLocaleString('es-MX')}</dd></div>}
+          {m.seat?.altitude_m && <div><dt>Altitud de la cabecera</dt><dd>{m.seat.altitude_m.toLocaleString('es-MX')} m</dd></div>}
+          {v.puebloMagico && <div><dt>Nombramiento</dt><dd>Pueblo Mágico</dd></div>}
+          <div><dt>Clave INEGI</dt><dd>{m.id ?? 'Sin clave'}</dd></div>
+        </dl>
+        {!rich && (
+          <p class="truth">Las fuentes oficiales consultadas documentan poca información turística de {name}. Esta página muestra solo lo registrado: {[v.destinations.length && 'destinos', v.venues.length && 'recintos culturales', v.museums.length && 'museos', v.events.length && 'fiestas', v.lodging.length && 'hospedaje', v.food.length && 'establecimientos de comida'].filter(Boolean).join(', ') || 'su ubicación y municipios vecinos'}.</p>
+        )}
+      </div>
+      <div class="mid__map" aria-hidden="true">
+        <StateSilhouette places={pointPlaces} focus={[m.id]} labels={false} variant="line" />
+        <p class="tiny muted">Cabecera municipal (INEGI) y destinos investigados.</p>
+      </div>
+    </div>
+  </section>
+
+  {v.destinations.length > 0 && (
+    <section id="lugares" class="psec" data-ground="ivory" data-tone="region" data-region={region} aria-labelledby="lug-t">
+      <div class="wrap">
+        <div class="psec__head">
+          <p class="label">Por qué ir</p>
+          <h2 id="lug-t" class="psec__title">Lugares para descubrir en {name}</h2>
+        </div>
+        <ul class="pgrid pgrid--rail">
+          {v.destinations.map((d) => <li><DestinationCard d={d} ratio="4/5" size="sm" sizes="(max-width: 640px) 78vw, 18rem" headingLevel="h3" showText /></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {experiences.length > 0 && (
+    <section class="psec psec--tight" data-ground="dark" data-tone="jungle" aria-labelledby="xp-t">
+      <div class="wrap">
+        <div class="psec__head"><p class="label">Experiencias</p><h2 id="xp-t" class="psec__title">Vívelo</h2></div>
+        <ul class="pgrid pgrid--wide">
+          {experiences.map((x) => (
+            <li class="mxp" data-region={x.d.region}>
+              <a href={experienceHref(x.slug)} class="tile">
+                {x.image && <Photo id={x.image} fill sizes="(max-width: 640px) 90vw, 26rem" widths={[480, 800]} />}
+                <span class="tile__body"><span class="tile__sub">{x.interest}</span><span class="tile__title">{x.title}</span></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {(culture.length > 0 || v.events.length > 0) && (
+    <section id="cultura" class="psec" data-ground="light" data-region={region} aria-labelledby="cul-t">
+      <div class="wrap">
+        <div class="psec__head"><p class="label">Cultura y patrimonio</p><h2 id="cul-t" class="psec__title">Tradición, fiestas y patrimonio</h2></div>
+        {v.events.length > 0 && (
+          <>
+            <h3 class="sub-h">Fiestas y eventos</h3>
+            <ul class="pgrid pgrid--ent">
+              {v.events.map((e) => <li><EntityCard e={e} href={eventHref(eventSlug(e))} showMuni={false} /></li>)}
+            </ul>
+          </>
+        )}
+        {culture.length > 0 && (
+          <>
+            <h3 class="sub-h">Patrimonio y recintos</h3>
+            <ul class="pgrid pgrid--ent">{culture.map((e) => <li><EntityCard e={e} showMuni={false} compact /></li>)}</ul>
+          </>
+        )}
+      </div>
+    </section>
+  )}
+
+  {(v.protected.length > 0 || v.recreation.length > 0) && (
+    <section id="naturaleza" class="psec" data-ground="ivory" data-tone="mist" data-region={region} aria-labelledby="nat-t">
+      <div class="wrap">
+        <div class="psec__head"><p class="label">Naturaleza</p><h2 id="nat-t" class="psec__title">Áreas naturales y balnearios</h2></div>
+        <ul class="pgrid pgrid--ent">{[...v.protected, ...v.recreation].map((e) => <li><EntityCard e={e} showMuni={false} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+
+  {(v.museums.length > 0 || v.archaeology.length > 0) && (
+    <section id="museos" class="psec" data-ground="dark" data-tone="heritage" data-region={region} aria-labelledby="mus-t">
+      <div class="wrap">
+        <div class="psec__head"><p class="label">Museos y arqueología</p><h2 id="mus-t" class="psec__title">Para entender {name}</h2></div>
+        <ul class="pgrid pgrid--ent">
+          {v.archaeology.map((e) => <li><EntityCard e={e} href={archHref(archSlug(e))} showMuni={false} /></li>)}
+          {v.museums.map((e) => <li><EntityCard e={e} showMuni={false} /></li>)}
+        </ul>
+        {otherVenues.length > 0 && <p class="small muted more-line">Además: {otherVenues.map((x) => x.canonical_name).join(' · ')} (SIC).</p>}
+      </div>
+    </section>
+  )}
+
+  {(v.food.length > 0 || dishes.length > 0) && (
+    <section id="comer" class="psec" data-ground="ivory" data-tone="sand" data-region={region} aria-labelledby="food-t">
+      <div class="wrap">
+        <div class="psec__head psec__head--split">
+          <div><p class="label">Gastronomía</p><h2 id="food-t" class="psec__title">Dónde y qué comer</h2></div>
+          <a class="arrow" href={`${href('food')}?mun=${m.slug}`}>Directorio de {name}</a>
+        </div>
+        {dishes.map((g) => <div class="note"><p class="note__t">{g.place}</p><p>{g.dishes.join(', ')}. <span class="tiny">Folleto oficial de la región.</span></p></div>)}
+        {v.food.length > 0 && <ul class="pgrid pgrid--ent">{v.food.slice(0, 6).map((e) => <li><EntityCard e={e} showMuni={false} compact /></li>)}</ul>}
+        {v.food.length > 6 && <p class="small more-line"><a class="link" href={`${href('food')}?mun=${m.slug}`}>Ver los {v.food.length} establecimientos</a></p>}
+      </div>
+    </section>
+  )}
+
+  {v.lodging.length > 0 && (
+    <section id="dormir" class="psec" data-ground="light" data-tone="utility" data-region={region} aria-labelledby="lod-t">
+      <div class="wrap">
+        <div class="psec__head psec__head--split">
+          <div><p class="label">Hospedaje</p><h2 id="lod-t" class="psec__title">Dónde dormir</h2></div>
+          <a class="arrow" href={`${href('lodging')}?mun=${m.slug}`}>Los {v.lodging.length} hospedajes</a>
+        </div>
+        <ul class="pgrid pgrid--ent">{v.lodging.slice(0, 6).map((e) => <li><EntityCard e={e} showMuni={false} compact /></li>)}</ul>
+        <p class="truth">Sin calificaciones, precios ni disponibilidad: este sitio no es una plataforma de reservas. Directorio oficial primero; los registros DENUE (INEGI) no confirman que el establecimiento opere hoy.</p>
+      </div>
+    </section>
+  )}
+
+  <section id="mapa" class="psec" data-ground="light" aria-labelledby="map-t">
+    <div class="wrap">
+      <div class="psec__head"><p class="label">Mapa</p><h2 id="map-t" class="psec__title">{name} en el mapa</h2></div>
+      {m.seat ? <MapView mode="mini" focus={m.id} height="26rem" label={`Mapa de la cabecera de ${name}`} /> : <p class="truth">No hay coordenadas oficiales de la cabecera de este municipio en el Censo 2020 (municipio creado en 2024).</p>}
+    </div>
+  </section>
+
+  <section id="llegar" class="psec psec--tight" data-ground="ivory" data-tone="utility" aria-labelledby="go-t">
+    <div class="wrap">
+      <div class="psec__head"><p class="label">Cómo llegar</p><h2 id="go-t" class="psec__title">Llegar a {name}</h2></div>
+      {dist.length > 0 && (
+        <table class="dtable">
+          <caption class="visually-hidden">Distancias de los folletos oficiales</caption>
+          <thead><tr><th scope="col">Desde</th><th scope="col">Hasta</th><th scope="col">Distancia</th><th scope="col">Tiempo aprox.</th><th scope="col">Carretera</th></tr></thead>
+          <tbody>{dist.map((d) => <tr><td>{d.from}</td><td>{d.to}</td><td>{d.km} km</td><td>{d.time}</td><td>{d.highway ?? '—'}</td></tr>)}</tbody>
+        </table>
+      )}
+      <ul class="golist">
+        {airports[0] && <li><b>Aeropuerto más cercano:</b> {airports[0].x.canonical_name} ({airports[0].x.municipality}), a unos {Math.round(airports[0].d)} km en línea recta.</li>}
+        {terminals.map((t) => <li><b>Terminal de autobuses:</b> {t.canonical_name}{t.official_contact?.address ? `, ${t.official_contact.address}` : ''}.</li>)}
+        {seatName && <li><b>Cabecera:</b> {seatName} ({m.seat!.latitude.toFixed(4)}, {m.seat!.longitude.toFixed(4)}; INEGI).</li>}
+      </ul>
+      <p class="truth">Distancias en línea recta y de folletos oficiales: no son rutas de manejo. El cálculo de rutas por carretera llegará en una fase posterior.</p>
+    </div>
+  </section>
+
+  {near.length > 0 && (
+    <section class="psec" data-ground="light" aria-labelledby="near-t">
+      <div class="wrap">
+        <div class="psec__head"><p class="label">Cerca de {name}</p><h2 id="near-t" class="psec__title">Municipios vecinos</h2></div>
+        <ul class="pgrid pgrid--rail">{near.map((x) => <li><MuniCard m={x} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+
+  <section id="fuentes" class="psec psec--tight" data-ground="ivory" aria-labelledby="src-t">
+    <div class="wrap">
+      <h2 id="src-t" class="label">Fuentes</h2>
+      <ul class="srclist">
+        {sources.map((s) => { const u = sourceUrl(s); return <li>{u ? <a href={u} rel="noopener" target="_blank">{sourceLabel(s)}</a> : sourceLabel(s)}</li>; })}
+        {v.venues.length + v.museums.length > 0 && <li><a href="https://sic.cultura.gob.mx/" rel="noopener" target="_blank">Sistema de Información Cultural, Secretaría de Cultura</a></li>}
+        {v.lodging.length + v.food.length > 0 && <li><a href="https://www.inegi.org.mx/app/mapa/denue/" rel="noopener" target="_blank">DENUE, INEGI</a> · <a href="https://estadia.visitasanluispotosi.com/" rel="noopener" target="_blank">Estadía, Secretaría de Turismo</a></li>}
+      </ul>
+      <p class="tiny muted">Datos consultados el 6 de octubre de 2026. Región: Plan Estatal de Desarrollo Urbano (PDU-SLP).</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .mh__route { margin-top: var(--sc-3); }
+  .mid { display: grid; gap: var(--sc-6); align-items: start; }
+  @media (min-width: 900px) { .mid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr); gap: var(--sc-8); } }
+  .mid__text { display: grid; gap: var(--sc-4); }
+  .mid__map { display: grid; gap: var(--sc-3); justify-items: center; color: var(--slp-region-ink, var(--sc-ink)); }
+  .mid__map :global(.sil) { --sil-ground: var(--slp-region-wash, var(--slp-ivory-2)); --sil-edge: var(--slp-region-ink, currentColor); --sil-pin-ring: #fff; max-width: 22rem; }
+  .sub-h { font: 700 0.7rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); margin: var(--sc-5) 0 var(--sc-3); }
+  .more-line { margin-top: var(--sc-4); }
+  .note { margin-bottom: var(--sc-4); }
+  .dtable { width: 100%; border-collapse: collapse; font-size: var(--sc-t-sm); margin-bottom: var(--sc-4); }
+  .dtable th, .dtable td { text-align: left; padding: 0.55rem 0.4rem; border-bottom: 1px solid var(--sc-hairline); }
+  .dtable thead th { font: 700 0.62rem/1 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  @media (max-width: 640px) { .dtable { display: block; overflow-x: auto; } }
+  .golist { list-style: none; display: grid; gap: 0.5rem; margin-bottom: var(--sc-4); font-size: var(--sc-t-sm); }
+  .srclist { list-style: none; display: grid; gap: 0.35rem; margin: var(--sc-3) 0; font-size: var(--sc-t-sm); }
+  .srclist a { color: inherit; }
+</style>

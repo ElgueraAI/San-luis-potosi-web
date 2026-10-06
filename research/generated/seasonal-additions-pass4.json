@@ -1,0 +1,80 @@
+{
+ "generated": "2026-10-06",
+ "pass": "4 — Temporadas month storytelling (audit: docs/temporadas-auditoria.md)",
+ "rule": "Additive to seasonal-calendar.json and events.json, which stay untouched. Same publication rules: a record renders only when verified; dates of a past edition are never presented as the next one.",
+ "sources": [
+  {
+   "source_id": "cultura-slp-navidad-verde-2025",
+   "institution": "Secretaría de Cultura del Estado de San Luis Potosí",
+   "title": "Agenda navideña impulsa la cultura en todo el estado",
+   "url": "https://cultura.slp.gob.mx/noticias/2025/12/3/agenda-navide%C3%B1a-impulsa-la-cultura-en-todo-el-estado/",
+   "type": "official news",
+   "read": "2026-10-06",
+   "content": "Programa 'Navidad Verde', del 1 de diciembre al 6 de enero (edición 2025-2026). Sedes: Plaza de Fundadores, Teatro de la Paz, Basílica de Guadalupe, Catedral Metropolitana, templos del Centro Histórico, Museo del Ferrocarril, Museo Francisco Cossío."
+  },
+  {
+   "source_id": "turismo-slp-festival-navidad-verde",
+   "institution": "Secretaría de Turismo de San Luis Potosí (visitasanluispotosi.com)",
+   "title": "Festival de la Navidad Verde",
+   "url": "https://visitasanluispotosi.com/festival-navidad/",
+   "type": "official tourism page",
+   "read": "2026-10-06",
+   "content": "Festival de la Navidad Verde: encendido del árbol, coros, gran Nacimiento, videomapping 'Regalo de Luz', conciertos y pastorelas en Plaza de los Fundadores, Plaza de Armas, Catedral Metropolitana, Plaza del Carmen, Plaza de Aranzazú y Plaza de San Francisco. The page states 4–15 de diciembre without a year (an earlier edition)."
+  },
+  {
+   "source_id": "cultura-slp-navidad-2025-conciertos",
+   "institution": "Secretaría de Cultura del Estado de San Luis Potosí",
+   "title": "Música y tradición navideña iluminan el Centro Histórico",
+   "url": "https://cultura.slp.gob.mx/noticias/2026/1/12/m%C3%BAsica-y-tradici%C3%B3n-navide%C3%B1a-iluminan-el-centro-hist%C3%B3rico/",
+   "type": "official news",
+   "read": "2026-10-06",
+   "content": "Conciertos navideños gratuitos en Plaza de Fundadores, 23 y 24 de diciembre de 2025."
+  },
+  {
+   "source_id": "seguridad-slp-operativo-guadalupano-2025",
+   "institution": "Secretaría de Seguridad y Protección Ciudadana del Estado de San Luis Potosí",
+   "title": "Cobertura y despliegue del Estado a través del operativo 'Guadalupano 2025'",
+   "url": "https://seguridad.slp.gob.mx/noticias/2025/12/8/cobertura-y-despliegue-del-estado-a-trav%C3%A9s-del-operativo-guadalupano-2025/",
+   "type": "official news (security operation, not tourism)",
+   "read": "2026-10-06",
+   "content": "Operativo del 5 al 15 de diciembre de 2025 para peregrinaciones hacia centros religiosos de las cuatro regiones. Used only as context for an alternative; not a tourism recommendation."
+  }
+ ],
+ "records": [
+  {
+   "record_id": "se-navidad-verde",
+   "destination": "C01",
+   "region": "centro",
+   "months": [12],
+   "seasons": ["invierno"],
+   "recommended_activities": ["encendido del árbol", "Nacimiento y pastorelas", "conciertos navideños", "videomapping"],
+   "festivals": ["ev-navidad-verde"],
+   "cultural_periods": "Navidad",
+   "source_id": "cultura-slp-navidad-verde-2025",
+   "verification_status": "verified",
+   "notes": "Runs into early January (to 6 Jan in the 2025 edition) but is a December programme; not added to January. 2026 dates not announced as of 2026-10-06."
+  }
+ ],
+ "events": [
+  {
+   "event_id": "ev-navidad-verde",
+   "event_name": "Navidad Verde (agenda navideña del Gobierno del Estado)",
+   "destination": "C01",
+   "municipality": "San Luis Potosí",
+   "region": "centro",
+   "typical_month": "diciembre (hasta inicios de enero)",
+   "2026_date_if_confirmed": null,
+   "source_id": "cultura-slp-navidad-verde-2025",
+   "source_url": "https://cultura.slp.gob.mx/noticias/2025/12/3/agenda-navide%C3%B1a-impulsa-la-cultura-en-todo-el-estado/",
+   "verification_status": "verified",
+   "recurring": "annual",
+   "category": "festival cultural",
+   "notes": "2025 edition: 1 Dec 2025 – 6 Jan 2026. Do not reuse as 2026 dates."
+  }
+ ],
+ "localities": [
+  { "id": "MUN-CERRITOS", "name": "Cerritos", "region": "zona-media", "latitude": 22.427666, "longitude": -100.279597, "precision": "locality", "coordinate_source": "INEGI ITER 2020: Cerritos, Cerritos (cve 240080001)", "source_id": "inegi-iter-2020" },
+  { "id": "MUN-TANCANHUITZ", "name": "Tancanhuitz", "region": "huasteca", "latitude": 21.597319, "longitude": -98.966388, "precision": "locality", "coordinate_source": "INEGI ITER 2020: Tancanhuitz, Tancanhuitz (cve 240120001)", "source_id": "inegi-iter-2020" },
+  { "id": "MUN-TOLENTINO", "name": "San Nicolás Tolentino", "region": "zona-media", "latitude": 22.248535, "longitude": -100.552076, "precision": "locality", "coordinate_source": "INEGI ITER 2020: San Nicolás Tolentino, San Nicolás Tolentino (cve 240300001)", "source_id": "inegi-iter-2020" }
+ ]
+}

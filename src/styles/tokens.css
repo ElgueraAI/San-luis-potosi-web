@@ -1,16 +1,19 @@
 /* =============================================================================
    San Luis Potosí design tokens
    Brand values first, then the mapping onto Scroll Craft's six colour roles.
-   Contrast notes are measured on flat colour; re-measure on the render.
+   Contrast notes are measured on flat colour; the render is re-measured in QA.
    ========================================================================== */
 :root {
   /* ---- brand ------------------------------------------------------------ */
   --slp-charcoal: #1f2524;
   --slp-charcoal-2: #262d2c;
   --slp-charcoal-3: #313937;
+  --slp-night: #161b1a;
   --slp-ivory: #f6f1e7;
   --slp-ivory-2: #ede6d8;
   --slp-ivory-3: #ddd3c1;
+  --slp-paper: #fbf8f2;
+  --slp-stone: #6b6459;
 
   /* Regional accents. For large type, rules, markers and controls only
      (3:1 or more). Body text is never set in an accent. */
@@ -19,6 +22,11 @@
   --slp-media: #3d8f8a;     /* ~3.4:1 on ivory, ~4.1:1 on charcoal */
   --slp-huasteca: #176b57;  /* ~5.7:1 on ivory, fails on charcoal   */
   --slp-huasteca-lift: #3fa383; /* same hue, lifted for dark grounds, ~5:1 */
+  /* Deeper variants for small UI text on paper (≥4.5:1). */
+  --slp-altiplano-ink: #8c4a1c;
+  --slp-centro-ink: #874a53;
+  --slp-media-ink: #276b66;
+  --slp-huasteca-ink: #176b57;
 
   --slp-aqua: #68b9b0;      /* dark grounds only (~6.8:1)            */
   --slp-gold: #c7a35a;      /* dark grounds only (~6.5:1)            */
@@ -31,10 +39,11 @@
 
   /* Cormorant has a small x-height and fine hairlines: it runs one step larger
      than a grotesque would and never below ~24px. */
-  --sc-t-2xl: clamp(2.3rem, 1.7rem + 2.6vw, 3.8rem);
-  --sc-t-3xl: clamp(3rem, 2rem + 4.6vw, 5.6rem);
-  --sc-t-4xl: clamp(3.4rem, 1.6rem + 7.4vw, 8.6rem);
-  --slp-t-region: clamp(3.6rem, 1.4rem + 9vw, 10.5rem);
+  --sc-t-xl: clamp(1.7rem, 1.4rem + 1.2vw, 2.4rem);
+  --sc-t-2xl: clamp(2.2rem, 1.7rem + 2.4vw, 3.6rem);
+  --sc-t-3xl: clamp(2.7rem, 1.9rem + 3.8vw, 5rem);
+  --sc-t-4xl: clamp(3.1rem, 1.6rem + 6.4vw, 7.6rem);
+  --slp-t-region: clamp(3.2rem, 1.4rem + 7vw, 8.5rem);
 
   --sc-track-tight: -0.012em;
   --sc-track-snug: -0.006em;
@@ -48,44 +57,60 @@
   --sc-r-md: 3px;
   --sc-r-lg: 4px;
   --sc-shadow-color: 168 9% 6%;
+  --sc-maxw: 90rem;
+  --slp-wrap: min(var(--sc-maxw), 100% - 2 * var(--sc-gutter));
 
   /* ---- chrome ------------------------------------------------------------ */
-  --slp-header-h: 4.25rem;
-  --slp-line-h: 3.5rem;
+  --slp-header-h: 4.5rem;
+  --slp-subnav-h: 3.25rem;
   --slp-tap: 44px;
 
-  --sc-grain-opacity: 0.045;
+  --sc-grain-opacity: 0.035;
 }
 
 @media (max-width: 860px) {
   :root {
-    --slp-header-h: 3.5rem;
-    --slp-line-h: 1.375rem;
+    --slp-header-h: 3.75rem;
+    --slp-subnav-h: 3rem;
+    --sc-gutter: 1rem;
   }
 }
 
 /* ---- grounds: each one restates `color` (inherited values are computed) - */
 :root,
+[data-ground="light"] {
+  --sc-canvas: var(--slp-paper);
+  --sc-surface: var(--slp-ivory);
+  --sc-ink: var(--slp-charcoal);
+  --sc-ink-soft: #545852;
+  --sc-accent: var(--slp-gold-deep);
+  --sc-accent-ink: var(--slp-ivory);
+  --slp-region-ui: var(--slp-region-light, var(--slp-gold-deep));
+  --slp-region-text: var(--slp-region-ink, var(--slp-gold-deep));
+  --slp-line-ink: var(--slp-charcoal);
+  --sc-shadow-color: 38 30% 40%;
+}
+[data-ground="ivory"] {
+  --sc-canvas: var(--slp-ivory);
+  --sc-surface: var(--slp-ivory-2);
+  --sc-ink: var(--slp-charcoal);
+  --sc-ink-soft: #50544f;
+  --sc-accent: var(--slp-gold-deep);
+  --sc-accent-ink: var(--slp-ivory);
+  --slp-region-ui: var(--slp-region-light, var(--slp-gold-deep));
+  --slp-region-text: var(--slp-region-ink, var(--slp-gold-deep));
+}
 [data-ground="dark"] {
   --sc-canvas: var(--slp-charcoal);
   --sc-surface: var(--slp-charcoal-2);
   --sc-ink: var(--slp-ivory);
-  --sc-ink-soft: #bab8b0;
+  --sc-ink-soft: #c2bfb6;
   --sc-accent: var(--slp-gold);
   --sc-accent-ink: var(--slp-charcoal);
   --slp-region-ui: var(--slp-region-dark, var(--slp-gold));
+  --slp-region-text: var(--slp-region-dark, var(--slp-gold));
   --slp-line-ink: var(--slp-ivory);
-}
-[data-ground="light"] {
-  --sc-canvas: var(--slp-ivory);
-  --sc-surface: var(--slp-ivory-2);
-  --sc-ink: var(--slp-charcoal);
-  --sc-ink-soft: #4e524f;
-  --sc-accent: var(--slp-gold-deep);
-  --sc-accent-ink: var(--slp-ivory);
-  --slp-region-ui: var(--slp-region-light, var(--slp-gold-deep));
-  --slp-line-ink: var(--slp-charcoal);
-  --sc-shadow-color: 38 30% 40%;
+  --sc-shadow-color: 168 9% 4%;
 }
 [data-ground] {
   color: var(--sc-ink);
@@ -93,9 +118,36 @@
 }
 
 /* ---- regions: one accent per region, resolved for the ground it sits on -- */
-[data-region="altiplano"]  { --slp-region: var(--slp-altiplano); --slp-region-light: var(--slp-altiplano); --slp-region-dark: var(--slp-altiplano); }
-[data-region="centro"]     { --slp-region: var(--slp-centro);    --slp-region-light: var(--slp-centro);    --slp-region-dark: #c08890; }
-[data-region="zona-media"] { --slp-region: var(--slp-media);     --slp-region-light: var(--slp-media);     --slp-region-dark: var(--slp-media); }
-[data-region="huasteca"]   { --slp-region: var(--slp-huasteca);  --slp-region-light: var(--slp-huasteca);  --slp-region-dark: var(--slp-huasteca-lift); }
-[data-region][data-ground="dark"]  { --slp-region-ui: var(--slp-region-dark); }
-[data-region][data-ground="light"] { --slp-region-ui: var(--slp-region-light); }
+[data-region="altiplano"]  { --slp-region: var(--slp-altiplano); --slp-region-light: var(--slp-altiplano); --slp-region-dark: #d08a52; --slp-region-ink: var(--slp-altiplano-ink); }
+[data-region="centro"]     { --slp-region: var(--slp-centro);    --slp-region-light: var(--slp-centro);    --slp-region-dark: #c99aa0; --slp-region-ink: var(--slp-centro-ink); }
+[data-region="zona-media"] { --slp-region: var(--slp-media);     --slp-region-light: var(--slp-media);     --slp-region-dark: #6fb3ab; --slp-region-ink: var(--slp-media-ink); }
+[data-region="huasteca"]   { --slp-region: var(--slp-huasteca);  --slp-region-light: var(--slp-huasteca);  --slp-region-dark: var(--slp-huasteca-lift); --slp-region-ink: var(--slp-huasteca-ink); }
+/* Regional palette depth: a light wash (two stops) and a deep tone per region,
+   for grounds, tints, overlays and indicators, never for body text.
+   Altiplano copper and mineral sand · Centro cantera and soft burgundy ·
+   Zona Media spring water and orchard · Huasteca jungle, jade and river. */
+[data-region="altiplano"]  { --slp-region-wash: #f1e2cf; --slp-region-wash-2: #e3c6a2; --slp-region-deep: #3a2416; --slp-region-glow: rgb(208 138 82 / 0.34); }
+[data-region="centro"]     { --slp-region-wash: #f2e3de; --slp-region-wash-2: #dfc1bb; --slp-region-deep: #3a1f25; --slp-region-glow: rgb(201 154 160 / 0.32); }
+[data-region="zona-media"] { --slp-region-wash: #dcece7; --slp-region-wash-2: #b9d9cf; --slp-region-deep: #133431; --slp-region-glow: rgb(111 179 171 / 0.34); }
+[data-region="huasteca"]   { --slp-region-wash: #d9e8dc; --slp-region-wash-2: #b3d3bd; --slp-region-deep: #0f2e24; --slp-region-glow: rgb(63 163 131 / 0.34); }
+[data-region][data-ground="dark"]  { --slp-region-ui: var(--slp-region-dark); --slp-region-text: var(--slp-region-dark); }
+[data-region]:not([data-ground="dark"]) { --slp-region-ui: var(--slp-region-light); --slp-region-text: var(--slp-region-ink); }
+[data-ground="dark"] [data-region] { --slp-region-ui: var(--slp-region-dark); --slp-region-text: var(--slp-region-dark); }
+
+/* ---- tones: section colour on top of a ground ------------------------------
+   A tone changes only the canvas and surface (and the soft ink to keep 4.5:1),
+   so every ground-dependent rule keeps working. Light tones sit on
+   data-ground="ivory"/"light", dark tones on data-ground="dark".
+   sand = Altiplano mineral · stone = Centro cantera · mist = Zona Media water ·
+   jungle = Huasteca night · region / region-deep follow the nearest data-region. */
+[data-tone="sand"]   { --sc-canvas: #efe3d1; --sc-surface: #e5d4bd; --sc-ink-soft: #52483d; --slp-tone-line: rgb(140 74 28 / 0.22); }
+[data-tone="stone"]  { --sc-canvas: #f1e5e0; --sc-surface: #e6d4cd; --sc-ink-soft: #544749; --slp-tone-line: rgb(135 74 83 / 0.2); }
+[data-tone="mist"]   { --sc-canvas: #e2ede9; --sc-surface: #d1e3dc; --sc-ink-soft: #43514c; --slp-tone-line: rgb(39 107 102 / 0.22); }
+[data-tone="jungle"] { --sc-canvas: #10241e; --sc-surface: #163028; --sc-ink-soft: #bfcdc6; --slp-tone-line: rgb(63 163 131 / 0.28); }
+[data-tone="region"] { --sc-canvas: var(--slp-region-wash); --sc-surface: var(--slp-region-wash-2); --sc-ink-soft: #4b4c47; --slp-tone-line: var(--slp-region-glow); }
+[data-tone="region-deep"] { --sc-canvas: var(--slp-region-deep); --sc-surface: color-mix(in srgb, var(--slp-region-deep) 82%, #fff 6%); --sc-ink-soft: #cfc9bf; --slp-tone-line: var(--slp-region-glow); }
+/* Content-family tones (portal pass). heritage and night sit on dark grounds;
+   utility on light grounds (planning, directories: calm and legible). */
+[data-tone="heritage"] { --sc-canvas: #231b17; --sc-surface: #2e2420; --sc-ink-soft: #cdc2b6; --slp-tone-line: rgb(199 163 90 / 0.24); }
+[data-tone="night"]    { --sc-canvas: #12151d; --sc-surface: #1b1f2a; --sc-ink-soft: #c3c6cf; --slp-tone-line: rgb(150 160 200 / 0.22); }
+[data-tone="utility"]  { --sc-canvas: #f3f4f1; --sc-surface: #e7e9e4; --sc-ink-soft: #4a504c; --slp-tone-line: rgb(31 37 36 / 0.14); }

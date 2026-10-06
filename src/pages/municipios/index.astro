@@ -1,0 +1,86 @@
+---
+/**
+ * The 59 municipalities: searchable, filterable by region, grouped by region
+ * with cards (photo when a researched place exists, otherwise the state
+ * silhouette with the seat marked) and an A–Z index.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import MuniCard from '@/components/portal/MuniCard.astro';
+import { municipalities, REGION_LABEL, muniView } from '@/data/portal';
+import { REGIONS } from '@/data/regions';
+import { muniHref, regionHref } from '@/i18n/routes';
+
+const groups = [...REGIONS.map((r) => ({ id: r.id as string, name: r.name, slug: r.slug, list: municipalities.filter((m) => m.region === r.id) })),
+  { id: 'none', name: 'Región por confirmar', slug: null, list: municipalities.filter((m) => !m.region) }].filter((g) => g.list.length);
+const letters = [...new Set(municipalities.map((m) => m.canonical_name[0].toUpperCase()))].sort((a, b) => a.localeCompare(b, 'es'));
+const pop = municipalities.reduce((a, m) => a + (m.population_2020 ?? 0), 0);
+---
+<BaseLayout title="Municipios" description="Los 59 municipios de San Luis Potosí por región: qué hay en cada uno, según fuentes oficiales.">
+  <PageHeader
+    label="Destinos · Municipios"
+    title="Los 59 municipios"
+    lede={`Cuatro regiones y ${municipalities.length} municipios, de la capital a las comunidades de la sierra. ${pop.toLocaleString('es-MX')} habitantes en 2020 (INEGI).`}
+    tone="stone"
+    ground="ivory"
+    crumbs={[{ label: 'Destinos' }, { label: 'Municipios' }]}
+  />
+
+  <section class="psec psec--tight" data-ground="light" data-muni-index aria-label="Buscar municipio">
+    <div class="wrap">
+      <form class="dir__form mi__form" role="search" onsubmit="return false">
+        <label>Buscar municipio<input type="search" data-mi-q placeholder="Escribe un nombre…" autocomplete="off" /></label>
+        <fieldset class="mi__regions">
+          <legend>Región</legend>
+          <button type="button" class="chip-btn" aria-pressed="true" data-mi-region="">Todas</button>
+          {REGIONS.map((r) => <button type="button" class="chip-btn" aria-pressed="false" data-mi-region={r.id} data-region={r.id}><span class="swatch" aria-hidden="true"></span>{r.name}</button>)}
+        </fieldset>
+      </form>
+      <p class="psec__count mi__count" aria-live="polite" data-mi-count>{municipalities.length} municipios</p>
+
+      {groups.map((g) => (
+        <section class="mi__group" data-mi-group={g.id} data-region={g.id !== 'none' ? g.id : undefined} aria-labelledby={`mig-${g.id}`}>
+          <div class="mi__ghead">
+            <h2 id={`mig-${g.id}`} class="psec__title">{g.name}</h2>
+            <p class="psec__count">{g.list.length} municipios</p>
+            {g.slug && <a class="arrow" href={regionHref(g.slug)}>La región</a>}
+          </div>
+          <ul class="pgrid">
+            {g.list.map((m) => <li data-mi-name={m.canonical_name.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()} data-mi-reg={m.region ?? ''}><MuniCard m={m} /></li>)}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </section>
+
+  <section class="psec" data-ground="ivory" data-tone="stone" aria-labelledby="az-t">
+    <div class="wrap">
+      <div class="psec__head"><p class="label">Índice</p><h2 id="az-t" class="psec__title">De la A a la Z</h2></div>
+      <div class="az">
+        {letters.map((l) => (
+          <div class="az__group">
+            <p class="az__letter" aria-hidden="true">{l}</p>
+            <ul aria-label={`Municipios con ${l}`}>
+              {municipalities.filter((m) => m.canonical_name[0].toUpperCase() === l).map((m) => {
+                const v = muniView(m);
+                return <li data-region={m.region ?? undefined}><a href={muniHref(m.slug!)}><span class="az__dot" aria-hidden="true"></span>{m.canonical_name}<span class="az__meta">{m.region ? REGION_LABEL[m.region] : 'Por confirmar'}{v.destinations.length ? ` · ${v.destinations.length} destinos` : ''}</span></a></li>;
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .mi__form { grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 900px) { .mi__form { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); } }
+  .mi__regions { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+  .mi__regions legend { float: left; margin-right: 0.6rem; font: 700 0.62rem/1 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .mi__count { margin: var(--sc-4) 0 var(--sc-2); }
+  .mi__group { margin-top: clamp(2.5rem, 5vw, 4rem); }
+  .mi__group[hidden] { display: none; }
+  .mi__ghead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1.4rem; margin-bottom: var(--sc-5); padding-bottom: var(--sc-3); border-bottom: 2px solid var(--slp-region-ui, var(--sc-hairline-strong)); }
+  .pgrid li[hidden] { display: none; }
+</style>

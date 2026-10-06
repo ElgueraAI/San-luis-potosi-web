@@ -1,373 +1,205 @@
 ---
 /**
- * Act 3 · The Descent. Wonder: the peak of the page.
+ * The Descent: the signature moment. A pinned Scroll Craft act (engine
+ * unmodified) over the measured INEGI transect Real de Catorce → San Luis
+ * Potosí → Rioverde → Ciudad Valles. As the visitor scrolls, a marker travels
+ * the real line, the altitude readout falls, and the photograph above the land
+ * cuts hard at each regional boundary. The land itself is the area under the
+ * line, so the photograph reads as the sky over the terrain.
  *
- * One pinned stage. Four worlds stacked inside it, one per region. Each world
- * is a photograph (or its placeholder) below the terrain line and its own sky
- * above it. The camera (an SVG viewBox, see motion/camera.ts) travels the line
- * west to east; at each region boundary the next world cuts in with its own
- * transition. One San Luis Potosí is the line, which never breaks. Four
- * worlds are the cuts. The last phase is the drop: the camera dives below the
- * line into the Huasteca and the page's only video takes the frame.
- *
- * Without motion (reduced motion, no JS) the same markup lays out as four
- * full-screen compositions in reading order, framed at build time.
+ * Reduced motion / no engine: the same content as a static figure plus four
+ * regional panels (src/scripts/descent.ts never pins it).
  */
-import MediaSlot from '@/components/primitives/MediaSlot.astro';
-import FactValue from '@/components/primitives/FactValue.astro';
-import SlotLabel from '@/components/primitives/SlotLabel.astro';
-import { getSlot } from '@/lib/media';
-import { profile, worldPath, skyPath, elevationAt, altitudesEnabled, WORLD } from '@/data/geo';
-import { camera, viewBoxAttr, CAMERA_DESKTOP } from '@/motion/camera';
-import { t, pick, type Locale } from '@/i18n';
-import { href, asset } from '@/i18n/routes';
-import type { RegionWithBounds } from '@/lib/regions';
+import Photo from '@/components/media/Photo.astro';
+import { REGIONS } from '@/data/regions';
+import { profile, regionElevation } from '@/data/research';
+import { profileGeometry, fmtM, fmtKm } from '@/lib/profile';
+import { regionHref } from '@/i18n/routes';
 
-interface Props {
-  locale: Locale;
-  regions: RegionWithBounds[];
-}
-const { locale, regions } = Astro.props;
+const W = 1000, H = 300, CEIL = 3200;
+const g = profileGeometry(W, H, { tolerance: 4, ceil: CEIL });
 
-const sky = skyPath(profile.points);
-const line = worldPath(profile.points, 0, 1, 2000);
-const staticCam = { ...CAMERA_DESKTOP, mx: 0.5 };
-const ticks = regions.slice(1).map((r) => ({ x: r.bounds.from * WORLD.X, y: (1 - elevationAt(r.bounds.from)) * WORLD.YR }));
+// Descent photographs: home-05-descent-* in the home asset manifest.
+const PHOTOS: Record<string, string> = {
+  altiplano: 'wc-42373253',
+  centro: 'wc-50604767',
+  'zona-media': 'wc-76389273',
+  huasteca: 'wc-45072511',
+};
+const FOCAL: Record<string, string> = { altiplano: '50% 40%', centro: '50% 45%', 'zona-media': '50% 40%', huasteca: '50% 45%' };
 
-const dropSlot = await getSlot('huasteca-drop-video');
-const huasteca = regions.find((r) => r.id === 'huasteca');
-const showReadout = altitudesEnabled || import.meta.env.DEV;
+// Anchor km: the transect sample closest to each anchor locality.
+const anchors = profile.anchors.map((a) => {
+  let best = profile.samples[0], bd = Infinity;
+  for (const s of profile.samples) {
+    const d = Math.hypot(s.lat - a.lat, s.lon - a.lon);
+    if (d < bd) { bd = d; best = s; }
+  }
+  return { name: a.name, km: best.km, m: best.m };
+});
+const data = {
+  length: profile.lengthKm,
+  ceil: CEIL,
+  samples: profile.samples.map((s) => [s.km, Math.round(s.m), s.region, s.near]),
+  segments: profile.segments,
+};
+const segs = profile.segments.map((s) => ({ ...s, meta: REGIONS.find((r) => r.id === s.region)!, elev: regionElevation(s.region) }));
 ---
 <section
   id="descenso"
-  class="slp-descent"
+  class="dsc"
+  data-ground="dark"
   data-descent
-  data-chrome="overlay"
-  data-chrome-ground="dark"
   data-sc-act="pin"
-  data-sc-span="6"
-  data-slp-span-m="4.6"
-  data-slp-collapse
-  aria-labelledby="descenso-title"
-  style="--span:6;--span-m:4.6;--drop:0"
+  data-sc-span="4.2"
+  data-span-mobile="3.4"
+  aria-labelledby="descent-title"
 >
-  <h2 id="descenso-title" class="visually-hidden">{t(locale, 'descent.title')}</h2>
+  <div class="dsc__stage" data-sc-stage>
+    <div class="dsc__photos">
+      {segs.map((s, i) => (
+        <div class:list={['dsc__photo', { 'is-active': i === 0 }]} data-dsc-photo={s.region}>
+          <Photo id={PHOTOS[s.region]} fill sizes="100vw" focal={FOCAL[s.region]} widths={[640, 960, 1280, 1600, 2000, 2560]} />
+        </div>
+      ))}
+    </div>
+    <div class="dsc__shade" aria-hidden="true"></div>
 
-  <div class="slp-descent__stage" data-sc-stage>
-    {regions.map((r, i) => {
-      const mid = (r.bounds.from + r.bounds.to) / 2;
-      const cam = camera(mid, 16 / 9, staticCam);
-      const my = (1 - elevationAt(mid)) * WORLD.YR;
-      return (
-        <article
-          id={`descenso-${r.id}`}
-          class="slp-world"
-          data-world={i}
-          data-region={r.id}
-          data-ground={r.ground}
-          data-transition={i === 0 ? 'none' : r.transition}
-          data-from={r.bounds.from}
-          data-to={r.bounds.to}
-          aria-labelledby={`world-${r.id}-title`}
-        >
-          <div class="slp-world__fill">
-            <MediaSlot id={r.descent.fill} locale={locale} label="none" eager={i === 0} />
+    <header class="dsc__head wrap">
+      <p class="label dsc__kicker">El descenso · {fmtKm(profile.lengthKm)} de sierra a río</p>
+      <h2 id="descent-title" class="visually-hidden">El descenso: de {fmtM(profile.summary.max_m)} a {fmtM(profile.summary.min_m)} a través de las cuatro regiones</h2>
+      <div class="dsc__copies">
+        {segs.map((s, i) => (
+          <div class:list={['dsc__copy', { 'is-active': i === 0 }]} data-dsc-copy={s.region} data-region={s.region}>
+            <p class="dsc__region display">{s.meta.name}</p>
+            <p class="dsc__identity">{s.meta.identity}</p>
+            <p class="dsc__range tiny">{fmtM(s.elev.max)} a {fmtM(s.elev.min)} · km {Math.round(s.from)} a {Math.round(s.to)}</p>
+            <a class="arrow dsc__link" href={regionHref(s.meta.slug)}>Explora {s.meta.nameIn}</a>
           </div>
+        ))}
+      </div>
+    </header>
 
-          <svg class="slp-world__sky" viewBox={viewBoxAttr(cam)} preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-            <defs>
-              <clipPath id={`done-${r.id}`}>
-                <rect x="-3000" y="-6000" width={mid * WORLD.X + 3000} height="12000" />
-              </clipPath>
-            </defs>
-            <path class="slp-world__skyfill" d={sky} />
-            <path class="slp-world__ahead" d={line} vector-effect="non-scaling-stroke" />
-            <path class="slp-world__done" d={line} clip-path={`url(#done-${r.id})`} vector-effect="non-scaling-stroke" />
-            {ticks.map((tk) => (
-              <path class="slp-world__tick" d={`M${tk.x} ${tk.y - 14}L${tk.x} ${tk.y + 14}`} vector-effect="non-scaling-stroke" />
-            ))}
-            <circle class="slp-world__marker" cx={mid * WORLD.X} cy={my} r="1.7" />
-          </svg>
+    <div class="dsc__chart">
+      <svg class="dsc__svg" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <clipPath id="dsc-done"><rect data-dsc-clip x="0" y="0" width="0" height={H} /></clipPath>
+          <linearGradient id="dsc-land" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#161b1a" stop-opacity="0.78" />
+            <stop offset="1" stop-color="#161b1a" stop-opacity="0.96" />
+          </linearGradient>
+        </defs>
+        <path class="dsc__land" d={g.area} fill="url(#dsc-land)" />
+        {segs.slice(1).map((s) => <line class="dsc__boundary" x1={g.X(s.from)} x2={g.X(s.from)} y1={H} y2={g.Y(3000)} vector-effect="non-scaling-stroke" />)}
+        <path class="dsc__line" d={g.line} vector-effect="non-scaling-stroke" />
+        <g clip-path="url(#dsc-done)">
+          {segs.map((s) => <path class="dsc__seg" d={g.segment(s.region)} data-region={s.region} vector-effect="non-scaling-stroke" />)}
+        </g>
+      </svg>
 
-          <SlotLabel id={r.descent.fill} locale={locale} position="br" />
+      <ul class="dsc__regions" aria-hidden="true">
+        {segs.map((s) => (
+          <li data-region={s.region} data-dsc-label={s.region} style={`left:${(s.from / profile.lengthKm) * 100}%;width:${((s.to - s.from) / profile.lengthKm) * 100}%`}>{s.meta.name}</li>
+        ))}
+      </ul>
+      <ul class="dsc__anchors" aria-hidden="true">
+        {anchors.map((a) => (
+          <li style={`left:${(a.km / profile.lengthKm) * 100}%;top:${(1 - a.m / CEIL) * 100}%`}><span>{a.name}</span></li>
+        ))}
+      </ul>
 
-          <div class={`slp-world__copy slp-world__copy--${r.anchor}`}>
-            <p class="slp-label slp-world__light">{pick(r.light, locale)}</p>
-            <h3 id={`world-${r.id}-title`} class="slp-display-region">{pick(r.name, locale)}</h3>
-            <div class="slp-world__body">
-              <p class="sc-lede">{pick(r.descent.lede, locale)}</p>
-              {r.published ? (
-                <a class="slp-link slp-link--tap" href={href('region', { region: r.id }, locale)}>
-                  {t(locale, 'descent.explore', { region: pick(r.nameInSentence, locale) })}
-                </a>
-              ) : (
-                <p class="slp-world__soon">{t(locale, 'descent.soon')}</p>
-              )}
-            </div>
-          </div>
-        </article>
-      );
-    })}
-
-    <div class="slp-descent__drop" data-drop data-region="huasteca" data-ground="dark">
-      {dropSlot.src.desktop ? (
-        <video
-          data-sc-scrub
-          data-sc-src={asset(dropSlot.src.desktop)}
-          data-sc-src-mobile={dropSlot.src.mobile ? asset(dropSlot.src.mobile) : undefined}
-          playsinline
-          muted
-          aria-hidden="true"
-        ></video>
-      ) : (
-        <MediaSlot id={dropSlot.id} locale={locale} label="none" />
-      )}
-      <div class="slp-descent__scrim" aria-hidden="true"></div>
-      <SlotLabel id={dropSlot.id} locale={locale} position="tr" />
-      <div class="slp-descent__finale" data-sc-cue="0.86 1 0.3 0.04">
-        <p class="sc-display slp-descent__finale-title">{t(locale, 'descent.finale')}</p>
-        <p class="sc-lede">{t(locale, 'descent.finaleBody')}</p>
-        {huasteca?.published && (
-          <a class="slp-link slp-link--tap" href={href('region', { region: 'huasteca' }, locale)}>
-            {t(locale, 'descent.explore', { region: pick(huasteca.nameInSentence, locale) })}
-          </a>
-        )}
+      <div class="dsc__marker" data-dsc-marker aria-hidden="true">
+        <span class="dsc__dot"></span>
+        <div class="dsc__readout">
+          <p class="dsc__alt" data-dsc-alt>{fmtM(profile.samples[0].m)}</p>
+          <p class="dsc__where" data-dsc-where>km 0 · {profile.samples[0].near}</p>
+        </div>
       </div>
     </div>
 
-    {showReadout && (
-      <p class="slp-descent__readout" data-readout data-ground="dark">
-        <span class="slp-label">{t(locale, 'descent.altitude')}</span>
-        {altitudesEnabled ? <span data-readout-value></span> : <FactValue fact={{ value: null, status: 'pending', note: 'Transecto INEGI CEM sin verificar' }} locale={locale} />}
-      </p>
-    )}
+    <p class="dsc__finale display" data-dsc-finale>Al final de la línea, el agua.</p>
+    <p class="dsc__src source">Perfil de elevación: INEGI, Continuo de Elevaciones Mexicano 3.0 (90 m). {profile.caveat}</p>
   </div>
+
+  <p class="visually-hidden">
+    Perfil medido a lo largo de {fmtKm(profile.lengthKm)}: comienza en {fmtM(profile.summary.start_m)} en Real de Catorce, alcanza {fmtM(profile.summary.max_m)} en la Sierra de Catorce y termina en {fmtM(profile.summary.end_m)} en Ciudad Valles.
+    {segs.map((s) => `${s.meta.name}: de ${fmtM(s.elev.max)} a ${fmtM(s.elev.min)}. `)}
+  </p>
+  <script type="application/json" data-dsc-data set:html={JSON.stringify(data)} />
 </section>
 
 <style>
-  .slp-descent { position: relative; background: var(--slp-charcoal); }
-  .slp-descent__stage { position: relative; }
+  .dsc { position: relative; background: var(--slp-night); }
+  .dsc__stage { height: 100svh; min-height: 34rem; overflow: hidden; isolation: isolate; }
+  :global(.dsc:not(.sc-act--pinned)) .dsc__stage { position: relative; }
+  .dsc__photos { position: absolute; inset: 0; }
+  .dsc__photo { position: absolute; inset: 0; opacity: 0; transition: opacity 260ms var(--sc-ease-out); }
+  .dsc__photo.is-active { opacity: 1; }
+  .dsc__shade {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(180deg, rgb(14 18 17 / 0.72) 0%, rgb(14 18 17 / 0.25) 34%, rgb(14 18 17 / 0) 55%),
+      linear-gradient(90deg, rgb(14 18 17 / 0.45) 0%, rgb(14 18 17 / 0) 50%);
+  }
+  .dsc__head { position: absolute; z-index: 3; left: 0; right: 0; top: calc(var(--slp-header-h) + var(--sc-5)); display: grid; gap: var(--sc-4); }
+  .dsc__kicker { color: rgb(246 241 231 / 0.85); }
+  .dsc__copies { display: grid; }
+  .dsc__copy { grid-area: 1 / 1; display: grid; gap: 0.5rem; justify-items: start; max-width: 34rem; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity 280ms var(--sc-ease-out), transform 280ms var(--sc-ease-out), visibility 0s linear 280ms; }
+  .dsc__copy.is-active { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  .dsc__region { font-size: clamp(3rem, 1.6rem + 5.2vw, 6.6rem); line-height: 0.92; letter-spacing: -0.02em; }
+  .dsc__region::before { content: ''; display: block; width: 2.4rem; height: 2px; margin-bottom: 0.9rem; background: var(--slp-region-dark); }
+  .dsc__identity { font: italic 500 clamp(1.2rem, 1rem + 0.8vw, 1.65rem)/1.3 var(--sc-font-display); max-width: 30ch; }
+  .dsc__range { color: rgb(246 241 231 / 0.82); font-variant-numeric: tabular-nums; }
 
-  /* ---- a world ---------------------------------------------------------- */
-  .slp-world {
-    position: relative;
-    height: 100vh;
-    height: 100svh;
-    min-height: 34rem;
-    overflow: clip;
-    color: var(--sc-ink);
-    background: var(--sc-canvas);
-  }
-  .slp-world__fill { position: absolute; inset: 0; z-index: 0; }
-  .slp-world__sky {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  .slp-world__skyfill { fill: var(--sc-canvas); }
-  .slp-world__ahead {
-    fill: none;
-    stroke: var(--sc-ink);
-    stroke-width: 1.4;
-    stroke-linejoin: round;
-    opacity: 0.38;
-  }
-  .slp-world__done {
-    fill: none;
-    stroke: var(--slp-region-ui);
-    stroke-width: 3;
-    stroke-linejoin: round;
-    stroke-linecap: round;
-  }
-  .slp-world__tick { stroke: var(--sc-ink); stroke-width: 1; opacity: 0.5; }
-  .slp-world__marker { fill: var(--sc-canvas); stroke: var(--sc-ink); stroke-width: 0.7; }
+  .dsc__chart { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; height: 44%; }
+  .dsc__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .dsc__line { fill: none; stroke: rgb(246 241 231 / 0.5); stroke-width: 1.25px; }
+  .dsc__seg { fill: none; stroke-width: 3px; stroke-linejoin: round; stroke: var(--slp-region-dark); }
+  .dsc__boundary { stroke: rgb(246 241 231 / 0.22); stroke-width: 1px; stroke-dasharray: 3 4; }
+  .dsc__regions { list-style: none; position: absolute; left: 0; right: 0; bottom: var(--sc-5); height: 1.2rem; }
+  .dsc__regions li { position: absolute; padding-left: 0.6rem; font: 700 0.66rem/1 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; color: rgb(246 241 231 / 0.55); white-space: nowrap; overflow: hidden; transition: color 200ms; }
+  .dsc__regions li.is-active { color: var(--slp-region-dark); }
+  .dsc__anchors { list-style: none; position: absolute; inset: 0; pointer-events: none; }
+  .dsc__anchors li { position: absolute; width: 0; height: 0; }
+  .dsc__anchors li::before { content: ''; position: absolute; left: -3px; top: -3px; width: 6px; height: 6px; border-radius: 50%; background: rgb(246 241 231 / 0.8); }
+  .dsc__anchors span { position: absolute; left: 0.5rem; top: 0.45rem; font: 600 0.68rem/1.2 var(--sc-font-text); color: rgb(246 241 231 / 0.78); white-space: nowrap; }
+  .dsc__anchors li:last-child span { left: auto; right: 0.5rem; }
 
-  .slp-world__copy {
-    position: absolute;
-    z-index: 2;
-    top: calc(var(--slp-header-h) + 6vh);
-    left: var(--sc-gutter);
-    right: var(--sc-gutter);
-    display: grid;
-    gap: var(--sc-3);
-    max-width: 44rem;
+  .dsc__marker { position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 3; will-change: transform; }
+  .dsc__dot { position: absolute; left: -8px; top: -8px; width: 16px; height: 16px; border-radius: 50%; background: var(--slp-ivory); box-shadow: 0 0 0 5px rgb(246 241 231 / 0.18), 0 2px 8px rgb(0 0 0 / 0.4); }
+  .dsc__readout { position: absolute; left: 0.9rem; bottom: 0.9rem; display: grid; gap: 0.15rem; white-space: nowrap; width: max-content; text-shadow: 0 1px 12px rgb(10 12 11 / 0.6); }
+  .dsc__marker.is-right .dsc__readout { left: auto; right: 0.9rem; text-align: right; }
+  .dsc__alt { font: 600 clamp(2rem, 1.4rem + 2vw, 3.2rem)/1 var(--sc-font-display); font-variant-numeric: tabular-nums lining-nums; }
+  .dsc__where { font: 600 0.74rem/1.3 var(--sc-font-text); color: rgb(246 241 231 / 0.85); }
+
+  .dsc__finale {
+    position: absolute; z-index: 4; right: var(--sc-gutter); top: 50%; transform: translateY(-50%);
+    max-width: 12ch; text-align: right; font-size: clamp(2.2rem, 1.4rem + 3vw, 4.4rem); line-height: 1;
+    opacity: 0; transition: opacity 400ms var(--sc-ease-out);
   }
-  .slp-world__copy--trail { left: auto; text-align: right; justify-items: end; }
-  .slp-world__copy--center { margin-inline: auto; text-align: center; justify-items: center; }
-  .slp-world__copy--split {
-    max-width: none;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
-    align-items: end;
-    column-gap: var(--sc-8);
-  }
-  .slp-world__copy--split .slp-world__light { grid-column: 1 / -1; }
-  .slp-world__copy--split .slp-world__body { align-self: end; padding-bottom: 0.6rem; }
-  /* Small text never takes the accent (it cannot hold 4.5:1 on both grounds);
-     the accent rides on a short rule beside it instead. */
-  .slp-world__light {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    color: var(--sc-ink-soft);
-  }
-  .slp-world__light::before {
-    content: '';
-    width: 1.75rem;
-    height: 2px;
-    background: var(--slp-region-ui);
-  }
-  .slp-world__body { display: grid; gap: var(--sc-3); justify-items: inherit; }
-  .slp-world__body > a, .slp-descent__finale > a { justify-self: start; }
-  .slp-world__copy--trail .slp-world__body > a { justify-self: end; }
-  .slp-world__copy--center .slp-world__body > a { justify-self: center; }
-  .slp-world__body .sc-lede { max-width: 30ch; }
-  .slp-world__soon {
-    font-size: var(--sc-t-sm);
-    font-weight: 600;
-    color: var(--sc-ink-soft);
-    min-height: var(--slp-tap);
-    display: flex;
-    align-items: center;
+  .dsc__finale.is-on { opacity: 1; }
+  .dsc__src { position: absolute; z-index: 4; right: var(--sc-gutter); bottom: 0.5rem; max-width: 46rem; text-align: right; color: rgb(246 241 231 / 0.62); font-size: 0.64rem; }
+
+  @media (max-width: 760px) {
+    .dsc__chart { height: 40%; }
+    .dsc__head { top: calc(var(--slp-header-h) + var(--sc-3)); }
+    .dsc__identity { font-size: 1.15rem; }
+    .dsc__anchors span { display: none; }
+    .dsc__regions li { font-size: 0.56rem; letter-spacing: 0.1em; padding-left: 0.25rem; }
+    .dsc__finale { top: 40%; left: var(--sc-gutter); right: auto; text-align: left; }
+    .dsc__src { left: var(--sc-gutter); text-align: left; bottom: 0.25rem; font-size: 0.58rem; }
+    .dsc__regions { bottom: var(--sc-6); }
   }
 
-  /* ---- the drop and the finale ----------------------------------------- */
-  .slp-descent__drop {
-    position: relative;
-    height: 100vh;
-    height: 100svh;
-    min-height: 34rem;
-    overflow: clip;
-    background: var(--slp-charcoal);
-  }
-  .slp-descent__drop :global(video) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .slp-descent__scrim {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background: linear-gradient(to top right,
-      color-mix(in oklab, var(--slp-charcoal) 92%, transparent) 0%,
-      color-mix(in oklab, var(--slp-charcoal) 62%, transparent) 30%,
-      transparent 62%);
-  }
-  .slp-descent__finale {
-    position: absolute;
-    z-index: 2;
-    left: var(--sc-gutter);
-    right: var(--sc-gutter);
-    bottom: calc(var(--slp-line-h) + 9vh);
-    display: grid;
-    gap: var(--sc-4);
-    max-width: 40rem;
-    color: var(--slp-ivory);
-  }
-  .slp-descent__finale-title { font-size: var(--sc-t-3xl); }
-
-  /* The readout rides just above the marker, in the sky, so it always sits on
-     the world's own ground. Positioned by motion/descent.ts. */
-  .slp-descent__readout {
-    position: absolute;
-    z-index: 5;
-    left: 0;
-    top: 0;
-    display: none;
-    align-items: baseline;
-    gap: var(--sc-3);
-    margin: 0;
-    background: none;
-    white-space: nowrap;
-    transform: translate3d(var(--rx, 0px), var(--ry, 0px), 0);
-    opacity: var(--ro, 1);
-    pointer-events: none;
-  }
-
-  /* ---- motion: worlds stack inside one pinned stage ---------------------- */
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent { height: calc(var(--span) * 100vh); }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent__stage {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    height: 100svh;
-    overflow: clip;
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world,
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent__drop {
-    position: absolute;
-    inset: 0;
-    height: auto;
-    min-height: 0;
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world {
-    --q: 0;
-    will-change: clip-path;
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='none'] { --q: 1; }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='shadow'] {
-    clip-path: inset(0 calc((1 - var(--q)) * 100%) 0 0);
-  }
-  /* An arch opening from the ground up: the colonial doorway. */
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='arch'] {
-    clip-path: inset(calc((1 - var(--q)) * 100%) calc((1 - var(--q)) * 42%) 0 round calc((1 - var(--q)) * 100vw) calc((1 - var(--q)) * 100vw) 0 0);
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='waterline'] {
-    clip-path: inset(calc((1 - var(--q)) * 100%) 0 0 0);
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='curtain'] {
-    clip-path: inset(0 0 calc((1 - var(--q)) * 100%) 0);
-  }
-  /* The leading edge of a cut: a water surface rising, a curtain of water
-     falling, a shadow crossing the plain. Visible only while the cut runs. */
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world:is([data-transition='waterline'], [data-transition='curtain'], [data-transition='shadow'])::after {
-    content: '';
-    position: absolute;
-    z-index: 6;
-    background: var(--slp-region-ui);
-    opacity: calc((1 - var(--q)) * 40);
-    pointer-events: none;
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='waterline']::after {
-    left: 0; right: 0; height: 3px; top: calc((1 - var(--q)) * 100%);
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='curtain']::after {
-    left: 0; right: 0; height: 3px; top: calc(var(--q) * 100% - 3px);
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world[data-transition='shadow']::after {
-    top: 0; bottom: 0; width: 3px; left: calc(var(--q) * 100% - 3px);
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world__copy {
-    transform: translate3d(0, calc((1 - var(--q)) * 3vh), 0);
-    opacity: var(--copy-o, 1);
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-world__fill {
-    transform: scale(calc(1.06 - var(--q) * 0.06));
-    transform-origin: 50% 70%;
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent__drop {
-    z-index: 4;
-    opacity: var(--drop);
-    pointer-events: none;
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent[data-dropped] .slp-descent__drop { pointer-events: auto; }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent__readout { display: flex; }
-
-  @media (max-width: 860px) {
-    :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-descent { height: calc(var(--span-m) * 100vh); }
-    .slp-world__copy,
-    .slp-world__copy--trail,
-    .slp-world__copy--center {
-      top: calc(var(--slp-header-h) + 4vh);
-      left: var(--sc-gutter);
-      right: var(--sc-gutter);
-      margin: 0;
-      text-align: left;
-      justify-items: start;
-    }
-    .slp-world__copy--split { grid-template-columns: 1fr; }
-    .slp-display-region { font-size: clamp(3rem, 2rem + 8vw, 4.4rem); }
-    .slp-world__body .sc-lede { font-size: var(--sc-t-base); }
-    .slp-descent__finale { bottom: 12vh; }
-  }
+  /* ---- static composition (reduced motion, no engine) -------------------- */
+  :global(.dsc[data-static]) .dsc__stage { height: auto; min-height: 0; padding: var(--sc-section) 0 var(--sc-7); overflow: visible; display: grid; gap: var(--sc-6); }
+  :global(.dsc[data-static]) .dsc__photos { position: relative; inset: auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; width: var(--slp-wrap); margin-inline: auto; order: 2; }
+  :global(.dsc[data-static]) .dsc__photo { position: relative; opacity: 1; aspect-ratio: 16 / 10; }
+  :global(.dsc[data-static]) .dsc__shade, :global(.dsc[data-static]) .dsc__marker, :global(.dsc[data-static]) .dsc__finale { display: none; }
+  :global(.dsc[data-static]) .dsc__head { position: relative; top: auto; order: 0; }
+  :global(.dsc[data-static]) .dsc__copies { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: var(--sc-6); }
+  :global(.dsc[data-static]) .dsc__copy { grid-area: auto; opacity: 1; visibility: visible; transform: none; }
+  :global(.dsc[data-static]) .dsc__region { font-size: var(--sc-t-2xl); }
+  :global(.dsc[data-static]) .dsc__chart { position: relative; height: 16rem; width: var(--slp-wrap); margin-inline: auto; order: 1; }
+  :global(.dsc[data-static]) .dsc__src { position: relative; right: auto; bottom: auto; width: var(--slp-wrap); margin-inline: auto; text-align: left; order: 3; }
 </style>

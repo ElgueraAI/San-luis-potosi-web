@@ -1,0 +1,68 @@
+---
+/**
+ * Current weather (Open-Meteo, no key) for representative verified points.
+ * Server renders the shell with a loading state; src/scripts/weather.ts fills
+ * it and handles offline / API failure without affecting the rest of the page.
+ */
+import { weatherPoints, weatherConfig, type WeatherPoint } from '@/data/research';
+import { REGION_NAME } from '@/data/regions';
+
+interface Props { keys: string[]; layout?: 'row' | 'single'; title?: string; class?: string }
+const { keys, layout = 'row', title, class: cls } = Astro.props;
+const pts = keys.map((k) => weatherPoints.find((p) => p.key === k)).filter((p): p is WeatherPoint => !!p);
+// balanced rows: 6 points read as 3 × 2, never 5 + an orphan
+const cols = pts.length <= 4 ? pts.length : pts.length % 3 === 0 ? 3 : 4;
+---
+<section class:list={['wx', `wx--${layout}`, cls]} data-weather aria-label={title ?? 'Clima actual'}>
+  {title && <p class="label wx__title">{title}</p>}
+  <ul class="wx__list" style={`--wx-cols: ${cols}`}>
+    {pts.map((p) => (
+      <li class="wx__item" data-region={p.region} data-wx-point={p.key} data-lat={p.lat} data-lon={p.lon} data-state="loading">
+        <p class="wx__place">
+          <span class="wx__name">{p.name}</span>
+          <span class="wx__region">{REGION_NAME[p.region]}</span>
+        </p>
+        <p class="wx__now"><span class="wx__temp"><span data-wx="temp">--</span><span class="wx__deg" aria-hidden="true">°</span><span class="visually-hidden"> grados</span></span><span class="wx__cond" data-wx="cond">Cargando clima…</span></p>
+        <dl class="wx__facts">
+          <div><dt>Sensación</dt><dd data-wx="feels">--</dd></div>
+          <div><dt>Máx / mín</dt><dd data-wx="range">--</dd></div>
+          <div><dt>Viento</dt><dd data-wx="wind">--</dd></div>
+          <div><dt>Lluvia</dt><dd data-wx="rain">--</dd></div>
+        </dl>
+      </li>
+    ))}
+  </ul>
+  <p class="wx__error tiny" data-wx-error hidden>El clima en vivo no está disponible en este momento. El resto de la página funciona con normalidad.</p>
+  <p class="source wx__attr">
+    Clima en vivo para puntos de referencia oficiales (INEGI).
+    <a href={weatherConfig.links[0]} rel="noopener" target="_blank">Datos meteorológicos: Open-Meteo.com</a>
+    (<a href={weatherConfig.links[1]} rel="noopener" target="_blank">CC BY 4.0</a>).
+  </p>
+</section>
+
+<style>
+  .wx { display: grid; gap: var(--sc-4); }
+  .wx__list { list-style: none; display: grid; gap: 1px; background: var(--sc-hairline); border-block: 1px solid var(--sc-hairline); }
+  .wx--row .wx__list { grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+  @media (min-width: 64em) { .wx--row .wx__list { grid-template-columns: repeat(var(--wx-cols, 3), minmax(0, 1fr)); } }
+  .wx__item { background: var(--sc-canvas); padding: var(--sc-4) var(--sc-4) var(--sc-4) 0; display: grid; gap: 0.6rem; }
+  .wx--row .wx__item { padding-inline: var(--sc-4); }
+  .wx__place { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; }
+  .wx__name { font-weight: 700; }
+  .wx__region { font: 700 0.66rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--slp-region-text); }
+  /* Weather numbers use the text sans with tabular figures: precise, compact,
+     never competing with page titles. Only this component changes. */
+  .wx__now { display: flex; align-items: center; gap: 0.8rem; min-height: 3rem; }
+  .wx__temp { display: inline-flex; align-items: flex-start; font: 600 clamp(2.1rem, 1.75rem + 0.8vw, 2.75rem)/1 var(--sc-font-text); letter-spacing: -0.03em; font-variant-numeric: tabular-nums lining-nums; min-width: 2.6ch; }
+  .wx__deg { font-size: 0.5em; font-weight: 500; line-height: 1; margin: 0.12em 0 0 0.06em; letter-spacing: 0; opacity: 0.8; }
+  .wx__cond { font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem); line-height: 1.3; color: var(--sc-ink-soft); }
+  .wx__facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 1rem; margin: 0; font-size: 0.875rem; }
+  .wx__facts div { display: grid; gap: 0.15rem; border-top: 1px solid var(--sc-hairline); padding-top: 0.35rem; }
+  .wx__facts dt { font: 700 0.62rem/1.2 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .wx__facts dd { margin: 0; font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .wx__item[data-state='loading'] .wx__temp { animation: wx-pulse 1.4s ease-in-out infinite; }
+  .wx__item[data-state='error'] { opacity: 0.7; }
+  @keyframes wx-pulse { 50% { opacity: 0.35; } }
+  @media (prefers-reduced-motion: reduce) { .wx__item[data-state='loading'] .wx__temp { animation: none; } }
+  .wx__error { padding: 0.6rem 0.8rem; border-left: 1px solid var(--sc-ink-soft); color: var(--sc-ink-soft); }
+</style>

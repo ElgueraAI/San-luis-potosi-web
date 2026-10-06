@@ -1,0 +1,70 @@
+---
+/**
+ * Compact card for a normalized entity (museum, venue, event, lodging,
+ * protected area, archaeology, food). No borrowed photograph: a region rule
+ * and the type label carry the identity. Shows only fields a source published,
+ * the source note, and "Añadir a Mi Ruta" when the entity has a point.
+ */
+import RouteButton from '@/components/ui/RouteButton.astro';
+import { muniHref } from '@/i18n/routes';
+import { REGION_LABEL, muniById, bizNote, DATE_STATUS, ACCESS, type Entity } from '@/data/portal';
+
+interface Props { e: Entity; href?: string | null; level?: 'h3' | 'h4'; showMuni?: boolean; note?: string | null; compact?: boolean }
+const { e, href: link = null, level = 'h3', showMuni = true, note, compact = false } = Astro.props;
+const H = level;
+const muni = e.municipality_id ? muniById.get(e.municipality_id) : null;
+const isBiz = !!e.denue || !!e.official_directory;
+const extUrl = e.official_url && /^https?:/i.test(e.official_url) ? e.official_url : null;
+const status = e.date_status ? DATE_STATUS[e.date_status] : null;
+const access = e.access_status ? ACCESS[e.access_status] : null;
+const sourceLine = note !== undefined ? note : isBiz ? bizNote(e) : e.source_ids?.some((s) => s.startsWith('sic')) ? 'Fuente: Sistema de Información Cultural (Secretaría de Cultura)' : e.source_ids?.some((s) => s.startsWith('inah')) ? 'Fuente: INAH' : null;
+---
+<article class:list={['ecard', { 'ecard--compact': compact }]} data-region={e.region ?? undefined}>
+  <p class="ecard__type">{e.subcategory ?? e.entity_type}</p>
+  <H class="ecard__name">{link ? <a href={link}>{e.canonical_name}</a> : e.canonical_name}</H>
+  {showMuni && (e.municipality || e.region) && (
+    <p class="ecard__where">
+      {muni ? <a href={muniHref(muni.slug!)}>{muni.canonical_name}</a> : e.municipality}
+      {e.locality && e.locality !== e.municipality && <span> · {e.locality}</span>}
+      {e.region && <span class="ecard__reg"><span class="ecard__dot" aria-hidden="true"></span>{REGION_LABEL[e.region]}</span>}
+    </p>
+  )}
+  {status && <p class:list={['ecard__status', `is-${status.tone}`]}>{status.label}{e.date_pattern ? ` · ${e.date_pattern}` : ''}</p>}
+  {access && <p class:list={['ecard__status', e.access_status === 'OPEN_TO_PUBLIC' ? 'is-ok' : 'is-unknown']}>{access}</p>}
+  {!compact && e.short_description && <p class="ecard__text">{e.short_description}</p>}
+  {!compact && e.official_contact?.address && <p class="ecard__meta">{e.official_contact.address}</p>}
+  {(extUrl || e.official_contact?.phone) && (
+    <p class="ecard__links">
+      {extUrl && <a class="link" href={extUrl} rel="noopener" target="_blank">Sitio oficial<span class="visually-hidden"> de {e.canonical_name} (abre en otra pestaña)</span></a>}
+      {e.official_contact?.phone && <span class="ecard__phone">Tel. {e.official_contact.phone}</span>}
+    </p>
+  )}
+  <div class="ecard__foot">
+    {sourceLine && <p class="ecard__src">{sourceLine}</p>}
+    {e.latitude != null && <RouteButton id={e.id} name={e.canonical_name} variant="icon" />}
+  </div>
+</article>
+
+<style is:global>
+  .ecard { position: relative; display: grid; gap: 0.4rem; align-content: start; height: 100%; min-width: 0; overflow-wrap: anywhere; padding: 1.1rem 1.1rem 0.9rem 1.25rem; border-radius: var(--sc-r-sm); background: var(--sc-surface); box-shadow: inset 3px 0 0 var(--slp-region-ui, var(--sc-hairline-strong)); }
+  .ecard__type { font: 700 0.62rem/1.3 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--slp-region-text, var(--sc-ink-soft)); }
+  .ecard__name { font: 600 1.3rem/1.15 var(--sc-font-display); text-wrap: balance; }
+  .ecard__name a { color: inherit; text-decoration: none; }
+  .ecard__name a:hover { text-decoration: underline; text-underline-offset: 0.16em; }
+  .ecard__where { font-size: 0.82rem; font-weight: 600; display: flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 0.6rem; }
+  .ecard__where a { color: inherit; }
+  .ecard__reg { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 500; color: var(--sc-ink-soft); }
+  .ecard__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-ui, var(--sc-ink-soft)); }
+  .ecard__status { font-size: 0.76rem; font-weight: 650; display: inline-flex; gap: 0.4rem; align-items: center; }
+  .ecard__status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; border: 2px solid currentColor; flex: none; }
+  .ecard__status.is-ok::before { background: currentColor; }
+  .ecard__status.is-past, .ecard__status.is-unknown { color: var(--sc-ink-soft); }
+  .ecard__text { font-size: var(--sc-t-sm); line-height: 1.55; color: var(--sc-ink-soft); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .ecard__meta { font-size: 0.78rem; color: var(--sc-ink-soft); }
+  .ecard__links { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-size: 0.82rem; font-weight: 600; }
+  .ecard__phone { color: var(--sc-ink-soft); font-weight: 500; }
+  .ecard__foot { display: flex; align-items: end; justify-content: space-between; gap: 0.8rem; margin-top: auto; padding-top: 0.4rem; }
+  .ecard__src { font-size: 0.68rem; line-height: 1.4; color: var(--sc-ink-soft); max-width: 34ch; }
+  .ecard--compact { padding-block: 0.85rem 0.7rem; }
+  .ecard--compact .ecard__name { font-size: 1.15rem; }
+</style>

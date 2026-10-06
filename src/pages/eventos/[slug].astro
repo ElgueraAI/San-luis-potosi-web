@@ -1,0 +1,112 @@
+---
+/**
+ * Event page: what it is (sourced Spanish text), the date and how confirmed it
+ * is, where (municipality, map), the official source, and what is nearby
+ * (destinations, lodging, food in the same municipality). A photograph only
+ * when it shows the event or its place (src/data/eventsText.ts).
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import DestinationCard from '@/components/ui/DestinationCard.astro';
+import EntityCard from '@/components/portal/EntityCard.astro';
+import MapView from '@/components/map/MapView.astro';
+import Photo from '@/components/media/Photo.astro';
+import { events, muniById, muniView, DATE_STATUS, REGION_LABEL, fmtConfirmed, near, lodging, eventSlug } from '@/data/portal';
+import { getDestination, sourceLabel, sourceUrl, MONTHS_ES } from '@/data/research';
+import { EVENT_TEXT, EVENT_IMAGE } from '@/data/eventsText';
+import { href, muniHref, regionHref, eventHref, destHref } from "@/i18n/routes";
+import { REGIONS } from '@/data/regions';
+
+export function getStaticPaths() {
+  return events.map((e) => ({ params: { slug: e.slug }, props: { e } }));
+}
+const { e } = Astro.props as { e: (typeof events)[number] };
+const muni = e.municipality_id ? muniById.get(e.municipality_id) ?? null : null;
+const v = muni ? muniView(muni) : null;
+const region = REGIONS.find((r) => r.id === e.region) ?? null;
+const status = DATE_STATUS[e.date_status!];
+const dest = e.related_entities.map((id) => getDestination(id)).find(Boolean) ?? null;
+const img = EVENT_IMAGE[e.id] ?? null;
+// research notes on ev-* records are English working notes; pass-6 notes are written for visitors
+const text = EVENT_TEXT[e.id] ?? e.travel_notes ?? (e.id.startsWith('ev-') ? null : e.notes ?? null);
+const confirmed = fmtConfirmed(e.confirmed_dates);
+const months = (e.months ?? []).map((m) => MONTHS_ES[m - 1]);
+const src = e.source_ids[0];
+const srcUrl = e.official_url ?? (src ? sourceUrl(src) : null);
+const beds = muni ? near(lodging, muni.latitude ?? null, muni.longitude ?? null, 20, 4) : [];
+const sameMonth = events.filter((o) => o.id !== e.id && o.months?.some((m) => e.months?.includes(m))).slice(0, 3);
+---
+<BaseLayout title={e.canonical_name} description={`${e.canonical_name}${muni ? `, ${muni.canonical_name}` : ''}. ${status.label}${e.date_pattern ? `: ${e.date_pattern}` : ''}.`} image={img?.id ?? null}>
+  <PageHeader
+    label={`Evento · ${e.subcategory ?? 'Fiesta'}`}
+    title={e.canonical_name}
+    image={img?.id ?? null}
+    tone="heritage"
+    ground="dark"
+    region={e.region}
+    crumbs={[{ label: 'Eventos', href: href('events') }, { label: e.canonical_name }]}
+  />
+
+  <section class="psec" data-ground="light" data-region={e.region} aria-labelledby="ev-t">
+    <div class="wrap split">
+      <div class="evd">
+        <h2 id="ev-t" class="visually-hidden">Información del evento</h2>
+        <p class:list={['evd__status', `is-${status.tone}`]}>{status.label}</p>
+        {text && <p class="lede evd__text">{text}</p>}
+        <dl class="facts">
+          {confirmed && <div class="facts__wide"><dt>Fechas confirmadas</dt><dd>{confirmed}</dd></div>}
+          {e.date_pattern && <div><dt>Cuándo</dt><dd>{e.date_pattern}</dd></div>}
+          {months.length > 0 && <div><dt>Meses</dt><dd>{months.join(', ')}</dd></div>}
+          <div><dt>Dónde</dt><dd>{muni ? <a href={muniHref(muni.slug!)}>{muni.canonical_name}</a> : e.municipality ?? 'Varios municipios'}</dd></div>
+          {region && <div><dt>Región</dt><dd><a href={regionHref(region.slug)}>{region.name}</a></dd></div>}
+          <div><dt>Categoría</dt><dd>{e.subcategory ?? 'Evento'}</dd></div>
+          <div class="facts__wide"><dt>Fuente oficial</dt><dd>{srcUrl ? <a href={srcUrl} rel="noopener" target="_blank">{src ? sourceLabel(src) : 'Fuente'}</a> : src ? sourceLabel(src) : '—'}</dd></div>
+        </dl>
+        {e.date_status !== 'CONFIRMED_CURRENT_YEAR' && <p class="truth">Antes de viajar, confirma la fecha con la fuente oficial o el municipio: {status.label.toLowerCase()}.</p>}
+        {dest && <a class="arrow" href={destHref(dest.slug)}>Sobre {dest.name.split(' – ')[0]}</a>}
+      </div>
+      {img && <figure class="split__media evd__fig"><Photo id={img.id} ratio="4/5" sizes="(max-width: 900px) 92vw, 40vw" widths={[480, 800, 1200]} alt={img.caption} /><figcaption class="tiny muted">{img.caption}</figcaption></figure>}
+    </div>
+  </section>
+
+  {muni?.seat && (
+    <section class="psec psec--tight" data-ground="ivory" aria-labelledby="evm-t">
+      <div class="wrap">
+        <h2 id="evm-t" class="label">Ubicación: {muni.canonical_name}</h2>
+        <MapView mode="mini" focus={muni.id} height="22rem" label={`Mapa de ${muni.canonical_name}`} />
+        <p class="tiny muted">Punto de la cabecera municipal (INEGI). El lugar exacto depende de cada edición.</p>
+      </div>
+    </section>
+  )}
+
+  {v && (v.destinations.length > 0 || beds.length > 0 || v.food.length > 0) && (
+    <section class="psec" data-ground="light" aria-labelledby="evn-t">
+      <div class="wrap">
+        <div class="psec__head"><p class="label">Cerca</p><h2 id="evn-t" class="psec__title">Aprovecha el viaje</h2></div>
+        {v.destinations.length > 0 && <ul class="pgrid pgrid--rail">{v.destinations.slice(0, 4).map((d) => <li><DestinationCard d={d} ratio="4/5" size="sm" sizes="(max-width: 640px) 78vw, 18rem" headingLevel="h3" /></li>)}</ul>}
+        {beds.length > 0 && <><h3 class="evsub">Hospedaje cercano</h3><ul class="pgrid pgrid--ent">{beds.map((b) => <li><EntityCard e={b} compact /></li>)}</ul></>}
+        {v.food.length > 0 && <><h3 class="evsub">Dónde comer en {muni!.canonical_name}</h3><ul class="pgrid pgrid--ent">{v.food.slice(0, 4).map((f) => <li><EntityCard e={f} compact showMuni={false} /></li>)}</ul></>}
+      </div>
+    </section>
+  )}
+
+  {sameMonth.length > 0 && (
+    <section class="psec psec--tight" data-ground="dark" data-tone="heritage" aria-labelledby="evo-t">
+      <div class="wrap">
+        <h2 id="evo-t" class="label">También en {months[0] ?? 'el año'}</h2>
+        <ul class="pgrid pgrid--ent">{sameMonth.map((o) => <li><EntityCard e={o} href={eventHref(eventSlug(o))} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .evd { display: grid; gap: var(--sc-4); justify-items: start; }
+  .evd__status { font: 700 0.72rem/1.3 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; padding: 0.45rem 0.7rem; border-radius: 999px; border: 1px solid currentColor; }
+  .evd__status.is-ok { background: var(--slp-region-ui, var(--slp-gold-deep)); color: #fff; border-color: transparent; }
+  .evd__status.is-past, .evd__status.is-unknown { color: var(--sc-ink-soft); }
+  .evd__text { max-width: 46ch; }
+  .evd .facts { width: 100%; }
+  .evd__fig { margin: 0; display: grid; gap: 0.5rem; }
+  .evsub { font: 700 0.7rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); margin: var(--sc-6) 0 var(--sc-3); }
+</style>

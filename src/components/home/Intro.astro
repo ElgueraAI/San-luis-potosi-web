@@ -1,121 +1,53 @@
 ---
-/**
- * Act 2 · Introduction. Discovery, and the authored silence before the peak.
- * Ivory paper, one sentence, and the whole line drawing itself region by region
- * from the act's --sc-p. No photography on purpose.
- */
-import { profile, worldPath, elevationAt } from '@/data/geo';
-import { t, pick, type Locale } from '@/i18n';
-import type { RegionWithBounds } from '@/lib/regions';
+/** Descubre: the central idea, one strong photograph, four verified figures. */
+import Photo from '@/components/media/Photo.astro';
+import { profile, destinations, verifiedMunicipalityTotal, sourceUrl } from '@/data/research';
+import { fmtM } from '@/lib/profile';
 
-interface Props {
-  locale: Locale;
-  regions: RegionWithBounds[];
-}
-const { locale, regions } = Astro.props;
+const pm = destinations.filter((d) => d.puebloMagico).length;
+const figures = [
+  { value: '4', label: 'regiones turísticas' },
+  { value: String(verifiedMunicipalityTotal), label: 'municipios verificados en el PDU-SLP' },
+  { value: String(pm), label: 'Pueblos Mágicos' },
+  { value: `${fmtM(profile.summary.max_m)} → ${fmtM(profile.summary.min_m)}`, label: 'de desnivel a lo largo del transecto INEGI' },
+];
 ---
-<section id="introduccion" class="slp-intro" data-ground="light" data-chrome="solid" data-sc-act="flow" aria-labelledby="intro-title">
-  <div class="sc-wrap slp-intro__text" data-sc-in data-sc-stagger="80">
-    <h2 id="intro-title" class="sc-display slp-intro__title">{t(locale, 'intro.title')}</h2>
-    <p class="sc-lede slp-intro__body">{t(locale, 'intro.body')}</p>
+<section id="descubre" class="intro section" data-ground="light" aria-labelledby="intro-title">
+  <div class="wrap intro__grid">
+    <div class="intro__media" data-reveal>
+      <Photo id="wc-42373253" ratio="4/3" sizes="(max-width: 900px) 100vw, 56vw" focal="50% 55%" />
+      <p class="tiny muted intro__cap">Semidesierto potosino, camino a Matehuala.</p>
+    </div>
+    <div class="intro__text" data-reveal>
+      <p class="label">Descubre</p>
+      <h2 id="intro-title" class="display display--lg">No es un solo destino.<br /><em>Es un descenso.</em></h2>
+      <p class="lede">Real de Catorce está en lo alto de la sierra; Ciudad Valles, casi al nivel del río. Entre ambos, San Luis Potosí pasa del desierto a la cantera, de los manantiales a la selva.</p>
+      <p class="body muted">Cuatro regiones con paisajes, climas y culturas distintas, que se pueden recorrer en un mismo viaje. Este sitio te ayuda a descubrirlas todas, no solo las más conocidas.</p>
+    </div>
   </div>
-
-  <figure class="slp-intro__line" aria-hidden="true">
-    <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
-      {regions.map((r) => (
-        <path
-          data-region={r.id}
-          data-ground="light"
-          d={worldPath(profile.points, r.bounds.from, r.bounds.to)}
-          vector-effect="non-scaling-stroke"
-          style={`--from:${r.bounds.from};--to:${r.bounds.to}`}
-        />
-      ))}
-    </svg>
-    <ol class="slp-intro__regions" role="list">
-      {regions.map((r) => (
-        <li
-          data-region={r.id}
-          data-ground="light"
-          style={`--from:${r.bounds.from};--to:${r.bounds.to};--e:${elevationAt((r.bounds.from + r.bounds.to) / 2).toFixed(3)}`}
-        >
-          <span class="slp-intro__name">{pick(r.name, locale)}</span>
-          <span class="slp-intro__light">{pick(r.light, locale)}</span>
-        </li>
-      ))}
-    </ol>
-  </figure>
+  <dl class="wrap intro__figures" data-reveal>
+    {figures.map((f) => (
+      <div><dt>{f.label}</dt><dd class="display">{f.value}</dd></div>
+    ))}
+  </dl>
+  <p class="wrap source intro__src">
+    Regiones y municipios: <a href={sourceUrl('pdu-slp') ?? '#'}>PDU-SLP</a>. Pueblos Mágicos: SECTUR. Altitudes: {profile.sourceShort}, {profile.caveat}
+  </p>
 </section>
 
 <style>
-  .slp-intro {
-    position: relative;
-    padding-block: calc(var(--sc-section) + var(--slp-header-h)) var(--sc-section);
-    overflow: clip;
+  .intro__grid { display: grid; gap: var(--sc-7); align-items: end; }
+  @media (min-width: 900px) { .intro__grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: clamp(3rem, 6vw, 7rem); } }
+  .intro__text { display: grid; gap: var(--sc-5); padding-bottom: var(--sc-4); }
+  .intro__text h2 em { color: var(--slp-gold-deep); }
+  .intro__cap { margin-top: 0.6rem; }
+  .intro__figures {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0;
+    margin-top: clamp(3rem, 6vw, 5rem); border-top: 1px solid var(--sc-hairline-strong);
   }
-  .slp-intro__text { display: grid; gap: var(--sc-5); }
-  .slp-intro__title {
-    font-size: var(--sc-t-3xl);
-    max-width: 14ch;
-  }
-  .slp-intro__body {
-    max-width: 38ch;
-    font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
-    line-height: 1.42;
-    color: var(--sc-ink-soft);
-    margin-left: clamp(0rem, 18vw, 22rem);
-  }
-
-  .slp-intro__line {
-    --draw: clamp(0, (var(--sc-p, 1) - 0.18) / 0.42, 1);
-    position: relative;
-    height: clamp(11rem, 26vw, 22rem);
-    margin: var(--sc-9) var(--sc-gutter) 0;
-  }
-  .slp-intro__line svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .slp-intro__line path {
-    --local: clamp(0, (var(--draw) - var(--from)) / (var(--to) - var(--from)), 1);
-    fill: none;
-    stroke: var(--slp-region-ui);
-    stroke-width: 2.6;
-    stroke-linejoin: round;
-    stroke-linecap: round;
-    /* Drawn west to east by uncovering the segment's own box. (A dash offset
-       misbehaves with non-scaling strokes, so it is not used here.) */
-    clip-path: inset(-20% calc((1 - var(--local)) * 100%) -20% -2%);
-  }
-
-  .slp-intro__regions { margin: 0; padding: 0; list-style: none; }
-  .slp-intro__regions li {
-    --local: clamp(0, (var(--draw) - var(--from)) / (var(--to) - var(--from)), 1);
-    position: absolute;
-    left: calc(var(--from) * 100%);
-    top: calc((1 - var(--e)) * 100% + 1.6rem);
-    display: grid;
-    gap: 0.15rem;
-    padding-left: 0.7rem;
-    border-left: 2px solid var(--slp-region-ui);
-    opacity: calc(0.2 + var(--local) * 0.8);
-  }
-  .slp-intro__name {
-    font-family: var(--sc-font-display);
-    font-size: var(--sc-t-xl);
-    font-weight: 600;
-    line-height: 1;
-  }
-  .slp-intro__light {
-    font-size: var(--sc-t-xs);
-    font-weight: 650;
-    letter-spacing: var(--slp-track-label);
-    text-transform: uppercase;
-    color: var(--sc-ink-soft);
-  }
-
-  @media (max-width: 860px) {
-    .slp-intro__body { margin-left: 0; }
-    .slp-intro__line { height: 12rem; margin-inline: var(--sc-gutter); margin-bottom: 6rem; }
-    .slp-intro__regions li { padding-left: 0.45rem; }
-    .slp-intro__name { font-size: 1.15rem; }
-    .slp-intro__light { display: none; }
-  }
+  @media (min-width: 900px) { .intro__figures { grid-template-columns: repeat(4, 1fr); } }
+  .intro__figures div { padding: var(--sc-5) var(--sc-4) var(--sc-4) 0; display: flex; flex-direction: column-reverse; gap: 0.35rem; border-bottom: 1px solid var(--sc-hairline); }
+  .intro__figures dt { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); max-width: 22ch; }
+  .intro__figures dd { margin: 0; font-size: clamp(2rem, 1.4rem + 2vw, 3rem); line-height: 1; font-variant-numeric: lining-nums; }
+  .intro__src { margin-top: var(--sc-4); }
 </style>

@@ -1,0 +1,12 @@
+---
+/** All experiences on a dark cinematic ground, grouped as one editorial grid. */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import Experiences from '@/components/home/Experiences.astro';
+import { ALL_EXPERIENCES } from '@/data/experiences';
+import { href } from '@/i18n/routes';
+---
+<BaseLayout title="Experiencias" description="Doce experiencias en las cuatro regiones de San Luis Potosí, cada una sobre un destino verificado." image="wc-45072553">
+  <PageHeader label="Experiencias" title="Momentos que hacen el viaje" lede="Remar hasta Tamul, entrar a una gruta, ver nacer un rebozo, recorrer una ciudad huasteca. Cada experiencia parte de un destino verificado y reúne cuándo ir, qué hay cerca y dónde dormir." image="wc-45072553" crumbs={[{ label: 'Qué hacer', href: href('thingsToDo') }, { label: 'Experiencias' }]} />
+  <Experiences items={ALL_EXPERIENCES} heading="Doce maneras de vivir el estado." lede="Agua, piedra, desierto, oficio y ciudad. Elige una para ver su temporada, el mapa y lo que hay cerca." id="todas" all={false} />
+</BaseLayout>

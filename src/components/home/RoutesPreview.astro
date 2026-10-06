@@ -1,0 +1,26 @@
+---
+import ItineraryCard from '@/components/routes/ItineraryCard.astro';
+import { ITINERARIES } from '@/data/itineraries';
+import { href } from '@/i18n/routes';
+---
+<section id="rutas" class="routes section" data-ground="light" aria-labelledby="routes-title">
+  <div class="wrap section-head section-head--split">
+    <div>
+      <p class="label">Rutas e itinerarios</p>
+      <h2 id="routes-title" class="display display--lg">De un fin de semana a las cuatro regiones.</h2>
+    </div>
+    <div class="routes__aside">
+      <p class="body muted">Recorridos sugeridos con destinos verificados. Distancias y tiempos aproximados tomados de los folletos oficiales de la Secretaría de Turismo.</p>
+      <a class="arrow" href={href('routes')}>Todas las rutas</a>
+    </div>
+  </div>
+  <ul class="wrap rail routes__rail" aria-label="Itinerarios sugeridos">
+    {ITINERARIES.map((it, i) => <li><ItineraryCard it={it} featured={i === 4} /></li>)}
+  </ul>
+</section>
+
+<style>
+  .routes__aside { display: grid; gap: var(--sc-3); justify-items: start; }
+  .routes__rail { list-style: none; grid-auto-columns: minmax(19rem, 25rem); gap: var(--sc-6); }
+  @media (max-width: 760px) { .routes__rail { grid-auto-columns: 85%; } }
+</style>

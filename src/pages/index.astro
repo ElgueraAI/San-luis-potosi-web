@@ -1,15 +1,138 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HomeHero from '@/components/home/HomeHero.astro';
+import SubNav from '@/components/home/SubNav.astro';
 import Intro from '@/components/home/Intro.astro';
+import Regions from '@/components/home/Regions.astro';
 import Descent from '@/components/home/Descent.astro';
-import { getRegions } from '@/lib/regions';
+import MustSee from '@/components/home/MustSee.astro';
+import Interests from '@/components/home/Interests.astro';
+import Experiences from '@/components/home/Experiences.astro';
+import RoutesPreview from '@/components/home/RoutesPreview.astro';
+import Close from '@/components/home/Close.astro';
+import PortalLinks from '@/components/home/PortalLinks.astro';
+import MapView from '@/components/map/MapView.astro';
+import Weather from '@/components/ui/Weather.astro';
+import SeasonModule from '@/components/season/SeasonModule.astro';
+import ResourceGroups from '@/components/guides/ResourceGroups.astro';
+import Practical from '@/components/plan/Practical.astro';
+import ManualAsset from '@/components/media/ManualAsset.astro';
+import Photo from '@/components/media/Photo.astro';
+import { href } from '@/i18n/routes';
+import { preloadFor } from '@/lib/media';
+import { mapPlaces } from '@/data/research';
 
-const locale = 'es';
-const regions = await getRegions();
+const preload = await preloadFor('wc-69780780', [640, 960, 1280, 1600, 2000, 2560]);
+const nav = [
+  { id: 'descubre', label: 'Descubre' },
+  { id: 'regiones', label: 'Regiones' },
+  { id: 'que-hacer', label: 'Qué hacer' },
+  { id: 'experiencias', label: 'Experiencias' },
+  { id: 'mapa', label: 'Mapa' },
+  { id: 'temporadas', label: 'Temporadas' },
+  { id: 'rutas', label: 'Rutas' },
+  { id: 'guias', label: 'Guías' },
+  { id: 'planea', label: 'Planea' },
+];
+const ready = mapPlaces.filter((p) => p.status === 'ready').length;
+const prov = mapPlaces.filter((p) => p.status === 'provisional').length;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'San Luis Potosí · Cuatro mundos',
+  inLanguage: 'es-MX',
+  about: { '@type': 'AdministrativeArea', name: 'San Luis Potosí', containedInPlace: { '@type': 'Country', name: 'México' } },
+};
 ---
-<BaseLayout locale={locale}>
-  <HomeHero locale={locale} regions={regions} />
-  <Intro locale={locale} regions={regions} />
-  <Descent locale={locale} regions={regions} />
+<BaseLayout overlayHeader engine preload={preload} jsonLd={jsonLd}>
+  <HomeHero />
+  <SubNav items={nav} />
+  <Intro />
+  <Regions />
+  <Descent />
+  <MustSee />
+  <Interests />
+  <Experiences />
+
+  <section id="mapa" class="section mapsec" data-ground="light" aria-labelledby="map-title">
+    <div class="wrap section-head section-head--split">
+      <div>
+        <p class="label">Mapa</p>
+        <h2 id="map-title" class="display display--lg">El estado, punto por punto.</h2>
+      </div>
+      <p class="body muted">{ready} lugares con ubicación oficial verificada y {prov} con ubicación aproximada. Filtra por región o por interés y añade a Mi Ruta.</p>
+    </div>
+    <div class="wrap">
+      <MapView mode="full" />
+      <div class="mapsec__wx">
+        <Weather keys={['altiplano', 'centro', 'zona-media', 'huasteca']} title="El clima ahora en las cuatro regiones" />
+      </div>
+      <a class="arrow" href={href('map')}>Abrir el mapa completo</a>
+    </div>
+  </section>
+
+  <section id="temporadas" class="section" data-ground="ivory" data-tone="mist" aria-labelledby="season-title">
+    <div class="wrap section-head section-head--split">
+      <div>
+        <p class="label">Temporadas</p>
+        <h2 id="season-title" class="display display--lg">Qué hacer ahora.</h2>
+      </div>
+      <p class="body muted">Recorre el año mes a mes: lo que las fuentes oficiales recomiendan, dónde ocurre en el estado y, aparte, el clima típico de cada región para que planees con contexto.</p>
+    </div>
+    <div class="wrap">
+      <SeasonModule />
+      <a class="arrow season-more" href={href('seasons')}>Calendario completo</a>
+    </div>
+  </section>
+
+  <RoutesPreview />
+
+  <section id="guias" class="section guides" data-ground="ivory" data-tone="stone" aria-labelledby="guides-title">
+    <div class="wrap guides__grid">
+      <div class="guides__aside">
+        <p class="label">Guías y recursos</p>
+        <h2 id="guides-title" class="display display--lg">Información oficial, a un clic.</h2>
+        <p class="body muted">Folletos, mapas y el directorio de guías acreditados, enlazados a sus fuentes oficiales.</p>
+        <ManualAsset label="Guías y recursos · Retrato" ratio="3:2" subject="Guía de turistas acreditado trabajando con un grupo, con autorización de imagen." region="centro" class="guides__ph" />
+        <a class="arrow" href={href('guides')}>Todos los recursos</a>
+      </div>
+      <ResourceGroups only={['folletos', 'mapas', 'guias-turisticos', 'movilidad']} />
+    </div>
+  </section>
+
+  <section id="planea" class="section plan" data-ground="light" aria-labelledby="plan-title">
+    <div class="wrap plan__head">
+      <div class="plan__text">
+        <p class="label">Planea</p>
+        <h2 id="plan-title" class="display display--lg">Planea tu viaje.</h2>
+        <p class="body muted">Distancias, recomendaciones y contacto oficiales. Guarda lugares en Mi Ruta mientras exploras y revisa tu recorrido en un mapa.</p>
+        <div class="plan__ctas">
+          <a class="btn" href={href('plan')}>Planea tu viaje</a>
+          <a class="btn btn--ghost" href={href('myRoute')}>Ver Mi Ruta</a>
+        </div>
+      </div>
+      <Photo id="wc-21525423" ratio="16/10" sizes="(max-width: 900px) 100vw, 50vw" class="plan__img" />
+    </div>
+    <div class="wrap">
+      <Practical hubs={['Capital (San Luis Potosí)']} limit={7} showPacking={false} />
+    </div>
+  </section>
+
+  <PortalLinks />
+  <Close />
 </BaseLayout>
+
+<style>
+  .mapsec__wx { margin-block: var(--sc-7) var(--sc-4); }
+  .season-more { margin-top: var(--sc-5); }
+  .guides__grid { display: grid; gap: var(--sc-7); }
+  @media (min-width: 1000px) { .guides__grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr); } }
+  .guides__aside { display: grid; gap: var(--sc-4); align-content: start; justify-items: start; }
+  .guides__aside :global(.guides__ph) { width: min(100%, 22rem); }
+  @media (max-width: 900px) { .guides__aside :global(.guides__ph) { display: none; } }
+  .plan__head { display: grid; gap: var(--sc-6); align-items: end; margin-bottom: var(--sc-8); }
+  @media (min-width: 900px) { .plan__head { grid-template-columns: 1fr 1fr; gap: var(--sc-8); } }
+  .plan__text { display: grid; gap: var(--sc-4); justify-items: start; }
+  .plan__ctas { display: flex; flex-wrap: wrap; gap: var(--sc-3); margin-top: var(--sc-2); }
+  :global(.plan__img) { border-radius: var(--sc-r-sm); }
+</style>

@@ -1,0 +1,340 @@
+---
+/**
+ * Destination detail. Generated only for research records with a verified
+ * description. Every section renders only when its data exists; nothing is
+ * filled in to look complete.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Photo from '@/components/media/Photo.astro';
+import ManualAsset from '@/components/media/ManualAsset.astro';
+import RouteButton from '@/components/ui/RouteButton.astro';
+import DestinationCard from '@/components/ui/DestinationCard.astro';
+import Weather from '@/components/ui/Weather.astro';
+import MapView from '@/components/map/MapView.astro';
+import ItineraryCard from '@/components/routes/ItineraryCard.astro';
+import {
+  destinations, getDestination, alternativesFor, weatherPointFor, distances, getResource, getSource,
+  sourceLabel, sourceUrl, events, seasonRecords, MONTHS_ES, type Destination,
+} from '@/data/research';
+import { recViews } from '@/data/seasons';
+import { regionMeta, REGION_NAME, REGIONS } from '@/data/regions';
+import { ITINERARIES } from '@/data/itineraries';
+import { destHref, href, regionHref, muniHref, experienceHref } from '@/i18n/routes';
+import { municipalityOf } from '@/data/portal';
+import { ALL_EXPERIENCES } from '@/data/experiences';
+import { preloadFor, mediaRecord } from '@/lib/media';
+
+export function getStaticPaths() {
+  return destinations.map((d) => ({ params: { slug: d.slug }, props: { id: d.id } }));
+}
+const d = getDestination(Astro.props.id) as Destination;
+const meta = regionMeta(d.region);
+const hero = d.media.hero;
+const heroRec = mediaRecord(hero);
+const gallery = d.media.gallery.slice(0, 5);
+const wx = weatherPointFor(d);
+const recs = recViews.filter((r) => d.seasonalRecords.includes(r.id));
+const evs = events.filter((e) => e.destination === d.id);
+const monthsSet = [...new Set(seasonRecords.filter((r) => d.seasonalRecords.includes(r.record_id)).flatMap((r) => r.months))].sort((a, b) => a - b);
+
+// How to get there: brochure distance rows that name this place or its municipality.
+const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const keys = [d.name, d.municipality ?? '', d.name.replace(/^(Cascadas? de |Zona Arqueológica de |Manantial de la |Sótano de las |Hoya de las )/, '')].filter((k) => k.length > 3).map(norm);
+const how = distances.filter((r) => keys.some((k) => norm(r.to).includes(k) || k.includes(norm(r.to).replace(/ \((cuota|libre)\)/, '')))).slice(0, 4);
+
+const nearby = d.nearby.map((n) => ({ d: getDestination(n.id), km: n.km })).filter((n) => n.d);
+const alts = alternativesFor(d, 4).filter((a) => !nearby.some((n) => n.d!.id === a.id)).slice(0, 4);
+const otherRegion = REGIONS.filter((r) => r.id !== d.region);
+const routes = ITINERARIES.filter((it) => it.stops.includes(d.id));
+const res = d.resources.map(getResource).filter((r) => !!r);
+const srcs = d.officialSources.map(getSource).filter((s) => !!s);
+
+const faq: { q: string; a: string }[] = [];
+if (d.season) faq.push({ q: `¿Cuál es la mejor época para visitar ${d.name}?`, a: `${d.season.value} (${sourceLabel(d.season.source)}).` });
+if (d.access.length) faq.push({ q: `¿Cómo se visita ${d.name}?`, a: d.access.map((a) => a.value).join(' ') });
+const hours = d.facts.find((f) => f.key === 'hours');
+const adm = d.facts.find((f) => f.key === 'admission');
+if (hours) faq.push({ q: '¿Qué horario tiene?', a: `${hours.value} (${sourceLabel(hours.source)}).` });
+if (adm) faq.push({ q: '¿Tiene costo de entrada?', a: `${adm.value} (${sourceLabel(adm.source)}).` });
+if (how[0]) faq.push({ q: `¿A qué distancia está desde ${how[0].from}?`, a: `Aproximadamente ${how[0].km} km, unos ${how[0].time} por carretera, según el folleto oficial.` });
+
+const preload = hero ? await preloadFor(hero, [640, 960, 1280, 1600, 2000]) : null;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': d.category === 'natural' ? 'TouristAttraction' : 'TouristAttraction',
+  name: d.name,
+  description: d.description,
+  ...(d.coords && d.mapStatus === 'ready' ? { geo: { '@type': 'GeoCoordinates', latitude: d.coords[1], longitude: d.coords[0] } } : {}),
+  containedInPlace: { '@type': 'AdministrativeArea', name: `${d.municipality ? d.municipality + ', ' : ''}San Luis Potosí, México` },
+  ...(faq.length ? {} : {}),
+};
+const SECTIONS = [
+  ['resumen', 'Resumen'],
+  ...(gallery.length ? [['galeria', 'Galería']] : []),
+  ['ubicacion', 'Ubicación y clima'],
+  ...(recs.length || evs.length || d.season ? [['temporada', 'Temporada']] : []),
+  ...(how.length ? [['como-llegar', 'Cómo llegar']] : []),
+  ['cerca', 'Cerca de aquí'],
+  ...(res.length || srcs.length ? [['recursos', 'Recursos']] : []),
+];
+---
+<BaseLayout
+  title={`${d.name}, ${REGION_NAME[d.region]}`}
+  description={d.description}
+  image={hero ?? meta.card}
+  overlayHeader={!!hero}
+  preload={preload}
+  jsonLd={jsonLd}
+>
+  <section class:list={['dhero', { 'dhero--ph': !hero }]} data-region={d.region} data-ground="dark" aria-labelledby="d-title">
+    {hero
+      ? <Photo id={hero} mobile={d.media.heroMobile} fill eager sizes="100vw" widths={[640, 960, 1280, 1600, 2000]} />
+      : <ManualAsset fill label={`${d.name} · Hero`} ratio="16:9" subject="Fotografía principal del destino." region={d.region} />}
+    <div class="dhero__shade" aria-hidden="true"></div>
+    <div class="wrap dhero__copy">
+      <nav class="tiny dhero__crumbs" aria-label="Ruta de navegación"><a href={href('home')}>Inicio</a> / <a href={regionHref(meta.slug)}>{meta.name}</a> / <span aria-current="page">{d.name}</span></nav>
+      <p class="label dhero__kicker"><span class="dhero__reg">{REGION_NAME[d.region]}</span> · {d.kind}{d.municipality ? ` · ${d.municipality}` : ''}</p>
+      <h1 id="d-title" class="display dhero__title">{d.name}</h1>
+      <div class="dhero__ctas">
+        <RouteButton id={d.id} name={d.name} variant="solid" class="dhero__route" />
+        <a class="btn btn--outline-light" href="#ubicacion">Ver en el mapa</a>
+      </div>
+      {heroRec && <p class="tiny dhero__credit">Foto: {heroRec.author} · {heroRec.licence}</p>}
+    </div>
+  </section>
+
+  <nav class="dnav" aria-label="Secciones del destino">
+    <ul class="wrap dnav__list">
+      {SECTIONS.map(([id, l]) => <li><a href={`#${id}`}>{l}</a></li>)}
+    </ul>
+  </nav>
+
+  <section id="resumen" class="section dsum" data-region={d.region} data-ground="light" aria-labelledby="sum-title">
+    <div class="wrap dsum__grid">
+      <div class="dsum__text">
+        <h2 id="sum-title" class="visually-hidden">Resumen</h2>
+        <p class="dsum__lead display">{d.description}</p>
+        <p class="source">
+          {d.descriptionSource === 'neutral'
+            ? 'Redacción neutral del proyecto a partir de fuentes oficiales que difieren en un detalle.'
+            : <>Fuente: {sourceUrl(d.descriptionSource) ? <a href={sourceUrl(d.descriptionSource)!} target="_blank" rel="noopener">{sourceLabel(d.descriptionSource)}</a> : sourceLabel(d.descriptionSource)}</>}
+        </p>
+        {d.disputed.map((n) => <p class="dsum__disputed small"><b>Nota:</b> {n}</p>)}
+        {d.ethics && <p class="dsum__ethics small"><b>Visita con respeto:</b> {/consent|permission|permiso/i.test(d.ethics) ? 'pide permiso antes de fotografiar a personas o ceremonias y sigue las indicaciones de la comunidad.' : 'sigue las indicaciones locales.'}</p>}
+        {(d.access.length > 0 || recs.some((r) => r.what)) && (
+          <div class="dsum__todo">
+            <h3 class="display display--sm">Qué hacer</h3>
+            <ul>
+              {d.access.map((a) => <li>{a.value}</li>)}
+              {recs.filter((r) => r.id !== 'se-altiplano-clima').map((r) => <li>{r.what}</li>)}
+            </ul>
+          </div>
+        )}
+      </div>
+      <aside class="dsum__facts" aria-label="Datos verificados">
+        <p class="label">Datos verificados</p>
+        <dl>
+          <div><dt>Región</dt><dd><a class="link" href={regionHref(meta.slug)}>{meta.officialName}</a></dd></div>
+          {d.municipality && <div><dt>Municipio</dt><dd>{municipalityOf(d.municipality) ? <a href={muniHref(municipalityOf(d.municipality)!.slug!)}>{d.municipality}</a> : d.municipality}</dd></div>}
+          {ALL_EXPERIENCES.filter((x) => x.d.id === d.id).map((x) => <div><dt>Experiencia</dt><dd><a href={experienceHref(x.slug)}>{x.title}</a></dd></div>)}
+          {d.puebloMagico && <div><dt>Distinción</dt><dd>Pueblo Mágico</dd></div>}
+          {d.facts.map((f) => <div><dt>{f.label}</dt><dd>{f.value}<span class="dsum__src">{sourceLabel(f.source)}</span></dd></div>)}
+          <div><dt>Ubicación</dt><dd>{d.mapStatus === 'ready' ? <><span class="status-dot status-dot--ready" aria-hidden="true"></span>Verificada con fuente oficial</> : d.mapStatus === 'provisional' ? <><span class="status-dot status-dot--provisional" aria-hidden="true"></span>Aproximada (OpenStreetMap)</> : 'Sin punto en el mapa'}</dd></div>
+        </dl>
+        <RouteButton id={d.id} name={d.name} variant="solid" />
+      </aside>
+    </div>
+  </section>
+
+  {gallery.length > 0 && (
+    <section id="galeria" class="section section--tight dgal" data-ground="light" aria-label="Galería">
+      <ul class="wrap dgal__grid" data-count={gallery.length}>
+        {gallery.map((g, i) => <li class={`dgal__i dgal__i--${i}`}><Photo id={g} ratio={i === 0 ? '4/3' : '1/1'} sizes="(max-width: 760px) 92vw, 34vw" /></li>)}
+      </ul>
+    </section>
+  )}
+
+  <section id="ubicacion" class="section" data-region={d.region} data-ground="ivory" data-tone="region" aria-labelledby="loc-title">
+    <div class="wrap dloc">
+      <div class="dloc__map">
+        <h2 id="loc-title" class="display display--md">Ubicación</h2>
+        {d.coords ? (
+          <>
+            <MapView mode="mini" focus={d.id} label={`Ubicación de ${d.name}`} />
+            {d.mapStatus === 'provisional' && <p class="small dloc__warn"><span class="status-dot status-dot--provisional" aria-hidden="true"></span>Ubicación aproximada tomada de OpenStreetMap y revisada por plausibilidad; no es una coordenada oficial.</p>}
+          </>
+        ) : (
+          <div class="dloc__none">
+            <p class="display display--sm">Este lugar no tiene un punto confiable en el mapa.</p>
+            <p class="small muted">No es un sitio puntual o no se encontró una ubicación oficial aceptable. Consulta el folleto de la región o el mapa general.</p>
+            <a class="arrow" href={href('map')}>Abrir el mapa del estado</a>
+          </div>
+        )}
+      </div>
+      <div class="dloc__wx">
+        <Weather keys={[wx.key]} layout="single" title={`Clima ahora en ${wx.name}`} />
+        {wx.placeId !== d.id && <p class="source">Punto de referencia regional: {wx.name}. El clima del destino puede variar.</p>}
+      </div>
+    </div>
+  </section>
+
+  {(recs.length > 0 || evs.length > 0 || d.season) && (
+    <section id="temporada" class="section" data-region={d.region} data-ground="light" aria-labelledby="t-title">
+      <div class="wrap dseason">
+        <div>
+          <p class="label label--region">Temporada</p>
+          <h2 id="t-title" class="display display--md">Cuándo ir.</h2>
+        </div>
+        <div class="dseason__body">
+          {d.season && <p class="lede">{d.season.value}</p>}
+          {monthsSet.length > 0 && monthsSet.length < 12 && (
+            <ol class="dseason__months" aria-label="Meses recomendados">
+              {MONTHS_ES.map((m, i) => <li class:list={{ on: monthsSet.includes(i + 1) }}><abbr title={m}>{m.slice(0, 3)}</abbr></li>)}
+            </ol>
+          )}
+          {monthsSet.length === 12 && <p class="small">Recomendado todo el año.</p>}
+          {evs.map((e) => <p class="small"><b>{e.event_name}:</b> {e.typical_month}. {e['2026_date_if_confirmed'] ? '' : 'Fecha 2026 aún no confirmada oficialmente.'}</p>)}
+          <a class="arrow" href={href('seasons')}>Ver qué hacer ahora en todo el estado</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {how.length > 0 && (
+    <section id="como-llegar" class="section section--tight" data-ground="ivory" aria-labelledby="how-title">
+      <div class="wrap dhow">
+        <h2 id="how-title" class="display display--md">Cómo llegar</h2>
+        <table class="dhow__t">
+          <thead><tr><th scope="col">Desde</th><th scope="col">Hasta</th><th scope="col">Distancia</th><th scope="col">Tiempo aprox.</th></tr></thead>
+          <tbody>{how.map((r) => <tr><td>{r.from}</td><th scope="row">{r.to}</th><td>{r.km} km{r.unpaved ? ` (${r.unpaved} km sin pavimentar)` : ''}</td><td>{r.time}</td></tr>)}</tbody>
+        </table>
+        <p class="source">Tablas de distancias del folleto oficial de la región. Tiempos aproximados por carretera.</p>
+      </div>
+    </section>
+  )}
+
+  <section id="cerca" class="section" data-region={d.region} data-ground="light" aria-labelledby="near-title">
+    <div class="wrap section-head section-head--split">
+      <div>
+        <p class="label label--region">Combina tu viaje</p>
+        <h2 id="near-title" class="display display--md">Si te interesa {d.name}, descubre también…</h2>
+      </div>
+      {nearby.length > 0 && <p class="small muted">Cercanos en línea recta: {nearby.map((n) => `${n.d!.name} (${n.km} km)`).join(', ')}. No son distancias por carretera.</p>}
+    </div>
+    <ul class="wrap dnear">
+      {[...nearby.map((n) => n.d!), ...alts].slice(0, 4).map((x) => <li><DestinationCard d={x} ratio="4/5" size="sm" sizes="(max-width: 760px) 78vw, 22vw" /></li>)}
+    </ul>
+    {routes.length > 0 && (
+      <div class="wrap droutes">
+        <p class="label">Ruta sugerida</p>
+        <ul class="rail" style="list-style:none">{routes.map((it) => <li><ItineraryCard it={it} /></li>)}</ul>
+      </div>
+    )}
+    <div class="wrap dother">
+      <p class="label">Explora otra región</p>
+      <ul>{otherRegion.map((r) => <li data-region={r.id}><a class="arrow" href={regionHref(r.slug)}>{r.name}</a></li>)}</ul>
+    </div>
+  </section>
+
+  {faq.length > 0 && (
+    <section class="section section--tight" data-ground="ivory" aria-labelledby="faq-title">
+      <div class="wrap dfaq">
+        <h2 id="faq-title" class="display display--md">Preguntas frecuentes</h2>
+        <div>
+          {faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {(res.length > 0 || srcs.length > 0) && (
+    <section id="recursos" class="section section--tight" data-ground="light" aria-labelledby="res-title">
+      <div class="wrap dres">
+        <h2 id="res-title" class="display display--md">Recursos oficiales</h2>
+        <ul>
+          {srcs.map((s) => <li><a href={s!.url} target="_blank" rel="noopener"><span>{s!.title}</span><span class="tiny muted">{s!.institution} · Fuente oficial ↗</span></a></li>)}
+          {res.map((r) => <li><a href={r!.url} target="_blank" rel="noopener"><span>{r!.title}</span><span class="tiny muted">{r!.institution} · Recurso oficial externo ↗</span></a></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="dcta" data-ground="dark" data-tone="region-deep" data-region={d.region}>
+    <div class="wrap dcta__in">
+      <p class="display display--md">¿Lo sumas a tu viaje?</p>
+      <div class="dcta__btns">
+        <RouteButton id={d.id} name={d.name} variant="solid" />
+        <a class="btn btn--outline-light" href={href('myRoute')}>Ver Mi Ruta</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .dhero { position: relative; height: 78svh; min-height: 30rem; max-height: 52rem; display: grid; align-content: end; overflow: hidden; isolation: isolate; background: var(--slp-night); }
+  .dhero__shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgb(12 18 16 / 0.86) 0%, rgb(12 18 16 / 0.2) 55%, rgb(12 18 16 / 0.4) 100%); }
+  .dhero__copy { position: relative; z-index: 2; display: grid; gap: var(--sc-4); justify-items: start; padding-bottom: var(--sc-7); }
+  .dhero__crumbs { color: rgb(246 241 231 / 0.8); }
+  .dhero__crumbs a { color: inherit; }
+  .dhero__kicker { color: rgb(246 241 231 / 0.88); }
+  .dhero__reg { color: var(--slp-region-dark); }
+  .dhero__title { font-size: clamp(2.8rem, 1.6rem + 5vw, 6.6rem); line-height: 0.95; max-width: 16ch; }
+  .dhero__ctas { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
+  .dhero__ctas :global(.dhero__route) { background: var(--slp-ivory); color: var(--slp-charcoal); border-color: var(--slp-ivory); }
+  .dhero__credit { color: rgb(246 241 231 / 0.7); }
+  .dnav { position: sticky; top: 0; z-index: 60; background: color-mix(in oklab, var(--slp-paper) 96%, transparent); border-bottom: 1px solid var(--sc-hairline-strong); backdrop-filter: blur(8px); }
+  :global(html:not(.hdr-hidden)) .dnav { top: var(--slp-header-h); }
+  .dnav__list { list-style: none; display: flex; gap: var(--sc-5); overflow-x: auto; scrollbar-width: none; }
+  .dnav__list a { display: inline-flex; align-items: center; min-height: 46px; font: 700 0.68rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--sc-ink-soft); white-space: nowrap; }
+  .dsum__grid { display: grid; gap: var(--sc-7); }
+  @media (min-width: 960px) { .dsum__grid { grid-template-columns: 1.5fr 1fr; gap: var(--sc-9); } }
+  .dsum__text { display: grid; gap: var(--sc-4); align-content: start; }
+  .dsum__lead { font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.6rem); line-height: 1.2; }
+  .dsum__disputed, .dsum__ethics { padding: var(--sc-3) var(--sc-4); background: var(--sc-surface); border-radius: var(--sc-r-sm); }
+  .dsum__todo { margin-top: var(--sc-4); display: grid; gap: var(--sc-3); }
+  .dsum__todo ul { list-style: none; border-top: 1px solid var(--sc-hairline); }
+  .dsum__todo li { padding: 0.65rem 0; border-bottom: 1px solid var(--sc-hairline); }
+  .dsum__facts { display: grid; gap: var(--sc-4); align-content: start; padding: var(--sc-5); background: var(--sc-surface); border-radius: var(--sc-r-sm); }
+  .dsum__facts dl { margin: 0; }
+  .dsum__facts dl div { display: grid; gap: 0.15rem; padding: 0.7rem 0; border-bottom: 1px solid var(--sc-hairline); }
+  .dsum__facts dt { font: 700 0.64rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .dsum__facts dd { margin: 0; font-weight: 600; }
+  .dsum__src { display: block; font-size: 0.72rem; font-weight: 450; color: var(--sc-ink-soft); }
+  .dgal__grid { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sc-3); }
+  .dgal__i--0 { grid-column: span 2; grid-row: span 2; }
+  .dgal__grid[data-count='1'] .dgal__i--0 { grid-column: 1 / -1; }
+  @media (max-width: 760px) { .dgal__grid { grid-template-columns: 1fr 1fr; } }
+  .dloc { display: grid; gap: var(--sc-7); }
+  @media (min-width: 960px) { .dloc { grid-template-columns: 1.6fr 1fr; } }
+  .dloc__map { display: grid; gap: var(--sc-4); }
+  .dloc__warn { display: flex; gap: 0.3rem; align-items: baseline; }
+  .dloc__none { display: grid; gap: var(--sc-3); padding: var(--sc-6); border: 1px dashed var(--sc-hairline-strong); border-radius: var(--sc-r-sm); justify-items: start; }
+  .dloc__wx { display: grid; gap: var(--sc-3); align-content: start; padding-top: 3.4rem; }
+  .dseason { display: grid; gap: var(--sc-5); }
+  @media (min-width: 900px) { .dseason { grid-template-columns: 1fr 2fr; } }
+  .dseason__body { display: grid; gap: var(--sc-4); justify-items: start; }
+  .dseason__months { list-style: none; display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; width: 100%; max-width: 40rem; }
+  .dseason__months li { padding: 0.55rem 0; text-align: center; font: 700 0.66rem/1 var(--sc-font-text); text-transform: uppercase; letter-spacing: 0.06em; background: var(--sc-surface); color: var(--sc-ink-soft); }
+  .dseason__months li.on { background: var(--slp-region-ui); color: #fff; }
+  .dseason__months abbr { text-decoration: none; }
+  .dhow { display: grid; gap: var(--sc-4); }
+  .dhow__t { width: 100%; border-collapse: collapse; font-size: var(--sc-t-sm); }
+  .dhow__t th, .dhow__t td { text-align: left; padding: 0.7rem 0.5rem 0.7rem 0; border-bottom: 1px solid var(--sc-hairline); }
+  .dhow__t thead th { font: 700 0.64rem/1 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .dnear { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sc-5); }
+  @media (max-width: 900px) { .dnear { grid-template-columns: 1fr 1fr; } }
+  .droutes, .dother { margin-top: var(--sc-7); display: grid; gap: var(--sc-4); }
+  .dother ul { list-style: none; display: flex; flex-wrap: wrap; gap: var(--sc-6); }
+  .dfaq { display: grid; gap: var(--sc-5); }
+  @media (min-width: 900px) { .dfaq { grid-template-columns: 1fr 2fr; } }
+  .dfaq details { border-bottom: 1px solid var(--sc-hairline-strong); }
+  .dfaq summary { min-height: var(--slp-tap); display: flex; align-items: center; padding: 0.8rem 0; cursor: pointer; font-weight: 700; }
+  .dfaq details p { padding-bottom: var(--sc-4); color: var(--sc-ink-soft); }
+  .dres { display: grid; gap: var(--sc-4); }
+  .dres ul { list-style: none; border-top: 1px solid var(--sc-hairline-strong); }
+  .dres a { display: grid; gap: 0.2rem; padding: 0.8rem 0; border-bottom: 1px solid var(--sc-hairline); text-decoration: none; font-weight: 650; }
+  .dcta { padding-block: var(--sc-8); }
+  .dcta__in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--sc-5); }
+  .dcta__btns { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
+  .dcta :global(.rbtn--solid) { background: var(--slp-ivory); color: var(--slp-charcoal); border-color: var(--slp-ivory); }
+</style>

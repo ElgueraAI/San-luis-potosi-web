@@ -1,0 +1,26 @@
+---
+/** Prev / next buttons and a progress rule for a card track (src/scripts/carousel.ts). */
+interface Props { track: string; label: string; class?: string }
+const { track, label, class: cls } = Astro.props;
+---
+<div class:list={['cctl', cls]} data-carousel-ctrl={track} role="group" aria-label={label}>
+  <span class="cctl__bar" aria-hidden="true"><span data-carousel-progress></span></span>
+  <button type="button" class="cctl__btn" data-carousel-prev aria-controls={track} aria-label="Anteriores" disabled>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+  </button>
+  <button type="button" class="cctl__btn" data-carousel-next aria-controls={track} aria-label="Siguientes">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+  </button>
+</div>
+
+<style>
+  .cctl { display: flex; align-items: center; gap: 0.5rem; }
+  .cctl[data-static] { visibility: hidden; }
+  .cctl__bar { width: clamp(4rem, 10vw, 8rem); height: 2px; margin-right: 0.75rem; background: var(--sc-hairline-strong); position: relative; overflow: hidden; }
+  .cctl__bar span { position: absolute; inset: 0; background: currentColor; transform: scaleX(var(--p, 0.25)); transform-origin: left; transition: transform 200ms linear; }
+  .cctl__btn { width: 3rem; height: 3rem; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; background: none; color: inherit; cursor: pointer; transition: background-color 160ms, color 160ms, opacity 160ms; }
+  .cctl__btn svg { width: 1.1rem; height: 1.1rem; fill: none; stroke: currentColor; stroke-width: 1.6; }
+  .cctl__btn:disabled { opacity: 0.3; cursor: default; }
+  @media (hover: hover) and (pointer: fine) { .cctl__btn:not(:disabled):hover { background: var(--sc-ink); color: var(--sc-canvas); border-color: var(--sc-ink); } }
+  @media (max-width: 760px) { .cctl__btn { width: 2.75rem; height: 2.75rem; } }
+</style>

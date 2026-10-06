@@ -3,18 +3,22 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { href } from '@/i18n/routes';
 ---
 <BaseLayout title="Página no encontrada">
-  <section class="slp-404" data-ground="light" data-chrome="solid">
-    <div class="sc-wrap">
-      <p class="slp-label">404</p>
-      <h1 class="sc-display">Este camino no está en la línea.</h1>
-      <p class="sc-lede">La página que buscas no existe o todavía está en preparación.</p>
-      <a class="slp-btn" href={href('home')}>Volver al inicio</a>
+  <section class="nf" data-ground="light">
+    <div class="wrap">
+      <p class="label">404</p>
+      <h1 class="display display--lg">Este camino no está en la línea.</h1>
+      <p class="lede">La página que buscas no existe o cambió de lugar.</p>
+      <div class="nf__ctas">
+        <a class="btn" href={href('home')}>Volver al inicio</a>
+        <a class="btn btn--ghost" href={href('map')}>Abrir el mapa</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .slp-404 { min-height: 100svh; display: grid; align-items: center; padding-block: calc(var(--slp-header-h) + var(--sc-8)) var(--sc-9); }
-  .slp-404 .sc-wrap { display: grid; gap: var(--sc-5); justify-items: start; }
-  .slp-404 h1 { font-size: var(--sc-t-3xl); max-width: 16ch; }
+  .nf { min-height: 80svh; display: grid; align-items: center; padding-block: calc(var(--slp-header-h) + var(--sc-8)) var(--sc-9); }
+  .nf .wrap { display: grid; gap: var(--sc-5); justify-items: start; }
+  .nf h1 { max-width: 16ch; }
+  .nf__ctas { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
 </style>

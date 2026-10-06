@@ -1,0 +1,174 @@
+---
+/**
+ * MapLibre discovery map (loaded lazily by src/scripts/map.ts).
+ * Modes:
+ *   full   region + interest filters, selected-place panel, synced list
+ *   region locked to one region, interest filters, panel, list
+ *   mini   one destination, no filters (destination pages)
+ *   route  the visitor's Mi Ruta, ordered line between saved places
+ * Verified coordinates are solid markers; provisional ones are outlined and
+ * labelled "aproximada". Places without an acceptable point are not plotted.
+ */
+import { href } from '@/i18n/routes';
+import { REGIONS } from '@/data/regions';
+import { mapAttribution } from '@/data/research';
+
+interface Props {
+  mode?: 'full' | 'region' | 'mini' | 'route';
+  region?: string;
+  focus?: string;
+  height?: string;
+  label?: string;
+  interests?: boolean;
+  class?: string;
+}
+const { mode = 'full', region, focus, height, label = 'Mapa interactivo de destinos de San Luis Potosí', interests = true, class: cls } = Astro.props;
+const INTEREST_FILTERS = [
+  ['naturaleza', 'Naturaleza'], ['cultura', 'Cultura'], ['cascadas', 'Cascadas'], ['arqueologia', 'Arqueología'],
+  ['pueblos-magicos', 'Pueblos Mágicos'], ['gastronomia', 'Gastronomía'], ['aventura', 'Aventura'],
+];
+const withPanel = mode === 'full' || mode === 'region';
+---
+<div
+  class:list={['mapv', `mapv--${mode}`, cls]}
+  data-map
+  data-map-mode={mode}
+  data-map-region={region}
+  data-map-focus={focus}
+  data-places-url={href('placesData')}
+  data-route-url={href('myRoute')}
+  style={height ? `--map-h:${height}` : undefined}
+>
+  {withPanel && (
+    <div class="mapv__filters" role="group" aria-label="Filtros del mapa">
+      {mode === 'full' && (
+        <div class="mapv__chips" data-filter-group="region">
+          <button type="button" class="chip-btn" aria-pressed="true" data-value="all">Todos</button>
+          {REGIONS.map((r) => (
+            <button type="button" class="chip-btn" aria-pressed="false" data-value={r.id} data-region={r.id}><span class="swatch" aria-hidden="true"></span>{r.name}</button>
+          ))}
+        </div>
+      )}
+      {interests && (
+        <div class="mapv__chips" data-filter-group="interest">
+          {INTEREST_FILTERS.map(([v, l]) => (
+            <button type="button" class="chip-btn" aria-pressed="false" data-value={v}>{l}</button>
+          ))}
+        </div>
+      )}
+    </div>
+  )}
+
+  <div class="mapv__stage">
+    <div class="mapv__canvas" data-map-canvas role="region" aria-label={label}>
+      <div class="mapv__state" data-map-state>
+        <span class="mapv__spinner" aria-hidden="true"></span>
+        <span data-map-state-text>Cargando mapa…</span>
+      </div>
+    </div>
+
+    <div class="mapv__legend" aria-label="Leyenda">
+      <span><i class="lg lg--ready" aria-hidden="true"></i>Ubicación verificada</span>
+      <span><i class="lg lg--prov" aria-hidden="true"></i>Ubicación aproximada</span>
+    </div>
+
+    {withPanel && (
+      <aside class="mapv__panel" data-map-panel aria-label="Lugar seleccionado" aria-live="polite">
+        <div class="mapv__intro" data-map-intro>
+          <p class="label"><span data-map-count>0</span> lugares en el mapa</p>
+          <p class="small muted">Selecciona un punto o un nombre de la lista para ver su información, el clima del día y añadirlo a Mi Ruta.</p>
+        </div>
+        <div class="mapv__selected" data-map-selected hidden></div>
+        <div class="mapv__empty" data-map-empty hidden>
+          <p class="display display--sm">Ningún lugar coincide con estos filtros.</p>
+          <button type="button" class="btn btn--ghost" data-map-reset>Quitar filtros</button>
+        </div>
+        <ul class="mapv__list" data-map-list aria-label="Lugares visibles"></ul>
+      </aside>
+    )}
+  </div>
+  <p class="source mapv__attr">
+    Puntos: {mapAttribution}. Las ubicaciones aproximadas provienen de OpenStreetMap y no son coordenadas oficiales; algunos lugares sin un punto confiable no se muestran.
+  </p>
+</div>
+
+<style>
+  .mapv { --map-h: min(78svh, 46rem); display: grid; gap: var(--sc-4); }
+  .mapv__filters { display: grid; gap: 0.6rem; }
+  .mapv__chips { display: flex; gap: 0.45rem; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+  .mapv__chips::-webkit-scrollbar { display: none; }
+  .mapv__stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1px solid var(--sc-hairline-strong);
+    border-radius: var(--sc-r-md);
+    overflow: hidden;
+    background: #e9e3d6;
+  }
+  .mapv--full .mapv__stage, .mapv--region .mapv__stage { grid-template-columns: minmax(0, 1fr) 24rem; }
+  .mapv__canvas { position: relative; height: var(--map-h); min-height: 22rem; }
+  .mapv--mini { --map-h: 22rem; }
+  .mapv--route { --map-h: 28rem; }
+  .mapv__state {
+    position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 0.75rem;
+    color: var(--slp-stone); font-size: var(--sc-t-sm); text-align: center; padding: 1rem;
+    background: radial-gradient(70% 60% at 50% 50%, #efe9dd, #e5ddce);
+  }
+  .mapv__state[hidden] { display: none; }
+  .mapv__spinner { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid currentColor; border-top-color: transparent; animation: mapv-spin 1s linear infinite; }
+  .mapv__state[data-error] .mapv__spinner { display: none; }
+  @keyframes mapv-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .mapv__spinner { animation: none; } }
+  .mapv__legend {
+    position: absolute; left: 0.75rem; bottom: 0.75rem; z-index: 3;
+    display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; padding: 0.5rem 0.7rem;
+    background: rgb(251 248 242 / 0.94); color: var(--slp-charcoal); border-radius: var(--sc-r-sm);
+    font: 600 0.72rem/1.2 var(--sc-font-text); box-shadow: var(--sc-e1);
+  }
+  .mapv__legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .lg { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .lg--ready { background: var(--slp-charcoal); border: 1.5px solid #fff; box-shadow: 0 0 0 1px var(--slp-charcoal); }
+  .lg--prov { background: #fbf8f2; border: 2px solid var(--slp-charcoal); }
+  .mapv__panel {
+    background: var(--slp-paper); color: var(--slp-charcoal); border-left: 1px solid var(--sc-hairline-strong);
+    height: var(--map-h); min-height: 22rem; overflow-y: auto; padding: var(--sc-5);
+    display: flex; flex-direction: column; gap: var(--sc-4);
+  }
+  .mapv__intro { display: grid; gap: 0.4rem; }
+  .mapv__list { list-style: none; display: grid; border-top: 1px solid var(--sc-hairline); }
+  .mapv__list :global(button) {
+    width: 100%; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.65rem;
+    min-height: var(--slp-tap); padding: 0.45rem 0.1rem; border: 0; border-bottom: 1px solid var(--sc-hairline);
+    background: none; text-align: left; font: 600 0.88rem/1.25 var(--sc-font-text); color: inherit;
+  }
+  .mapv__list :global(button[aria-current='true']) { background: var(--slp-ivory); }
+  .mapv__list :global(.dot) { width: 10px; height: 10px; border-radius: 50%; background: var(--c); border: 2px solid var(--c); }
+  .mapv__list :global(.dot.is-prov) { background: transparent; }
+  .mapv__list :global(.reg) { font: 700 0.62rem/1 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  @media (hover: hover) and (pointer: fine) { .mapv__list :global(button:hover) { background: var(--slp-ivory); } }
+  .mapv__empty { display: grid; gap: var(--sc-4); justify-items: start; padding: var(--sc-4) 0; }
+  .mapv__attr { max-width: 70ch; }
+
+  /* selected place card (markup injected by the map script) */
+  .mapv__selected :global(.sel) { display: grid; gap: 0.75rem; }
+  .mapv__selected :global(.sel__img) { aspect-ratio: 3 / 2; width: 100%; object-fit: cover; border-radius: var(--sc-r-sm); background: #ddd5c6; }
+  .mapv__selected :global(.sel__ph) { aspect-ratio: 3 / 2; border-radius: var(--sc-r-sm); display: grid; align-content: end; padding: 0.8rem; background: linear-gradient(160deg, #3a3630, #23211d); color: #efe9de; font: 600 0.66rem/1.4 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; }
+  .mapv__selected :global(.sel__meta) { font: 700 0.68rem/1.3 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .mapv__selected :global(.sel__name) { font: 600 1.9rem/1.05 var(--sc-font-display); }
+  .mapv__selected :global(.sel__status) { font-size: 0.78rem; color: var(--sc-ink-soft); }
+  .mapv__selected :global(.sel__desc) { font-size: 0.9rem; line-height: 1.55; }
+  .mapv__selected :global(.sel__wx) { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.6rem 0; border-block: 1px solid var(--sc-hairline); font-size: 0.82rem; }
+  .mapv__selected :global(.sel__wx b) { font: 600 1.6rem/1 var(--sc-font-display); }
+  .mapv__selected :global(.sel__actions) { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .mapv__selected :global(.sel__back) { justify-self: start; border: 0; background: none; padding: 0; min-height: 36px; font: 650 0.76rem/1 var(--sc-font-text); letter-spacing: 0.1em; text-transform: uppercase; color: var(--sc-ink-soft); }
+
+  @media (max-width: 900px) {
+    .mapv--full .mapv__stage, .mapv--region .mapv__stage { grid-template-columns: 1fr; }
+    .mapv { --map-h: 62svh; }
+    .mapv--mini { --map-h: 18rem; }
+    .mapv__panel { height: auto; max-height: none; border-left: 0; border-top: 1px solid var(--sc-hairline-strong); }
+    .mapv__list { max-height: 18rem; overflow-y: auto; }
+  }
+  :global(.maplibregl-ctrl-attrib) { font-size: 10px; }
+</style>

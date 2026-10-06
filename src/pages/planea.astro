@@ -1,0 +1,288 @@
+---
+/**
+ * Planea tu viaje: an editorial planning hub. Each planning family pairs a
+ * photograph (or, where no licensed photograph exists, a data figure) with a
+ * short explanation and the practical data, alternating image | text,
+ * text | image, full-width bands and small cards. All facts are sourced: DENUE
+ * for airports and terminals, the official brochures for distances and
+ * recommendations, the entity layer for lodging and food. Real road routing is
+ * a later pass.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Photo from '@/components/media/Photo.astro';
+import Practical from '@/components/plan/Practical.astro';
+import Weather from '@/components/ui/Weather.astro';
+import ResourceGroups from '@/components/guides/ResourceGroups.astro';
+import StateSilhouette from '@/components/season/StateSilhouette.astro';
+import { REGIONS } from '@/data/regions';
+import { mobility, counts, municipalities, muniById, lodging } from '@/data/portal';
+import { STORY } from '@/data/seasons';
+import { mediaRecord } from '@/lib/media';
+import { href, regionHref, muniHref, tdHref } from '@/i18n/routes';
+
+const airports = mobility.filter((m) => /aeropuerto/i.test(m.canonical_name));
+const terminals = mobility.filter((m) => /central|terminal/i.test(m.canonical_name));
+const mlink = (id: string | null) => (id ? muniById.get(id) : null);
+const credit = (id: string) => mediaRecord(id)?.attribution_text ?? '';
+const sections: [string, string][] = [['llegar', 'Cómo llegar'], ['moverse', 'Moverse'], ['cuando', 'Cuándo ir'], ['dormir', 'Dormir y comer'], ['guias', 'Guías'], ['recursos', 'Mapas y folletos'], ['practica', 'Práctico'], ['preguntas', 'Preguntas'], ['mi-ruta', 'Mi Ruta']];
+const hubs = REGIONS.map((r) => ({ r, n: municipalities.filter((m) => m.region === r.id).length }));
+// lodging density: one point per municipal seat with registered lodging
+const beds = municipalities.filter((m) => m.seat && m.region && lodging.some((l) => l.municipality_id === m.id))
+  .map((m) => ({ id: m.id, name: m.canonical_name, region: m.region!, status: 'ready' as const, coords: [m.seat!.longitude, m.seat!.latitude] as [number, number] }));
+const seasons = [
+  { label: 'Invierno', months: 'Diciembre a febrero', image: STORY.m1.image, note: STORY.m1.title },
+  { label: 'Primavera', months: 'Marzo a mayo', image: STORY.m4.image, note: STORY.m4.title },
+  { label: 'Verano', months: 'Junio a agosto', image: STORY.m7.image, note: STORY.m7.title },
+  { label: 'Otoño', months: 'Septiembre a noviembre', image: STORY.m11.image, note: STORY.m11.title },
+];
+const faqs: [string, string][] = [
+  ['¿Este sitio vende hospedaje o tours?', 'No. Es un proyecto académico de información: enlaza a directorios y fuentes oficiales y no publica precios, disponibilidad ni calificaciones.'],
+  ['¿Las fechas de las fiestas son oficiales?', 'Cada evento indica el estado de su fecha: confirmada, patrón oficial (por ejemplo, «cada 24 de junio»), última edición confirmada o pendiente. Confírmala antes de viajar.'],
+  ['¿Puedo visitar cualquier zona arqueológica?', 'Solo se presentan como visitables las zonas que el INAH registra abiertas al público: Tamtoc y Tamohí, en Tamuín.'],
+  ['¿Cómo sé si un guía está acreditado?', 'Consulta el directorio nacional de guías de turistas acreditados de la SECTUR, enlazado en Guías y recursos.'],
+  ['¿Las distancias son rutas de manejo?', 'Las tablas vienen de los folletos oficiales; en las páginas de municipio las distancias son en línea recta. El cálculo de rutas por carretera llegará en una fase posterior.'],
+  ['¿Los negocios del directorio están abiertos?', 'Los del directorio oficial Estadía son listados de la Secretaría de Turismo. Los del DENUE son registros estadísticos de INEGI: no confirman que el negocio opere hoy.'],
+];
+---
+<BaseLayout title="Planea tu viaje" description="Cómo llegar a San Luis Potosí, moverse entre regiones, cuándo ir, dónde dormir y comer, guías acreditados, folletos y mapas oficiales." image="wc-52774850">
+  <header class="pl-hero" data-ground="dark">
+    <Photo id="wc-52774850" fill eager sizes="100vw" focal="50% 62%" alt="Camino en el llano del Altiplano rumbo a Estación Catorce" />
+    <div class="pl-hero__shade" aria-hidden="true"></div>
+    <div class="wrap pl-hero__in">
+      <nav class="tiny pl-hero__crumbs" aria-label="Ruta de navegación"><a href={href('home')}>Inicio</a> / <span aria-current="page">Planifica tu viaje</span></nav>
+      <p class="label">Planifica tu viaje</p>
+      <h1 class="display pl-hero__title">Planea tu viaje</h1>
+      <p class="lede pl-hero__lede">Cuatro regiones, 59 municipios y muchas horas de camino entre el desierto y la selva. Aquí está lo práctico, de fuentes oficiales.</p>
+    </div>
+    <p class="pl-cap tiny">Rumbo a Estación Catorce, Altiplano · {credit('wc-52774850')}</p>
+  </header>
+
+  <nav class="pnav" aria-label="Secciones de planeación"><ul class="wrap">{sections.map(([id, l]) => <li><a href={`#${id}`}>{l}</a></li>)}</ul></nav>
+
+  <!-- IMAGE | TEXT -->
+  <section id="llegar" class="psec" data-ground="light" aria-labelledby="ll-t">
+    <div class="wrap split">
+      <figure class="pl-fig">
+        <Photo id="wc-12418759" ratio="4/5" sizes="(max-width: 900px) 92vw, 44vw" widths={[480, 800, 1200]} alt="Entrada al Túnel de Ogarrio" />
+        <figcaption class="tiny muted">El Túnel de Ogarrio, la entrada tradicional a Real de Catorce · {credit('wc-12418759')}</figcaption>
+      </figure>
+      <div class="pl-text">
+        <p class="label">Llegar</p>
+        <h2 id="ll-t" class="psec__title">Cómo llegar a San Luis Potosí</h2>
+        <p class="body muted">Dos aeropuertos y varias centrales de autobuses conectan el estado; la mayoría de los destinos se alcanzan por carretera desde la capital, Matehuala, Rioverde o Ciudad Valles.</p>
+        <div class="pl-cols">
+          <div>
+            <h3 class="pl-h">Aeropuertos</h3>
+            <ul class="pl-list">{airports.map((a) => <li><b>{a.canonical_name}</b>{mlink(a.municipality_id) && <a href={muniHref(mlink(a.municipality_id)!.slug!)}>{a.municipality}</a>}</li>)}</ul>
+          </div>
+          <div>
+            <h3 class="pl-h">Autobuses</h3>
+            <ul class="pl-list">{terminals.map((a) => <li><b>{a.canonical_name}</b>{mlink(a.municipality_id) && <a href={muniHref(mlink(a.municipality_id)!.slug!)}>{a.municipality}</a>}</li>)}</ul>
+          </div>
+        </div>
+        <p class="truth">Registrados en el DENUE (INEGI). Horarios, aerolíneas y líneas de autobús: consulta a cada operador.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SMALL EDITORIAL CARDS: four regions -->
+  <section id="moverse" class="psec" data-ground="ivory" data-tone="stone" aria-labelledby="mov-t">
+    <div class="wrap">
+      <div class="psec__head psec__head--split">
+        <div><p class="label">Moverse</p><h2 id="mov-t" class="psec__title">Cuatro regiones, cuatro ciudades base</h2></div>
+        <p class="body muted">Cada región tiene una ciudad desde la que se recorren sus destinos. Organiza el viaje por regiones y deja tiempo para los trayectos.</p>
+      </div>
+      <ul class="pl-regions">
+        {hubs.map(({ r, n }) => (
+          <li data-region={r.id}>
+            <a href={regionHref(r.slug)}>
+              <Photo id={r.card} ratio="4/5" sizes="(max-width: 640px) 80vw, (max-width: 1100px) 45vw, 20rem" widths={[400, 640, 900]} />
+              <span class="pl-regions__body">
+                <span class="pl-regions__name">{r.name}</span>
+                <span class="pl-regions__meta">Ciudad base: {r.hub.replace('Capital (San Luis Potosí)', 'San Luis Potosí')} · {n} municipios</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- FIGURE | DATA: distances -->
+  <section class="psec" data-ground="light" aria-labelledby="dist-t">
+    <div class="wrap">
+      <div class="psec__head"><p class="label">Distancias</p><h2 id="dist-t" class="psec__title">De una ciudad base a otra</h2></div>
+      <Practical hubs={['Capital (San Luis Potosí)', 'Matehuala', 'Rioverde', 'Ciudad Valles']} limit={8} region="huasteca" showRecs={false} showContact={false} />
+    </div>
+  </section>
+
+  <!-- FULL-WIDTH: when to go -->
+  <section id="cuando" class="psec pl-when" data-ground="dark" data-tone="jungle" aria-labelledby="wh-t">
+    <div class="wrap">
+      <div class="psec__head psec__head--split">
+        <div><p class="label">Cuándo ir</p><h2 id="wh-t" class="psec__title">Cada temporada, otro estado</h2></div>
+        <div class="pl-when__aside"><p class="body muted">La temporada de cascadas en la Huasteca, las fiestas de primavera, el verano de festivales, el Xantolo en otoño: lo que recomiendan las fuentes oficiales, mes a mes.</p><a class="arrow" href={href('seasons')}>Qué hacer cada mes</a></div>
+      </div>
+      <ul class="pl-seasons">
+        {seasons.map((s) => (
+          <li>
+            <a href={href('seasons')}>
+              <Photo id={s.image} ratio="3/2" sizes="(max-width: 640px) 80vw, (max-width: 1100px) 45vw, 20rem" widths={[400, 640, 900]} alt="" />
+              <span class="pl-seasons__k">{s.label} · {s.months}</span>
+              <span class="pl-seasons__t">{s.note}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="pl-wx"><Weather keys={['altiplano', 'centro', 'zona-media', 'huasteca', 'real-de-catorce', 'xilitla']} title="El clima ahora" /></div>
+    </div>
+  </section>
+
+  <!-- TWO CARDS: stay / eat -->
+  <section id="dormir" class="psec" data-ground="light" data-tone="utility" aria-labelledby="dc-t">
+    <div class="wrap">
+      <div class="psec__head"><p class="label">Dormir y comer</p><h2 id="dc-t" class="psec__title">Dónde dormir, dónde comer</h2></div>
+      <div class="pl-duo">
+        <article class="pl-card">
+          <div class="pl-card__fig pl-card__fig--map"><StateSilhouette places={beds} variant="line" lite /></div>
+          <div class="pl-card__body">
+            <p class="label">Hospedaje</p>
+            <h3 class="pl-card__t">{counts.lodging.toLocaleString('es-MX')} hospedajes en {beds.length} municipios</h3>
+            <p class="small muted">El directorio oficial Estadía de la Secretaría de Turismo y los registros del DENUE de INEGI, por municipio. Sin calificaciones ni precios: este sitio no reserva.</p>
+            <a class="arrow" href={href('lodging')}>Directorio de hospedaje</a>
+          </div>
+        </article>
+        <article class="pl-card">
+          <div class="pl-card__fig"><Photo id="wc-105308560" ratio="3/2" sizes="(max-width: 900px) 92vw, 40vw" widths={[480, 800]} alt="Zacahuil envuelto en hojas antes de hornear" /></div>
+          <div class="pl-card__body">
+            <p class="label">Gastronomía</p>
+            <h3 class="pl-card__t">Cuatro cocinas regionales</h3>
+            <p class="small muted">Zacahuil y enchiladas huastecas, cabrito del Altiplano, enchiladas potosinas y rioverdenses, según los folletos oficiales; y {counts.foodShown.toLocaleString('es-MX')} establecimientos en el directorio.</p>
+            <a class="arrow" href={href('food')}>Dónde comer</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEXT | IMAGE: guides -->
+  <section id="guias" class="psec" data-ground="ivory" aria-labelledby="gu-t">
+    <div class="wrap split split--flip">
+      <figure class="pl-fig">
+        <Photo id="wc-2008166" ratio="4/5" sizes="(max-width: 900px) 92vw, 40vw" widths={[480, 800, 1200]} alt="Descenso a rappel en la boca del Sótano de las Golondrinas" />
+        <figcaption class="tiny muted">Descenso en el Sótano de las Golondrinas · {credit('wc-2008166')}</figcaption>
+      </figure>
+      <div class="pl-text">
+        <p class="label">Guías</p>
+        <h2 id="gu-t" class="psec__title">Con un guía acreditado</h2>
+        <p class="body muted">Los folletos oficiales recomiendan guías certificados y reservar los recorridos con anticipación, sobre todo en ríos, sótanos y sierra.</p>
+        <p class="body">La acreditación se verifica en el directorio nacional de la SECTUR (normas NOM-08-TUR-2002 y NOM-09-TUR-2002), filtrable por estado, municipio, tipo de guía e idioma. Este sitio no copia ese directorio porque contiene datos personales.</p>
+        <a class="arrow" href={href('guides', {}, 'es', 'recursos-guias-turisticos')}>Ir al directorio oficial</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEXT | CARDS: maps and official documents -->
+  <section id="recursos" class="psec" data-ground="light" data-tone="stone" aria-labelledby="fo-t">
+    <div class="wrap pl-res">
+      <div class="pl-text">
+        <p class="label">Mapas y folletos</p>
+        <h2 id="fo-t" class="psec__title">Publicaciones oficiales</h2>
+        <p class="body muted">Folletos regionales y mapas turísticos de la Secretaría de Turismo del Estado, enlazados en su ubicación original.</p>
+        <a class="arrow" href={href('guides')}>Todos los recursos</a>
+      </div>
+      <ResourceGroups only={['folletos', 'mapas']} />
+    </div>
+  </section>
+
+  <!-- PRACTICAL: less visual, formatted -->
+  <section id="practica" class="psec" data-ground="ivory" aria-labelledby="pr-t">
+    <div class="wrap">
+      <div class="psec__head"><p class="label">Práctico</p><h2 id="pr-t" class="psec__title">Recomendaciones oficiales y contacto</h2></div>
+      <Practical hubs={[]} region="huasteca" showDist={false} />
+    </div>
+  </section>
+
+  <section id="preguntas" class="psec" data-ground="light" aria-labelledby="fq-t">
+    <div class="wrap pl-faqwrap">
+      <div><p class="label">Preguntas frecuentes</p><h2 id="fq-t" class="psec__title">Antes de viajar</h2></div>
+      <div class="pl-faq">{faqs.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}</div>
+    </div>
+  </section>
+
+  <!-- FULL-WIDTH: Mi Ruta -->
+  <section id="mi-ruta" class="pl-cta" data-ground="dark" aria-labelledby="mr-t">
+    <Photo id="wc-50604767" fill sizes="100vw" focal="50% 55%" alt="" />
+    <div class="pl-cta__shade" aria-hidden="true"></div>
+    <div class="wrap pl-cta__in">
+      <p class="label">Mi Ruta</p>
+      <h2 id="mr-t" class="display pl-cta__title">Guarda los lugares. Ordena tu viaje.</h2>
+      <p class="body">Usa «Añadir a Mi Ruta» en destinos, municipios, museos, zonas arqueológicas y hospedaje; después ordénalos en el mapa de Mi Ruta.</p>
+      <div class="pl-cta__btns"><a class="btn btn--light" href={href('myRoute')}>Abrir Mi Ruta</a><a class="btn btn--outline-light" href={href('map')}>Mapa interactivo</a></div>
+    </div>
+    <p class="pl-cap tiny">Panorámica desde Cerro de San Pedro · {credit('wc-50604767')}</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .pl-hero { position: relative; min-height: min(72svh, 44rem); display: grid; align-content: end; padding: calc(var(--slp-header-h) + var(--sc-7)) 0 var(--sc-8); isolation: isolate; overflow: hidden; background: var(--slp-night); }
+  .pl-hero__shade, .pl-cta__shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgb(12 16 14 / 0.86), rgb(12 16 14 / 0.25) 58%, rgb(12 16 14 / 0.45)); }
+  .pl-hero__in, .pl-cta__in { position: relative; z-index: 2; display: grid; gap: var(--sc-4); justify-items: start; }
+  .pl-hero__crumbs, .pl-hero__crumbs a { color: rgb(246 241 231 / 0.85); }
+  .pl-hero__title { font-size: clamp(3rem, 1.6rem + 5.4vw, 6.6rem); line-height: 0.95; }
+  .pl-hero__lede { max-width: 40ch; }
+  .pl-cap { position: absolute; z-index: 2; right: var(--sc-gutter); bottom: 0.8rem; color: rgb(246 241 231 / 0.7); max-width: 60ch; text-align: right; }
+
+  .pl-fig { margin: 0; display: grid; gap: 0.5rem; }
+  .pl-fig :global(.photo) { border-radius: var(--sc-r-sm); overflow: hidden; }
+  .pl-text { display: grid; gap: var(--sc-4); justify-items: start; align-content: center; }
+  .pl-cols { display: grid; gap: var(--sc-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); width: 100%; }
+  .pl-h { font: 700 0.68rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); margin-bottom: var(--sc-2); }
+  .pl-list { list-style: none; display: grid; border-top: 1px solid var(--sc-hairline); }
+  .pl-list li { padding: 0.7rem 0; border-bottom: 1px solid var(--sc-hairline); display: grid; gap: 0.15rem; font-size: var(--sc-t-sm); }
+  .pl-list a { color: var(--sc-ink-soft); font-size: 0.82rem; }
+
+  .pl-regions { list-style: none; display: grid; gap: clamp(1rem, 2vw, 1.5rem); grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); }
+  .pl-regions a { position: relative; display: block; border-radius: var(--sc-r-sm); overflow: hidden; color: var(--slp-ivory); text-decoration: none; isolation: isolate; }
+  .pl-regions a::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, color-mix(in srgb, var(--slp-region-deep) 92%, transparent), transparent 55%); z-index: 1; }
+  .pl-regions__body { position: absolute; z-index: 2; inset: auto 1rem 1rem; display: grid; gap: 0.3rem; }
+  .pl-regions__name { font: 600 2rem/1 var(--sc-font-display); }
+  .pl-regions__meta { font-size: 0.8rem; color: rgb(246 241 231 / 0.88); }
+  .pl-regions a:focus-visible { outline: 3px solid var(--slp-region-ui); outline-offset: 3px; }
+  @media (hover: hover) and (pointer: fine) { .pl-regions a :global(img) { transition: transform 1s var(--sc-ease-out); } .pl-regions a:hover :global(img) { transform: scale(1.04); } }
+
+  .pl-when__aside { display: grid; gap: var(--sc-3); justify-items: start; }
+  .pl-when__aside .arrow { color: var(--sc-ink); }
+  .pl-seasons { list-style: none; display: grid; gap: clamp(1rem, 2vw, 1.5rem); grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); margin-bottom: var(--sc-7); }
+  .pl-seasons a { display: grid; gap: 0.45rem; color: inherit; text-decoration: none; }
+  .pl-seasons a :global(.photo) { border-radius: var(--sc-r-sm); overflow: hidden; }
+  .pl-seasons__k { font: 700 0.62rem/1.2 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--slp-gold); margin-top: 0.3rem; }
+  .pl-seasons__t { font: 500 1.3rem/1.15 var(--sc-font-display); }
+  .pl-seasons a:hover .pl-seasons__t { text-decoration: underline; text-underline-offset: 0.16em; }
+
+  .pl-duo { display: grid; gap: clamp(1rem, 2vw, 1.5rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+  .pl-card { display: grid; grid-template-rows: auto 1fr; border-radius: var(--sc-r-sm); overflow: hidden; background: var(--sc-surface); }
+  .pl-card__fig { aspect-ratio: 3 / 2; overflow: hidden; }
+  .pl-card__fig :global(.photo) { height: 100%; }
+  .pl-card__fig--map { display: grid; place-items: center; background: linear-gradient(150deg, #e6ece6, #d6e2da); }
+  .pl-card__fig--map :global(.sil) { width: 62%; --sil-ground: #fff; --sil-edge: var(--slp-charcoal); --sil-pin-ring: #fff; }
+  .pl-card__body { display: grid; gap: var(--sc-3); justify-items: start; align-content: start; padding: var(--sc-5); }
+  .pl-card__t { font: 500 1.7rem/1.1 var(--sc-font-display); }
+
+  .pl-res { display: grid; gap: var(--sc-7); }
+  @media (min-width: 1000px) { .pl-res { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr); align-items: start; } }
+  .pl-res__map { width: min(16rem, 100%); }
+  .pl-res__map :global(.sil) { --sil-ground: var(--sc-surface); --sil-edge: var(--slp-centro-ink); }
+
+  .pl-faqwrap { display: grid; gap: var(--sc-5); }
+  @media (min-width: 900px) { .pl-faqwrap { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); } }
+  .pl-faq { display: grid; border-top: 1px solid var(--sc-hairline-strong); }
+  .pl-faq details { border-bottom: 1px solid var(--sc-hairline); }
+  .pl-faq summary { cursor: pointer; padding: 1rem 0; font: 600 1.2rem/1.3 var(--sc-font-display); min-height: var(--slp-tap); }
+  .pl-faq p { padding-bottom: 1rem; color: var(--sc-ink-soft); max-width: 62ch; }
+
+  .pl-cta { position: relative; min-height: min(70svh, 40rem); display: grid; align-content: center; padding-block: var(--sc-9, 6rem); isolation: isolate; overflow: hidden; background: var(--slp-night); }
+  .pl-cta__title { font-size: clamp(2.4rem, 1.6rem + 3vw, 4.4rem); line-height: 1; max-width: 16ch; }
+  .pl-cta .body { max-width: 46ch; }
+  .pl-cta__btns { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
+</style>

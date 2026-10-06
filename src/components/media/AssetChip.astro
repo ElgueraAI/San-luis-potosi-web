@@ -1,0 +1,45 @@
+---
+/**
+ * Discreet status chip over a still that stands in for a missing final asset
+ * (usually a video). The still is real and licensed; the chip only says the
+ * planned media is still pending, so the layout reads as final.
+ */
+interface Props {
+  slot: string;
+  kind?: 'video' | 'photo';
+  subject?: string;
+  position?: 'br' | 'bl' | 'tr' | 'tl';
+  class?: string;
+}
+const { slot, kind = 'video', subject, position = 'br', class: cls } = Astro.props;
+---
+<p class:list={['chip', `chip--${position}`, cls]} title={subject ? `${slot}: ${subject}` : slot}>
+  <span class="chip__dot" aria-hidden="true"></span>
+  <span>{kind === 'video' ? 'Video pendiente' : 'Imagen definitiva pendiente'}</span>
+  <span class="visually-hidden">: {slot}, needs manual asset{subject ? `. ${subject}` : ''}</span>
+</p>
+
+<style>
+  .chip {
+    position: absolute;
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0;
+    padding: 0.3rem 0.6rem;
+    border-radius: 2px;
+    background: rgb(20 22 21 / 0.62);
+    color: #efe9de;
+    font: 600 0.62rem/1.2 var(--sc-font-text);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    backdrop-filter: blur(6px);
+    pointer-events: auto;
+  }
+  .chip__dot { width: 6px; height: 6px; border-radius: 50%; border: 1px solid currentColor; }
+  .chip--br { right: var(--sc-gutter); bottom: var(--sc-5); }
+  .chip--bl { left: var(--sc-gutter); bottom: var(--sc-5); }
+  .chip--tr { right: var(--sc-gutter); top: calc(var(--slp-header-h) + var(--sc-4)); }
+  .chip--tl { left: var(--sc-gutter); top: calc(var(--slp-header-h) + var(--sc-4)); }
+</style>

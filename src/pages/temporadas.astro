@@ -1,0 +1,44 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import SeasonModule from '@/components/season/SeasonModule.astro';
+import { eventViews } from '@/data/seasons';
+import { REGION_NAME } from '@/data/regions';
+import { eventHref } from '@/i18n/routes';
+
+---
+<BaseLayout title="Qué hacer ahora · Temporadas" description="Recomendaciones oficiales por mes y temporada en San Luis Potosí, fiestas y eventos, con el clima típico de cada región como contexto.">
+  <PageHeader label="Temporadas" title="Qué hacer ahora." lede="Cada mes, lo que las fuentes oficiales recomiendan. Aparte, el clima típico de cada región para planear con contexto." image="wc-98007106" />
+  <section class="section" data-ground="light" aria-label="Calendario">
+    <div class="wrap"><SeasonModule /></div>
+  </section>
+  <section class="section" data-ground="ivory" data-tone="mist" aria-labelledby="ev-t">
+    <div class="wrap evs">
+      <div>
+        <h2 id="ev-t" class="display display--md">Fiestas y eventos del año</h2>
+        <p class="small muted">Solo eventos con fuente oficial. Las fechas exactas de 2026 se muestran únicamente cuando una fuente oficial las confirma.</p>
+      </div>
+      <ul>
+        {eventViews.map((e) => (
+          <li data-region={e.region}>
+            <p class="evs__when">{e.when}</p>
+            <p class="evs__name">{e.slug ? <a class="link" href={eventHref(e.slug)}>{e.name}</a> : e.name}</p>
+            <p class="tiny muted">{e.where} · {REGION_NAME[e.region]} · {e.date2026 ? `2026: ${e.date2026}` : 'Fecha 2026 no confirmada'}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <p class="wrap source evs__rule">Regla del calendario: las recomendaciones provienen solo de fuentes oficiales; el clima modelado es contexto, nunca una recomendación por sí mismo.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .evs { display: grid; gap: var(--sc-6); }
+  @media (min-width: 900px) { .evs { grid-template-columns: 1fr 2fr; } }
+  .evs ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 0 var(--sc-5); border-top: 1px solid var(--sc-hairline-strong); }
+  .evs li { padding: var(--sc-4) 0; border-bottom: 1px solid var(--sc-hairline); display: grid; gap: 0.25rem; }
+  .evs__when::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-ui); margin-right: 0.5rem; }
+  .evs__when { font: 700 0.66rem/1.2 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .evs__name { font: 600 1.35rem/1.15 var(--sc-font-display); }
+  .evs__rule { margin-top: var(--sc-5); }
+</style>

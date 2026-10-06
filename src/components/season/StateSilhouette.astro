@@ -1,0 +1,90 @@
+---
+/**
+ * The state of San Luis Potosí as a small contextual map. With `image`, a
+ * research photograph is masked into the silhouette (kept for decorative
+ * uses); the Temporadas stage uses the clean `line` variant as a mini map.
+ * Places are marked only when they have a stored coordinate: solid for a
+ * verified point, outlined for an approximate one (same rule as the map).
+ * `focus` ids are drawn larger and, with `labels`, named on the map; each
+ * dot carries a <title> for hover. Callers also list the places in text.
+ */
+import Photo from '@/components/media/Photo.astro';
+import { OUTLINE_W, OUTLINE_H, OUTLINE_PATH, OUTLINE_MASK, project, markPath } from '@/lib/outline';
+
+export type SilPlace = { id: string; name: string; region: string; status: 'ready' | 'provisional'; coords: [number, number] };
+interface Props {
+  image?: string | null;
+  places?: SilPlace[];
+  focus?: string[];
+  labels?: boolean;
+  sizes?: string;
+  variant?: 'photo' | 'line';
+  /** a lighter outline (fewer points) for small, repeated figures such as cards */
+  lite?: boolean;
+  class?: string;
+}
+const { image, places = [], focus = [], labels = false, sizes = '(max-width: 900px) 92vw, 46vw', variant = image ? 'photo' : 'line', lite = false, class: cls } = Astro.props;
+const edge = lite ? markPath(OUTLINE_W, 3).d : OUTLINE_PATH;
+const REGION_ES: Record<string, string> = { altiplano: 'Altiplano', centro: 'Centro', 'zona-media': 'Zona Media', huasteca: 'Huasteca' };
+// focus points last so they paint on top
+const dots = places
+  .map((p) => ({ ...p, xy: project(p.coords[0], p.coords[1]), on: focus.includes(p.id) }))
+  .sort((a, b) => Number(a.on) - Number(b.on));
+// one label per cluster: a focus point within 70 units of an already labelled one stays unlabelled
+const labelled: { x: number; y: number }[] = [];
+const withLabels = dots.map((d) => {
+  if (!labels || !d.on || labelled.some((l) => Math.hypot(l.x - d.xy[0], l.y - d.xy[1]) < 70)) return { ...d, label: false, left: false };
+  labelled.push({ x: d.xy[0], y: d.xy[1] });
+  return { ...d, label: true, left: d.xy[0] > OUTLINE_W * 0.62 };
+});
+---
+<figure class:list={['sil', `sil--${variant}`, cls]} style={variant === 'photo' ? `--sil-mask:${OUTLINE_MASK};aspect-ratio:${OUTLINE_W}/${OUTLINE_H}` : `aspect-ratio:${OUTLINE_W}/${OUTLINE_H}`}>
+  {variant === 'photo' && (
+    <div class="sil__fill">
+      {image && <Photo id={image} fill sizes={sizes} widths={[480, 800, 1200, 1600]} alt="" />}
+    </div>
+  )}
+  <svg class="sil__marks" viewBox={`0 0 ${OUTLINE_W} ${OUTLINE_H}`} aria-hidden="true" focusable="false">
+    <path class="sil__edge" d={edge} />
+    {withLabels.map((d) => (
+      <g class:list={['sil__dot', `sil__dot--${d.status}`, { 'is-focus': d.on, 'is-quiet': focus.length > 0 && !d.on }]} data-region={d.region} data-id={d.id} transform={`translate(${d.xy[0]} ${d.xy[1]})`}>
+        <title>{`${d.name} · ${REGION_ES[d.region] ?? d.region}${d.status === 'provisional' ? ' · ubicación aproximada' : ''}`}</title>
+        <circle class="sil__halo" r={d.on ? 34 : 24} />
+        <circle class="sil__pin" r={d.on ? 16 : 13} />
+        {d.label && (
+          <text class="sil__label" x={d.left ? -30 : 30} y="10" text-anchor={d.left ? 'end' : 'start'}>{d.name.split(' – ')[0]}</text>
+        )}
+      </g>
+    ))}
+  </svg>
+</figure>
+
+<style>
+  .sil { position: relative; width: 100%; margin: 0; }
+  .sil__fill {
+    position: absolute; inset: 0;
+    -webkit-mask: var(--sil-mask) center / 100% 100% no-repeat;
+    mask: var(--sil-mask) center / 100% 100% no-repeat;
+    background: var(--sil-ground, var(--slp-ivory-3));
+  }
+  .sil--photo .sil__fill :global(img) { transition: transform 1.4s var(--sc-ease-out), opacity 600ms; }
+  .sil__marks { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .sil--line .sil__edge { fill: var(--sil-ground, transparent); }
+  .sil__edge { fill: none; stroke: var(--sil-edge, currentColor); stroke-width: 2.5; vector-effect: non-scaling-stroke; stroke-linejoin: round; opacity: 0.9; }
+  .sil--photo .sil__edge { stroke: var(--sil-edge, rgb(246 241 231 / 0.9)); }
+  .sil__halo { fill: var(--slp-region-glow, rgb(246 241 231 / 0.35)); }
+  .sil__pin { fill: var(--slp-region-ui, var(--slp-gold)); stroke: var(--sil-pin-ring, var(--slp-ivory)); stroke-width: 4; }
+  .sil__dot--provisional .sil__pin { fill: var(--sil-pin-ring, var(--slp-ivory)); stroke: var(--slp-region-ui, var(--slp-gold)); stroke-width: 6; }
+  .sil__dot.is-quiet { opacity: 0.55; }
+  .sil__dot.is-quiet .sil__halo { fill: none; }
+  .sil--line .sil__dot:not(.is-focus) .sil__halo { fill: none; }
+  .sil__label { font: 700 34px/1 var(--sc-font-text); fill: var(--sil-label, currentColor); paint-order: stroke; stroke: var(--sil-label-halo, transparent); stroke-width: 8px; stroke-linejoin: round; letter-spacing: 0.01em; }
+  @media (prefers-reduced-motion: no-preference) {
+    .sil__dot { animation: sil-in 600ms var(--sc-ease-out) both; }
+    .sil__dot:nth-child(3) { animation-delay: 80ms; } .sil__dot:nth-child(4) { animation-delay: 160ms; } .sil__dot:nth-child(5) { animation-delay: 240ms; }
+    .sil__dot:nth-child(n + 6) { animation-delay: 320ms; }
+    .sil__dot.is-focus .sil__halo { animation: sil-pulse 2.8s ease-in-out 900ms infinite; transform-box: fill-box; transform-origin: center; }
+  }
+  @keyframes sil-in { from { opacity: 0; } }
+  @keyframes sil-pulse { 50% { transform: scale(1.3); opacity: 0.45; } }
+</style>

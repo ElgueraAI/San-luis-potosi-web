@@ -1,0 +1,172 @@
+---
+/**
+ * Festividades y eventos: yearly calendar over the single events dataset
+ * (research/entities/events; Temporadas and the municipality pages read the
+ * same records). Each month shows «Eventos del mes» (dated events, confirmed
+ * first) and «También disponible este mes» (ALL_YEAR and SEASONAL_WINDOW
+ * experiences active that month), so tourism seasons are never confused
+ * with festivals. «Todo el año» gathers the seasonal experiences; «Fecha
+ * pendiente» the records with no published date. Without JavaScript every
+ * panel is visible in order; src/scripts/calendar.ts switches them.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import EventCard from '@/components/portal/EventCard.astro';
+import StateSilhouette from '@/components/season/StateSilhouette.astro';
+import { events, seasonalExperiences, municipalities, muniById, DATE_STATUS, REGION_LABEL, STATUS_RANK, startDay, type Entity } from '@/data/portal';
+import { MONTHS_ES } from '@/data/research';
+import { href } from '@/i18n/routes';
+
+const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
+const BUILD_MONTH = 10;
+const cats = [...new Set(events.map((e) => e.subcategory ?? 'Evento'))].sort((a, b) => a.localeCompare(b, 'es'));
+const munis = municipalities.filter((m) => events.some((e) => e.municipality_id === m.id));
+const order = (m: number) => (a: Entity, b: Entity) => (STATUS_RANK[a.date_status!] ?? 9) - (STATUS_RANK[b.date_status!] ?? 9) || startDay(a, m) - startDay(b, m) || a.canonical_name.localeCompare(b.canonical_name, 'es');
+const months = MONTHS_ES.map((name, i) => {
+  const m = i + 1;
+  return {
+    m, name: cap(name),
+    dated: events.filter((e) => e.months?.includes(m)).sort(order(m)),
+    also: seasonalExperiences.filter((x) => x.months?.includes(m)),
+  };
+});
+const allYear = seasonalExperiences.filter((x) => x.date_status === 'ALL_YEAR');
+const windows = seasonalExperiences.filter((x) => x.date_status === 'SEASONAL_WINDOW');
+const pending = events.filter((e) => !e.months?.length);
+// one map dot per municipal seat that hosts an event; months it is active in
+const dots = munis.filter((m) => m.seat && m.region).map((m) => ({ id: m.id, name: m.canonical_name, region: m.region!, status: 'ready' as const, coords: [m.seat!.longitude, m.seat!.latitude] as [number, number] }));
+const muniMonths = Object.fromEntries(munis.map((m) => [m.id, [...new Set(events.filter((e) => e.municipality_id === m.id).flatMap((e) => e.months ?? []))]]));
+const statusCount = Object.fromEntries(Object.keys(DATE_STATUS).map((k) => [k, events.filter((e) => e.date_status === k).length + seasonalExperiences.filter((e) => e.date_status === k).length]));
+const attrs = (e: Entity) => ({ 'data-cal-item': '', 'data-id': e.id, 'data-region': e.region ?? '', 'data-cat': e.subcategory ?? 'Evento', 'data-status': e.date_status, 'data-mun': e.municipality_id ? muniById.get(e.municipality_id)?.slug : '' });
+---
+<BaseLayout title="Festividades y eventos" description={`Calendario de ${events.length} fiestas, ferias, festivales y tradiciones de los municipios de San Luis Potosí, con el estado de cada fecha según fuentes oficiales.`} image="wc-36732336">
+  <PageHeader
+    label="Eventos"
+    title="Festividades y eventos"
+    lede={`${events.length} fiestas, ferias y celebraciones de ${munis.length} municipios, más experiencias de temporada. Cada fecha dice qué tan confirmada está: ${statusCount.CONFIRMED_CURRENT_YEAR} confirmadas para 2026, ${statusCount.RECURRENT_OFFICIAL_PATTERN} con patrón oficial anual y ${statusCount.HISTORICAL_LAST_CONFIRMED} con su última edición confirmada.`}
+    image="wc-36732336"
+    focal="50% 40%"
+    crumbs={[{ label: 'Eventos' }]}
+  />
+
+  <div class="cal" data-cal data-build-month={BUILD_MONTH}>
+    <section class="psec psec--tight cal__top" data-ground="dark" data-tone="heritage" aria-label="Elegir mes y filtros">
+      <div class="wrap">
+        <div class="cal__months" role="group" aria-label="Mes">
+          {months.map((x) => (
+            <button type="button" class="cal__mo" data-cal-month={x.m} aria-pressed="false">
+              <span class="cal__mo-n">{x.name.slice(0, 3)}</span>
+              <span class="cal__mo-c">{x.dated.length}<span class="visually-hidden"> eventos en {x.name}</span></span>
+              <span class="cal__mo-bar" aria-hidden="true" style={`--n:${Math.min(1, x.dated.length / 20)}`}></span>
+            </button>
+          ))}
+          <button type="button" class="cal__mo cal__mo--all" data-cal-month="todo" aria-pressed="false">
+            <span class="cal__mo-n">Todo el año</span>
+            <span class="cal__mo-c">{seasonalExperiences.length}<span class="visually-hidden"> experiencias de temporada</span></span>
+          </button>
+        </div>
+        <form class="dir__form cal__form" data-cal-form aria-label="Filtrar eventos" onsubmit="return false">
+          <label>Región<select name="region"><option value="">Todas</option>{Object.entries(REGION_LABEL).map(([v, l]) => <option value={v}>{l}</option>)}</select></label>
+          <label>Municipio<select name="mun"><option value="">Todos</option>{munis.map((m) => <option value={m.slug}>{m.canonical_name}</option>)}</select></label>
+          <label>Categoría<select name="cat"><option value="">Todas</option>{cats.map((c) => <option value={c}>{c}</option>)}</select></label>
+          <label>Fecha<select name="estado"><option value="">Cualquier estado</option>{['CONFIRMED_CURRENT_YEAR', 'RECURRENT_OFFICIAL_PATTERN', 'HISTORICAL_LAST_CONFIRMED', 'DATE_PENDING'].map((v) => <option value={v}>{DATE_STATUS[v].label}</option>)}</select></label>
+        </form>
+        <ul class="cal__legend" aria-label="Estados de fecha">
+          {['CONFIRMED_CURRENT_YEAR', 'RECURRENT_OFFICIAL_PATTERN', 'HISTORICAL_LAST_CONFIRMED', 'DATE_PENDING'].map((k) => <li class={`is-${DATE_STATUS[k].tone}`}><b>{DATE_STATUS[k].short}</b> {k === 'CONFIRMED_CURRENT_YEAR' ? 'fecha anunciada para 2026' : k === 'RECURRENT_OFFICIAL_PATTERN' ? 'la fuente da el día o la temporada de cada año' : k === 'HISTORICAL_LAST_CONFIRMED' ? 'solo hay fechas de una edición anterior' : 'sin fecha publicada'}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="psec" data-ground="light" aria-label="Calendario">
+      <div class="wrap cal__grid">
+        <div class="cal__panels">
+          {months.map((x) => (
+            <section class="cal__panel" data-cal-panel={x.m} aria-labelledby={`calm-${x.m}`}>
+              <div class="cal__ph">
+                <h2 id={`calm-${x.m}`} class="cal__gh">{x.name}</h2>
+                <p class="psec__count" data-cal-count>{x.dated.length} {x.dated.length === 1 ? 'evento' : 'eventos'}</p>
+              </div>
+              <h3 class="cal__sub">Eventos del mes</h3>
+              {x.dated.length > 0 ? (
+                <ul class="pgrid cal__cards">{x.dated.map((e) => <li {...attrs(e)}><EventCard e={e} month={x.m} /></li>)}</ul>
+              ) : (
+                <p class="truth cal__zero">No encontramos todavía una celebración con fecha oficial suficientemente verificada para este mes.</p>
+              )}
+              <p class="dir__empty" data-cal-empty hidden>No hay eventos de {x.name.toLowerCase()} con estos filtros.</p>
+              {x.also.length > 0 && (
+                <>
+                  <h3 class="cal__sub cal__sub--also">También disponible este mes</h3>
+                  <ul class="pgrid cal__cards">{x.also.map((e) => <li><EventCard e={e} month={x.m} seasonal /></li>)}</ul>
+                </>
+              )}
+            </section>
+          ))}
+
+          <section class="cal__panel" data-cal-panel="todo" aria-labelledby="calm-todo">
+            <div class="cal__ph"><h2 id="calm-todo" class="cal__gh">Todo el año y temporadas</h2></div>
+            <p class="body muted cal__intro">Experiencias que no son fiestas: lugares que las fuentes oficiales recomiendan todo el año o en una temporada.</p>
+            <h3 class="cal__sub">Todo el año</h3>
+            <ul class="pgrid cal__cards">{allYear.map((e) => <li><EventCard e={e} seasonal /></li>)}</ul>
+            <h3 class="cal__sub cal__sub--also">Temporadas recomendadas</h3>
+            <ul class="pgrid cal__cards">{windows.map((e) => <li><EventCard e={e} seasonal /></li>)}</ul>
+            {pending.length > 0 && (
+              <>
+                <h3 class="cal__sub cal__sub--also">Fecha pendiente</h3>
+                <p class="truth">Registrados por el Sistema de Información Cultural o los folletos oficiales sin fecha. Consulta al organizador antes de viajar.</p>
+                <ul class="pgrid cal__cards">{pending.map((e) => <li {...attrs(e)}><EventCard e={e} /></li>)}</ul>
+              </>
+            )}
+          </section>
+        </div>
+
+        <aside class="cal__map" aria-label="Dónde ocurren">
+          <p class="label">Dónde ocurren</p>
+          <div class="cal__sil" data-cal-map data-mun-months={JSON.stringify(muniMonths)}>
+            <StateSilhouette places={dots} variant="line" />
+          </div>
+          <p class="tiny muted">Cabeceras municipales (INEGI) con eventos en el mes elegido. Pasa por una tarjeta para ver su municipio.</p>
+          <a class="arrow" href={href('seasons')}>Qué hacer cada mes</a>
+          <p class="tiny muted cal__src">Fuentes: Gobierno del Estado (CEFIM, Secretaría de Turismo, Secretaría de Cultura), Sistema de Información Cultural, folletos oficiales. Consultadas el 6 de octubre de 2026.</p>
+        </aside>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .cal__months { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)) minmax(0, 1.6fr); gap: 0.35rem; margin-bottom: var(--sc-5); }
+  @media (max-width: 960px) { .cal__months { grid-template-columns: repeat(6, minmax(0, 1fr)); } .cal__mo--all { grid-column: 1 / -1; } }
+  .cal__mo { position: relative; display: grid; gap: 0.25rem; justify-items: center; align-content: center; min-height: 4.2rem; padding: 0.5rem 0.2rem 0.7rem; border: 1px solid rgb(246 241 231 / 0.18); border-radius: var(--sc-r-sm); background: none; color: inherit; cursor: pointer; }
+  .cal__mo-n { font: 600 1.25rem/1 var(--sc-font-display); }
+  .cal__mo--all .cal__mo-n { font-size: 1.05rem; }
+  .cal__mo-c { font: 700 0.66rem/1 var(--sc-font-text); color: var(--sc-ink-soft); font-variant-numeric: tabular-nums; }
+  .cal__mo-bar { position: absolute; left: 20%; right: 20%; bottom: 0.35rem; height: 2px; background: var(--slp-gold); opacity: 0.6; transform: scaleX(var(--n)); transform-origin: left; }
+  .cal__mo[aria-pressed='true'] { background: var(--slp-gold); border-color: var(--slp-gold); color: var(--slp-charcoal); }
+  .cal__mo[aria-pressed='true'] .cal__mo-c { color: var(--slp-charcoal); }
+  .cal__mo[aria-pressed='true'] .cal__mo-bar { background: var(--slp-charcoal); }
+  .cal__form { background: rgb(246 241 231 / 0.06); margin-bottom: var(--sc-3); }
+  .cal__form select { background: var(--slp-charcoal-2); color: var(--slp-ivory); }
+  .cal__legend { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: 0.78rem; color: var(--sc-ink-soft); }
+  .cal__legend b { color: var(--sc-ink); font-weight: 700; }
+  .cal__legend .is-ok b { color: var(--slp-gold); }
+
+  .cal__grid { display: grid; gap: var(--sc-7); }
+  @media (min-width: 1100px) { .cal__grid { grid-template-columns: minmax(0, 1fr) 18rem; } .cal__map { position: sticky; top: calc(var(--slp-header-h) + 1rem); align-self: start; } }
+  .cal__panel { margin-bottom: var(--sc-8); }
+  .cal__panel[hidden] { display: none; }
+  .cal__ph { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.4rem 1rem; margin-bottom: var(--sc-4); padding-bottom: var(--sc-3); border-bottom: 1px solid var(--sc-hairline-strong); }
+  .cal__gh { font: 500 clamp(2rem, 1.5rem + 1.6vw, 3rem)/1 var(--sc-font-display); }
+  .cal__sub { font: 700 0.7rem/1 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; color: var(--sc-ink-soft); margin: var(--sc-4) 0 var(--sc-3); }
+  .cal__sub--also { margin-top: var(--sc-7); padding-top: var(--sc-4); border-top: 1px dashed var(--sc-hairline-strong); }
+  .cal__cards { grid-template-columns: repeat(auto-fill, minmax(min(100%, 15.5rem), 1fr)); gap: var(--sc-4); }
+  .cal__cards li[hidden] { display: none; }
+  .cal__zero { margin: var(--sc-3) 0; }
+  .cal__intro { margin-bottom: var(--sc-3); }
+  .cal__map { display: grid; gap: var(--sc-3); }
+  .cal__sil :global(.sil) { --sil-ground: var(--slp-ivory-2); --sil-edge: var(--slp-charcoal); --sil-pin-ring: #fff; }
+  .cal__sil :global(.sil__dot) { transition: opacity 200ms; }
+  .cal__sil :global(.sil__dot.is-off) { opacity: 0.12; }
+  .cal__sil :global(.sil__dot.is-hot .sil__pin) { stroke: var(--slp-charcoal); stroke-width: 6; }
+  .cal__sil :global(.sil__dot.is-hot .sil__halo) { fill: var(--slp-region-glow, rgb(199 163 90 / 0.4)); transform: scale(1.8); transform-box: fill-box; transform-origin: center; }
+  .cal__src { margin-top: var(--sc-3); }
+</style>

@@ -1,0 +1,25 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import ResourceGroups from '@/components/guides/ResourceGroups.astro';
+import ManualAsset from '@/components/media/ManualAsset.astro';
+---
+<BaseLayout title="Guías y recursos oficiales" description="Folletos regionales, mapas turísticos, directorio oficial de guías acreditados y movilidad para viajar por San Luis Potosí.">
+  <PageHeader label="Guías y recursos" title="Información oficial, a un clic." lede="Folletos y mapas de la Secretaría de Turismo del Estado, guías arqueológicas del INAH, directorios oficiales, el directorio de guías acreditados de SECTUR y datos descargables. Todo enlazado a su fuente, nunca copiado." tone="stone" ground="ivory" crumbs={[{ label: 'Guías y recursos' }]} />
+  <nav class="pnav" aria-label="Grupos de recursos"><ul class="wrap">{[['folletos','Folletos'],['mapas','Mapas'],['arqueologia','Arqueología'],['cultura','Cultura'],['guias-turisticos','Guías acreditados'],['directorios','Directorios'],['descargas','Datos'],['practica','Práctico'],['movilidad','Movilidad']].map(([id, l]) => <li><a href={`#recursos-${id}`}>{l}</a></li>)}</ul></nav>
+  <section class="section section--tight" data-ground="ivory" data-tone="stone" aria-label="Recursos">
+    <div class="wrap g">
+      <ResourceGroups />
+      <aside class="g__aside">
+        <ManualAsset label="Guías · Retrato" ratio="4:5" subject="Guía de turistas acreditado trabajando con un grupo, con autorización de imagen." region="centro" />
+        <p class="small muted">¿Vas a contratar un guía? Los folletos oficiales recomiendan guías certificados y reservar recorridos con anticipación. Verifica la acreditación en el directorio oficial de SECTUR.</p>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .g { display: grid; gap: var(--sc-8); }
+  @media (min-width: 1100px) { .g { grid-template-columns: 1fr 18rem; } }
+  .g__aside { display: grid; gap: var(--sc-4); align-content: start; }
+</style>

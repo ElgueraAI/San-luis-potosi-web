@@ -1,0 +1,47 @@
+{
+ "generated": "2026-10-06",
+ "pass": "4 — Temporadas month storytelling",
+ "method": [
+  "Additive registry: records here are merged by scripts/media/build-media.mjs on top of media-reviewed.json and attributions.json, which stay untouched.",
+  "Each asset was found by a targeted Wikimedia Commons search for one month's theme chosen in docs/temporadas-auditoria.md (the image follows the data).",
+  "Reviewed visually on 330–500 px previews. Licence, author and description read from the Commons file page (extmetadata) on 2026-10-06."
+ ],
+ "assets": [
+  {
+   "asset_id": "wc-43676810", "place_id": "MUN-CERRITOS", "region": "zona-media", "destination": "Cerritos",
+   "subject": "San Juan Bautista Cerritos", "source": "Wikimedia Commons",
+   "source_url": "https://commons.wikimedia.org/wiki/File:San_Juan_Bautista_Cerritos.jpg",
+   "author": "Antonio de Jesús Pérez Cruz", "licence": "CC BY-SA 4.0", "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "width": 4000, "height": 3000, "orientation": "landscape", "role": "seasonal", "status": "SELECTED", "score": 82,
+   "rationale": "Parroquia de San Juan Bautista, Cerritos, with papel picado; taken 23 Jun 2015, the eve of the patron saint festival (se-cerritos, June).",
+   "visually_reviewed": true, "review_date": "2026-10-06", "crop_allowed": true, "third_party_rights": null, "share_alike_required": true, "commercial_use_allowed": true
+  },
+  {
+   "asset_id": "wc-198070643", "place_id": "C01", "region": "centro", "destination": "Feria Nacional Potosina (FENAPO)",
+   "subject": "Entrada Feria Nacional Potosina", "source": "Wikimedia Commons",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Entrada_Feria_Nacional_Potosina..jpg",
+   "author": "EnchiladasyZacahuil", "licence": "CC BY-SA 4.0", "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "width": 1200, "height": 1600, "orientation": "portrait", "role": "seasonal", "status": "SELECTED", "score": 64,
+   "rationale": "Entrance to the FENAPO grounds with monumental letters (2026). Only free-licence photo of the fair found; low resolution (1200 px). Replace when a better one exists.",
+   "visually_reviewed": true, "review_date": "2026-10-06", "crop_allowed": true, "third_party_rights": "Fair signage visible.", "share_alike_required": true, "commercial_use_allowed": true
+  },
+  {
+   "asset_id": "wc-44351463", "place_id": "MUN-TANCANHUITZ", "region": "huasteca", "destination": "Tancanhuitz",
+   "subject": "Textiles de Tancanhuitz (ExpoIndigenous2015 042)", "source": "Wikimedia Commons",
+   "source_url": "https://commons.wikimedia.org/wiki/File:ExpoIndigenous2015_042.JPG",
+   "author": "AlejandroLinaresGarcia", "licence": "CC BY-SA 4.0", "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "width": 6016, "height": 4000, "orientation": "landscape", "role": "seasonal", "status": "SELECTED", "score": 70,
+   "rationale": "Embroidered textiles from Tancanhuitz, photographed at the Expo de los Pueblos Indígenas, Mexico City, 2015 (file description). Fallback for September: no free-licence photo of the San Miguel Arcángel festival exists; caption must say where it was taken.",
+   "visually_reviewed": true, "review_date": "2026-10-06", "crop_allowed": true, "third_party_rights": "Traditional designs of the community; editorial use only.", "share_alike_required": true, "commercial_use_allowed": true
+  },
+  {
+   "asset_id": "wc-36732336", "place_id": "H18", "region": "huasteca", "destination": "Xantolo / tradiciones huastecas",
+   "subject": "Xantolo 16", "source": "Wikimedia Commons",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Xantolo_16.JPG",
+   "author": "Elenats.93", "licence": "CC BY-SA 4.0", "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "width": 1936, "height": 2592, "orientation": "portrait", "role": "seasonal", "status": "SELECTED", "score": 84,
+   "rationale": "Xantolo altar under a marigold arch; file description: Xantolo in the Huasteca Potosina, 1–2 Nov 2014. No people.",
+   "visually_reviewed": true, "review_date": "2026-10-06", "crop_allowed": true, "third_party_rights": null, "share_alike_required": true, "commercial_use_allowed": true
+  }
+ ]
+}

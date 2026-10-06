@@ -1,0 +1,87 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import Photo from '@/components/media/Photo.astro';
+import RouteMini from '@/components/routes/RouteMini.astro';
+import RouteButton from '@/components/ui/RouteButton.astro';
+import { ITINERARIES } from '@/data/itineraries';
+import { REGION_NAME } from '@/data/regions';
+import { distances, getDestination, placeName } from '@/data/research';
+import { destHref } from '@/i18n/routes';
+
+const leg = (id: string) => distances.find((d) => d.id === id);
+---
+<BaseLayout title="Rutas e itinerarios" description="Itinerarios sugeridos por San Luis Potosí: fin de semana, 2, 3 y 5 días, y un road trip por las cuatro regiones, con distancias de los folletos oficiales.">
+  <PageHeader label="Rutas e itinerarios" title="Recorridos para armar tu viaje." lede="Secuencias sugeridas con destinos verificados. Las distancias y los tiempos son aproximados y vienen de las tablas de los folletos oficiales de la Secretaría de Turismo del Estado." image="wc-45072511" />
+
+  <nav class="wrap itnav" aria-label="Itinerarios">
+    <ul>{ITINERARIES.map((it) => <li><a href={`#${it.id}`}><span class="itnav__l">{it.label}</span><span>{it.title}</span></a></li>)}</ul>
+  </nav>
+
+  {ITINERARIES.map((it, i) => (
+    <section id={it.id} class="section it" data-ground={i % 2 ? 'ivory' : 'light'} data-tone={i % 2 && it.regions.length === 1 ? 'region' : undefined} data-region={it.regions.length === 1 ? it.regions[0] : undefined} aria-labelledby={`it-${it.id}`}>
+      <div class="wrap it__grid">
+        <div class="it__head">
+          <p class="label it__label">{it.label} · {it.duration}</p>
+          <h2 id={`it-${it.id}`} class="display display--lg">{it.title}</h2>
+          <p class="lede">{it.summary}</p>
+          <ul class="it__regions">{it.regions.map((r) => <li data-region={r}><span aria-hidden="true"></span>{REGION_NAME[r]}</li>)}</ul>
+          <Photo id={it.image} ratio="3/2" sizes="(max-width: 900px) 100vw, 40vw" />
+          <div class="it__map"><RouteMini stops={it.stops} w={420} h={260} /><p class="tiny muted">Paradas trazadas en línea recta sobre sus coordenadas (verificadas o aproximadas); no es la ruta carretera.</p></div>
+        </div>
+        <ol class="it__days">
+          {it.days.map((day, k) => (
+            <li class="it__day">
+              <p class="it__n">Día {k + 1}</p>
+              <h3 class="display it__dt">{day.title}</h3>
+              <ul class="it__stops">
+                {day.stops.map((s) => {
+                  const d = getDestination(s);
+                  return (
+                    <li>
+                      {d ? <a class="link" href={destHref(d.slug)}>{d.name}</a> : <span>{placeName(s)}</span>}
+                      {d && <RouteButton id={d.id} name={d.name} />}
+                    </li>
+                  );
+                })}
+              </ul>
+              {day.legs && (
+                <ul class="it__legs">
+                  {day.legs.map((l) => leg(l.fact)).filter(Boolean).map((r, j) => (
+                    <li><span>{r!.from} → {r!.to}</span><span>{r!.km} km{day.legs![j].kmOnly ? '' : ` · ${r!.time}`}{r!.unpaved ? ` · ${r!.unpaved} km sin pavimentar` : ''}</span></li>
+                  ))}
+                </ul>
+              )}
+              {day.note && <p class="small muted">{day.note}</p>}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  ))}
+</BaseLayout>
+
+<style>
+  .itnav { padding-block: var(--sc-5); }
+  .itnav ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: var(--sc-3); }
+  .itnav a { display: grid; gap: 0.3rem; padding: var(--sc-4); border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); text-decoration: none; font-weight: 650; min-height: 100%; }
+  .itnav__l { font: 700 0.66rem/1 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; color: var(--slp-gold-deep); }
+  @media (hover: hover) and (pointer: fine) { .itnav a:hover { border-color: var(--sc-ink); } }
+  .it__grid { display: grid; gap: var(--sc-7); }
+  @media (min-width: 960px) { .it__grid { grid-template-columns: 1fr 1.1fr; gap: var(--sc-9); } .it__head { position: sticky; top: calc(var(--slp-header-h) + 1rem); align-self: start; } }
+  .it__head { display: grid; gap: var(--sc-4); align-content: start; }
+  .it__label { color: var(--slp-gold-deep); }
+  .it__regions { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font: 650 0.8rem/1 var(--sc-font-text); }
+  .it__regions li { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .it__regions span { width: 8px; height: 8px; border-radius: 50%; background: var(--slp-region-ui); }
+  .it__map { display: grid; gap: 0.4rem; color: var(--slp-charcoal); padding: var(--sc-4); background: var(--sc-surface); border-radius: var(--sc-r-sm); }
+  .it__days { list-style: none; display: grid; gap: 0; counter-reset: d; }
+  .it__day { display: grid; gap: var(--sc-3); padding-block: var(--sc-6); border-top: 1px solid var(--sc-hairline-strong); }
+  .it__n { font: 700 0.7rem/1 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .it__dt { font-size: clamp(1.7rem, 1.4rem + 1vw, 2.3rem); }
+  .it__stops { list-style: none; display: grid; gap: 0.4rem; }
+  .it__stops li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem; }
+  .it__legs { list-style: none; border-top: 1px solid var(--sc-hairline); }
+  .it__legs li { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem 1rem; padding: 0.55rem 0; border-bottom: 1px solid var(--sc-hairline); font-size: var(--sc-t-sm); font-variant-numeric: tabular-nums; }
+  .it__legs li span:last-child { font-weight: 650; }
+</style>

@@ -6,47 +6,68 @@ import '@fontsource-variable/manrope';
 import '@/vendor/scrollcraft/scrollcraft.css';
 import '@/styles/tokens.css';
 import '@/styles/base.css';
+import '@/styles/portal.css';
 
 import SiteHeader from '@/components/chrome/SiteHeader.astro';
-import TheLine from '@/components/chrome/TheLine.astro';
 import MenuSheet from '@/components/chrome/MenuSheet.astro';
 import SiteFooter from '@/components/chrome/SiteFooter.astro';
-import { t, langTag, type Locale } from '@/i18n';
 import { asset } from '@/i18n/routes';
-import { getRegions } from '@/lib/regions';
+import { mediaImage } from '@/lib/media';
+import { getImage } from 'astro:assets';
 
 interface Props {
   title?: string;
   description?: string;
-  locale?: Locale;
+  /** Production media id used for Open Graph. */
+  image?: string | null;
+  /** Header starts transparent over a full-bleed hero. */
+  overlayHeader?: boolean;
+  /** Load the Scroll Craft engine (only pages with pinned acts). */
+  engine?: boolean;
+  jsonLd?: Record<string, unknown> | null;
+  /** Hero image to preload (critical asset only). */
+  preload?: { srcset: string; sizes: string } | null;
 }
 
-const { title, description, locale = 'es' } = Astro.props;
-const pageTitle = title ? `${title} · ${t(locale, 'site.name')}` : `${t(locale, 'site.name')} · ${t(locale, 'site.tagline')}`;
-const pageDescription = description ?? t(locale, 'site.description');
+const SITE = 'San Luis Potosí';
+const TAGLINE = 'Cuatro mundos. Un San Luis Potosí.';
+const DEFAULT_DESC =
+  'Del desierto alto a la selva de la Huasteca: descubre las cuatro regiones de San Luis Potosí, explora por interés, temporada y mapa, y arma tu propia ruta.';
+
+const { title, description = DEFAULT_DESC, image = 'wc-69780780', overlayHeader = false, engine = false, jsonLd = null, preload = null } = Astro.props;
+const pageTitle = title ? `${title} · ${SITE}` : `${SITE} · ${TAGLINE}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const regions = await getRegions();
+const og = mediaImage(image);
+const ogImg = og ? await getImage({ src: og, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 78 }) : null;
+const ogUrl = ogImg ? new URL(ogImg.src, Astro.site).href : null;
 ---
 <!doctype html>
-<html lang={langTag[locale]} style={`--slp-contours: url("${asset('placeholders/contours.svg')}")`}>
+<html lang="es-MX" style={`--slp-contours: url("${asset('placeholders/contours.svg')}")`}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
+    <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#1f2524" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE} />
     <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={pageDescription} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="es_MX" />
+    {ogUrl && <meta property="og:image" content={ogUrl} />}
+    {ogUrl && <meta name="twitter:card" content="summary_large_image" />}
     <link rel="icon" href={asset('favicon.svg')} type="image/svg+xml" />
+    {preload && <link rel="preload" as="image" imagesrcset={preload.srcset} imagesizes={preload.sizes} fetchpriority="high" />}
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <!-- Motion tier, decided before first paint so the layout never jumps.
          No JavaScript means no attribute, which the CSS treats as static. -->
     <script is:inline>
       (function () {
         var d = document.documentElement, tier = 'full';
+        d.setAttribute('data-js', '');
         try {
           var c = navigator.connection || {};
           if (matchMedia('(prefers-reduced-motion: reduce)').matches) tier = 'static';
@@ -55,21 +76,38 @@ const regions = await getRegions();
         d.setAttribute('data-motion', tier);
       })();
     </script>
-    <script is:inline defer src={asset('vendor/scrollcraft/scrollcraft.js')}></script>
+    {engine && <script is:inline defer src={asset('vendor/scrollcraft/scrollcraft.js')}></script>}
     <slot name="head" />
   </head>
   <body>
-    <a class="slp-skip slp-btn" href="#contenido">{t(locale, 'a11y.skip')}</a>
-    <SiteHeader locale={locale} regions={regions} />
-    <TheLine locale={locale} regions={regions} />
+    <a class="skip btn" href="#contenido">Saltar al contenido</a>
+    <SiteHeader overlay={overlayHeader} />
     <main id="contenido" tabindex="-1">
       <slot />
     </main>
-    <SiteFooter locale={locale} />
-    <MenuSheet locale={locale} regions={regions} />
-    <div class="sc-grain" aria-hidden="true"></div>
+    <SiteFooter />
+    <MenuSheet />
+    <div class="route-toast" role="status" aria-live="polite" data-route-toast hidden></div>
     <script>
-      import '@/motion/boot';
+      import '@/scripts/site';
     </script>
   </body>
 </html>
+
+<style is:global>
+  .route-toast {
+    position: fixed;
+    left: 50%;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    z-index: 120;
+    transform: translateX(-50%);
+    padding: 0.8rem 1.1rem;
+    border-radius: var(--sc-r-sm);
+    background: var(--slp-charcoal);
+    color: var(--slp-ivory);
+    font: 600 0.82rem/1.35 var(--sc-font-text);
+    box-shadow: var(--sc-e2);
+    max-width: calc(100vw - 2rem);
+  }
+  .route-toast a { color: var(--slp-gold); font-weight: 700; margin-left: 0.5rem; }
+</style>

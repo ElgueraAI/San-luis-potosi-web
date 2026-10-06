@@ -1,0 +1,2076 @@
+{
+ "generated": "2026-10-06",
+ "pass": "6 — events calendar completeness",
+ "rule": "Additive to events.json and seasonal-additions-pass4.json (untouched). date_status: CONFIRMED_CURRENT_YEAR · RECURRENT_OFFICIAL_PATTERN · HISTORICAL_LAST_CONFIRMED · DATE_PENDING. No 2026 date is inferred from a pattern.",
+ "xantolo_cycle": {
+  "source_id": "turismo-slp-dia-de-muertos",
+  "steps": [
+   [
+    "29 de septiembre",
+    "San Miguel Arcángel: inicio de las fiestas y primera ofrenda"
+   ],
+   [
+    "18 de octubre",
+    "San Lucas: segunda ofrenda"
+   ],
+   [
+    "28 de octubre",
+    "San Judas Tadeo: preparativos"
+   ],
+   [
+    "30 y 31 de octubre",
+    "Altares; ofrenda a los niños angelitos"
+   ],
+   [
+    "1 de noviembre",
+    "Todos Santos"
+   ],
+   [
+    "2 de noviembre",
+    "Fieles Difuntos: la fiesta grande"
+   ],
+   [
+    "30 de noviembre",
+    "San Andrés: despedida y levantamiento del arco"
+   ]
+  ]
+ },
+ "events": [
+  {
+   "event_id": "cefim-ahualulco-fiesta-de-la-virgen-de-la-candelaria",
+   "event_name": "Fiesta de la Virgen de la Candelaria",
+   "municipality": "Ahualulco",
+   "category": "Fiesta patronal y feria",
+   "typical_month": "Del 26 de febrero al 2 de marzo",
+   "months": [
+    2,
+    3
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;26 feb–2 mar",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-alaquines-fiestas-del-senor-del-santo-entierro-cri",
+   "event_name": "Fiestas del Señor del Santo Entierro (Cristo Milagroso)",
+   "municipality": "Alaquines",
+   "category": "Fiesta religiosa",
+   "typical_month": "Del 25 al 29 de mayo",
+   "months": [
+    5
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;25–29 may",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-aquismon-feria-de-santiago-apostol-y-santa-ana",
+   "event_name": "Feria de Santiago Apóstol y Santa Ana",
+   "municipality": "Aquismón",
+   "category": "Feria y fiesta religiosa",
+   "typical_month": "25 y 26 de julio",
+   "months": [
+    7
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;25–26 jul",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-aquismon-fiesta-de-san-isidro-labrador",
+   "event_name": "Fiesta de San Isidro Labrador",
+   "municipality": "Aquismón",
+   "category": "Fiesta religiosa",
+   "typical_month": "15 de mayo",
+   "months": [
+    5
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;15 may",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-aquismon-fiesta-de-san-miguel-arcangel-santo-patr",
+   "event_name": "Fiesta de San Miguel Arcángel, santo patrono",
+   "municipality": "Aquismón",
+   "category": "Fiesta patronal",
+   "typical_month": "29 de septiembre",
+   "months": [
+    9
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;29 sep",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-armadillo-de-los-infante-fiesta-de-la-purisima-concepcion",
+   "event_name": "Fiesta de la Purísima Concepción",
+   "municipality": "Armadillo de los Infante",
+   "category": "Fiesta patronal",
+   "typical_month": "8 de diciembre",
+   "months": [
+    12
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;8 dic",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-axtla-de-terrazas-fiestas-de-santa-catarina",
+   "event_name": "Fiestas de Santa Catarina",
+   "municipality": "Axtla de Terrazas",
+   "category": "Fiesta patronal",
+   "typical_month": "Inician el 25 de noviembre",
+   "months": [
+    11
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;desde 25 nov",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-cardenas-fiesta-de-san-nicolas-tolentino-santo-pa",
+   "event_name": "Fiesta de San Nicolás Tolentino, santo patrono",
+   "municipality": "Cárdenas",
+   "category": "Fiesta patronal y peregrinación",
+   "typical_month": "9 de septiembre",
+   "months": [
+    9
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;9 sep",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-cardenas-feria-de-la-primavera",
+   "event_name": "Feria de la Primavera",
+   "municipality": "Cárdenas",
+   "category": "Feria",
+   "typical_month": "En mayo",
+   "months": [
+    5
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;mayo",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-cedral-fiestas-de-la-virgen-de-la-asuncion",
+   "event_name": "Fiestas de la Virgen de la Asunción",
+   "municipality": "Cedral",
+   "category": "Fiesta patronal y feria",
+   "typical_month": "Del 31 de julio al 15 de agosto",
+   "months": [
+    7,
+    8
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;31 jul–15 ago",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-cerro-de-san-pedro-fiesta-de-san-pedro-santo-patrono",
+   "event_name": "Fiesta de San Pedro, santo patrono",
+   "municipality": "Cerro de San Pedro",
+   "category": "Fiesta patronal",
+   "typical_month": "29 de junio",
+   "months": [
+    6
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;29 jun",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-charcas-fiestas-de-la-virgen-de-charcas",
+   "event_name": "Fiestas de la Virgen de Charcas",
+   "municipality": "Charcas",
+   "category": "Fiesta patronal",
+   "typical_month": "Del 31 de agosto al 8 de septiembre",
+   "months": [
+    8,
+    9
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;31 ago–8 sep",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-charcas-fiesta-de-la-virgen-del-rosario",
+   "event_name": "Fiesta de la Virgen del Rosario",
+   "municipality": "Charcas",
+   "category": "Fiesta religiosa",
+   "typical_month": "Del 30 de septiembre al 8 de octubre",
+   "months": [
+    9,
+    10
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;30 sep–8 oct",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-ciudad-del-maiz-feria-regional-de-ciudad-del-maiz",
+   "event_name": "Feria Regional de Ciudad del Maíz",
+   "municipality": "Ciudad del Maíz",
+   "category": "Feria",
+   "typical_month": "Del 12 al 20 de enero",
+   "months": [
+    1
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;12–20 ene",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-ciudad-del-maiz-fiesta-de-la-purisima-concepcion",
+   "event_name": "Fiesta de la Purísima Concepción",
+   "municipality": "Ciudad del Maíz",
+   "category": "Fiesta religiosa",
+   "typical_month": "8 de diciembre",
+   "months": [
+    12
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;8 dic",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-ciudad-del-maiz-fiesta-de-san-jose-villa-de-san-jose",
+   "event_name": "Fiesta de San José (Villa de San José)",
+   "municipality": "Ciudad del Maíz",
+   "category": "Fiesta religiosa",
+   "typical_month": "19 de marzo",
+   "months": [
+    3
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;19 mar",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-ciudad-fernandez-fiesta-del-dulce-nombre-de-jesus",
+   "event_name": "Fiesta del Dulce Nombre de Jesús",
+   "municipality": "Ciudad Fernández",
+   "category": "Fiesta religiosa",
+   "typical_month": "Del 1 al 14 de enero",
+   "months": [
+    1
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;1–14 ene",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-ciudad-fernandez-fiesta-popular-del-refugio",
+   "event_name": "Fiesta popular del Refugio",
+   "municipality": "Ciudad Fernández",
+   "category": "Fiesta popular",
+   "typical_month": "Del 26 de junio al 4 de julio",
+   "months": [
+    6,
+    7
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;26 jun–4 jul",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-ciudad-valles-fiestas-de-santiago-apostol-y-santa-ana",
+   "event_name": "Fiestas de Santiago Apóstol y Santa Ana",
+   "municipality": "Ciudad Valles",
+   "category": "Fiesta patronal",
+   "typical_month": "25 y 26 de julio",
+   "months": [
+    7
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;25–26 jul",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-coxcatlan-fiesta-de-san-juan-bautista",
+   "event_name": "Fiesta de San Juan Bautista",
+   "municipality": "Coxcatlán",
+   "category": "Fiesta patronal",
+   "typical_month": "24 de junio, con novenario y peregrinación en las comunidades",
+   "months": [
+    6
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;24 jun",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-ebano-fiesta-conmemorativa-petrolera",
+   "event_name": "Fiesta conmemorativa petrolera",
+   "municipality": "Ébano",
+   "category": "Conmemoración",
+   "typical_month": "18 de marzo",
+   "months": [
+    3
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;18 mar",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-el-naranjo-dia-de-la-santa-cruz",
+   "event_name": "Día de la Santa Cruz",
+   "municipality": "El Naranjo",
+   "category": "Fiesta religiosa",
+   "typical_month": "3 de mayo",
+   "months": [
+    5
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;3 may",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-el-naranjo-conmemoracion-de-la-virgen-de-fatima",
+   "event_name": "Conmemoración de la Virgen de Fátima",
+   "municipality": "El Naranjo",
+   "category": "Fiesta religiosa",
+   "typical_month": "13 de mayo",
+   "months": [
+    5
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;13 may",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-el-naranjo-fiesta-de-la-virgen-de-guadalupe",
+   "event_name": "Fiesta de la Virgen de Guadalupe",
+   "municipality": "El Naranjo",
+   "category": "Fiesta religiosa",
+   "typical_month": "Del 2 al 12 de diciembre",
+   "months": [
+    12
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;2–12 dic",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-guadalcazar-fiestas-de-navidad-y-feria-popular",
+   "event_name": "Fiestas de Navidad y Feria Popular",
+   "municipality": "Guadalcázar",
+   "category": "Fiesta popular y feria",
+   "typical_month": "Del 16 al 25 de diciembre; feria del 22 al 25",
+   "months": [
+    12
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;16–25 dic",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-huehuetlan-fiesta-de-san-diego-de-alcala",
+   "event_name": "Fiesta de San Diego de Alcalá",
+   "municipality": "Huehuetlán",
+   "category": "Fiesta patronal",
+   "typical_month": "12 y 13 de noviembre, con novenario y peregrinación",
+   "months": [
+    11
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;12–13 nov",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-lagunillas-fiesta-de-san-antonio-de-padua",
+   "event_name": "Fiesta de San Antonio de Padua",
+   "municipality": "Lagunillas",
+   "category": "Fiesta patronal",
+   "typical_month": "13 de junio",
+   "months": [
+    6
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;13 jun",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-lagunillas-fiestas-de-diciembre-virgen-de-guadalupe",
+   "event_name": "Fiestas de diciembre: Virgen de Guadalupe y feria",
+   "municipality": "Lagunillas",
+   "category": "Fiesta religiosa y feria",
+   "typical_month": "12 de diciembre; fiesta con baile y feria el 24",
+   "months": [
+    12
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;12 y 24 dic",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-matehuala-fiesta-del-cristo-de-matehuala",
+   "event_name": "Fiesta del Cristo de Matehuala",
+   "municipality": "Matehuala",
+   "category": "Fiesta religiosa",
+   "typical_month": "Del 1 al 15 de enero",
+   "months": [
+    1
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;1–15 ene",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-matehuala-fiesta-de-san-antonio",
+   "event_name": "Fiesta de San Antonio",
+   "municipality": "Matehuala",
+   "category": "Fiesta religiosa",
+   "typical_month": "13 de junio",
+   "months": [
+    6
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;13 jun",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-matehuala-fiestas-de-la-fundacion-de-matehuala",
+   "event_name": "Fiestas de la fundación de Matehuala",
+   "municipality": "Matehuala",
+   "category": "Conmemoración",
+   "typical_month": "Del 8 al 16 de julio",
+   "months": [
+    7
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;8–16 jul",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-mexquitic-de-carmona-fiesta-de-la-virgen-de-guadalupe-en-el-d",
+   "event_name": "Fiesta de la Virgen de Guadalupe en el Desierto",
+   "municipality": "Mexquitic de Carmona",
+   "category": "Fiesta religiosa y peregrinación",
+   "typical_month": "12 de diciembre",
+   "months": [
+    12
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;12 dic",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-moctezuma-fiestas-de-santa-anita",
+   "event_name": "Fiestas de Santa Anita",
+   "municipality": "Moctezuma",
+   "category": "Fiesta patronal",
+   "typical_month": "Del 24 al 28 de julio, con desfiles alegóricos y danzas",
+   "months": [
+    7
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;24–28 jul",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-rayon-feria-regional-comercial",
+   "event_name": "Feria Regional Comercial",
+   "municipality": "Rayón",
+   "category": "Feria",
+   "typical_month": "Del 1 al 5 de mayo",
+   "months": [
+    5
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;1–5 may",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-rayon-fiesta-religiosa-de-julio",
+   "event_name": "Fiesta religiosa de julio",
+   "municipality": "Rayón",
+   "category": "Fiesta religiosa",
+   "typical_month": "4 de julio",
+   "months": [
+    7
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;4 jul",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-rioverde-fiestas-de-santa-catarina-y-feria-region",
+   "event_name": "Fiestas de Santa Catarina y Feria Regional",
+   "municipality": "Rioverde",
+   "category": "Fiesta patronal y feria",
+   "typical_month": "Del 16 al 25 de noviembre: feria, verbena, entrada de cera y danzas",
+   "months": [
+    11
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;16–25 nov",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-rioverde-fiesta-religiosa-de-julio",
+   "event_name": "Fiesta religiosa de julio",
+   "municipality": "Rioverde",
+   "category": "Fiesta religiosa",
+   "typical_month": "Del 10 al 18 de julio",
+   "months": [
+    7
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;10–18 jul",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-rioverde-fiestas-tipicas",
+   "event_name": "Fiestas típicas",
+   "municipality": "Rioverde",
+   "category": "Fiesta popular",
+   "typical_month": "24 de octubre",
+   "months": [
+    10
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;24 oct",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-salinas-fiesta-patronal-de-nuestro-padre-jesus",
+   "event_name": "Fiesta patronal de Nuestro Padre Jesús",
+   "municipality": "Salinas",
+   "category": "Fiesta patronal y feria",
+   "typical_month": "Bajada de la imagen el último domingo de febrero, con concurso de danzas chichimecas; fiesta el primer viernes de marzo",
+   "months": [
+    2,
+    3
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;último domingo de febrero – primer viernes de marzo",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-san-antonio-fiesta-de-san-antonio-de-padua",
+   "event_name": "Fiesta de San Antonio de Padua",
+   "municipality": "San Antonio",
+   "category": "Fiesta patronal",
+   "typical_month": "13 de junio",
+   "months": [
+    6
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;13 jun",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-san-ciro-de-acosta-feria-regional-de-san-ciro-de-acosta",
+   "event_name": "Feria Regional de San Ciro de Acosta",
+   "municipality": "San Ciro de Acosta",
+   "category": "Feria",
+   "typical_month": "Del 22 al 31 de enero: danzas, charreadas, bailes y juegos pirotécnicos",
+   "months": [
+    1
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;22–31 ene",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-san-ciro-de-acosta-fiesta-de-la-virgen-de-guadalupe",
+   "event_name": "Fiesta de la Virgen de Guadalupe",
+   "municipality": "San Ciro de Acosta",
+   "category": "Fiesta religiosa",
+   "typical_month": "12 de diciembre",
+   "months": [
+    12
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;12 dic",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-san-martin-chalchicuautla-xantolo-desfile-y-concurso-de-comparsas",
+   "event_name": "Xantolo: desfile y concurso de comparsas",
+   "municipality": "San Martín Chalchicuautla",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Día de Muertos (fines de octubre – 2 de noviembre)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;Xantolo",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-san-vicente-tancuayalab-fiesta-de-san-francisco-de-asis-santo-pa",
+   "event_name": "Fiesta de San Francisco de Asís, santo patrono",
+   "municipality": "San Vicente Tancuayalab",
+   "category": "Fiesta patronal",
+   "typical_month": "4 de octubre",
+   "months": [
+    10
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;4 oct",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-san-vicente-tancuayalab-fiesta-de-la-virgen-de-guadalupe",
+   "event_name": "Fiesta de la Virgen de Guadalupe",
+   "municipality": "San Vicente Tancuayalab",
+   "category": "Fiesta religiosa",
+   "typical_month": "En diciembre",
+   "months": [
+    12
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;diciembre",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-santa-catarina-fiesta-de-san-francisco-de-asis-con-danz",
+   "event_name": "Fiesta de San Francisco de Asís, con danzas autóctonas",
+   "municipality": "Santa Catarina",
+   "category": "Fiesta religiosa",
+   "typical_month": "4 de octubre",
+   "months": [
+    10
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;4 oct",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-santa-maria-del-rio-fiesta-de-la-asuncion-y-feria-nacional-d",
+   "event_name": "Fiesta de la Asunción y Feria Nacional del Rebozo",
+   "municipality": "Santa María del Río",
+   "category": "Fiesta patronal y feria",
+   "typical_month": "Del 1 al 15 de agosto",
+   "months": [
+    8
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;1–15 ago",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-santo-domingo-fiesta-de-santo-domingo-santo-patrono",
+   "event_name": "Fiesta de Santo Domingo, santo patrono",
+   "municipality": "Santo Domingo",
+   "category": "Fiesta patronal",
+   "typical_month": "4 de agosto, con jaripeos y carreras de caballos",
+   "months": [
+    8
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;4 ago",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-tamasopo-feria-regional-de-tamasopo",
+   "event_name": "Feria Regional de Tamasopo",
+   "municipality": "Tamasopo",
+   "category": "Feria",
+   "typical_month": "Del 10 al 19 de marzo, con muestra gastronómica",
+   "months": [
+    3
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;10–19 mar",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-tamazunchale-feria-anual-guadalupana",
+   "event_name": "Feria Anual Guadalupana",
+   "municipality": "Tamazunchale",
+   "category": "Feria y fiesta religiosa",
+   "typical_month": "12 de diciembre",
+   "months": [
+    12
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;12 dic",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-tamazunchale-fiesta-de-san-juan-bautista",
+   "event_name": "Fiesta de San Juan Bautista",
+   "municipality": "Tamazunchale",
+   "category": "Fiesta religiosa",
+   "typical_month": "24 de junio",
+   "months": [
+    6
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;24 jun",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-tamazunchale-semana-santa-con-huehues",
+   "event_name": "Semana Santa con huehues",
+   "municipality": "Tamazunchale",
+   "category": "Tradición",
+   "typical_month": "Semana Santa (marzo o abril): procesiones, representaciones y bendición de pan y cereales",
+   "months": [
+    3,
+    4
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;Semana Santa",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-tampacan-fiesta-de-la-asuncion-de-la-virgen",
+   "event_name": "Fiesta de la Asunción de la Virgen",
+   "municipality": "Tampacán",
+   "category": "Fiesta patronal",
+   "typical_month": "15 de agosto",
+   "months": [
+    8
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;15 ago",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-tampamolon-corona-fiesta-patronal-de-santiago-apostol",
+   "event_name": "Fiesta patronal de Santiago Apóstol",
+   "municipality": "Tampamolón Corona",
+   "category": "Fiesta patronal",
+   "typical_month": "24 y 25 de julio, con danzas Las Varitas y La Malinche",
+   "months": [
+    7
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;24–25 jul",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-tamuin-semana-santa-en-tamuin",
+   "event_name": "Semana Santa en Tamuín",
+   "municipality": "Tamuín",
+   "category": "Fiesta popular",
+   "typical_month": "Semana Santa (marzo o abril)",
+   "months": [
+    3,
+    4
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;Semana Santa",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-tanlajas-semana-santa-y-dia-de-muertos-con-mascar",
+   "event_name": "Semana Santa y Día de Muertos con máscaras",
+   "municipality": "Tanlajás",
+   "category": "Tradición",
+   "typical_month": "Semana Santa; 1 y 2 de noviembre",
+   "months": [
+    3,
+    4,
+    11
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;Semana Santa y Día de Muertos",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-tanquian-de-escobedo-fiestas-patronales-de-san-jose",
+   "event_name": "Fiestas Patronales de San José",
+   "municipality": "Tanquián de Escobedo",
+   "category": "Fiesta patronal y feria",
+   "typical_month": "Del 15 al 19 de marzo: feria con exposición ganadera, artesanal y gastronómica",
+   "months": [
+    3
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;15–19 mar",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-vanegas-feria-regional-y-fiesta-de-san-juan",
+   "event_name": "Feria Regional y fiesta de San Juan",
+   "municipality": "Vanegas",
+   "category": "Feria y fiesta patronal",
+   "typical_month": "Feria del 10 al 15 de junio; San Juan el 24 de junio",
+   "months": [
+    6
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;10–15 y 24 jun",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-venado-fiestas-de-la-purisima-concepcion",
+   "event_name": "Fiestas de la Purísima Concepción",
+   "municipality": "Venado",
+   "category": "Fiesta patronal y feria",
+   "typical_month": "Del 1 al 8 de diciembre; el día 8, feria y danza de matlachines",
+   "months": [
+    12
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;1–8 dic",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-venado-santa-cruz-y-procesion-del-senor-de-las-",
+   "event_name": "Santa Cruz y procesión del Señor de las Injurias",
+   "municipality": "Venado",
+   "category": "Fiesta religiosa",
+   "typical_month": "En mayo",
+   "months": [
+    5
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;mayo",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-villa-de-arriaga-fiesta-de-la-virgen-de-guadalupe",
+   "event_name": "Fiesta de la Virgen de Guadalupe",
+   "municipality": "Villa de Arriaga",
+   "category": "Fiesta religiosa",
+   "typical_month": "Del 2 al 12 de diciembre",
+   "months": [
+    12
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;2–12 dic",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-villa-de-guadalupe-dia-de-la-santa-cruz",
+   "event_name": "Día de la Santa Cruz",
+   "municipality": "Villa de Guadalupe",
+   "category": "Fiesta religiosa",
+   "typical_month": "3 de mayo",
+   "months": [
+    5
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;3 may",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-villa-de-guadalupe-fiesta-de-la-virgen-de-guadalupe",
+   "event_name": "Fiesta de la Virgen de Guadalupe",
+   "municipality": "Villa de Guadalupe",
+   "category": "Fiesta religiosa",
+   "typical_month": "12 de diciembre",
+   "months": [
+    12
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;12 dic",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-villa-de-la-paz-fiesta-de-la-virgen-de-la-paz-y-feria-re",
+   "event_name": "Fiesta de la Virgen de la Paz y Feria Regional",
+   "municipality": "Villa de la Paz",
+   "category": "Fiesta patronal y feria",
+   "typical_month": "Del 16 al 24 de enero",
+   "months": [
+    1
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;16–24 ene",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-villa-de-ramos-fiesta-de-san-juan-nepomuceno-y-feria",
+   "event_name": "Fiesta de San Juan Nepomuceno y feria",
+   "municipality": "Villa de Ramos",
+   "category": "Fiesta patronal y feria",
+   "typical_month": "16 de mayo",
+   "months": [
+    5
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;16 may",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-villa-de-reyes-fiesta-de-san-francisco-de-asis-santo-pa",
+   "event_name": "Fiesta de San Francisco de Asís, santo patrono",
+   "municipality": "Villa de Reyes",
+   "category": "Fiesta patronal",
+   "typical_month": "Del 25 de septiembre al 4 de octubre",
+   "months": [
+    9,
+    10
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;25 sep–4 oct",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-villa-juarez-fiesta-de-santa-gertrudis-y-feria-region",
+   "event_name": "Fiesta de Santa Gertrudis y feria regional",
+   "municipality": "Villa Juárez",
+   "category": "Fiesta patronal y feria",
+   "typical_month": "16 de noviembre, con corridas de toros",
+   "months": [
+    11
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;16 nov",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-xilitla-feria-de-xilitla",
+   "event_name": "Feria de Xilitla",
+   "municipality": "Xilitla",
+   "category": "Feria",
+   "typical_month": "Del 1 al 15 de mayo",
+   "months": [
+    5
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;1–15 may",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-xilitla-fiesta-de-san-agustin",
+   "event_name": "Fiesta de San Agustín",
+   "municipality": "Xilitla",
+   "category": "Fiesta patronal",
+   "typical_month": "Del 27 de agosto al 2 de septiembre; el 28, peregrinaciones y danzas de Soledad, Varitas y Rebozo",
+   "months": [
+    8,
+    9
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;27 ago–2 sep",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-zaragoza-fiesta-de-san-antonio-de-padua-santo-pat",
+   "event_name": "Fiesta de San Antonio de Padua, santo patrono",
+   "municipality": "Zaragoza",
+   "category": "Fiesta patronal",
+   "typical_month": "13 de junio, con peregrinaciones",
+   "months": [
+    6
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;13 jun",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Patrón anual publicado por el CEFIM (Gobierno del Estado) en la infografía municipal 2022; no confirma las fechas de 2026."
+  },
+  {
+   "event_id": "cefim-ebano-feria-tradicional",
+   "event_name": "Feria Tradicional de Ébano",
+   "municipality": "Ébano",
+   "category": "Feria",
+   "typical_month": "Junio (la fuente escribe «31 de junio», que no existe)",
+   "months": [
+    6
+   ],
+   "date_status": "DATE_PENDING",
+   "recurrence_rule": null,
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cefim-infografias-2022",
+   "source_url": "https://cefimslp.gob.mx/infografias/2022/",
+   "verification_status": "verified",
+   "notes": "Fecha inválida en la fuente; se conserva el mes y se marca como pendiente."
+  },
+  {
+   "event_id": "slp-gob-saucito-2026",
+   "event_name": "Fiestas patronales del Señor del Saucito",
+   "municipality": "San Luis Potosí",
+   "category": "Fiesta patronal · patrimonio cultural inmaterial del Estado",
+   "typical_month": "Del 23 de febrero al 15 de marzo de 2026",
+   "months": [
+    2,
+    3
+   ],
+   "date_status": "CONFIRMED_CURRENT_YEAR",
+   "recurrence_rule": null,
+   "start_date": "2026-02-23",
+   "end_date": "2026-03-15",
+   "source_id": "slp-gob-saucito-2026",
+   "source_url": "https://slp.gob.mx/noticias/2026/2/25/gobierno-estatal-fortalece-la-protecci%C3%B3n-de-las-tradiciones-del-saucito/",
+   "verification_status": "verified",
+   "notes": "Misas, peregrinaciones, novenario y festivales de danza (Gobierno del Estado). Reconocidas como Patrimonio Cultural Inmaterial del Estado."
+  },
+  {
+   "event_id": "slp-gob-fenahuap-2026",
+   "event_name": "Feria Nacional de la Huasteca Potosina (FENAHUAP)",
+   "municipality": "Ciudad Valles",
+   "category": "Feria",
+   "typical_month": "Del 27 de marzo al 5 de abril de 2026 (64.ª edición)",
+   "months": [
+    3,
+    4
+   ],
+   "date_status": "CONFIRMED_CURRENT_YEAR",
+   "recurrence_rule": null,
+   "start_date": "2026-03-27",
+   "end_date": "2026-04-05",
+   "source_id": "slp-gob-fenahuap-2026",
+   "source_url": "https://slp.gob.mx/noticias/2026/3/28/64%C2%AA-edici%C3%B3n-de-la-feria-nacional-de-la-huasteca-potosina-en-ciudad-valles/",
+   "verification_status": "verified",
+   "notes": "Conflicto de fuentes: la infografía municipal del CEFIM (2022) la ubica del 8 al 28 de mayo; prevalece la edición 2026 confirmada."
+  },
+  {
+   "event_id": "slp-gob-semana-santa-2026",
+   "event_name": "Semana Santa en San Luis Potosí: programa estatal",
+   "municipality": null,
+   "category": "Tradición religiosa",
+   "typical_month": "Del 27 de marzo al 11 de abril de 2026",
+   "months": [
+    3,
+    4
+   ],
+   "date_status": "CONFIRMED_CURRENT_YEAR",
+   "recurrence_rule": null,
+   "start_date": "2026-03-27",
+   "end_date": "2026-04-11",
+   "source_id": "slp-gob-semana-santa-2026",
+   "source_url": "https://slp.gob.mx/noticias/2026/4/1/semana-santa-fortalece-tradiciones-y-atrae-visitantes-a-san-luis/",
+   "verification_status": "verified",
+   "notes": "Más de 100 actividades en todo el estado: Procesión del Silencio, Procesión de los Cristos, viacrucis viviente en Villa de Pozos, Quema de Judas."
+  },
+  {
+   "event_id": "slp-gob-fenae-2026",
+   "event_name": "Feria Nacional de la Enchilada (FENAE)",
+   "municipality": "Soledad de Graciano Sánchez",
+   "category": "Feria gastronómica",
+   "typical_month": "Inició el 4 de abril de 2026; durante la semana de Pascua (CEFIM)",
+   "months": [
+    4
+   ],
+   "date_status": "CONFIRMED_CURRENT_YEAR",
+   "recurrence_rule": null,
+   "start_date": "2026-04-04",
+   "end_date": null,
+   "source_id": "slp-gob-fenae-2026",
+   "source_url": "https://slp.gob.mx/noticias/2026/4/4/as%C3%AD-arranc%C3%B3-la-fenae-2026/",
+   "verification_status": "verified",
+   "notes": "La infografía del CEFIM la sitúa en la semana de la Resurrección (abril)."
+  },
+  {
+   "event_id": "inpode-trail-rioverde-2026",
+   "event_name": "Serial Trail Mágico en Rioverde",
+   "municipality": "Rioverde",
+   "category": "Deporte y aventura",
+   "typical_month": "7 y 8 de noviembre de 2026",
+   "months": [
+    11
+   ],
+   "date_status": "CONFIRMED_CURRENT_YEAR",
+   "recurrence_rule": null,
+   "start_date": "2026-11-07",
+   "end_date": "2026-11-08",
+   "source_id": "inpode-trail-rioverde-2026",
+   "source_url": "https://inpode.slp.gob.mx/eventos/2026/4/21/serial-trail-magico-en-rio-verde/",
+   "verification_status": "verified",
+   "notes": "Carrera de montaña organizada por el INPODE."
+  },
+  {
+   "event_id": "inpode-trail-soledad-2026",
+   "event_name": "Serial Trail Mágico en Soledad",
+   "municipality": "Soledad de Graciano Sánchez",
+   "category": "Deporte y aventura",
+   "typical_month": "5 y 6 de diciembre de 2026",
+   "months": [
+    12
+   ],
+   "date_status": "CONFIRMED_CURRENT_YEAR",
+   "recurrence_rule": null,
+   "start_date": "2026-12-05",
+   "end_date": "2026-12-06",
+   "source_id": "inpode-trail-soledad-2026",
+   "source_url": "https://inpode.slp.gob.mx/eventos/2026/4/21/serial-trail-magico-en-soledad/",
+   "verification_status": "verified",
+   "notes": "Carrera de montaña organizada por el INPODE; fechas según la agenda de Turismo SLP."
+  },
+  {
+   "event_id": "slp-gob-estudiantinas-2026",
+   "event_name": "Noche de tunas y callejoneada de máscaras",
+   "municipality": "San Luis Potosí",
+   "category": "Música y tradición",
+   "typical_month": "Concierto de estudiantinas el 9 de mayo y callejoneada de máscaras y antifaces el 16 de mayo de 2026",
+   "months": [
+    5
+   ],
+   "date_status": "CONFIRMED_CURRENT_YEAR",
+   "recurrence_rule": null,
+   "start_date": "2026-05-09",
+   "end_date": "2026-05-16",
+   "source_id": "slp-gob-estudiantinas-2026",
+   "source_url": "https://slp.gob.mx/noticias/2026/4/27/invitan-a-concierto-de-estudiantinas-y-callejoneada-de-m%C3%A1scaras-y-antifaces/",
+   "verification_status": "verified",
+   "notes": "Secretaría de Cultura del Estado, Teatro de la Paz y Centro Histórico."
+  },
+  {
+   "event_id": "cultura-slp-rondallas-2026",
+   "event_name": "2.º Festival de Rondallas Potosinas",
+   "municipality": "San Luis Potosí",
+   "category": "Música",
+   "typical_month": "14 de febrero de 2026",
+   "months": [
+    2
+   ],
+   "date_status": "CONFIRMED_CURRENT_YEAR",
+   "recurrence_rule": null,
+   "start_date": "2026-02-14",
+   "end_date": "2026-02-14",
+   "source_id": "cultura-slp-rondallas-2026",
+   "source_url": "https://cultura.slp.gob.mx/eventos/2026/2/3/2do-festival-de-rondallas-potosinas/",
+   "verification_status": "verified",
+   "notes": "Museo Nacional de la Máscara."
+  },
+  {
+   "event_id": "cultura-slp-festival-luna-2026",
+   "event_name": "Festival de la Luna",
+   "municipality": "Matehuala",
+   "category": "Festival cultural",
+   "typical_month": "Junio (edición 2026; fecha exacta no publicada en la nota)",
+   "months": [
+    6
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": null,
+   "end_date": null,
+   "source_id": "cultura-slp-festival-luna-2026",
+   "source_url": "https://cultura.slp.gob.mx/noticias/2026/6/26/gobierno-estatal-acerca-la-cultura-al-altiplano-con-el-festival-de-la-luna/",
+   "verification_status": "verified",
+   "notes": "La nota no indica si es anual."
+  },
+  {
+   "event_id": "matehuala-charamusca-2025",
+   "event_name": "Feria de la Charamusca",
+   "municipality": "Matehuala",
+   "category": "Feria gastronómica",
+   "typical_month": "Del 17 al 20 de abril de 2025 (Semana Santa)",
+   "months": [
+    4
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-04-17",
+   "end_date": "2025-04-20",
+   "source_id": "matehuala-gob-conoce",
+   "source_url": "https://matehuala.gob.mx/m/conoce-matehuala/",
+   "verification_status": "verified",
+   "notes": "Edición 2025 publicada por el Ayuntamiento de Matehuala."
+  },
+  {
+   "event_id": "turismo-slp-villa-hidalgo-san-jose",
+   "event_name": "Fiesta de San José",
+   "municipality": "Villa Hidalgo",
+   "category": "Fiesta patronal",
+   "typical_month": "19 de marzo",
+   "months": [
+    3
+   ],
+   "date_status": "RECURRENT_OFFICIAL_PATTERN",
+   "recurrence_rule": "FREQ=YEARLY;19 mar",
+   "start_date": null,
+   "end_date": null,
+   "source_id": "turismo-slp-lugar-villa-hidalgo",
+   "source_url": "https://turismo.slp.gob.mx/lugares/villa-hidalgo/",
+   "verification_status": "verified",
+   "notes": null
+  },
+  {
+   "event_id": "turismo-slp-campeonato-charro",
+   "event_name": "Congreso y Campeonato Nacional Charro (edición LXXX)",
+   "municipality": "San Luis Potosí",
+   "category": "Charrería",
+   "typical_month": "Del 14 de octubre al 3 de noviembre (año no indicado en la página)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": null,
+   "end_date": null,
+   "source_id": "turismo-slp-campeonato-charro",
+   "source_url": "https://visitasanluispotosi.com/campeonato-nacional-charro/",
+   "verification_status": "verified",
+   "notes": "Sede: Arena Potosí. Campeonato nacional que rota de sede: no es una fiesta anual del estado."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-aquismon",
+   "event_name": "Xantolo y Día de Muertos en Aquismón",
+   "municipality": "Aquismón",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 25 de octubre al 5 de noviembre (10 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-25",
+   "end_date": "2025-11-05",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Exposición de catrinas; Concurso de Comparsas; Tianguis artesanal; Taller para elaboración de máscaras…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-axtla-de-terrazas",
+   "event_name": "Xantolo y Día de Muertos en Axtla de Terrazas",
+   "municipality": "Axtla de Terrazas",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 25 de octubre al 9 de noviembre (3 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-25",
+   "end_date": "2025-11-09",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: XANTOLO 2025; Cambio de Fiscal; Garzas Bike – El Desafío 2025. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-tampamolon-corona",
+   "event_name": "Xantolo y Día de Muertos en Tampamolón Corona",
+   "municipality": "Tampamolón Corona",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 30 de octubre al 1 de noviembre (4 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-30",
+   "end_date": "2025-11-01",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Concurso de Altares; Fiestas de \"Xantolo\", Desfile, encendido de velas, Presentación de Comparsas; Concurso de Catrinas Infantiles y Juveniles, Concurso de Comparsas Infantiles; Primer Concurso Regional de Comparsas. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-tamuin",
+   "event_name": "Xantolo y Día de Muertos en Tamuín",
+   "municipality": "Tamuín",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 29 de septiembre al 2 de noviembre (10 actividades)",
+   "months": [
+    9,
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-09-29",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Primera ofrenda; Encuentro de Comparsas; Procesión de luz; Levantamiento de almas participación de las Comparsas…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-el-naranjo",
+   "event_name": "Xantolo y Día de Muertos en El Naranjo",
+   "municipality": "El Naranjo",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 30 de octubre al 2 de noviembre (12 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-30",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Concurso de Murales en el panteón; Demostración de altares en plaza municipal; Música y exposición artesanal; Xantolo en la Cascada…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-xilitla",
+   "event_name": "Xantolo y Día de Muertos en Xilitla",
+   "municipality": "Xilitla",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 30 de octubre al 2 de noviembre (17 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-30",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: 1er. Encuentro de comparsas de maestros. “Tradición cultura y educación”; Presentación de comparsas de maestros; Concurso de altares; Carrera Xantolo Surrealista 2025…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-cerritos",
+   "event_name": "Xantolo y Día de Muertos en Cerritos",
+   "municipality": "Cerritos",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 31 de octubre al 2 de noviembre (9 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-31",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Danza religiosa Señor del Amparo; Presentación de Altares; Comparsa Media Luna; Proyección de Película…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-ciudad-del-maiz",
+   "event_name": "Xantolo y Día de Muertos en Ciudad del Maíz",
+   "municipality": "Ciudad del Maíz",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 30 de octubre al 2 de noviembre (10 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-30",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Actividad familiar, elaboración de tapete de aserrín alusivo a día de muertos; Evento cultural: grupo de danza, cantante, cuentacuentos; Inauguración altar Monumental.; Desfile de carros alegóricos…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-cardenas",
+   "event_name": "Xantolo y Día de Muertos en Cárdenas",
+   "municipality": "Cárdenas",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 1 de noviembre al 2 de noviembre (9 actividades)",
+   "months": [
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-11-01",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Concurso de altares de instituciones educativas y locales; Concurso de catrinas y catrines; Callejoneada y visita a altares de los barrios; Actividades artísticas y culturales…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-ciudad-fernandez",
+   "event_name": "Xantolo y Día de Muertos en Ciudad Fernández",
+   "municipality": "Ciudad Fernández",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 30 de octubre al 2 de noviembre (14 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-30",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Recorrido estudiantil de Huehues; Carrera de mostritos; El dulce sabor de la calavera; Concurso tapetes de aserrín \"Camino a la Luz\"…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-san-ciro-de-acosta",
+   "event_name": "Xantolo y Día de Muertos en San Ciro de Acosta",
+   "municipality": "San Ciro de Acosta",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 30 de octubre al 31 de octubre (3 actividades)",
+   "months": [
+    10
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-30",
+   "end_date": "2025-10-31",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Gran concurso de Comparsitas; Gran concurso de Comparsas; Concurso de Catrinas. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-lagunillas",
+   "event_name": "Xantolo y Día de Muertos en Lagunillas",
+   "municipality": "Lagunillas",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: el 31 de octubre (4 actividades)",
+   "months": [
+    10
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-31",
+   "end_date": "2025-10-31",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Concurso de Comparsas; Desfile de Comparsas; Comparsa La Maruquez de Ciudad Valles; Trio Huasteco Los Pregoneros del Tampaon.. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-villa-de-ramos",
+   "event_name": "Xantolo y Día de Muertos en Villa de Ramos",
+   "municipality": "Villa de Ramos",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: el 2 de noviembre (1 actividad)",
+   "months": [
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-11-02",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Exhibición de altar de muertos monumental, Concurso de disfraces, concurso de calaveritas literarias, se ofrece a todos los asistentes pan tradicional, chocolate y dulces. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-cedral",
+   "event_name": "Xantolo y Día de Muertos en Cedral",
+   "municipality": "Cedral",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 30 de octubre al 1 de noviembre (3 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-30",
+   "end_date": "2025-11-01",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: 2do. Festival del Pan de Muerto y Chocolate; Concurso Municipal de Catrinas; Fiesta de luz \"Recordando a los Nuestros\". Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-villa-de-la-paz",
+   "event_name": "Xantolo y Día de Muertos en Villa de la Paz",
+   "municipality": "Villa de la Paz",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: el 2 de noviembre (1 actividad)",
+   "months": [
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-11-02",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Desfile de día de muertos y presentación de Comparsas. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-moctezuma",
+   "event_name": "Xantolo y Día de Muertos en Moctezuma",
+   "municipality": "Moctezuma",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 30 de octubre al 2 de noviembre (13 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-30",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Comparsas de Huehues; Actividad de animación previa a la premiación de alebrijes (teatro y música).; Premiación del concurso de alebrijes; Rodada ciclista…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-villa-de-reyes",
+   "event_name": "Xantolo y Día de Muertos en Villa de Reyes",
+   "municipality": "Villa de Reyes",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 26 de octubre al 2 de noviembre (10 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-26",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Xantolo en Villa de Reyes; Concurso de calaverita literaria; Concurso de disfraces en mascotas; Concurso de altares…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-san-luis-potosi",
+   "event_name": "Xantolo y Día de Muertos en San Luis Potosí",
+   "municipality": "San Luis Potosí",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 21 de octubre al 2 de noviembre (17 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-21",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: La muerte en el México prehispanico y en el Virreinato; Entre Difuntos y Disfrazados; Relatos de Vida y Muerte; Xantolo se Vive en el Museo del Virreinato…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-mexquitic-de-carmona",
+   "event_name": "Xantolo y Día de Muertos en Mexquitic de Carmona",
+   "municipality": "Mexquitic de Carmona",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: el 26 de octubre (2 actividades)",
+   "months": [
+    10
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-26",
+   "end_date": "2025-10-26",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: 1er Concurso de Comparsas; Taller de Catrinas edad 12 años en adelante. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-soledad-de-graciano-sanchez",
+   "event_name": "Xantolo y Día de Muertos en Soledad de Graciano Sánchez",
+   "municipality": "Soledad de Graciano Sánchez",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 24 de octubre al 2 de noviembre (33 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-24",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Xantolo se Vive en Soledad; Taller de máscara Xantolera cartonería; Taller de fomento a la lectura \"Páginas Vivas\"; ¡Corre y se va con… El Xantolo!…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-charcas",
+   "event_name": "Xantolo y Día de Muertos en Charcas",
+   "municipality": "Charcas",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 30 de octubre al 1 de noviembre (8 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-30",
+   "end_date": "2025-11-01",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Inauguración de Altar Monumental; Comparsas Los Huhues de Escuatitla Municipio de San Martín Chalchicuautla; Comparsa Hidalgo, Municipio De Cd. Valles; Comparsa Hueyi Mijtotianij, Taman,Tamazunchale…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-estacion-catorce",
+   "event_name": "Xantolo y Día de Muertos en Estación Catorce",
+   "municipality": "Catorce",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 31 de octubre al 2 de noviembre (16 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-31",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Festival Día de Muertos “Altares y recuerdos, desde las raíces del Desierto”; “Ruta Catorce: entre ruedas y calaveras”; Rodada de motos y demostración de las caracterizaciones; Altar Monumental “Ofrenda del Desierto: el gran Altar del Recuerdo”…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-real-de-catorce",
+   "event_name": "Xantolo y Día de Muertos en Real de Catorce",
+   "municipality": "Catorce",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 27 de octubre al 2 de noviembre (8 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-27",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Festival “Catorce Catrinas y el Jergas”; Día de las Mascotas; Día de los Ahogados; Día de los Olvidados…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-tierra-nueva",
+   "event_name": "Xantolo y Día de Muertos en Tierra Nueva",
+   "municipality": "Tierra Nueva",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 2 de noviembre al 3 de noviembre (3 actividades)",
+   "months": [
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-11-02",
+   "end_date": "2025-11-03",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Misa en Honor a los fieles difuntos; Convocatoria abierta al público de Concursos de Catrinas, Altares; Festival Xantolo. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-zaragoza",
+   "event_name": "Xantolo y Día de Muertos en Zaragoza",
+   "municipality": "Zaragoza",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 30 de octubre al 2 de noviembre (5 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-30",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Calaveras de Alta Moda; Desfile de Xantolo; Velada en El Panteón Municipal; Concurso de Catrinas…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-santa-maria-del-rio",
+   "event_name": "Xantolo y Día de Muertos en Santa María del Río",
+   "municipality": "Santa María del Río",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: el 1 de noviembre (1 actividad)",
+   "months": [
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-11-01",
+   "end_date": "2025-11-01",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Pluma de Colibri. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-huehuetlan",
+   "event_name": "Xantolo y Día de Muertos en Huehuetlán",
+   "municipality": "Huehuetlán",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 31 de octubre al 2 de noviembre (14 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-31",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Desfile de Catrín y Catrina; Feria del Tamal; Demostración de Altares; Rodada Xantolera…. Las fechas de 2026 aún no se publican."
+  },
+  {
+   "event_id": "turismo-slp-xantolo-2025-ciudad-valles",
+   "event_name": "Xantolo y Día de Muertos en Ciudad Valles",
+   "municipality": "Ciudad Valles",
+   "category": "Tradición y patrimonio vivo",
+   "typical_month": "Programa 2025: del 30 de octubre al 2 de noviembre (12 actividades)",
+   "months": [
+    10,
+    11
+   ],
+   "date_status": "HISTORICAL_LAST_CONFIRMED",
+   "recurrence_rule": null,
+   "start_date": "2025-10-30",
+   "end_date": "2025-11-02",
+   "source_id": "turismo-slp-dia-de-muertos",
+   "source_url": "https://visitasanluispotosi.com/dia-de-muertos/",
+   "verification_status": "verified",
+   "notes": "Actividades 2025: Inauguración /concurso de máscaras gigantes; Rodada Xantolera; Ritual \"Xantolo\"; Cine…. Las fechas de 2026 aún no se publican."
+  }
+ ]
+}

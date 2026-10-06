@@ -1,0 +1,78 @@
+---
+/**
+ * Archaeological site page. Open sites show INAH's own description, period,
+ * hours and cost as read on Lugares INAH (dated); documented sites show only
+ * what the publication says and an explicit "access not confirmed".
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import DestinationCard from '@/components/ui/DestinationCard.astro';
+import EntityCard from '@/components/portal/EntityCard.astro';
+import MapView from '@/components/map/MapView.astro';
+import RouteButton from '@/components/ui/RouteButton.astro';
+import { archaeology, archSlug, ACCESS, muniById, muniView, near, lodging, type Entity } from '@/data/portal';
+import { getDestination, destinations } from '@/data/research';
+import { href, muniHref, destHref } from '@/i18n/routes';
+
+export function getStaticPaths() {
+  return archaeology.map((a) => ({ params: { slug: archSlug(a) }, props: { a } }));
+}
+const { a } = Astro.props as { a: Entity };
+const open = a.access_status === 'OPEN_TO_PUBLIC';
+const muni = a.municipality_id ? muniById.get(a.municipality_id) ?? null : null;
+const place = a.related_entities.map((id) => getDestination(id)).find(Boolean) ?? null;
+const img = place?.media.hero ?? null;
+const nearDest = a.latitude != null ? destinations.filter((d) => d.coords && d.id !== place?.id).map((d) => ({ d, k: Math.hypot(d.coords![1] - a.latitude!, (d.coords![0] - a.longitude!) * 0.93) })).sort((x, y) => x.k - y.k).slice(0, 4).map((x) => x.d) : [];
+const beds = near(lodging, a.latitude, a.longitude, 30, 4);
+const sister = archaeology.filter((x) => x.id !== a.id && x.access_status === 'OPEN_TO_PUBLIC');
+---
+<BaseLayout title={a.canonical_name} description={`${a.canonical_name}${muni ? `, ${muni.canonical_name}` : ''}: ${ACCESS[a.access_status!]}. ${a.short_description?.slice(0, 120) ?? ''}`} image={img}>
+  <PageHeader label={`Arqueología · ${ACCESS[a.access_status!]}`} title={a.canonical_name} lede={a.alternate_names.length ? `También: ${a.alternate_names.join(', ')}` : undefined} image={img} tone="heritage" ground="dark" region={a.region} crumbs={[{ label: 'Arqueología', href: href('archaeology') }, { label: a.canonical_name }]}>
+    {a.latitude != null && <RouteButton id={a.id} name={a.canonical_name} variant="solid" />}
+  </PageHeader>
+
+  <section class="psec" data-ground="light" data-region={a.region} aria-labelledby="ad-t">
+    <div class="wrap ad">
+      <h2 id="ad-t" class="psec__title">{open ? 'Visitar la zona' : 'Lo que se sabe'}</h2>
+      {a.short_description && <p class="lede ad__text">{a.short_description}</p>}
+      <dl class="facts">
+        <div><dt>Acceso</dt><dd>{ACCESS[a.access_status!]}</dd></div>
+        {a.historical_context && <div><dt>{open ? 'Periodo' : 'Referencia'}</dt><dd>{a.historical_context}</dd></div>}
+        {muni && <div><dt>Municipio</dt><dd><a href={muniHref(muni.slug!)}>{muni.canonical_name}</a></dd></div>}
+        {a.opening_hours && <div><dt>Horario</dt><dd>{a.opening_hours}</dd></div>}
+        {a.price && <div><dt>Costo</dt><dd>{a.price}</dd></div>}
+        {a.site_museum != null && <div><dt>Museo de sitio</dt><dd>{a.site_museum ? 'Sí' : 'No'}</dd></div>}
+        {a.services && a.services.length > 0 && <div><dt>Servicios</dt><dd>{a.services.join(', ')}</dd></div>}
+        {a.official_contact?.address && <div class="facts__wide"><dt>Ubicación oficial</dt><dd>{a.official_contact.address}</dd></div>}
+        {a.official_contact?.responsible && <div><dt>Responsable</dt><dd>{a.official_contact.responsible}</dd></div>}
+        {a.official_url && <div class="facts__wide"><dt>Fuente oficial</dt><dd><a href={a.official_url} rel="noopener" target="_blank">{open ? 'Lugares INAH' : 'Publicación del INAH'}</a></dd></div>}
+      </dl>
+      {open ? <p class="truth">Horario y costo leídos en Lugares INAH el 6 de octubre de 2026. Pueden cambiar: confírmalos antes de ir.</p> : <p class="truth">{a.travel_notes}</p>}
+      {place && <a class="arrow" href={destHref(place.slug)}>Más sobre {place.name}</a>}
+    </div>
+  </section>
+
+  {a.latitude != null && (
+    <section class="psec psec--tight" data-ground="ivory" aria-labelledby="am-t">
+      <div class="wrap"><h2 id="am-t" class="label">Mapa</h2><MapView mode="mini" focus={a.id} height="24rem" label={`Mapa: ${a.canonical_name}`} /><p class="tiny muted">Punto del Sistema de Información Cultural (aproximado).</p></div>
+    </section>
+  )}
+
+  {(nearDest.length > 0 || beds.length > 0 || sister.length > 0) && (
+    <section class="psec" data-ground="light" aria-labelledby="an-t">
+      <div class="wrap">
+        <div class="psec__head"><p class="label">Cerca</p><h2 id="an-t" class="psec__title">Para combinar</h2></div>
+        {sister.length > 0 && <ul class="pgrid pgrid--ent">{sister.map((s) => <li><EntityCard e={s} href={`${href('archaeology')}${archSlug(s)}/`} /></li>)}</ul>}
+        {nearDest.length > 0 && <ul class="pgrid pgrid--rail an__gap">{nearDest.map((d) => <li><DestinationCard d={d} ratio="4/5" size="sm" sizes="(max-width: 640px) 78vw, 18rem" headingLevel="h3" /></li>)}</ul>}
+        {beds.length > 0 && <><h3 class="label an__gap">Hospedaje a menos de 30 km</h3><ul class="pgrid pgrid--ent">{beds.map((b) => <li><EntityCard e={b} compact /></li>)}</ul></>}
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .ad { display: grid; gap: var(--sc-4); justify-items: start; }
+  .ad__text { max-width: 52ch; }
+  .ad .facts { width: 100%; }
+  .an__gap { margin-top: var(--sc-5); }
+</style>

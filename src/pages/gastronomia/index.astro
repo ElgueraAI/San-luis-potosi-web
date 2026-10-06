@@ -1,0 +1,58 @@
+---
+/**
+ * Gastronomía: regional cooking (official brochures) first, then the food and
+ * drink directory: official Estadía listings, cafés, traditional drink
+ * producers, restaurants and bars from DENUE (6+ staff; size is a capacity
+ * cue, not a ranking). Nothing here is a quality or popularity judgement.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import Directory from '@/components/portal/Directory.astro';
+import DestinationCard from '@/components/ui/DestinationCard.astro';
+import { food, counts, REGION_LABEL } from '@/data/portal';
+import { gastronomyFor, destinations, type RegionId } from '@/data/research';
+import { href, tdHref } from '@/i18n/routes';
+
+const regions = Object.keys(REGION_LABEL) as RegionId[];
+const kitchens = regions.map((r) => ({ r, rows: gastronomyFor(r).filter((g) => g.dishes.length) })).filter((k) => k.rows.length);
+const items = [...food].sort((a, b) => Number(!!b.official_directory) - Number(!!a.official_directory) || a.canonical_name.localeCompare(b.canonical_name, 'es'));
+const types: [string, string][] = [['food', 'Restaurantes'], ['cafe', 'Cafeterías'], ['drink', 'Productores de bebidas'], ['nightlife', 'Bares y vida nocturna']];
+const foodDest = destinations.filter((d) => d.tags.includes('gastronomia')).slice(0, 8);
+---
+<BaseLayout title="Gastronomía" description="Cocina de las cuatro regiones de San Luis Potosí y directorio de restaurantes, cafés, bebidas tradicionales y bares, con fuentes oficiales." image="wc-105308560">
+  <PageHeader label="Qué hacer · Gastronomía" title="El estado en la mesa" lede="Zacahuil y enchiladas huastecas, cabrito del Altiplano, enchiladas potosinas y rioverdenses: la cocina de cada región según los folletos oficiales, y dónde comer en cada municipio." image="wc-105308560" crumbs={[{ label: 'Qué hacer', href: href('thingsToDo') }, { label: 'Gastronomía' }]} />
+
+  <section class="psec" data-ground="ivory" data-tone="sand" aria-labelledby="k-t">
+    <div class="wrap">
+      <div class="psec__head"><p class="label">Cocina regional</p><h2 id="k-t" class="psec__title">Cuatro cocinas</h2></div>
+      <div class="ga__k">
+        {kitchens.map((k) => (
+          <section class="ga__reg" data-region={k.r} aria-labelledby={`k-${k.r}`}>
+            <h3 id={`k-${k.r}`} class="ga__rh">{REGION_LABEL[k.r]}</h3>
+            {k.rows.map((g) => <p class="small"><b>{g.place ?? 'Región'}:</b> {g.dishes.join(', ')}.</p>)}
+          </section>
+        ))}
+      </div>
+      <p class="source">Fuente: folletos regionales oficiales, Secretaría de Turismo de San Luis Potosí. Los platillos se asocian a la región o al destino, no a una temporada.</p>
+      {foodDest.length > 0 && <ul class="pgrid pgrid--rail ga__gap">{foodDest.map((d) => <li><DestinationCard d={d} ratio="4/5" size="sm" sizes="(max-width: 640px) 78vw, 18rem" headingLevel="h3" /></li>)}</ul>}
+    </div>
+  </section>
+
+  <section id="directorio" class="psec" data-ground="light" data-tone="utility" aria-labelledby="gd-t">
+    <div class="wrap">
+      <div class="psec__head psec__head--split">
+        <div><p class="label">Directorio</p><h2 id="gd-t" class="psec__title">Dónde comer y beber</h2></div>
+        <p class="body muted">{food.length.toLocaleString('es-MX')} establecimientos visibles de {counts.foodAll.toLocaleString('es-MX')} investigados. <a class="link" href={tdHref('vida-nocturna')}>Vida nocturna</a></p>
+      </div>
+      <Directory name="food" items={items} types={types} label="gastronomía" total={food.length} note="Directorio oficial Estadía primero. De DENUE (INEGI) se muestran cafeterías, productores de bebidas, y restaurantes y bares de 6 o más empleados: es una señal de tamaño, no una recomendación ni una calificación. Los mercados públicos no tienen una fuente estructurada todavía." />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ga__k { display: grid; gap: var(--sc-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); margin-bottom: var(--sc-4); }
+  .ga__reg { padding: var(--sc-5); border-radius: var(--sc-r-sm); background: var(--sc-surface); box-shadow: inset 0 3px 0 var(--slp-region-ui); display: grid; gap: 0.5rem; align-content: start; }
+  .ga__rh { font: 500 1.8rem/1 var(--sc-font-display); color: var(--slp-region-deep); }
+  .ga__reg b { color: var(--slp-region-text); }
+  .ga__gap { margin-top: var(--sc-6); }
+</style>

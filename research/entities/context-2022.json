@@ -1,0 +1,14 @@
+{
+ "generated": "2026-10-06",
+ "source_id": "sectur-estadisticas-2022",
+ "year": 2022,
+ "note": "Historical statistical context. Not evidence of current operation.",
+ "figures": [
+  {
+   "key": "hotel_rooms_state",
+   "value": 12630,
+   "label": "Cuartos de hotel en el estado",
+   "basis": "Tabla «Principales indicadores por entidad federativa», DataTur 2022 (folleto, p. 1)"
+  }
+ ]
+}

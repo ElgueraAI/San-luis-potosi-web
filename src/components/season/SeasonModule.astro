@@ -1,0 +1,435 @@
+---
+/**
+ * Qué hacer ahora: a time explorer. A twelve-month rail (plus seasons) drives
+ * a stage that tells one story per month: a full photograph (never cropped
+ * into a shape), the month in large type, the lead official recommendation
+ * with its place, kind and source, a mini map of the state with that month's
+ * points, and "También este mes" for the other official records. Below the
+ * stage: the month's fiestas, the modelled climate and the regional table.
+ *
+ * The lead of each month comes from STORY in src/data/seasons.ts, decided by
+ * the audit in docs/temporadas-auditoria.md. Every panel is rendered at build
+ * time; src/scripts/season.ts only switches which one is visible, and sets
+ * the stage's regional tone from the panel's lead record.
+ * Panels use `display: contents` so their parts sit in the stage grid.
+ */
+import Photo from '@/components/media/Photo.astro';
+import StateSilhouette from './StateSilhouette.astro';
+import { monthPanels, seasonPanels, storyFromRec, type Panel, type RecView } from '@/data/seasons';
+import { SEASONS, MONTHS_ES, climateLabel, sourceLabel, sourceUrl } from '@/data/research';
+import { REGION_NAME } from '@/data/regions';
+import { OUTLINE_SOURCE } from '@/lib/outline';
+import { mediaRecord } from '@/lib/media';
+import { destHref, eventHref, href } from '@/i18n/routes';
+import { DATE_STATUS } from '@/data/portal';
+
+interface Props { region?: string; compact?: boolean; buildMonth?: number }
+const { region, buildMonth = 10 } = Astro.props;
+
+const CLIMA = 'se-altiplano-clima';
+// On a region page the stage keeps the month's story when its lead record is
+// in that region; otherwise it tells the region's own most specific record.
+const filterPanel = (p: Panel): Panel => {
+  if (!region) return p;
+  const recs = p.recs.filter((r) => r.region === region);
+  const keep = p.story?.recView.region === region;
+  const lead = recs.find((r) => r.id !== CLIMA);
+  return {
+    ...p,
+    recs,
+    events: p.events.filter((e) => e.region === region),
+    climate: p.climate.filter((c) => c.region === region),
+    dishes: p.dishes.filter((d) => d.region === region),
+    places: p.places.filter((x) => x.region === region),
+    story: keep ? p.story : lead ? storyFromRec(lead) : null,
+  };
+};
+const panels = [...monthPanels, ...seasonPanels].map(filterPanel);
+const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
+const NAMES = MONTHS_ES.map(cap);
+const ABBR = NAMES.map((n) => n.slice(0, 3));
+const seasonOf = (m: number) => SEASONS.find((s) => (s.months as readonly number[]).includes(m))!;
+const fmt = (n: number) => `${Math.round(n)}°`;
+const short = (s: string) => s.split(' – ')[0];
+
+/** "Todo el año", "Solo en octubre", "De noviembre a marzo", "Marzo y abril" */
+function window_(r: RecView): string {
+  const ms = r.months;
+  if (ms.length >= 12) return 'Todo el año';
+  if (ms.length === 1) return `Solo en ${MONTHS_ES[ms[0] - 1]}`;
+  if (ms.length === 2) return `${NAMES[ms[0] - 1]} y ${MONTHS_ES[ms[1] - 1]}`;
+  const run = ms.every((m, i) => i === 0 || m === (ms[i - 1] % 12) + 1);
+  return run ? `De ${MONTHS_ES[ms[0] - 1]} a ${MONTHS_ES[ms[ms.length - 1] - 1]}` : ms.map((m) => ABBR[m - 1]).join(' · ');
+}
+const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
+const othersOf = (p: Panel) => p.recs.filter((r) => r.id !== p.story?.rec && r.id !== CLIMA);
+const monthCount = (i: number) => panels[i].recs.filter((r) => r.id !== CLIMA).length + panels[i].events.length;
+const maxCount = Math.max(...NAMES.map((_, i) => monthCount(i)));
+/** frame ratio follows the photograph, clamped so it is never a sliver */
+const frame = (id: string) => {
+  const m = mediaRecord(id);
+  const r = m ? m.width / m.height : 4 / 3;
+  return Math.min(Math.max(r, 4 / 5), 3 / 2).toFixed(3);
+};
+---
+<div class="season" data-season data-build-month={buildMonth} data-mtone={panels[buildMonth - 1].story?.tone ?? ''}>
+  <div class="season__rail">
+    <div class="season__months" role="group" aria-label="Elegir mes" data-season-rail>
+      {NAMES.map((n, i) => (
+        <button
+          type="button"
+          class="mo"
+          aria-pressed={i + 1 === buildMonth ? 'true' : 'false'}
+          data-season-month={i + 1}
+          aria-label={`${n}: ${plural(monthCount(i), 'recomendación o fiesta', 'recomendaciones y fiestas')}`}
+          style={`--n:${monthCount(i) / maxCount}`}
+        >
+          <span class="mo__name" aria-hidden="true">{ABBR[i]}</span>
+          <span class="mo__bar" aria-hidden="true"></span>
+        </button>
+      ))}
+    </div>
+    <div class="season__seasons" role="group" aria-label="Elegir temporada">
+      {SEASONS.map((s) => <button type="button" class="chip-btn" aria-pressed="false" data-season-pick={`s-${s.id}`} data-season-months={s.months.join(' ')}>{s.label}</button>)}
+    </div>
+  </div>
+
+  <div class="season__body">
+    {panels.map((p) => {
+      const st = p.story;
+      const others = othersOf(p);
+      const shown = others.slice(0, 4);
+      const more = others.slice(4);
+      const credit = st?.image ? mediaRecord(st.image) : null;
+      const focusIds = st?.focus.map((x) => x.id) ?? [];
+      // the mini map shows the lead's points plus the other places of the month
+      const mapPlaces = [...(st?.focus ?? []), ...p.places.filter((x) => !focusIds.includes(x.id))];
+      const src = st ? st.recView.source : null;
+      const srcUrl = src ? sourceUrl(src) : null;
+      const mi = p.key.startsWith('m') ? +p.key.slice(1) : buildMonth;
+      const kicker = p.key.startsWith('m') ? seasonOf(mi).label : 'Temporada';
+      return (
+        <div class="season__panel" data-season-panel={p.key} data-stage-region={st?.recView.region ?? ''} data-stage-tone={st?.tone ?? ''} hidden={p.key !== `m${buildMonth}`}>
+          {/* the stage is a closed box: the sticky photograph is contained by it and ends with it */}
+          <div class="season__stage" data-ground="dark" data-mtone={st?.tone ?? ''}>
+          <figure class="season__photo">
+            {st?.image ? (
+              <div class="season__frame" style={`--fr:${frame(st.image)}`}>
+                <Photo id={st.image} fill focal={st.focal ?? '50% 50%'} sizes="(max-width: 900px) 100vw, 58vw" widths={[640, 960, 1280, 1600, 2000]} alt={st.caption || undefined} />
+              </div>
+            ) : (
+              <div class="season__frame season__frame--plain" data-region={st?.recView.region} style="--fr:1.333">
+                <span>{st ? REGION_NAME[st.recView.region] : ''}</span>
+              </div>
+            )}
+            {st?.caption && (
+              <figcaption class="season__cap">
+                <span class="season__cap-k">En la imagen</span> {st.caption}
+                {credit && <span class="season__credit">{credit.attribution_text}</span>}
+              </figcaption>
+            )}
+          </figure>
+
+          <div class="season__head">
+            <p class="season__kicker" data-season-kicker>{kicker}</p>
+            <p class="season__current display" aria-live="polite" data-season-current>{p.title}</p>
+            <div class="season__step">
+              <button type="button" class="season__arrow" data-season-prev aria-label="Mes anterior"><span aria-hidden="true">←</span> <span data-season-prev-label>{NAMES[(mi + 10) % 12]}</span></button>
+              <button type="button" class="season__arrow" data-season-next aria-label="Mes siguiente"><span data-season-next-label>{NAMES[mi % 12]}</span> <span aria-hidden="true">→</span></button>
+            </div>
+          </div>
+
+          <div class="season__info">
+            {!st ? (
+              <p class="season__empty">Las fuentes oficiales consultadas no señalan una recomendación específica para {p.title.toLowerCase()}{region ? ' en esta región' : ''}. Los destinos de todo el año siguen disponibles.</p>
+            ) : (
+              <article class="story" data-region={st.recView.region}>
+                <p class="story__count">
+                  <span class="story__seal" aria-hidden="true"></span>
+                  {plural(p.recs.filter((r) => r.id !== CLIMA).length, 'recomendación oficial', 'recomendaciones oficiales')}{p.events.length > 0 && ` · ${plural(p.events.length, 'fiesta', 'fiestas')}`}
+                </p>
+                <h3 class="story__title">{st.title}</h3>
+                <p class="story__text rec__what">{st.text}</p>
+                <dl class="story__meta">
+                  <div><dt>Región</dt><dd><span class="story__dot" aria-hidden="true"></span>{REGION_NAME[st.recView.region]}</dd></div>
+                  {st.where && <div><dt>Lugar</dt><dd>{st.where}</dd></div>}
+                  <div><dt>Cuándo</dt><dd>{window_(st.recView)}</dd></div>
+                  {st.kind && <div><dt>Tipo</dt><dd>{st.kind}</dd></div>}
+                  <div class="story__src"><dt>Fuente</dt><dd>{srcUrl ? <a href={srcUrl} rel="noopener" target="_blank">{sourceLabel(src!)}</a> : sourceLabel(src!)}</dd></div>
+                </dl>
+                {st.recView.places.some((x) => x.slug) && (
+                  <p class="story__links">{st.recView.places.filter((x) => x.slug).map((x) => <a class="arrow" href={destHref(x.slug!)}>{short(x.name)}</a>)}</p>
+                )}
+              </article>
+            )}
+
+            {p.recs.some((r) => r.id === CLIMA) && (
+              <p class="season__caution"><b>Ten en cuenta:</b> en el Altiplano el verano es muy soleado, caluroso y seco, y el invierno de frío extremo (folleto oficial).</p>
+            )}
+
+            {shown.length > 0 && (
+              <section class="season__also" aria-label={`También en ${p.title.toLowerCase()}`}>
+                <p class="season__also-h">También {p.key.startsWith('m') ? 'este mes' : 'esta temporada'}</p>
+                <ul>
+                  {shown.map((r) => (
+                    <li class="rec" data-region={r.region}>
+                      <p class="rec__meta"><span>{REGION_NAME[r.region]}</span><span class="rec__when">{window_(r)}</span></p>
+                      <p class="rec__what">{r.what}</p>
+                      {r.places.some((x) => x.slug) && (
+                        <p class="rec__links">{r.places.filter((x) => x.slug).map((x) => <a class="link" href={destHref(x.slug!)}>{short(x.name)}</a>)}</p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                {more.length > 0 && (
+                  <details class="season__moreRecs">
+                    <summary>{plural(more.length, 'recomendación más', 'recomendaciones más')}</summary>
+                    <ul>
+                      {more.map((r) => (
+                        <li class="rec" data-region={r.region}>
+                          <p class="rec__meta"><span>{REGION_NAME[r.region]}</span><span class="rec__when">{window_(r)}</span></p>
+                          <p class="rec__what">{r.what}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
+              </section>
+            )}
+          </div>
+          </div>
+
+          <section class="season__geo" aria-label={`Dónde: ${p.title}`}>
+            {mapPlaces.length > 0 && (
+              <div class="season__map">
+                <StateSilhouette places={mapPlaces} focus={focusIds} labels variant="line" />
+                <ul class="season__places" aria-label="Lugares destacados en el mapa">
+                  {(st?.focus.length ? st.focus : mapPlaces).map((x) => (
+                    <li data-region={x.region} class:list={[`is-${x.status}`, { 'is-focus': focusIds.includes(x.id) }]}>
+                      <span class="season__mark" aria-hidden="true"></span>
+                      {x.slug ? <a href={destHref(x.slug)}>{short(x.name)}</a> : <span>{short(x.name)}</span>}
+                      <span class="season__preg">{REGION_NAME[x.region]}</span>
+                      {x.status === 'provisional' && <span class="season__approx">ubicación aproximada</span>}
+                    </li>
+                  ))}
+                </ul>
+                {st && st.focus.length > 0 && mapPlaces.length > st.focus.length && (
+                  <p class="season__others"><span class="season__qdot" aria-hidden="true"></span>{plural(mapPlaces.length - st.focus.length, 'punto más', 'puntos más')}: otras recomendaciones del {p.key.startsWith('m') ? 'mes' : 'periodo'}, abajo.</p>
+                )}
+              </div>
+            )}
+
+            <p class="season__figsrc">Mapa: silueta del estado a partir de {OUTLINE_SOURCE} Punto lleno: ubicación verificada; contorno: aproximada.</p>
+          </section>
+
+          <div class="season__more">
+            {p.events.length > 0 && (
+              <section class="season__events" aria-label={`Fiestas y eventos: ${p.title}`}>
+                <p class="label">Fiestas y eventos</p>
+                <ul>
+                  {p.events.slice(0, 6).map((e) => (
+                    <li data-region={e.region}>
+                      <span class="ev__when">{e.when}</span>
+                      <span class="ev__name"><a class="link" href={eventHref(e.slug)}>{e.name}</a></span>
+                      <span class="ev__meta">{e.where} · {REGION_NAME[e.region]}</span>
+                      <span class="ev__date">{e.date2026 ? `Fecha 2026 confirmada: ${e.date2026}` : DATE_STATUS[e.status]?.label ?? ''}</span>
+                    </li>
+                  ))}
+                </ul>
+                {p.events.length > 6 && <a class="arrow ev__all" href={`${href('events')}${p.key.startsWith('m') ? `?mes=${p.key.slice(1)}` : ''}`}>{p.key.startsWith('m') ? `Los ${p.events.length} eventos de ${p.title.toLowerCase()}` : `Los ${p.events.length} eventos de la temporada`}</a>}
+              </section>
+            )}
+            <section class="season__climate" aria-label={`Contexto climático: ${p.title}`}>
+              <p class="label">Contexto climático</p>
+              <table>
+                <caption class="visually-hidden">Clima promedio modelado para {p.title}</caption>
+                <thead><tr><th scope="col">Región</th><th scope="col">Máx</th><th scope="col">Mín</th><th scope="col">Lluvia</th></tr></thead>
+                <tbody>
+                  {p.climate.map((c) => (
+                    <tr data-region={c.region}>
+                      <th scope="row"><span class="dotr" aria-hidden="true"></span>{REGION_NAME[c.region]}</th>
+                      <td>{fmt(c.tmax)}</td><td>{fmt(c.tmin)}</td><td>{c.precip} mm</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p class="source">{climateLabel}. Promedios de un punto por región; no es una normal oficial ni una recomendación turística.</p>
+            </section>
+            {p.dishes.length > 0 && (
+              <section class="season__dishes" aria-label="En la mesa">
+                <p class="label">En la mesa</p>
+                {p.dishes.map((d) => <p class="small" data-region={d.region}><b>{REGION_NAME[d.region]}:</b> {d.dishes.join(', ')}.</p>)}
+                <p class="source">Platillos que el folleto oficial asocia a cada región, no a una temporada.</p>
+              </section>
+            )}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</div>
+
+<style>
+  .season { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sc-5); }
+
+  /* ---- month rail ------------------------------------------------------ */
+  .season__rail { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--sc-4) var(--sc-6); }
+  .season__months { flex: 1 1 36rem; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); border-bottom: 1px solid var(--sc-hairline-strong); }
+  .mo { position: relative; display: grid; justify-items: start; gap: 0.55rem; min-height: 4.6rem; padding: 1rem 0.4rem 0.75rem; border: 0; background: none; color: var(--sc-ink-soft); text-align: left; cursor: pointer; }
+  .mo__name { font: 600 1.35rem/1 var(--sc-font-display); letter-spacing: 0.01em; transition: color 160ms; }
+  /* activity: a short rule whose length follows the month's official content */
+  .mo__bar { display: block; height: 3px; width: calc(0.6rem + var(--n) * 70%); border-radius: 2px; background: currentColor; opacity: 0.35; transition: opacity 160ms, background-color 160ms; }
+  .mo::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--stage-ink); transform: scaleX(0); transform-origin: left; transition: transform 320ms var(--sc-ease-out); }
+  .mo[aria-pressed='true'] { color: var(--sc-ink); }
+  .mo[aria-pressed='true'] .mo__bar { opacity: 1; background: var(--stage-ink); }
+  .mo[aria-pressed='true']::after { transform: scaleX(1); }
+  .mo.is-in-season { color: var(--sc-ink); }
+  .mo.is-in-season::after { transform: scaleX(1); opacity: 0.45; }
+  .mo[data-today]::before { content: 'hoy'; position: absolute; top: 0.15rem; left: 0.4rem; font: 700 0.54rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--slp-gold-deep); }
+  @media (hover: hover) and (pointer: fine) { .mo:hover { color: var(--sc-ink); } .mo:hover .mo__bar { opacity: 0.7; } }
+  .season__seasons { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+  /* ---- month atmosphere --------------------------------------------------
+     Each month's story has its own palette (data-mtone on the stage; the rail
+     reads the same values from .season[data-mtone], set by season.ts).
+     --stage-deep / --stage-deep-2: the stage ground; --stage-glow: the light;
+     --stage-ui: accent on the dark stage; --stage-ink: accent on light grounds
+     (month rail, geographic block), at least 4.5:1 on the mist ground. */
+  .season, [data-mtone] { --stage-deep: var(--slp-charcoal-2); --stage-deep-2: var(--slp-night); --stage-glow: rgb(199 163 90 / 0.14); --stage-ui: var(--slp-gold); --stage-ink: var(--slp-gold-deep); }
+  [data-mtone='emerald']   { --stage-deep: #0b2a22; --stage-deep-2: #0f3d36; --stage-glow: rgb(56 178 160 / 0.30); --stage-ui: #5cc4a8; --stage-ink: #17604f; }
+  [data-mtone='turquoise'] { --stage-deep: #0c2c30; --stage-deep-2: #10474a; --stage-glow: rgb(90 200 200 / 0.28); --stage-ui: #6cc9c4; --stage-ink: #1d6466; }
+  [data-mtone='maiz']      { --stage-deep: #24301a; --stage-deep-2: #3a4a22; --stage-glow: rgb(190 200 110 / 0.26); --stage-ui: #c9cf82; --stage-ink: #566018; }
+  [data-mtone='procesion'] { --stage-deep: #221827; --stage-deep-2: #3a2436; --stage-glow: rgb(200 150 170 / 0.24); --stage-ui: #d8a6b8; --stage-ink: #874a63; }
+  [data-mtone='manantial'] { --stage-deep: #0e2f38; --stage-deep-2: #194b4f; --stage-glow: rgb(120 200 220 / 0.28); --stage-ui: #86d4e2; --stage-ink: #1f6576; }
+  [data-mtone='feria-sol'] { --stage-deep: #36190f; --stage-deep-2: #5a2e18; --stage-glow: rgb(240 160 80 / 0.30); --stage-ui: #f2a75f; --stage-ink: #94490f; }
+  [data-mtone='escena']    { --stage-deep: #26132c; --stage-deep-2: #3e1d3a; --stage-glow: rgb(210 140 200 / 0.24); --stage-ui: #dca2d4; --stage-ink: #87407c; }
+  [data-mtone='feria']     { --stage-deep: #121a30; --stage-deep-2: #23305a; --stage-glow: rgb(255 140 110 / 0.26); --stage-ui: #ffa28a; --stage-ink: #a2452e; }
+  [data-mtone='textil']    { --stage-deep: #2c111e; --stage-deep-2: #4a1a32; --stage-glow: rgb(230 90 140 / 0.26); --stage-ui: #f294b6; --stage-ink: #9b2f5b; }
+  [data-mtone='desierto']  { --stage-deep: #36210f; --stage-deep-2: #4e3420; --stage-glow: rgb(220 160 90 / 0.28); --stage-ui: #e6ad6b; --stage-ink: #8c4a1c; }
+  /* Xantolo: marigold and ochre on charcoal and black; Huasteca green as second accent */
+  [data-mtone='xantolo']   { --stage-deep: #17110c; --stage-deep-2: #3d2a0e; --stage-glow: rgb(245 160 40 / 0.34); --stage-ui: #f6aa3c; --stage-ink: #96590a; --stage-2nd: #3fa383; }
+  /* December: burgundy, pine, warm gold, night */
+  [data-mtone='navidad']   { --stage-deep: #2b0f17; --stage-deep-2: #0f2a22; --stage-glow: rgb(226 186 96 / 0.32); --stage-ui: #e6c470; --stage-ink: #7a5d14; --stage-2nd: #5aa07e; }
+  [data-mtone='spring']    { --stage-deep: #2a2333; --stage-deep-2: #33462a; --stage-glow: rgb(226 176 206 / 0.26); --stage-ui: #e6b8d2; --stage-ink: #8a4a6c; }
+  [data-mtone='summer']    { --stage-deep: #0b2f3a; --stage-deep-2: #0f4a3a; --stage-glow: rgb(80 210 200 / 0.30); --stage-ui: #74dbcf; --stage-ink: #17656a; }
+  [data-mtone='altiplano'] { --stage-deep: #36210f; --stage-deep-2: #4e3420; --stage-glow: rgb(220 160 90 / 0.28); --stage-ui: #e6ad6b; --stage-ink: #8c4a1c; }
+  [data-mtone='centro']    { --stage-deep: #2f1a20; --stage-deep-2: #452730; --stage-glow: rgb(201 154 160 / 0.24); --stage-ui: #d2a3aa; --stage-ink: #874a53; }
+  [data-mtone='zona-media'] { --stage-deep: #0e2f2c; --stage-deep-2: #194b45; --stage-glow: rgb(111 179 171 / 0.28); --stage-ui: #7cc2b9; --stage-ink: #276b66; }
+  [data-mtone='huasteca']  { --stage-deep: #0b2a22; --stage-deep-2: #0f3d36; --stage-glow: rgb(63 163 131 / 0.28); --stage-ui: #5cc4a8; --stage-ink: #176b57; }
+
+  /* ---- panel: a closed component (stage, then geography, then the month's table) ---- */
+  .season__body { position: relative; }
+  .season__panel { display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
+  .season__panel[hidden] { display: none; }
+
+  /* Stage: photograph left (about 60%), month and story right. The sticky
+     photograph's containing block is this element, so it ends with the stage. */
+  .season__stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-areas: 'photo head' 'photo info';
+    grid-template-rows: auto 1fr;
+    column-gap: clamp(2rem, 4vw, 4rem);
+    border-radius: var(--sc-r-sm);
+    background:
+      radial-gradient(90% 80% at 88% 12%, var(--stage-glow), transparent 62%),
+      linear-gradient(165deg, var(--stage-deep) 10%, var(--stage-deep-2) 62%, var(--slp-night) 100%);
+    box-shadow: inset 0 0 0 1px rgb(246 241 231 / 0.06);
+  }
+  .season__head, .season__photo, .season__info { background: transparent; }
+
+  .season__photo { grid-area: photo; margin: 0; padding: clamp(1rem, 2vw, 1.5rem) 0 clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem); display: grid; gap: 0.75rem; align-content: start; align-self: start; position: sticky; top: calc(var(--slp-header-h) + var(--slp-subnav-h) + 1rem); }
+  .season__frame { position: relative; aspect-ratio: var(--fr); overflow: hidden; border-radius: var(--sc-r-sm); background: var(--slp-charcoal-3); box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.6); }
+  .season__frame :global(img) { filter: saturate(1.04) contrast(1.03); }
+  .season__frame--plain { display: grid; place-items: end start; padding: 1rem; background: linear-gradient(150deg, var(--slp-region-wash), var(--slp-region-wash-2)); color: var(--slp-region-ink); font: 600 italic 1.4rem/1 var(--sc-font-display); }
+  .season__cap { font: 500 italic 1.02rem/1.35 var(--sc-font-display); color: var(--sc-ink); display: flex; flex-wrap: wrap; gap: 0.2rem 0.6rem; align-items: baseline; }
+  .season__cap-k { font: 700 normal 0.6rem/1 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; color: var(--stage-ui); }
+  .season__credit { flex-basis: 100%; font: 400 normal 0.7rem/1.4 var(--sc-font-text); color: var(--sc-ink-soft); }
+
+  .season__head { grid-area: head; padding: clamp(2rem, 4vw, 3.25rem) clamp(1.25rem, 3vw, 2.75rem) 0 0; display: grid; gap: var(--sc-3); align-content: start; }
+  .season__kicker { font: 700 0.72rem/1 var(--sc-font-text); letter-spacing: 0.18em; text-transform: uppercase; color: var(--stage-ui); }
+  .season__current { font-size: clamp(3.2rem, 1.8rem + 5vw, 6.5rem); line-height: 0.9; letter-spacing: -0.02em; }
+  .season__step { display: flex; gap: var(--sc-5); }
+  .season__arrow { display: inline-flex; align-items: center; gap: 0.45rem; min-height: var(--slp-tap); padding: 0; border: 0; background: none; font: 700 0.7rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); cursor: pointer; }
+  @media (hover: hover) and (pointer: fine) { .season__arrow:hover { color: var(--sc-ink); } }
+
+  .season__info { grid-area: info; padding: var(--sc-5) clamp(1.25rem, 3vw, 2.75rem) clamp(2rem, 4vw, 3rem) 0; display: grid; gap: var(--sc-6); align-content: start; }
+  .story { display: grid; gap: var(--sc-4); }
+  .story__count { display: inline-flex; align-items: center; gap: 0.55rem; font: 700 0.68rem/1.3 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .story__seal { width: 9px; height: 9px; border-radius: 50%; background: var(--stage-ui); flex: none; }
+  .story__title { font: 500 clamp(1.9rem, 1.4rem + 1.4vw, 2.8rem)/1.04 var(--sc-font-display); letter-spacing: -0.01em; text-wrap: balance; }
+  .story__text { font-size: var(--sc-t-base, 1rem); line-height: 1.6; color: var(--sc-ink-soft); max-width: 46ch; }
+  .story__meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem 1.25rem; padding-top: var(--sc-4); border-top: 1px solid rgb(246 241 231 / 0.14); }
+  .story__meta div { display: grid; gap: 0.25rem; }
+  .story__meta dt { font: 700 0.6rem/1 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; color: var(--stage-ui); }
+  .story__meta dd { margin: 0; font-size: 0.88rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.45rem; }
+  .story__src { grid-column: 1 / -1; }
+  .story__src a { color: inherit; text-decoration: underline; text-decoration-color: rgb(246 241 231 / 0.35); text-underline-offset: 0.2em; }
+  .story__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--slp-region-ui); }
+  .story__links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+  .story__links :global(.arrow) { color: var(--sc-ink); }
+
+  /* ---- geography: below the stage, light, secondary to the photograph ---- */
+  .season__geo { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sc-3); padding: clamp(1rem, 2vw, 1.5rem); border-radius: var(--sc-r-sm); background: color-mix(in srgb, var(--stage-ui) 9%, var(--sc-canvas)); box-shadow: inset 3px 0 0 var(--stage-ink); }
+  .season__map { display: grid; gap: var(--sc-3) clamp(1.5rem, 4vw, 3rem); align-items: center; }
+  @media (min-width: 760px) { .season__map { grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr); } }
+  .season__map :global(.sil) { --sil-ground: color-mix(in srgb, var(--stage-ui) 16%, #fff); --sil-edge: var(--stage-ink); --sil-label: var(--slp-charcoal); --sil-label-halo: #fff; --sil-pin-ring: #fff; max-width: 18rem; justify-self: center; }
+  .season__places { list-style: none; display: grid; gap: 0.45rem; font-size: 0.86rem; }
+  .season__places li { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.55rem; color: var(--sc-ink-soft); }
+  .season__places li.is-focus { color: var(--sc-ink); font-weight: 650; }
+  .season__places a { color: inherit; text-decoration: underline; text-decoration-color: var(--sc-hairline-strong); text-underline-offset: 0.2em; }
+  .season__preg { font: 700 0.6rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--slp-region-text); }
+  .season__approx { font-size: 0.72rem; font-style: italic; color: var(--sc-ink-soft); }
+  .season__mark { width: 9px; height: 9px; border-radius: 50%; background: var(--slp-region-ui); border: 2px solid var(--slp-region-ui); flex: none; }
+  .is-provisional .season__mark { background: transparent; }
+
+  .season__others { display: flex; align-items: center; gap: 0.5rem; font-size: 0.74rem; color: var(--sc-ink-soft); }
+  .season__qdot { width: 7px; height: 7px; border-radius: 50%; background: var(--sc-ink-soft); opacity: 0.5; flex: none; }
+  .story__text.rec__what { font: 400 1rem/1.6 var(--sc-font-text); }
+  .season__caution { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); max-width: 46ch; }
+  .season__empty { color: var(--sc-ink-soft); max-width: 40ch; }
+
+  /* ---- también este mes ------------------------------------------------ */
+  .season__also { display: grid; gap: var(--sc-3); }
+  .season__also-h { font: 700 0.68rem/1 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; color: var(--stage-ui); }
+  .season__also ul { list-style: none; display: grid; border-top: 1px solid rgb(246 241 231 / 0.14); }
+  .rec { display: grid; gap: 0.3rem; padding: 0.85rem 0 0.85rem 1rem; border-bottom: 1px solid rgb(246 241 231 / 0.1); position: relative; }
+  .rec::before { content: ''; position: absolute; left: 0; top: 1.15rem; width: 6px; height: 6px; border-radius: 50%; background: var(--slp-region-ui); }
+  .rec__meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.2rem 0.75rem; font: 700 0.6rem/1.3 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--slp-region-text); }
+  .rec__when { color: var(--sc-ink-soft); letter-spacing: 0.08em; }
+  .rec__what { font: 500 1.1rem/1.3 var(--sc-font-display); }
+  .rec__links { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-size: var(--sc-t-sm); font-weight: 600; }
+  .season__moreRecs summary { cursor: pointer; padding-top: 0.7rem; font: 700 0.68rem/1.3 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); }
+
+  .season__figsrc { font-size: 0.68rem; line-height: 1.45; color: var(--sc-ink-soft); }
+
+  /* ---- events / climate / table (light ground below the stage) -------- */
+  .season__more { margin-top: var(--sc-3); display: grid; gap: var(--sc-7); grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); align-items: start; }
+  .season__events, .season__climate, .season__dishes { display: grid; gap: var(--sc-3); align-content: start; }
+  .season__events ul { list-style: none; display: grid; border-top: 1px solid var(--sc-hairline-strong); }
+  .season__events li { display: grid; gap: 0.2rem; padding: var(--sc-3) 0 var(--sc-3) var(--sc-4); border-bottom: 1px solid var(--sc-hairline); position: relative; }
+  .season__events li::before { content: ''; position: absolute; left: 0; top: 1.15rem; width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-ui); }
+  .ev__when { font: 700 0.64rem/1.3 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--slp-region-text); }
+  .ev__name { font: 600 1.25rem/1.2 var(--sc-font-display); }
+  .ev__all { margin-top: var(--sc-3); }
+  .ev__meta, .ev__date { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+  .season__climate table { width: 100%; border-collapse: collapse; font-size: var(--sc-t-sm); }
+  .season__climate th, .season__climate td { text-align: left; padding: 0.55rem 0.3rem; border-bottom: 1px solid var(--sc-hairline); font-variant-numeric: tabular-nums; }
+  .season__climate thead th { font: 700 0.64rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); border-bottom-color: var(--sc-hairline-strong); }
+  .season__climate tbody th { font-weight: 650; }
+  .dotr { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--slp-region-ui); margin-right: 0.5rem; }
+  .season__dishes b { color: var(--slp-region-text); }
+
+  /* ---- tablet / phone: photo, month and text, geography, table ---- */
+  @media (max-width: 900px) {
+    .season__stage { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'photo' 'head' 'info'; grid-template-rows: none; }
+    .season__photo { position: static; padding: var(--sc-4) var(--sc-4) 0; }
+    .season__head { padding: var(--sc-5) var(--sc-5) 0; }
+    .season__info { padding: var(--sc-4) var(--sc-5) var(--sc-6); }
+    .season__months { grid-template-columns: repeat(12, 4.1rem); overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; flex-basis: 100%; }
+    .season__months::-webkit-scrollbar { display: none; }
+    .mo { scroll-snap-align: center; }
+  }
+  @media (max-width: 520px) { .season__current { font-size: 3.4rem; } .story__meta { grid-template-columns: minmax(0, 1fr); } }
+</style>

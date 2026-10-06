@@ -1,282 +1,128 @@
 ---
 /**
- * Act 1 · Hero. Curiosity.
- * A layered scene at the top of the line: the Altiplano at first light. Planes
- * move at different rates from the act's --sc-p (CSS only) and lean toward a
- * fine pointer (motion/heroDepth.ts). The terrain line rides along the horizon
- * and docks as the site navigation when the act ends (motion/line.ts).
+ * Home hero. Real de Catorce panorama (strongest approved asset; the layered
+ * Altiplano dawn plates are still NEEDS_MANUAL_ASSET) with restrained depth:
+ * the photograph, the shade and the measured terrain line move at different
+ * rates (src/scripts/hero.ts). Static under reduced motion.
  */
-import MediaSlot from '@/components/primitives/MediaSlot.astro';
-import HeroPlaneArt from './HeroPlaneArt.astro';
-import { getSlot } from '@/lib/media';
-import { profile, worldPath, elevationAt } from '@/data/geo';
-import { t, pick, type Locale } from '@/i18n';
-import type { RegionWithBounds } from '@/lib/regions';
+import Photo from '@/components/media/Photo.astro';
+import { href, regionHref } from '@/i18n/routes';
+import { REGIONS } from '@/data/regions';
+import { profileGeometry } from '@/lib/profile';
+import { mediaRecord } from '@/lib/media';
 
-interface Props {
-  locale: Locale;
-  regions: RegionWithBounds[];
-}
-const { locale, regions } = Astro.props;
-
-const planes = ['far', 'mid', 'focal', 'near', 'atmos'] as const;
-const slots = await Promise.all(planes.map((p) => getSlot(`altiplano-hero-${p}`)));
-const pending = slots.filter((s) => s.status === 'placeholder');
-const regionName: Record<string, string> = Object.fromEntries(regions.map((r) => [r.id, pick(r.name, locale)]));
-// "Cuatro mundos. Un San Luis Potosí." sets as two lines, one per sentence.
-const titleLines = t(locale, 'hero.title').split(/(?<=\.)\s+/);
+const HERO = 'wc-69780780';
+const rec = mediaRecord(HERO)!;
+const g = profileGeometry(1600, 140, { tolerance: 10, ceil: 3100 });
 ---
-<section
-  id="inicio"
-  class="slp-hero"
-  data-ground="dark"
-  data-region="altiplano"
-  data-chrome="overlay"
-  data-sc-act="pin"
-  data-sc-span="1.8"
-  data-slp-span-m="1.45"
-  data-slp-collapse
-  data-hero
-  aria-labelledby="hero-title"
-  style="--span:1.8;--span-m:1.45"
->
-  <div class="slp-hero__stage" data-sc-stage>
-    {planes.map((p, i) => (
-      <div class={`slp-hero__plane slp-hero__plane--${p}`}>
-        {slots[i].status === 'placeholder' ? <HeroPlaneArt plane={p} /> : <MediaSlot id={slots[i].id} locale={locale} label="none" eager={p === 'far'} />}
-      </div>
-    ))}
+<section class="hero" data-ground="dark" data-hero-depth aria-labelledby="hero-title">
+  <div class="hero__media" data-depth="0.18">
+    <Photo id={HERO} fill eager focal="50% 62%" mobileFocal="36% 62%" sizes="100vw" widths={[640, 960, 1280, 1600, 2000, 2560]} />
+  </div>
+  <div class="hero__shade" aria-hidden="true"></div>
 
-    <div class="slp-hero__copy">
-      <h1 id="hero-title" class="sc-display slp-hero__title">
-        {titleLines.map((line, i) => <>{i > 0 && ' '}<span>{line}</span></>)}
-      </h1>
-      <p class="sc-lede slp-hero__lede">{t(locale, 'hero.lede')}</p>
+  <svg class="hero__line" data-depth="0.32" viewBox="0 0 1600 140" preserveAspectRatio="none" aria-hidden="true">
+    <path d={g.line} vector-effect="non-scaling-stroke" />
+  </svg>
+
+  <div class="hero__copy wrap" data-depth="-0.08">
+    <p class="label hero__kicker">San Luis Potosí · México</p>
+    <h1 id="hero-title" class="display hero__title">
+      <span>Cuatro mundos.</span>
+      <span><em>Un</em> San Luis Potosí.</span>
+    </h1>
+    <p class="hero__lede">Del desierto alto a la selva de la Huasteca: un solo estado que cambia de paisaje, de luz y de cultura cuatro veces.</p>
+    <div class="hero__ctas">
+      <a class="btn btn--light" href="#regiones">Explora San Luis Potosí</a>
+      <a class="btn btn--outline-light" href={href('plan')}>Planea tu viaje</a>
     </div>
+  </div>
 
-    <div class="slp-hero__horizon" aria-hidden="true">
-      <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
-        {regions.map((r) => (
-          <path data-region={r.id} d={worldPath(profile.points, r.bounds.from, r.bounds.to)} vector-effect="non-scaling-stroke" />
-        ))}
-      </svg>
-      {regions.map((r) => (
-        <span
-          class="slp-hero__tick"
-          data-region={r.id}
-          style={`--x:${r.bounds.from};--e:${elevationAt(r.bounds.from + 0.002).toFixed(3)}`}
-        >
-          {regionName[r.id]}
-        </span>
+  <div class="hero__foot wrap">
+    <ul class="hero__regions" aria-label="Las cuatro regiones">
+      {REGIONS.map((r) => (
+        <li data-region={r.id}><a href={regionHref(r.slug)}><span class="hero__dot" aria-hidden="true"></span>{r.name}</a></li>
       ))}
-    </div>
-
-    {pending.length > 0 && (
-      <details class="slp-hero__legend">
-        <summary>
-          <span class="slp-hero__legend-region">Altiplano</span>
-          {t(locale, 'placeholder.legend')} ({pending.length})
-        </summary>
-        <ul role="list">
-          {pending.map((s) => (
-            <li>
-              <b>{s.id}</b>
-              <span>{t(locale, 'placeholder.plane')} · {s.aspect.desktop} escritorio / {s.aspect.mobile} móvil</span>
-              <span>{t(locale, 'placeholder.required')}: {pick(s.subject, locale)}</span>
-            </li>
-          ))}
-        </ul>
-      </details>
-    )}
+    </ul>
+    <p class="hero__caption tiny">
+      Real de Catorce, Altiplano · Foto: {rec.author}, {rec.licence}
+      <span class="hero__pending" title="home-01-hero: escena por capas al amanecer (Altiplano). Needs manual asset.">· Escena por capas pendiente</span>
+    </p>
   </div>
 </section>
 
 <style>
-  .slp-hero { position: relative; }
-  .slp-hero__stage {
+  .hero {
     position: relative;
-    height: 100vh;
     height: 100svh;
-    min-height: 34rem;
-    overflow: clip;
-    background: #141817;
+    min-height: 36rem;
+    max-height: 70rem;
+    overflow: hidden;
     isolation: isolate;
+    background: var(--slp-night);
   }
-
-  /* ---- planes ----------------------------------------------------------- */
-  .slp-hero__plane {
-    position: absolute;
-    inset: -4% -3% 0;
-    pointer-events: none;
+  .hero__media { position: absolute; inset: -6% 0 -6%; will-change: transform; }
+  .hero__media :global(img) { transform: scale(1.04); }
+  .hero__shade {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(90deg, rgb(15 18 17 / 0.62) 0%, rgb(15 18 17 / 0.28) 42%, rgb(15 18 17 / 0) 70%),
+      linear-gradient(0deg, rgb(15 18 17 / 0.72) 0%, rgb(15 18 17 / 0) 38%);
   }
-  .slp-hero__plane :global(.slp-hero__art) { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .slp-hero__plane--far { z-index: 1; }
-  .slp-hero__plane--mid { z-index: 2; }
-  .slp-hero__copy { z-index: 3; }
-  .slp-hero__plane--focal { z-index: 4; }
-  .slp-hero__plane--near { z-index: 5; inset: -4% -4% -6%; }
-  /* Every plane is solid below its silhouette, so rising planes never open a
-     gap at the bottom of the frame. */
-  .slp-hero__plane--mid::after,
-  .slp-hero__plane--near::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: calc(100% - 2px);
-    height: 60vh;
-    background: var(--floor);
+  .hero__line {
+    position: absolute; left: 0; right: 0; bottom: 12%; z-index: 2;
+    width: 100%; height: clamp(70px, 12vh, 130px);
+    fill: none; stroke: rgb(246 241 231 / 0.55); stroke-width: 1.25px;
+    pointer-events: none; will-change: transform;
   }
-  .slp-hero__plane--mid { --floor: #3c2d22; }
-  .slp-hero__plane--near { --floor: #16120f; }
-  .slp-hero__plane--atmos { z-index: 6; }
-  .slp-hero__horizon { z-index: 7; }
-  .slp-hero__legend { z-index: 8; }
-
-  /* ---- copy ------------------------------------------------------------- */
-  .slp-hero__copy {
-    position: absolute;
-    left: var(--sc-gutter);
-    top: calc(var(--slp-header-h) + 8vh);
-    max-width: min(62rem, 84vw);
+  .hero__copy {
+    position: absolute; z-index: 3; left: 0; right: 0;
+    bottom: clamp(9rem, 24vh, 15rem);
+    display: grid; gap: var(--sc-4); justify-items: start;
   }
-  .slp-hero__title {
-    font-size: clamp(2.9rem, 1.3rem + 6.2vw, 7.6rem);
+  .hero__kicker { color: rgb(246 241 231 / 0.86); }
+  .hero__title {
+    font-size: clamp(2.9rem, 1.2rem + 4.6vw, 6.4rem);
     line-height: 0.95;
-    text-wrap: balance;
-  }
-  .slp-hero__title span { display: inline-block; }
-  .slp-hero__lede {
-    margin-top: var(--sc-5);
-    max-width: 34ch;
-    color: color-mix(in oklab, var(--slp-ivory) 88%, transparent);
-  }
-
-  /* ---- the horizon line ------------------------------------------------- */
-  .slp-hero__horizon {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 60%;
-    height: 22%;
-  }
-  .slp-hero__horizon svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .slp-hero__horizon path {
-    fill: none;
-    stroke: var(--slp-ivory);
-    stroke-width: 1.6;
-    stroke-linejoin: round;
-    opacity: 0.85;
-  }
-  .slp-hero__horizon path[data-region='altiplano'] { stroke-width: 2.4; opacity: 1; }
-  .slp-hero__tick {
-    position: absolute;
-    left: calc(var(--x) * 100%);
-    top: calc((1 - var(--e)) * 100%);
-    padding: 0.7rem 0 0 0.55rem;
-    border-left: 1px solid color-mix(in oklab, var(--slp-ivory) 70%, transparent);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: var(--slp-track-label);
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: var(--slp-ivory);
-  }
-  .slp-hero__tick[data-region='altiplano'] { left: calc(var(--sc-gutter) + 0.25rem); }
-
-  /* ---- placeholder legend ---------------------------------------------- */
-  .slp-hero__legend {
-    position: absolute;
-    right: var(--sc-gutter);
-    bottom: var(--sc-5);
-    max-width: min(30rem, calc(100% - 2 * var(--sc-gutter)));
-    font-size: 0.74rem;
-    color: var(--slp-ivory);
-  }
-  .slp-hero__legend summary {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    min-height: var(--slp-tap);
-    padding: 0 0.9rem;
-    border: 1px solid color-mix(in oklab, var(--slp-ivory) 32%, transparent);
-    border-radius: var(--sc-r-sm);
-    background: color-mix(in oklab, #120f0c 80%, transparent);
-    cursor: pointer;
-    list-style: none;
-    font-weight: 600;
-  }
-  .slp-hero__legend summary::-webkit-details-marker { display: none; }
-  .slp-hero__legend-region { font-weight: 750; letter-spacing: var(--slp-track-label); text-transform: uppercase; font-size: 0.66rem; color: var(--slp-gold); }
-  .slp-hero__legend ul {
-    position: absolute;
-    right: 0;
-    bottom: calc(100% + 0.5rem);
+    letter-spacing: -0.02em;
     display: grid;
-    gap: 0.7rem;
-    width: min(30rem, calc(100vw - 2 * var(--sc-gutter)));
-    margin: 0;
-    padding: 0.9rem 1rem;
-    list-style: none;
-    border: 1px solid color-mix(in oklab, var(--slp-ivory) 32%, transparent);
-    border-radius: var(--sc-r-sm);
-    background: #120f0c;
+    white-space: nowrap;
+    text-shadow: 0 2px 30px rgb(10 12 11 / 0.35);
   }
-  .slp-hero__legend li { display: grid; gap: 0.1rem; line-height: 1.4; }
-  .slp-hero__legend li b { font-size: 0.8rem; }
-  .slp-hero__legend li span { opacity: 0.86; }
+  .hero__title em { font-weight: 500; }
+  .hero__lede { max-width: 34rem; font-size: var(--sc-t-lg); line-height: 1.5; color: rgb(246 241 231 / 0.92); }
+  .hero__ctas { display: flex; flex-wrap: wrap; gap: var(--sc-3); margin-top: var(--sc-2); }
+  .hero__foot {
+    position: absolute; z-index: 3; left: 0; right: 0; bottom: var(--sc-5);
+    display: flex; justify-content: space-between; align-items: flex-end; gap: var(--sc-4);
+  }
+  .hero__regions { list-style: none; display: flex; gap: clamp(0.75rem, 2.5vw, 2.25rem); }
+  .hero__regions a {
+    display: inline-flex; align-items: center; gap: 0.5rem; min-height: var(--slp-tap);
+    font: 700 0.72rem/1 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;
+  }
+  .hero__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-dark); }
+  .hero__caption { color: rgb(246 241 231 / 0.78); text-align: right; max-width: 26rem; }
+  .hero__pending { white-space: nowrap; }
 
-  /* ---- motion: only when the engine is driving the act ------------------ */
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-hero {
-    --p: var(--sc-p, 0);
-    --dock: clamp(0, (var(--p) - 0.5) / 0.5, 1);
-    height: calc(var(--span) * 100vh);
+  @media (max-width: 760px) {
+    .hero { min-height: 34rem; }
+    .hero__shade {
+      background:
+        linear-gradient(0deg, rgb(15 18 17 / 0.85) 0%, rgb(15 18 17 / 0.45) 45%, rgb(15 18 17 / 0.15) 75%),
+        linear-gradient(180deg, rgb(15 18 17 / 0.35), transparent 30%);
+    }
+    .hero__copy { bottom: 7.2rem; }
+    .hero__title { font-size: clamp(2.3rem, 10.6vw, 3.4rem); }
+    .hero__lede { font-size: 1.02rem; }
+    .hero__ctas { width: 100%; }
+    .hero__ctas .btn { flex: 1 1 100%; }
+    .hero__line { bottom: 5.4rem; height: 56px; }
+    .hero__regions { display: none; }
+    .hero__caption { text-align: left; font-size: 0.66rem; }
+    .hero__pending { display: none; }
   }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-hero__stage {
-    position: sticky;
-    top: 0;
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-hero__plane {
-    will-change: transform;
-    transform: translate3d(calc(var(--mx, 0) * var(--lean-x, 0px)), calc(var(--p) * var(--rise) + var(--my, 0) * var(--lean-y, 0px)), 0)
-      scale(calc(1 + var(--p) * var(--grow, 0)));
-  }
-  .slp-hero__plane--far { --rise: -3vh; --grow: 0.035; --lean-x: 6px; --lean-y: 3px; }
-  .slp-hero__plane--mid { --rise: -13vh; --lean-x: 12px; --lean-y: 5px; }
-  .slp-hero__plane--focal { --rise: -19vh; --grow: 0.02; --lean-x: 17px; --lean-y: 7px; }
-  .slp-hero__plane--near { --rise: -30vh; --lean-x: 26px; --lean-y: 10px; }
-  .slp-hero__plane--atmos { --rise: -9vh; --lean-x: -10px; }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-hero__copy {
-    will-change: transform, opacity;
-    transform: translate3d(0, calc(var(--p) * -7vh), 0);
-    opacity: calc(1 - clamp(0, (var(--p) - 0.45) / 0.35, 1));
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-hero__horizon {
-    will-change: transform, opacity;
-    transform: translate3d(0, calc(var(--p) * -13vh + var(--dock) * 30vh), 0) scaleY(calc(1 - var(--dock) * 0.75));
-    transform-origin: 50% 100%;
-    opacity: calc(1 - clamp(0, (var(--p) - 0.82) / 0.16, 1));
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-hero__legend {
-    opacity: calc(1 - clamp(0, (var(--p) - 0.35) / 0.25, 1));
-  }
-  :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-hero__tick {
-    opacity: calc(1 - var(--dock) * 1.6);
-  }
-
-  @media (max-width: 860px) {
-    :global(html:is([data-motion='full'], [data-motion='lite'])) .slp-hero { height: calc(var(--span-m) * 100vh); }
-    .slp-hero__copy { top: calc(var(--slp-header-h) + 5vh); max-width: none; right: var(--sc-gutter); }
-    .slp-hero__title { font-size: clamp(2.5rem, 1.2rem + 6vw, 3.6rem); }
-    .slp-hero__lede { font-size: var(--sc-t-base); }
-    .slp-hero__horizon { top: 63%; height: 14%; }
-    .slp-hero__tick { font-size: 0.6rem; padding-left: 0.4rem; }
-    .slp-hero__tick[data-region='centro'], .slp-hero__tick[data-region='zona-media'] { display: none; }
-    .slp-hero__tick[data-region='huasteca'] { left: auto; right: var(--sc-gutter); border-left: 0; border-right: 1px solid color-mix(in oklab, var(--slp-ivory) 70%, transparent); padding: 0.7rem 0.4rem 0 0; top: 100%; }
-    .slp-hero__legend { left: var(--sc-gutter); right: auto; }
-    .slp-hero__legend ul { left: 0; right: auto; }
-    .slp-hero__plane--mid { --rise: -9vh; }
-    .slp-hero__plane--focal { --rise: -13vh; }
-    .slp-hero__plane--near { --rise: -20vh; }
+  @media (max-width: 760px) and (max-height: 700px) {
+    .hero__lede { display: none; }
   }
 </style>

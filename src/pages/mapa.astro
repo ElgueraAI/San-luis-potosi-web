@@ -1,0 +1,80 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Photo from '@/components/media/Photo.astro';
+import { mediaRecord } from '@/lib/media';
+import MapView from '@/components/map/MapView.astro';
+import Weather from '@/components/ui/Weather.astro';
+import { mapPlaces, unplottedPlaces } from '@/data/research';
+import { REGION_NAME } from '@/data/regions';
+import { destHref, href } from '@/i18n/routes';
+
+const ready = mapPlaces.filter((p) => p.status === 'ready').length;
+const prov = mapPlaces.filter((p) => p.status === 'provisional').length;
+---
+<BaseLayout title="Mapa interactivo" description="Mapa de destinos de San Luis Potosí con filtros por región e interés, ubicaciones verificadas y aproximadas, clima en vivo y Mi Ruta.">
+  <header class="mh" data-ground="dark">
+    <Photo id="wc-42373253" fill eager sizes="100vw" focal="50% 58%" alt="Semidesierto con yucas en el camino hacia Matehuala" />
+    <div class="mh__shade" aria-hidden="true"></div>
+    <div class="wrap mh__in">
+      <nav class="tiny mh__crumbs" aria-label="Ruta de navegación"><a href={href('home')}>Inicio</a> / <span aria-current="page">Mapa</span></nav>
+      <p class="label">Mapa</p>
+      <h1 class="display mh__title">El estado, punto por punto.</h1>
+      <ul class="mh__keys">
+        <li><span class="mh__dot" aria-hidden="true"></span><b>{ready}</b> lugares con ubicación oficial verificada</li>
+        <li><span class="mh__dot mh__dot--prov" aria-hidden="true"></span><b>{prov}</b> con ubicación aproximada</li>
+        <li>Filtra por región o interés y añade lugares a <a href={href('myRoute')}>Mi Ruta</a></li>
+      </ul>
+    </div>
+    <p class="mh__cap tiny">Hacia Matehuala, Altiplano · {mediaRecord('wc-42373253')?.attribution_text}</p>
+  </header>
+  <section class="section section--tight mh__map" data-ground="light" aria-label="Mapa">
+    <div class="wrap"><MapView mode="full" height="min(82svh, 52rem)" /></div>
+  </section>
+  <section class="section section--tight" data-ground="ivory" aria-labelledby="wx-t">
+    <div class="wrap">
+      <h2 id="wx-t" class="visually-hidden">Clima</h2>
+      <Weather keys={['altiplano', 'centro', 'zona-media', 'huasteca', 'real-de-catorce', 'xilitla']} title="El clima ahora" />
+    </div>
+  </section>
+  <section class="section section--tight" data-ground="light" aria-labelledby="np-t">
+    <div class="wrap unp">
+      <div>
+        <h2 id="np-t" class="display display--md">Lugares sin punto en el mapa</h2>
+        <p class="small muted">No se dibujan porque no son un sitio puntual (un paisaje, un río, una tradición) o porque no se encontró una ubicación oficial o aceptable. Preferimos no mostrar un punto dudoso.</p>
+      </div>
+      <ul>
+        {unplottedPlaces.map((p) => (
+          <li data-region={p.region}>
+            <span class="unp__dot" aria-hidden="true"></span>
+            {p.slug ? <a class="link" href={destHref(p.slug)}>{p.name}</a> : <span>{p.name}</span>}
+            <span class="tiny muted">{REGION_NAME[p.region]}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* editorial geographic opening, short enough that the map starts near the fold */
+  .mh { position: relative; min-height: clamp(22rem, 52svh, 34rem); display: grid; align-content: end; padding: calc(var(--slp-header-h) + var(--sc-6)) 0 var(--sc-7); isolation: isolate; overflow: hidden; background: var(--slp-night); }
+  .mh__shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgb(10 14 12 / 0.9) 0%, rgb(10 14 12 / 0.55) 45%, rgb(10 14 12 / 0.25) 75%, rgb(10 14 12 / 0.5) 100%), linear-gradient(90deg, rgb(10 14 12 / 0.55), transparent 60%); }
+  .mh__in { position: relative; z-index: 2; display: grid; gap: var(--sc-3); justify-items: start; }
+  .mh__crumbs, .mh__crumbs a { color: rgb(246 241 231 / 0.85); }
+  .mh__title { font-size: clamp(2.6rem, 1.6rem + 4vw, 5.2rem); line-height: 0.95; max-width: 14ch; }
+  .mh__keys { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem; font-size: 0.92rem; color: rgb(246 241 231 / 0.92); }
+  .mh__keys li { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .mh__keys b { font-variant-numeric: tabular-nums; }
+  .mh__keys a { color: inherit; }
+  .mh__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--slp-gold); border: 2px solid var(--slp-gold); }
+  .mh__dot--prov { background: transparent; }
+  .mh__cap { position: absolute; z-index: 2; right: var(--sc-gutter); bottom: 0.7rem; color: rgb(246 241 231 / 0.7); text-align: right; max-width: 50ch; }
+  @media (max-width: 640px) { .mh__cap { display: none; } }
+  .mh__map { padding-top: var(--sc-5); }
+  .unp { display: grid; gap: var(--sc-6); }
+  @media (min-width: 900px) { .unp { grid-template-columns: 1fr 1.4fr; } }
+  .unp ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0 var(--sc-5); border-top: 1px solid var(--sc-hairline); }
+  .unp li { display: flex; align-items: center; gap: 0.6rem; padding: 0.65rem 0; border-bottom: 1px solid var(--sc-hairline); }
+  .unp li .tiny { margin-left: auto; }
+  .unp__dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px dashed var(--slp-region-ui); }
+</style>

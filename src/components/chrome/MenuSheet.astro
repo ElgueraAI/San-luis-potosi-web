@@ -1,198 +1,237 @@
 ---
-import { t, pick, type Locale } from '@/i18n';
-import { href, homeAnchor } from '@/i18n/routes';
-import { primaryNav, planNav } from '@/data/nav';
-import { profile, worldPath } from '@/data/geo';
-import type { RegionWithBounds } from '@/lib/regions';
+/**
+ * The destination portal menu (dialog). Progressive disclosure: level 1 lists
+ * the families; a "›" item opens its next level in place (no navigation), with
+ * Atrás and Cerrar always available. The dialog traps focus natively; Escape
+ * closes it; src/scripts/menu.ts moves between panels and keeps focus and the
+ * location trail ("Menú / Qué hacer / Cultura") current. Without JavaScript
+ * every panel is a plain list of links, so nothing is out of reach.
+ */
+import { href, regionHref, muniHref, destHref, tdHref, archHref } from '@/i18n/routes';
+import { REGIONS } from '@/data/regions';
+import { THINGS } from '@/data/thingsToDo';
+import { municipalities, events, archaeology, archSlug } from '@/data/portal';
+import { destinations, MONTHS_ES } from '@/data/research';
 
-interface Props {
-  locale: Locale;
-  regions: RegionWithBounds[];
-}
-const { locale, regions } = Astro.props;
-const sections = [...primaryNav.filter((i) => i.key !== 'nav.regions'), planNav].filter((i) => i.ready);
+type Item = { label: string; href?: string; go?: string; note?: string; region?: string };
+type Panel = { id: string; title: string; parent: string | null; intro?: string; items: Item[]; all?: { label: string; href: string } };
+const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
+const pm = destinations.filter((d) => d.puebloMagico);
+const featuredEvents = ['ev-xantolo', 'ev-procesion-silencio', 'ev-fenapo', 'ev-navidad-verde', 'ev-lila-lopez', 'ev-san-francisco-catorce']
+  .map((id) => events.find((e) => e.id === id)).filter((e): e is (typeof events)[number] => !!e);
+
+const panels: Panel[] = [
+  {
+    id: 'root', title: 'Menú', parent: null,
+    items: [
+      { label: 'Inicio', href: href('home') },
+      { label: 'Destinos', go: 'destinos' },
+      { label: 'Qué hacer', go: 'que-hacer' },
+      { label: 'Planifica tu viaje', go: 'planifica' },
+      { label: 'Guías y recursos', go: 'guias' },
+      { label: 'Eventos', go: 'eventos' },
+      { label: 'Acerca del proyecto', go: 'acerca' },
+    ],
+  },
+  {
+    id: 'destinos', title: 'Destinos', parent: 'root',
+    intro: 'Cuatro regiones, 59 municipios.',
+    items: [
+      ...REGIONS.map((r) => ({ label: r.name, href: regionHref(r.slug), region: r.id, note: 'Región' })),
+      { label: 'Municipios', go: 'municipios' },
+      { label: 'Pueblos Mágicos', go: 'pueblos-magicos' },
+      { label: 'Destinos naturales', href: tdHref('naturaleza') },
+      { label: 'Patrimonio', href: tdHref('historia') },
+      { label: 'Arqueología', go: 'arqueologia' },
+      { label: 'Ciudades y pueblos', href: tdHref('pueblos-ciudades') },
+    ],
+    all: { label: 'Todos los destinos', href: href('destinations') },
+  },
+  {
+    id: 'municipios', title: 'Municipios', parent: 'destinos',
+    items: REGIONS.map((r) => ({ label: r.name, go: `mun-${r.id}`, region: r.id, note: `${municipalities.filter((m) => m.region === r.id).length} municipios` })),
+    all: { label: 'Índice de los 59 municipios', href: href('municipalities') },
+  },
+  ...REGIONS.map((r) => ({
+    id: `mun-${r.id}`, title: r.name, parent: 'municipios',
+    items: municipalities.filter((m) => m.region === r.id).map((m) => ({ label: m.canonical_name, href: muniHref(m.slug!), region: r.id })),
+    all: { label: `Región ${r.name}`, href: regionHref(r.slug) },
+  })),
+  {
+    id: 'pueblos-magicos', title: 'Pueblos Mágicos', parent: 'destinos',
+    items: pm.map((d) => ({ label: d.name.split(' – ')[0], href: destHref(d.slug), region: d.region })),
+    all: { label: 'Pueblos y ciudades', href: tdHref('pueblos-ciudades') },
+  },
+  {
+    id: 'arqueologia', title: 'Arqueología', parent: 'destinos',
+    items: archaeology.map((a) => ({ label: a.canonical_name, href: archHref(archSlug(a)), region: a.region ?? undefined, note: a.access_status === 'OPEN_TO_PUBLIC' ? 'Abierta (INAH)' : 'Documentada' })),
+    all: { label: 'Arqueología en San Luis Potosí', href: href('archaeology') },
+  },
+  {
+    id: 'que-hacer', title: 'Qué hacer', parent: 'root',
+    items: [...THINGS.map((c) => ({ label: c.label, go: `td-${c.id}` })), { label: 'Experiencias', href: href('experiences') }],
+    all: { label: 'Todo lo que hay que hacer', href: href('thingsToDo') },
+  },
+  ...THINGS.map((c) => ({
+    id: `td-${c.id}`, title: c.label, parent: 'que-hacer', intro: c.lede,
+    items: c.subs.map((s) => ({ label: s.label, href: tdHref(c.id, s.id) })),
+    all: { label: `Ver ${c.label.toLowerCase()}`, href: tdHref(c.id) },
+  })),
+  {
+    id: 'planifica', title: 'Planifica tu viaje', parent: 'root',
+    items: [
+      { label: 'Cómo llegar', href: href('plan', {}, 'es', 'llegar') },
+      { label: 'Moverse por el estado', href: href('plan', {}, 'es', 'moverse') },
+      { label: 'Clima y temporadas', href: href('seasons') },
+      { label: 'Hospedaje', href: href('lodging') },
+      { label: 'Gastronomía', href: href('food') },
+      { label: 'Rutas e itinerarios', href: href('routes') },
+      { label: 'Mapa interactivo', href: href('map') },
+      { label: 'Información práctica', href: href('plan', {}, 'es', 'practica') },
+      { label: 'Mi Ruta', href: href('myRoute') },
+    ],
+    all: { label: 'Planea tu viaje', href: href('plan') },
+  },
+  {
+    id: 'guias', title: 'Guías y recursos', parent: 'root',
+    items: [
+      { label: 'Folletos oficiales', href: href('guides', {}, 'es', 'recursos-folletos') },
+      { label: 'Mapas', href: href('guides', {}, 'es', 'recursos-mapas') },
+      { label: 'Guías de turistas acreditados', href: href('guides', {}, 'es', 'recursos-guias-turisticos') },
+      { label: 'Movilidad', href: href('guides', {}, 'es', 'recursos-movilidad') },
+      { label: 'Información práctica', href: href('guides', {}, 'es', 'recursos-practica') },
+      { label: 'Museos y recintos culturales', href: href('museums') },
+    ],
+    all: { label: 'Todos los recursos', href: href('guides') },
+  },
+  {
+    id: 'eventos', title: 'Eventos', parent: 'root',
+    items: [
+      { label: 'Calendario anual', href: href('events') },
+      { label: 'Por mes', go: 'eventos-mes' },
+      ...featuredEvents.map((e) => ({ label: e.canonical_name.replace(/\s*\(.*\)/, ''), href: `${href('events')}${e.slug}/`, region: e.region ?? undefined })),
+    ],
+    all: { label: 'Festividades y eventos', href: href('events') },
+  },
+  {
+    id: 'eventos-mes', title: 'Eventos por mes', parent: 'eventos',
+    items: MONTHS_ES.map((m, i) => ({ label: cap(m), href: `${href('events')}?mes=${i + 1}`, note: `${events.filter((e) => e.months?.includes(i + 1)).length || 'Sin'} ${events.filter((e) => e.months?.includes(i + 1)).length === 1 ? 'evento' : 'eventos'}` })),
+  },
+  {
+    id: 'acerca', title: 'Acerca del proyecto', parent: 'root',
+    items: [
+      { label: 'Acerca del proyecto', href: href('about') },
+      { label: 'Créditos, fuentes y licencias', href: href('credits') },
+      { label: 'Buscar en el sitio', href: href('search') },
+    ],
+  },
+];
+const byId = new Map(panels.map((p) => [p.id, p]));
+const trail = (p: Panel): string[] => (p.parent ? [...trail(byId.get(p.parent)!), p.title] : [p.title]);
 ---
-<dialog id="slp-menu" class="slp-menu" data-ground="dark" aria-labelledby="slp-menu-title">
-  <div class="slp-menu__inner">
-    <div class="slp-menu__bar">
-      <p id="slp-menu-title" class="slp-menu__title">{t(locale, 'menu.title')}</p>
-      <button class="slp-menu__close" type="button" data-menu-close>
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-        </svg>
-        <span class="visually-hidden">{t(locale, 'a11y.menuClose')}</span>
+<dialog class="menu" id="menu-sheet" aria-label="Menú del sitio" data-menu>
+  <div class="menu__panel" data-ground="dark">
+    <div class="menu__top">
+      <form class="menu__search" action={href('search')} method="get" role="search">
+        <label class="visually-hidden" for="menu-q">Buscar destinos, municipios, eventos…</label>
+        <input id="menu-q" name="q" type="search" placeholder="Buscar destinos, municipios, eventos…" autocomplete="off" />
+        <button type="submit" aria-label="Buscar"><span aria-hidden="true">→</span></button>
+      </form>
+      <button class="menu__close" type="button" data-menu-close aria-label="Cerrar menú">
+        <span aria-hidden="true"></span>
       </button>
     </div>
 
-    <nav class="slp-menu__regions" aria-labelledby="slp-menu-regions">
-      <h2 id="slp-menu-regions" class="slp-label">{t(locale, 'menu.regions')}</h2>
-      <ol role="list">
-        {regions.map((r) => (
-          <li data-region={r.id} data-ground="dark">
-            <a href={homeAnchor(`descenso-${r.id}`, locale)} data-menu-link>
-              <svg class="slp-menu__seg" viewBox={`${r.bounds.from * 1000} 0 ${(r.bounds.to - r.bounds.from) * 1000} 300`} preserveAspectRatio="none" aria-hidden="true">
-                <path d={worldPath(profile.points, r.bounds.from, r.bounds.to)} vector-effect="non-scaling-stroke" />
-              </svg>
-              <span class="slp-menu__name">{pick(r.name, locale)}</span>
-              <span class="slp-menu__light">{pick(r.light, locale)}</span>
-            </a>
-            {r.published ? (
-              <a class="slp-link slp-link--tap slp-menu__page" href={href('region', { region: r.id }, locale)} data-menu-link>
-                {t(locale, 'descent.explore', { region: pick(r.nameInSentence, locale) })}
-              </a>
-            ) : (
-              <span class="slp-menu__soon">{t(locale, 'descent.soon')}</span>
+    <nav class="menu__nav" aria-label="Menú del sitio">
+      {panels.map((p) => (
+        <section class="mp" id={`mp-${p.id}`} data-menu-panel={p.id} data-parent={p.parent ?? undefined} aria-labelledby={`mp-${p.id}-t`} hidden={p.id !== 'root'}>
+          <div class="mp__head">
+            {p.parent && (
+              <button type="button" class="mp__back" data-menu-back={p.parent}>
+                <span aria-hidden="true">←</span> {byId.get(p.parent)!.title === 'Menú' ? 'Menú' : byId.get(p.parent)!.title}
+              </button>
             )}
-          </li>
-        ))}
-      </ol>
+            <p class="mp__trail" aria-hidden="true">{trail(p).slice(0, -1).join(' / ')}</p>
+            <h2 class="mp__title" id={`mp-${p.id}-t`} tabindex="-1">{p.title}</h2>
+            {p.intro && <p class="mp__intro">{p.intro}</p>}
+          </div>
+          <ul class:list={['mp__list', { 'mp__list--root': p.id === 'root', 'mp__list--dense': p.items.length > 12 }]}>
+            {p.items.map((it) => (
+              <li data-region={it.region}>
+                {it.go ? (
+                  <button type="button" class="mp__item" data-menu-go={it.go} aria-controls={`mp-${it.go}`} aria-haspopup="true">
+                    <span class="mp__label">{it.region && <span class="mp__dot" aria-hidden="true"></span>}{it.label}</span>
+                    {it.note && <span class="mp__note">{it.note}</span>}
+                    <span class="mp__chev" aria-hidden="true">›</span>
+                  </button>
+                ) : (
+                  <a class="mp__item" href={it.href}>
+                    <span class="mp__label">{it.region && <span class="mp__dot" aria-hidden="true"></span>}{it.label}</span>
+                    {it.note && <span class="mp__note">{it.note}</span>}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+          {p.all && <a class="arrow mp__all" href={p.all.href}>{p.all.label}</a>}
+        </section>
+      ))}
     </nav>
 
-    {sections.length > 0 && (
-      <nav class="slp-menu__sections" aria-labelledby="slp-menu-sections">
-        <h2 id="slp-menu-sections" class="slp-label">{t(locale, 'menu.sections')}</h2>
-        <ul role="list">
-          {sections.map((s) => (
-            <li><a href={homeAnchor(s.anchor, locale)} data-menu-link>{t(locale, s.key)}</a></li>
-          ))}
-        </ul>
-      </nav>
-    )}
+    <div class="menu__quick">
+      <a href={href('map')}>Mapa</a>
+      <a href={href('seasons')}>Temporadas</a>
+      <a href={href('experiences')}>Experiencias</a>
+      <a href={href('routes')}>Rutas</a>
+      <a href={href('myRoute')}>Mi Ruta <span data-route-count class="menu__count">0</span></a>
+    </div>
   </div>
 </dialog>
 
-<script>
-  const dialog = document.getElementById('slp-menu') as HTMLDialogElement | null;
-  if (dialog) {
-    let opener: HTMLElement | null = null;
-    document.querySelectorAll<HTMLElement>('[data-menu-open]').forEach((btn) =>
-      btn.addEventListener('click', () => {
-        opener = btn;
-        dialog.showModal();
-        btn.setAttribute('aria-expanded', 'true');
-      }),
-    );
-    const close = () => dialog.close();
-    dialog.querySelector('[data-menu-close]')?.addEventListener('click', close);
-    dialog.querySelectorAll('[data-menu-link]').forEach((a) => a.addEventListener('click', close));
-    // A click on the backdrop lands on the dialog element itself.
-    dialog.addEventListener('click', (e) => { if (e.target === dialog) close(); });
-    dialog.addEventListener('close', () => {
-      opener?.setAttribute('aria-expanded', 'false');
-      opener?.focus();
-    });
-  }
-</script>
-
 <style>
-  .slp-menu {
-    width: 100%;
-    max-width: none;
-    height: 100%;
-    max-height: none;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    color: var(--sc-ink);
-    background: var(--sc-canvas);
-    overscroll-behavior: contain;
+  .menu { position: fixed; inset: 0; width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; }
+  .menu::backdrop { background: rgb(14 17 16 / 0.6); }
+  .menu[open] .menu__panel { animation: menu-in 360ms var(--sc-ease-drawer); }
+  @keyframes menu-in { from { transform: translateX(6%); opacity: 0; } to { transform: none; opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .menu[open] .menu__panel { animation: none; } }
+  .menu__panel {
+    margin-left: auto; width: min(44rem, 100%); height: 100%; overflow-y: auto;
+    display: grid; grid-template-rows: auto 1fr auto;
+    padding: 0 clamp(1.25rem, 4vw, 3.25rem) var(--sc-5);
+    background: var(--slp-charcoal);
   }
-  .slp-menu::backdrop { background: color-mix(in oklab, var(--slp-charcoal) 60%, transparent); }
-  .slp-menu[open] { animation: slp-menu-in var(--sc-d-slow) var(--sc-ease-drawer); }
-  @keyframes slp-menu-in {
-    from { opacity: 0; transform: translateY(-1.5rem); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .slp-menu[open] { animation: none; }
-  }
+  .menu__top { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: var(--sc-3); min-height: var(--slp-header-h); background: var(--slp-charcoal); }
+  .menu__search { flex: 1; display: flex; align-items: center; border-bottom: 1px solid rgb(246 241 231 / 0.3); }
+  .menu__search input { flex: 1; min-width: 0; min-height: var(--slp-tap); border: 0; background: none; color: inherit; font: 500 1rem/1.2 var(--sc-font-text); }
+  .menu__search input::placeholder { color: rgb(246 241 231 / 0.55); }
+  .menu__search button { width: var(--slp-tap); height: var(--slp-tap); border: 0; background: none; color: inherit; font-size: 1.2rem; }
+  .menu__close { width: var(--slp-tap); height: var(--slp-tap); border: 0; background: none; position: relative; color: inherit; flex: none; }
+  .menu__close span::before, .menu__close span::after { content: ''; position: absolute; left: 11px; right: 11px; top: 50%; height: 1.5px; background: currentColor; transform: rotate(45deg); }
+  .menu__close span::after { transform: rotate(-45deg); }
 
-  .slp-menu__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-    grid-template-rows: auto 1fr;
-    gap: var(--sc-7) var(--sc-9);
-    max-width: var(--sc-maxw);
-    min-height: 100%;
-    margin-inline: auto;
-    padding: 0 var(--sc-gutter) var(--sc-8);
-  }
-  .slp-menu__bar {
-    grid-column: 1 / -1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: var(--slp-header-h);
-  }
-  .slp-menu__title {
-    font-family: var(--sc-font-display);
-    font-size: var(--sc-t-lg);
-    font-weight: 600;
-  }
-  .slp-menu__close {
-    display: inline-grid;
-    place-items: center;
-    width: var(--slp-tap);
-    height: var(--slp-tap);
-    border: 0;
-    background: none;
-    color: inherit;
-    cursor: pointer;
-  }
-
-  .slp-menu ol, .slp-menu ul { margin: var(--sc-4) 0 0; padding: 0; list-style: none; }
-
-  .slp-menu__regions li {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0 var(--sc-5);
-    padding-block: var(--sc-4);
-    border-top: 1px solid var(--sc-hairline);
-  }
-  .slp-menu__regions li > a:first-child {
-    display: grid;
-    grid-template-columns: 7rem auto;
-    grid-template-rows: auto auto;
-    align-items: center;
-    column-gap: var(--sc-5);
-    min-height: var(--slp-tap);
-    color: inherit;
-    text-decoration: none;
-  }
-  .slp-menu__seg {
-    grid-row: 1 / span 2;
-    width: 7rem;
-    height: 2.4rem;
-    overflow: visible;
-  }
-  .slp-menu__seg path { fill: none; stroke: var(--slp-region-dark); stroke-width: 2; }
-  .slp-menu__name {
-    font-family: var(--sc-font-display);
-    font-size: var(--sc-t-2xl);
-    font-weight: 600;
-    line-height: 1;
-  }
-  .slp-menu__light { font-size: var(--sc-t-xs); letter-spacing: var(--slp-track-label); text-transform: uppercase; color: var(--sc-ink-soft); font-weight: 650; }
-  .slp-menu__soon { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+  .mp { display: grid; gap: var(--sc-4); padding-top: var(--sc-5); align-content: start; }
+  .mp[hidden] { display: none; }
+  .mp__head { display: grid; gap: 0.5rem; }
+  .mp__back { justify-self: start; display: inline-flex; align-items: center; gap: 0.5rem; min-height: var(--slp-tap); padding: 0; border: 0; background: none; color: var(--slp-gold); font: 700 0.72rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; }
+  .mp__trail { font-size: 0.72rem; color: var(--sc-ink-soft); letter-spacing: 0.06em; min-height: 1em; }
+  .mp__title { font: 500 clamp(2.2rem, 1.6rem + 2.4vw, 3.2rem)/1 var(--sc-font-display); outline: none; }
+  .mp__intro { color: var(--sc-ink-soft); max-width: 42ch; font-size: var(--sc-t-sm); }
+  .mp__list { list-style: none; display: grid; border-top: 1px solid rgb(246 241 231 / 0.14); }
+  .mp__list li { border-bottom: 1px solid rgb(246 241 231 / 0.1); }
+  .mp__item { width: 100%; display: flex; align-items: center; gap: 0.8rem; min-height: 3.4rem; padding: 0.5rem 0; border: 0; background: none; color: inherit; text-align: left; text-decoration: none; font: 600 1.05rem/1.25 var(--sc-font-text); cursor: pointer; }
+  .mp__list--root .mp__item { min-height: 4.2rem; font: 500 clamp(1.6rem, 1.3rem + 1.2vw, 2.2rem)/1.1 var(--sc-font-display); }
+  .mp__list--dense { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); column-gap: var(--sc-5); }
+  .mp__list--dense .mp__item { min-height: var(--slp-tap); font-size: 0.95rem; }
+  .mp__label { flex: 1; display: inline-flex; align-items: center; gap: 0.6rem; }
+  .mp__dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--slp-region-dark, var(--slp-gold)); flex: none; }
+  .mp__note { font: 600 0.68rem/1 var(--sc-font-text); letter-spacing: 0.08em; color: var(--sc-ink-soft); text-transform: uppercase; }
+  .mp__chev { font-size: 1.6rem; line-height: 1; color: var(--slp-gold); transition: transform 200ms var(--sc-ease-out); }
+  .mp__all { justify-self: start; color: var(--slp-ivory); margin-top: var(--sc-2); }
   @media (hover: hover) and (pointer: fine) {
-    .slp-menu__regions li > a:first-child:hover .slp-menu__name { font-style: italic; }
+    .mp__item:hover .mp__label { text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+    .mp__item:hover .mp__chev { transform: translateX(4px); }
   }
-
-  .slp-menu__sections a {
-    display: flex;
-    align-items: center;
-    min-height: 3.25rem;
-    border-top: 1px solid var(--sc-hairline);
-    color: inherit;
-    font-size: var(--sc-t-lg);
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  @media (max-width: 860px) {
-    .slp-menu__inner { grid-template-columns: 1fr; gap: var(--sc-6); }
-    .slp-menu__regions li > a:first-child { grid-template-columns: 4.5rem auto; column-gap: var(--sc-4); }
-    .slp-menu__seg { width: 4.5rem; }
-  }
+  .menu__quick { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; padding-top: var(--sc-5); margin-top: var(--sc-6); border-top: 1px solid rgb(246 241 231 / 0.14); font-size: 0.85rem; font-weight: 650; }
+  .menu__quick a { display: inline-flex; align-items: center; gap: 0.4rem; min-height: var(--slp-tap); color: inherit; text-decoration: none; }
+  .menu__count { min-width: 1.4rem; height: 1.4rem; padding: 0 0.35rem; border-radius: 999px; display: inline-grid; place-items: center; background: rgb(246 241 231 / 0.14); font-size: 0.72rem; }
 </style>

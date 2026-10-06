@@ -1,0 +1,81 @@
+/* =============================================================================
+   Portal layer: shared layouts for the content families (municipalities,
+   things to do, events, archaeology, museums, lodging, food, planning, search).
+   One grid, one spacing scale and one card rhythm; each family changes tone
+   (data-tone) and density, not the system.
+   ========================================================================== */
+
+/* ---- in-page section nav (sticky chips under the header) ----------------- */
+.pnav { position: sticky; top: var(--slp-header-h); z-index: 20; background: color-mix(in oklab, var(--sc-canvas) 94%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--sc-hairline); }
+.pnav ul { list-style: none; display: flex; gap: 0.3rem 1.4rem; overflow-x: auto; scrollbar-width: none; padding-block: 0.2rem; }
+.pnav ul::-webkit-scrollbar { display: none; }
+.pnav a { display: inline-flex; align-items: center; min-height: var(--slp-tap); white-space: nowrap; font: 650 0.82rem/1 var(--sc-font-text); color: var(--sc-ink-soft); text-decoration: none; }
+.pnav a:hover, .pnav a:focus-visible { color: var(--sc-ink); }
+html:has(.pnav) { scroll-padding-top: calc(var(--slp-header-h) + 4rem); }
+
+/* ---- section heads ------------------------------------------------------ */
+.psec { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
+.psec--tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
+.psec__head { display: grid; gap: var(--sc-3); margin-bottom: clamp(1.5rem, 3vw, 2.5rem); max-width: 52rem; }
+.psec__head--split { max-width: none; grid-template-columns: minmax(0, 1fr); align-items: end; }
+@media (min-width: 900px) { .psec__head--split { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: var(--sc-7); } }
+.psec__title { font: 500 clamp(2rem, 1.5rem + 2vw, 3.2rem)/1.02 var(--sc-font-display); letter-spacing: -0.01em; text-wrap: balance; }
+.psec__count { font: 700 0.68rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); }
+
+/* ---- grids: one rhythm for cards of the same kind ----------------------- */
+.pgrid { list-style: none; display: grid; gap: clamp(1.5rem, 3vw, 2.25rem) clamp(1rem, 2vw, 1.5rem); grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
+.pgrid--wide { grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); }
+.pgrid--ent { gap: 0.75rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); }
+.pgrid > li { min-width: 0; }
+@media (max-width: 640px) {
+  .pgrid--rail { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 78%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: var(--sc-3); }
+  .pgrid--rail > li { scroll-snap-align: start; }
+}
+
+/* ---- fact sheet (dl) ---------------------------------------------------- */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--sc-4) var(--sc-5); padding: var(--sc-5) 0; border-block: 1px solid var(--sc-hairline-strong); }
+.facts div { display: grid; gap: 0.3rem; align-content: start; }
+.facts dt { font: 700 0.62rem/1.2 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--slp-region-text, var(--sc-ink-soft)); }
+.facts dd { margin: 0; font-size: 0.95rem; font-weight: 600; }
+.facts .facts__wide { grid-column: 1 / -1; }
+
+/* ---- directory: filters + list ------------------------------------------- */
+.dir { display: grid; gap: var(--sc-5); }
+.dir__form { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); align-items: end; padding: var(--sc-4); border-radius: var(--sc-r-sm); background: var(--sc-surface); }
+.dir__form label { display: grid; gap: 0.35rem; font: 700 0.62rem/1 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+.dir__form input, .dir__form select { width: 100%; min-width: 0; min-height: var(--slp-tap); padding: 0 0.75rem; border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: var(--sc-canvas); color: var(--sc-ink); font: 500 0.95rem/1 var(--sc-font-text); text-transform: none; letter-spacing: 0; }
+.dir__bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 1rem; }
+.dir__empty { color: var(--sc-ink-soft); padding: var(--sc-5) 0; }
+.dir__note { font-size: 0.78rem; color: var(--sc-ink-soft); max-width: 70ch; }
+.dir__more { justify-self: center; }
+
+/* ---- editorial split: photo + text ------------------------------------- */
+.split { display: grid; gap: var(--sc-6); align-items: center; }
+@media (min-width: 900px) { .split { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(2rem, 5vw, 5rem); } .split--flip > :first-child { order: 2; } }
+.split__media { border-radius: var(--sc-r-sm); overflow: hidden; }
+
+/* ---- category tiles (Qué hacer hub) ------------------------------------ */
+.tile { position: relative; display: block; border-radius: var(--sc-r-sm); overflow: hidden; color: var(--slp-ivory); text-decoration: none; isolation: isolate; aspect-ratio: 4 / 5; background: var(--slp-charcoal); }
+.tile .photo, .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tile::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgb(10 14 13 / 0.88), rgb(10 14 13 / 0.15) 58%, transparent); }
+.tile__body { position: absolute; z-index: 2; inset: auto 1.1rem 1.1rem; display: grid; gap: 0.4rem; }
+.tile__title { font: 600 clamp(1.7rem, 1.4rem + 0.8vw, 2.2rem)/1 var(--sc-font-display); }
+.tile__sub { font-size: 0.8rem; color: rgb(246 241 231 / 0.85); }
+.tile:focus-visible { outline: 3px solid var(--slp-gold); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .tile img { transition: transform 1s var(--sc-ease-out); } .tile:hover img { transform: scale(1.05); } }
+
+/* ---- text notes (regional dishes, unknowns) ----------------------------- */
+.note { padding: var(--sc-4) var(--sc-5); border-radius: var(--sc-r-sm); background: var(--sc-surface); box-shadow: inset 3px 0 0 var(--slp-region-ui, var(--sc-hairline-strong)); }
+.note__t { font: 600 1.15rem/1.2 var(--sc-font-display); margin-bottom: 0.3rem; }
+.note p { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+.truth { font-size: 0.78rem; color: var(--sc-ink-soft); max-width: 72ch; border-left: 2px solid var(--sc-hairline-strong); padding-left: 0.8rem; }
+
+/* ---- A–Z index ---------------------------------------------------------- */
+.az { columns: 16rem auto; column-gap: var(--sc-6); }
+.az__group { break-inside: avoid; margin-bottom: var(--sc-5); }
+.az__letter { font: 600 1.6rem/1 var(--sc-font-display); color: var(--slp-gold-deep); margin-bottom: 0.4rem; }
+.az ul { list-style: none; }
+.az li a { display: flex; align-items: center; gap: 0.55rem; min-height: 2.2rem; color: inherit; text-decoration: none; font-weight: 600; }
+.az li a:hover { text-decoration: underline; }
+.az__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-ui); flex: none; }
+.az__meta { font-size: 0.72rem; font-weight: 500; color: var(--sc-ink-soft); }

@@ -1,0 +1,55 @@
+---
+/**
+ * Municipality card. With a researched photograph of a place in the
+ * municipality it shows that photograph; without one it shows the state
+ * silhouette with the municipal seat marked (INEGI), never an unrelated photo.
+ * Fixed 4:3 frame either way so a row keeps its rhythm.
+ */
+import Photo from '@/components/media/Photo.astro';
+import StateSilhouette from '@/components/season/StateSilhouette.astro';
+import { muniHref } from '@/i18n/routes';
+import { REGION_LABEL, muniView, type Entity } from '@/data/portal';
+
+interface Props { m: Entity; level?: 'h2' | 'h3'; sizes?: string }
+const { m, level = 'h3', sizes = '(max-width: 760px) 80vw, 22rem' } = Astro.props;
+const H = level;
+const v = muniView(m);
+const seat = m.seat ? [{ id: m.id, name: m.seat.name, region: m.region ?? 'centro', status: 'ready' as const, coords: [m.seat.longitude, m.seat.latitude] as [number, number] }] : [];
+const things = [
+  v.destinations.length && `${v.destinations.length} ${v.destinations.length === 1 ? 'destino' : 'destinos'}`,
+  v.museums.length && `${v.museums.length} ${v.museums.length === 1 ? 'museo' : 'museos'}`,
+  v.events.length && `${v.events.length} ${v.events.length === 1 ? 'fiesta o evento' : 'fiestas y eventos'}`,
+  v.lodging.length && `${v.lodging.length} hospedajes`,
+].filter(Boolean);
+---
+<article class="mcard" data-region={m.region ?? undefined}>
+  <div class="mcard__media">
+    {v.image ? (
+      <Photo id={v.image} ratio="4/3" sizes={sizes} widths={[400, 640, 900]} />
+    ) : (
+      <div class="mcard__plain"><StateSilhouette places={seat} focus={[m.id]} variant="line" lite /></div>
+    )}
+    {v.puebloMagico && <span class="mcard__pm">Pueblo Mágico</span>}
+  </div>
+  <p class="mcard__reg"><span aria-hidden="true"></span>{m.region ? REGION_LABEL[m.region] : 'Región por confirmar'}</p>
+  <H class="mcard__name"><a href={muniHref(m.slug!)}>{m.canonical_name}</a></H>
+  <p class="mcard__meta">{m.population_2020 ? `${m.population_2020.toLocaleString('es-MX')} habitantes (2020)` : 'Municipio creado en 2024'}{things.length > 0 && ` · ${things.join(' · ')}`}</p>
+</article>
+
+<style>
+  .mcard { position: relative; display: grid; gap: 0.45rem; align-content: start; }
+  .mcard__media { position: relative; border-radius: var(--sc-r-sm); overflow: hidden; aspect-ratio: 4 / 3; }
+  .mcard__media :global(.photo) { height: 100%; }
+  .mcard__media :global(img) { transition: transform 900ms var(--sc-ease-out); }
+  .mcard__plain { height: 100%; display: grid; place-items: center; background: linear-gradient(150deg, var(--slp-region-wash, var(--slp-ivory-2)), var(--slp-region-wash-2, var(--slp-ivory-3))); color: var(--slp-region-ink, var(--sc-ink)); }
+  .mcard__plain :global(.sil) { width: 62%; --sil-ground: rgb(255 255 255 / 0.4); --sil-edge: var(--slp-region-ink, currentColor); --sil-pin-ring: #fff; }
+  .mcard__pm { position: absolute; top: 0.7rem; left: 0.7rem; padding: 0.35rem 0.6rem; border-radius: 999px; background: rgb(246 241 231 / 0.92); color: var(--slp-charcoal); font: 700 0.6rem/1 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; }
+  .mcard__reg { display: inline-flex; align-items: center; gap: 0.4rem; font: 700 0.62rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--slp-region-text, var(--sc-ink-soft)); margin-top: 0.3rem; }
+  .mcard__reg span { width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-ui, var(--sc-ink-soft)); }
+  .mcard__name { font: 600 1.55rem/1.05 var(--sc-font-display); }
+  .mcard__name a { color: inherit; text-decoration: none; }
+  .mcard__name a::after { content: ''; position: absolute; inset: 0; }
+  .mcard__meta { font-size: 0.8rem; color: var(--sc-ink-soft); }
+  .mcard:has(a:focus-visible) .mcard__media { outline: 3px solid var(--slp-region-ui, var(--sc-accent)); outline-offset: 3px; }
+  @media (hover: hover) and (pointer: fine) { .mcard:hover .mcard__media :global(img) { transform: scale(1.04); } .mcard:hover .mcard__name a { text-decoration: underline; text-underline-offset: 0.14em; } }
+</style>

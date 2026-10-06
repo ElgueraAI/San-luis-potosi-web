@@ -1,0 +1,46 @@
+---
+/**
+ * "Todo el estado": the portal's quick entries on the home page (municipalities,
+ * events, museums, archaeology, lodging, food, search), each with its real
+ * count from research/entities. Planning-style boxes, kept quiet so the
+ * cinematic home stays the lead.
+ */
+import { counts, events } from '@/data/portal';
+import { href } from '@/i18n/routes';
+
+const items = [
+  { n: counts.municipalities, t: 'Municipios', s: 'Cada uno con su página y lo que registran las fuentes oficiales', u: href('municipalities') },
+  { n: events.length, t: 'Fiestas y eventos', s: 'Calendario con el estado de cada fecha', u: href('events') },
+  { n: counts.museums, t: 'Museos', s: `Y ${counts.venues} teatros, centros culturales y galerías`, u: href('museums') },
+  { n: counts.archaeology, t: 'Arqueología', s: 'Zonas abiertas según el INAH y sitios documentados', u: href('archaeology') },
+  { n: counts.lodging, t: 'Hospedajes', s: 'Directorio oficial y DENUE, por municipio', u: href('lodging') },
+  { n: counts.foodShown, t: 'Dónde comer', s: 'Cocina regional y directorio', u: href('food') },
+];
+---
+<section id="todo-el-estado" class="psec plinks" data-ground="light" data-tone="utility" aria-labelledby="pl-t">
+  <div class="wrap">
+    <div class="psec__head psec__head--split">
+      <div><p class="label">Todo el estado</p><h2 id="pl-t" class="psec__title">Más allá de los imperdibles</h2></div>
+      <form class="plinks__q" action={href('search')} method="get" role="search">
+        <label class="visually-hidden" for="pl-q">Buscar en el sitio</label>
+        <input id="pl-q" name="q" type="search" placeholder="Busca un municipio, fiesta o museo…" />
+        <button type="submit" class="btn">Buscar</button>
+      </form>
+    </div>
+    <ul class="plinks__grid">
+      {items.map((i) => <li><a href={i.u}><span class="plinks__n">{i.n.toLocaleString('es-MX')}</span><span class="plinks__t">{i.t}</span><span class="plinks__s">{i.s}</span></a></li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .plinks__q { display: flex; gap: 0.5rem; }
+  .plinks__q input { flex: 1; min-width: 0; min-height: var(--slp-tap); padding: 0 0.85rem; border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: var(--sc-canvas); font: 500 0.95rem/1 var(--sc-font-text); color: var(--sc-ink); }
+  .plinks__grid { list-style: none; display: grid; gap: var(--sc-3); grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr)); }
+  .plinks__grid a { display: grid; gap: 0.3rem; height: 100%; padding: var(--sc-5) var(--sc-4); border-radius: var(--sc-r-sm); background: var(--sc-surface); color: inherit; text-decoration: none; box-shadow: inset 0 3px 0 var(--slp-gold-deep); transition: transform 220ms var(--sc-ease-out); }
+  .plinks__grid a:hover { transform: translateY(-2px); }
+  .plinks__grid a:hover .plinks__t { text-decoration: underline; }
+  .plinks__n { font: 500 2.4rem/1 var(--sc-font-display); }
+  .plinks__t { font-weight: 700; }
+  .plinks__s { font-size: 0.8rem; color: var(--sc-ink-soft); }
+</style>

@@ -1,0 +1,65 @@
+---
+/**
+ * Arqueología: INAH is the authority. Open zones (INAH open data) first, with
+ * their pages; documented sites apart, never presented as visitable.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import EntityCard from '@/components/portal/EntityCard.astro';
+import Photo from '@/components/media/Photo.astro';
+import { archaeology, archSlug, museums, ACCESS } from '@/data/portal';
+import { getDestination } from '@/data/research';
+import { archHref, destHref, href } from '@/i18n/routes';
+
+const open = archaeology.filter((a) => a.access_status === 'OPEN_TO_PUBLIC');
+const other = archaeology.filter((a) => a.access_status !== 'OPEN_TO_PUBLIC');
+const archMuseums = museums.filter((m) => /arqueol|antropol/i.test(`${m.subcategory} ${m.canonical_name}`));
+const mezclita = getDestination('M06');
+const IMG: Record<string, string> = { 'arq-tamtoc': 'wc-60066386' };
+---
+<BaseLayout title="Arqueología" description="Zonas arqueológicas de San Luis Potosí según el INAH: Tamtoc y Tamohí abiertas al público, y sitios documentados." image="wc-60066386">
+  <PageHeader label="Qué hacer · Arqueología" title="La Huasteca antes de la Huasteca" lede="Zonas arqueológicas abiertas al público según el INAH y sitios documentados por la investigación. Un sitio registrado no es necesariamente visitable." image="wc-60066386" crumbs={[{ label: 'Qué hacer', href: href('thingsToDo') }, { label: 'Arqueología' }]} />
+
+  <section class="psec" data-ground="dark" data-tone="heritage" aria-labelledby="open-t">
+    <div class="wrap">
+      <div class="psec__head"><p class="label">{ACCESS.OPEN_TO_PUBLIC}</p><h2 id="open-t" class="psec__title">Zonas abiertas al público</h2></div>
+      <ul class="pgrid pgrid--wide">
+        {open.map((a) => (
+          <li>
+            <a class="tile arq__tile" href={archHref(archSlug(a))}>
+              {IMG[a.id] && <Photo id={IMG[a.id]} fill sizes="(max-width: 640px) 92vw, 30rem" widths={[480, 800, 1200]} alt="" />}
+              <span class="tile__body"><span class="tile__sub">{a.municipality} · {a.historical_context}</span><span class="tile__title">{a.canonical_name}</span></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="truth arq__note">Fuente: datos abiertos del INAH (zonas arqueológicas abiertas al público) y Lugares INAH, consultados el 6 de octubre de 2026.</p>
+    </div>
+  </section>
+
+  {other.length > 0 && (
+    <section class="psec" data-ground="light" aria-labelledby="doc-t">
+      <div class="wrap">
+        <div class="psec__head"><p class="label">Documentados · acceso no confirmado</p><h2 id="doc-t" class="psec__title">Sitios documentados</h2><p class="body muted">Estudiados en publicaciones del INAH. No hay confirmación de que reciban visitantes.</p></div>
+        <ul class="pgrid pgrid--ent">{other.map((a) => <li><EntityCard e={a} href={archHref(archSlug(a))} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+
+  {(archMuseums.length > 0 || mezclita) && (
+    <section class="psec" data-ground="ivory" data-tone="stone" aria-labelledby="am-t">
+      <div class="wrap">
+        <div class="psec__head"><p class="label">Museos</p><h2 id="am-t" class="psec__title">Para ver las piezas</h2></div>
+        <ul class="pgrid pgrid--ent">
+          {mezclita && <li><article class="ecard" data-region={mezclita.region}><p class="ecard__type">{mezclita.kind}</p><h3 class="ecard__name"><a href={destHref(mezclita.slug)}>{mezclita.name}</a></h3><p class="ecard__text">{mezclita.description}</p></article></li>}
+          {archMuseums.map((m) => <li><EntityCard e={m} /></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .arq__tile { aspect-ratio: 16 / 10; }
+  .arq__note { margin-top: var(--sc-5); }
+</style>

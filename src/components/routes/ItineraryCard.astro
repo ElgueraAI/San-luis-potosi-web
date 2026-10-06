@@ -1,0 +1,46 @@
+---
+import Photo from '@/components/media/Photo.astro';
+import RouteMini from './RouteMini.astro';
+import { REGION_NAME } from '@/data/regions';
+import { placeName } from '@/data/research';
+import { href } from '@/i18n/routes';
+import type { Itinerary } from '@/data/itineraries';
+
+interface Props { it: Itinerary; featured?: boolean }
+const { it, featured = false } = Astro.props;
+---
+<article class:list={['itc', { 'itc--featured': featured }]} data-region={it.regions.length === 1 ? it.regions[0] : undefined}>
+  <a class="itc__media" href={href('routes', {}, 'es', it.id)} tabindex="-1" aria-hidden="true">
+    <Photo id={it.image} ratio="3/2" sizes="(max-width: 760px) 85vw, 30rem" />
+  </a>
+  <div class="itc__body">
+    <p class="itc__label">{it.label}</p>
+    <h3 class="itc__title display"><a href={href('routes', {}, 'es', it.id)}>{it.title}</a></h3>
+    <p class="itc__dur">{it.duration}</p>
+    <ul class="itc__regions" aria-label="Regiones">
+      {it.regions.map((r) => <li data-region={r}><span aria-hidden="true"></span>{REGION_NAME[r]}</li>)}
+    </ul>
+    <div class="itc__route">
+      <RouteMini stops={it.stops} />
+      <p class="itc__stops"><span class="visually-hidden">Paradas clave: </span>{it.stops.map((s) => placeName(s)).join(' → ')}</p>
+    </div>
+    <a class="arrow" href={href('routes', {}, 'es', it.id)}>Ver la ruta</a>
+  </div>
+</article>
+
+<style>
+  .itc { position: relative; display: grid; gap: var(--sc-4); align-content: start; }
+  .itc__media { display: block; overflow: hidden; border-radius: var(--sc-r-sm); }
+  .itc__media :global(img) { transition: transform 900ms var(--sc-ease-out); }
+  @media (hover: hover) and (pointer: fine) { .itc:hover .itc__media :global(img) { transform: scale(1.03); } }
+  .itc__body { display: grid; gap: 0.6rem; justify-items: start; }
+  .itc__label { font: 700 0.7rem/1 var(--sc-font-text); letter-spacing: 0.18em; text-transform: uppercase; color: var(--slp-gold-deep); }
+  .itc__title { font-size: 1.9rem; line-height: 1.05; }
+  .itc__title a { text-decoration: none; color: inherit; }
+  .itc__dur { font-size: var(--sc-t-sm); font-weight: 650; }
+  .itc__regions { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; font: 650 0.74rem/1.3 var(--sc-font-text); color: var(--sc-ink-soft); }
+  .itc__regions li { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .itc__regions span { width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-ui); }
+  .itc__route { display: grid; grid-template-columns: 7.5rem 1fr; gap: var(--sc-4); align-items: center; width: 100%; padding-block: var(--sc-3); border-block: 1px solid var(--sc-hairline); color: var(--slp-charcoal); }
+  .itc__stops { font-size: 0.8rem; line-height: 1.45; color: var(--sc-ink-soft); }
+</style>

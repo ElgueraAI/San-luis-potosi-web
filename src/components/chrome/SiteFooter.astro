@@ -1,48 +1,63 @@
 ---
-import { t, type Locale } from '@/i18n';
-
-interface Props {
-  locale: Locale;
-}
-const { locale } = Astro.props;
-const year = new Date().getFullYear();
+import { href, regionHref } from '@/i18n/routes';
+import { REGIONS } from '@/data/regions';
+import { weatherConfig } from '@/data/research';
+import Brand from './Brand.astro';
+const year = 2026;
 ---
-<footer class="slp-footer" data-ground="dark" data-chrome="solid">
-  <div class="sc-wrap slp-footer__inner">
-    <p class="slp-footer__mark">{t(locale, 'site.tagline')}</p>
-    <div class="slp-footer__notes">
-      <p>{t(locale, 'footer.note')}</p>
-      <p>{t(locale, 'footer.demo')}</p>
-      <p>© {year} San Luis Potosí · Cuatro mundos</p>
+<footer class="ftr" data-ground="dark">
+  <div class="wrap ftr__grid">
+    <div class="ftr__brand">
+      <Brand />
+      <p class="ftr__tag display">Cuatro mundos. Un San Luis Potosí.</p>
+      <p class="small muted">Proyecto académico sobre distribución inteligente del turismo en San Luis Potosí. No es un sitio oficial del Gobierno del Estado.</p>
     </div>
+    <nav aria-label="Regiones">
+      <p class="label">Regiones</p>
+      <ul>
+        {REGIONS.map((r) => <li data-region={r.id}><a href={regionHref(r.slug)}>{r.name}</a></li>)}
+      </ul>
+    </nav>
+    <nav aria-label="Descubre y planea">
+      <p class="label">Descubre y planea</p>
+      <ul>
+        <li><a href={href('map')}>Mapa</a></li>
+        <li><a href={href('seasons')}>Temporadas</a></li>
+        <li><a href={href('routes')}>Rutas</a></li>
+        <li><a href={href('guides')}>Guías y recursos</a></li>
+        <li><a href={href('plan')}>Planea tu viaje</a></li>
+        <li><a href={href('myRoute')}>Mi Ruta</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="label">Datos y créditos</p>
+      <ul>
+        <li><a href={href('credits')}>Créditos fotográficos y licencias</a></li>
+        <li><a href={href('credits', {}, 'es', 'fuentes')}>Fuentes oficiales</a></li>
+      </ul>
+      <p class="tiny muted ftr__note">
+        Información de destinos: Secretaría de Turismo del Estado de San Luis Potosí, SECTUR, INAH, INEGI y SEGAM, según cada ficha.
+        Fotografías: autores de Wikimedia Commons y Pexels, con sus licencias. {weatherConfig.attribution}.
+        Mapa: © OpenStreetMap contributors, OpenFreeMap.
+      </p>
+    </div>
+  </div>
+  <div class="wrap ftr__base tiny muted">
+    <span>© {year} Proyecto académico · San Luis Potosí</span>
+    <span>Los datos marcados como aproximados o pendientes no son información oficial.</span>
   </div>
 </footer>
 
 <style>
-  .slp-footer {
-    padding-block: var(--sc-9) calc(var(--sc-8) + var(--slp-line-h));
-    border-top: 1px solid var(--sc-hairline);
-  }
-  .slp-footer__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-    gap: var(--sc-7);
-    align-items: end;
-  }
-  .slp-footer__mark {
-    font-family: var(--sc-font-display);
-    font-size: var(--sc-t-2xl);
-    font-weight: 600;
-    line-height: 1.02;
-    max-width: 14ch;
-  }
-  .slp-footer__notes {
-    display: grid;
-    gap: var(--sc-2);
-    font-size: var(--sc-t-sm);
-    color: var(--sc-ink-soft);
-  }
-  @media (max-width: 860px) {
-    .slp-footer__inner { grid-template-columns: 1fr; }
-  }
+  .ftr { padding: var(--sc-9) 0 var(--sc-6); }
+  .ftr__grid { display: grid; gap: var(--sc-7); grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .ftr__grid { grid-template-columns: 1.4fr 0.8fr 1fr 1.3fr; } }
+  .ftr__brand { display: grid; gap: var(--sc-4); align-content: start; }
+  .ftr__tag { font-size: var(--sc-t-xl); }
+  .ftr ul { list-style: none; margin-top: var(--sc-3); }
+  .ftr li a { display: inline-flex; align-items: center; min-height: 40px; text-decoration: none; font-weight: 550; }
+  .ftr li[data-region] a::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-dark); margin-right: 0.6rem; }
+  @media (hover: hover) and (pointer: fine) { .ftr li a:hover { text-decoration: underline; text-underline-offset: 0.3em; } }
+  .ftr__note { margin-top: var(--sc-4); max-width: 34ch; }
+  .ftr__base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sc-3); margin-top: var(--sc-8); padding-top: var(--sc-4); border-top: 1px solid var(--sc-hairline); }
 </style>

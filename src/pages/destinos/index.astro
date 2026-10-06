@@ -1,0 +1,26 @@
+---
+/** All researched destinations, grouped by region, uniform 4:5 cards. */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import DestinationCard from '@/components/ui/DestinationCard.astro';
+import { destinations } from '@/data/research';
+import { REGIONS } from '@/data/regions';
+import { href, regionHref } from '@/i18n/routes';
+---
+<BaseLayout title="Todos los destinos" description={`${destinations.length} destinos de San Luis Potosí investigados con fuentes oficiales, por región.`}>
+  <PageHeader label="Destinos" title="Todos los destinos" lede={`${destinations.length} destinos con información verificada en las cuatro regiones. Para el resto del estado, consulta los municipios.`} tone="stone" ground="ivory" crumbs={[{ label: 'Destinos' }]}>
+    <p><a class="arrow" href={href('municipalities')}>Los 59 municipios</a></p>
+  </PageHeader>
+  <nav class="pnav" aria-label="Regiones"><ul class="wrap">{REGIONS.map((r) => <li><a href={`#${r.id}`}>{r.name}</a></li>)}</ul></nav>
+  {REGIONS.map((r, i) => (
+    <section id={r.id} class="psec" data-ground={i % 2 ? 'ivory' : 'light'} data-tone={i % 2 ? 'region' : undefined} data-region={r.id} aria-labelledby={`dr-${r.id}`}>
+      <div class="wrap">
+        <div class="psec__head psec__head--split">
+          <div><p class="label">Región</p><h2 id={`dr-${r.id}`} class="psec__title">{r.name}</h2></div>
+          <a class="arrow" href={regionHref(r.slug)}>Explora {r.nameIn}</a>
+        </div>
+        <ul class="pgrid">{destinations.filter((d) => d.region === r.id).map((d) => <li><DestinationCard d={d} ratio="4/5" size="sm" sizes="(max-width: 640px) 92vw, 18rem" headingLevel="h3" /></li>)}</ul>
+      </div>
+    </section>
+  ))}
+</BaseLayout>

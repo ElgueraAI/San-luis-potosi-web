@@ -1,0 +1,91 @@
+---
+/**
+ * Practical planning from the official brochures: distances (only rows the
+ * brochures do not contradict), official recommendations, what to pack and
+ * the Secretaría de Turismo contact. `hub` limits distances to one origin.
+ */
+import { distances, recommendationsFor, brochureFact, type RegionId } from '@/data/research';
+
+interface Props { hubs?: string[]; region?: RegionId; limit?: number; showContact?: boolean; showPacking?: boolean; showDist?: boolean; showRecs?: boolean }
+const { hubs = ['Capital (San Luis Potosí)'], region, limit = 8, showContact = true, showPacking = true, showDist = true, showRecs = true } = Astro.props;
+
+// Pairs the brochures disagree on (research: brochure-tables inconsistencies).
+const CONFLICT = /(Capital.*Ciudad Valles$|Ciudad Valles.*San Luis Potosí Capital|Matehuala.*Rioverde|Rioverde.*Matehuala|Matehuala.*San Luis Potosí|Capital.*Matehuala)/;
+const groups = hubs.map((h) => ({
+  hub: h.replace('Capital (San Luis Potosí)', 'San Luis Potosí (capital)'),
+  rows: distances.filter((d) => d.from === h && !CONFLICT.test(`${d.from} ${d.to}`)).slice(0, limit),
+}));
+const recs = recommendationsFor(region ?? 'centro');
+const safety = brochureFact('bt-142');
+const packing = brochureFact('bt-143');
+const contact = brochureFact('bt-144');
+---
+<div class="prac">
+  {showDist && groups.some((g) => g.rows.length) && <section class="prac__block prac__dist" id="movilidad" aria-labelledby="prac-dist">
+    <h3 id="prac-dist" class="display prac__h">Distancias por carretera</h3>
+    {groups.map((g) => (
+      <table class="prac__table">
+        <caption>Desde {g.hub}</caption>
+        <thead><tr><th scope="col">Destino</th><th scope="col">Distancia</th><th scope="col">Tiempo aprox.</th></tr></thead>
+        <tbody>
+          {g.rows.map((r) => (
+            <tr>
+              <th scope="row">{r.to}{r.highway ? <span class="prac__hw"> · carr. {r.highway}</span> : null}</th>
+              <td>{r.km} km{r.unpaved ? <span class="prac__hw"> ({r.unpaved} km sin pavimentar)</span> : null}</td>
+              <td>{r.time}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ))}
+    <p class="source">Tablas de distancias de los folletos oficiales de la Secretaría de Turismo del Estado. Tiempos aproximados; verifica el estado de los caminos antes de salir. Se omiten los tramos en que dos folletos dan cifras distintas.</p>
+  </section>}
+
+  {showRecs && <section class="prac__block" aria-labelledby="prac-rec">
+    <h3 id="prac-rec" class="display prac__h">Recomendaciones oficiales</h3>
+    <ul class="prac__list">
+      {recs.map((r) => <li>{r}</li>)}
+      {(!region || region === 'huasteca') && safety && <li>{(safety.value as { text: string }).text}</li>}
+    </ul>
+    {showPacking && packing && (!region || region === 'huasteca') && (
+      <>
+        <p class="label prac__sub">Qué llevar a la Huasteca</p>
+        <ul class="prac__list prac__list--inline">
+          {(packing.value as { items: string[] }).items.map((i) => <li>{i[0].toUpperCase() + i.slice(1)}</li>)}
+        </ul>
+      </>
+    )}
+    <p class="source">Folletos oficiales de la Secretaría de Turismo del Estado de San Luis Potosí.</p>
+  </section>}
+
+  {showContact && contact && (
+    <section class="prac__block" aria-labelledby="prac-contact">
+      <h3 id="prac-contact" class="display prac__h">Contacto oficial</h3>
+      <p class="small">Secretaría de Turismo del Estado de San Luis Potosí</p>
+      <ul class="prac__list">
+        {(contact.value as { text: string }).text.replace(/^SEDE Secretaría de Turismo:\s*/, 'Sede: ').split(/;\s*/).map((line) => <li>{line.replace(/\.$/, '')}</li>)}
+      </ul>
+      <p class="source">Datos de contacto impresos en el folleto oficial de la Huasteca.</p>
+    </section>
+  )}
+</div>
+
+<style>
+  .prac { display: grid; gap: var(--sc-7) var(--sc-6); }
+  @media (min-width: 960px) { .prac { grid-template-columns: 1.3fr 1fr; } .prac__dist { grid-row: span 2; } }
+  .prac__block { display: grid; gap: var(--sc-4); align-content: start; }
+  .prac__h { font-size: 1.75rem; }
+  .prac__table { width: 100%; border-collapse: collapse; font-size: var(--sc-t-sm); }
+  .prac__table caption { text-align: left; font: 700 0.72rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); padding-bottom: 0.6rem; }
+  .prac__table th, .prac__table td { text-align: left; padding: 0.6rem 0.4rem 0.6rem 0; border-bottom: 1px solid var(--sc-hairline); vertical-align: top; font-variant-numeric: tabular-nums; }
+  .prac__table thead th { font: 700 0.64rem/1 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); border-bottom-color: var(--sc-hairline-strong); }
+  .prac__table tbody th { font-weight: 650; }
+  .prac__table td { white-space: nowrap; }
+  .prac__hw { font-weight: 450; color: var(--sc-ink-soft); font-size: 0.78rem; white-space: normal; }
+  .prac__list { list-style: none; display: grid; gap: 0; border-top: 1px solid var(--sc-hairline); }
+  .prac__list li { padding: 0.65rem 0; border-bottom: 1px solid var(--sc-hairline); font-size: var(--sc-t-sm); }
+  .prac__list--inline { display: flex; flex-wrap: wrap; gap: 0.4rem; border: 0; }
+  .prac__list--inline li { padding: 0.35rem 0.7rem; border: 1px solid var(--sc-hairline-strong); border-radius: 999px; font-size: 0.8rem; }
+  .prac__sub { margin-top: var(--sc-3); }
+  @media (max-width: 520px) { .prac__table td { white-space: normal; } }
+</style>

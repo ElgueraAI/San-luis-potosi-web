@@ -1,0 +1,38 @@
+---
+/**
+ * Hospedaje: discovery layer, not a booking platform. Official directory
+ * (Estadía, Secretaría de Turismo) first, then INEGI DENUE lodging records.
+ * No ratings, stars, prices or availability: none is published by a current
+ * authoritative source.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import Directory from '@/components/portal/Directory.astro';
+import { lodging, REGION_LABEL, context2022 } from '@/data/portal';
+import { href } from '@/i18n/routes';
+
+const items = [...lodging].sort((a, b) => Number(!!b.official_directory) - Number(!!a.official_directory) || a.canonical_name.localeCompare(b.canonical_name, 'es'));
+const official = lodging.filter((l) => l.official_directory).length;
+const subtypes = [...new Set(lodging.map((l) => l.subcategory).filter(Boolean))] as string[];
+const byRegion = Object.entries(REGION_LABEL).map(([id, l]) => ({ id, l, n: lodging.filter((x) => x.region === id).length }));
+const rooms = context2022.figures.find((f) => f.key === 'hotel_rooms_state');
+---
+<BaseLayout title="Hospedaje" description={`${lodging.length} hospedajes en San Luis Potosí: directorio oficial Estadía y registros del DENUE (INEGI), por municipio.`}>
+  <PageHeader label="Planifica · Hospedaje" title="Dónde dormir" lede={`${official} hospedajes del directorio oficial Estadía y ${lodging.length - official} registros del DENUE de INEGI, en todo el estado. Este sitio no vende ni reserva: enlaza a la información oficial.`} tone="utility" ground="light" crumbs={[{ label: 'Planifica tu viaje', href: href('plan') }, { label: 'Hospedaje' }]}>
+    <ul class="lo__stats">{byRegion.map((r) => <li data-region={r.id}><b>{r.n}</b> {r.l}</li>)}</ul>
+  </PageHeader>
+
+  <section class="psec psec--tight" data-ground="light" data-tone="utility" aria-labelledby="lo-t">
+    <div class="wrap">
+      <h2 id="lo-t" class="visually-hidden">Directorio de hospedaje</h2>
+      <Directory name="lodging" items={items} types={subtypes.map((s) => [s, s])} label="hospedaje" total={lodging.length} note="Primero el directorio oficial Estadía (Secretaría de Turismo); después registros DENUE (INEGI, alta hasta 2025), que no confirman que el establecimiento opere hoy. Sin calificaciones, precios ni disponibilidad." />
+      {rooms && <p class="truth lo__ctx">Contexto histórico: {rooms.value.toLocaleString('es-MX')} cuartos de hotel en el estado en {context2022.year} (folleto «El Sector Turismo», Secretaría de Turismo de SLP, con datos DataTur). No describe la oferta actual.</p>}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lo__stats { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem; margin-top: var(--sc-3); font-size: 0.9rem; }
+  .lo__stats b { font: 600 1.6rem/1 var(--sc-font-display); color: var(--slp-region-ui); margin-right: 0.3rem; }
+  .lo__ctx { margin-top: var(--sc-6); }
+</style>

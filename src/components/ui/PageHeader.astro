@@ -1,0 +1,59 @@
+---
+/**
+ * Interior page header: editorial title block with an optional photo band.
+ * `crumbs` gives a multi-level breadcrumb (home is added first); `tone` sets
+ * the ground for pages without a photo (a page family's atmosphere);
+ * `region` tints the label and rules.
+ */
+import Photo from '@/components/media/Photo.astro';
+import { href } from '@/i18n/routes';
+
+interface Props {
+  label: string; title: string; lede?: string; image?: string | null; focal?: string; crumb?: string; compact?: boolean;
+  crumbs?: { label: string; href?: string }[]; tone?: string; region?: string | null; ground?: 'dark' | 'light' | 'ivory';
+}
+const { label, title, lede, image, focal = '50% 50%', crumb, compact = false, crumbs, tone, region, ground } = Astro.props;
+const trail = crumbs ?? [{ label: crumb ?? title }];
+---
+<header
+  class:list={['ph', { 'ph--img': !!image, 'ph--compact': compact }]}
+  data-ground={image ? 'dark' : ground ?? 'light'}
+  data-tone={image ? undefined : tone}
+  data-region={region ?? undefined}
+>
+  {image && <Photo id={image} fill eager sizes="100vw" focal={focal} />}
+  {image && <div class="ph__shade" aria-hidden="true"></div>}
+  <div class="wrap ph__in">
+    <nav class="tiny ph__crumbs" aria-label="Ruta de navegación">
+      <ol>
+        <li><a href={href('home')}>Inicio</a></li>
+        {trail.map((c, i) => (
+          <li>{c.href && i < trail.length - 1 ? <a href={c.href}>{c.label}</a> : <span aria-current={i === trail.length - 1 ? 'page' : undefined}>{c.label}</span>}</li>
+        ))}
+      </ol>
+    </nav>
+    <p class="label ph__label">{label}</p>
+    <h1 class="display ph__title">{title}</h1>
+    {lede && <p class="lede ph__lede">{lede}</p>}
+    <slot />
+  </div>
+</header>
+
+<style>
+  .ph { position: relative; padding: calc(var(--slp-header-h) + var(--sc-8)) 0 var(--sc-7); isolation: isolate; overflow: hidden; }
+  .ph--img { min-height: 62svh; display: grid; align-content: end; padding-bottom: var(--sc-8); background: var(--slp-night); }
+  .ph__shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, color-mix(in srgb, var(--slp-region-deep, #0c1210) 88%, transparent), rgb(12 18 16 / 0.2) 60%, rgb(12 18 16 / 0.45)); }
+  .ph__in { position: relative; z-index: 2; display: grid; gap: var(--sc-4); justify-items: start; }
+  .ph__crumbs { color: var(--sc-ink-soft); }
+  .ph__crumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.2rem 0; }
+  .ph__crumbs li + li::before { content: '/'; margin: 0 0.45rem; opacity: 0.6; }
+  .ph--img .ph__crumbs, .ph--img .ph__label { color: rgb(246 241 231 / 0.85); }
+  .ph__crumbs a { color: inherit; }
+  .ph__label { color: var(--slp-region-text, var(--sc-ink-soft)); }
+  .ph__title { font-size: clamp(2.8rem, 1.6rem + 5vw, 6.4rem); line-height: 0.95; max-width: 18ch; text-wrap: balance; }
+  .ph__lede { max-width: 44rem; }
+  .ph--compact { padding: calc(var(--slp-header-h) + var(--sc-5)) 0 var(--sc-4); }
+  .ph--compact .ph__in { gap: var(--sc-2); }
+  .ph--compact .ph__title { font-size: clamp(2.2rem, 1.6rem + 2.4vw, 3.6rem); }
+  .ph--compact .ph__lede { font-size: var(--sc-t-base); }
+</style>

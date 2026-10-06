@@ -1,0 +1,107 @@
+---
+/**
+ * Destinos imperdibles: an editorial mosaic with mixed ratios (portrait,
+ * landscape, square, one full-width), balanced across the four regions.
+ * Followed by "Más allá de los lugares conocidos": lesser-known places with
+ * verified descriptions (editorial priority, never a popularity claim).
+ */
+import DestinationCard from '@/components/ui/DestinationCard.astro';
+import Photo from '@/components/media/Photo.astro';
+import RouteButton from '@/components/ui/RouteButton.astro';
+import { getDestination, beyondTheKnown, type Destination } from '@/data/research';
+import { REGION_NAME } from '@/data/regions';
+import { destHref, href } from '@/i18n/routes';
+
+const pick = (id: string) => getDestination(id)!;
+const items: { d: Destination; img?: string; ratio: string; cls: string; size: 'lg' | 'md' | 'sm' }[] = [
+  { d: pick('H01'), ratio: '4/3', cls: 'm1', size: 'lg' },
+  { d: pick('A01'), img: 'wc-119874344', ratio: '4/5', cls: 'm2', size: 'md' },
+  { d: pick('C03'), img: 'wc-81112902', ratio: '3/4', cls: 'm3', size: 'md' },
+  { d: pick('M01'), ratio: '16/10', cls: 'm4', size: 'lg' },
+  { d: pick('H08'), img: 'wc-29767259', ratio: '4/5', cls: 'm5', size: 'md' },
+  { d: pick('A08'), ratio: '1/1', cls: 'm6', size: 'sm' },
+  { d: pick('H16'), ratio: '3/4', cls: 'm7', size: 'sm' },
+];
+const wide = pick('C10');
+const beyond = beyondTheKnown()
+  .filter((d) => !['A08'].includes(d.id))
+  .sort((a, b) => a.id.localeCompare(b.id));
+// interleave regions so the rail never reads as one region's list
+const byRegion = ['altiplano', 'centro', 'zona-media', 'huasteca'].map((r) => beyond.filter((d) => d.region === r));
+const rail: Destination[] = [];
+for (let i = 0; rail.length < 12 && byRegion.some((l) => l[i]); i++) byRegion.forEach((l) => l[i] && rail.length < 12 && rail.push(l[i]));
+---
+<section id="que-hacer" class="must section" data-ground="light" aria-labelledby="must-title">
+  <div class="wrap section-head section-head--split">
+    <div>
+      <p class="label">Qué hacer</p>
+      <h2 id="must-title" class="display display--lg">Destinos imperdibles.</h2>
+    </div>
+    <p class="body muted">Cascadas, reales de minas, barroco y manantiales: una selección por las cuatro regiones, con información de fuentes oficiales.</p>
+  </div>
+
+  <div class="wrap must__grid">
+    {items.map((it) => (
+      <DestinationCard d={it.d} imageId={it.img} ratio={it.ratio} size={it.size} class={`must__item ${it.cls}`} sizes="(max-width: 900px) 92vw, 45vw" />
+    ))}
+  </div>
+
+  <article class="must__wide" data-region={wide.region} data-ground="dark" data-reveal>
+    <Photo id={wide.media.hero} fill sizes="100vw" focal="50% 55%" />
+    <div class="must__wide-shade" aria-hidden="true"></div>
+    <div class="wrap must__wide-text">
+      <p class="label"><span class="must__reg">{REGION_NAME[wide.region]}</span> · {wide.kind}</p>
+      <h3 class="display display--lg"><a href={destHref(wide.slug)}>{wide.name}</a></h3>
+      <p class="must__wide-desc">{wide.description}</p>
+      <div class="must__wide-actions">
+        <a class="btn btn--light" href={destHref(wide.slug)}>Ver destino</a>
+        <RouteButton id={wide.id} name={wide.name} />
+      </div>
+    </div>
+  </article>
+
+  <div class="wrap beyond" id="mas-alla">
+    <div class="beyond__head">
+      <div>
+        <p class="label">Más allá de los lugares conocidos</p>
+        <h3 class="display display--md">Repartir el viaje también es descubrir.</h3>
+      </div>
+      <p class="small muted beyond__note">Pueblos, grutas, haciendas y talleres de las cuatro regiones que combinan bien con los destinos más visitados. Todos con descripción de fuente oficial.</p>
+    </div>
+    <ul class="rail beyond__rail" aria-label="Destinos para descubrir">
+      {rail.map((d) => <li><DestinationCard d={d} ratio="4/5" size="sm" sizes="(max-width: 760px) 78vw, 22rem" showText /></li>)}
+    </ul>
+    <a class="arrow" href={href('map')}>Ver todos en el mapa</a>
+  </div>
+</section>
+
+<style>
+  .must { padding-bottom: var(--sc-section); }
+  .must__grid { display: grid; gap: clamp(2.5rem, 5vw, 4rem) var(--sc-6); }
+  @media (min-width: 900px) {
+    .must__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; }
+    .must__grid :global(.m1) { grid-column: 1 / span 7; }
+    .must__grid :global(.m2) { grid-column: 9 / span 4; margin-top: clamp(4rem, 10vw, 9rem); }
+    .must__grid :global(.m3) { grid-column: 1 / span 4; }
+    .must__grid :global(.m4) { grid-column: 6 / span 7; margin-top: clamp(2rem, 6vw, 6rem); }
+    .must__grid :global(.m5) { grid-column: 2 / span 4; }
+    .must__grid :global(.m6) { grid-column: 7 / span 3; margin-top: clamp(4rem, 9vw, 8rem); }
+    .must__grid :global(.m7) { grid-column: 10 / span 3; }
+  }
+  @media (min-width: 600px) and (max-width: 899px) {
+    .must__grid { grid-template-columns: 1fr 1fr; }
+    .must__grid :global(.m1), .must__grid :global(.m4) { grid-column: 1 / -1; }
+  }
+  .must__wide { position: relative; margin-top: clamp(4rem, 9vw, 8rem); min-height: min(88svh, 50rem); display: grid; align-content: end; isolation: isolate; overflow: hidden; }
+  .must__wide-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgb(14 18 17 / 0.82), rgb(14 18 17 / 0.1) 60%), linear-gradient(90deg, rgb(14 18 17 / 0.5), transparent 60%); }
+  .must__wide-text { position: relative; z-index: 2; padding-block: clamp(3rem, 7vw, 5.5rem); display: grid; gap: var(--sc-4); justify-items: start; }
+  .must__wide-text h3 a { color: inherit; text-decoration: none; }
+  .must__wide-text .label { color: rgb(246 241 231 / 0.85); }
+  .must__reg { color: var(--slp-region-dark); }
+  .must__wide-desc { max-width: 40rem; color: rgb(246 241 231 / 0.9); }
+  .must__wide-actions { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
+  .beyond { margin-top: clamp(4rem, 8vw, 7rem); display: grid; gap: var(--sc-6); }
+  .beyond__head { display: grid; gap: var(--sc-4); }
+  @media (min-width: 900px) { .beyond__head { grid-template-columns: 1.2fr 0.8fr; align-items: end; gap: var(--sc-7); } }
+  .beyond__rail { list-style: none; }
+</style>

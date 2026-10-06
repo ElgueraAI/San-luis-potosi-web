@@ -1,0 +1,105 @@
+---
+/**
+ * Four regions: asymmetric editorial spreads, not four equal cards.
+ * Altiplano wide-left, Centro and Zona Media as an offset portrait pair,
+ * Huasteca full-bleed as the section's last, largest frame.
+ */
+import Photo from '@/components/media/Photo.astro';
+import { REGIONS } from '@/data/regions';
+import { municipalityCount, regionElevation, getDestination, profile } from '@/data/research';
+import { regionHref } from '@/i18n/routes';
+import { fmtM } from '@/lib/profile';
+
+const info = Object.fromEntries(
+  REGIONS.map((r) => {
+    const e = regionElevation(r.id);
+    const places = r.highlights.map((id) => getDestination(id)?.name).filter(Boolean).slice(0, 3);
+    return [r.id, { munis: municipalityCount(r.id), elev: `${fmtM(e.min)} a ${fmtM(e.max)}`, places }];
+  }),
+);
+const [alt, cen, med, hua] = REGIONS;
+---
+<section id="regiones" class="regions section" data-ground="light" aria-labelledby="regions-title">
+  <div class="wrap section-head section-head--split">
+    <div>
+      <p class="label">Regiones</p>
+      <h2 id="regions-title" class="display display--lg">Cuatro mundos en un mismo mapa.</h2>
+    </div>
+    <p class="body muted">Cada región tiene su paisaje, su luz y su manera de viajar. Empieza por la que te llame y combina las demás.</p>
+  </div>
+
+  <div class="wrap regions__grid">
+    {[alt, cen, med].map((r, i) => (
+      <article class:list={['reg', `reg--${r.id}`]} data-region={r.id} data-reveal>
+        <a class="reg__media" href={regionHref(r.slug)} tabindex="-1" aria-hidden="true">
+          <Photo id={r.card} ratio={i === 0 ? '16/10' : '4/5'} sizes={i === 0 ? '(max-width: 900px) 100vw, 62vw' : '(max-width: 900px) 100vw, 34vw'} />
+        </a>
+        <div class="reg__text">
+          <p class="reg__label"><span class="reg__rule" aria-hidden="true"></span>{r.officialName}</p>
+          <h3 class="reg__name display"><a href={regionHref(r.slug)}>{r.name}</a></h3>
+          <p class="reg__identity">{r.identity}</p>
+          <p class="reg__context">{info[r.id].munis} municipios · {info[r.id].places.join(', ')}</p>
+          <p class="reg__context reg__context--alt">{info[r.id].elev} en el transecto</p>
+          <a class="arrow reg__cta" href={regionHref(r.slug)}>Explora {r.nameIn}</a>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <article class="reg reg--huasteca reg--wide" data-region={hua.id} data-ground="dark" data-reveal>
+    <a class="reg__media" href={regionHref(hua.slug)} tabindex="-1" aria-hidden="true">
+      <Photo id={hua.card} fill sizes="100vw" focal="50% 45%" />
+    </a>
+    <div class="reg__shade" aria-hidden="true"></div>
+    <div class="wrap reg__overlay">
+      <div class="reg__text">
+        <p class="reg__label"><span class="reg__rule" aria-hidden="true"></span>{hua.officialName}</p>
+        <h3 class="reg__name display"><a href={regionHref(hua.slug)}>{hua.name}</a></h3>
+        <p class="reg__identity">{hua.identity}</p>
+        <p class="reg__context">{info.huasteca.munis} municipios · {info.huasteca.places.join(', ')}</p>
+        <p class="reg__context reg__context--alt">{info.huasteca.elev} en el transecto</p>
+        <a class="arrow reg__cta" href={regionHref(hua.slug)}>Explora {hua.nameIn}</a>
+      </div>
+    </div>
+  </article>
+  <p class="wrap source regions__src">Municipios por región: PDU-SLP. Altitudes mínima y máxima del tramo regional del transecto {profile.sourceShort}; no representan toda la región.</p>
+</section>
+
+<style>
+  .regions { padding-bottom: 0; }
+  .regions__grid { display: grid; gap: clamp(3rem, 6vw, 5.5rem) var(--sc-6); }
+  @media (min-width: 900px) {
+    .regions__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .reg--altiplano { grid-column: 1 / -1; grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .reg--altiplano .reg__media { grid-column: 1 / span 8; }
+    .reg--altiplano .reg__text { grid-column: 9 / -1; align-self: end; }
+    .reg--centro { grid-column: 1 / span 6; }
+    .reg--zona-media { grid-column: 8 / span 5; margin-top: clamp(4rem, 12vw, 12rem); }
+  }
+  .reg { display: grid; gap: var(--sc-5); position: relative; }
+  .reg__media { position: relative; display: block; overflow: hidden; border-radius: var(--sc-r-sm); }
+  /* each region keeps its colour: a rule at the photo's foot and its deep tone in the name */
+  .reg:not(.reg--wide) .reg__media::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: linear-gradient(90deg, var(--slp-region-ui), var(--slp-region-wash-2)); }
+  .reg:not(.reg--wide) .reg__name { color: var(--slp-region-deep); }
+  .reg__media :global(img) { transition: transform 1200ms var(--sc-ease-out); }
+  @media (hover: hover) and (pointer: fine) { .reg:hover .reg__media :global(img) { transform: scale(1.03); } }
+  .reg__text { display: grid; gap: 0.7rem; justify-items: start; max-width: 32rem; }
+  .reg__label { display: inline-flex; align-items: center; gap: 0.75rem; font: 700 0.72rem/1 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; color: var(--slp-region-text); }
+  .reg__rule { width: 2.2rem; height: 2px; background: var(--slp-region-ui); }
+  .reg__name { font-size: var(--slp-t-region); line-height: 0.9; letter-spacing: -0.02em; }
+  .reg__name a { text-decoration: none; color: inherit; }
+  .reg__identity { font: italic 500 clamp(1.3rem, 1.1rem + 0.8vw, 1.75rem)/1.3 var(--sc-font-display); max-width: 30ch; }
+  .reg__context { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+  .reg__context--alt { margin-top: -0.4rem; }
+  .reg__cta { color: var(--sc-ink); margin-top: 0.2rem; }
+
+  .reg--wide { margin-top: clamp(4rem, 9vw, 8rem); min-height: min(92svh, 56rem); align-content: end; isolation: isolate; overflow: hidden; }
+  .reg--wide .reg__media { position: absolute; inset: 0; border-radius: 0; }
+  .reg__shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, color-mix(in srgb, var(--slp-region-deep) 90%, transparent) 0%, color-mix(in srgb, var(--slp-region-deep) 40%, transparent) 45%, transparent 70%), linear-gradient(90deg, color-mix(in srgb, var(--slp-region-deep) 55%, transparent), transparent 55%); pointer-events: none; }
+  .reg__overlay { position: relative; z-index: 2; padding-block: clamp(3rem, 8vw, 6rem); }
+  .reg--wide .reg__context { color: rgb(246 241 231 / 0.85); }
+  .regions__src { padding-block: var(--sc-4) var(--sc-6); }
+  @media (max-width: 899px) {
+    .reg--wide { min-height: 38rem; }
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+/**
+ * Qué hacer: the thematic discovery hub. Keeps the "¿Qué te mueve?" carousel
+ * (interest cards filtering destinations) as the gateway, then the category
+ * tree (src/data/thingsToDo.ts) as editorial tiles with their subcategories.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import Interests from '@/components/home/Interests.astro';
+import Photo from '@/components/media/Photo.astro';
+import { THINGS } from '@/data/thingsToDo';
+import { href, tdHref } from '@/i18n/routes';
+---
+<BaseLayout title="Qué hacer" description="Naturaleza, cultura, gastronomía, arte, historia, arqueología, pueblos, descanso y vida nocturna en San Luis Potosí, con datos de fuentes oficiales.">
+  <PageHeader
+    label="Qué hacer"
+    title="Qué hacer en San Luis Potosí"
+    lede="Elige por lo que te mueve o entra por tema. Cada categoría reúne destinos investigados, museos, fiestas y servicios registrados por fuentes oficiales."
+    image="px-14842050"
+    focal="50% 35%"
+    crumbs={[{ label: 'Qué hacer' }]}
+  />
+
+  <nav class="pnav" aria-label="Categorías">
+    <ul class="wrap">{THINGS.map((c) => <li><a href={tdHref(c.id)}>{c.short}</a></li>)}<li><a href={href('experiences')}>Experiencias</a></li></ul>
+  </nav>
+
+  <Interests />
+
+  <section class="psec" data-ground="light" aria-labelledby="cats-t">
+    <div class="wrap">
+      <div class="psec__head psec__head--split">
+        <div><p class="label">Por tema</p><h2 id="cats-t" class="psec__title">Diez maneras de recorrer el estado</h2></div>
+        <p class="body muted">Cada tema se abre en subtemas; solo aparecen los que tienen datos de fuentes oficiales.</p>
+      </div>
+      <ul class="pgrid tdh__grid">
+        {THINGS.map((c) => (
+          <li class="tdh">
+            <a class="tile" href={tdHref(c.id)}>
+              <Photo id={c.image} fill sizes="(max-width: 640px) 92vw, (max-width: 1100px) 45vw, 22rem" widths={[480, 720, 960]} alt="" />
+              <span class="tile__body">
+                <span class="tile__title">{c.label}</span>
+                <span class="tile__sub">{c.subs.length} {c.subs.length === 1 ? 'subtema' : 'subtemas'}</span>
+              </span>
+            </a>
+            <ul class="tdh__subs" aria-label={`Subtemas de ${c.label}`}>
+              {c.subs.map((s) => <li><a href={tdHref(c.id, s.id)}>{s.label}</a></li>)}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tdh__grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
+  .tdh { display: grid; gap: var(--sc-3); align-content: start; }
+  .tdh__subs { list-style: none; display: flex; flex-wrap: wrap; gap: 0.15rem 0.9rem; font-size: 0.82rem; font-weight: 600; }
+  .tdh__subs a { color: var(--sc-ink-soft); text-decoration: none; }
+  .tdh__subs a:hover { color: var(--sc-ink); text-decoration: underline; }
+</style>

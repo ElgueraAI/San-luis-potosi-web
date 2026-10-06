@@ -1,0 +1,90 @@
+---
+/**
+ * Credits: every production photograph (research/media-registry/attributions.json
+ * via src/data/generated/media.json), the official data sources, and the map
+ * and weather attributions. Grouped attribution, as the licences permit.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import lib from '@/data/generated/media.json';
+import { sources, profile, weatherConfig, mapAttribution } from '@/data/research';
+import { REGION_NAME } from '@/data/regions';
+
+type Rec = (typeof lib.assets)[keyof typeof lib.assets];
+const assets = Object.values(lib.assets as Record<string, Rec>).sort((a, b) => (a.place_id ?? '').localeCompare(b.place_id ?? ''));
+const thirdParty = assets.filter((a) => a.third_party_rights);
+const official = sources.filter((s) => s.url && /gob|inegi|inah|sectur|slp|conanp|segam/i.test(`${s.domain} ${s.institution}`));
+---
+<BaseLayout title="Créditos, fuentes y licencias" description="Créditos fotográficos, licencias y fuentes oficiales de datos del proyecto San Luis Potosí: cuatro mundos.">
+  <PageHeader label="Créditos" title="Créditos, fuentes y licencias." lede="Este proyecto académico usa fotografías con licencias abiertas y datos de fuentes oficiales. Aquí está el registro completo." />
+
+  <section class="section section--tight" data-ground="light" aria-labelledby="ph-t">
+    <div class="wrap cr">
+      <div class="cr__intro">
+        <h2 id="ph-t" class="display display--md">Fotografías</h2>
+        <p class="small muted">{assets.length} fotografías de Wikimedia Commons y Pexels. En el sitio se muestran recortadas y redimensionadas: las obras CC BY-SA se publican como derivados bajo la misma licencia. Las de Pexels no requieren atribución; se acreditan por cortesía.</p>
+      </div>
+      <table class="cr__t">
+        <thead><tr><th scope="col">Lugar</th><th scope="col">Autor</th><th scope="col">Licencia</th><th scope="col">Fuente</th></tr></thead>
+        <tbody>
+          {assets.map((a) => (
+            <tr id={a.id}>
+              <th scope="row">{a.destination ?? '—'}<span class="tiny muted">{a.region ? REGION_NAME[a.region as keyof typeof REGION_NAME] : ''} · {a.id}</span></th>
+              <td>{a.author}</td>
+              <td>{a.licence_url ? <a class="link" href={a.licence_url} target="_blank" rel="noopener">{a.licence}</a> : a.licence}{a.share_alike ? <span class="tiny muted"> · derivado CC BY-SA</span> : null}</td>
+              <td><a class="link" href={a.source_url} target="_blank" rel="noopener">{a.source}</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {thirdParty.length > 0 && (
+        <div class="cr__note">
+          <h3 class="display display--sm">Derechos de terceros</h3>
+          <p class="small">Algunas fotografías muestran obras o sitios con derechos propios: las esculturas de Leonora Carrington, el jardín escultórico de Las Pozas (que exige permiso para filmar) y monumentos arqueológicos bajo custodia del INAH. Se usan aquí con fines académicos y editoriales, con crédito a su autor fotográfico; un uso comercial requeriría los permisos correspondientes.</p>
+        </div>
+      )}
+      <p class="small muted">Las imágenes marcadas en el sitio como «Needs manual asset» son espacios reservados para fotografía o video que aún debe producirse o licenciarse.</p>
+    </div>
+  </section>
+
+  <section id="fuentes" class="section section--tight" data-ground="ivory" aria-labelledby="src-t">
+    <div class="wrap cr">
+      <div class="cr__intro">
+        <h2 id="src-t" class="display display--md">Fuentes oficiales de datos</h2>
+        <p class="small muted">Las descripciones, regiones, temporadas, eventos y distancias provienen de estas fuentes. Los datos pendientes de verificación no se publican como información oficial; las ubicaciones aproximadas se señalan como tales.</p>
+      </div>
+      <ul class="cr__src">
+        {official.map((s) => <li><a href={s.url} target="_blank" rel="noopener"><span>{s.title}</span><span class="tiny muted">{s.institution}</span></a></li>)}
+      </ul>
+      <dl class="cr__other">
+        <div><dt>Perfil de elevación</dt><dd>{profile.source}. <a class="link" href={profile.url} target="_blank" rel="noopener">INEGI</a>. {profile.caveat}</dd></div>
+        <div><dt>Mapa</dt><dd>Puntos: {mapAttribution}. Mapa base: <a class="link" href="https://openfreemap.org" target="_blank" rel="noopener">OpenFreeMap</a>, datos © <a class="link" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>. Biblioteca: MapLibre GL JS (BSD-3).</dd></div>
+        <div><dt>Clima</dt><dd>{weatherConfig.attribution}. Clima mensual: promedio modelado Open-Meteo 2016–2025, no es una normal oficial.</dd></div>
+        <div><dt>Tipografía</dt><dd>Cormorant Garamond y Manrope (SIL Open Font License).</dd></div>
+      </dl>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cr { display: grid; gap: var(--sc-6); }
+  .cr__intro { display: grid; gap: var(--sc-3); max-width: 50rem; }
+  .cr__t { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+  .cr__t th, .cr__t td { text-align: left; padding: 0.6rem 0.6rem 0.6rem 0; border-bottom: 1px solid var(--sc-hairline); vertical-align: top; }
+  .cr__t thead th { font: 700 0.64rem/1 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .cr__t tbody th { font-weight: 650; }
+  .cr__t tbody th span { display: block; }
+  @media (max-width: 700px) {
+    .cr__t thead { display: none; }
+    .cr__t tr { display: grid; padding: 0.6rem 0; border-bottom: 1px solid var(--sc-hairline); }
+    .cr__t th, .cr__t td { border: 0; padding: 0.1rem 0; }
+  }
+  .cr__note { padding: var(--sc-5); background: var(--sc-surface); border-radius: var(--sc-r-sm); display: grid; gap: var(--sc-3); }
+  .cr__src { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); gap: 0 var(--sc-5); border-top: 1px solid var(--sc-hairline-strong); }
+  .cr__src a { display: grid; gap: 0.15rem; padding: 0.65rem 0; border-bottom: 1px solid var(--sc-hairline); text-decoration: none; font-size: 0.86rem; font-weight: 600; }
+  .cr__other { display: grid; gap: 0; margin: 0; border-top: 1px solid var(--sc-hairline-strong); }
+  .cr__other div { display: grid; gap: 0.3rem; padding: var(--sc-4) 0; border-bottom: 1px solid var(--sc-hairline); }
+  @media (min-width: 800px) { .cr__other div { grid-template-columns: 12rem 1fr; } }
+  .cr__other dt { font-weight: 700; }
+  .cr__other dd { margin: 0; font-size: var(--sc-t-sm); }
+</style>

@@ -1,0 +1,23 @@
+---
+/**
+ * Wordmark: "San Luis Potosí" in Cormorant beside the state's silhouette as an
+ * editorial identifier. The shape is the same INEGI-derived outline used in
+ * Temporadas (src/lib/outline.ts), simplified for a small, monochrome mark.
+ */
+import { markPath } from '@/lib/outline';
+const W = 32;
+const { d, h } = markPath(W, 10);
+---
+<span class="brand">
+  <svg class="brand__mark" viewBox={`-1 -1 ${W + 2} ${h + 2}`} width={W} height={h} aria-hidden="true"><path d={d} /></svg>
+  <span class="brand__rule" aria-hidden="true"></span>
+  <span class="brand__name">San Luis Potosí</span>
+</span>
+
+<style>
+  .brand { display: inline-flex; align-items: center; gap: 0.62rem; }
+  .brand__mark { width: 32px; height: auto; fill: currentColor; fill-opacity: 0.16; stroke: currentColor; stroke-width: 1.25; stroke-linejoin: round; overflow: visible; flex: none; }
+  .brand__rule { width: 1px; height: 1.35rem; background: currentColor; opacity: 0.35; }
+  .brand__name { font: 600 1.42rem/1 var(--sc-font-display); letter-spacing: -0.005em; white-space: nowrap; }
+  @media (max-width: 400px) { .brand__name { font-size: 1.22rem; } .brand__mark { width: 24px; } .brand__rule { display: none; } }
+</style>

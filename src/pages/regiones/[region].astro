@@ -1,0 +1,494 @@
+---
+/**
+ * Regional page, one template for the four regions. Everything comes from the
+ * research adapter (destinations, map, seasons, brochures, resources) plus the
+ * regional editorial layer. The Huasteca adds its complete-experience extras
+ * (src/data/regionPages.ts); the other three render the same structure with
+ * whatever their data supports and omit the rest.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SubNav from '@/components/home/SubNav.astro';
+import Photo from '@/components/media/Photo.astro';
+import ManualAsset from '@/components/media/ManualAsset.astro';
+import AssetChip from '@/components/media/AssetChip.astro';
+import DestinationCard from '@/components/ui/DestinationCard.astro';
+import RouteButton from '@/components/ui/RouteButton.astro';
+import Weather from '@/components/ui/Weather.astro';
+import MapView from '@/components/map/MapView.astro';
+import SeasonModule from '@/components/season/SeasonModule.astro';
+import ItineraryCard from '@/components/routes/ItineraryCard.astro';
+import ResourceGroups from '@/components/guides/ResourceGroups.astro';
+import Practical from '@/components/plan/Practical.astro';
+import Close from '@/components/home/Close.astro';
+import { REGIONS, regionMeta, REGION_NAME } from '@/data/regions';
+import { REGION_EXTRAS } from '@/data/regionPages';
+import { ITINERARIES } from '@/data/itineraries';
+import { municipalities as allMunis, muniView } from '@/data/portal';
+import { muniHref } from '@/i18n/routes';
+import { destinationsIn, getDestination, municipalityCount, regionElevation, gastronomyFor, brochureFact, distances, profile, beyondTheKnown, sourceLabel, type RegionId } from '@/data/research';
+import { destHref, href, regionHref } from '@/i18n/routes';
+import { preloadFor } from '@/lib/media';
+import { fmtM } from '@/lib/profile';
+
+export function getStaticPaths() {
+  return REGIONS.map((r) => ({ params: { region: r.slug } }));
+}
+
+const meta = REGIONS.find((r) => r.slug === Astro.params.region)!;
+const id = meta.id as RegionId;
+const extras = REGION_EXTRAS[id] ?? {};
+const all = destinationsIn(id);
+const featuredIds = new Set((extras.features ?? []).flatMap((f) => f.places));
+const highlights = meta.highlights.map(getDestination).filter((d) => !!d);
+const rest = all.filter((d) => !featuredIds.has(d.id) && !meta.highlights.includes(d.id));
+const elev = regionElevation(id);
+const munis = municipalityCount(id);
+const regionMunis = allMunis.filter((m) => m.region === id);
+const dishes = gastronomyFor(id);
+const routes = ITINERARIES.filter((it) => it.regions.includes(id));
+const weatherKeys = id === 'huasteca' ? ['huasteca', 'xilitla'] : id === 'altiplano' ? ['altiplano', 'real-de-catorce'] : [id];
+const hub = distances.find((d) => d.from.startsWith(meta.hub.split(' ')[0]))?.from ?? meta.hub;
+const others = REGIONS.filter((r) => r.id !== id);
+const beyond = beyondTheKnown(id).slice(0, 6);
+const legRow = (fid: string) => distances.find((d) => d.id === fid);
+
+const nav = [
+  { id: 'introduccion', label: 'Introducción' },
+  { id: 'destinos', label: 'Destinos' },
+  ...(extras.features ?? []).map((f) => ({ id: f.id, label: f.label === 'Aquismón' ? 'Tamul' : f.label })),
+  { id: 'mapa', label: 'Mapa' },
+  { id: 'temporadas', label: 'Temporadas' },
+  ...(extras.culture ? [{ id: 'cultura', label: 'Cultura' }] : []),
+  ...(dishes.length ? [{ id: 'gastronomia', label: 'Gastronomía' }] : []),
+  ...(routes.length ? [{ id: 'rutas', label: 'Rutas' }] : []),
+  { id: 'planea', label: 'Planea' },
+];
+
+const preload = meta.hero.id ? await preloadFor(meta.hero.id, [640, 960, 1280, 1600, 2000, 2560]) : null;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TouristDestination',
+  name: `${meta.officialName}, San Luis Potosí`,
+  description: meta.identity,
+  containedInPlace: { '@type': 'AdministrativeArea', name: 'San Luis Potosí, México' },
+  includesAttraction: highlights.map((d) => ({ '@type': 'TouristAttraction', name: d!.name })),
+};
+---
+<BaseLayout
+  title={`${meta.name}: ${meta.identity.split(':')[0].split('.')[0]}`}
+  description={`${meta.officialName} de San Luis Potosí. ${meta.identity} Destinos, mapa, clima, temporadas, rutas y recursos oficiales.`}
+  image={meta.hero.id ?? meta.card}
+  overlayHeader
+  preload={preload}
+  jsonLd={jsonLd}
+>
+  <section class="rhero" data-region={id} data-ground="dark" aria-labelledby="rh-title">
+    {meta.hero.manual ? (
+      <>
+        <Photo id={meta.hero.id} fill eager sizes="100vw" focal="50% 50%" />
+        <AssetChip slot={meta.hero.manual.slot} kind="photo" subject={meta.hero.manual.subject} position="tr" />
+      </>
+    ) : (
+      <Photo id={meta.hero.id} mobile={meta.hero.mobile} fill eager sizes="100vw" focal="50% 50%" mobileFocal="50% 40%" widths={[640, 960, 1280, 1600, 2000, 2560]} />
+    )}
+    {meta.hero.video && !meta.hero.manual && <AssetChip slot={meta.hero.video.slot} subject={meta.hero.video.subject} position="tr" />}
+    <div class="rhero__shade" aria-hidden="true"></div>
+    <div class="wrap rhero__copy">
+      <nav class="rhero__crumbs tiny" aria-label="Ruta de navegación"><a href={href('home')}>Inicio</a> / <a href={href('home', {}, 'es', 'regiones')}>Regiones</a> / <span aria-current="page">{meta.name}</span></nav>
+      <p class="label rhero__kicker"><span class="rhero__rule" aria-hidden="true"></span>{meta.officialName} · San Luis Potosí</p>
+      <h1 id="rh-title" class="display rhero__title">{meta.name}</h1>
+      <p class="rhero__identity">{meta.identity}</p>
+      <div class="rhero__ctas">
+        <a class="btn btn--light" href="#destinos">Ver destinos</a>
+        <a class="btn btn--outline-light" href="#mapa">Abrir el mapa</a>
+      </div>
+    </div>
+  </section>
+
+  <SubNav items={nav} title={meta.name} region={id} />
+
+  <section id="introduccion" class="section rintro" data-region={id} data-ground="light" aria-labelledby="ri-title">
+    <div class="wrap rintro__grid">
+      <div class="rintro__text" data-reveal>
+        <p class="label label--region">{meta.light} en {meta.nameIn}</p>
+        <h2 id="ri-title" class="display display--lg">{meta.keywords.slice(0, 3).map((k, i) => <>{i ? ', ' : ''}{i ? k : k[0].toUpperCase() + k.slice(1)}</>)}.</h2>
+        {meta.intro.map((p, i) => <p class={i ? 'body muted' : 'lede'}>{p}</p>)}
+        <dl class="rintro__facts">
+          <div><dt>Municipios</dt><dd>{munis}</dd></div>
+          <div><dt>Altitud en el transecto</dt><dd>{fmtM(elev.min)} a {fmtM(elev.max)}</dd></div>
+          <div><dt>Destinos con ficha</dt><dd>{all.length}</dd></div>
+        </dl>
+        <p class="source">Municipios: PDU-SLP. Altitud: {profile.sourceShort}, solo el tramo regional del transecto. Fichas: Secretaría de Turismo de SLP, SECTUR, INAH y otras fuentes oficiales.</p>
+      </div>
+      <div class="rintro__media" data-reveal>
+        <Photo id={id === 'huasteca' ? 'wc-45072511' : meta.landscape} ratio="4/5" sizes="(max-width: 900px) 100vw, 40vw" />
+        {meta.detail && <Photo id={meta.detail} ratio="1/1" sizes="(max-width: 900px) 50vw, 18vw" class="rintro__detail" />}
+      </div>
+    </div>
+  </section>
+
+  {extras.reasons && (
+    <section class="section section--tight reasons" data-region={id} data-ground="ivory" data-tone="region" aria-labelledby="rr-title">
+      <div class="wrap">
+        <p class="label">Por qué visitar {meta.nameIn}</p>
+        <h2 id="rr-title" class="visually-hidden">Por qué visitar {meta.nameIn}</h2>
+        <ul class="reasons__grid">
+          {extras.reasons.map((r) => (
+            <li data-reveal>
+              <Photo id={r.image} ratio="4/5" sizes="(max-width: 760px) 80vw, 24vw" />
+              <h3 class="display reasons__t">{r.title}</h3>
+              <p class="small muted">{r.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section id="destinos" class="section" data-region={id} data-ground="light" aria-labelledby="rd-title">
+    <div class="wrap section-head section-head--split">
+      <div>
+        <p class="label label--region">Destinos principales</p>
+        <h2 id="rd-title" class="display display--lg">Imprescindibles de {meta.nameIn}.</h2>
+      </div>
+      <p class="body muted">Descripciones de fuentes oficiales. Añade a Mi Ruta los que quieras combinar.</p>
+    </div>
+    <div class="wrap rdest">
+      {highlights.map((d, i) => (
+        <DestinationCard d={d!} ratio={i === 0 ? '16/10' : i === 3 ? '16/10' : '4/5'} size={i === 0 ? 'lg' : 'md'} showText class={`rdest__i rdest__i--${i}`} sizes="(max-width: 900px) 92vw, 45vw" />
+      ))}
+    </div>
+  </section>
+
+  {(extras.features ?? []).map((f, fi) => (
+    <section id={f.id} class:list={['section', 'feat', { 'feat--alt': fi % 2 === 1 }]} data-region={id} data-ground={fi % 2 === 1 ? 'ivory' : 'light'} data-tone={fi % 2 === 1 ? 'region' : undefined} aria-labelledby={`f-${f.id}`}>
+      <div class="wrap feat__grid">
+        <div class="feat__media">
+          {f.images.map((im, k) => (
+            <div class={`feat__img feat__img--${k}`} data-reveal>
+              {im.manual
+                ? <ManualAsset label={im.manual.label} subject={im.manual.subject} ratio={im.manual.ratio} region={id} />
+                : <Photo id={im.id} ratio={im.ratio} sizes={k === 0 ? '(max-width: 900px) 100vw, 55vw' : '(max-width: 900px) 50vw, 22vw'} />}
+            </div>
+          ))}
+        </div>
+        <div class="feat__text" data-reveal>
+          <p class="label label--region">{f.label}</p>
+          <h2 id={`f-${f.id}`} class="display display--lg">{f.title}</h2>
+          <p class="lede">{f.lede}</p>
+          {f.figures && (
+            <dl class="feat__figs">
+              {f.figures.map((g) => <div><dd class="display">{g.value}</dd><dt>{g.label}</dt></div>)}
+            </dl>
+          )}
+          {f.legs && (
+            <ul class="feat__legs" aria-label={`Distancias desde ${meta.hub}`}>
+              {f.legs.map(legRow).filter(Boolean).map((r) => <li><span>{r!.from} → {r!.to}</span><span>{r!.km} km · {r!.time}</span></li>)}
+            </ul>
+          )}
+          {f.note && <p class="small feat__note">{f.note}</p>}
+          <ul class="feat__places">
+            {f.places.map(getDestination).filter((d) => !!d).map((d) => (
+              <li>
+                <a class="arrow" href={destHref(d!.slug)}>{d!.name}</a>
+                <RouteButton id={d!.id} name={d!.name} />
+              </li>
+            ))}
+          </ul>
+          <p class="source">Datos: folleto oficial de la Huasteca y fichas oficiales de cada destino. Distancias y tiempos aproximados.</p>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  {(extras.more || rest.length > 0) && (
+    <section class="section" data-region={id} data-ground="light" aria-labelledby="rm-title">
+      <div class="wrap section-head section-head--split">
+        <div>
+          <p class="label label--region">{extras.more ? 'Más atractivos' : 'Más destinos'}</p>
+          <h2 id="rm-title" class="display display--md">{extras.more ? 'Cascadas, sótanos, arqueología y pueblos.' : `Todo ${meta.nameIn}.`}</h2>
+        </div>
+        <p class="body muted">Si te interesa un ícono, descubre también los lugares cercanos que combinan con él.</p>
+      </div>
+      <ul class="wrap rmore">
+        {(extras.more ? extras.more.map(getDestination).filter((d) => !!d) : rest).map((d) => (
+          <li>
+            {d!.id === 'H15'
+              ? <article class="dcard-ph"><ManualAsset label="El Salto · Imagen" ratio="4:3" subject="Cascada El Salto en temporada (lluvias o Semana Santa), caída de 70 m." region={id} compact /><p class="dcard-ph__meta">{REGION_NAME[id]} · {d!.kind}</p><h3 class="display dcard-ph__name"><a href={destHref(d!.slug)}>{d!.name}</a></h3><p class="small muted">{d!.description}</p></article>
+              : <DestinationCard d={d!} ratio="4/3" size="sm" showText sizes="(max-width: 760px) 92vw, 30vw" />}
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section id="mapa" class="section" data-region={id} data-ground="ivory" data-tone="region" aria-labelledby="rmap-title">
+    <div class="wrap section-head section-head--split">
+      <div>
+        <p class="label label--region">Mapa de {meta.nameIn}</p>
+        <h2 id="rmap-title" class="display display--md">Dónde está cada lugar.</h2>
+      </div>
+      <Weather keys={weatherKeys} title={`El clima ahora en ${meta.nameIn}`} />
+    </div>
+    <div class="wrap"><MapView mode="region" region={id} label={`Mapa de destinos de ${meta.nameIn}`} /></div>
+  </section>
+
+  <section id="temporadas" class="section" data-region={id} data-ground="light" aria-labelledby="rs-title">
+    <div class="wrap section-head">
+      <p class="label label--region">Qué hacer según la temporada</p>
+      <h2 id="rs-title" class="display display--md">{meta.name}, mes a mes.</h2>
+    </div>
+    <div class="wrap"><SeasonModule region={id} /></div>
+  </section>
+
+  {extras.culture && (
+    <section id="cultura" class="section culture" data-region={id} data-ground="dark" data-tone="region-deep" aria-labelledby="rc-title">
+      <div class="wrap section-head section-head--split">
+        <div>
+          <p class="label label--region">Cultura</p>
+          <h2 id="rc-title" class="display display--lg">Una región viva.</h2>
+        </div>
+        <p class="body">{extras.culture.lede}</p>
+      </div>
+      <ul class="wrap culture__grid">
+        {extras.culture.items.map((c, k) => (
+          <li class={`culture__i culture__i--${k}`} data-reveal>
+            {c.manual ? <ManualAsset label={c.manual.label} subject={c.manual.subject} ratio={c.manual.ratio} region={id} /> : <Photo id={c.image} ratio="4/5" sizes="(max-width: 900px) 92vw, 30vw" />}
+            <h3 class="display culture__t">{c.title}</h3>
+            <p class="small">{c.text}</p>
+            <p class="source">Fuente: {sourceLabel(c.source === 'media' ? 'brochure-huasteca' : c.source)}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {dishes.length > 0 && (
+    <section id="gastronomia" class="section gastro" data-region={id} data-ground="ivory" data-tone="region" aria-labelledby="rg-title">
+      <div class="wrap gastro__grid">
+        <div class="gastro__media">
+          {extras.gastronomy?.image && (
+            <figure>
+              <Photo id={extras.gastronomy.image} ratio="3/2" sizes="(max-width: 900px) 100vw, 45vw" />
+              <figcaption class="tiny muted">Zacahuil envuelto en hojas antes de hornear.</figcaption>
+            </figure>
+          )}
+          {extras.gastronomy?.manual && <div class="gastro__fig"><ManualAsset label={extras.gastronomy.manual.label} subject={extras.gastronomy.manual.subject} ratio="1:1" region={id} compact /></div>}
+          {!extras.gastronomy && meta.culture && <Photo id={meta.culture} ratio="4/3" sizes="(max-width: 900px) 100vw, 40vw" />}
+        </div>
+        <div class="gastro__text">
+          <p class="label label--region">Gastronomía</p>
+          <h2 id="rg-title" class="display display--lg">A la mesa en {meta.nameIn}.</h2>
+          {dishes.map((g) => (
+            <div class="gastro__list">
+              {g.place && <p class="label">{g.place}</p>}
+              <ul>{g.dishes.map((x) => <li>{x[0].toUpperCase() + x.slice(1)}</li>)}</ul>
+            </div>
+          ))}
+          <p class="source">Platillos señalados en el folleto oficial de la región.{id === 'altiplano' ? ' El recuadro general de gastronomía del folleto del Altiplano repite el de la Huasteca, por lo que solo se muestran los platillos por municipio.' : ''}</p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {routes.length > 0 && (
+    <section id="rutas" class="section" data-region={id} data-ground="light" aria-labelledby="rru-title">
+      <div class="wrap section-head section-head--split">
+        <div>
+          <p class="label label--region">Rutas e itinerarios</p>
+          <h2 id="rru-title" class="display display--md">Combina tu viaje.</h2>
+        </div>
+        <a class="arrow" href={href('routes')}>Todas las rutas</a>
+      </div>
+      <ul class="wrap rail" style="list-style:none">
+        {routes.map((it) => <li><ItineraryCard it={it} /></li>)}
+      </ul>
+    </section>
+  )}
+
+  {extras.stories && (
+    <section class="section stories" data-region={id} data-ground="ivory" data-tone="region" aria-labelledby="rst-title">
+      <div class="wrap section-head">
+        <p class="label label--region">Historias</p>
+        <h2 id="rst-title" class="display display--md">Para leer antes de ir.</h2>
+      </div>
+      <ul class="wrap stories__grid">
+        {extras.stories.map((s) => {
+          const d = getDestination(s.place);
+          return (
+            <li data-reveal>
+              <Photo id={s.image} ratio="3/2" sizes="(max-width: 900px) 92vw, 30vw" />
+              <h3 class="display stories__t">{s.title}</h3>
+              <p class="small">{s.text}</p>
+              {d && <a class="arrow" href={destHref(d.slug)}>{d.name}</a>}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  )}
+
+  {beyond.length > 0 && (
+    <section class="section section--tight" data-region={id} data-ground="light" aria-labelledby="rb-title">
+      <div class="wrap section-head">
+        <p class="label label--region">Más allá de los lugares conocidos</p>
+        <h2 id="rb-title" class="display display--md">Si te interesa {meta.nameIn}, descubre también…</h2>
+      </div>
+      <ul class="wrap rail" style="list-style:none">
+        {beyond.map((d) => <li><DestinationCard d={d} ratio="4/5" size="sm" sizes="(max-width: 760px) 78vw, 22rem" /></li>)}
+      </ul>
+    </section>
+  )}
+
+  <section id="planea" class="section" data-region={id} data-ground="ivory" data-tone="region" aria-labelledby="rp-title">
+    <div class="wrap section-head section-head--split">
+      <div>
+        <p class="label label--region">Planea</p>
+        <h2 id="rp-title" class="display display--md">Información práctica.</h2>
+      </div>
+      <p class="body muted">Distancias desde {meta.hub}, recomendaciones oficiales y recursos para descargar o consultar.</p>
+    </div>
+    <div class="wrap rplan">
+      <Practical hubs={[hub]} region={id} limit={10} showContact={id === 'huasteca'} />
+      <div class="rplan__res">
+        <h3 class="display display--sm">Guías y recursos oficiales</h3>
+        <ResourceGroups only={['folletos', 'mapas', 'guias-turisticos']} region={id} columns={false} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight" data-region={id} data-ground="ivory" data-tone="region" aria-labelledby="rmu-title">
+    <div class="wrap">
+      <div class="section-head section-head--split">
+        <div><p class="label label--region">Municipios</p><h2 id="rmu-title" class="display display--md">Los {regionMunis.length} municipios de {meta.nameIn}</h2></div>
+        <a class="arrow" href={`${href('municipalities')}?region=${id}`}>Índice de municipios</a>
+      </div>
+      <ul class="rmunis">
+        {regionMunis.map((m) => { const n = muniView(m).destinations.length; return <li><a href={muniHref(m.slug!)}><span class="rmunis__n">{m.canonical_name}</span>{n > 0 && <span class="rmunis__c">{n} {n === 1 ? 'destino' : 'destinos'}</span>}</a></li>; })}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--tight others" data-ground="light" aria-labelledby="ro-title">
+    <div class="wrap">
+      <p class="label">Explora otra región</p>
+      <h2 id="ro-title" class="visually-hidden">Explora otra región</h2>
+      <ul class="others__grid">
+        {others.map((r) => (
+          <li data-region={r.id}>
+            <a href={regionHref(r.slug)} class="others__a">
+              <Photo id={r.card} ratio="16/10" sizes="(max-width: 760px) 92vw, 30vw" />
+              <span class="display others__n">{r.name}</span>
+              <span class="small muted">{r.identity}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {extras.close
+    ? <Close image={extras.close.image} title={extras.close.title} body={extras.close.body} videoSlot={extras.close.video} />
+    : <Close image={meta.landscape ?? meta.card} title={`${meta.name}: el viaje sigue.`} body="Guarda los lugares que te llamaron y combina regiones en tu propia ruta." videoSlot={meta.hero.video?.slot} />}
+</BaseLayout>
+
+<style>
+  .rhero { position: relative; height: 92svh; min-height: 34rem; max-height: 62rem; display: grid; align-content: end; overflow: hidden; isolation: isolate; background: var(--slp-night); }
+  .rhero__shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgb(12 18 16 / 0.85) 0%, rgb(12 18 16 / 0.25) 50%, rgb(12 18 16 / 0.35) 100%); }
+  .rhero__copy { position: relative; z-index: 2; display: grid; gap: var(--sc-4); justify-items: start; padding-bottom: clamp(3rem, 8vh, 5.5rem); }
+  .rhero__crumbs, .rhero__kicker { text-shadow: 0 1px 10px rgb(10 14 13 / 0.7); }
+  .rhero__crumbs { color: rgb(246 241 231 / 0.88); }
+  .rhero__crumbs a { color: inherit; }
+  .rhero__kicker { display: inline-flex; align-items: center; gap: 0.7rem; color: rgb(246 241 231 / 0.88); }
+  .rhero__rule { width: 2.4rem; height: 2px; background: var(--slp-region-dark); }
+  .rhero__title { font-size: clamp(3.6rem, 1.6rem + 9vw, 10rem); line-height: 0.88; letter-spacing: -0.025em; }
+  .rhero__identity { font: italic 500 clamp(1.3rem, 1.1rem + 1vw, 2rem)/1.3 var(--sc-font-display); max-width: 30ch; }
+  .rhero__ctas { display: flex; flex-wrap: wrap; gap: var(--sc-3); margin-top: var(--sc-2); }
+
+  .rintro__grid { display: grid; gap: var(--sc-7); }
+  @media (min-width: 900px) { .rintro__grid { grid-template-columns: 1.1fr 0.9fr; gap: clamp(3rem, 7vw, 7rem); align-items: start; } }
+  .rintro__text { display: grid; gap: var(--sc-5); }
+  .rintro__media { position: relative; padding-bottom: 3rem; }
+  .rintro__media :global(.rintro__detail) { position: absolute; width: 42%; left: -12%; bottom: 0; border: 6px solid var(--slp-paper); }
+  @media (max-width: 899px) { .rintro__media :global(.rintro__detail) { left: auto; right: 0; } }
+  .rintro__facts { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--sc-hairline-strong); margin: 0; }
+  .rintro__facts div { padding: var(--sc-4) var(--sc-3) 0 0; display: flex; flex-direction: column-reverse; gap: 0.2rem; }
+  .rintro__facts dt { font-size: 0.78rem; color: var(--sc-ink-soft); }
+  .rintro__facts dd { margin: 0; font: 600 clamp(1.4rem, 1.1rem + 1vw, 2rem)/1.1 var(--sc-font-display); }
+
+  .reasons__grid { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sc-5); margin-top: var(--sc-5); }
+  .reasons__grid li { display: grid; gap: 0.6rem; align-content: start; }
+  .reasons__grid li:nth-child(even) { margin-top: 3rem; }
+  .reasons__t { font-size: 1.6rem; margin-top: 0.3rem; }
+  @media (max-width: 900px) { .reasons__grid { grid-template-columns: 1fr 1fr; } }
+
+  .rdest { display: grid; gap: var(--sc-7) var(--sc-6); }
+  @media (min-width: 900px) {
+    .rdest { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .rdest :global(.rdest__i--0) { grid-column: 1 / span 7; }
+    .rdest :global(.rdest__i--1) { grid-column: 9 / span 4; margin-top: 6rem; }
+    .rdest :global(.rdest__i--2) { grid-column: 2 / span 4; }
+    .rdest :global(.rdest__i--3) { grid-column: 7 / span 6; margin-top: 4rem; }
+  }
+
+  .feat__grid { display: grid; gap: var(--sc-7); align-items: center; }
+  @media (min-width: 960px) {
+    .feat__grid { grid-template-columns: 1.25fr 0.75fr; gap: clamp(3rem, 6vw, 6rem); }
+    .feat--alt .feat__media { order: 2; }
+  }
+  .feat__media { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--sc-4); }
+  .feat__img--0 { grid-column: 1 / -1; }
+  .feat__img--1 { grid-column: 1 / span 3; }
+  .feat__img--2 { grid-column: 4 / span 3; align-self: end; }
+  .feat__img--1:last-child { grid-column: 2 / span 4; }
+  .feat__text { display: grid; gap: var(--sc-4); align-content: start; }
+  .feat__figs { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; border-top: 1px solid var(--sc-hairline-strong); }
+  .feat__figs div { padding-top: var(--sc-3); }
+  .feat__figs dd { margin: 0; font-size: 2.2rem; line-height: 1; }
+  .feat__figs dt { font-size: 0.78rem; color: var(--sc-ink-soft); }
+  .feat__legs { list-style: none; border-top: 1px solid var(--sc-hairline); }
+  .feat__legs li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.55rem 0; border-bottom: 1px solid var(--sc-hairline); font-size: var(--sc-t-sm); font-variant-numeric: tabular-nums; }
+  .feat__legs li span:last-child { font-weight: 650; white-space: nowrap; }
+  .feat__note { padding: var(--sc-3) var(--sc-4); background: var(--sc-surface); border-radius: var(--sc-r-sm); }
+  .feat__places { list-style: none; display: grid; gap: 0.3rem; }
+  .feat__places li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; border-bottom: 1px solid var(--sc-hairline); padding-bottom: 0.3rem; }
+
+  .rmore { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: var(--sc-7) var(--sc-5); }
+  .dcard-ph { display: grid; gap: 0.6rem; }
+  .dcard-ph__meta { font: 700 0.7rem/1.3 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .dcard-ph__name { font-size: 1.4rem; }
+  .dcard-ph__name a { text-decoration: none; color: inherit; }
+
+  .culture__grid { list-style: none; display: grid; gap: var(--sc-6); }
+  @media (min-width: 900px) { .culture__grid { grid-template-columns: 1.3fr 0.9fr 0.9fr; align-items: start; } .culture__i--1 { margin-top: 5rem; } }
+  .culture__i { display: grid; gap: 0.6rem; }
+  .culture__t { font-size: 1.8rem; margin-top: 0.3rem; }
+  .culture .source { color: rgb(246 241 231 / 0.7); }
+
+  .gastro__grid { display: grid; gap: var(--sc-7); }
+  @media (min-width: 900px) { .gastro__grid { grid-template-columns: 1fr 1fr; align-items: center; } }
+  .gastro__media { position: relative; display: grid; gap: var(--sc-4); }
+  .gastro__fig { width: 46%; margin-top: -18%; margin-left: auto; position: relative; z-index: 2; border: 6px solid var(--slp-ivory); background: var(--slp-ivory); }
+  .gastro__text { display: grid; gap: var(--sc-4); }
+  .gastro__list ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+  .gastro__list li { padding: 0.4rem 0.8rem; border: 1px solid var(--sc-hairline-strong); border-radius: 999px; font-size: 0.86rem; }
+
+  .stories__grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--sc-6); }
+  .stories__grid li { display: grid; gap: 0.6rem; align-content: start; }
+  .stories__t { font-size: 1.7rem; margin-top: 0.3rem; }
+
+  .rplan { display: grid; gap: var(--sc-8); }
+  @media (min-width: 1100px) { .rplan { grid-template-columns: 1.6fr 1fr; } }
+  .rplan__res { display: grid; gap: var(--sc-4); align-content: start; }
+
+  .others__grid { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sc-5); margin-top: var(--sc-4); }
+  @media (max-width: 760px) { .others__grid { grid-template-columns: 1fr; } }
+  .others__a { display: grid; gap: 0.4rem; text-decoration: none; color: inherit; }
+  .others__n { font-size: 2rem; border-top: 2px solid var(--slp-region); padding-top: 0.5rem; margin-top: 0.4rem; }
+  .rmunis { list-style: none; columns: 14rem auto; column-gap: var(--sc-6); margin-top: var(--sc-5); }
+  .rmunis li { break-inside: avoid; border-bottom: 1px solid var(--sc-hairline); }
+  .rmunis a { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; min-height: var(--slp-tap); padding: 0.4rem 0; color: inherit; text-decoration: none; }
+  .rmunis a:hover .rmunis__n { text-decoration: underline; }
+  .rmunis__n { font: 600 1.15rem/1.2 var(--sc-font-display); }
+  .rmunis__c { font-size: 0.72rem; color: var(--slp-region-text); font-weight: 700; white-space: nowrap; }
+</style>
