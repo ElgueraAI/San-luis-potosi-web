@@ -1,6 +1,6 @@
 # Smart tourism · what exists and what comes next
 
-Branch `feature/smart-map-routing` (2026-10-06). Companion to `docs/map-api-decision.md` (providers, quotas,
+Branches `feature/smart-map-routing` and `feature/live-routing-engine` (2026-10-06). Companion to `docs/map-api-decision.md` (providers, quotas,
 keys) and `docs/smart-map-routing-plan.md` (task checklist).
 
 ## What the visitor gets now
@@ -15,6 +15,10 @@ keys) and `docs/smart-map-routing-plan.md` (task checklist).
 | «Optimizar recorrido»: compares current vs optimized order, applied only if the visitor accepts | `/mi-ruta/` | one road matrix + `geo/route-optimizer.ts` (exact Held–Karp up to 12 points, NN + 2-opt above) |
 | Suggestions with an explicit reason | `/mi-ruta/` | `geo/recommend.ts` + `/data/route-context.json` |
 | Honest failure: no straight line ever replaces a road route; stops stay on the map; «Reintentar ruta» | everywhere | normalized `RouteError` codes |
+| Live trip: next destination, remaining distance and time, ETA (no live traffic), trip progress, travelled part muted on the map, camera follow + «Recentrar» | `/mi-ruta/` only | `geo/navigation.ts` + `geo/route-geometry.ts` |
+| Off-route detection and bounded automatic rerouting (max(60 m, 1.5 × accuracy); 3 readings or 15 s; 45 s cooldown; 6 per trip), manual «Recalcular ruta» | `/mi-ruta/` | `geo/navigation.ts` (rules in `map-api-decision.md` § Live navigation) |
+| Arrival («Has llegado a …»), «Marcar como visitado», «Continuar al siguiente lugar», trip summary, «Restablecer recorrido»; visited stops survive a refresh | `/mi-ruta/` | `geo/trip-store.ts` (place ids only) |
+| Offline mid-trip keeps the last route and progress; pause on hidden tab, safe resume; optional «Mantener pantalla encendida» | `/mi-ruta/` | `geo/nav-controller.ts`, `nav-ui.ts` |
 
 ### Recommendation rules (transparent, rule-based)
 
@@ -43,8 +47,18 @@ portal has no source for any of them.
 - **Spanish only**: `/en/my-route/` is declared in `src/i18n/routes.ts` but no English pages are built yet,
   so every routing string is Spanish.
 
+- **Live navigation is not a driving navigator**: no turn-by-turn, no voice, no traffic, no background
+  tracking (browsers suspend geolocation when the page is hidden; the trip pauses and says so).
+- **No mid-trip provider failover**: if openrouteservice fails during a trip the previous route is kept; the
+  OSRM demo is not used as an automatic backup for production traffic.
+- **ETA** scales the provider's leg time by the share of the leg still ahead; it does not learn from the
+  visitor's actual speed.
+- **Thresholds are untested on real roads**: all navigation checks use simulated GPS.
+
 ## Next phase (proposed, not started)
 
+0. **Field test + turn-by-turn**: drive a real route in the Huasteca with a phone to tune the off-route and
+   arrival thresholds, then add turn-by-turn on the extension point described in `map-api-decision.md`.
 1. **Deploy the proxy** (`serverless/route-proxy/`) and set `PUBLIC_ROUTE_PROXY_URL` in the Pages workflow, so
    production routes through openrouteservice within its documented quota instead of the community fallback.
 2. **Verify the 21 approximate points** against official sources (research layer first, then `places.json`),

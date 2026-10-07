@@ -1,7 +1,8 @@
 /**
  * MapLibre layers for location and routing, shared by every map mode.
  *  - visitor: DOM dot (unmistakable shape + label) + accuracy circle in metres
- *  - route: casing + ink line for the chosen route, dashed thin lines for alternatives
+ *  - route: casing + ink line for the chosen route, dashed thin lines for alternatives;
+ *    during live navigation the travelled part is drawn muted under the remaining part
  *  - waypoints: start (ring + «Inicio»), numbered stops (circles), end (square + «Fin»)
  * Shape and text carry the meaning, colour only reinforces it.
  * Callers draw only after the map's 'style.load' (map.ts tracks it); sources
@@ -72,10 +73,12 @@ export class RouteLayer {
 
   private ensure() {
     if (this.map.getSource('route-main')) return;
+    this.map.addSource('route-done', { type: 'geojson', data: EMPTY });
     this.map.addSource('route-main', { type: 'geojson', data: EMPTY });
     this.map.addSource('route-alts', { type: 'geojson', data: EMPTY });
     const before = firstPlacesLayer(this.map);
     this.map.addLayer({ id: 'route-alts', type: 'line', source: 'route-alts', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#6d675d', 'line-width': 3, 'line-opacity': 0.75, 'line-dasharray': [1.2, 1.4] } }, before);
+    this.map.addLayer({ id: 'route-done', type: 'line', source: 'route-done', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#a39b8f', 'line-width': ['interpolate', ['linear'], ['zoom'], 6, 2.6, 12, 5], 'line-opacity': 0.85 } }, before);
     this.map.addLayer({ id: 'route-casing', type: 'line', source: 'route-main', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#fbf8f2', 'line-width': ['interpolate', ['linear'], ['zoom'], 6, 5, 12, 9] } }, before);
     this.map.addLayer({ id: 'route-line', type: 'line', source: 'route-main', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': INK, 'line-width': ['interpolate', ['linear'], ['zoom'], 6, 2.6, 12, 5] } }, before);
   }
@@ -86,10 +89,20 @@ export class RouteLayer {
     const all = result ? [result.geometry, ...result.alternatives.map((a) => a.geometry)] : [];
     const main = all[altIndex] ?? all[0];
     (this.map.getSource('route-main') as GeoJSONSource).setData(main ? { type: 'Feature', properties: {}, geometry: main } : EMPTY);
+    (this.map.getSource('route-done') as GeoJSONSource).setData(EMPTY);
     (this.map.getSource('route-alts') as GeoJSONSource).setData({
       type: 'FeatureCollection',
       features: all.filter((g) => g !== main).map((g) => ({ type: 'Feature' as const, properties: {}, geometry: g })),
     });
+  }
+
+  /** Live navigation: muted travelled part + primary remaining part; no alternatives. */
+  setNavigation(done: Coordinate[], rest: Coordinate[]) {
+    this.ensure();
+    const line = (c: Coordinate[]) => (c.length > 1 ? { type: 'Feature' as const, properties: {}, geometry: { type: 'LineString' as const, coordinates: c } } : EMPTY);
+    (this.map.getSource('route-done') as GeoJSONSource).setData(line(done));
+    (this.map.getSource('route-main') as GeoJSONSource).setData(line(rest));
+    (this.map.getSource('route-alts') as GeoJSONSource).setData(EMPTY);
   }
 
   /** Start / numbered stops / end. `regions` maps place id → region for the stop colour. */

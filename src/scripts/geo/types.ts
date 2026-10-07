@@ -103,6 +103,10 @@ export interface GeoFix {
   accuracy: number; // metres (95% radius as reported by the device)
   altitude: number | null; // metres, only when the device reports it
   altitudeAccuracy: number | null;
+  /** degrees clockwise from true north; null when the device does not report it (common when standing still) */
+  heading: number | null;
+  /** metres per second; null when the device does not report it */
+  speed: number | null;
   timestamp: number; // epoch ms
 }
 

@@ -88,4 +88,97 @@ for free, works with both providers, and ≤ 25 stops stay far below the 3,500-c
 * Matrix cached the same way; the optimizer reuses it.
 * Client throttle: OSRM ≥ 1.1 s between requests; ORS 429/403 → normalized `rate-limit` / `quota` errors, no automatic retry loop.
 * Headers `x-ratelimit-remaining` / `x-ratelimit-reset` are copied into `RouteResult.quota` (debug only, no secrets). The proxy forwards them.
-* Watch-position updates do not re-route; the origin only moves when the user presses «Actualizar».
+* While planning, watch-position updates do not re-route; the origin only moves when the user presses «Actualizar».
+  During a live trip (below), rerouting is automatic but bounded by the rules in § Live navigation.
+* A failed request anchors the GPS origin too, so new GPS readings never turn a failure into a retry loop.
+
+## Live navigation (feature/live-routing-engine, 2026-10-06)
+
+Only `/mi-ruta/` runs live navigation; `/mapa/` stays exploration and planning (no navigation card, no
+camera follow). It is a tourism route aid, **not** a certified driving navigator: no turn-by-turn, no
+voice, no live traffic. Times are the provider's free-flow estimates and the UI says «sin tráfico en tiempo real».
+
+### Modules
+
+| Module | Role |
+|---|---|
+| `src/scripts/geo/route-geometry.ts` | Pure: projection onto the polyline, distance from route, along / total / travelled / remaining, progress 0..1, leg boundaries, split for drawing. Bounded search (300 m behind … 3 km ahead of the previous snap); full search only when that window has nothing close. |
+| `src/scripts/geo/navigation.ts` | Pure state machine (`NavigationEngine`). Time, connectivity and side effects come in through `NavPorts`, so every rule is unit-tested. |
+| `src/scripts/geo/nav-controller.ts` | Wires the engine to the location service, `route-session` (the only routing layer), the visited-stops store, `online`/`offline` and `visibilitychange`. Holds camera-follow view state. |
+| `src/scripts/geo/trip-store.ts` | Visited stops in `localStorage` (`slp:mi-ruta:trip:v1`). |
+| `src/scripts/nav-ui.ts` | The card on `/mi-ruta/`; optional Screen Wake Lock. |
+
+### State machine
+
+```
+idle ──Iniciar──▶ starting ──first route──▶ navigating ◀────────── route ok ──────────┐
+                    │ no position / no route   │  ▲                                    │
+                    ▼                          │  └── back on the road ──┐             │
+                  error                        ├── off-route confirmed ──▶ off-route ──▶ rerouting
+                                               │                (cooldown / limit / offline: waits here)
+                                               └── within arrival radius ──▶ arrived-stop
+                                                   «Marcar como visitado» / «Continuar» ──▶ navigating | finished
+any active state ──«Pausar» or page hidden──▶ paused ──«Reanudar» or page visible──▶ previous state
+«Terminar recorrido» ──▶ idle (visited stops stay stored until «Restablecer recorrido»)
+```
+
+### Rules (constants in `navigation.ts`)
+
+| Rule | Value |
+|---|---|
+| Off-route threshold | distance to route > **max(60 m, 1.5 × accuracy)** |
+| Confirmation | **3 consecutive** valid off-route readings, or **≥ 15 s** off route with at least 2 readings. A reading back on the road resets the evidence. |
+| Readings used for decisions | accuracy ≤ **150 m** (worse readings neither confirm nor reset); progress uses readings ≤ 500 m |
+| Automatic reroute cooldown | **45 s** between launches |
+| Automatic reroutes per trip | **6**; then only «Recalcular ruta» (manual, offered whenever online and nothing is in flight; not counted) |
+| In flight | never two reroutes at once; superseded requests are aborted by `route-session` |
+| Offline | no reroute (automatic or manual); last route, stops and progress stay |
+| Back online | no immediate request; the next confirmed off-route reading decides |
+| Failed reroute | previous route kept and drawn; message «No se pudo recalcular… Seguimos con tu ruta anterior»; cooldown applies |
+| Arrival radius | car 80 m · bike 50 m · foot 35 m, **plus** the reading's accuracy up to the same amount again; either the direct distance to the stop or reaching the end of its leg on the route |
+| Arrival | never removes a stop; «Marcar como visitado» stores it, «Continuar al siguiente lugar» goes on (skipping it for this trip if not marked) |
+| GPS lost | no reading for 30 s while navigating → «Sin señal GPS reciente» (last position kept) |
+| Page hidden / visible | hidden → `paused` (decisions stop). Visible → resume, discard old off-route evidence, restart the watch, request a fresh fix if the last one is older than 30 s. A pause chosen by the visitor is not lifted by visibility. |
+
+Requests per trip: one route at start, at most one per stop when continuing (recomputed from the current
+position without the visited stop), at most 6 automatic reroutes, plus explicit «Recalcular ruta» presses.
+Positions by themselves never trigger requests.
+
+### Location filter
+
+`location-service.ts` keeps the raw position (no smoothing, so the dot never lags). It drops a reading only when
+it implies more than 70 m/s from the previous fix **and** reports a clearly worse accuracy (> 2× previous and
+> 50 m), at most 3 times in a row; out-of-order readings are dropped. Heading and speed are kept when the device
+reports them and are `null` otherwise (never computed or invented); the card shows them only in «Detalles».
+
+### Privacy
+
+* Permission is requested only by «Iniciar recorrido» / «Reanudar recorrido» (or «Usar mi ubicación»).
+* Position, heading and speed live in memory for the page view. No trace or history is kept; the engine holds
+  only the last fix and the last snapped point (for the summary distance).
+* `localStorage` gets `{ id, startedAt, stops: { placeId: { visited: true, visitedAt } } }` only (`sanitize()` drops
+  anything else). Routes that start at the visitor are cached in memory only, never in `sessionStorage`.
+* Verified by `tests/geo/navigation.test.ts` (test 16) and `scripts/verify/navigation.mjs` (every position fed to
+  the browser is searched for in storage).
+
+### Provider behaviour during a trip
+
+The provider chosen by `PUBLIC_ROUTING_PROVIDER` is used as is. There is **no automatic switch** from
+openrouteservice to the OSRM demo when ORS fails mid-trip: the previous route is kept and the visitor is told.
+That is deliberate: a public demo server must not silently absorb production traffic. A controlled failover
+(ORS → OSRM only for `provider-down`, once per trip) is a possible later addition.
+
+### Browser limits (stated in the UI)
+
+* No background tracking: with the screen off or the page hidden, browsers (especially on phones) suspend
+  geolocation. The trip pauses and resumes; nothing claims otherwise.
+* Screen Wake Lock is optional («Mantener pantalla encendida»), requested only from that button, re-acquired on
+  return to the page, released when the trip ends. Hidden when unsupported; the trip works without it.
+* Geolocation needs HTTPS (GitHub Pages is) or localhost.
+
+### Turn-by-turn extension point
+
+Not implemented. A later phase would ask the provider for steps (`steps=true` on OSRM, `instructions` on ORS;
+same endpoints, so the proxy allow-list does not change), normalize them into `RouteResult` (for example
+`legs[i].steps`) and add a `nextManeuver` field computed in `NavigationEngine.update()` from the same snap
+(`along` against step boundaries). The state machine, rules and UI slots do not need to change.

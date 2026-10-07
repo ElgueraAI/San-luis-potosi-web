@@ -87,6 +87,8 @@ class RouteSession {
   private ready: Promise<void> | null = null;
   private routedOrigin: Coordinate | null = null;
   private lastKey = '';
+  /** Stops left out of the route: visited (trip-store) or skipped during live navigation. */
+  private excluded = new Set<string>();
   state: SessionState;
 
   constructor() {
@@ -152,8 +154,28 @@ class RouteSession {
 
   selectAlternative(i: number) { this.set({ altIndex: i }); }
 
-  /** «Reintentar ruta» and «Actualizar desde mi posición»: bypass the debounce, keep the cache. */
-  retry() { this.lastKey = ''; this.set({ originMoved: false }); this.routedOrigin = null; this.compute(); }
+  /** Live navigation: visited / skipped stops are no longer routed (they stay in Mi Ruta). */
+  setExcluded(ids: Iterable<string>) {
+    const next = new Set(ids);
+    if (next.size === this.excluded.size && [...next].every((id) => this.excluded.has(id))) return;
+    this.excluded = next;
+    this.changed(true);
+  }
+  isExcluded(id: string): boolean { return this.excluded.has(id); }
+
+  /**
+   * «Reintentar ruta», «Actualizar desde mi posición» and navigation reroutes:
+   * rebuild the waypoints (the GPS origin may have moved), bypass the debounce, keep the cache.
+   */
+  retry() {
+    if (!this.ready || !this.places.length) return;
+    clearTimeout(this.timer);
+    const { waypoints, skipped } = this.build();
+    this.lastKey = '';
+    this.routedOrigin = null;
+    this.set({ originMoved: false, waypoints, skipped });
+    this.compute();
+  }
 
   // ------------------------------------------------------------ waypoints --
   private originWaypoint(): RouteWaypoint | null {
@@ -172,7 +194,7 @@ class RouteSession {
 
   private build(): { waypoints: RouteWaypoint[]; stops: Place[]; skipped: Place[]; origin: RouteWaypoint | null } {
     const saved = route.get().map((id) => this.byId.get(id)).filter((p): p is Place => !!p);
-    const stops = saved.filter(routable);
+    const stops = saved.filter(routable).filter((p) => !this.excluded.has(p.id));
     const skipped = saved.filter((p) => !routable(p));
     const origin = this.originWaypoint();
     const pts: RouteWaypoint[] = [
@@ -235,6 +257,8 @@ class RouteSession {
     } catch (e) {
       if (ctrl.signal.aborted) return;
       const err = e instanceof RouteError ? e : new RouteError('unknown', String((e as Error)?.message ?? e));
+      // a failure also anchors the GPS origin: later fixes must not each fire a new request (no retry loop)
+      this.routedOrigin = this.state.origin.kind === 'gps' ? waypoints[0].coord : null;
       // never keep an old line on screen for a different set of stops
       this.set({ phase: 'error', error: err, result: null });
     }

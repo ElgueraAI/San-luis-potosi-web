@@ -92,6 +92,11 @@ const withTools = mode !== 'mini';
             <span class="mapv__ico mapv__ico--pin" aria-hidden="true"></span><span>Elegir inicio en el mapa</span>
           </button>
         )}
+        {mode === 'route' && (
+          <button type="button" class="mapv__tool" data-nav-recenter hidden>
+            <span class="mapv__ico mapv__ico--loc" aria-hidden="true"></span><span>Recentrar</span>
+          </button>
+        )}
       </div>
       <div class="mapv__card geo-card" data-geo-card hidden aria-live="polite"></div>
       {mode !== 'route' && <div class="mapv__routebar" data-route-bar hidden aria-live="polite"></div>}
@@ -110,6 +115,7 @@ const withTools = mode !== 'mini';
       <span><i class="lg lg--prov" aria-hidden="true"></i>Ubicación aproximada</span>
       {withTools && <span class="mapv__legend-geo" data-legend-geo hidden><i class="lg lg--me" aria-hidden="true"></i>Tú</span>}
       {withTools && <span class="mapv__legend-route" data-legend-route hidden><i class="lg lg--route" aria-hidden="true"></i>Ruta por carretera</span>}
+      {mode === 'route' && <span class="mapv__legend-done" data-legend-done hidden><i class="lg lg--done" aria-hidden="true"></i>Tramo recorrido</span>}
     </div>
 
     {withPanel && (
@@ -241,10 +247,15 @@ const withTools = mode !== 'mini';
     width: 100%; padding: 0.75rem 0.85rem; background: rgb(251 248 242 / 0.97); color: var(--slp-charcoal);
     border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); box-shadow: var(--sc-e2); font-size: 0.8rem;
   }
-  .mapv__card[hidden], .mapv__routebar[hidden] { display: none; }
+  .mapv__card[hidden], .mapv__routebar[hidden], .mapv__tool[hidden] { display: none; }
+  /* live navigation: start-point picker, «Centrar en mí» and the location card give way to the trip card and «Recentrar» */
+  .mapv[data-navigating] [data-pick-origin],
+  .mapv[data-navigating] [data-geo-locate],
+  .mapv[data-navigating] [data-geo-card] { display: none; }
   .mapv__routebar { display: grid; gap: 0.35rem; }
   .lg--me { background: #1d5fd1; border: 2px solid #fff; box-shadow: 0 0 0 1px #1d5fd1; }
   .lg--route { width: 18px; height: 4px; border-radius: 2px; background: var(--slp-charcoal); box-shadow: 0 0 0 1.5px #fbf8f2; }
+  .lg--done { width: 18px; height: 4px; border-radius: 2px; background: #a39b8f; }
   .mapv__legend span[hidden] { display: none; }
   .mapv[data-picking] .mapv__canvas :global(canvas) { cursor: crosshair !important; }
   @media (max-width: 640px) {

@@ -14,7 +14,8 @@
     "media:build": "node scripts/media/build-media.mjs",
     "verify:pages": "node scripts/verify/pages.mjs",
     "test:geo": "node scripts/test-geo.mjs",
-    "verify:routing": "node scripts/verify/routing.mjs"
+    "verify:routing": "node scripts/verify/routing.mjs",
+    "verify:navigation": "node scripts/verify/navigation.mjs"
   },
   "engines": {
     "node": ">=20"

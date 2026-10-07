@@ -11,6 +11,14 @@ import type { GeoFix, LocationState, LocationStatus } from './types';
 export const APPROX_ACCURACY_M = 1500;
 /** A fix older than this is flagged as stale. */
 export const STALE_AFTER_MS = 5 * 60 * 1000;
+/**
+ * Outlier filter (deliberately simple, no smoothing so the dot never lags):
+ * a reading that implies more than MAX_SPEED_MS from the previous fix AND
+ * reports a clearly worse accuracy is dropped, at most MAX_REJECTS times in a
+ * row (after that it is accepted: the visitor really moved).
+ */
+export const MAX_SPEED_MS = 70;
+export const MAX_REJECTS = 3;
 
 type Listener = (s: LocationState) => void;
 
@@ -30,6 +38,9 @@ function fromPosition(p: GeolocationPosition): GeoFix {
     // coords.altitude is null when the device does not measure it; never invent one
     altitude: typeof c.altitude === 'number' && Number.isFinite(c.altitude) ? c.altitude : null,
     altitudeAccuracy: typeof c.altitudeAccuracy === 'number' && Number.isFinite(c.altitudeAccuracy) ? c.altitudeAccuracy : null,
+    // heading is NaN when the device is still, null when unsupported: both become null
+    heading: typeof c.heading === 'number' && Number.isFinite(c.heading) ? c.heading : null,
+    speed: typeof c.speed === 'number' && Number.isFinite(c.speed) && c.speed >= 0 ? c.speed : null,
     timestamp: p.timestamp || Date.now(),
   };
 }
@@ -37,6 +48,17 @@ function fromPosition(p: GeolocationPosition): GeoFix {
 export function statusForFix(fix: GeoFix, now = Date.now()): LocationStatus {
   if (now - fix.timestamp > STALE_AFTER_MS) return 'stale';
   return fix.accuracy > APPROX_ACCURACY_M ? 'approximate' : 'ok';
+}
+
+/** true when `next` should be ignored as a GPS jump (see MAX_SPEED_MS). */
+export function isOutlier(prev: GeoFix | null, next: GeoFix, rejectsInRow: number): boolean {
+  if (!prev || rejectsInRow >= MAX_REJECTS) return false;
+  if (next.timestamp < prev.timestamp) return true; // out-of-order delivery
+  const dt = Math.max(1, next.timestamp - prev.timestamp) / 1000;
+  const lat = (prev.coord[1] * Math.PI) / 180;
+  const dx = (next.coord[0] - prev.coord[0]) * 111320 * Math.cos(lat), dy = (next.coord[1] - prev.coord[1]) * 111320;
+  const jump = Math.hypot(dx, dy);
+  return jump / dt > MAX_SPEED_MS && next.accuracy > Math.max(2 * prev.accuracy, 50);
 }
 
 function errorStatus(e: GeolocationPositionError): LocationStatus {
@@ -50,6 +72,7 @@ class LocationService {
   private listeners = new Set<Listener>();
   private watchId: number | null = null;
   private staleTimer: ReturnType<typeof setTimeout> | undefined;
+  private rejects = 0;
 
   get(): LocationState { return this.state; }
 
@@ -78,6 +101,8 @@ class LocationService {
 
   private accept(p: GeolocationPosition) {
     const fix = fromPosition(p);
+    if (isOutlier(this.state.fix, fix, this.rejects)) { this.rejects += 1; return; }
+    this.rejects = 0;
     this.set({ fix, status: statusForFix(fix), message: null });
     clearTimeout(this.staleTimer);
     this.staleTimer = setTimeout(() => {
@@ -93,14 +118,15 @@ class LocationService {
   }
 
   /** One explicit request (button). Resolves with the fix or null. */
-  locate(): Promise<GeoFix | null> {
+  locate(opts: { maximumAge?: number } = {}): Promise<GeoFix | null> {
     if (!this.supported()) return Promise.resolve(null);
     this.set({ status: 'requesting', message: null });
     return new Promise((resolve) => {
       navigator.geolocation.getCurrentPosition(
-        (p) => { this.accept(p); resolve(this.state.fix); },
+        // an explicit request is always taken (the visitor asked for it), never filtered as a jump
+      (p) => { this.rejects = MAX_REJECTS; this.accept(p); resolve(this.state.fix); },
         (e) => { this.reject(e); resolve(null); },
-        { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: opts.maximumAge ?? 60000 },
       );
     });
   }
@@ -127,6 +153,7 @@ class LocationService {
   forget(): void {
     this.stopFollowing();
     clearTimeout(this.staleTimer);
+    this.rejects = 0;
     this.set({ status: 'idle', fix: null, message: null });
   }
 

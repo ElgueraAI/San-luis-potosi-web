@@ -4,11 +4,14 @@
  * in the route. The map on the page (mode="route") and the planner
  * (route-planner.ts) follow the same store through route-session, which
  * also provides the road distance / time of each leg shown in the list.
+ * Live navigation (nav-ui.ts) marks stops as visited; they stay in the list
+ * with a «Visitado» tag and leave the routed line until the trip is reset.
  */
 import { route } from './route-store';
 import { loadPlaces, esc, REGION_NAME, routable, type Place } from './geo/places';
 import { routeSession, type SessionState } from './geo/route-session';
 import { fmtDistance, fmtDuration } from './geo/format';
+import { tripStore } from './geo/trip-store';
 
 export async function initMyRoute(): Promise<void> {
   const box = document.querySelector<HTMLElement>('[data-my-route]');
@@ -42,7 +45,7 @@ export async function initMyRoute(): Promise<void> {
     const s = routeSession.get();
     const ids = route.get().filter((id) => byId.has(id));
     // skip identical renders (session emits loading/ok states) so focus and scroll stay put
-    const sig = [ids.join(), s.phase, s.result?.computedAt ?? '', s.altIndex, s.waypoints.map((w) => w.id).join()].join('#');
+    const sig = [ids.join(), tripStore.visitedIds().join(), s.phase, s.result?.computedAt ?? '', s.altIndex, s.waypoints.map((w) => w.id).join()].join('#');
     if (sig === lastSig) return;
     lastSig = sig;
     const f = document.activeElement as HTMLElement | null;
@@ -80,12 +83,13 @@ export async function initMyRoute(): Promise<void> {
         const isStart = !origin && routedIds[0] === p.id && routedIds.length > 1;
         const isEnd = lastRouted === p.id && routedIds.length > 1;
         const tag = isStart ? '<span class="mr__tag">Inicio</span>' : isEnd ? '<span class="mr__tag">Fin</span>' : '';
-        return `<li data-region="${p.region}">
+        const visited = tripStore.isVisited(p.id);
+        return `<li data-region="${p.region}"${visited ? ' data-visited' : ''}>
         <span class="mr__n" aria-hidden="true">${i + 1}</span>
         ${p.image ? `<img class="mr__img" src="${p.image}" alt="" width="80" height="80" loading="lazy">` : '<span class="mr__ph" aria-hidden="true"></span>'}
         <div>
           <p class="mr__name">${p.url ? `<a href="${p.url}">${esc(p.name)}</a>` : esc(p.name)}</p>
-          <p class="mr__meta">${tag}${REGION_NAME[p.region]} · ${esc(p.kind)}${p.municipality ? ` · ${esc(p.municipality)}` : ''}${p.status === 'provisional' ? ' · ubicación aproximada' : !routable(p) ? ' · sin punto en el mapa: no entra en el cálculo' : ''}</p>
+          <p class="mr__meta">${visited ? '<span class="mr__done">✓ Visitado</span>' : ''}${tag}${REGION_NAME[p.region]} · ${esc(p.kind)}${p.municipality ? ` · ${esc(p.municipality)}` : ''}${p.status === 'provisional' ? ' · ubicación aproximada' : !routable(p) ? ' · sin punto en el mapa: no entra en el cálculo' : ''}</p>
         </div>
         <div class="mr__ctrl">
           <button type="button" data-mv="-1" data-id="${p.id}" aria-label="Subir ${esc(p.name)}" ${i === 0 ? 'disabled' : ''}>↑</button>
@@ -112,6 +116,7 @@ export async function initMyRoute(): Promise<void> {
     if (confirm('¿Quitar todos los lugares de Mi Ruta?')) route.clear();
   });
   route.subscribe(render);
+  tripStore.subscribe(render);
   render();
 
   // road legs + planner (route-session also feeds the map on this page)
@@ -121,6 +126,8 @@ export async function initMyRoute(): Promise<void> {
     routeSession.subscribe(render);
     const { initPlanner } = await import('./route-planner');
     initPlanner(box);
+    const { initNavigation } = await import('./nav-ui');
+    initNavigation(box);
   } catch {
     /* places already loaded above; the list keeps working without routing */
   }

@@ -87,6 +87,77 @@ import { href, regionHref } from '@/i18n/routes';
         </section>
       </div>
       <div class="mr__mapcol">
+        <section class="nav" data-nav hidden aria-labelledby="nav-t">
+          <h2 id="nav-t" class="visually-hidden">Recorrido en vivo</h2>
+
+          <div class="nav__view" data-nav-view="idle">
+            <p class="label">Recorrido en vivo</p>
+            <p class="nav__lede" data-nav-idle-text>Sigue tu avance hacia cada lugar: distancia que falta, tiempo estimado y aviso al llegar.</p>
+            <p class="nav__trip small" data-nav-trip hidden></p>
+            <div class="nav__acts">
+              <button type="button" class="btn" data-nav-start>Iniciar recorrido</button>
+              <button type="button" class="btn btn--ghost" data-nav-reset hidden>Restablecer recorrido</button>
+            </div>
+            <p class="geo-fine">Al iniciar, el navegador te pedirá permiso para usar tu ubicación. Tu posición solo vive en esta página: no se guarda ni se envía a estadísticas. Es una guía para tu recorrido turístico, no un navegador certificado: no da indicaciones vuelta por vuelta. Con la pantalla apagada o la página en segundo plano, el navegador puede pausar tu ubicación.</p>
+          </div>
+
+          <div class="nav__view" data-nav-view="live" hidden>
+            <p class="label">Siguiente destino</p>
+            <p class="nav__dest" data-nav-dest>—</p>
+            <p class="nav__big"><b data-nav-dist>—</b><b><span data-nav-time>—</span><span class="nav__aprox">aprox.</span></b></p>
+            <p class="nav__eta small" data-nav-eta></p>
+            <div class="nav__bar" role="progressbar" aria-label="Avance del recorrido" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-nav-bar><span></span></div>
+            <p class="nav__count small" data-nav-count></p>
+            <p class="geo-st" data-nav-status aria-live="polite"></p>
+            <p class="geo-msg" data-nav-msg aria-live="polite" hidden></p>
+            <div class="nav__acts">
+              <button type="button" class="geo-act" data-nav-pause>Pausar</button>
+              <button type="button" class="geo-act" data-nav-resume hidden>Reanudar</button>
+              <button type="button" class="geo-act" data-nav-center hidden>Recentrar</button>
+              <button type="button" class="geo-act" data-nav-reroute>Recalcular ruta</button>
+              <button type="button" class="geo-act" data-nav-wake aria-pressed="false" hidden>Mantener pantalla encendida</button>
+              <button type="button" class="geo-act" data-nav-stop>Terminar recorrido</button>
+            </div>
+            <details class="nav__more">
+              <summary>Detalles de ubicación</summary>
+              <dl class="geo-dl" data-nav-details></dl>
+              <p class="geo-fine" data-nav-details-note></p>
+            </details>
+          </div>
+
+          <div class="nav__view" data-nav-view="arrived" hidden>
+            <p class="label">Llegada</p>
+            <p class="nav__dest" data-nav-arrived-title>Has llegado</p>
+            <p class="small" data-nav-arrived-note></p>
+            <div class="nav__acts">
+              <button type="button" class="btn" data-nav-visited>Marcar como visitado</button>
+              <button type="button" class="btn btn--ghost" data-nav-continue>Continuar al siguiente lugar</button>
+              <button type="button" class="geo-act" data-nav-stop>Terminar recorrido</button>
+            </div>
+          </div>
+
+          <div class="nav__view" data-nav-view="finished" hidden>
+            <p class="label">Recorrido terminado</p>
+            <p class="nav__dest" data-nav-sum-title></p>
+            <ul class="nav__sum small" data-nav-sum></ul>
+            <p class="small" data-nav-sum-meta></p>
+            <div class="nav__acts">
+              <button type="button" class="btn btn--ghost" data-nav-reset>Restablecer recorrido</button>
+              <button type="button" class="btn btn--ghost" data-nav-close>Volver a planear</button>
+            </div>
+          </div>
+
+          <div class="nav__view" data-nav-view="error" hidden>
+            <p class="geo-st" data-tone="err"><span class="geo-st__sym" aria-hidden="true">⊘</span>No pudimos iniciar el recorrido</p>
+            <p class="geo-msg" data-nav-err></p>
+            <div class="nav__acts">
+              <button type="button" class="btn btn--ghost" data-nav-start>Reintentar</button>
+              <button type="button" class="btn btn--ghost" data-nav-close>Volver a planear</button>
+            </div>
+          </div>
+
+          <p class="geo-fine nav__fine">Tiempos estimados por el proveedor de rutas, sin tráfico en tiempo real. Si conduces, no manipules la pantalla: detente en un lugar seguro.</p>
+        </section>
         <MapView mode="route" label="Mapa de tu ruta" height="min(72svh, 40rem)" />
         <p class="source">La línea sigue calles y carreteras calculadas por el servicio de rutas que se indica en la atribución. Si el cálculo falla, solo se muestran tus lugares: nunca dibujamos una línea recta como si fuera carretera. Distancias y tiempos son estimaciones del proveedor y no consideran tráfico en tiempo real. Lugares sin ubicación puntual no entran en el cálculo.</p>
       </div>
@@ -166,6 +237,38 @@ import { href, regionHref } from '@/i18n/routes';
   .plan__opt :global(th) { font: 700 0.62rem/1.2 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
   .plan__opt :global(ol) { padding-left: 1.3rem; font-size: 0.86rem; display: grid; gap: 0.15rem; }
   .plan__opt :global(.opt__acts) { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
+
+  .plan[data-locked] { opacity: 0.55; }
+  /* mobile / tablet trip view: card and map move to the top of the page */
+  @media (max-width: 999px) { .mr__mapcol[data-nav-live] { order: -1; } }
+  /* desktop trip view: card + map share the viewport so the whole map stays reachable */
+  @media (min-width: 1000px) {
+    .mr__mapcol[data-nav-live] :global(.mapv__canvas) { height: max(18rem, calc(100svh - var(--slp-header-h) - var(--nav-h, 0px) - 4rem)); min-height: 18rem; }
+  }
+
+  /* live navigation card */
+  .nav { display: grid; gap: var(--sc-4); padding: var(--sc-5); border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: var(--slp-paper); min-width: 0; }
+  .nav[hidden], .nav__view[hidden], .nav [hidden] { display: none; }
+  .nav__view { display: grid; gap: var(--sc-3); min-width: 0; }
+  .nav__lede { font-size: 0.92rem; line-height: 1.5; }
+  .nav__trip { padding: 0.5rem 0.7rem; background: var(--sc-surface); border-radius: var(--sc-r-sm); }
+  .nav__dest { font: 600 clamp(1.6rem, 1.3rem + 1vw, 2.1rem)/1.05 var(--sc-font-display); overflow-wrap: anywhere; }
+  .nav__big { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 1.4rem; }
+  .nav__big b { font: 600 clamp(2rem, 1.6rem + 1.4vw, 2.7rem)/1 var(--sc-font-display); font-variant-numeric: tabular-nums; }
+  .nav__aprox { font: 600 0.8rem/1 var(--sc-font-text); color: var(--sc-ink-soft); margin-left: 0.3rem; }
+  .nav__eta { font-variant-numeric: tabular-nums; }
+  .nav__bar { height: 6px; border-radius: 3px; background: var(--sc-hairline); overflow: hidden; }
+  .nav__bar span { display: block; height: 100%; width: 0; background: var(--slp-charcoal); transition: width 0.4s ease; }
+  @media (prefers-reduced-motion: reduce) { .nav__bar span { transition: none; } }
+  .nav__count { color: var(--sc-ink-soft); font-variant-numeric: tabular-nums; }
+  .nav__acts { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .nav__acts .geo-act { min-height: 40px; }
+  .nav__more summary { cursor: pointer; font: 700 0.62rem/1.2 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); min-height: 32px; display: flex; align-items: center; }
+  .nav__more[open] summary { margin-bottom: 0.4rem; }
+  .nav__sum { padding-left: 1.2rem; display: grid; gap: 0.15rem; }
+  .nav__fine { border-top: 1px solid var(--sc-hairline); padding-top: var(--sc-3); }
+  .mr__list :global(.mr__done) { display: inline-block; margin-right: 0.45rem; padding: 1px 6px; border-radius: 3px; border: 1px solid var(--slp-charcoal); font: 700 0.6rem/1.4 var(--sc-font-text); letter-spacing: 0.1em; text-transform: uppercase; vertical-align: middle; }
+  .mr__list :global(li[data-visited]) { opacity: 0.72; }
 
   /* recommendations */
   .recos { display: grid; gap: var(--sc-3); padding-top: var(--sc-5); border-top: 1px solid var(--sc-hairline-strong); }

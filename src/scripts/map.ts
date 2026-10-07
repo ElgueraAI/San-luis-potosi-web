@@ -7,6 +7,8 @@
  * Location and routing live in src/scripts/geo/: the visitor position is
  * requested only from «Usar mi ubicación»; routes come from the routing
  * provider through route-session (never a straight line between stops).
+ * Live navigation (geo/nav-controller.ts) is drawn only by the route-mode map
+ * on /mi-ruta/: travelled part muted, camera follows until the visitor pans.
  */
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { Map as MLMap, NavigationControl, AttributionControl, LngLatBounds, setWorkerUrl, type GeoJSONSource, type StyleSpecification, type MapMouseEvent } from 'maplibre-gl';
@@ -22,6 +24,9 @@ import { locationReadout } from './geo/location-ui';
 import { UserLayer, RouteLayer } from './geo/map-layers';
 import { routeSession, errorMessage, type SessionState } from './geo/route-session';
 import { fmtDistance, fmtDuration } from './geo/format';
+import { navigation } from './geo/nav-controller';
+import { isActive, type NavState } from './geo/navigation';
+import { splitAt } from './geo/route-geometry';
 
 const STATE_BOUNDS: [[number, number], [number, number]] = [[-102.35, 21.1], [-98.3, 24.55]];
 const BASEMAP = 'https://tiles.openfreemap.org/styles/positron';
@@ -125,6 +130,8 @@ export async function mountMap(el: HTMLElement): Promise<void> {
   const user = new UserLayer(map);
   const routeLayer = new RouteLayer(map);
   let styleReady = false;
+  /** live navigation is drawing this map (declared early: listeners below read it on subscribe) */
+  let navOn = false;
 
   map.on('style.load', () => {
     clearTimeout(styleTimer);
@@ -134,6 +141,7 @@ export async function mountMap(el: HTMLElement): Promise<void> {
     styleReady = true;
     // a style swap (fallback) drops custom sources: redraw what we had
     drawRouteState(routeSession.get(), true);
+    if (navOn) drawNav(navigation.get(), true);
     user.update(geoLocation.get().fix, geoLocation.get().status === 'stale');
   });
 
@@ -390,7 +398,7 @@ export async function mountMap(el: HTMLElement): Promise<void> {
     if (legendGeo) legendGeo.hidden = !s.fix;
     if (styleReady) user.update(s.fix, s.status === 'stale');
     // while following, keep the dot in view without fighting the visitor's own panning
-    if (s.watching && s.fix && flewToFix && !map.getBounds().contains(s.fix.coord)) map.easeTo({ center: s.fix.coord, duration: reducedMotion() ? 0 : 500 });
+    if (!navOn && s.watching && s.fix && flewToFix && !map.getBounds().contains(s.fix.coord)) map.easeTo({ center: s.fix.coord, duration: reducedMotion() ? 0 : 500 });
     renderCard();
   });
 
@@ -425,6 +433,7 @@ export async function mountMap(el: HTMLElement): Promise<void> {
 
   function drawRouteState(s: SessionState, force: boolean) {
     if (!overlayOn || !styleReady) return;
+    if (navOn) { if (routeAttr && s.result) routeAttr.textContent = ` ${s.result.attribution}.`; return; } // drawn by drawNav
     const regions: Record<string, string> = {};
     s.waypoints.forEach((w) => { const p = routeSession.place(w.id); if (p) regions[w.id] = p.region; });
     const sig = [s.phase, s.result?.computedAt ?? '', s.altIndex, s.waypoints.map((w) => w.id + w.coord.join()).join('|')].join('#');
@@ -459,6 +468,76 @@ export async function mountMap(el: HTMLElement): Promise<void> {
   bar?.addEventListener('click', (e) => { if ((e.target as Element).closest('[data-route-retry]')) routeSession.retry(); });
 
   if (mode === 'route') void setOverlay(true);
+
+  // ---- live navigation (route mode only; state machine lives in nav-controller) ------------
+  const recenterBtn = el.querySelector<HTMLButtonElement>('[data-nav-recenter]');
+  const legendDone = el.querySelector<HTMLElement>('[data-legend-done]');
+  let navSig = '';
+  let splitAlong = -1;
+  let lastFollowFix: unknown = null;
+
+  function drawNav(n: NavState, force = false) {
+    if (!styleReady) return;
+    const line = navigation.engine.line;
+    if (!n.route || !line) return;
+    const wps = n.route.waypoints.filter((w) => w.id.startsWith('origin:') || !routeSession.isExcluded(w.id));
+    const sig = [n.route.computedAt, wps.map((w) => w.id).join()].join('#');
+    if (sig !== navSig || force) {
+      navSig = sig;
+      splitAlong = -1;
+      const regions: Record<string, string> = {};
+      wps.forEach((w) => { const p = routeSession.place(w.id); if (p) regions[w.id] = p.region; });
+      routeLayer.setWaypoints(wps.slice(1), regions); // the visitor dot is the start
+    }
+    // redraw the split only when the visitor advanced noticeably (cheap on long routes)
+    const along = n.progress?.along ?? 0;
+    if (force || splitAlong < 0 || Math.abs(along - splitAlong) > 15) {
+      splitAlong = along;
+      const { done, rest } = splitAt(line, along);
+      routeLayer.setNavigation(done, rest);
+    }
+    if (legendRoute) legendRoute.hidden = false;
+    if (legendDone) legendDone.hidden = along <= 0;
+  }
+
+  function follow(n: NavState) {
+    const fix = n.fix;
+    if (!fix || fix === lastFollowFix || navigation.camera !== 'follow' || !styleReady) return;
+    const first = lastFollowFix === null;
+    lastFollowFix = fix;
+    map.easeTo({ center: fix.coord, zoom: first ? Math.max(map.getZoom(), 14) : map.getZoom(), duration: reducedMotion() ? 0 : 600 });
+  }
+
+  if (mode === 'route') {
+    // any gesture by the visitor hands the camera back to them; «Recentrar» resumes following
+    const toFree = (e: { originalEvent?: unknown }) => { if (navOn && e.originalEvent) navigation.setCamera('free'); };
+    map.on('dragstart', toFree);
+    map.on('zoomstart', toFree);
+    map.on('wheel', () => { if (navOn) navigation.setCamera('free'); });
+    recenterBtn?.addEventListener('click', () => navigation.setCamera('follow'));
+    navigation.onCamera((c) => {
+      if (recenterBtn) recenterBtn.hidden = !(navOn && c === 'free');
+      if (c === 'follow') { lastFollowFix = null; follow(navigation.get()); }
+    });
+    navigation.subscribe((n) => {
+      const on = isActive(n.status) && !!n.route;
+      if (on !== navOn) {
+        navOn = on;
+        el.toggleAttribute('data-navigating', on);
+        if (recenterBtn) recenterBtn.hidden = !(on && navigation.camera === 'free');
+        if (!on) {
+          // back to the planning view of the route
+          navSig = ''; lastSig = ''; lastFollowFix = null;
+          if (legendDone) legendDone.hidden = true;
+          if (styleReady) drawRouteState(routeSession.get(), true);
+          return;
+        }
+      }
+      if (!on) return;
+      drawNav(n);
+      follow(n);
+    });
+  }
 
   // ---- pick the starting point on the map (route mode) -----------------------------
   const pickBtn = el.querySelector<HTMLButtonElement>('[data-pick-origin]');
