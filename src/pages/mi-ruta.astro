@@ -5,10 +5,10 @@ import MapView from '@/components/map/MapView.astro';
 import { REGIONS } from '@/data/regions';
 import { href, regionHref } from '@/i18n/routes';
 ---
-<BaseLayout title="Mi Ruta" description="Los lugares que guardaste en San Luis Potosí, ordenados en un recorrido con mapa. Se guardan solo en este navegador.">
-  <PageHeader compact label="Mi Ruta" title="Tu viaje, a tu manera." lede="Los lugares que guardaste mientras explorabas. Ordénalos, quítalos o revisa el recorrido en el mapa. Se guardan solo en este navegador; no necesitas cuenta." />
+<BaseLayout title="Mi Ruta" description="Los lugares que guardaste en San Luis Potosí, en un recorrido por carretera con distancia, tiempo y orden sugerido. Se guardan solo en este navegador.">
+  <PageHeader compact label="Mi Ruta" title="Tu viaje, a tu manera." lede="Los lugares que guardaste mientras explorabas, unidos por calles y carreteras reales. Elige desde dónde sales, cómo te mueves y en qué orden. Se guardan solo en este navegador; no necesitas cuenta." />
 
-  <section class="section section--tight" data-ground="light" data-my-route data-places-url={href('placesData')} aria-label="Lugares guardados">
+  <section class="section section--tight" data-ground="light" data-my-route data-places-url={href('placesData')} data-context-url={href('routeContextData')} aria-label="Lugares guardados">
     <div class="wrap mr">
       <div class="mr__col">
         <div class="mr__summary" data-mr-summary hidden>
@@ -18,6 +18,46 @@ import { href, regionHref } from '@/i18n/routes';
           </ul>
         </div>
         <p class="mr__loading small muted" data-mr-loading>Cargando tu ruta…</p>
+
+        <div class="plan" data-planner hidden>
+          <fieldset class="plan__set">
+            <legend class="label">Punto de partida</legend>
+            <div class="plan__seg" data-origin-opts>
+              <label><input type="radio" name="origin" value="gps" /><span>Mi ubicación</span></label>
+              <label><input type="radio" name="origin" value="place" /><span>Un municipio</span></label>
+              <label><input type="radio" name="origin" value="first" /><span>Mi primer lugar</span></label>
+              <label><input type="radio" name="origin" value="point" /><span>Punto en el mapa</span></label>
+            </div>
+            <div class="plan__sub" data-origin-gps hidden>
+              <div class="geo-card" data-plan-geo aria-live="polite"></div>
+              <div class="geo-card__acts">
+                <button type="button" class="geo-act" data-plan-locate>Usar mi ubicación</button>
+                <button type="button" class="geo-act" data-plan-follow aria-pressed="false" hidden>Seguir mi posición</button>
+              </div>
+              <p class="geo-fine">Tu ubicación solo se usa en esta página para calcular la ruta. No se guarda ni se envía a estadísticas.</p>
+            </div>
+            <div class="plan__sub" data-origin-place hidden>
+              <label class="plan__field"><span class="tiny muted">Cabecera municipal (INEGI)</span>
+                <select data-origin-select><option value="">Elige un municipio…</option></select>
+              </label>
+            </div>
+            <p class="plan__sub small" data-origin-point hidden>Usa «Elegir inicio en el mapa» y toca el punto desde donde sales.</p>
+            <p class="plan__note small" data-origin-note hidden></p>
+          </fieldset>
+
+          <fieldset class="plan__set">
+            <legend class="label">Cómo te mueves</legend>
+            <div class="plan__seg" data-profile-opts>
+              <label><input type="radio" name="profile" value="car" /><span>Auto</span></label>
+              <label><input type="radio" name="profile" value="foot" /><span>A pie</span></label>
+              <label><input type="radio" name="profile" value="bike" /><span>Bicicleta</span></label>
+            </div>
+          </fieldset>
+
+          <div class="plan__sum" data-plan-summary aria-live="polite"></div>
+          <div class="plan__opt" data-plan-opt hidden aria-live="polite"></div>
+        </div>
+
         <ol class="mr__list" data-mr-list aria-label="Orden de tu recorrido"></ol>
 
         <div class="mr__empty" data-mr-empty hidden>
@@ -39,10 +79,16 @@ import { href, regionHref } from '@/i18n/routes';
           <ul>{REGIONS.map((r) => <li data-region={r.id} data-mr-missing={r.id} hidden><a class="arrow" href={regionHref(r.slug)}>{r.name}</a></li>)}</ul>
         </div>
         <p class="mr__error small" data-mr-error hidden>No se pudieron cargar los datos de tus lugares. Revisa tu conexión y recarga la página; tu selección sigue guardada.</p>
+
+        <section class="recos" data-recos hidden aria-labelledby="recos-t">
+          <h2 id="recos-t" class="display display--sm">Para tu ruta</h2>
+          <p class="small muted">Sugerencias con reglas simples sobre los datos del portal. Cada una dice por qué aparece; no reflejan afluencia ni disponibilidad en tiempo real.</p>
+          <ul class="recos__list" data-recos-list></ul>
+        </section>
       </div>
       <div class="mr__mapcol">
-        <MapView mode="route" label="Mapa de tu ruta" />
-        <p class="source">La línea une tus lugares en el orden de la lista, en línea recta; no es una ruta carretera. Lugares sin ubicación puntual no se dibujan.</p>
+        <MapView mode="route" label="Mapa de tu ruta" height="min(72svh, 40rem)" />
+        <p class="source">La línea sigue calles y carreteras calculadas por el servicio de rutas que se indica en la atribución. Si el cálculo falla, solo se muestran tus lugares: nunca dibujamos una línea recta como si fuera carretera. Distancias y tiempos son estimaciones del proveedor y no consideran tráfico en tiempo real. Lugares sin ubicación puntual no entran en el cálculo.</p>
       </div>
     </div>
   </section>
@@ -80,4 +126,55 @@ import { href, regionHref } from '@/i18n/routes';
   .mr__empty-cta, .mr__actions { display: flex; flex-wrap: wrap; gap: var(--sc-3); align-items: center; }
   .mr__suggest ul { list-style: none; display: flex; flex-wrap: wrap; gap: var(--sc-5); }
   .mr__error { padding: var(--sc-3) var(--sc-4); background: var(--sc-surface); }
+  .mr__list :global(.mr__leg) { grid-column: 3 / -1; font: 600 0.76rem/1.3 var(--sc-font-text); color: var(--sc-ink-soft); font-variant-numeric: tabular-nums; }
+  .mr__list :global(.mr__leg b) { color: var(--sc-ink); }
+  .mr__list :global(li.mr__start) { grid-template-columns: auto 1fr; }
+  .mr__list :global(.mr__startmark) { width: 1.8rem; height: 1.8rem; border-radius: 50%; background: #fff; border: 6px solid var(--slp-charcoal); }
+  .mr__list :global(.mr__tag) { display: inline-block; margin-right: 0.45rem; padding: 1px 6px; border-radius: 3px; background: var(--slp-charcoal); color: var(--slp-ivory); font: 700 0.6rem/1.4 var(--sc-font-text); letter-spacing: 0.1em; text-transform: uppercase; vertical-align: middle; }
+  @media (max-width: 520px) { .mr__list :global(.mr__leg) { grid-column: 2 / -1; } }
+
+  /* planner */
+  .plan { display: grid; gap: var(--sc-5); padding: var(--sc-5); border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: var(--slp-paper); min-width: 0; }
+  .plan[hidden] { display: none; }
+  .plan__set { border: 0; padding: 0; margin: 0; display: grid; gap: var(--sc-3); min-width: 0; }
+  .plan__seg { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .plan__seg label { position: relative; }
+  .plan__seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .plan__seg span {
+    display: inline-flex; align-items: center; min-height: 40px; padding: 0 0.85rem; border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm);
+    font: 700 0.7rem/1 var(--sc-font-text); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .plan__seg input:checked + span { background: var(--slp-charcoal); color: var(--slp-ivory); border-color: var(--slp-charcoal); }
+  .plan__seg input:checked + span::before { content: '✓'; margin-right: 0.4rem; }
+  .plan__seg input:focus-visible + span { outline: 2px solid var(--slp-charcoal); outline-offset: 2px; }
+  .plan__sub { display: grid; gap: var(--sc-3); }
+  .plan__sub[hidden], .plan__note[hidden], .plan__opt[hidden] { display: none; }
+  .plan__field { display: grid; gap: 0.35rem; }
+  .plan__field select { min-height: 44px; padding: 0 0.6rem; border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: #fff; font: 600 0.9rem/1.2 var(--sc-font-text); color: var(--slp-charcoal); max-width: 100%; }
+  .plan__note { padding: 0.5rem 0.7rem; background: var(--sc-surface); border-radius: var(--sc-r-sm); }
+  .plan__sum { display: grid; gap: var(--sc-3); border-top: 1px solid var(--sc-hairline-strong); padding-top: var(--sc-4); }
+  .plan__sum :global(.sum__big) { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 1.4rem; }
+  .plan__sum :global(.sum__big b) { font: 600 clamp(2.1rem, 1.6rem + 1.6vw, 2.9rem)/1 var(--sc-font-display); font-variant-numeric: tabular-nums; }
+  .plan__sum :global(.sum__big span) { font-size: 0.8rem; color: var(--sc-ink-soft); margin-left: 0.25rem; }
+  .plan__sum :global(.sum__meta) { font-size: 0.84rem; line-height: 1.5; }
+  .plan__sum :global(.sum__alts) { display: grid; gap: 0.3rem; border: 0; padding: 0; margin: 0; }
+  .plan__sum :global(.sum__alts label) { display: flex; gap: 0.5rem; align-items: center; font-size: 0.84rem; min-height: 36px; }
+  .plan__sum :global(.sum__fine), .plan__opt :global(.sum__fine) { font-size: 0.72rem; color: var(--sc-ink-soft); }
+  .plan__opt { display: grid; gap: var(--sc-3); border-top: 1px solid var(--sc-hairline); padding-top: var(--sc-4); }
+  .plan__opt :global(table) { width: 100%; border-collapse: collapse; font-size: 0.84rem; font-variant-numeric: tabular-nums; }
+  .plan__opt :global(th), .plan__opt :global(td) { text-align: left; padding: 0.45rem 0.3rem; border-bottom: 1px solid var(--sc-hairline); }
+  .plan__opt :global(th) { font: 700 0.62rem/1.2 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .plan__opt :global(ol) { padding-left: 1.3rem; font-size: 0.86rem; display: grid; gap: 0.15rem; }
+  .plan__opt :global(.opt__acts) { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
+
+  /* recommendations */
+  .recos { display: grid; gap: var(--sc-3); padding-top: var(--sc-5); border-top: 1px solid var(--sc-hairline-strong); }
+  .recos[hidden] { display: none; }
+  .recos__list { list-style: none; display: grid; border-top: 1px solid var(--sc-hairline); }
+  .recos__list :global(li) { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.3rem var(--sc-3); align-items: center; padding: var(--sc-3) 0; border-bottom: 1px solid var(--sc-hairline); }
+  .recos__list :global(.rc__k) { font: 700 0.6rem/1.2 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .recos__list :global(.rc__t) { font: 600 1.15rem/1.15 var(--sc-font-display); }
+  .recos__list :global(.rc__t a) { color: inherit; }
+  .recos__list :global(.rc__r) { font-size: 0.8rem; line-height: 1.45; }
+  @media (max-width: 520px) { .recos__list :global(li) { grid-template-columns: 1fr; } }
 </style>

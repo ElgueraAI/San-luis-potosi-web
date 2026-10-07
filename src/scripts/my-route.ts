@@ -1,13 +1,14 @@
 /**
  * Mi Ruta page: renders the saved places (localStorage via route-store) with
  * order controls, the regions they cover, and suggestions for regions not yet
- * in the route. The map on the page (mode="route") follows the same store.
+ * in the route. The map on the page (mode="route") and the planner
+ * (route-planner.ts) follow the same store through route-session, which
+ * also provides the road distance / time of each leg shown in the list.
  */
 import { route } from './route-store';
-
-type Place = { id: string; name: string; region: string; kind: string; municipality: string | null; url: string | null; image: string | null; status: string };
-const REGION_NAME: Record<string, string> = { altiplano: 'Altiplano', centro: 'Centro', 'zona-media': 'Zona Media', huasteca: 'Huasteca' };
-const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+import { loadPlaces, esc, REGION_NAME, routable, type Place } from './geo/places';
+import { routeSession, type SessionState } from './geo/route-session';
+import { fmtDistance, fmtDuration } from './geo/format';
 
 export async function initMyRoute(): Promise<void> {
   const box = document.querySelector<HTMLElement>('[data-my-route]');
@@ -16,19 +17,37 @@ export async function initMyRoute(): Promise<void> {
   const list = $<HTMLOListElement>('[data-mr-list]');
   let places: Place[] = [];
   try {
-    const r = await fetch(box.dataset.placesUrl!);
-    if (!r.ok) throw new Error(String(r.status));
-    places = await r.json();
+    places = await loadPlaces(box.dataset.placesUrl!);
   } catch {
     $('[data-mr-loading]').hidden = true;
     $('[data-mr-error]').hidden = false;
     return;
   }
   $('[data-mr-loading]').hidden = true;
+  const byId = new Map(places.map((p) => [p.id, p]));
 
+  /** Road leg arriving at each waypoint id (from the current route result). */
+  const legsFor = (s: SessionState) => {
+    const m = new Map<string, { distance: number; duration: number; from: string }>();
+    if (s.phase !== 'ok' || !s.result || s.altIndex) return m; // alternatives have no per-leg split
+    s.waypoints.forEach((w, i) => {
+      const leg = s.result!.legs[i - 1];
+      if (i > 0 && leg) m.set(w.id, { distance: leg.distance, duration: leg.duration, from: s.waypoints[i - 1].name });
+    });
+    return m;
+  };
+
+  let lastSig = '';
   const render = () => {
-    const ids = route.get().filter((id) => places.some((p) => p.id === id));
-    const sel = ids.map((id) => places.find((p) => p.id === id)!);
+    const s = routeSession.get();
+    const ids = route.get().filter((id) => byId.has(id));
+    // skip identical renders (session emits loading/ok states) so focus and scroll stay put
+    const sig = [ids.join(), s.phase, s.result?.computedAt ?? '', s.altIndex, s.waypoints.map((w) => w.id).join()].join('#');
+    if (sig === lastSig) return;
+    lastSig = sig;
+    const f = document.activeElement as HTMLElement | null;
+    const focusSel = f && list.contains(f) && f.dataset.id ? `button[data-id="${f.dataset.id}"][data-mv="${f.dataset.mv}"]` : null;
+    const sel = ids.map((id) => byId.get(id)!);
     $('[data-mr-empty]').hidden = sel.length > 0;
     $('[data-mr-summary]').hidden = sel.length === 0;
     $('[data-mr-actions]').hidden = sel.length === 0;
@@ -48,21 +67,36 @@ export async function initMyRoute(): Promise<void> {
     });
     $('[data-mr-suggest]').hidden = missing === 0;
 
-    list.innerHTML = sel
-      .map((p, i) => `<li data-region="${p.region}">
+    const legs = legsFor(s);
+    const origin = s.waypoints[0]?.id.startsWith('origin:') ? s.waypoints[0] : null;
+    const routedIds = s.waypoints.map((w) => w.id);
+    const lastRouted = routedIds[routedIds.length - 1];
+    const startRow = origin && sel.length
+      ? `<li class="mr__start"><span class="mr__startmark" aria-hidden="true"></span><div><p class="mr__name">${esc(origin.name)}</p><p class="mr__meta"><span class="mr__tag">Inicio</span>Punto de partida${origin.approximate ? ' · ubicación aproximada' : ''}</p></div></li>`
+      : '';
+    list.innerHTML = startRow + sel
+      .map((p, i) => {
+        const leg = legs.get(p.id);
+        const isStart = !origin && routedIds[0] === p.id && routedIds.length > 1;
+        const isEnd = lastRouted === p.id && routedIds.length > 1;
+        const tag = isStart ? '<span class="mr__tag">Inicio</span>' : isEnd ? '<span class="mr__tag">Fin</span>' : '';
+        return `<li data-region="${p.region}">
         <span class="mr__n" aria-hidden="true">${i + 1}</span>
         ${p.image ? `<img class="mr__img" src="${p.image}" alt="" width="80" height="80" loading="lazy">` : '<span class="mr__ph" aria-hidden="true"></span>'}
         <div>
           <p class="mr__name">${p.url ? `<a href="${p.url}">${esc(p.name)}</a>` : esc(p.name)}</p>
-          <p class="mr__meta">${REGION_NAME[p.region]} · ${esc(p.kind)}${p.municipality ? ` · ${esc(p.municipality)}` : ''}${p.status === 'provisional' ? ' · ubicación aproximada' : p.status === 'none' ? ' · sin punto en el mapa' : ''}</p>
+          <p class="mr__meta">${tag}${REGION_NAME[p.region]} · ${esc(p.kind)}${p.municipality ? ` · ${esc(p.municipality)}` : ''}${p.status === 'provisional' ? ' · ubicación aproximada' : !routable(p) ? ' · sin punto en el mapa: no entra en el cálculo' : ''}</p>
         </div>
         <div class="mr__ctrl">
           <button type="button" data-mv="-1" data-id="${p.id}" aria-label="Subir ${esc(p.name)}" ${i === 0 ? 'disabled' : ''}>↑</button>
           <button type="button" data-mv="1" data-id="${p.id}" aria-label="Bajar ${esc(p.name)}" ${i === sel.length - 1 ? 'disabled' : ''}>↓</button>
           <button type="button" data-rm="${p.id}" aria-label="Quitar ${esc(p.name)} de Mi Ruta">✕</button>
         </div>
-      </li>`)
+        ${leg ? `<p class="mr__leg">↳ <b>${fmtDistance(leg.distance)}</b> · <b>${fmtDuration(leg.duration)}</b> desde ${esc(leg.from)}</p>` : ''}
+      </li>`;
+      })
       .join('');
+    if (focusSel) (list.querySelector<HTMLButtonElement>(`${focusSel}:not(:disabled)`) ?? list.querySelector<HTMLButtonElement>(`button[data-id="${f!.dataset.id}"]:not(:disabled)`))?.focus();
   };
 
   list.addEventListener('click', (e) => {
@@ -79,4 +113,15 @@ export async function initMyRoute(): Promise<void> {
   });
   route.subscribe(render);
   render();
+
+  // road legs + planner (route-session also feeds the map on this page)
+  try {
+    await routeSession.init(box.dataset.placesUrl!);
+    routeSession.activate();
+    routeSession.subscribe(render);
+    const { initPlanner } = await import('./route-planner');
+    initPlanner(box);
+  } catch {
+    /* places already loaded above; the list keeps working without routing */
+  }
 }

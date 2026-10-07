@@ -5,9 +5,13 @@
  *   full   region + interest filters, selected-place panel, synced list
  *   region locked to one region, interest filters, panel, list
  *   mini   one destination, no filters (destination pages)
- *   route  the visitor's Mi Ruta, ordered line between saved places
+ *   route  the visitor's Mi Ruta: road route from the routing provider
+ *          (src/scripts/geo/route-session.ts), never a straight line
  * Verified coordinates are solid markers; provisional ones are outlined and
  * labelled "aproximada". Places without an acceptable point are not plotted.
+ * Every mode except mini has «Usar mi ubicación» (asked only on click);
+ * full/region can overlay Mi Ruta; full adds clustered layers (seats,
+ * culture, nature, lodging) from the portal's own records.
  */
 import { href } from '@/i18n/routes';
 import { REGIONS } from '@/data/regions';
@@ -27,7 +31,11 @@ const INTEREST_FILTERS = [
   ['naturaleza', 'Naturaleza'], ['cultura', 'Cultura'], ['cascadas', 'Cascadas'], ['arqueologia', 'Arqueología'],
   ['pueblos-magicos', 'Pueblos Mágicos'], ['gastronomia', 'Gastronomía'], ['aventura', 'Aventura'],
 ];
+const LAYERS = [
+  ['seats', 'Cabeceras municipales'], ['culture', 'Museos y cultura'], ['nature', 'Áreas naturales'], ['lodging', 'Hospedaje'],
+];
 const withPanel = mode === 'full' || mode === 'region';
+const withTools = mode !== 'mini';
 ---
 <div
   class:list={['mapv', `mapv--${mode}`, cls]}
@@ -56,10 +64,40 @@ const withPanel = mode === 'full' || mode === 'region';
           ))}
         </div>
       )}
+      {mode === 'full' && (
+        <div class="mapv__chips mapv__layers" data-layer-group role="group" aria-label="Capas adicionales">
+          <span class="mapv__layers-l" aria-hidden="true">Más capas</span>
+          {LAYERS.map(([v, l]) => (
+            <button type="button" class="chip-btn" aria-pressed="false" data-layer={v}>{l}</button>
+          ))}
+        </div>
+      )}
     </div>
   )}
 
   <div class="mapv__stage">
+    {withTools && (
+      <div class="mapv__overlay">
+      <div class="mapv__tools" data-map-tools>
+        <button type="button" class="mapv__tool" data-geo-locate>
+          <span class="mapv__ico mapv__ico--loc" aria-hidden="true"></span><span data-geo-label>Usar mi ubicación</span>
+        </button>
+        {mode !== 'route' && (
+          <button type="button" class="mapv__tool" data-route-overlay aria-pressed="false">
+            <span class="mapv__ico mapv__ico--route" aria-hidden="true"></span><span>Mi Ruta en el mapa</span>
+          </button>
+        )}
+        {mode === 'route' && (
+          <button type="button" class="mapv__tool" data-pick-origin aria-pressed="false">
+            <span class="mapv__ico mapv__ico--pin" aria-hidden="true"></span><span>Elegir inicio en el mapa</span>
+          </button>
+        )}
+      </div>
+      <div class="mapv__card geo-card" data-geo-card hidden aria-live="polite"></div>
+      {mode !== 'route' && <div class="mapv__routebar" data-route-bar hidden aria-live="polite"></div>}
+      </div>
+    )}
+
     <div class="mapv__canvas" data-map-canvas role="region" aria-label={label}>
       <div class="mapv__state" data-map-state>
         <span class="mapv__spinner" aria-hidden="true"></span>
@@ -70,6 +108,8 @@ const withPanel = mode === 'full' || mode === 'region';
     <div class="mapv__legend" aria-label="Leyenda">
       <span><i class="lg lg--ready" aria-hidden="true"></i>Ubicación verificada</span>
       <span><i class="lg lg--prov" aria-hidden="true"></i>Ubicación aproximada</span>
+      {withTools && <span class="mapv__legend-geo" data-legend-geo hidden><i class="lg lg--me" aria-hidden="true"></i>Tú</span>}
+      {withTools && <span class="mapv__legend-route" data-legend-route hidden><i class="lg lg--route" aria-hidden="true"></i>Ruta por carretera</span>}
     </div>
 
     {withPanel && (
@@ -89,6 +129,7 @@ const withPanel = mode === 'full' || mode === 'region';
   </div>
   <p class="source mapv__attr">
     Puntos: {mapAttribution}. Las ubicaciones aproximadas provienen de OpenStreetMap y no son coordenadas oficiales; algunos lugares sin un punto confiable no se muestran.
+    {withTools && <span data-route-attr hidden></span>}
   </p>
 </div>
 
@@ -171,4 +212,95 @@ const withPanel = mode === 'full' || mode === 'region';
     .mapv__list { max-height: 18rem; overflow-y: auto; }
   }
   :global(.maplibregl-ctrl-attrib) { font-size: 10px; }
+
+  /* layer chips (full map) */
+  .mapv__layers { align-items: center; }
+  .mapv__layers-l { flex: none; font: 700 0.64rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); padding-right: 0.2rem; }
+
+  /* location + route overlay (top-left of the canvas; never blocks map drag outside its boxes) */
+  .mapv__overlay {
+    position: absolute; z-index: 4; top: 0.75rem; left: 0.75rem;
+    width: min(20rem, calc(100% - 4.5rem)); display: grid; gap: 0.5rem; justify-items: start; pointer-events: none;
+  }
+  .mapv__overlay > * { pointer-events: auto; }
+  .mapv__tools { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .mapv__tool {
+    display: inline-flex; align-items: center; gap: 0.5rem; min-height: 40px; padding: 0 0.85rem 0 0.7rem;
+    border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: rgb(251 248 242 / 0.96); color: var(--slp-charcoal);
+    font: 700 0.7rem/1 var(--sc-font-text); letter-spacing: 0.08em; text-transform: uppercase; box-shadow: var(--sc-e1); cursor: pointer;
+  }
+  .mapv__tool[aria-pressed='true'] { background: var(--slp-charcoal); color: var(--slp-ivory); border-color: var(--slp-charcoal); }
+  .mapv__tool[aria-busy='true'] { opacity: 0.7; cursor: progress; }
+  @media (hover: hover) and (pointer: fine) { .mapv__tool:hover { border-color: var(--slp-charcoal); } }
+  .mapv__ico { width: 14px; height: 14px; flex: none; position: relative; display: inline-block; }
+  .mapv__ico--loc { border: 2px solid currentColor; border-radius: 50%; }
+  .mapv__ico--loc::after { content: ''; position: absolute; inset: 3px; border-radius: 50%; background: currentColor; }
+  .mapv__ico--route { border-left: 2px dotted currentColor; border-bottom: 2px solid currentColor; border-radius: 0 0 0 6px; }
+  .mapv__ico--pin { border: 2px solid currentColor; border-radius: 50% 50% 50% 0; transform: rotate(-45deg) scale(0.85); }
+  .mapv__card, .mapv__routebar {
+    width: 100%; padding: 0.75rem 0.85rem; background: rgb(251 248 242 / 0.97); color: var(--slp-charcoal);
+    border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); box-shadow: var(--sc-e2); font-size: 0.8rem;
+  }
+  .mapv__card[hidden], .mapv__routebar[hidden] { display: none; }
+  .mapv__routebar { display: grid; gap: 0.35rem; }
+  .lg--me { background: #1d5fd1; border: 2px solid #fff; box-shadow: 0 0 0 1px #1d5fd1; }
+  .lg--route { width: 18px; height: 4px; border-radius: 2px; background: var(--slp-charcoal); box-shadow: 0 0 0 1.5px #fbf8f2; }
+  .mapv__legend span[hidden] { display: none; }
+  .mapv[data-picking] .mapv__canvas :global(canvas) { cursor: crosshair !important; }
+  @media (max-width: 640px) {
+    .mapv__overlay { width: calc(100% - 4.25rem); }
+    .mapv__tool { min-height: 38px; padding: 0 0.6rem; font-size: 0.64rem; }
+  }
+</style>
+
+<style is:global>
+  /* ---- shared geo UI (map overlay + Mi Ruta planner); markers are injected by MapLibre ---- */
+  .geo-card { display: grid; gap: 0.5rem; }
+  .geo-card__head { display: flex; justify-content: space-between; align-items: start; gap: 0.5rem; }
+  .geo-card__x { border: 0; background: none; padding: 0.15rem 0.3rem; min-width: 32px; min-height: 32px; font-size: 1rem; line-height: 1; color: var(--sc-ink-soft); cursor: pointer; }
+  .geo-card__acts { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .geo-act {
+    min-height: 34px; padding: 0 0.7rem; border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: transparent; color: inherit;
+    font: 700 0.66rem/1 var(--sc-font-text); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
+  }
+  .geo-act[aria-pressed='true'] { background: var(--slp-charcoal); color: var(--slp-ivory); border-color: var(--slp-charcoal); }
+  @media (hover: hover) and (pointer: fine) { .geo-act:hover { border-color: currentColor; } }
+  .geo-st { display: flex; align-items: center; gap: 0.45rem; font: 700 0.7rem/1.2 var(--sc-font-text); letter-spacing: 0.1em; text-transform: uppercase; }
+  .geo-st__sym { font-size: 0.95rem; line-height: 1; }
+  .geo-st[data-tone='ok'] .geo-st__sym { color: #1d5fd1; }
+  .geo-st[data-tone='warn'] .geo-st__sym { color: #9a6a12; }
+  .geo-st[data-tone='err'] { color: #8f2f22; }
+  .geo-st__live { font-weight: 600; letter-spacing: 0.04em; text-transform: none; color: var(--sc-ink-soft); }
+  .geo-dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.35rem 0.9rem; margin: 0; }
+  .geo-dl div { display: grid; gap: 0.1rem; }
+  .geo-dl dt { font: 700 0.58rem/1.2 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .geo-dl dd { margin: 0; font: 600 0.84rem/1.25 var(--sc-font-text); font-variant-numeric: tabular-nums; }
+  .geo-msg { font-size: 0.8rem; line-height: 1.45; }
+  .geo-fine { font-size: 0.72rem; color: var(--sc-ink-soft); }
+
+  /* visitor marker: blue dot + white ring + «Tú» tag; outline when stale */
+  .geo-me { position: relative; width: 22px; height: 22px; display: grid; place-items: center; pointer-events: none; }
+  .geo-me__dot { width: 16px; height: 16px; border-radius: 50%; background: #1d5fd1; border: 3px solid #fff; box-shadow: 0 0 0 1px rgb(0 0 0 / 0.25), 0 1px 4px rgb(0 0 0 / 0.35); }
+  .geo-me::before { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid #1d5fd1; opacity: 0; animation: geo-pulse 2.4s ease-out infinite; }
+  .geo-me[data-stale] .geo-me__dot { background: #fff; border-color: #1d5fd1; }
+  .geo-me[data-stale]::before { animation: none; }
+  .geo-me__tag { position: absolute; left: 50%; top: calc(100% + 2px); transform: translateX(-50%); padding: 1px 5px; border-radius: 3px; background: #1d5fd1; color: #fff; font: 700 10px/1.3 var(--sc-font-text); letter-spacing: 0.04em; white-space: nowrap; }
+  @keyframes geo-pulse { 0% { transform: scale(0.6); opacity: 0.7; } 100% { transform: scale(1.6); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .geo-me::before { animation: none; } }
+  html[data-motion='static'] .geo-me::before { animation: none; }
+
+  /* waypoints: start = ring + «Inicio», stop = numbered circle, end = numbered square + «Fin» */
+  .wp { position: relative; display: grid; place-items: center; pointer-events: none; }
+  .wp__mark {
+    width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%;
+    background: var(--c, #1f2524); color: #fff; border: 2px solid #fff; box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+    font: 800 12px/1 var(--sc-font-text);
+  }
+  .wp.is-approx .wp__mark { border-style: dashed; }
+  .wp--start:not(.wp--num) .wp__mark { width: 22px; height: 22px; background: #fff; border: 6px solid #1f2524; }
+  .wp--end .wp__mark { border-radius: 4px; width: 28px; height: 28px; background: #1f2524; box-shadow: 0 0 0 2px var(--c, #1f2524), 0 1px 4px rgb(0 0 0 / 0.35); }
+  .wp__tag {
+    position: absolute; top: calc(100% + 3px); left: 50%; transform: translateX(-50%); white-space: nowrap;
+    padding: 1px 6px; border-radius: 3px; background: #1f2524; color: #fbf8f2; font: 700 10px/1.35 var(--sc-font-text); letter-spacing: 0.08em; text-transform: uppercase;
+  }
 </style>

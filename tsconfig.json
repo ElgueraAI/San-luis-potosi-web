@@ -11,7 +11,9 @@
     "research/raw",
     "research/scripts",
     "media-source",
-    "scrollcraft/lab"
+    "scrollcraft/lab",
+    "serverless",
+    "tests"
   ],
   "compilerOptions": {
     "baseUrl": ".",

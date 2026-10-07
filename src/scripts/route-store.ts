@@ -37,6 +37,12 @@ export const route = {
     write(next);
   },
   clear() { write([]); },
+  /** Replace the order (same ids only; used when the visitor accepts «Optimizar recorrido»). */
+  set(ids: string[]) {
+    const next = ids.filter((id, i) => memory.includes(id) && ids.indexOf(id) === i);
+    memory.forEach((id) => { if (!next.includes(id)) next.push(id); });
+    write(next);
+  },
   subscribe(l: Listener) { listeners.add(l); return () => listeners.delete(l); },
 };
 

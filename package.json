@@ -12,7 +12,9 @@
     "facts:report": "node scripts/facts/report.mjs",
     "geo:profile": "node scripts/geo/build-profile.mjs",
     "media:build": "node scripts/media/build-media.mjs",
-    "verify:pages": "node scripts/verify/pages.mjs"
+    "verify:pages": "node scripts/verify/pages.mjs",
+    "test:geo": "node scripts/test-geo.mjs",
+    "verify:routing": "node scripts/verify/routing.mjs"
   },
   "engines": {
     "node": ">=20"
