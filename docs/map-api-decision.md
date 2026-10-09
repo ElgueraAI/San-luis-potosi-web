@@ -182,3 +182,11 @@ Not implemented. A later phase would ask the provider for steps (`steps=true` on
 same endpoints, so the proxy allow-list does not change), normalize them into `RouteResult` (for example
 `legs[i].steps`) and add a `nextManeuver` field computed in `NavigationEngine.update()` from the same snap
 (`along` against step boundaries). The state machine, rules and UI slots do not need to change.
+
+## Public demo on GitHub Pages (checkpoint-E, 2026-10-09)
+
+The first public deployment (`docs/deployment-github-pages.md`) builds with `PUBLIC_ROUTING_PROVIDER=auto`
+and **no** `PUBLIC_ROUTE_PROXY_URL`, so `auto` resolves to **osrm-fossgis** in production: keyless, throttled
+to ≥ 1.1 s between requests, cached and debounced as above. openrouteservice stays available for local
+development (Vite proxy) and becomes the primary provider again only if `serverless/route-proxy` is deployed and
+its URL is set in the workflow. No key is part of the workflow or the build.

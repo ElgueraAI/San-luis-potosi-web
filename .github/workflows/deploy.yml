@@ -1,0 +1,62 @@
+# Builds the static Astro site and publishes it to GitHub Pages.
+# Follows the workflow in https://docs.astro.build/en/guides/deploy/github/
+# Full explanation: docs/deployment-github-pages.md
+#
+# site and base are derived from the repository at run time (nothing hard-coded):
+#   <owner>.github.io        → site https://<owner>.github.io, base /
+#   any other repository     → site https://<owner>.github.io, base /<repository>/
+# astro.config.mjs reads them from SITE_URL and BASE_PATH.
+#
+# No secrets are used. Routing in production goes to the keyless FOSSGIS OSRM
+# service (PUBLIC_ROUTING_PROVIDER=auto with no PUBLIC_ROUTE_PROXY_URL).
+# ORS_API_KEY must never be added here: anything in the build reaches the browser.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [deploy/github-pages-mvp]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# one deployment at a time; never cancel one that is already publishing
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v7
+
+      - name: Derive site and base from the repository
+        shell: bash
+        run: |
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          repo="${GITHUB_REPOSITORY#*/}"
+          if [ "${repo,,}" = "${owner}.github.io" ]; then base="/"; else base="/${repo}/"; fi
+          echo "SITE_URL=https://${owner}.github.io" >> "$GITHUB_ENV"
+          echo "BASE_PATH=${base}" >> "$GITHUB_ENV"
+          echo "Publishing to https://${owner}.github.io${base}"
+
+      - name: Install, build, and upload your site
+        uses: withastro/action@v6
+        env:
+          PUBLIC_ROUTING_PROVIDER: auto
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

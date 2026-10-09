@@ -1,9 +1,16 @@
 // Internal link check over the built site (dist/). Every href/src that points
 // inside the site must resolve to a file. External links are counted, not fetched.
-//   node scripts/verify/links.mjs
+//   node scripts/verify/links.mjs [--base /san-luis-potosi-web/]
+//
+// --base: the build was made with that BASE_PATH (GitHub Pages project site).
+// Root-absolute references must then start with it; one that does not would
+// 404 on Pages and is reported as missing.
 import fs from 'node:fs';
 import path from 'node:path';
 
+const argv = process.argv.slice(2);
+const bi = argv.indexOf('--base');
+const BASE = bi > -1 && argv[bi + 1] ? `/${argv[bi + 1].replace(/^\/|\/$/g, '')}` : '';
 const DIST = path.resolve('dist');
 const files = [];
 (function walk(d) {
@@ -26,7 +33,9 @@ for (const f of files) {
       u = u.split('#')[0].split('?')[0];
       if (!u) continue;
       checked++;
-      const abs = u.startsWith('/') ? path.join(DIST, decodeURIComponent(u)) : path.join(path.dirname(f), decodeURIComponent(u));
+      if (u.startsWith('/') && BASE && !(u === BASE || u.startsWith(BASE + '/'))) { missing.set(u, (missing.get(u) ?? 0) + 1); continue; }
+      const rel = u.startsWith('/') ? u.slice(BASE.length) : u;
+      const abs = u.startsWith('/') ? path.join(DIST, decodeURIComponent(rel)) : path.join(path.dirname(f), decodeURIComponent(rel));
       const ok = fs.existsSync(abs) && (fs.statSync(abs).isFile() || fs.existsSync(path.join(abs, 'index.html')));
       if (!ok) missing.set(u, (missing.get(u) ?? 0) + 1);
     }
