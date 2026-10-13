@@ -6,6 +6,7 @@
 import '@/styles/intel.css';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/ui/PageHeader.astro';
+import Dashboard from '@/components/intel/Dashboard.astro';
 import { href } from '@/i18n/routes';
 
 const engines = [
@@ -42,9 +43,19 @@ const engines = [
     </div>
   </section>
 
-  <!-- dashboard -->
+  <nav class="pnav" data-ground="light" aria-label="Secciones del tablero">
+    <div class="wrap"><ul>
+      <li><a href="#observado">Datos observados</a></li>
+      <li><a href="#derivado">Indicadores derivados</a></li>
+      <li><a href="#simulado">Escenario simulado</a></li>
+      <li><a href="#arquitectura">Arquitectura</a></li>
+      <li><a href="#limites">Límites</a></li>
+    </ul></div>
+  </nav>
 
-  <section class="psec" data-ground="ivory" aria-labelledby="it-m">
+  <Dashboard />
+
+  <section id="arquitectura" class="psec" data-ground="light" aria-labelledby="it-m">
     <div class="wrap">
       <div class="psec__head">
         <p class="label">Arquitectura</p>
@@ -69,7 +80,7 @@ const engines = [
     </div>
   </section>
 
-  <section class="psec psec--tight" data-ground="light" aria-labelledby="it-l">
+  <section id="limites" class="psec psec--tight" data-ground="ivory" aria-labelledby="it-l">
     <div class="wrap it-lim">
       <h2 id="it-l" class="psec__title">Lo que el sistema no afirma</h2>
       <ul class="body">

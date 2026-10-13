@@ -3,6 +3,10 @@
 Branches `feature/smart-map-routing` and `feature/live-routing-engine` (2026-10-06). Companion to `docs/map-api-decision.md` (providers, quotas,
 keys) and `docs/smart-map-routing-plan.md` (task checklist).
 
+> Checkpoints F–K (branch `feature/smart-tourism-engine`) built the intelligence layer on top of what this
+> document describes: recommender, route-aware suggestions, redistribution, segments and the dashboard. See
+> `docs/smart-tourism-architecture.md`. Item 6 below (seasonal context in recommendations) is done there.
+
 ## What the visitor gets now
 
 | Capability | Where | Source of truth |

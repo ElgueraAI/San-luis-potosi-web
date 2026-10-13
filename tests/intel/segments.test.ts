@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import { SEGMENTS, segmentFor, interestSignal, affinity, sessionFeatures, FEATURE_COLUMNS, MIN_AFFINITY } from '../../src/lib/intel/segments';
 import { CAMPAIGNS, PROPOSAL_LABEL, segmentEvidence, campaignSupport, matchesSegment } from '../../src/lib/intel/marketing';
 import { FORBIDDEN_KEY } from '../../src/lib/intel/analytics';
+import { runScenario, SCENARIO_LABEL } from '../../src/lib/intel/scenario';
 import { INTERESTS } from '../../src/lib/intel/taxonomy';
 import { buildDataset } from '../../src/lib/intel/dataset';
 import type { IntelPlace, TouristProfile } from '../../src/lib/intel/types';
@@ -134,4 +135,20 @@ test('marketing: every proposal is supported by offer in its region and carries 
     assert.ok(!/\d+\s?%|conversi[oó]n|ROI|alcance de|impresiones|clics/i.test(text), `no performance claim in "${c.message}"`);
     assert.ok(!/saturad|sin gente|vac[ií]o/i.test(text), 'no crowding claim');
   }
+});
+
+// -------------------------------------------------------------------- scenario --
+test('scenario: synthetic, labelled, and relevance is preserved', () => {
+  assert.equal(SCENARIO_LABEL, 'Datos simulados para demostración académica');
+  const res = runScenario({ generated: 't', ...built, climate: {}, sources: {} });
+  assert.equal(res.runs, 8 * 4 * 4);
+  const [rel, bonus, alt] = res.steps;
+  for (const s of res.steps) {
+    assert.ok(s.lowExposureShare >= 0 && s.lowExposureShare <= 1 && s.top5Share >= 0 && s.top5Share <= 1);
+    assert.ok(s.suggestions > 0 && s.municipalities > 0);
+  }
+  assert.ok(Math.abs(bonus.meanRelevance - rel.meanRelevance) < 2, 'bonuses do not trade relevance away');
+  assert.ok(alt.suggestions > bonus.suggestions, 'alternatives are added, nothing is removed from the main list');
+  assert.ok(alt.lowExposureShare > rel.lowExposureShare, 'the redistribution engine moves suggestions towards less exposed municipalities');
+  assert.deepEqual(runScenario({ generated: 't', ...built, climate: {}, sources: {} }), res, 'deterministic: no randomness, no clock');
 });

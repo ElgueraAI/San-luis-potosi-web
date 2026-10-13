@@ -8,3 +8,4 @@ export * from '../../src/lib/intel/trip';
 export * from '../../src/lib/intel/segments';
 export * from '../../src/lib/intel/marketing';
 export * from '../../src/lib/intel/analytics';
+export * from '../../src/lib/intel/scenario';

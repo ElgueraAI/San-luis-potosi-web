@@ -46,3 +46,15 @@ and are never rendered as information in production builds.
 Real photography and video replace placeholders by filling the slot's `src` in
 `src/content/media.yaml`. Original high-resolution files never go into Git
 (`media-source/` is ignored).
+
+## Smart tourism layer
+
+Branch `feature/smart-tourism-engine` adds an explainable recommender (`/descubre/`), route-aware suggestions,
+a redistribution engine and the trip comparison on `/mi-ruta/`, interpretable segments and a campaign matrix
+(`/inteligencia-turistica/segmentos/`), and the academic dashboard (`/inteligencia-turistica/`). All logic is pure
+TypeScript in `src/lib/intel/`. Start with `docs/smart-tourism-architecture.md`.
+
+```bash
+npm run test          # tests/geo + tests/intel
+npm run intel:report  # regenerates docs/tourism-data-quality.md
+```

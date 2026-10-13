@@ -64,6 +64,8 @@ export interface ScoreContext {
   /** Regions and municipalities already in Mi Ruta (for the diversity bonus). */
   routeRegions?: Set<string>;
   routeMunicipalities?: Set<string>;
+  /** Score on relevance alone (used only by the simulated scenario, to compare with and without bonuses). */
+  disableBonuses?: boolean;
 }
 
 export interface Factor { id: FactorId; value: number | null; weight: number; reason: string | null; warning: string | null }
@@ -226,9 +228,9 @@ export function scorePlace(p: IntelPlace, ctx: ScoreContext): Recommendation {
   let bonus = 0, eventBonus = 0;
   const reasons = factors.map((f) => f.reason).filter((r): r is string => !!r);
   const event = eventOf(p, ctx);
-  if (event && base >= RELEVANCE_GATE) eventBonus = EVENT_BONUS[event.date_confidence];
+  if (event && base >= RELEVANCE_GATE && !ctx.disableBonuses) eventBonus = EVENT_BONUS[event.date_confidence];
   if (event) reasons.push(eventReason(p, event, ctx.month));
-  if (base >= RELEVANCE_GATE) {
+  if (base >= RELEVANCE_GATE && !ctx.disableBonuses) {
     const muni = p.municipality_id ? ctx.municipalities.get(p.municipality_id) : undefined;
     if (ctx.routeRegions?.size && p.region && !ctx.routeRegions.has(p.region)) { bonus += 3; reasons.push(`Añade una región distinta a tu viaje: ${REGION_LABEL[p.region]}`); }
     else if (ctx.routeMunicipalities?.size && p.municipality_id && !ctx.routeMunicipalities.has(p.municipality_id)) { bonus += 1.5; reasons.push(`Añade un municipio distinto a tu viaje: ${p.municipality}`); }

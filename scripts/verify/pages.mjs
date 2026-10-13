@@ -26,6 +26,7 @@ const routes = [
   ['que-hacer', '/que-hacer/'], ['qh-naturaleza', '/que-hacer/naturaleza/'], ['qh-noche', '/que-hacer/vida-nocturna/'], ['experiencias', '/experiencias/'], ['exp', '/experiencias/nadar-en-el-agua-clara-de-la-media-luna/'],
   ['eventos', '/eventos/'], ['evento', '/eventos/navidad-verde/'], ['arqueologia', '/arqueologia/'], ['tanute', '/arqueologia/tanute/'],
   ['museos', '/museos/'], ['hospedaje', '/hospedaje/'], ['gastronomia', '/gastronomia/'], ['buscar', '/buscar/?q=museo'], ['acerca', '/acerca/'], ['destinos', '/destinos/'],
+  ['descubre', '/descubre/'], ['inteligencia', '/inteligencia-turistica/'], ['segmentos', '/inteligencia-turistica/segmentos/'],
 ].filter(([n]) => !ONLY || ONLY.split(',').includes(n));
 const sizes = (arg('--sizes', '') ? arg('--sizes', '').split(',').map((s) => { const [n, w, h] = s.split(':'); return [n, +w, +h]; }) : [['desk', 1440, 900], ['phone', 390, 844]]);
 

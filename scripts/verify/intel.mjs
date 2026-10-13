@@ -421,6 +421,25 @@ await step('inteligencia: page, story and layouts', async () => {
   }
 });
 
+await step('tablero: observed, derived and simulated are kept apart', async () => {
+  const { c } = await ctxFor(1440, 900);
+  const p = await c.newPage(); const errs = watch(p);
+  await p.goto(`${BASE}/inteligencia-turistica/`, { waitUntil: 'networkidle' });
+  const tag = (id) => p.textContent(`#${id} .dclass`);
+  ok('dashboard: three labelled layers', /Datos observados/.test(await tag('observado')) && /Indicadores derivados/.test(await tag('derivado')) && /Escenario simulado/.test(await tag('simulado')));
+  const sim = (await p.textContent('#simulado')).replace(/\s+/g, ' ');
+  ok('dashboard: the scenario carries the academic-simulation label and denies being visits', /Datos simulados para demostración académica/.test(sim) && /no viajes ni visitas/.test(sim) && /No es una predicción de comportamiento/.test(sim));
+  const der = (await p.textContent('#derivado')).replace(/\s+/g, ' ');
+  ok('dashboard: exposure is presented as a proxy', /proxy/.test(der) && /no mide visitantes, ocupación ni saturación/.test(der));
+  ok('dashboard: no individual positions and no visitor counts', !/visitantes al a[nñ]o|turistas recibidos|afluencia de \d/i.test(await p.textContent('main')));
+  const figs = await p.$$eval('.db-fig .db-q', (els) => els.length);
+  ok('dashboard: every chart is headed by a question or a statement', figs >= 9, `${figs} figures`);
+  const bars = await p.$$eval('#observado .db-bars .ibar', (els) => els.map((e) => +e.querySelector('.ibar__v').textContent));
+  ok('dashboard: coverage bars are sorted and labelled with their value', bars.length === 12 && bars.every((v, i) => i === 0 || bars[i - 1] >= v), bars.join(' '));
+  ok('dashboard: no console errors', errs.length === 0, errs.join(' | '));
+  await c.close();
+});
+
 // @@MORE@@
 
 await browser.close();

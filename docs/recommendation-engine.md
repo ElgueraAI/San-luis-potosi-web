@@ -95,7 +95,7 @@ pronóstico.
 
 - No hay afluencia, ocupación, precios, horarios ni tráfico: ningún factor los usa y ninguna frase los menciona.
 - El presupuesto no altera el puntaje porque la base no tiene precios oficiales.
-- 21 destinos tienen punto aproximado (OSM) y lo indican; su distancia hereda esa imprecisión.
+- 18 destinos publicados tienen punto aproximado (OSM) y lo indican; su distancia hereda esa imprecisión.
 - Los intereses derivados (museos, áreas protegidas, catedrales) vienen del tipo oficial, no de una revisión del lugar.
 - El clima corresponde a seis puntos de referencia, no a cada sitio; la interfaz no hace afirmaciones de seguridad.
 - Los pesos son juicio de diseño. Calibrarlos exige datos observados de comportamiento, que hoy no existen.
