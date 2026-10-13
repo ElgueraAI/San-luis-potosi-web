@@ -371,6 +371,56 @@ await step('optimizar mi viaje: original vs optimised', async () => {
   await c.close();
 });
 
+// ====================================================================== segments + pages ==
+await step('segmentos: session segment, matrix and feature row', async () => {
+  const { c } = await ctxFor(1440, 900, {}, undefined, { 'slp:perfil:v1': { interests: ['naturaleza', 'agua'], duration: 'weekend', mode: 'car', budget: 'medio' }, 'slp:mi-ruta:v1': ['H01', 'M01'] });
+  const p = await c.newPage(); const errs = watch(p);
+  await p.goto(`${BASE}/inteligencia-turistica/segmentos/`, { waitUntil: 'networkidle' });
+  await p.waitForFunction(() => /Explorador natural/.test(document.querySelector('[data-segment-out]').textContent), null, { timeout: 15000 });
+  const out = (await p.textContent('[data-segment-out]')).replace(/\s+/g, ' ');
+  ok('segment: the session is assigned by a visible rule', /Explorador natural.*Afinidad \d+ de 100.*elegiste Naturaleza, Cascadas y agua; guardaste 2 lugares/.test(out), out.slice(0, 170));
+  ok('segment: affinity with all segments is listed', (await p.$$('[data-segment-out] .ibar')).length === 8);
+  const rows = await p.$$eval('.mx tbody tr', (els) => els.map((e) => e.textContent.replace(/\s+/g, ' ')));
+  ok('matrix: every row is labelled «Propuesta estratégica» and has evidence', rows.length >= 12 && rows.every((r) => /Propuesta estratégica/.test(r) && /\d+ lugares/.test(r)), `${rows.length} rows`);
+  ok('matrix: no campaign result is claimed', rows.every((r) => !/\d+\s?%|conversi[oó]n|ROI/i.test(r)));
+  const feat = await p.$$eval('[data-segment-row] dt', (els) => els.map((e) => e.textContent));
+  ok('feature row: fixed columns, no position or identity', feat.length === 27 && !feat.some((k) => /lat|lon|coord|gps|email|user|device/i.test(k)), `${feat.length} columns`);
+  ok('segmentos: no console errors', errs.length === 0, errs.join(' | '));
+  await shot(p, 'segmentos-desktop');
+  await c.close();
+});
+
+await step('segmentos: empty session and phone layout', async () => {
+  const { c } = await ctxFor(390, 844, { isMobile: true, hasTouch: true });
+  const p = await c.newPage(); const errs = watch(p);
+  await p.goto(`${BASE}/inteligencia-turistica/segmentos/`, { waitUntil: 'networkidle' });
+  await p.waitForFunction(() => /Perfil aún sin definir/.test(document.querySelector('[data-segment-out]').textContent), null, { timeout: 15000 });
+  ok('segment: an empty session is not given a segment', true);
+  ok('segmentos: no horizontal overflow at 390 px', (await overflow(p)) <= 0, String(await overflow(p)));
+  ok('segmentos: no console errors on phone', errs.length === 0, errs.join(' | '));
+  await p.locator('#matriz').scrollIntoViewIfNeeded();
+  await shot(p, 'segmentos-phone');
+  await c.close();
+});
+
+await step('inteligencia: page, story and layouts', async () => {
+  for (const [name, w, h] of [['desktop', 1440, 900], ['tablet', 820, 1180], ['phone', 390, 844]]) {
+    const { c } = await ctxFor(w, h, name === 'phone' ? { isMobile: true, hasTouch: true } : {});
+    const p = await c.newPage(); const errs = watch(p);
+    const res = await p.goto(`${BASE}/inteligencia-turistica/`, { waitUntil: 'networkidle' });
+    const text = (await p.textContent('main')).replace(/\s+/g, ' ');
+    ok(`inteligencia ${name}: loads`, res.status() === 200);
+    if (name === 'desktop') {
+      ok('inteligencia: problem, question and solution are stated', /Problema.*Pregunta central.*Solución/.test(text));
+      ok('inteligencia: says what the system does not claim', /No hay datos de afluencia, ocupación ni saturación/.test(text) && /no tienen tráfico en tiempo real/.test(text));
+    }
+    ok(`inteligencia ${name}: no horizontal overflow`, (await overflow(p)) <= 0, String(await overflow(p)));
+    ok(`inteligencia ${name}: no console errors`, errs.length === 0, errs.join(' | '));
+    await shot(p, `inteligencia-${name}`);
+    await c.close();
+  }
+});
+
 // @@MORE@@
 
 await browser.close();

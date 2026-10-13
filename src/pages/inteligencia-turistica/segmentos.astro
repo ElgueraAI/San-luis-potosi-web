@@ -1,0 +1,219 @@
+---
+/**
+ * Segmentation and smart marketing (academic / professional section).
+ * Evidence columns are computed from the dataset (src/lib/intel/marketing.ts);
+ * messages, channels and calls to action are proposals and are labelled so.
+ */
+import '@/styles/intel.css';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import { intelPlaces, intelMunicipalities, intelEvents } from '@/data/intel';
+import { SEGMENTS, FEATURE_COLUMNS, MIN_AFFINITY, SIGNAL_WEIGHTS, DEFINING_SHARE } from '@/lib/intel/segments';
+import { CAMPAIGNS, PROPOSAL_LABEL, segmentEvidence, campaignSupport } from '@/lib/intel/marketing';
+import { EVENT_SCHEMA } from '@/lib/intel/analytics';
+import { INTEREST_LABEL, REGION_LABEL, MONTHS_ES } from '@/lib/intel/taxonomy';
+import type { ProfileInterest, RegionId } from '@/lib/intel/types';
+import { href, muniHref } from '@/i18n/routes';
+
+const evidence = segmentEvidence(intelPlaces, intelMunicipalities, intelEvents);
+const byId = new Map(evidence.map((e) => [e.segment.id, e]));
+const slugOf = new Map(intelMunicipalities.map((m) => [m.id, m.slug]));
+const regions = Object.keys(REGION_LABEL) as RegionId[];
+const maxRegion = Math.max(...evidence.flatMap((e) => regions.map((r) => e.placesByRegion[r])));
+const weightsText = (w: Partial<Record<ProfileInterest, number>>) => (Object.entries(w) as [ProfileInterest, number][]).map(([i, v]) => `${INTEREST_LABEL[i]} ${v.toLocaleString('es-MX')}`).join(' · ');
+const M = (m: number) => MONTHS_ES[m - 1].slice(0, 3);
+const rows = CAMPAIGNS.map((c) => ({ c, seg: SEGMENTS.find((s) => s.id === c.segment)!, support: campaignSupport(c, evidence) }));
+const events = Object.entries(EVENT_SCHEMA).map(([name, props]) => ({ name, props: Object.keys(props).join(', ') }));
+const crumbs = [{ label: 'Inteligencia turística', href: href('intelligence') }, { label: 'Segmentos y campañas' }];
+---
+<BaseLayout title="Segmentos y campañas" description="Segmentación interpretable de visitantes y matriz de campañas propuesta para San Luis Potosí: evidencia de la base de datos, mensajes como propuesta estratégica y la ruta hacia modelos de agrupamiento.">
+  <PageHeader label="Inteligencia turística" title="Segmentos y campañas" lede="A quién hablarle, de qué región, en qué temporada y con qué invitación. La evidencia sale de la base de datos; los mensajes son propuestas, no resultados." tone="stone" ground="ivory" crumbs={crumbs} />
+
+  <nav class="pnav" data-ground="ivory" aria-label="Secciones de la página">
+    <div class="wrap"><ul>
+      <li><a href="#tu-segmento">Tu segmento</a></li>
+      <li><a href="#segmentos">Los ocho segmentos</a></li>
+      <li><a href="#matriz">Matriz de campañas</a></li>
+      <li><a href="#modelos">De reglas a modelos</a></li>
+      <li><a href="#eventos">Eventos de producto</a></li>
+    </ul></div>
+  </nav>
+
+  <section id="tu-segmento" class="psec psec--tight" data-ground="light" data-segment data-intel-url={href('intelData')} aria-labelledby="sg-now">
+    <div class="wrap seg-now">
+      <div class="seg-now__text">
+        <p class="label">Demostración en vivo</p>
+        <h2 id="sg-now" class="psec__title">Tu segmento en esta sesión</h2>
+        <p class="body">Se calcula en tu navegador con tres señales: los intereses que elegiste en <a href={href('discover')}>Descubre</a> (peso {SIGNAL_WEIGHTS.declared}), los lugares que guardaste en Mi Ruta (peso {SIGNAL_WEIGHTS.saved}) y el registro local de uso (peso {SIGNAL_WEIGHTS.behaviour}). Nada sale de este dispositivo.</p>
+        <p class="truth">No es un modelo entrenado: es una regla visible. La afinidad con un segmento es {Math.round(DEFINING_SHARE * 100)} % el interés que lo define y {Math.round((1 - DEFINING_SHARE) * 100)} % sus intereses de apoyo. Con menos de {Math.round(MIN_AFFINITY * 100)} puntos no se asigna ningún segmento.</p>
+        <p><a class="btn btn--ghost" href={href('discover')}>Elegir mis intereses</a></p>
+      </div>
+      <div class="seg-now__out" data-segment-out aria-live="polite"><p class="muted">Calculando…</p></div>
+    </div>
+  </section>
+
+  <section id="segmentos" class="psec" data-ground="ivory" aria-labelledby="sg-all">
+    <div class="wrap">
+      <div class="psec__head">
+        <p class="label">Segmentación interpretable</p>
+        <h2 id="sg-all" class="psec__title">Los ocho segmentos</h2>
+        <p class="body">Cada segmento es una combinación ponderada de los doce intereses del portal; el primero de sus pesos es el que lo define. Los nombres salen de la taxonomía real de la base, no de un estudio de mercado. A la derecha, la oferta que la base registra para cada uno.</p>
+        <p><span class="dclass" data-class="observado">Dato observado</span> lugares por región · <span class="dclass" data-class="derivado">Indicador derivado</span> municipios por impulsar</p>
+      </div>
+      <ul class="sg-grid">
+        {evidence.map((e) => (
+          <li class="sg">
+            <h3 class="sg__name">{e.segment.name}</h3>
+            <p class="sg__sum">{e.segment.summary}</p>
+            <p class="sg__w"><span class="tiny muted">Pesos</span> {weightsText(e.segment.weights)}{e.segment.durations && ' · definido también por la duración (fin de semana o 2 días)'}</p>
+            <ul class="sg__bars" aria-label={`Lugares de la base afines a ${e.segment.name}, por región`}>
+              {regions.map((r) => (
+                <li class="ibar" data-region={r}><span>{REGION_LABEL[r]}</span><span class="ibar__track"><span class="ibar__fill" style={`width:${(e.placesByRegion[r] / maxRegion) * 100}%`}></span></span><span class="ibar__v">{e.placesByRegion[r]}</span></li>
+              ))}
+            </ul>
+            {e.toPromote.length > 0 && (
+              <p class="sg__promo"><span class="tiny muted">Municipios poco expuestos con esta oferta</span> {e.toPromote.map((m, i) => (<>{i > 0 && ', '}{slugOf.get(m.id) ? <a href={muniHref(slugOf.get(m.id)!)}>{m.name}</a> : m.name}</>))}</p>
+            )}
+            {e.seasonMonths.length > 0 && <p class="sg__season tiny muted">Temporada oficial de parte de esta oferta: {e.seasonMonths.map(M).join(', ')}.</p>}
+          </li>
+        ))}
+      </ul>
+      <p class="truth">«Poco expuesto» es un indicador derivado (proxy de exposición menor a 0.40 con servicios registrados). No mide afluencia. Método en la <a href={href('intelligence')}>página de inteligencia turística</a>.</p>
+    </div>
+  </section>
+
+  <section id="matriz" class="psec" data-ground="light" aria-labelledby="sg-mx">
+    <div class="wrap">
+      <div class="psec__head">
+        <p class="label">Mercadotecnia inteligente</p>
+        <h2 id="sg-mx" class="psec__title">Matriz de campañas</h2>
+        <p class="body">Segmento × región × temporada × interés × mensaje × canal × llamada a la acción. La columna «Oferta en la base» es evidencia; el mensaje, el canal y la llamada a la acción son una <strong>propuesta estratégica</strong>. Ninguna campaña se ha ejecutado: aquí no hay cifras de alcance ni de conversión.</p>
+      </div>
+      <div class="mx-wrap" role="region" aria-labelledby="sg-mx" tabindex="0">
+        <table class="mx">
+          <thead><tr>
+            <th scope="col">Segmento</th><th scope="col">Región</th><th scope="col">Temporada</th><th scope="col">Interés</th>
+            <th scope="col">Oferta en la base</th><th scope="col">Mensaje</th><th scope="col">Canal</th><th scope="col">Llamada a la acción</th>
+          </tr></thead>
+          <tbody>
+            {rows.map(({ c, seg, support }) => (
+              <tr data-region={c.region}>
+                <th scope="row">{seg.name}</th>
+                <td><span class="mx__dot" aria-hidden="true"></span>{REGION_LABEL[c.region]}</td>
+                <td>{c.season}</td>
+                <td>{INTEREST_LABEL[c.interest]}</td>
+                <td class="mx__n">{support} <span class="tiny muted">lugares</span></td>
+                <td class="mx__msg"><span class="dclass" data-class="simulado">{PROPOSAL_LABEL}</span> «{c.message}»</td>
+                <td>{c.channel}</td>
+                <td><a href={href(c.ctaRoute)}>{c.cta}</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="truth">Cómo leerla: una fila es una hipótesis de campaña que la base puede sostener (hay oferta afín en esa región). Para evaluarla harían falta datos que hoy no existen: impresiones, visitas atribuibles y rutas generadas por campaña.</p>
+    </div>
+  </section>
+
+  <section id="modelos" class="psec" data-ground="ivory" aria-labelledby="sg-ml">
+    <div class="wrap sg-ml">
+      <div class="sg-ml__text">
+        <p class="label">Ruta analítica</p>
+        <h2 id="sg-ml" class="psec__title">De reglas a modelos</h2>
+        <p class="body">Entrenar un agrupamiento con sesiones inventadas produciría grupos inventados. Por eso esta etapa deja lista la estructura y espera los datos.</p>
+        <ol class="sg-ml__steps body">
+          <li><strong>Hoy.</strong> Segmentos por regla, una fila numérica por sesión y un registro local de eventos, sin servidor.</li>
+          <li><strong>Con consentimiento y recolección.</strong> Unos cientos de sesiones observadas permiten un primer K-Means sobre la fila de la derecha (variables estandarizadas, k elegido con silueta y codo) y compararlo con los ocho segmentos.</li>
+          <li><strong>Con más volumen.</strong> Agrupamiento jerárquico para ver cómo se anidan los segmentos; DBSCAN para detectar viajes atípicos; análisis de cohortes por mes de visita y ciudad emisora.</li>
+          <li><strong>Validación.</strong> Estabilidad de los grupos entre meses y utilidad: si un segmento no cambia ninguna recomendación ni campaña, sobra.</li>
+        </ol>
+      </div>
+      <div class="sg-ml__row">
+        <p class="label">La fila de esta sesión ({FEATURE_COLUMNS.length} variables, sin identificador ni ubicación)</p>
+        <dl class="sg-feat" data-segment-row></dl>
+        <p class="tiny muted">Se calcula en tu navegador. Es lo que leería un modelo de agrupamiento; no se envía a ningún servidor.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="eventos" class="psec psec--tight" data-ground="light" aria-labelledby="sg-ev">
+    <div class="wrap">
+      <div class="psec__head">
+        <p class="label">Analítica respetuosa</p>
+        <h2 id="sg-ev" class="psec__title">Eventos de producto</h2>
+        <p class="body">El esquema admite solo identificadores de lugar, intereses, regiones, conteos y puntajes redondeados. Cualquier propiedad con latitud, longitud, posición, correo, nombre o identificador de dispositivo se descarta antes de guardarse. En esta versión los eventos viven en este navegador y pueden borrarse o exportarse desde <a href={href('discover')}>Descubre</a>.</p>
+      </div>
+      <table class="ev-table">
+        <thead><tr><th scope="col">Evento</th><th scope="col">Propiedades permitidas</th></tr></thead>
+        <tbody>{events.map((e) => <tr><th scope="row"><code>{e.name}</code></th><td>{e.props}</td></tr>)}</tbody>
+      </table>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { initSegment } from '@/scripts/intel/segment-ui';
+  const box = document.querySelector<HTMLElement>('[data-segment]');
+  if (box) void initSegment(box);
+</script>
+
+<style>
+  .seg-now { display: grid; gap: var(--sc-6); }
+  @media (min-width: 1000px) { .seg-now { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: start; } }
+  .seg-now__text { display: grid; gap: var(--sc-4); align-content: start; }
+  .seg-now__out { display: grid; gap: var(--sc-3); padding: var(--sc-5); border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: var(--slp-paper); min-width: 0; }
+  .seg-now__out :global(.seg-now__bars) { list-style: none; display: grid; gap: 0.45rem; margin-top: var(--sc-3); padding-top: var(--sc-4); border-top: 1px solid var(--sc-hairline); }
+
+  .sg-grid { list-style: none; display: grid; gap: var(--sc-5); grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); margin-bottom: var(--sc-5); }
+  .sg { display: grid; gap: 0.6rem; align-content: start; padding: var(--sc-5); background: var(--slp-paper); border-radius: var(--sc-r-sm); box-shadow: inset 0 3px 0 var(--slp-gold-deep); min-width: 0; }
+  .sg__name { font: 600 1.7rem/1.05 var(--sc-font-display); }
+  .sg__sum { font-size: 0.92rem; }
+  .sg__w, .sg__promo { font-size: 0.8rem; line-height: 1.5; }
+  .sg__w .tiny, .sg__promo .tiny { display: block; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.6rem; }
+  .sg__bars { list-style: none; display: grid; gap: 0.35rem; padding-block: 0.4rem; }
+  .sg__bars .ibar { grid-template-columns: 6rem minmax(0, 1fr) auto; font-size: 0.78rem; }
+  .sg__promo a { color: inherit; }
+
+  .mx-wrap { overflow-x: auto; border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); margin-bottom: var(--sc-4); }
+  .mx-wrap:focus-visible { outline: 2px solid var(--slp-charcoal); outline-offset: 2px; }
+  .mx { width: 100%; min-width: 68rem; border-collapse: collapse; font-size: 0.84rem; line-height: 1.45; }
+  .mx th, .mx td { text-align: left; padding: 0.75rem 0.8rem; border-bottom: 1px solid var(--sc-hairline); vertical-align: top; }
+  .mx thead th { position: sticky; top: 0; background: var(--sc-surface); font: 700 0.62rem/1.2 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); white-space: nowrap; }
+  .mx tbody th { font: 600 1.1rem/1.15 var(--sc-font-display); min-width: 9rem; }
+  .mx__dot { display: inline-block; width: 8px; height: 8px; margin-right: 0.45rem; border-radius: 50%; background: var(--slp-region-ui); }
+  .mx__n { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+  .mx__msg { min-width: 17rem; }
+  .mx__msg .dclass { display: block; width: fit-content; margin-bottom: 0.35rem; }
+  .mx a { color: inherit; font-weight: 650; }
+  /* phones: each campaign becomes a card, so the matrix never needs sideways scrolling */
+  @media (max-width: 760px) {
+    .mx-wrap { overflow: visible; border: 0; }
+    .mx { min-width: 0; }
+    .mx thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .mx, .mx tbody, .mx tr, .mx th, .mx td { display: block; }
+    .mx tr { padding: var(--sc-4); margin-bottom: var(--sc-3); border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); }
+    .mx th, .mx td { padding: 0.25rem 0; border: 0; }
+    .mx td:nth-child(2)::before { content: 'Región: '; }
+    .mx td:nth-child(3)::before { content: 'Temporada: '; }
+    .mx td:nth-child(4)::before { content: 'Interés: '; }
+    .mx td:nth-child(5)::before { content: 'Oferta en la base: '; }
+    .mx td:nth-child(7)::before { content: 'Canal: '; }
+    .mx td:nth-child(8)::before { content: 'Llamada a la acción: '; }
+    .mx td::before { font-weight: 700; color: var(--sc-ink-soft); }
+    .mx__msg { min-width: 0; padding-block: 0.5rem !important; }
+  }
+
+  .sg-ml { display: grid; gap: var(--sc-6); }
+  @media (min-width: 1000px) { .sg-ml { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } }
+  .sg-ml__text, .sg-ml__row { display: grid; gap: var(--sc-4); align-content: start; min-width: 0; }
+  .sg-ml__steps { display: grid; gap: 0.6rem; padding-left: 1.2rem; }
+  .sg-feat { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: 0 var(--sc-4); padding: var(--sc-4); background: var(--slp-paper); border-radius: var(--sc-r-sm); font-size: 0.76rem; font-variant-numeric: tabular-nums; }
+  .sg-feat :global(div) { display: flex; justify-content: space-between; gap: 0.6rem; padding: 0.3rem 0; border-bottom: 1px solid var(--sc-hairline); min-width: 0; }
+  .sg-feat :global(dt) { color: var(--sc-ink-soft); overflow-wrap: anywhere; }
+  .sg-feat :global(dd) { margin: 0; font-weight: 700; }
+
+  .ev-table { width: 100%; border-collapse: collapse; font-size: var(--sc-t-sm); }
+  .ev-table th, .ev-table td { text-align: left; padding: 0.55rem 0.4rem; border-bottom: 1px solid var(--sc-hairline); vertical-align: top; font-weight: 500; overflow-wrap: anywhere; }
+  .ev-table thead th { font: 700 0.62rem/1 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .ev-table code { font: 650 0.82rem/1.3 var(--sc-font-text); }
+</style>

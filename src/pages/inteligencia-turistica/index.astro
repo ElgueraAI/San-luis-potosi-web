@@ -1,0 +1,101 @@
+---
+/**
+ * Inteligencia turística: the academic face of the smart tourism system.
+ * Problem, question and solution, with the method behind each engine.
+ */
+import '@/styles/intel.css';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import { href } from '@/i18n/routes';
+
+const engines = [
+  { n: '01', t: 'Capa de datos', d: 'Normaliza destinos, museos, arqueología, áreas protegidas, eventos y municipios de fuentes oficiales, con procedencia y nivel de confianza por registro.', k: 'Ciencia de datos' },
+  { n: '02', t: 'Recomendador explicable', d: 'Puntaje de 0 a 100 con pesos documentados: intereses, distancia, temporada, clima, servicios y calidad de la información. Cada sugerencia dice por qué.', k: 'Sistemas de recomendación' },
+  { n: '03', t: 'Motor de contexto', d: 'Combina mes, estación, clima actual, eventos, punto de partida y la ruta guardada. Lo que falta deja de contar; nunca se supone.', k: 'Sistemas sensibles al contexto' },
+  { n: '04', t: 'Lugares cerca del recorrido', d: 'Mide la cercanía a la geometría real de la ruta por carretera y estima el desvío sin gastar consultas al servicio de rutas.', k: 'Análisis geoespacial' },
+  { n: '05', t: 'Redistribución turística', d: 'Propone alternativas relevantes en municipios menos expuestos, con un índice de oportunidad de diversificación y filtros de relevancia.', k: 'Política turística con datos' },
+  { n: '06', t: 'Optimización del viaje', d: 'Ordena las paradas para reducir el tiempo de traslado: exacto hasta 12 puntos (Held–Karp), heurístico por encima (vecino más cercano, 2-opt, Or-opt).', k: 'Investigación de operaciones' },
+  { n: '07', t: 'Segmentación', d: 'Ocho segmentos interpretables por regla y la fila numérica que usaría un modelo de agrupamiento cuando existan datos observados.', k: 'Aprendizaje automático (ruta futura)' },
+  { n: '08', t: 'Mercadotecnia inteligente', d: 'Matriz segmento × región × temporada × mensaje × canal, con la oferta de la base como evidencia y los mensajes como propuesta estratégica.', k: 'Mercadotecnia digital' },
+];
+---
+<BaseLayout title="Inteligencia turística" description="Cómo los datos, la geolocalización, la recomendación explicable y la optimización de rutas pueden distribuir mejor el turismo en San Luis Potosí: problema, método, indicadores y límites.">
+  <PageHeader label="Inteligencia turística" title="Repartir mejor el viaje, sin empeorarlo" lede="Un sistema de turismo inteligente para San Luis Potosí: entiende el contexto del viaje, recomienda con razones, optimiza el recorrido y propone alternativas en municipios menos expuestos." tone="stone" ground="ivory" crumbs={[{ label: 'Inteligencia turística' }]} />
+
+  <section class="psec psec--tight" data-ground="light" aria-labelledby="it-p">
+    <div class="wrap it-story">
+      <article>
+        <p class="label">Problema</p>
+        <h2 id="it-p" class="it-story__h">La visita se concentra; la oferta no.</h2>
+        <p class="body">El turismo del estado gira alrededor de unos cuantos destinos emblemáticos, mientras una gran cantidad de atractivos repartidos por el territorio resulta poco visible para quien planea su viaje.</p>
+      </article>
+      <article>
+        <p class="label">Pregunta central</p>
+        <h2 class="it-story__h">¿Pueden los datos repartir mejor el turismo sin restarle relevancia al viaje?</h2>
+        <p class="body">¿Cómo pueden los datos, la geolocalización, la recomendación explicable y la optimización de rutas ayudar a distribuir de forma más inteligente el turismo dentro de San Luis Potosí sin reducir la relevancia de la experiencia del visitante?</p>
+      </article>
+      <article>
+        <p class="label">Solución</p>
+        <h2 class="it-story__h">Un sistema que explica cada decisión.</h2>
+        <p class="body">Datos turísticos, contexto, geolocalización, rutas, optimización, recomendación, diversificación, segmentación y mercadotecnia, integrados en el portal y abiertos a revisión.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- dashboard -->
+
+  <section class="psec" data-ground="ivory" aria-labelledby="it-m">
+    <div class="wrap">
+      <div class="psec__head">
+        <p class="label">Arquitectura</p>
+        <h2 id="it-m" class="psec__title">Ocho piezas, una cadena</h2>
+        <p class="body">Datos → normalización → variables → recomendación → contexto → redistribución → optimización → interfaz → analítica. Cada pieza es código puro, con pruebas, y documenta sus fórmulas y sus límites.</p>
+      </div>
+      <ol class="it-eng">
+        {engines.map((e) => (
+          <li>
+            <span class="it-eng__n" aria-hidden="true">{e.n}</span>
+            <h3 class="it-eng__t">{e.t}</h3>
+            <p class="it-eng__d">{e.d}</p>
+            <p class="it-eng__k">{e.k}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="it-cta">
+        <a class="btn" href={href('discover')}>Probar el recomendador</a>
+        <a class="btn btn--ghost" href={href('myRoute')}>Optimizar un viaje en Mi Ruta</a>
+        <a class="arrow" href={href('segments')}>Segmentos y campañas</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="psec psec--tight" data-ground="light" aria-labelledby="it-l">
+    <div class="wrap it-lim">
+      <h2 id="it-l" class="psec__title">Lo que el sistema no afirma</h2>
+      <ul class="body">
+        <li><strong>No hay datos de afluencia, ocupación ni saturación.</strong> Por eso se habla de exposición estimada, potencial de diversificación y cobertura, siempre como indicadores derivados.</li>
+        <li><strong>Las rutas no tienen tráfico en tiempo real.</strong> Distancias y tiempos son estimaciones del servicio de rutas sobre OpenStreetMap.</li>
+        <li><strong>Lo único en tiempo real es tu ubicación,</strong> que viene de tu navegador con tu permiso, y el clima actual de Open-Meteo.</li>
+        <li><strong>No se entrenó ningún modelo</strong> con datos ficticios. La segmentación es una regla visible hasta que existan observaciones reales.</li>
+        <li><strong>Los pesos son decisiones de diseño</strong> documentadas, no parámetros estimados.</li>
+      </ul>
+      <p class="body"><a class="arrow" href={href('about')}>Fuentes y reglas de verdad del proyecto</a></p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .it-story { display: grid; gap: var(--sc-6); }
+  @media (min-width: 900px) { .it-story { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .it-story article { display: grid; gap: var(--sc-3); align-content: start; padding-top: var(--sc-4); border-top: 2px solid var(--slp-charcoal); }
+  .it-story__h { font: 600 clamp(1.6rem, 1.3rem + 1vw, 2.1rem)/1.08 var(--sc-font-display); text-wrap: balance; }
+  .it-eng { list-style: none; display: grid; gap: var(--sc-5) var(--sc-5); grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
+  .it-eng li { display: grid; gap: 0.45rem; align-content: start; padding-top: var(--sc-3); border-top: 1px solid var(--sc-hairline-strong); }
+  .it-eng__n { font: 500 2rem/1 var(--sc-font-display); color: var(--slp-gold-deep); }
+  .it-eng__t { font: 600 1.45rem/1.1 var(--sc-font-display); }
+  .it-eng__d { font-size: 0.9rem; line-height: 1.5; }
+  .it-eng__k { font: 700 0.62rem/1.3 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .it-cta { display: flex; flex-wrap: wrap; gap: var(--sc-4); align-items: center; margin-top: var(--sc-6); }
+  .it-lim { display: grid; gap: var(--sc-4); }
+  .it-lim ul { display: grid; gap: 0.6rem; padding-left: 1.1rem; max-width: 74ch; }
+</style>

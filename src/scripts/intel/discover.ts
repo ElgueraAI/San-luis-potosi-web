@@ -19,6 +19,7 @@ import { recommendationCard, esc } from './cards';
 import { buildContext, tripMoment, climateNote } from '@/lib/intel/context';
 import { rank, type WeatherNow } from '@/lib/intel/scoring';
 import { diversifyTrip } from '@/lib/intel/diversify';
+import { segmentFor } from '@/lib/intel/segments';
 import { alternativeCard } from './alternatives';
 import { DURATIONS, INTEREST_LABEL, REGION_LABEL, reachKm } from '@/lib/intel/taxonomy';
 import type { Coord, IntelDataset, ProfileInterest, TouristProfile } from '@/lib/intel/types';
@@ -166,6 +167,12 @@ export async function initDiscover(box: HTMLElement): Promise<void> {
     const altKey = found.map((a) => a.place.id).join();
     if (found.length && altKey !== altSig) { altSig = altKey; track('alternative_seen', { anchor_id: found[0].anchor.id, place_ids: found.map((a) => a.place.id) }); }
     document.dispatchEvent(new Event('route:refresh'));
+
+    // interpretable segment of the session (rule-based; see /inteligencia-turistica/segmentos/)
+    const ids = route.get();
+    const seg = segmentFor({ profile, saved: ds.places.filter((p) => ids.includes(p.id) || (p.route_id && ids.includes(p.route_id))) }).primary;
+    $('[data-style]').hidden = !seg;
+    if (seg) $('[data-style-name]').textContent = seg.segment.name;
 
     const sig = recs.map((r) => r.place.id).join();
     if (recs.length && sig !== seenSig) {

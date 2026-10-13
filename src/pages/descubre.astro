@@ -74,6 +74,7 @@ const factors = (Object.keys(WEIGHTS) as FactorId[]).map((id) => ({ label: FACTO
           <h2 class="psec__title" id="dc-r">Para ti</h2>
           <p class="dc__status small" data-status aria-live="polite">Cargando recomendaciones…</p>
           <p class="tiny muted" data-climate></p>
+          <p class="small" data-style hidden>Tu estilo de viaje en esta sesión: <strong data-style-name></strong>. <a href={href('segments')}>Cómo se calcula</a></p>
         </div>
         <ul class="rk-list" data-results aria-labelledby="dc-r"></ul>
         <p class="body muted" data-empty hidden>Ningún lugar de la base coincide con esa combinación. Quita un interés o amplía el tiempo de viaje.</p>
@@ -96,7 +97,7 @@ const factors = (Object.keys(WEIGHTS) as FactorId[]).map((id) => ({ label: FACTO
         <p class="body">No es una caja negra. Cada lugar recibe un valor de 0 a 100 en cada factor que tiene datos; el puntaje es su promedio ponderado. Si un factor no tiene datos (por ejemplo, no hay temporada oficial o no cargó el clima), su peso sale del cálculo en lugar de restar.</p>
         <p class="body">Primero va la relevancia. Solo los lugares con {RELEVANCE_GATE} puntos o más pueden recibir hasta {DIVERSITY_BONUS_MAX} puntos adicionales por sumar una región o un municipio distinto a tu viaje. Ningún lugar pierde puntos por ser conocido.</p>
         <p class="truth">El portal no tiene datos de afluencia, ocupación, precios ni tráfico, y por eso ninguna recomendación habla de ellos. La distancia se mide en línea recta desde tu punto de partida; el recorrido por carretera se calcula en Mi Ruta.</p>
-        <p class="body"><a class="arrow" href={href('about')}>Acerca del proyecto y sus fuentes</a></p>
+        <p class="body"><a class="arrow" href={href('intelligence')}>Método, indicadores y límites</a></p>
       </div>
       <table class="dc-how__table">
         <caption class="label">Pesos del puntaje</caption>

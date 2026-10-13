@@ -25,9 +25,9 @@ export function track(name: EventName, props: Record<string, unknown> = {}): voi
 export const analyticsLog = {
   all: read,
   clear() { try { localStorage.removeItem(KEY); } catch { /* ignore */ } },
-  /** Voluntary export of the demo log as a JSON file. */
-  export() {
-    const body = { note: 'Registro local de demostración. No contiene ubicación ni datos personales.', events: read() };
+  /** Voluntary export of the demo log as a JSON file; `extra` adds derived, non-personal summaries. */
+  export(extra: Record<string, unknown> = {}) {
+    const body = { note: 'Registro local de demostración. No contiene ubicación ni datos personales.', ...extra, events: read() };
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([JSON.stringify(body, null, 2)], { type: 'application/json' }));
     a.download = 'slp-registro-local.json';
