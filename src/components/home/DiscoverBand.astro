@@ -1,0 +1,30 @@
+---
+/**
+ * Home entry to the recommender (/descubre/): an editorial split, photo and
+ * invitation. The engine itself loads only on that page.
+ */
+import Photo from '@/components/media/Photo.astro';
+import { href } from '@/i18n/routes';
+---
+<section id="a-tu-medida" class="psec dband" data-ground="ivory" aria-labelledby="db-t">
+  <div class="wrap split split--flip">
+    <div class="split__media"><Photo id="wc-76389273" ratio="4/3" sizes="(min-width: 900px) 50vw, 100vw" widths={[640, 960, 1280]} /></div>
+    <div class="dband__text">
+      <p class="label">A tu medida</p>
+      <h2 id="db-t" class="psec__title">Dinos cómo viajas. Te decimos por qué ir.</h2>
+      <p class="body">Elige lo que te interesa y cuánto tiempo tienes. El portal ordena los lugares del estado con datos de fuentes oficiales y explica cada sugerencia: qué coincide contigo, si es buena temporada, qué tan lejos queda y qué se celebra este mes.</p>
+      <ul class="dband__list small">
+        <li>Sin cuenta y sin datos personales.</li>
+        <li>Cada puntaje muestra cómo se calculó.</li>
+        <li>También propone municipios que casi nadie pone en su lista.</li>
+      </ul>
+      <p class="dband__cta"><a class="btn" href={href('discover')}>Descubrir a mi medida</a></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .dband__text { display: grid; gap: var(--sc-4); align-content: center; }
+  .dband__list { display: grid; gap: 0.35rem; padding-left: 1.1rem; color: var(--sc-ink-soft); }
+  .dband__cta { display: flex; flex-wrap: wrap; gap: var(--sc-4); align-items: center; }
+</style>

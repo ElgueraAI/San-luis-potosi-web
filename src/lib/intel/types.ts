@@ -139,4 +139,6 @@ export interface IntelDataset {
   events: IntelEvent[];
   /** Monthly modelled climate per region (Open-Meteo reanalysis 2016–2025): rain days, max temperature. */
   climate: Record<string, { rain_days: number; tmax: number; tmin: number }[]>;
+  /** Source registry rows cited by the places: id to display name and URL. */
+  sources: Record<string, { name: string; url: string | null }>;
 }

@@ -1,0 +1,92 @@
+/* =============================================================================
+   Intelligence layer UI: profile controls, recommendation cards, indicator
+   bars. Imported only by the pages that use them (descubre, mi-ruta,
+   inteligencia-turistica). Same tokens, radius and type scale as the rest of
+   the portal: editorial cards on paper, hairlines, serif numerals.
+   ========================================================================== */
+
+/* ---- segmented radios (duration, mode, budget) ---------------------------- */
+.seg { border: 0; padding: 0; margin: 0; display: grid; gap: var(--sc-3); min-width: 0; }
+.seg > legend { margin-bottom: var(--sc-3); padding: 0; }
+.seg__opts { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.seg__opts label { position: relative; }
+.seg__opts input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.seg__opts span {
+  display: inline-flex; align-items: center; min-height: var(--slp-tap); padding: 0 0.95rem;
+  border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm);
+  font: 700 0.7rem/1 var(--sc-font-text); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.seg__opts input:checked + span { background: var(--slp-charcoal); color: var(--slp-ivory); border-color: var(--slp-charcoal); }
+.seg__opts input:checked + span::before { content: '✓'; margin-right: 0.4rem; }
+.seg__opts input:focus-visible + span { outline: 2px solid var(--slp-charcoal); outline-offset: 2px; }
+.seg__hint { font-size: 0.76rem; color: var(--sc-ink-soft); max-width: 60ch; }
+
+/* ---- recommendation cards ----------------------------------------------------- */
+.rk-list { list-style: none; display: grid; border-top: 1px solid var(--sc-hairline-strong); }
+.rk {
+  display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) auto; gap: var(--sc-4) var(--sc-5);
+  padding: var(--sc-5) 0; border-bottom: 1px solid var(--sc-hairline); align-items: start; min-width: 0;
+}
+.rk--compact { grid-template-columns: minmax(0, 1fr) auto; padding: var(--sc-4) 0; }
+.rk__img, .rk__ph { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--sc-r-sm); background: var(--sc-surface); }
+.rk__ph { display: grid; place-items: end start; padding: 0.8rem; background: linear-gradient(160deg, var(--slp-region-wash, var(--slp-ivory-2)), var(--slp-region-wash-2, var(--slp-ivory-3))); }
+.rk__ph span { font: 700 0.62rem/1.2 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--slp-region-ink, var(--sc-ink-soft)); }
+.rk__body { display: grid; gap: 0.55rem; min-width: 0; align-content: start; }
+.rk__kicker { font: 700 0.62rem/1.3 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--slp-region-text, var(--sc-ink-soft)); }
+.rk__title { font: 600 clamp(1.5rem, 1.3rem + 0.8vw, 2rem)/1.05 var(--sc-font-display); overflow-wrap: anywhere; }
+.rk--compact .rk__title { font-size: 1.3rem; }
+.rk__title a { color: inherit; text-decoration: none; }
+.rk__title a:hover { text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+.rk__desc { font-size: 0.9rem; line-height: 1.5; color: var(--sc-ink-soft); max-width: 62ch; }
+.rk__lead { font-size: 0.9rem; line-height: 1.5; max-width: 62ch; }
+.rk__tags { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.rk__tags li { padding: 0.25rem 0.55rem; border-radius: 999px; background: var(--sc-surface); font: 650 0.68rem/1.2 var(--sc-font-text); }
+.rk__why { margin-top: 0.3rem; font: 700 0.62rem/1.2 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); }
+.rk__reasons, .rk__warn { list-style: none; display: grid; gap: 0.3rem; font-size: 0.86rem; line-height: 1.45; max-width: 66ch; }
+.rk__reasons li, .rk__warn li { position: relative; padding-left: 1.4rem; }
+.rk__reasons li::before { content: '✓'; position: absolute; left: 0; font-weight: 700; color: var(--slp-huasteca-ink); }
+.rk__warn li { color: var(--sc-ink-soft); }
+.rk__warn li::before { content: '!'; position: absolute; left: 0.25rem; font-weight: 800; color: var(--slp-altiplano-ink); }
+.rk__how summary { cursor: pointer; display: inline-flex; align-items: center; min-height: 36px; font: 700 0.62rem/1.2 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+.rk__how[open] { display: grid; gap: 0.5rem; }
+.rk__how table { width: 100%; max-width: 34rem; border-collapse: collapse; font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+.rk__how th, .rk__how td { text-align: left; padding: 0.4rem 0.6rem 0.4rem 0; border-bottom: 1px solid var(--sc-hairline); font-weight: 500; vertical-align: middle; }
+.rk__how thead th { font: 700 0.6rem/1.2 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+.rk__how a { color: inherit; }
+.rk__bar { display: inline-block; width: 3.5rem; height: 4px; margin-right: 0.5rem; border-radius: 2px; background: var(--sc-hairline); vertical-align: middle; overflow: hidden; }
+.rk__bar i { display: block; height: 100%; background: var(--slp-charcoal); }
+.rk__side { display: grid; gap: 0.6rem; justify-items: end; text-align: right; min-width: 8.5rem; }
+.rk__score { display: flex; align-items: baseline; gap: 0.3rem; font-variant-numeric: tabular-nums; }
+.rk__score b { font: 600 clamp(2.6rem, 2.1rem + 1.6vw, 3.4rem)/0.9 var(--sc-font-display); }
+.rk--compact .rk__score b { font-size: 2.1rem; }
+.rk__score span { font: 650 0.72rem/1 var(--sc-font-text); color: var(--sc-ink-soft); letter-spacing: 0.06em; }
+.rk__ev { font: 700 0.6rem/1.3 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; padding: 0.25rem 0.5rem; border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); }
+.rk__ev[data-evidence='alta'] { border-color: var(--slp-huasteca-ink); color: var(--slp-huasteca-ink); }
+.rk__ev[data-evidence='baja'] { border-style: dashed; color: var(--sc-ink-soft); }
+.rk__noadd { max-width: 14rem; }
+@media (max-width: 900px) {
+  .rk { grid-template-columns: minmax(0, 9rem) minmax(0, 1fr); }
+  .rk__side { grid-column: 1 / -1; grid-auto-flow: column; justify-content: space-between; justify-items: start; align-items: center; text-align: left; min-width: 0; }
+}
+@media (max-width: 560px) {
+  .rk, .rk--compact { grid-template-columns: minmax(0, 1fr); }
+  .rk__img, .rk__ph { aspect-ratio: 16 / 9; }
+  .rk__side { grid-auto-flow: row; grid-template-columns: auto 1fr; gap: 0.5rem 0.9rem; }
+  .rk__side .rbtn, .rk__noadd { grid-column: 1 / -1; justify-self: stretch; justify-content: center; }
+}
+
+/* ---- indicator bars (dashboard, methodology) ---------------------------------- */
+.ibar { display: grid; grid-template-columns: minmax(7rem, 14rem) minmax(0, 1fr) auto; gap: 0.2rem 0.8rem; align-items: center; font-size: 0.84rem; }
+.ibar__track { height: 10px; border-radius: 2px; background: var(--sc-surface); overflow: hidden; }
+.ibar__fill { display: block; height: 100%; border-radius: 0 2px 2px 0; background: var(--slp-region-ui, var(--slp-charcoal)); }
+.ibar__v { font-variant-numeric: tabular-nums; font-weight: 650; min-width: 2.6rem; text-align: right; }
+@media (max-width: 520px) { .ibar { grid-template-columns: minmax(0, 1fr) auto; } .ibar__track { grid-column: 1 / -1; grid-row: 2; } }
+
+/* ---- class tags: observed / derived / simulated ----------------------------- */
+.dclass { display: inline-block; padding: 0.25rem 0.55rem; border-radius: var(--sc-r-sm); font: 700 0.6rem/1.3 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid currentColor; }
+.dclass[data-class='observado'] { color: var(--slp-huasteca-ink); }
+.dclass[data-class='derivado'] { color: var(--slp-gold-deep); }
+.dclass[data-class='simulado'] { color: var(--slp-centro-ink); border-style: dashed; }
+[data-ground='dark'] .dclass[data-class='observado'] { color: var(--slp-huasteca-lift); }
+[data-ground='dark'] .dclass[data-class='derivado'] { color: var(--slp-gold); }
+[data-ground='dark'] .dclass[data-class='simulado'] { color: #c99aa0; }

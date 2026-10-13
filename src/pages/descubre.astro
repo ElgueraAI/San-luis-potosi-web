@@ -1,0 +1,165 @@
+---
+/**
+ * Descubre: light visitor profile → explainable recommendations.
+ * The page ships only the shell; src/scripts/intel/discover.ts loads
+ * /data/intel.json and runs the engines in the browser (src/lib/intel).
+ */
+import '@/styles/intel.css';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+// imported for its global .rbtn styles: the cards render «Añadir a Mi Ruta» on the client
+import RouteButton from '@/components/ui/RouteButton.astro';
+import { weatherPoints, weatherConfig } from '@/data/research';
+import { INTERESTS, INTEREST_LABEL, DURATIONS, MODES, BUDGETS } from '@/lib/intel/taxonomy';
+import { WEIGHTS, FACTOR_LABEL, DIVERSITY_BONUS_MAX, RELEVANCE_GATE, type FactorId } from '@/lib/intel/scoring';
+import { href } from '@/i18n/routes';
+
+void RouteButton;
+const wx = weatherPoints.map((p) => ({ key: p.key, lat: p.lat, lon: p.lon }));
+const factors = (Object.keys(WEIGHTS) as FactorId[]).map((id) => ({ label: FACTOR_LABEL[id], pct: Math.round(WEIGHTS[id] * 100) }));
+---
+<BaseLayout title="Descubre a tu medida" description="Elige tus intereses y el tiempo que tienes: el portal te sugiere lugares de San Luis Potosí y te explica por qué, con datos de fuentes oficiales." image="wc-45072628">
+  <PageHeader label="Descubre a tu medida" title="Dinos cómo viajas. Te decimos por qué ir." lede="Elige lo que te interesa y el tiempo que tienes. Cada sugerencia explica de dónde sale su puntaje: tus intereses, la temporada, la distancia, el clima de hoy y lo que pasa este mes." image="wc-45072628" crumbs={[{ label: 'Descubre a tu medida' }]} />
+
+  <section class="psec psec--tight" data-ground="light" data-discover data-loading data-intel-url={href('intelData')} data-wx={JSON.stringify(wx)} aria-labelledby="dc-t">
+    <div class="wrap dc">
+      <form class="dc__form" aria-labelledby="dc-t" onsubmit="return false">
+        <h2 id="dc-t" class="psec__title">Tu viaje</h2>
+
+        <fieldset class="seg">
+          <legend class="label">Qué te interesa</legend>
+          <div class="dc__chips">
+            {INTERESTS.map((i) => <button type="button" class="chip-btn" data-int={i} aria-pressed="false">{INTEREST_LABEL[i]}</button>)}
+          </div>
+          <p class="seg__hint">Elige uno o varios. Sin intereses, la lista se ordena solo por contexto.</p>
+        </fieldset>
+
+        <fieldset class="seg">
+          <legend class="label">Cuánto tiempo tienes</legend>
+          <div class="seg__opts">
+            {DURATIONS.map((d) => <label><input type="radio" name="duration" value={d.id} data-pref /><span>{d.label}</span></label>)}
+          </div>
+        </fieldset>
+
+        <fieldset class="seg">
+          <legend class="label">Cómo te mueves</legend>
+          <div class="seg__opts">
+            {MODES.map((m) => <label><input type="radio" name="mode" value={m.id} data-pref /><span>{m.label}</span></label>)}
+          </div>
+        </fieldset>
+
+        <fieldset class="seg">
+          <legend class="label">Presupuesto</legend>
+          <div class="seg__opts">
+            {BUDGETS.map((b) => <label><input type="radio" name="budget" value={b.id} data-pref /><span>{b.label}</span></label>)}
+          </div>
+          <p class="seg__hint">La base no tiene precios oficiales, así que el presupuesto no cambia el puntaje. Se usa para describir tu estilo de viaje.</p>
+        </fieldset>
+
+        <fieldset class="seg">
+          <legend class="label">Desde dónde sales</legend>
+          <div class="dc__origin">
+            <button type="button" class="btn btn--ghost" data-origin-locate>Usar mi ubicación</button>
+            <label class="dc__field"><span class="tiny muted">o elige un municipio</span>
+              <select data-origin-select><option value="">Sin punto de partida</option></select>
+            </label>
+          </div>
+          <p class="seg__hint" data-origin-status aria-live="polite"></p>
+          <p class="seg__hint">Tu ubicación se pide solo al tocar el botón, se usa en esta página para medir distancias y no se guarda ni se registra.</p>
+        </fieldset>
+      </form>
+
+      <div class="dc__out">
+        <div class="dc__head">
+          <h2 class="psec__title" id="dc-r">Para ti</h2>
+          <p class="dc__status small" data-status aria-live="polite">Cargando recomendaciones…</p>
+          <p class="tiny muted" data-climate></p>
+        </div>
+        <ul class="rk-list" data-results aria-labelledby="dc-r"></ul>
+        <p class="body muted" data-empty hidden>Ningún lugar de la base coincide con esa combinación. Quita un interés o amplía el tiempo de viaje.</p>
+
+        <section class="dc__alt" data-alt hidden aria-labelledby="dc-alt-t">
+          <h2 id="dc-alt-t" class="display display--sm">Otros municipios por descubrir</h2>
+          <p class="small muted" data-alt-lede></p>
+          <ul class="rk-list" data-alt-list></ul>
+        </section>
+
+        <p class="dc__next"><a class="btn" href={href('myRoute')}>Ver Mi Ruta</a> <a class="arrow" href={href('map')}>Explorar el mapa</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="psec psec--tight" data-ground="ivory" aria-labelledby="dc-how">
+    <div class="wrap dc-how">
+      <div>
+        <h2 id="dc-how" class="psec__title">Cómo se calcula el puntaje</h2>
+        <p class="body">No es una caja negra. Cada lugar recibe un valor de 0 a 100 en cada factor que tiene datos; el puntaje es su promedio ponderado. Si un factor no tiene datos (por ejemplo, no hay temporada oficial o no cargó el clima), su peso sale del cálculo en lugar de restar.</p>
+        <p class="body">Primero va la relevancia. Solo los lugares con {RELEVANCE_GATE} puntos o más pueden recibir hasta {DIVERSITY_BONUS_MAX} puntos adicionales por sumar una región o un municipio distinto a tu viaje. Ningún lugar pierde puntos por ser conocido.</p>
+        <p class="truth">El portal no tiene datos de afluencia, ocupación, precios ni tráfico, y por eso ninguna recomendación habla de ellos. La distancia se mide en línea recta desde tu punto de partida; el recorrido por carretera se calcula en Mi Ruta.</p>
+        <p class="body"><a class="arrow" href={href('about')}>Acerca del proyecto y sus fuentes</a></p>
+      </div>
+      <table class="dc-how__table">
+        <caption class="label">Pesos del puntaje</caption>
+        <thead><tr><th scope="col">Factor</th><th scope="col">Peso</th></tr></thead>
+        <tbody>{factors.map((f) => <tr><th scope="row">{f.label}</th><td>{f.pct} %</td></tr>)}</tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="psec psec--tight" data-ground="light" aria-labelledby="dc-priv">
+    <div class="wrap dc-priv">
+      <h2 id="dc-priv" class="psec__title">Lo que se guarda en este navegador</h2>
+      <ul class="dc-priv__list body">
+        <li><strong>Tus preferencias:</strong> intereses, tiempo, transporte y presupuesto. Nada que te identifique.</li>
+        <li><strong>Mi Ruta:</strong> los identificadores de los lugares que guardaste.</li>
+        <li><strong>Un registro local de uso</strong> (<span data-log-count>0</span> eventos): qué intereses elegiste y qué sugerencias añadiste, sin ubicación. No se envía a ningún servidor.</li>
+        <li><strong>Tu ubicación nunca se guarda:</strong> vive en la memoria de la página y desaparece al cerrarla.</li>
+      </ul>
+      <div class="dc-priv__acts">
+        <button type="button" class="btn btn--ghost" data-clear-profile>Borrar mis preferencias</button>
+        <button type="button" class="btn btn--ghost" data-clear-log>Borrar el registro local</button>
+        <button type="button" class="btn btn--ghost" data-export-log>Exportar el registro (JSON)</button>
+      </div>
+      <p class="small" data-privacy-msg aria-live="polite"></p>
+      <p class="source">Clima actual: <a href={weatherConfig.links[0]} rel="noopener" target="_blank">Open-Meteo.com</a> (<a href={weatherConfig.links[1]} rel="noopener" target="_blank">CC BY 4.0</a>). Lugares, eventos y temporadas: fuentes oficiales citadas en cada tarjeta y en <a href={href('credits')}>Créditos</a>.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { initDiscover } from '@/scripts/intel/discover';
+  const box = document.querySelector<HTMLElement>('[data-discover]');
+  if (box) void initDiscover(box);
+</script>
+
+<style>
+  .dc { display: grid; gap: var(--sc-7); }
+  @media (min-width: 1100px) { .dc { grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); align-items: start; } .dc__form { position: sticky; top: calc(var(--slp-header-h) + 1rem); max-height: calc(100svh - var(--slp-header-h) - 2rem); overflow-y: auto; } }
+  .dc__form { display: grid; gap: var(--sc-5); padding: var(--sc-5); border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: var(--slp-paper); min-width: 0; }
+  .dc__form .psec__title { font-size: clamp(1.8rem, 1.5rem + 1vw, 2.3rem); }
+  .dc__chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .dc__origin { display: grid; gap: var(--sc-3); }
+  .dc__field { display: grid; gap: 0.35rem; }
+  .dc__field select { min-height: var(--slp-tap); padding: 0 0.6rem; border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: #fff; font: 600 0.9rem/1.2 var(--sc-font-text); color: var(--slp-charcoal); max-width: 100%; min-width: 0; }
+  .dc__out { display: grid; gap: var(--sc-5); min-width: 0; }
+  .dc__head { display: grid; gap: 0.5rem; }
+  .dc__status { max-width: 70ch; }
+  .dc__alt { display: grid; gap: var(--sc-3); padding-top: var(--sc-5); }
+  .dc__alt[hidden] { display: none; }
+  .dc__next { display: flex; flex-wrap: wrap; gap: var(--sc-4); align-items: center; }
+  [data-discover][data-loading] .dc__form { opacity: 0.6; }
+
+  .dc-how { display: grid; gap: var(--sc-6); }
+  .dc-how > div { display: grid; gap: var(--sc-4); align-content: start; }
+  @media (min-width: 1000px) { .dc-how { grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); align-items: start; } }
+  .dc-how__table { width: 100%; border-collapse: collapse; font-size: var(--sc-t-sm); }
+  .dc-how__table caption { text-align: left; margin-bottom: var(--sc-3); }
+  .dc-how__table th, .dc-how__table td { text-align: left; padding: 0.6rem 0.4rem; border-bottom: 1px solid var(--sc-hairline-strong); font-weight: 500; }
+  .dc-how__table td { font: 600 1.3rem/1 var(--sc-font-display); white-space: nowrap; text-align: right; }
+  .dc-how__table thead th { font: 700 0.62rem/1 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .dc-how__table thead th:last-child { text-align: right; }
+
+  .dc-priv { display: grid; gap: var(--sc-4); }
+  .dc-priv__list { display: grid; gap: 0.5rem; padding-left: 1.1rem; max-width: 70ch; }
+  .dc-priv__acts { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
+</style>

@@ -22,6 +22,7 @@ const { overlay = false } = Astro.props;
       <button class="hdr__link hdr__desk" type="button" aria-expanded="false" aria-controls="explore-panel" data-explore-toggle>
         Destinos <span class="hdr__caret" aria-hidden="true"></span>
       </button>
+      <a class="hdr__link hdr__desk" href={href('discover')}>Descubre</a>
       <a class="hdr__link hdr__desk" href={href('thingsToDo')}>Qué hacer</a>
       <a class="hdr__link hdr__desk" href={href('events')}>Eventos</a>
       <a class="hdr__link hdr__desk" href={href('plan')}>Planea</a>
@@ -57,6 +58,7 @@ const { overlay = false } = Astro.props;
         <li><a class="arrow" href={href('municipalities')}>Los 59 municipios</a></li>
         <li><a class="arrow" href={href('destinations')}>Todos los destinos</a></li>
         <li><a class="arrow" href={href('map')}>Mapa interactivo</a></li>
+        <li><a class="arrow" href={href('discover')}>Descubre a tu medida</a></li>
         <li><a class="arrow" href={href('seasons')}>Qué hacer ahora</a></li>
         <li><a class="arrow" href={href('routes')}>Rutas e itinerarios</a></li>
         <li><a class="arrow" href={href('guides')}>Guías y recursos</a></li>
@@ -169,5 +171,6 @@ const { overlay = false } = Astro.props;
   .hdr__search { width: var(--slp-tap); justify-content: center; }
   .hdr__glass { position: relative; width: 15px; height: 15px; border: 1.6px solid currentColor; border-radius: 50%; }
   .hdr__glass::after { content: ''; position: absolute; right: -5px; bottom: -4px; width: 7px; height: 1.6px; background: currentColor; transform: rotate(45deg); }
-  @media (max-width: 1180px) { .hdr__desk.hdr__link[href$="planea/"], .hdr__desk.hdr__link[href$="eventos/"] { display: none; } }
+  @media (max-width: 1280px) { .hdr__desk.hdr__link[href$="planea/"], .hdr__desk.hdr__link[href$="eventos/"] { display: none; } }
+  @media (max-width: 1040px) { .hdr__desk.hdr__link[href$="que-hacer/"] { display: none; } }
 </style>

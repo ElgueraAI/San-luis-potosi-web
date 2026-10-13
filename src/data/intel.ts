@@ -13,7 +13,7 @@ import type { IntelDataset, IntelPlace } from '@/lib/intel/types';
 import type { RawEntity, RawSeasonRecord } from '@/lib/intel/normalize';
 import type { RawMunicipality } from '@/lib/intel/features';
 import { attractionsAll, archaeology, museums, venues, recreation, eventsAll, municipalities, events, muniById, slugify } from './portal';
-import { getDestination, seasonRecords, climate, sources as sourceRegistry } from './research';
+import { getDestination, seasonRecords, climate, sources as sourceRegistry, sourceLabel, sourceUrl } from './research';
 import { thumbUrl } from '@/lib/media';
 import { href, destHref, archHref, muniHref, eventHref } from '@/i18n/routes';
 import destIndex from '../../research/destinations/index.json';
@@ -62,7 +62,9 @@ export const intelClimate: IntelDataset['climate'] = Object.fromEntries(
 /** The dataset the client loads (thumbnails resolved, so it is async). */
 export async function intelDataset(): Promise<IntelDataset> {
   const places = await Promise.all(intelPlaces.map(async (p) => ({ ...p, image: p.image ? await thumbUrl(p.image, 640) : null })));
-  return { generated: new Date().toISOString().slice(0, 10), places, municipalities: intelMunicipalities, events: intelEvents, climate: intelClimate };
+  const ids = [...new Set(places.flatMap((p) => [...p.source_ids, ...(p.season_source ? [p.season_source] : [])]))];
+  const sources = Object.fromEntries(ids.map((id) => [id, { name: sourceLabel(id), url: sourceUrl(id) }]));
+  return { generated: new Date().toISOString().slice(0, 10), places, municipalities: intelMunicipalities, events: intelEvents, climate: intelClimate, sources };
 }
 
 /** Source registry by id, for "Fuentes" lines. */

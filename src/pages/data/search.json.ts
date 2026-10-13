@@ -34,7 +34,7 @@ export const GET: APIRoute = () => {
     ]),
     ...resources.filter((r) => r.url).map((r) => ({ n: r.title, k: 'Recurso oficial', u: href('guides'), r: (r.region || null) as string | null, m: null, x: r.institution })),
     ...[
-      ['Mapa interactivo', href('map')], ['Temporadas: qué hacer ahora', href('seasons')], ['Rutas e itinerarios', href('routes')],
+      ['Descubre a tu medida: recomendaciones', href('discover')], ['Mapa interactivo', href('map')], ['Temporadas: qué hacer ahora', href('seasons')], ['Rutas e itinerarios', href('routes')],
       ['Guías y recursos', href('guides')], ['Planea tu viaje', href('plan')], ['Mi Ruta', href('myRoute')], ['Festividades y eventos', href('events')],
       ['Hospedaje', href('lodging')], ['Gastronomía', href('food')], ['Museos y recintos culturales', href('museums')], ['Arqueología', href('archaeology')],
       ['Municipios', href('municipalities')], ['Experiencias', href('experiences')], ['Acerca del proyecto', href('about')],

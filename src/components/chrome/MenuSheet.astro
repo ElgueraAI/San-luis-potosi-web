@@ -80,6 +80,7 @@ const panels: Panel[] = [
   {
     id: 'planifica', title: 'Planifica tu viaje', parent: 'root',
     items: [
+      { label: 'Descubre a tu medida', href: href('discover'), note: 'Recomendador' },
       { label: 'Cómo llegar', href: href('plan', {}, 'es', 'llegar') },
       { label: 'Moverse por el estado', href: href('plan', {}, 'es', 'moverse') },
       { label: 'Clima y temporadas', href: href('seasons') },
@@ -179,6 +180,7 @@ const trail = (p: Panel): string[] => (p.parent ? [...trail(byId.get(p.parent)!)
     </nav>
 
     <div class="menu__quick">
+      <a href={href('discover')}>Descubre</a>
       <a href={href('map')}>Mapa</a>
       <a href={href('seasons')}>Temporadas</a>
       <a href={href('experiences')}>Experiencias</a>
