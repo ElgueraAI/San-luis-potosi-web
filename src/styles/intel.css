@@ -90,3 +90,6 @@
 [data-ground='dark'] .dclass[data-class='observado'] { color: var(--slp-huasteca-lift); }
 [data-ground='dark'] .dclass[data-class='derivado'] { color: var(--slp-gold); }
 [data-ground='dark'] .dclass[data-class='simulado'] { color: #c99aa0; }
+
+/* cards keep a full touch target wherever they are placed */
+.rk .rbtn { min-height: var(--slp-tap); }

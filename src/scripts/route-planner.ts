@@ -197,7 +197,7 @@ export function initPlanner(box: HTMLElement): void {
     const items = recommend({ stops, line, profile: s.profile, places: routeSession.allPlaces(), context, month: new Date().getMonth() + 1 });
     recos.hidden = items.length === 0;
     const KIND: Record<string, string> = { 'near-route': 'Cerca de tu ruta', event: 'Evento', lodging: 'Dónde dormir', dishes: 'Qué probar' };
-    recosList.innerHTML = items.map((r) => `<li>
+    recosList.innerHTML = items.map((r) => `<li data-kind="${r.kind}">
       <div><p class="rc__k">${KIND[r.kind]}${r.approximate ? ' · ubicación aproximada' : ''}</p>
         <p class="rc__t">${r.url ? `<a href="${r.url}">${esc(r.title)}</a>` : esc(r.title)}</p>
         <p class="rc__r">${esc(r.reason)}</p></div>

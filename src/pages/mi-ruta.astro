@@ -2,13 +2,20 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/ui/PageHeader.astro';
 import MapView from '@/components/map/MapView.astro';
+// imported for its global .rbtn styles: suggestions render «Añadir a Mi Ruta» on the client
+import RouteButton from '@/components/ui/RouteButton.astro';
 import { REGIONS } from '@/data/regions';
+import { weatherPoints } from '@/data/research';
+import '@/styles/intel.css';
 import { href, regionHref } from '@/i18n/routes';
+
+void RouteButton;
+const wx = weatherPoints.map((p) => ({ key: p.key, lat: p.lat, lon: p.lon }));
 ---
 <BaseLayout title="Mi Ruta" description="Los lugares que guardaste en San Luis Potosí, en un recorrido por carretera con distancia, tiempo y orden sugerido. Se guardan solo en este navegador.">
   <PageHeader compact label="Mi Ruta" title="Tu viaje, a tu manera." lede="Los lugares que guardaste mientras explorabas, unidos por calles y carreteras reales. Elige desde dónde sales, cómo te mueves y en qué orden. Se guardan solo en este navegador; no necesitas cuenta." />
 
-  <section class="section section--tight" data-ground="light" data-my-route data-places-url={href('placesData')} data-context-url={href('routeContextData')} aria-label="Lugares guardados">
+  <section class="section section--tight" data-ground="light" data-my-route data-places-url={href('placesData')} data-context-url={href('routeContextData')} data-intel-url={href('intelData')} data-wx={JSON.stringify(wx)} aria-label="Lugares guardados">
     <div class="wrap mr">
       <div class="mr__col">
         <div class="mr__summary" data-mr-summary hidden>
@@ -79,6 +86,23 @@ import { href, regionHref } from '@/i18n/routes';
           <ul>{REGIONS.map((r) => <li data-region={r.id} data-mr-missing={r.id} hidden><a class="arrow" href={regionHref(r.slug)}>{r.name}</a></li>)}</ul>
         </div>
         <p class="mr__error small" data-mr-error hidden>No se pudieron cargar los datos de tus lugares. Revisa tu conexión y recarga la página; tu selección sigue guardada.</p>
+
+        <section class="near" data-near hidden aria-labelledby="near-t">
+          <h2 id="near-t" class="display display--sm">Cerca de tu recorrido</h2>
+          <p class="small muted" data-near-lede aria-live="polite"></p>
+          <ul class="rk-list" data-near-list></ul>
+          <div class="near__acts">
+            <button type="button" class="btn btn--ghost" data-near-measure hidden>Medir desvíos por carretera</button>
+            <a class="arrow" href={href('discover')}>Ajustar mis intereses</a>
+          </div>
+          <p class="tiny muted" data-near-note aria-live="polite"></p>
+        </section>
+
+        <section class="alts" data-alts hidden aria-labelledby="alts-t">
+          <h2 id="alts-t" class="display display--sm">Alternativas para descubrir</h2>
+          <p class="small muted" data-alts-lede></p>
+          <ul class="rk-list" data-alts-list></ul>
+        </section>
 
         <section class="recos" data-recos hidden aria-labelledby="recos-t">
           <h2 id="recos-t" class="display display--sm">Para tu ruta</h2>
@@ -269,6 +293,13 @@ import { href, regionHref } from '@/i18n/routes';
   .nav__fine { border-top: 1px solid var(--sc-hairline); padding-top: var(--sc-3); }
   .mr__list :global(.mr__done) { display: inline-block; margin-right: 0.45rem; padding: 1px 6px; border-radius: 3px; border: 1px solid var(--slp-charcoal); font: 700 0.6rem/1.4 var(--sc-font-text); letter-spacing: 0.1em; text-transform: uppercase; vertical-align: middle; }
   .mr__list :global(li[data-visited]) { opacity: 0.72; }
+
+  /* route-aware suggestions and alternatives (cards: src/styles/intel.css) */
+  .near, .alts { display: grid; gap: var(--sc-3); padding-top: var(--sc-5); border-top: 1px solid var(--sc-hairline-strong); min-width: 0; }
+  .near[hidden], .alts[hidden] { display: none; }
+  .near__acts { display: flex; flex-wrap: wrap; gap: var(--sc-4); align-items: center; }
+  /* the scored corridor list replaces the planner's unscored «cerca de tu ruta» rows */
+  [data-my-route][data-intel-corridor] .recos__list :global(li[data-kind='near-route']) { display: none; }
 
   /* recommendations */
   .recos { display: grid; gap: var(--sc-3); padding-top: var(--sc-5); border-top: 1px solid var(--sc-hairline-strong); }

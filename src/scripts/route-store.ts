@@ -36,6 +36,13 @@ export const route = {
     [next[i], next[j]] = [next[j], next[i]];
     write(next);
   },
+  /** Put a saved place at a given position (used when a suggestion fits between two stops). */
+  moveTo(id: string, index: number) {
+    if (!memory.includes(id)) return;
+    const next = memory.filter((x) => x !== id);
+    next.splice(Math.max(0, Math.min(index, next.length)), 0, id);
+    if (next.join() !== memory.join()) write(next);
+  },
   clear() { write([]); },
   /** Replace the order (same ids only; used when the visitor accepts «Optimizar recorrido»). */
   set(ids: string[]) {

@@ -225,6 +225,88 @@ await step('descubre: tablet layout', async () => {
   await c.close();
 });
 
+// ============================================================================== Mi Ruta ==
+const ROUTE = { 'slp:mi-ruta:v1': ['C01', 'H17'], ...PROFILE, 'slp:perfil:v1': { interests: ['naturaleza', 'agua', 'historia'], duration: 'weekend', mode: 'car', budget: 'medio' } };
+const nearCards = (p) => cards(p, '[data-near-list] [data-reco]');
+const nearReady = (p) => p.waitForFunction(() => document.querySelectorAll('[data-near-list] [data-reco]').length > 0, null, { timeout: 20000 });
+
+await step('mi-ruta: route → places near the corridor', async () => {
+  const { c, state } = await ctxFor(1440, 900, {}, undefined, ROUTE);
+  const p = await c.newPage(); const errs = watch(p);
+  await p.goto(`${BASE}/mi-ruta/`, { waitUntil: 'networkidle' });
+  await nearReady(p);
+  const list = await nearCards(p);
+  ok('near: cards appear once a route exists', list.length > 0 && list.length <= 5, `${list.length} cards`);
+  ok('near: each card states an estimated extra time and a distance to the route', list.every((x) => /≈ \+\d+ min estimados · a (menos de 1|\d+) km de tu ruta/.test(x.text)));
+  ok('near: each card says why and how sure', list.every((x) => /Por qué te lo recomendamos/.test(x.text) && /Evidencia (alta|media|baja)/.test(x.text)));
+  ok('near: saved stops are not suggested', !list.some((x) => x.id === 'C01' || x.id === 'H17'));
+  ok('near: the lede says the time is an estimate', /es una estimación a partir de la distancia a la ruta/.test(await p.textContent('[data-near-lede]')));
+  ok('near: rendering asked the provider for nothing extra', state.calls.filter((k) => k === 'table').length === 0 && state.calls.filter((k) => k === 'route').length === 1, state.calls.join(','));
+  ok('near: the unscored «cerca de tu ruta» rows are replaced', (await p.$$eval('[data-recos-list] li[data-kind="near-route"]', (els) => els.filter((e) => getComputedStyle(e).display !== 'none').length)) === 0);
+  ok('near: no console errors', errs.length === 0, errs.join(' | '));
+  await p.locator('[data-near]').scrollIntoViewIfNeeded();
+  await shot(p, 'mi-ruta-near-desktop');
+
+  // ---- measure by road: exactly one matrix request --------------------------------------------
+  await p.click('[data-near-measure]');
+  await p.waitForFunction(() => /por carretera \(ida y vuelta/.test(document.querySelector('[data-near-list]').textContent), null, { timeout: 20000 });
+  ok('measure: one matrix request for all cards', state.calls.filter((k) => k === 'table').length === 1, state.calls.join(','));
+  ok('measure: cards now say «por carretera» and the note names the provider and no live traffic', /Sin tráfico en tiempo real/.test(await p.textContent('[data-near-note]')));
+
+  // ---- add: the stop goes where the route passes ---------------------------------------------------
+  const first = (await nearCards(p))[0];
+  await p.click('[data-near-list] [data-reco] [data-route-add]');
+  await p.waitForFunction(() => JSON.parse(localStorage.getItem('slp:mi-ruta:v1')).length === 3);
+  await p.waitForTimeout(100);
+  const order = await p.evaluate(() => JSON.parse(localStorage.getItem('slp:mi-ruta:v1')));
+  ok('add from route: inserted between the stops it lies between', order[0] === 'C01' && order[2] === 'H17' && order[1] === first.id, order.join(' → '));
+  await p.waitForFunction(() => document.querySelectorAll('[data-mr-list] li[data-region]').length === 3, null, { timeout: 15000 });
+  ok('add from route: Mi Ruta lists three stops', true);
+  await c.close();
+});
+
+await step('mi-ruta: routing provider down', async () => {
+  const { c } = await ctxFor(1440, 900, {}, { routing: '500', weather: 'ok', calls: [] }, ROUTE);
+  const p = await c.newPage(); const errs = watch(p);
+  await p.goto(`${BASE}/mi-ruta/`, { waitUntil: 'networkidle' });
+  await p.waitForFunction(() => /No fue posible calcular/.test(document.querySelector('[data-plan-summary]').textContent), null, { timeout: 20000 });
+  await p.waitForFunction(() => /Sin una ruta calculada/.test(document.querySelector('[data-near-lede]').textContent), null, { timeout: 15000 });
+  ok('provider down: saved places still listed', (await p.$$('[data-mr-list] li[data-region]')).length === 2);
+  ok('provider down: no corridor cards and no fabricated detour', (await nearCards(p)).length === 0 && !/\+\d+ min/.test(await p.textContent('[data-near]')));
+  ok('provider down: the page explains it', /no estimamos desvíos ni distancias por carretera/.test(await p.textContent('[data-near-lede]')));
+  ok('provider down: no uncaught errors', errs.length === 0, errs.join(' | '));
+  await c.close();
+});
+
+await step('mi-ruta: offline after the route was computed', async () => {
+  const { c } = await ctxFor(1440, 900, {}, undefined, ROUTE);
+  const p = await c.newPage();
+  await p.goto(`${BASE}/mi-ruta/`, { waitUntil: 'networkidle' });
+  await nearReady(p);
+  const before = (await nearCards(p)).map((x) => x.id).join();
+  await c.setOffline(true);
+  await p.evaluate(() => window.dispatchEvent(new Event('offline')));
+  await p.waitForTimeout(600);
+  ok('offline: the route summary stays', /km/.test(await p.textContent('[data-plan-summary]')));
+  ok('offline: the nearby places stay', (await nearCards(p)).map((x) => x.id).join() === before);
+  await c.setOffline(false);
+  await c.close();
+});
+
+await step('mi-ruta: phone', async () => {
+  const { c } = await ctxFor(390, 844, { isMobile: true, hasTouch: true }, undefined, ROUTE);
+  const p = await c.newPage(); const errs = watch(p);
+  await p.goto(`${BASE}/mi-ruta/`, { waitUntil: 'networkidle' });
+  await nearReady(p);
+  ok('phone: no horizontal overflow at 390 px', (await overflow(p)) <= 0, String(await overflow(p)));
+  const tap = await p.$$eval('[data-near] button, [data-near] a.arrow', (els) => els.filter((e) => e.offsetParent).map((e) => Math.round(e.getBoundingClientRect().height)));
+  ok('phone: touch targets in the section are at least 40 px', tap.every((h) => h >= 40), tap.join(' '));
+  ok('phone: no console errors', errs.length === 0, errs.join(' | '));
+  await p.locator('[data-near]').scrollIntoViewIfNeeded();
+  await shot(p, 'mi-ruta-near-phone');
+  await c.close();
+});
+
 // @@MORE@@
 
 await browser.close();

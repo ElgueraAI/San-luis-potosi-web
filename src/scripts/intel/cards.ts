@@ -61,7 +61,7 @@ export function recommendationCard(r: Recommendation, ds: Pick<IntelDataset, 'so
       ${opt.lead ? `<p class="rk__lead">${esc(opt.lead)}</p>` : ''}
       ${!opt.compact && p.description ? `<p class="rk__desc">${esc(p.description)}</p>` : ''}
       ${tags.length ? `<ul class="rk__tags" aria-label="Contexto">${tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
-      ${r.reasons.length ? `<p class="rk__why">Por qué te lo recomendamos</p><ul class="rk__reasons">${r.reasons.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+      ${r.reasons.length ? `<p class="rk__why">Por qué te lo recomendamos</p><ul class="rk__reasons">${(opt.compact ? r.reasons.slice(0, 4) : r.reasons).map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
       ${r.warnings.length ? `<ul class="rk__warn" aria-label="Ten en cuenta">${r.warnings.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
       <details class="rk__how">
         <summary>Cómo se calculó</summary>

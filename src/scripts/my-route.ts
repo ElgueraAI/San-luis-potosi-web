@@ -128,6 +128,8 @@ export async function initMyRoute(): Promise<void> {
     initPlanner(box);
     const { initNavigation } = await import('./nav-ui');
     initNavigation(box);
+    // intelligence layer: loaded last and on its own, so the planner never waits for it
+    void import('./intel/route-recos').then((m) => m.initRouteRecos(box)).catch(() => { /* the rule-based suggestions remain */ });
   } catch {
     /* places already loaded above; the list keeps working without routing */
   }
