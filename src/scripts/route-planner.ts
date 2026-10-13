@@ -11,6 +11,8 @@ import { locationReadout } from './geo/location-ui';
 import { routeSession, errorMessage, type SessionState, type Origin } from './geo/route-session';
 import { fmtDelta, fmtDistance, fmtDuration } from './geo/format';
 import { recommend, type RouteContext } from './geo/recommend';
+import { savings, savingsSentence } from '@/lib/intel/trip';
+import { track } from './intel/analytics';
 import type { RouteProfile } from './geo/types';
 
 const PROFILE_LABEL: Record<RouteProfile, string> = { car: 'en auto', foot: 'a pie', bike: 'en bicicleta' };
@@ -154,8 +156,9 @@ export function initPlanner(box: HTMLElement): void {
     if (!canOptimize) return;
     const o = s.optimization;
     if (o.phase === 'idle') {
-      opt.innerHTML = `<p class="small">¿Quieres que propongamos un orden más corto en tiempo? Tu orden actual no cambia hasta que lo aceptes.</p>
-        <div class="opt__acts"><button type="button" class="btn btn--ghost" data-opt-run>Optimizar recorrido</button></div>`;
+      opt.innerHTML = `<p class="label">Optimizar mi viaje</p>
+        <p class="small">Reordenamos tus paradas para reducir el tiempo de traslado, sin quitar ninguna. Tu orden actual no cambia hasta que lo aceptes.</p>
+        <div class="opt__acts"><button type="button" class="btn btn--ghost" data-opt-run>Optimizar mi viaje</button></div>`;
     } else if (o.phase === 'loading') opt.innerHTML = '<p class="geo-st"><span class="geo-st__sym" aria-hidden="true">◌</span>Comparando tiempos entre tus lugares…</p>';
     else if (o.phase === 'error') {
       opt.innerHTML = `<p class="geo-msg">No se pudo calcular un orden optimizado. ${errorMessage(o.error ?? null)}</p>
@@ -163,15 +166,21 @@ export function initPlanner(box: HTMLElement): void {
     } else if (o.phase === 'ready' && o.current && o.proposed && o.ids) {
       const names = o.ids.map((id) => routeSession.place(id)?.name ?? id);
       const dd = o.proposed.distance - o.current.distance, dt = o.proposed.duration - o.current.duration;
+      const saved = savings(o.current, o.proposed);
+      const before = route.get().map((id) => routeSession.place(id)?.name ?? id);
       opt.innerHTML = o.changed
-        ? `<p class="label">Orden propuesto</p>
+        ? `<p class="label">Ruta original y ruta optimizada</p>
+          <p class="opt__gain" data-opt-gain>${savingsSentence(saved)}</p>
           <table><thead><tr><th scope="col"></th><th scope="col">Distancia</th><th scope="col">Tiempo</th></tr></thead><tbody>
-            <tr><th scope="row">Tu orden</th><td>${fmtDistance(o.current.distance)}</td><td>${fmtDuration(o.current.duration)}</td></tr>
-            <tr><th scope="row">Propuesto</th><td>${fmtDistance(o.proposed.distance)}</td><td>${fmtDuration(o.proposed.duration)}</td></tr>
+            <tr><th scope="row">Ruta original</th><td>${fmtDistance(o.current.distance)}</td><td>${fmtDuration(o.current.duration)}</td></tr>
+            <tr><th scope="row">Ruta optimizada</th><td>${fmtDistance(o.proposed.distance)}</td><td>${fmtDuration(o.proposed.duration)}</td></tr>
             <tr><th scope="row">Cambio</th><td>${fmtDelta(dd, 'distance')}</td><td>${fmtDelta(dt, 'duration')}</td></tr>
           </tbody></table>
-          <ol>${names.map((n) => `<li>${esc(n)}</li>`).join('')}</ol>
-          <p class="sum__fine">Calculado con una matriz de tiempos por carretera del mismo proveedor y el orden que minimiza el tiempo total (exacto hasta 12 puntos; heurística vecino más cercano + 2-opt + Or-opt para más)${s.origin.kind === 'first' ? '; también puede cambiar el lugar de inicio' : ''}.</p>
+          <div class="opt__orders">
+            <div><p class="sum__fine">Ruta original</p><ol>${before.map((n) => `<li>${esc(n)}</li>`).join('')}</ol></div>
+            <div><p class="sum__fine">Ruta optimizada</p><ol>${names.map((n) => `<li>${esc(n)}</li>`).join('')}</ol></div>
+          </div>
+          <p class="sum__fine">Calculado con una matriz de tiempos por carretera del mismo proveedor y el orden que minimiza el tiempo total (exacto hasta 12 puntos; heurística vecino más cercano + 2-opt + Or-opt para más)${s.origin.kind === 'first' ? '; también puede cambiar el lugar de inicio' : ''}. Se conservan todas tus paradas. Son estimaciones del proveedor, sin tráfico en tiempo real.</p>
           <div class="opt__acts"><button type="button" class="btn" data-opt-apply>Aplicar orden optimizado</button><button type="button" class="btn btn--ghost" data-opt-keep>Conservar mi orden</button></div>`
         : `<p class="small">Tu orden ya es el más eficiente que encontramos (${fmtDistance(o.current.distance)} · ${fmtDuration(o.current.duration)}).</p>
           <div class="opt__acts"><button type="button" class="btn btn--ghost" data-opt-keep>Conservar mi orden</button></div>`;
@@ -180,9 +189,15 @@ export function initPlanner(box: HTMLElement): void {
   opt.addEventListener('click', (e) => {
     const b = (e.target as Element).closest<HTMLButtonElement>('button');
     if (!b) return;
+    const o = routeSession.get().optimization;
+    const logOpt = (applied: boolean) => {
+      if (o.phase !== 'ready' || !o.current || !o.proposed || !o.changed) return;
+      const sv = savings(o.current, o.proposed);
+      track('route_optimized', { stops: route.get().length, applied, saved_min: sv.duration / 60, saved_km: sv.distance / 1000 });
+    };
     if (b.hasAttribute('data-opt-run')) void routeSession.optimize();
-    else if (b.hasAttribute('data-opt-apply')) { routeSession.applyOptimization(); $('[data-mr-list]').focus?.(); }
-    else if (b.hasAttribute('data-opt-keep')) routeSession.dismissOptimization();
+    else if (b.hasAttribute('data-opt-apply')) { logOpt(true); routeSession.applyOptimization(); $('[data-mr-list]').focus?.(); }
+    else if (b.hasAttribute('data-opt-keep')) { logOpt(false); routeSession.dismissOptimization(); }
   });
 
   // ---- recommendations ---------------------------------------------------------------------

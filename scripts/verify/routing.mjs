@@ -116,7 +116,7 @@ await step('several stops', async () => {
   await p.click('[data-opt-run]');
   await p.waitForSelector('[data-opt-apply], [data-plan-opt] .small', { timeout: 15000 });
   const optText = await p.textContent('[data-plan-opt]');
-  ok('optimize proposes and shows the change', /Tu orden.*Propuesto.*Cambio/s.test(optText) && /−/.test(optText), optText.replace(/\s+/g, ' ').slice(0, 160));
+  ok('optimize proposes and shows the change', /Ruta original.*Ruta optimizada.*Cambio/s.test(optText) && /−/.test(optText), optText.replace(/\s+/g, ' ').slice(0, 160));
   ok('one matrix request for optimization', state.calls.filter((x) => x.kind === 'table').length === 1);
   const before = await p.evaluate(() => localStorage.getItem('slp:mi-ruta:v1'));
   await p.click('[data-opt-keep]');

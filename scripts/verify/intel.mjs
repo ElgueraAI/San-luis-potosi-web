@@ -307,6 +307,70 @@ await step('mi-ruta: phone', async () => {
   await c.close();
 });
 
+// ============================================================= redistribution + optimizer ==
+await step('redistribución: alternatives on /descubre/', async () => {
+  const { c } = await ctxFor(1440, 900, {}, undefined, { 'slp:perfil:v1': { interests: ['agua', 'aventura', 'naturaleza'], duration: 'weekend', mode: 'car', budget: 'medio' } });
+  const p = await c.newPage(); const errs = watch(p);
+  await p.goto(`${BASE}/descubre/`, { waitUntil: 'networkidle' });
+  await ready(p);
+  await p.selectOption('[data-origin-select]', { label: 'Aquismón' });
+  await p.waitForFunction(() => document.querySelectorAll('[data-alt-list] [data-reco]').length > 0, null, { timeout: 15000 });
+  const alts = await cards(p, '[data-alt-list] [data-reco]');
+  const main = (await cards(p)).map((x) => x.id);
+  ok('alternatives: shown for the top suggestions', alts.length > 0 && alts.length <= 3, `${alts.length} cards`);
+  ok('alternatives: each one names its anchor, what they share and the cost', alts.every((x) => /Te interesa .+\. También puedes explorar .+: comparte .+; (queda a \d+ km en línea recta|añade ≈)/.test(x.text)));
+  ok('alternatives: exposure is stated as a proxy, never as crowding', alts.every((x) => /menor exposición turística estimada.*proxy.*no mide afluencia/.test(x.text) && !/saturad|abarrotad|lleno de gente/i.test(x.text)));
+  ok('alternatives: not a repeat of the main list', alts.every((x) => !main.includes(x.id)));
+  ok('alternatives: can be added to Mi Ruta', (await p.$$('[data-alt-list] [data-route-add]')).length === alts.length);
+  ok('alternatives: no console errors', errs.length === 0, errs.join(' | '));
+  await p.locator('[data-alt]').scrollIntoViewIfNeeded();
+  await shot(p, 'descubre-alternativas');
+  await c.close();
+});
+
+await step('redistribución: alternatives on Mi Ruta', async () => {
+  const { c } = await ctxFor(1440, 900, {}, undefined, { 'slp:mi-ruta:v1': ['A01', 'H01'] });
+  const p = await c.newPage(); const errs = watch(p);
+  await p.goto(`${BASE}/mi-ruta/`, { waitUntil: 'networkidle' });
+  await p.waitForFunction(() => document.querySelectorAll('[data-alts-list] [data-reco]').length > 0, null, { timeout: 20000 });
+  const alts = await cards(p, '[data-alts-list] [data-reco]');
+  ok('route alternatives: shown for saved flagship stops', alts.length > 0, alts.map((x) => x.id).join(','));
+  ok('route alternatives: in other municipalities than the saved stops', alts.every((x) => !['A01', 'H01'].includes(x.id)));
+  ok('route alternatives: the lede names the proxy', /indicador derivado \(proxy\): el portal no mide afluencia ni ocupación/.test(await p.textContent('[data-alts-lede]')));
+  await p.click('[data-alts-list] [data-reco] [data-route-add]');
+  await p.waitForFunction(() => JSON.parse(localStorage.getItem('slp:mi-ruta:v1')).length === 3);
+  ok('route alternatives: adding one saves it', true);
+  ok('route alternatives: no console errors', errs.length === 0, errs.join(' | '));
+  await c.close();
+});
+
+await step('optimizar mi viaje: original vs optimised', async () => {
+  const { c, state } = await ctxFor(1440, 900, {}, undefined, { 'slp:mi-ruta:v1': ['C01', 'H17', 'M02', 'H12'] });
+  const p = await c.newPage(); const errs = watch(p);
+  await p.goto(`${BASE}/mi-ruta/`, { waitUntil: 'networkidle' });
+  await p.waitForSelector('[data-opt-run]', { timeout: 20000 });
+  ok('optimizer: offered as «Optimizar mi viaje»', /Optimizar mi viaje/.test(await p.textContent('[data-plan-opt]')));
+  const before = await p.evaluate(() => JSON.parse(localStorage.getItem('slp:mi-ruta:v1')));
+  await p.click('[data-opt-run]');
+  await p.waitForSelector('[data-opt-apply]', { timeout: 20000 });
+  const text = (await p.textContent('[data-plan-opt]')).replace(/\s+/g, ' ');
+  ok('optimizer: shows original and optimised routes with the change', /Ruta original.*Ruta optimizada.*Cambio/.test(text), text.slice(0, 150));
+  ok('optimizer: states the saving from the provider matrix', /Con el orden optimizado: ≈ .+ menos de traslado/.test(await p.textContent('[data-opt-gain]')), (await p.textContent('[data-opt-gain]')).trim());
+  ok('optimizer: says estimates carry no live traffic and every stop is kept', /Se conservan todas tus paradas.*sin tráfico en tiempo real/.test(text));
+  ok('optimizer: one matrix request', state.calls.filter((k) => k === 'table').length === 1, state.calls.join(','));
+  ok('optimizer: nothing changes until accepted', JSON.stringify(await p.evaluate(() => JSON.parse(localStorage.getItem('slp:mi-ruta:v1')))) === JSON.stringify(before));
+  await p.locator('[data-plan-opt]').scrollIntoViewIfNeeded();
+  await shot(p, 'mi-ruta-optimizar');
+  await p.click('[data-opt-apply]');
+  await p.waitForFunction((b) => localStorage.getItem('slp:mi-ruta:v1') !== b, JSON.stringify(before));
+  const after = await p.evaluate(() => JSON.parse(localStorage.getItem('slp:mi-ruta:v1')));
+  ok('optimizer: applying reorders without removing stops', [...after].sort().join() === [...before].sort().join() && after.join() !== before.join(), `${before.join(' → ')}  ⇒  ${after.join(' → ')}`);
+  const log = await p.evaluate(() => JSON.parse(localStorage.getItem('slp:analitica:v1') ?? '[]'));
+  ok('optimizer: logged locally as route_optimized', log.some((e) => e.name === 'route_optimized' && e.props.applied === true));
+  ok('optimizer: no console errors', errs.length === 0, errs.join(' | '));
+  await c.close();
+});
+
 // @@MORE@@
 
 await browser.close();

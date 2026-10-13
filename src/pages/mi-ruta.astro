@@ -261,6 +261,8 @@ const wx = weatherPoints.map((p) => ({ key: p.key, lat: p.lat, lon: p.lon }));
   .plan__opt :global(th) { font: 700 0.62rem/1.2 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
   .plan__opt :global(ol) { padding-left: 1.3rem; font-size: 0.86rem; display: grid; gap: 0.15rem; }
   .plan__opt :global(.opt__acts) { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
+  .plan__opt :global(.opt__gain) { font: 600 1.25rem/1.25 var(--sc-font-display); }
+  .plan__opt :global(.opt__orders) { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--sc-4); }
 
   .plan[data-locked] { opacity: 0.55; }
   /* mobile / tablet trip view: card and map move to the top of the page */

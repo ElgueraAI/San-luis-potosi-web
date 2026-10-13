@@ -2,3 +2,6 @@
 export * from '../../src/lib/intel/index';
 export * from '../../src/lib/intel/scoring';
 export * from '../../src/lib/intel/context';
+export * from '../../src/lib/intel/route-aware';
+export * from '../../src/lib/intel/diversify';
+export * from '../../src/lib/intel/trip';

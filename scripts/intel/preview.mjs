@@ -21,3 +21,16 @@ show('historia + arte · medio día · desde la capital · junio', { interests: 
 show('agua + aventura · fin de semana · desde Ciudad Valles · enero', { interests: ['agua', 'aventura'], duration: 'weekend' }, VALLES, 1);
 show('naturaleza · 1 día · sin origen · octubre', { interests: ['naturaleza'], duration: 'day' }, null, 10);
 show('pueblos mágicos + gastronomía + cultura · 3 a 5 días · desde la capital · octubre · con Real de Catorce guardado', { interests: ['pueblos-magicos', 'gastronomia', 'cultura'], duration: 'long' }, SLP, 10, ['A01']);
+
+// ---- redistribution: alternatives for a few anchors --------------------------------------
+const munis = new Map(dataset.municipalities.map((m) => [m.id, m]));
+for (const id of (process.argv[2] ?? 'A01,H01,H07,C01,H08').split(',')) {
+  const a = dataset.places.find((p) => p.id === id);
+  const alts = intel.alternativesFor(a, dataset.places, { month: 1, mode: 'car', municipalities: munis });
+  console.log(`\nAlternativas para ${a.name} [${a.interests.join(', ')}] (exposición ${munis.get(a.municipality_id)?.exposure_proxy})`);
+  for (const x of alts.slice(0, 6)) console.log(String(x.score).padStart(3), x.place.id.padEnd(16), x.place.name.slice(0, 34).padEnd(34), '|', (x.place.municipality ?? '').padEnd(18), `${Math.round(x.km)} km`.padStart(7), 'exp', x.exposure.candidate.toFixed(2), '| comparte', x.shared.join(', '));
+  if (!alts.length) {
+    const near = dataset.places.filter((p) => p.coord && p.municipality_id !== a.municipality_id && intel.haversineKm(a.coord, p.coord) <= 110).map((p) => ({ p, s: intel.similarity(a, p), m: munis.get(p.municipality_id) }));
+    for (const x of near.sort((u, v) => v.s.value - u.s.value).slice(0, 10)) console.log('  cand', x.p.id.padEnd(14), x.p.name.slice(0, 30).padEnd(30), 'sim', x.s.value.toFixed(2), 'exp', x.m?.exposure_proxy, 'infra', x.m?.infrastructure_index, x.p.evidence, '[' + x.p.interests.join(',') + ']');
+  }
+}

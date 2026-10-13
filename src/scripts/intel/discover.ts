@@ -18,6 +18,8 @@ import { track, analyticsLog } from './analytics';
 import { recommendationCard, esc } from './cards';
 import { buildContext, tripMoment, climateNote } from '@/lib/intel/context';
 import { rank, type WeatherNow } from '@/lib/intel/scoring';
+import { diversifyTrip } from '@/lib/intel/diversify';
+import { alternativeCard } from './alternatives';
 import { DURATIONS, INTEREST_LABEL, REGION_LABEL, reachKm } from '@/lib/intel/taxonomy';
 import type { Coord, IntelDataset, ProfileInterest, TouristProfile } from '@/lib/intel/types';
 
@@ -29,6 +31,7 @@ export async function initDiscover(box: HTMLElement): Promise<void> {
   /** The privacy panel is its own section, outside the recommender box. */
   const $doc = <T extends HTMLElement>(s: string) => document.querySelector<T>(s)!;
   let seenSig = '';
+  let altSig = '';
   const results = $<HTMLUListElement>('[data-results]');
   const status = $('[data-status]');
   const originStatus = $('[data-origin-status]');
@@ -152,8 +155,17 @@ export async function initDiscover(box: HTMLElement): Promise<void> {
     const top = recs[0]?.place.region ?? null;
     const note = climateNote(ds, top, moment.month);
     $('[data-climate]').textContent = note ? `${REGION_LABEL[top!]}: ${note}.` : '';
+    // ---- alternatives in less exposed municipalities, for the top suggestions --------------------
+    const shownIds = new Set([...recs.map((r) => r.place.id), ...route.get()]);
+    const found = diversifyTrip(recs.slice(0, 5).map((r) => r.place), ds.places, {
+      month: moment.month, mode: profile.mode, municipalities: ctx.municipalities, exclude: shownIds, routeRegions: ctx.routeRegions, interests: profile.interests,
+    }, 3);
+    $('[data-alt]').hidden = found.length === 0;
+    $('[data-alt-list]').innerHTML = found.map((a, i) => alternativeCard(a, ds, 'descubre-alternativas', i + 1)).join('');
+    $('[data-alt-lede]').textContent = 'Lugares parecidos a los de tu lista, en municipios con menor exposición turística estimada. La exposición es un indicador derivado (proxy) a partir de registros de hospedaje, destinos emblemáticos y Pueblos Mágicos: el portal no mide afluencia ni ocupación.';
+    const altKey = found.map((a) => a.place.id).join();
+    if (found.length && altKey !== altSig) { altSig = altKey; track('alternative_seen', { anchor_id: found[0].anchor.id, place_ids: found.map((a) => a.place.id) }); }
     document.dispatchEvent(new Event('route:refresh'));
-    box.dispatchEvent(new CustomEvent('intel:ranked', { detail: { recs, ctx, ds } }));
 
     const sig = recs.map((r) => r.place.id).join();
     if (recs.length && sig !== seenSig) {

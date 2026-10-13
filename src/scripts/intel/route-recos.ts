@@ -22,6 +22,8 @@ import { recommendationCard, esc } from './cards';
 import { buildContext } from '@/lib/intel/context';
 import { rank, type Detour, type WeatherNow } from '@/lib/intel/scoring';
 import { corridorCandidates, detourMatrixPoints, insertionIndex, measuredDetours, type CorridorCandidate } from '@/lib/intel/route-aware';
+import { diversifyTrip } from '@/lib/intel/diversify';
+import { alternativeCard } from './alternatives';
 import { INTEREST_LABEL } from '@/lib/intel/taxonomy';
 import type { IntelDataset, ProfileInterest, TouristProfile } from '@/lib/intel/types';
 
@@ -46,6 +48,10 @@ export async function initRouteRecos(box: HTMLElement): Promise<void> {
   const lede = $('[data-near-lede]');
   const measureBtn = $<HTMLButtonElement>('[data-near-measure]');
   const note = $('[data-near-note]');
+  const alts = box.querySelector<HTMLElement>('[data-alts]');
+  const altsList = box.querySelector<HTMLElement>('[data-alts-list]');
+  const altsLede = box.querySelector<HTMLElement>('[data-alts-lede]');
+  let altSig = '';
 
   let ds: IntelDataset;
   try { ds = await loadIntel(box.dataset.intelUrl!); } catch { return; } // the planner keeps its own rule-based suggestions
@@ -73,6 +79,7 @@ export async function initRouteRecos(box: HTMLElement): Promise<void> {
     sig = next;
     if (routeSig !== measuredFor) measured = null; // measured detours belong to one route
     section.hidden = ids.length === 0;
+    renderAlternatives(s, geometry?.coordinates ?? null);
     if (!geometry) {
       shown = [];
       list.innerHTML = '';
@@ -110,6 +117,37 @@ export async function initRouteRecos(box: HTMLElement): Promise<void> {
     document.dispatchEvent(new Event('route:refresh'));
     if (recs.length) track('recommendation_seen', { place_ids: recs.map((r) => r.place.id), surface: 'mi-ruta', top_score: recs[0].score });
   }
+
+  /**
+   * Alternatives in less exposed municipalities for the saved stops. With a route, the cost is the
+   * estimated detour from it; without one, the straight-line distance from the stop (labelled).
+   */
+  function renderAlternatives(s: SessionState, line: [number, number][] | null) {
+    if (!alts || !altsList || !altsLede) return;
+    const ids = route.get();
+    const anchors = ds.places.filter((p) => ids.includes(p.id) || (p.route_id && ids.includes(p.route_id)));
+    const { profile } = effectiveProfile(ds, ids);
+    const cands = line ? corridorCandidates({ line, waypoints: s.waypoints.map((w) => w.coord), mode: s.profile, places: ds.places, exclude: new Set(ids) }) : [];
+    const detours = new Map(cands.map((c) => [c.place.id, c.detour]));
+    const found = diversifyTrip(anchors, ds.places, {
+      month: new Date().getMonth() + 1, mode: s.profile, municipalities: new Map(ds.municipalities.map((m) => [m.id, m])), exclude: new Set(ids),
+      routeRegions: new Set(anchors.map((a) => a.region).filter((r): r is NonNullable<typeof r> => !!r)),
+      detourOf: line ? (p) => detours.get(p.id) ?? null : undefined, interests: profile.interests,
+    }, 3);
+    alts.hidden = found.length === 0;
+    altsList.innerHTML = found.map((a, i) => alternativeCard(a, ds, 'mi-ruta-alternativas', i + 1)).join('');
+    altsLede.textContent = 'Lugares parecidos a los que guardaste, en municipios con menor exposición turística estimada y un coste adicional pequeño. La exposición es un indicador derivado (proxy): el portal no mide afluencia ni ocupación.';
+    document.dispatchEvent(new Event('route:refresh'));
+    const key = found.map((a) => a.place.id).join();
+    if (found.length && key !== altSig) { altSig = key; track('alternative_seen', { anchor_id: found[0].anchor.id, place_ids: found.map((a) => a.place.id) }); }
+  }
+  alts?.addEventListener('click', (e) => {
+    const b = (e.target as Element).closest<HTMLButtonElement>('[data-route-add]');
+    const card = b?.closest<HTMLElement>('[data-reco]');
+    if (!b || !card || route.has(b.dataset.routeAdd!)) return;
+    track('recommendation_added', { place_id: card.dataset.reco, surface: 'mi-ruta-alternativas', score: +card.dataset.score!, rank: +card.dataset.rank! });
+    track('destination_added', { place_id: card.dataset.reco, source: 'alternativas' });
+  });
 
   // one matrix request, only on demand
   measureBtn.addEventListener('click', async () => {
