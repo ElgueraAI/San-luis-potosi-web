@@ -1,6 +1,7 @@
-// Bundles tests/geo/*.test.ts with esbuild (already installed through Astro/Vite)
+// Bundles tests/<suite>/*.test.ts with esbuild (already installed through Astro/Vite)
 // and runs them with node:test. No extra test framework.
-//   npm run test:geo
+//   npm run test:geo            (tests/geo)
+//   npm run test:intel          (node scripts/test-geo.mjs tests/intel)
 import { build } from 'esbuild';
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -9,7 +10,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const dir = path.join(root, 'tests/geo');
+const dir = path.join(root, process.argv[2] ?? 'tests/geo');
 const out = fs.mkdtempSync(path.join(os.tmpdir(), 'slp-geo-test-'));
 const files = fs.readdirSync(dir).filter((f) => f.endsWith('.test.ts'));
 const outputs = [];

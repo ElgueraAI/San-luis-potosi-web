@@ -35,6 +35,10 @@ const paths = {
   directoryData: { es: '/data/{name}.json', en: '/data/{name}.json' },
   placesData: { es: '/data/places.json', en: '/data/places.json' },
   routeContextData: { es: '/data/route-context.json', en: '/data/route-context.json' },
+  intelData: { es: '/data/intel.json', en: '/data/intel.json' },
+  discover: { es: '/descubre/', en: '/en/discover/' },
+  intelligence: { es: '/inteligencia-turistica/', en: '/en/tourism-intelligence/' },
+  segments: { es: '/inteligencia-turistica/segmentos/', en: '/en/tourism-intelligence/segments/' },
 } as const;
 
 export type RouteKey = keyof typeof paths;
