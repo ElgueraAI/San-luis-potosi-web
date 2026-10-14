@@ -86,8 +86,12 @@ export async function initDiscover(box: HTMLElement): Promise<void> {
   // ---- profile controls --------------------------------------------------------------------
   const chips = [...box.querySelectorAll<HTMLButtonElement>('[data-int]')];
   const radios = [...box.querySelectorAll<HTMLInputElement>('input[data-pref]')];
+  const intCount = $('[data-int-count]'), intReset = $<HTMLButtonElement>('[data-int-reset]');
+  intReset.addEventListener('click', () => profileStore.set({ interests: [] }));
   const syncControls = (p: TouristProfile) => {
     chips.forEach((c) => c.setAttribute('aria-pressed', String(p.interests.includes(c.dataset.int as ProfileInterest))));
+    intCount.textContent = p.interests.length ? `${p.interests.length} ${p.interests.length === 1 ? 'interés elegido' : 'intereses elegidos'}.` : 'Elige uno o varios.';
+    intReset.hidden = p.interests.length === 0;
     radios.forEach((r) => (r.checked = p[r.name as 'duration' | 'mode' | 'budget'] === r.value));
   };
   chips.forEach((c) => c.addEventListener('click', () => {

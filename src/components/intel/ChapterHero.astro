@@ -1,0 +1,64 @@
+---
+/**
+ * Chapter A: the hero of /inteligencia-turistica/. A real, licensed panorama
+ * (research media set; attribution printed and repeated in Créditos), a dark
+ * contrast gradient, the storyline and the index of chapters.
+ */
+import Photo from '@/components/media/Photo.astro';
+import { mediaRecord } from '@/lib/media';
+import { href } from '@/i18n/routes';
+
+interface Props { chapters: { id: string; letter: string; title: string }[] }
+const { chapters } = Astro.props;
+const PHOTO = 'wc-50604767';
+const rec = mediaRecord(PHOTO);
+---
+<header class="ih" data-ground="dark">
+  <Photo id={PHOTO} fill eager sizes="100vw" focal="50% 62%" />
+  <div class="ih__shade" aria-hidden="true"></div>
+  <div class="wrap ih__in">
+    <nav class="tiny ih__crumbs" aria-label="Ruta de navegación">
+      <ol><li><a href={href('home')}>Inicio</a></li><li><span aria-current="page">Inteligencia turística</span></li></ol>
+    </nav>
+    <p class="label ih__label">Inteligencia turística · San Luis Potosí</p>
+    <h1 class="display ih__title">Inteligencia para descubrir mejor</h1>
+    <p class="ih__story">Repartir mejor el viaje, sin empeorarlo.</p>
+    <p class="lede ih__lede">Un sistema que conecta la oferta turística registrada, las recomendaciones, las rutas y las oportunidades del territorio, y que explica cada cifra: qué se observó, qué se calculó y qué se simuló.</p>
+    <ol class="ih__index" aria-label="Capítulos">
+      {chapters.map((c) => <li><a href={`#${c.id}`}><b>{c.letter}</b><span>{c.title}</span></a></li>)}
+    </ol>
+  </div>
+  {rec && <p class="ih__credit tiny">{rec.subject} · <a href={rec.source_url} rel="noopener" target="_blank">{rec.attribution_text}</a></p>}
+</header>
+
+<style>
+  .ih { position: relative; isolation: isolate; overflow: hidden; min-height: min(92svh, 56rem); display: grid; align-content: end; padding: calc(var(--slp-header-h) + var(--sc-8)) 0 clamp(3rem, 6vw, 5rem); background: var(--slp-night); }
+  .ih__shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgb(8 22 19 / 0.96) 0%, rgb(8 22 19 / 0.78) 38%, rgb(8 22 19 / 0.3) 72%, rgb(8 22 19 / 0.55) 100%); }
+  .ih__in { position: relative; z-index: 2; display: grid; gap: var(--sc-4); justify-items: start; }
+  .ih__crumbs ol { list-style: none; display: flex; flex-wrap: wrap; }
+  .ih__crumbs li + li::before { content: '/'; margin: 0 0.45rem; opacity: 0.6; }
+  .ih__crumbs, .ih__label { color: rgb(248 244 234 / 0.86); }
+  .ih__crumbs a { color: inherit; }
+  .ih__title { font-size: clamp(3rem, 1.5rem + 6.4vw, 7.4rem); line-height: 0.93; max-width: 13ch; text-wrap: balance; }
+  .ih__story { font: 500 italic clamp(1.5rem, 1.2rem + 1.4vw, 2.4rem)/1.1 var(--sc-font-display); color: var(--viz-gold); }
+  .ih__lede { max-width: 44rem; }
+  .ih__index { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: 0; width: 100%; margin-top: var(--sc-5); border-top: 1px solid rgb(248 244 234 / 0.3); }
+  .ih__index a { display: grid; gap: 0.35rem; align-content: start; min-height: 4.5rem; padding: 0.9rem 0.9rem 0.9rem 0; color: inherit; text-decoration: none; border-bottom: 1px solid rgb(248 244 234 / 0.16); transition: color var(--sc-d-fast) var(--sc-ease-out); }
+  .ih__index b { font: 700 0.64rem/1 var(--sc-font-text); letter-spacing: 0.2em; color: var(--viz-gold); }
+  .ih__index span { font: 600 1.2rem/1.1 var(--sc-font-display); }
+  .ih__index a:hover span, .ih__index a:focus-visible span { text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+  .ih__credit { position: absolute; z-index: 2; right: var(--sc-gutter); top: calc(var(--slp-header-h) + 0.6rem); max-width: 60%; text-align: right; color: rgb(248 244 234 / 0.7); }
+  .ih__credit a { color: inherit; }
+  @media (max-width: 700px) { .ih__credit { position: relative; right: auto; top: auto; max-width: none; text-align: left; width: var(--slp-wrap); margin: var(--sc-4) auto 0; } }
+
+  /* one orchestrated entrance; nothing moves for reduced motion */
+  @keyframes ih-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes ih-zoom { from { transform: scale(1.06); } to { transform: none; } }
+  :global(html[data-motion='full']) .ih__in > * { animation: ih-in 800ms var(--sc-ease-out) both; }
+  :global(html[data-motion='full']) .ih__in > :nth-child(2) { animation-delay: 60ms; }
+  :global(html[data-motion='full']) .ih__in > :nth-child(3) { animation-delay: 140ms; }
+  :global(html[data-motion='full']) .ih__in > :nth-child(4) { animation-delay: 240ms; }
+  :global(html[data-motion='full']) .ih__in > :nth-child(5) { animation-delay: 320ms; }
+  :global(html[data-motion='full']) .ih__in > :nth-child(6) { animation-delay: 420ms; }
+  :global(html[data-motion='full']) .ih :global(.photo img) { animation: ih-zoom 2400ms var(--sc-ease-out) both; }
+</style>

@@ -1,0 +1,124 @@
+---
+/**
+ * Chapter E: Diversificación inteligente. DERIVED indicators only, each named
+ * as an index or a proxy. The cases are the real output of the redistribution
+ * engine (src/lib/intel/diversify.ts) for three flagship places. The page
+ * never speaks of crowding: no source measures it.
+ */
+import { derived, potentialRanking, scatter, cases, gates, CASE_MONTH, LOW_EXPOSURE, REGIONS, REGION_LABEL, MONTHS_ES, pct } from '@/data/dashboard';
+import { linear, symbolRadius, ticks } from '@/lib/charts/geometry';
+import { href } from '@/i18n/routes';
+
+const dec = (v: number) => v.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const W = 680, H = 420, M = { l: 52, r: 18, t: 16, b: 44 };
+const x = linear(0, 1, M.l, W - M.r), y = linear(0, 1, H - M.b, M.t);
+const maxAssets = Math.max(...scatter.map((s) => s.assets));
+const labelled = new Set([...[...scatter].sort((a, b) => b.potential - a.potential).slice(0, 5), ...[...scatter].sort((a, b) => b.exposure - a.exposure).slice(0, 4)].map((s) => s.name));
+const pts = [...scatter].sort((a, b) => b.assets - a.assets).map((s) => ({ ...s, cx: x(s.exposure), cy: y(s.infrastructure), r: symbolRadius(s.assets, maxAssets, 16, 4) || 4, lab: labelled.has(s.name) }));
+// direct labels: nudge a label down when it would sit on the previous one
+const labels = pts.filter((p) => p.lab).map((p) => ({ name: p.name, left: p.exposure > 0.7, x: p.exposure > 0.7 ? p.cx - p.r - 5 : p.cx + p.r + 5, y: p.cy + 4 })).sort((a, b) => a.y - b.y);
+labels.forEach((l, i) => { for (const o of labels.slice(0, i)) if (Math.abs(o.y - l.y) < 13 && Math.abs(o.x - l.x) < 90) l.y = o.y + 13; });
+---
+<section id="diversificacion" class="ch" data-ground="dark" data-tone="forest" aria-labelledby="ch-e">
+  <div class="wrap">
+    <div class="ch__head" data-reveal>
+      <p class="ch__eyebrow"><span class="ch__num">Capítulo E</span><span class="dclass" data-class="derivado">Indicadores derivados</span></p>
+      <h2 id="ch-e" class="ch__title">Diversificación inteligente</h2>
+      <p class="ch__lede">Índices que el proyecto calcula con los registros anteriores, de 0 a 1, con fórmula publicada. La <strong>exposición estimada es un proxy</strong> (hospedaje registrado, destinos emblemáticos, Pueblos Mágicos): no mide visitantes, ocupación ni saturación.</p>
+    </div>
+
+    <ul class="kpis" data-reveal>
+      <li><b>{pct(derived.top5Lodging)}</b><span>del hospedaje registrado está en cinco municipios</span></li>
+      <li><b>{pct(derived.top5Assets)}</b><span>de los atractivos puntuables está en cinco municipios</span></li>
+      <li><b>{dec(derived.hhiLodging)}</b><span>concentración del hospedaje (Herfindahl–Hirschman, de 0 a 1)</span></li>
+      <li><b>{derived.lowExposureWithAssets}</b><span>municipios con atractivos y exposición estimada menor a {LOW_EXPOSURE.toLocaleString('es-MX')}</span></li>
+    </ul>
+
+    <div class="figs">
+      <figure class="fig fig--7" data-reveal>
+        <figcaption>
+          <h3 class="fig__q">¿Qué municipios tienen servicios pero poca exposición?</h3>
+          <p class="fig__note">Cada círculo es un municipio con atractivos o eventos. Hacia arriba hay más servicios registrados; hacia la izquierda, menos exposición estimada. El área sigue el número de atractivos. La franja marca la exposición estimada baja.</p>
+        </figcaption>
+        <ul class="legend">{REGIONS.map((r) => <li data-viz-region={r}><i style="border-radius:50%"></i>{REGION_LABEL[r]}</li>)}</ul>
+        <div class="fig__scroll" role="region" aria-label="Exposición estimada frente a infraestructura, por municipio" tabindex="0">
+          <svg class="svgc" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Diagrama de dispersión: exposición estimada (horizontal) frente a índice de infraestructura (vertical). Los valores están en la tabla.">
+            <rect class="svgc__zone" x={M.l} y={M.t} width={x(LOW_EXPOSURE) - M.l} height={H - M.b - M.t} />
+            {ticks(1, 4).map((t) => <><line class="svgc__grid" x1={M.l} x2={W - M.r} y1={y(t)} y2={y(t)} /><text x={M.l - 8} y={y(t) + 4} text-anchor="end">{t.toLocaleString('es-MX')}</text><text x={x(t)} y={H - M.b + 18} text-anchor="middle">{t.toLocaleString('es-MX')}</text></>)}
+            <line class="svgc__axis" x1={M.l} x2={W - M.r} y1={H - M.b} y2={H - M.b} /><line class="svgc__axis" x1={M.l} x2={M.l} y1={M.t} y2={H - M.b} />
+            <text x={(M.l + W - M.r) / 2} y={H - 6} text-anchor="middle">Exposición estimada (proxy) →</text>
+            <text x={14} y={(M.t + H - M.b) / 2} text-anchor="middle" transform={`rotate(-90 14 ${(M.t + H - M.b) / 2})`}>Infraestructura →</text>
+            <text class="svgc__lab" x={M.l + 8} y={M.t + 16}>Exposición estimada baja</text>
+            {pts.map((p) => <circle class="pt" data-viz-region={p.region ?? undefined} cx={p.cx} cy={p.cy} r={p.r} tabindex={p.lab ? 0 : undefined} data-tip={`${p.name}${p.region ? ` · ${REGION_LABEL[p.region]}` : ''}\nExposición estimada ${dec(p.exposure)} (proxy)\nInfraestructura ${dec(p.infrastructure)}\nPotencial ${dec(p.potential)} · ${p.assets} atractivos`} />)}
+            {labels.map((l) => <text class="svgc__lab" x={l.x} y={l.y} text-anchor={l.left ? 'end' : 'start'}>{l.name}</text>)}
+          </svg>
+        </div>
+        <p class="fig__hint">Desliza la gráfica para verla completa.</p>
+        <details class="fig__table"><summary>Ver como tabla</summary>
+          <div class="fig__scroll" role="region" aria-label="Tabla de indicadores por municipio" tabindex="0"><table style="min-width:34rem"><thead><tr><th scope="col">Municipio</th><th scope="col">Región</th><th scope="col" class="num">Atractivos</th><th scope="col" class="num">Infraestructura</th><th scope="col" class="num">Exposición (proxy)</th><th scope="col" class="num">Potencial</th></tr></thead>
+            <tbody>{[...scatter].sort((a, b) => b.potential - a.potential).map((s) => <tr><th scope="row">{s.name}</th><td>{s.region ? REGION_LABEL[s.region] : 'Por confirmar'}</td><td class="num">{s.assets}</td><td class="num">{dec(s.infrastructure)}</td><td class="num">{dec(s.exposure)}</td><td class="num">{dec(s.potential)}</td></tr>)}</tbody></table></div>
+        </details>
+        <p class="fig__src"><b>Unidad</b> índices de 0 a 1 · <b>Fórmulas</b> infraestructura = ln(1 + hospedaje + alimentos) ÷ ln(1 + máximo estatal); exposición = 0.5 · hospedaje (log) + 0.3 · destinos emblemáticos + 0.2 · Pueblo Mágico · <b>Fuente</b> cálculo del proyecto sobre INEGI DENUE, Estadía y SECTUR · <b>Corte</b> 2026</p>
+      </figure>
+
+      <figure class="fig fig--5" data-reveal>
+        <figcaption>
+          <h3 class="fig__q">¿Dónde hay más potencial de diversificación?</h3>
+          <p class="fig__note">Municipios con qué ofrecer, dónde atender al visitante y poca exposición estimada. Los diez primeros; la línea completa equivale a 1.</p>
+        </figcaption>
+        <ol class="lolli">
+          {potentialRanking.map((m) => (
+            <li data-tip={`${m.name}\nPotencial ${dec(m.potential)}\nExposición estimada ${dec(m.exposure)} (proxy)\nInfraestructura ${dec(m.infrastructure)}\n${m.assets} atractivos · ${m.events} eventos`}>
+              <span>{m.href ? <a href={m.href}>{m.name}</a> : m.name}<small>{m.region ? REGION_LABEL[m.region] : 'Región por confirmar'}</small></span>
+              <span class="lolli__track"><span class="lolli__stem grow" style={`--v:${m.potential}`}></span></span>
+              <span class="lolli__v">{dec(m.potential)}</span>
+            </li>
+          ))}
+        </ol>
+        <p class="fig__src"><b>Unidad</b> índice de 0 a 1 <span class="proxy">proxy</span> · <b>Fórmula</b> (1 − exposición) × (0.6 · atractivo + 0.4 · infraestructura) · <b>Lectura</b> orden relativo; no garantiza capacidad de carga ni calidad</p>
+      </figure>
+
+      <div class="fig case" data-cases data-reveal>
+        <div class="fig" style="gap:0.45rem">
+          <h3 class="fig__q">Antes y después: cómo propone alternativas el sistema</h3>
+          <p class="fig__note">Resultado real del motor de redistribución para tres lugares emblemáticos, calculado para {MONTHS_ES[CASE_MONTH - 1]} y un viaje en auto. Elige uno.</p>
+        </div>
+        <div class="segc" role="tablist" aria-label="Lugar de partida">
+          {cases.map((c, i) => <button type="button" role="tab" id={`case-tab-${c.id}`} aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`case-${c.id}`} tabindex={i === 0 ? 0 : -1} data-case-tab={c.id}>{c.name}</button>)}
+        </div>
+        {cases.map((c, i) => (
+          <div class="case__flow" role="tabpanel" id={`case-${c.id}`} aria-labelledby={`case-tab-${c.id}`} data-case-panel={c.id} hidden={i !== 0} tabindex="0">
+            <article class="case__card">
+              <p class="case__k">Antes · te interesa</p>
+              <h4>{c.url ? <a href={c.url}>{c.name}</a> : c.name}</h4>
+              <p class="case__meta">{c.municipality}{c.region ? ` · ${REGION_LABEL[c.region]}` : ''}</p>
+              <p class="case__meta">Exposición estimada del municipio <b>{dec(c.exposure)}</b> <span class="proxy">proxy</span></p>
+              <span class="meter" aria-hidden="true"><i style={`--v:${c.exposure}`}></i></span>
+            </article>
+            <span class="case__arrow" aria-hidden="true">→</span>
+            <div class="case__alts">
+              {c.alternatives.length === 0 && <p class="fig__note">Ningún lugar de la base pasa todos los filtros para este punto de partida. El sistema no propone una alternativa que no pueda sostener.</p>}
+              {c.alternatives.map((a) => (
+                <article class="case__card">
+                  <p class="case__k">Después · también puedes explorar</p>
+                  <h4>{a.url ? <a href={a.url}>{a.name}</a> : a.name}</h4>
+                  <p class="case__meta">{a.municipality}{a.region ? ` · ${REGION_LABEL[a.region]}` : ''} · a {a.km} km en línea recta</p>
+                  <p class="case__score"><b>{a.score}</b><span>/ 100 de oportunidad de diversificación</span></p>
+                  <span class="stack" role="img" aria-label={a.components.filter((k) => k.value !== null).map((k) => `${k.label} ${Math.round((k.value as number) * 100)} de 100`).join(', ')}>
+                    {a.components.filter((k) => k.value !== null).map((k) => <i style={`flex:${k.weight};--o:${k.value}`} data-tip={`${k.label}\nPeso ${Math.round(k.weight * 100)} % · valor ${Math.round((k.value as number) * 100)} / 100`}></i>)}
+                  </span>
+                  <p class="case__meta">Comparte: {a.shared.join(', ') || 'la región'} · exposición estimada <b>{dec(a.exposure)}</b> frente a {dec(c.exposure)}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
+        <div class="fig" style="gap:var(--sc-3)">
+          <p class="cal__sub">Un candidato debe pasar los cinco filtros antes de puntuarse</p>
+          <ol class="gates">{gates.map((g) => <li>{g.label}<small>{g.rule}</small></li>)}</ol>
+        </div>
+        <p class="fig__src"><b>Unidad</b> oportunidad de diversificación, 0 a 100 (promedio ponderado de siete componentes; cada segmento de la barra es un componente, su ancho es el peso y su intensidad el valor) · <b>Fuente</b> motor de redistribución del portal · <b>Lectura</b> un lugar nunca se propone por ser poco conocido, y ningún destino pierde puntos por ser emblemático · <a href={href('discover')}>Verlo con tus intereses</a></p>
+      </div>
+    </div>
+  </div>
+</section>

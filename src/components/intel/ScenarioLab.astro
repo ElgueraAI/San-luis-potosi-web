@@ -1,0 +1,85 @@
+---
+/**
+ * Chapter F: Escenario académico. SIMULATED: the existing synthetic scenario
+ * (src/lib/intel/scenario.ts), unchanged. The label stays on screen for the
+ * whole chapter. It measures suggestions, never trips or visitors.
+ */
+import { scenario, SCENARIO_LABEL, SCENARIO_MONTHS, SCENARIO_ORIGINS, MONTHS_ES, LOW_EXPOSURE, fmt, pct } from '@/data/dashboard';
+
+const [rel] = scenario.steps;
+const SHORT = { relevance: 'Solo relevancia', bonus: 'Relevancia con bonos', alternatives: 'Con alternativas de redistribución' } as const;
+const pp = (v: number) => `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(Math.round(v * 100))} pp`;
+const steps = scenario.steps.map((s) => ({
+  ...s, short: SHORT[s.id],
+  dLow: s.lowExposureShare - rel.lowExposureShare, dTop: s.top5Share - rel.top5Share, dMuni: s.municipalities - rel.municipalities, dRel: Math.round((s.meanRelevance - rel.meanRelevance) * 10) / 10,
+}));
+const last = steps[steps.length - 1];
+const SPAN = 0.2; // the variation axis shows ±20 percentage points
+const bar = (d: number) => `left:${d >= 0 ? 50 : 50 + (Math.max(-SPAN, d) / SPAN) * 50}%;width:${(Math.min(SPAN, Math.abs(d)) / SPAN) * 50}%`;
+---
+<section id="escenario" class="ch" data-ground="ivory" aria-labelledby="ch-f">
+  <div class="wrap">
+    <div class="ch__head" data-reveal>
+      <p class="ch__eyebrow"><span class="ch__num">Capítulo F</span><span class="dclass" data-class="simulado">Escenario simulado</span></p>
+      <h2 id="ch-f" class="ch__title">Escenario académico</h2>
+      <p class="ch__lede">¿Hacia dónde apuntan las sugerencias cuando se activa cada motor? Se ejecutó el recomendador para <strong>{scenario.runs} perfiles sintéticos</strong> (8 segmentos × {SCENARIO_ORIGINS.length} ciudades de salida × {SCENARIO_MONTHS.length} meses), sin ningún visitante.</p>
+    </div>
+
+    <div class="sim" data-sim data-reveal>
+      <p class="sim__flag sim__flag--sticky"><span aria-hidden="true">◇</span>{SCENARIO_LABEL}</p>
+
+      <div class="segc" role="group" aria-label="Configuración del escenario">
+        {steps.map((s, i) => <button type="button" aria-pressed={i === steps.length - 1 ? 'true' : 'false'} data-sim-step={s.id}>{i + 1}. {s.short}</button>)}
+      </div>
+
+      <div class="sim__grid">
+        <div class="sim__big" aria-live="polite">
+          <b data-sim-big>{pct(last.lowExposureShare)}</b>
+          <span>de las <span data-sim-n>{fmt(last.suggestions)}</span> sugerencias simuladas apunta a municipios con exposición estimada menor a {LOW_EXPOSURE.toLocaleString('es-MX')} <span class="proxy">proxy</span></span>
+        </div>
+        <figure class="fig">
+          <figcaption><h3 class="fig__q">Proporción de sugerencias en municipios poco expuestos</h3></figcaption>
+          <ul class="sim__bars">
+            {steps.map((s, i) => (
+              <li data-sim-bar={s.id} data-on={i === steps.length - 1 ? '' : undefined} data-tip={`${s.short}\n${pct(s.lowExposureShare)} de ${fmt(s.suggestions)} sugerencias simuladas`}>
+                <span>{s.short}<b>{pct(s.lowExposureShare)}</b></span>
+                <span class="sim__track"><span class="sim__fill grow" style={`--v:${s.lowExposureShare}`}></span></span>
+              </li>
+            ))}
+          </ul>
+        </figure>
+      </div>
+
+      <figure class="fig">
+        <figcaption>
+          <h3 class="fig__q">Variación frente a «solo relevancia»</h3>
+          <p class="fig__note">En puntos porcentuales (pp). La línea central es el escenario de solo relevancia; el eje muestra ±{Math.round(SPAN * 100)} pp.</p>
+        </figcaption>
+        {steps.map((s, i) => (
+          <ul class="delta" data-sim-delta={s.id} hidden={i !== steps.length - 1}>
+            <li><span>Sugerencias en municipios poco expuestos</span><span class="delta__axis" aria-hidden="true"><span class="delta__bar" style={bar(s.dLow)}></span></span><span class="delta__v">{pp(s.dLow)}</span></li>
+            <li><span>Sugerencias en los 5 municipios más sugeridos</span><span class="delta__axis" aria-hidden="true"><span class="delta__bar" style={bar(s.dTop)}></span></span><span class="delta__v">{pp(s.dTop)}</span></li>
+            <li><span>Municipios distintos sugeridos</span><span></span><span class="delta__v">{s.dMuni > 0 ? '+' : s.dMuni < 0 ? '−' : ''}{Math.abs(s.dMuni)}</span></li>
+            <li><span>Relevancia media de la lista (0 a 100)</span><span></span><span class="delta__v">{s.dRel > 0 ? '+' : s.dRel < 0 ? '−' : ''}{Math.abs(s.dRel).toLocaleString('es-MX')}</span></li>
+          </ul>
+        ))}
+      </figure>
+
+      <div class="fig__scroll" role="region" aria-label="Resultados del escenario simulado" tabindex="0">
+        <table class="dtable" style="min-width:36rem">
+          <caption class="visually-hidden">{SCENARIO_LABEL}: resultados por configuración</caption>
+          <thead><tr><th scope="col">Configuración</th><th scope="col" class="num">Sugerencias</th><th scope="col" class="num">En municipios poco expuestos</th><th scope="col" class="num">Municipios distintos</th><th scope="col" class="num">En los 5 más sugeridos</th><th scope="col" class="num">Relevancia media</th></tr></thead>
+          <tbody>{steps.map((s) => <tr data-sim-row={s.id}><th scope="row">{s.short}</th><td class="num">{fmt(s.suggestions)}</td><td class="num">{pct(s.lowExposureShare)}</td><td class="num">{s.municipalities}</td><td class="num">{pct(s.top5Share)}</td><td class="num">{s.meanRelevance.toLocaleString('es-MX')} / 100</td></tr>)}</tbody>
+        </table>
+      </div>
+
+      <ul class="readout">
+        <li>Los bonos por sí solos casi no mueven la lista ({pct(steps[0].lowExposureShare)} frente a {pct(steps[1].lowExposureShare)}): son pequeños a propósito, para no sacrificar relevancia.</li>
+        <li>Las alternativas de redistribución sí cambian el reparto ({pp(last.dLow)}), mostradas aparte y sin quitar nada de la lista principal. La relevancia media de la lista no cambia.</li>
+        <li><strong>No es una predicción de comportamiento ni un resultado con turistas.</strong> Mide sugerencias, no viajes ni visitas. Para saber si un visitante acepta esas alternativas hacen falta datos observados, que hoy no existen.</li>
+      </ul>
+      <p class="fig__src"><b>Unidad</b> sugerencias del recomendador · <b>Origen</b> perfiles sintéticos; salidas desde {SCENARIO_ORIGINS.join(', ')}; meses: {SCENARIO_MONTHS.map((m) => MONTHS_ES[m - 1]).join(', ')} · <b>Fuente</b> ejecución de los motores del portal sobre su propia base · {SCENARIO_LABEL}</p>
+      <script type="application/json" data-sim-data set:html={JSON.stringify(steps.map((s) => ({ id: s.id, big: pct(s.lowExposureShare), n: fmt(s.suggestions) })))} />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,62 @@
+---
+/**
+ * Chapter C: Mapa de oportunidades turísticas. One proportional symbol per
+ * municipality at its seat (INEGI). The base holds no verified municipal
+ * polygons, so no boundary is drawn. MapLibre loads only when the chapter
+ * approaches the viewport (src/scripts/intel/opportunity-map.ts); the select
+ * and the panel work without the map.
+ */
+import { mapMunicipalities, mapMissingSeat, REGIONS, REGION_LABEL } from '@/data/dashboard';
+import { mapAttribution } from '@/data/research';
+
+const LAYERS = [
+  { id: 'assets', label: 'Atractivos registrados', cls: 'observado', unit: 'lugares puntuables en la base', proxy: false },
+  { id: 'infra', label: 'Infraestructura turística', cls: 'derivado', unit: 'índice 0–1 (hospedaje y alimentos registrados, escala logarítmica)', proxy: false },
+  { id: 'events', label: 'Festividades documentadas', cls: 'observado', unit: 'fiestas y eventos registrados', proxy: false },
+  { id: 'exposure', label: 'Exposición estimada', cls: 'derivado', unit: 'índice 0–1; no mide visitantes, ocupación ni saturación', proxy: true },
+  { id: 'potential', label: 'Potencial de diversificación', cls: 'derivado', unit: 'índice 0–1 construido sobre el proxy de exposición', proxy: true },
+];
+const byName = [...mapMunicipalities].sort((a, b) => a.n.localeCompare(b.n, 'es'));
+void mapAttribution;
+---
+<section id="mapa-oportunidades" class="ch" data-ground="dark" data-tone="teal" aria-labelledby="ch-c">
+  <div class="wrap">
+    <div class="ch__head" data-reveal>
+      <p class="ch__eyebrow"><span class="ch__num">Capítulo C</span><span class="dclass" data-class="observado">Observado</span><span class="dclass" data-class="derivado">Derivado</span></p>
+      <h2 id="ch-c" class="ch__title">Mapa de oportunidades turísticas</h2>
+      <p class="ch__lede">Cinco lecturas del mismo territorio. Elige una capa y un municipio: el panel reúne lo que la base sabe de él y marca qué es un conteo y qué es un indicador.</p>
+    </div>
+
+    <div class="opp" data-opp data-reveal>
+      <div class="opp__stage">
+        <div class="segc" role="group" aria-label="Capa del mapa">
+          {LAYERS.map((l, i) => <button type="button" aria-pressed={i === 0 ? 'true' : 'false'} data-opp-layer={l.id}>{l.label}{l.proxy && <> <span class="proxy">proxy</span></>}</button>)}
+        </div>
+        <div class="opp__map">
+          <div class="opp__canvas" data-opp-canvas role="application" aria-label="Mapa de municipios de San Luis Potosí. Usa la lista «Municipio» para elegir uno con el teclado."></div>
+          <p class="opp__state" data-opp-state>El mapa se carga al acercarte. Mientras tanto puedes elegir un municipio en la lista.</p>
+        </div>
+        <div class="opp__legend" aria-live="polite">
+          <p><b data-opp-layer-name>{LAYERS[0].label}</b> · <span class="dclass" data-class={LAYERS[0].cls} data-opp-layer-class>{LAYERS[0].cls === 'observado' ? 'Dato observado' : 'Indicador derivado'}</span></p>
+          <p data-opp-layer-unit>{LAYERS[0].unit}</p>
+          <p class="opp__scale"><span><i data-empty style="width:9px;height:9px"></i>sin registro en la base</span><span><i style="width:10px;height:10px"></i>menor</span><span><i style="width:26px;height:26px"></i>mayor <span data-opp-max></span></span></p>
+          <p>El área del círculo sigue el valor. Los círculos están en la cabecera municipal (INEGI): la base no tiene polígonos municipales verificados, así que no se dibujan fronteras.{mapMissingSeat > 0 && ` ${mapMissingSeat} municipio sin cabecera en el catálogo 2020 no aparece.`}</p>
+        </div>
+      </div>
+
+      <aside class="opp__panel" aria-labelledby="opp-t">
+        <label class="cal__sub" for="opp-sel">Municipio</label>
+        <select id="opp-sel" data-opp-select>
+          <option value="">Elige un municipio</option>
+          {REGIONS.map((r) => <optgroup label={REGION_LABEL[r]}>{byName.filter((m) => m.r === r).map((m) => <option value={m.id}>{m.n}</option>)}</optgroup>)}
+        </select>
+        <div data-opp-detail aria-live="polite">
+          <h3 id="opp-t">Elige un municipio</h3>
+          <p class="fig__note">En el mapa o en la lista. Verás su región, lo que hay registrado, sus indicadores derivados y enlaces a sus destinos.</p>
+        </div>
+      </aside>
+    </div>
+    <p class="fig__src" style="margin-top:var(--sc-5)"><b>Fuente</b> base del portal (conteos); indicadores calculados por el proyecto con las fórmulas de <a href="#diversificacion">Diversificación</a> · <b>Mapa base</b> OpenFreeMap, © OpenMapTiles, datos © OpenStreetMap · <b>Corte</b> 2026</p>
+    <script type="application/json" data-opp-data set:html={JSON.stringify({ layers: LAYERS, munis: mapMunicipalities, regions: REGION_LABEL })} />
+  </div>
+</section>

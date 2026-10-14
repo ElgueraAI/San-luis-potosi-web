@@ -88,7 +88,7 @@ await step('descubre: profile → explained recommendations', async () => {
   const after = await cards(p);
   ok('descubre: recommendations render without a profile', before.length > 0, `${before.length} cards`);
   ok('descubre: choosing interests changes the list', after.length > 0 && after.map((x) => x.id).join() !== before.map((x) => x.id).join());
-  ok('descubre: every card has a 0–100 score and a reason', after.every((x) => x.score >= 0 && x.score <= 100 && /Por qué te lo recomendamos/.test(x.text) && /Coincide con/.test(x.text)));
+  ok('descubre: every card has a 0–100 score and a reason', after.every((x) => x.score >= 0 && x.score <= 100 && /Por qué te recomendamos este lugar/.test(x.text) && /Coincide con/.test(x.text)));
   ok('descubre: sorted by score', after.every((x, i) => i === 0 || after[i - 1].score >= x.score), after.map((x) => x.score).join(' '));
   ok('descubre: distance is stated as straight-line', after.some((x) => /km en línea recta/.test(x.text)));
   ok('descubre: evidence level on every card', after.every((x) => /Evidencia (alta|media|baja)/.test(x.text)));
@@ -238,7 +238,7 @@ await step('mi-ruta: route → places near the corridor', async () => {
   const list = await nearCards(p);
   ok('near: cards appear once a route exists', list.length > 0 && list.length <= 5, `${list.length} cards`);
   ok('near: each card states an estimated extra time and a distance to the route', list.every((x) => /≈ \+\d+ min estimados · a (menos de 1|\d+) km de tu ruta/.test(x.text)));
-  ok('near: each card says why and how sure', list.every((x) => /Por qué te lo recomendamos/.test(x.text) && /Evidencia (alta|media|baja)/.test(x.text)));
+  ok('near: each card says why and how sure', list.every((x) => /Por qué te recomendamos este lugar/.test(x.text) && /Evidencia (alta|media|baja)/.test(x.text)));
   ok('near: saved stops are not suggested', !list.some((x) => x.id === 'C01' || x.id === 'H17'));
   ok('near: the lede says the time is an estimate', /es una estimación a partir de la distancia a la ruta/.test(await p.textContent('[data-near-lede]')));
   ok('near: rendering asked the provider for nothing extra', state.calls.filter((k) => k === 'table').length === 0 && state.calls.filter((k) => k === 'route').length === 1, state.calls.join(','));
@@ -425,18 +425,102 @@ await step('tablero: observed, derived and simulated are kept apart', async () =
   const { c } = await ctxFor(1440, 900);
   const p = await c.newPage(); const errs = watch(p);
   await p.goto(`${BASE}/inteligencia-turistica/`, { waitUntil: 'networkidle' });
-  const tag = (id) => p.textContent(`#${id} .dclass`);
-  ok('dashboard: three labelled layers', /Datos observados/.test(await tag('observado')) && /Indicadores derivados/.test(await tag('derivado')) && /Escenario simulado/.test(await tag('simulado')));
-  const sim = (await p.textContent('#simulado')).replace(/\s+/g, ' ');
+  const tag = async (id) => (await p.$$eval(`#${id} .ch__eyebrow .dclass`, (els) => els.map((e) => e.textContent).join(' ')));
+  ok('dashboard: six chapters, each reachable from the hero index', (await p.$$eval('.ih__index a', (as) => as.every((a) => !!document.querySelector(a.getAttribute('href'))) && as.length)) === 5);
+  ok('dashboard: chapters are labelled by data class', /Datos observados/.test(await tag('radiografia')) && /Datos observados/.test(await tag('calendario')) && /Indicadores derivados/.test(await tag('diversificacion')) && /Escenario simulado/.test(await tag('escenario')));
+  const sim = (await p.textContent('#escenario')).replace(/\s+/g, ' ');
   ok('dashboard: the scenario carries the academic-simulation label and denies being visits', /Datos simulados para demostración académica/.test(sim) && /no viajes ni visitas/.test(sim) && /No es una predicción de comportamiento/.test(sim));
-  const der = (await p.textContent('#derivado')).replace(/\s+/g, ' ');
+  ok('dashboard: the simulation label stays in view (sticky)', (await p.$eval('.sim__flag', (e) => getComputedStyle(e).position)) === 'sticky');
+  const der = (await p.textContent('#diversificacion')).replace(/\s+/g, ' ');
   ok('dashboard: exposure is presented as a proxy', /proxy/.test(der) && /no mide visitantes, ocupación ni saturación/.test(der));
-  ok('dashboard: no individual positions and no visitor counts', !/visitantes al a[nñ]o|turistas recibidos|afluencia de \d/i.test(await p.textContent('main')));
-  const figs = await p.$$eval('.db-fig .db-q', (els) => els.length);
-  ok('dashboard: every chart is headed by a question or a statement', figs >= 9, `${figs} figures`);
-  const bars = await p.$$eval('#observado .db-bars .ibar', (els) => els.map((e) => +e.querySelector('.ibar__v').textContent));
-  ok('dashboard: coverage bars are sorted and labelled with their value', bars.length === 12 && bars.every((v, i) => i === 0 || bars[i - 1] >= v), bars.join(' '));
+  const main = await p.textContent('main');
+  ok('dashboard: no visitor counts and no crowding claims', !/visitantes al a[nñ]o|turistas recibidos|afluencia de \d|saturación real|está saturad/i.test(main));
+  ok('dashboard: a gap in the base is not presented as a lack of attractions', /«Sin registro en la base» no significa «sin atractivo»/.test(main));
+  const figs = await p.$$eval('.fig__q', (els) => els.length);
+  const srcs = await p.$$eval('.fig__src', (els) => els.filter((e) => /Unidad|Fuente/.test(e.textContent)).length);
+  ok('dashboard: every chart is headed by a question and carries unit and source', figs >= 10 && srcs >= 9, `${figs} figures, ${srcs} source lines`);
+  const forms = await p.evaluate(() => ['.heat', '.cols', '.tree', '.dots', '.waffle', '.calg', '.spark', 'svg.svgc', '.lolli', '.sim__bars', '.delta'].filter((s) => document.querySelector(s)).length);
+  ok('dashboard: eleven different chart forms', forms === 11, String(forms));
+  const tree = await p.$$eval('.tree__cell', (els) => { const b = els[0].parentElement.getBoundingClientRect(); return { n: els.length, area: els.reduce((s, e) => { const r = e.getBoundingClientRect(); return s + r.width * r.height; }, 0) / (b.width * b.height) }; });
+  ok('dashboard: the treemap fills its frame with no overlap', tree.n >= 12 && Math.abs(tree.area - 1) < 0.02, JSON.stringify(tree));
   ok('dashboard: no console errors', errs.length === 0, errs.join(' | '));
+  await c.close();
+});
+
+await step('tablero: calendar, cases, scenario and tooltips respond', async () => {
+  const { c } = await ctxFor(1440, 900);
+  const p = await c.newPage(); const errs = watch(p);
+  await p.goto(`${BASE}/inteligencia-turistica/`, { waitUntil: 'networkidle' });
+  // calendar: month, cell, region and comparison
+  await p.click('.calg__m[data-cal-month="11"]');
+  const nov = +(await p.textContent('.calg__tot td:nth-of-type(11)'));
+  ok('calendar: selecting a month lists its events', (await p.textContent('[data-cal-title]')).startsWith('Noviembre') && (await p.$$eval('[data-cal-events] li a', (e) => e.length)) === nov, `${nov} events`);
+  await p.click('[data-cal-cell="huasteca"][data-cal-month="11"]');
+  const cell = +(await p.textContent('[data-cal-cell="huasteca"][data-cal-month="11"]'));
+  ok('calendar: a cell filters by region and month', /Huasteca/.test(await p.textContent('[data-cal-title]')) && (await p.$$eval('[data-cal-events] li a', (e) => e.length)) === cell, `${cell} events`);
+  ok('calendar: the other regions are dimmed, not hidden', (await p.$$eval('[data-cal-row][data-dim]', (e) => e.length)) === 3);
+  await p.selectOption('[data-cal-compare]', '1');
+  ok('calendar: two periods can be compared', /Enero/.test(await p.textContent('[data-cal-cmp]')) && !(await p.$eval('[data-cal-cmp-box]', (e) => e.hidden)));
+  ok('calendar: events without a known month are kept apart', /Sin mes confirmado \(\d+\)/.test(await p.textContent('#calendario')));
+  ok('calendar: rain is context, not a forecast', /no es un pronóstico/.test(await p.textContent('[data-cal-rain]')));
+  // cases: tabs with arrow keys
+  await p.focus('[data-case-tab]');
+  await p.keyboard.press('ArrowRight');
+  const panels = await p.$$eval('[data-case-panel]', (els) => els.map((e) => e.hidden));
+  ok('cases: arrow keys move between tabs', panels[0] === true && panels[1] === false && (await p.evaluate(() => document.activeElement.getAttribute('aria-selected'))) === 'true');
+  ok('cases: alternatives come with a score and a proxy comparison', (await p.$$eval('[data-case-panel]:not([hidden]) .case__score b', (e) => e.length)) >= 1 && /exposición estimada/.test(await p.textContent('[data-case-panel]:not([hidden])')));
+  // scenario switch
+  const before = await p.textContent('[data-sim-big]');
+  await p.click('[data-sim-step="relevance"]');
+  const after = await p.textContent('[data-sim-big]');
+  ok('scenario: switching the configuration changes the headline and the variation', before !== after && (await p.$$eval('[data-sim-delta]:not([hidden])', (e) => e.length)) === 1 && (await p.$eval('[data-sim-bar="relevance"]', (e) => e.hasAttribute('data-on'))), `${before} → ${after}`);
+  ok('scenario: the table matches the headline', (await p.textContent('[data-sim-row="relevance"] td:nth-of-type(2)')).trim() === after.trim());
+  // tooltip on focus
+  await p.focus('.tree__cell');
+  ok('tooltip: appears on keyboard focus', !(await p.$eval('.vtip', (e) => e.hidden)) && /registros de hospedaje/.test(await p.textContent('.vtip')));
+  await p.keyboard.press('Escape');
+  ok('tooltip: Escape dismisses it', await p.$eval('.vtip', (e) => e.hidden));
+  ok('tablero interactions: no console errors', errs.length === 0, errs.join(' | '));
+  await c.close();
+});
+
+await step('tablero: opportunity map', async () => {
+  const { c } = await ctxFor(1440, 900);
+  const p = await c.newPage(); const errs = watch(p);
+  await p.route(/tiles\.openfreemap\.org/, (r) => r.abort()); // the basemap is optional: the chapter must work without it
+  await p.goto(`${BASE}/inteligencia-turistica/`, { waitUntil: 'networkidle' });
+  ok('map: MapLibre is not loaded before the chapter is near', !(await p.$('.maplibregl-canvas')));
+  await p.locator('#mapa-oportunidades').scrollIntoViewIfNeeded();
+  await p.waitForSelector('[data-opp][data-opp-ready]', { timeout: 20000 }).catch(() => {});
+  ok('map: mounts without the basemap', !!(await p.$('[data-opp][data-opp-ready] .maplibregl-canvas')));
+  const first = await p.$eval('[data-opp-select] optgroup option', (o) => o.value);
+  await p.selectOption('[data-opp-select]', first);
+  const panel = (await p.textContent('[data-opp-detail]')).replace(/\s+/g, ' ');
+  ok('map: the select fills the panel (keyboard path)', /Atractivos registrados/.test(panel) && /Exposición estimada · proxy/.test(panel) && /no mide visitantes/.test(panel) && /Nivel de evidencia/.test(panel));
+  await p.click('[data-opp-layer="exposure"]');
+  const legend = (await p.textContent('.opp__legend')).replace(/\s+/g, ' ');
+  ok('map: a proxy layer is labelled as a proxy in the legend', /Exposición estimada/.test(legend) && /proxy/i.test(legend) && /no mide visitantes/.test(legend));
+  ok('map: no boundaries are claimed', /no se dibujan fronteras/.test(legend));
+  ok('map: no console errors', errs.filter((e) => !/openfreemap|ERR_FAILED|Failed to load resource/.test(e)).length === 0, errs.join(' | '));
+  await c.close();
+});
+
+await step('descubre: editorial cards', async () => {
+  const { c } = await ctxFor(390, 844, { isMobile: true, hasTouch: true });
+  const p = await c.newPage(); const errs = watch(p);
+  await p.goto(`${BASE}/descubre/`, { waitUntil: 'networkidle' });
+  await p.click('[data-int="naturaleza"]');
+  await p.waitForSelector('[data-results] .rk');
+  const cards = await p.$$eval('[data-results] .rk', (els) => els.map((e) => ({ band: e.querySelector('.rk__band')?.textContent, score: +e.dataset.score, shown: e.querySelector('.rk__score b')?.textContent, season: e.querySelector('.rk__season')?.dataset.season, orient: /puntaje orientativo/.test(e.textContent) })));
+  const band = (s) => (s >= 85 ? 'Muy afín a tu viaje' : s >= 70 ? 'Afín a tu viaje' : s >= 55 ? 'Puede interesarte' : 'Afinidad baja');
+  ok('cards: the word matches the score and the number is marked as orientative', cards.length > 0 && cards.every((x) => x.band === band(x.score) && +x.shown === x.score && x.orient));
+  ok('cards: every card states its season status', cards.every((x) => ['in', 'out', 'caution', 'none'].includes(x.season)));
+  ok('cards: a place without a verified photo says so instead of borrowing one', await p.$$eval('[data-results] .rk__ph', (els) => els.every((e) => /sin fotografía verificada/.test(e.textContent))));
+  ok('cards: the interest counter and reset work', /1 interés elegido/.test(await p.textContent('[data-int-count]')));
+  await p.click('[data-int-reset]');
+  ok('cards: reset clears the interests', (await p.$$eval('[data-int][aria-pressed="true"]', (e) => e.length)) === 0);
+  ok('cards phone: no horizontal overflow', (await overflow(p)) <= 0);
+  ok('cards: no console errors', errs.length === 0, errs.join(' | '));
   await c.close();
 });
 

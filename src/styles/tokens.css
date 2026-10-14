@@ -151,3 +151,32 @@
 [data-tone="heritage"] { --sc-canvas: #231b17; --sc-surface: #2e2420; --sc-ink-soft: #cdc2b6; --slp-tone-line: rgb(199 163 90 / 0.24); }
 [data-tone="night"]    { --sc-canvas: #12151d; --sc-surface: #1b1f2a; --sc-ink-soft: #c3c6cf; --slp-tone-line: rgb(150 160 200 / 0.22); }
 [data-tone="utility"]  { --sc-canvas: #f3f4f1; --sc-surface: #e7e9e4; --sc-ink-soft: #4a504c; --slp-tone-line: rgb(31 37 36 / 0.14); }
+
+/* ---- premium intelligence pass ---------------------------------------------
+   Two deep tones for the data chapters (on data-ground="dark") and the chart
+   palette. The regional chart hues are NOT the brand accents: the accents fail
+   a colour-blind separation check as a categorical set, so charts use these
+   four, validated with the dataviz palette validator (lightness band, chroma
+   floor, adjacent CVD ΔE ≥ 8, normal-vision ΔE ≥ 15, 3:1 on the surface) on
+   #0f2a25 and on #f5f2eb. A region is still always named in text. */
+:root {
+  --slp-forest: #103d35;
+  --slp-forest-2: #0f2a25;
+  --slp-teal: #183f43;
+  --slp-editorial: #f5f2eb;
+  --viz-gold: #c8a45c;
+  --viz-ink-dark: #f8f4ea;
+  --viz-altiplano: #b8620a;
+  --viz-centro: #a8377a;
+  --viz-zona-media: #1f6fb2;
+  --viz-huasteca: #2f7d32;
+}
+[data-tone="forest"] { --sc-canvas: var(--slp-forest-2); --sc-surface: #16382f; --sc-ink-soft: #c1cfc8; --slp-tone-line: rgb(200 164 92 / 0.26); }
+[data-tone="teal"]   { --sc-canvas: #142f33; --sc-surface: var(--slp-teal); --sc-ink-soft: #c0cdcf; --slp-tone-line: rgb(104 185 176 / 0.26); }
+[data-tone="carbon"] { --sc-canvas: #1e2624; --sc-surface: #27312e; --sc-ink-soft: #c3c8c2; --slp-tone-line: rgb(200 164 92 / 0.22); }
+[data-tone="editorial"] { --sc-canvas: var(--slp-editorial); --sc-surface: #ebe6da; --sc-ink-soft: #55605b; --slp-tone-line: rgb(16 61 53 / 0.18); }
+[data-ground="dark"] { --viz-altiplano: #c2751c; --viz-centro: #c2609e; --viz-zona-media: #3b93d1; --viz-huasteca: #4e9f3d; }
+[data-viz-region="altiplano"]  { --viz-region: var(--viz-altiplano); }
+[data-viz-region="centro"]     { --viz-region: var(--viz-centro); }
+[data-viz-region="zona-media"] { --viz-region: var(--viz-zona-media); }
+[data-viz-region="huasteca"]   { --viz-region: var(--viz-huasteca); }

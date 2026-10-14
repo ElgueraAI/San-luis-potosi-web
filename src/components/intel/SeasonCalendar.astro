@@ -1,0 +1,123 @@
+---
+/**
+ * Chapter D: Calendario turístico y estacionalidad. OBSERVED events by region
+ * and month, the seasons an official source declares, and modelled rain as
+ * context. Counting rule (docs/premium-dashboard-design.md): an event counts
+ * once in every month it spans; year-round events and events with no known
+ * month are listed apart and never enter the grid.
+ */
+import { calendar, calendarMax, busiestMonths, REGIONS, REGION_LABEL, MONTHS_ES } from '@/data/dashboard';
+import { ramp, linear, linePath } from '@/lib/charts/geometry';
+import { href } from '@/i18n/routes';
+
+const short = MONTHS_ES.map((m) => m.slice(0, 3));
+const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
+const rainMax = Math.max(...calendar.rain.flatMap((r) => r.days));
+const SW = 220, SH = 64;
+const sx = linear(0, 11, 4, SW - 4), sy = linear(0, rainMax, SH - 14, 6);
+const spark = calendar.rain.map((r) => {
+  const pts = r.days.map((d, i) => [sx(i), sy(d)] as [number, number]);
+  const peak = r.days.indexOf(Math.max(...r.days));
+  return { ...r, line: linePath(pts), area: `${linePath(pts)} L${sx(11).toFixed(1)} ${SH - 14} L${sx(0).toFixed(1)} ${SH - 14} Z`, peak, px: sx(peak), py: sy(r.days[peak]) };
+});
+---
+<section id="calendario" class="ch" data-ground="light" data-tone="editorial" aria-labelledby="ch-d">
+  <div class="wrap">
+    <div class="ch__head" data-reveal>
+      <p class="ch__eyebrow"><span class="ch__num">Capítulo D</span><span class="dclass" data-class="observado">Datos observados</span></p>
+      <h2 id="ch-d" class="ch__title">Calendario turístico y estacionalidad</h2>
+      <p class="ch__lede">Cuándo hay fiesta en cada región. Los meses con más eventos documentados son <strong>{busiestMonths.map((m) => `${MONTHS_ES[m.i]} (${m.v})`).join(', ')}</strong>. Elige un mes o una celda para ver qué ocurre.</p>
+    </div>
+
+    <div class="cal" data-cal2 data-reveal>
+      <div class="cal__tools">
+        <div>
+          <p class="cal__sub">Región</p>
+          <div class="segc" role="group" aria-label="Filtrar por región">
+            <button type="button" aria-pressed="true" data-cal-region="all">Todas</button>
+            {REGIONS.map((r) => <button type="button" aria-pressed="false" data-cal-region={r} data-viz-region={r}><i aria-hidden="true"></i>{REGION_LABEL[r]}</button>)}
+          </div>
+        </div>
+        <label>Comparar con
+          <select data-cal-compare>
+            <option value="">Sin comparación</option>
+            {MONTHS_ES.map((m, i) => <option value={i + 1}>{cap(m)}</option>)}
+          </select>
+        </label>
+      </div>
+
+      <figure class="fig">
+        <figcaption>
+          <h3 class="fig__q">¿Cuántos eventos documentados hay por región y mes?</h3>
+          <p class="fig__note">{calendar.monthlyEvents} fiestas y eventos con mes conocido. Un evento que abarca varios meses cuenta una vez en cada uno, por eso la suma de los meses es mayor que el número de eventos.</p>
+        </figcaption>
+        <div class="fig__scroll" role="region" aria-label="Eventos por región y mes" tabindex="0">
+          <table class="calg">
+            <thead><tr><th scope="col"><span class="visually-hidden">Región</span></th>{MONTHS_ES.map((m, i) => <th scope="col"><button type="button" class="calg__m" aria-pressed="false" data-cal-month={i + 1} aria-label={`Ver ${m}`}>{short[i]}</button></th>)}</tr></thead>
+            <tbody>
+              {calendar.grid.map((g) => (
+                <tr data-cal-row={g.region}><th scope="row">{REGION_LABEL[g.region]}</th>{g.months.map((v, i) => { const t = ramp(v, calendarMax); return <td><button type="button" style={`--t:${t}`} data-zero={v === 0 ? '' : undefined} data-hi={t >= 0.6 ? '' : undefined} aria-pressed="false" data-cal-month={i + 1} data-cal-cell={g.region} aria-label={`${REGION_LABEL[g.region]}, ${MONTHS_ES[i]}: ${v} eventos`}>{v}</button></td>; })}</tr>
+              ))}
+              <tr class="calg__tot"><th scope="row">Estado</th>{calendar.totals.map((v) => <td>{v}</td>)}</tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="fig__hint">Desliza la tabla para ver los doce meses.</p>
+      </figure>
+
+      <div class="cal__panel" data-cal-panel aria-live="polite">
+        <h3 data-cal-title>Elige un mes</h3>
+        <p class="fig__note" data-cal-summary>Toca un mes en la cabecera o una celda de la tabla.</p>
+        <div class="cal__cols">
+          <div>
+            <p class="cal__sub">Fiestas y eventos</p>
+            <ul class="cal__list" data-cal-events></ul>
+          </div>
+          <div style="display:grid;gap:var(--sc-4);align-content:start">
+            <div><p class="cal__sub">Temporadas declaradas por la fuente oficial</p><ul class="cal__list" data-cal-seasons></ul></div>
+            <div><p class="cal__sub">Contexto de lluvia · promedio modelado</p><p class="cal__cmp" data-cal-rain></p></div>
+            <div data-cal-cmp-box hidden><p class="cal__sub">Comparación</p><div class="cal__cmp" data-cal-cmp></div></div>
+          </div>
+        </div>
+      </div>
+
+      <figure class="fig">
+        <figcaption>
+          <h3 class="fig__q">¿Cuándo llueve en cada región?</h3>
+          <p class="fig__note">Días con lluvia al mes. Es contexto para las temporadas, no un pronóstico: en la Huasteca la lluvia cambia el color y el caudal de ríos y cascadas.</p>
+        </figcaption>
+        <div class="spark">
+          {spark.map((r) => (
+            <figure data-viz-region={r.region}>
+              <b>{REGION_LABEL[r.region]}</b>
+              <svg viewBox={`0 0 ${SW} ${SH}`} role="img" aria-label={`${REGION_LABEL[r.region]}: ${r.days.map((d, i) => `${short[i]} ${d}`).join(', ')} días con lluvia`}>
+                <path class="spark__area" d={r.area} /><path d={r.line} />
+                <circle cx={r.px} cy={r.py} r="3.5" fill="var(--viz-region)" stroke="var(--sc-canvas)" stroke-width="2" />
+                <text x={4} y={SH - 2}>ene</text><text x={SW / 2} y={SH - 2} text-anchor="middle">jun</text><text x={SW - 4} y={SH - 2} text-anchor="end">dic</text>
+              </svg>
+              <small>Máximo en {MONTHS_ES[r.peak]}: {r.days[r.peak]} días · mínimo {Math.min(...r.days)}</small>
+            </figure>
+          ))}
+        </div>
+        <details class="fig__table"><summary>Ver como tabla</summary>
+          <div class="fig__scroll" role="region" aria-label="Días con lluvia por mes" tabindex="0"><table style="min-width:40rem"><thead><tr><th scope="col">Región</th>{short.map((m) => <th scope="col" class="num">{m}</th>)}</tr></thead>
+            <tbody>{calendar.rain.map((r) => <tr><th scope="row">{REGION_LABEL[r.region]}</th>{r.days.map((d) => <td class="num">{d}</td>)}</tr>)}</tbody></table></div>
+        </details>
+        <p class="fig__src"><b>Unidad</b> días con lluvia al mes · <b>Fuente</b> reanálisis de Open-Meteo (CC BY 4.0), un punto de referencia por región · <b>Periodo</b> promedio 2016–2025 · no es una normal climatológica oficial</p>
+      </figure>
+
+      <div class="figs">
+        {calendar.allYear.length > 0 ? (
+          <details class="fig fig--6 fig__table"><summary>Todo el año ({calendar.allYear.length})</summary>
+            <ul class="cal__list">{calendar.allYear.map((e) => <li>{e.url ? <a href={e.url}>{e.name}</a> : e.name}<small>{e.municipality ?? 'Varios municipios'}</small></li>)}</ul>
+          </details>
+        ) : <p class="fig fig--6 fig__note"><b>Todo el año: 0.</b> Ningún evento con ficha en el portal está registrado como permanente; las experiencias de temporada están en sus destinos.</p>}
+        <details class="fig fig--6 fig__table"><summary>Sin mes confirmado ({calendar.noMonth.length})</summary>
+          <ul class="cal__list">{calendar.noMonth.map((e) => <li>{e.url ? <a href={e.url}>{e.name}</a> : e.name}<small>{e.municipality ?? 'Varios municipios'} · fecha por confirmar con el municipio</small></li>)}</ul>
+        </details>
+      </div>
+      <p class="fig__src"><b>Unidad</b> eventos documentados · <b>Fuente</b> Secretaría de Cultura (SIC), Secretaría de Turismo de SLP y fuentes municipales citadas en cada ficha de <a href={href('events')}>Festividades y eventos</a> · <b>Periodo</b> calendario anual; el estado de cada fecha (confirmada, patrón oficial, última edición) está en su ficha</p>
+    </div>
+    <script type="application/json" data-cal-data set:html={JSON.stringify({ ...calendar.client, months: MONTHS_ES, regions: REGION_LABEL })} />
+  </div>
+</section>

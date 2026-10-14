@@ -1,14 +1,30 @@
 ---
 /**
- * Inteligencia turística: the academic face of the smart tourism system.
- * Problem, question and solution, with the method behind each engine.
+ * Inteligencia turística: the academic face of the smart tourism system, told
+ * in six chapters. Observed data (B, D), derived indicators (C, E) and the
+ * simulated scenario (F) are kept in separate chapters and never share a
+ * figure. Charts are built at compile time (src/lib/charts); the page ships
+ * one small script for interaction and loads MapLibre only near chapter C.
  */
 import '@/styles/intel.css';
+import '@/styles/dashboard.css';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import PageHeader from '@/components/ui/PageHeader.astro';
-import Dashboard from '@/components/intel/Dashboard.astro';
+import ChapterHero from '@/components/intel/ChapterHero.astro';
+import Radiography from '@/components/intel/Radiography.astro';
+import OpportunityMap from '@/components/intel/OpportunityMap.astro';
+import SeasonCalendar from '@/components/intel/SeasonCalendar.astro';
+import Diversification from '@/components/intel/Diversification.astro';
+import ScenarioLab from '@/components/intel/ScenarioLab.astro';
 import { href } from '@/i18n/routes';
 
+const chapters = [
+  { id: 'inicio', letter: 'A', title: 'Inteligencia para descubrir mejor' },
+  { id: 'radiografia', letter: 'B', title: 'Radiografía del estado' },
+  { id: 'mapa-oportunidades', letter: 'C', title: 'Mapa de oportunidades' },
+  { id: 'calendario', letter: 'D', title: 'Calendario y estacionalidad' },
+  { id: 'diversificacion', letter: 'E', title: 'Diversificación inteligente' },
+  { id: 'escenario', letter: 'F', title: 'Escenario académico' },
+];
 const engines = [
   { n: '01', t: 'Capa de datos', d: 'Normaliza destinos, museos, arqueología, áreas protegidas, eventos y municipios de fuentes oficiales, con procedencia y nivel de confianza por registro.', k: 'Ciencia de datos' },
   { n: '02', t: 'Recomendador explicable', d: 'Puntaje de 0 a 100 con pesos documentados: intereses, distancia, temporada, clima, servicios y calidad de la información. Cada sugerencia dice por qué.', k: 'Sistemas de recomendación' },
@@ -20,51 +36,53 @@ const engines = [
   { n: '08', t: 'Mercadotecnia inteligente', d: 'Matriz segmento × región × temporada × mensaje × canal, con la oferta de la base como evidencia y los mensajes como propuesta estratégica.', k: 'Mercadotecnia digital' },
 ];
 ---
-<BaseLayout title="Inteligencia turística" description="Cómo los datos, la geolocalización, la recomendación explicable y la optimización de rutas pueden distribuir mejor el turismo en San Luis Potosí: problema, método, indicadores y límites.">
-  <PageHeader label="Inteligencia turística" title="Repartir mejor el viaje, sin empeorarlo" lede="Un sistema de turismo inteligente para San Luis Potosí: entiende el contexto del viaje, recomienda con razones, optimiza el recorrido y propone alternativas en municipios menos expuestos." tone="stone" ground="ivory" crumbs={[{ label: 'Inteligencia turística' }]} />
+<BaseLayout title="Inteligencia turística" description="Cómo los datos, la geolocalización, la recomendación explicable y la optimización de rutas pueden distribuir mejor el turismo en San Luis Potosí: radiografía, mapa de oportunidades, calendario, diversificación y escenario académico." image="wc-50604767" overlayHeader>
+  <div id="inicio"><ChapterHero chapters={chapters.slice(1)} /></div>
+
+  <nav class="chnav" data-ground="light" aria-label="Capítulos">
+    <div class="wrap"><ol>
+      {chapters.slice(1).map((c) => <li><a href={`#${c.id}`}><b>{c.letter}</b>{c.title}</a></li>)}
+      <li><a href="#arquitectura">Arquitectura</a></li>
+      <li><a href="#limites">Límites</a></li>
+    </ol></div>
+  </nav>
 
   <section class="psec psec--tight" data-ground="light" aria-labelledby="it-p">
-    <div class="wrap it-story">
-      <article>
+    <div class="wrap story">
+      <article data-reveal>
         <p class="label">Problema</p>
-        <h2 id="it-p" class="it-story__h">La visita se concentra; la oferta no.</h2>
+        <h2 id="it-p">La visita se concentra; la oferta no.</h2>
         <p class="body">El turismo del estado gira alrededor de unos cuantos destinos emblemáticos, mientras una gran cantidad de atractivos repartidos por el territorio resulta poco visible para quien planea su viaje.</p>
       </article>
-      <article>
+      <article data-reveal>
         <p class="label">Pregunta central</p>
-        <h2 class="it-story__h">¿Pueden los datos repartir mejor el turismo sin restarle relevancia al viaje?</h2>
+        <h2>¿Pueden los datos repartir mejor el turismo sin restarle relevancia al viaje?</h2>
         <p class="body">¿Cómo pueden los datos, la geolocalización, la recomendación explicable y la optimización de rutas ayudar a distribuir de forma más inteligente el turismo dentro de San Luis Potosí sin reducir la relevancia de la experiencia del visitante?</p>
       </article>
-      <article>
+      <article data-reveal>
         <p class="label">Solución</p>
-        <h2 class="it-story__h">Un sistema que explica cada decisión.</h2>
+        <h2>Un sistema que explica cada decisión.</h2>
         <p class="body">Datos turísticos, contexto, geolocalización, rutas, optimización, recomendación, diversificación, segmentación y mercadotecnia, integrados en el portal y abiertos a revisión.</p>
       </article>
     </div>
   </section>
 
-  <nav class="pnav" data-ground="light" aria-label="Secciones del tablero">
-    <div class="wrap"><ul>
-      <li><a href="#observado">Datos observados</a></li>
-      <li><a href="#derivado">Indicadores derivados</a></li>
-      <li><a href="#simulado">Escenario simulado</a></li>
-      <li><a href="#arquitectura">Arquitectura</a></li>
-      <li><a href="#limites">Límites</a></li>
-    </ul></div>
-  </nav>
+  <Radiography />
+  <OpportunityMap />
+  <SeasonCalendar />
+  <Diversification />
+  <ScenarioLab />
 
-  <Dashboard />
-
-  <section id="arquitectura" class="psec" data-ground="light" aria-labelledby="it-m">
+  <section id="arquitectura" class="ch" data-ground="dark" data-tone="carbon" aria-labelledby="it-m">
     <div class="wrap">
-      <div class="psec__head">
-        <p class="label">Arquitectura</p>
-        <h2 id="it-m" class="psec__title">Ocho piezas, una cadena</h2>
-        <p class="body">Datos → normalización → variables → recomendación → contexto → redistribución → optimización → interfaz → analítica. Cada pieza es código puro, con pruebas, y documenta sus fórmulas y sus límites.</p>
+      <div class="ch__head" data-reveal>
+        <p class="ch__eyebrow"><span class="ch__num">Arquitectura</span></p>
+        <h2 id="it-m" class="ch__title">Ocho piezas, una cadena</h2>
+        <p class="ch__lede">Datos → normalización → variables → recomendación → contexto → redistribución → optimización → interfaz → analítica. Cada pieza es código puro, con pruebas, y documenta sus fórmulas y sus límites.</p>
       </div>
       <ol class="it-eng">
         {engines.map((e) => (
-          <li>
+          <li data-reveal>
             <span class="it-eng__n" aria-hidden="true">{e.n}</span>
             <h3 class="it-eng__t">{e.t}</h3>
             <p class="it-eng__d">{e.d}</p>
@@ -73,14 +91,14 @@ const engines = [
         ))}
       </ol>
       <div class="it-cta">
-        <a class="btn" href={href('discover')}>Probar el recomendador</a>
-        <a class="btn btn--ghost" href={href('myRoute')}>Optimizar un viaje en Mi Ruta</a>
+        <a class="btn btn--light" href={href('discover')}>Probar el recomendador</a>
+        <a class="btn btn--outline-light" href={href('myRoute')}>Optimizar un viaje en Mi Ruta</a>
         <a class="arrow" href={href('segments')}>Segmentos y campañas</a>
       </div>
     </div>
   </section>
 
-  <section id="limites" class="psec psec--tight" data-ground="ivory" aria-labelledby="it-l">
+  <section id="limites" class="psec" data-ground="light" data-tone="editorial" aria-labelledby="it-l">
     <div class="wrap it-lim">
       <h2 id="it-l" class="psec__title">Lo que el sistema no afirma</h2>
       <ul class="body">
@@ -95,16 +113,17 @@ const engines = [
   </section>
 </BaseLayout>
 
+<script>
+  import { initDashboard } from '@/scripts/intel/dashboard';
+  initDashboard();
+</script>
+
 <style>
-  .it-story { display: grid; gap: var(--sc-6); }
-  @media (min-width: 900px) { .it-story { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  .it-story article { display: grid; gap: var(--sc-3); align-content: start; padding-top: var(--sc-4); border-top: 2px solid var(--slp-charcoal); }
-  .it-story__h { font: 600 clamp(1.6rem, 1.3rem + 1vw, 2.1rem)/1.08 var(--sc-font-display); text-wrap: balance; }
   .it-eng { list-style: none; display: grid; gap: var(--sc-5) var(--sc-5); grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
   .it-eng li { display: grid; gap: 0.45rem; align-content: start; padding-top: var(--sc-3); border-top: 1px solid var(--sc-hairline-strong); }
-  .it-eng__n { font: 500 2rem/1 var(--sc-font-display); color: var(--slp-gold-deep); }
+  .it-eng__n { font: 500 2rem/1 var(--sc-font-display); color: var(--sc-accent); }
   .it-eng__t { font: 600 1.45rem/1.1 var(--sc-font-display); }
-  .it-eng__d { font-size: 0.9rem; line-height: 1.5; }
+  .it-eng__d { font-size: 0.9rem; line-height: 1.5; color: var(--sc-ink-soft); }
   .it-eng__k { font: 700 0.62rem/1.3 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
   .it-cta { display: flex; flex-wrap: wrap; gap: var(--sc-4); align-items: center; margin-top: var(--sc-6); }
   .it-lim { display: grid; gap: var(--sc-4); }

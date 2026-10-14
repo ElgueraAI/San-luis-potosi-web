@@ -1,0 +1,147 @@
+---
+/**
+ * Chapter B: Radiografía turística del estado. OBSERVED data only: counts read
+ * from the portal's base. Four different chart forms, each answering one
+ * question, each with unit, source, period and a table alternative.
+ */
+import { observed, kindMatrix, kindMatrixMax, coverageRows, coverageSpread, COVERAGE_TYPES, lodgingByRegion, lodgingTotal, lodgingUnassigned, interestCounts, REGIONS, REGION_LABEL, fmt, pct } from '@/data/dashboard';
+import { treemap } from '@/lib/charts/geometry';
+import { ramp } from '@/lib/charts/geometry';
+import { href } from '@/i18n/routes';
+
+// ---- treemap: regions first, municipalities inside each region ---------------------------
+const W = 1000, H = 520, MIN_SHARE = 0.012;
+const regionCells = treemap(lodgingByRegion.map((r) => ({ value: r.total, data: r })), { x: 0, y: 0, w: W, h: H });
+const cells = regionCells.flatMap((rc) => {
+  const big = rc.data.rows.filter((m) => m.value / lodgingTotal >= MIN_SHARE);
+  const small = rc.data.rows.filter((m) => m.value / lodgingTotal < MIN_SHARE);
+  const items = [...big.map((m) => ({ value: m.value, data: { name: m.name, n: 1 } })), ...(small.length ? [{ value: small.reduce((s, m) => s + m.value, 0), data: { name: `Otros ${small.length} municipios`, n: small.length } }] : [])];
+  return treemap(items, rc).map((c) => ({ ...c, region: rc.data.region }));
+});
+const size = (c: { w: number; h: number }) => (c.w > 150 && c.h > 90 ? 'lg' : c.w > 62 && c.h > 34 ? 'md' : 'sm');
+const p = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
+
+const colMax = Math.max(...interestCounts.map((i) => i.total));
+const waffle = coverageSpread.flatMap((s) => Array.from({ length: s.municipalities }, () => s.types));
+---
+<section id="radiografia" class="ch" data-ground="dark" data-tone="carbon" aria-labelledby="ch-b">
+  <div class="wrap">
+    <div class="ch__head" data-reveal>
+      <p class="ch__eyebrow"><span class="ch__num">Capítulo B</span><span class="dclass" data-class="observado">Datos observados</span></p>
+      <h2 id="ch-b" class="ch__title">Radiografía turística del estado</h2>
+      <p class="ch__lede">Lo que registran las fuentes oficiales, contado tal cual. Son <strong>registros, no visitantes</strong>: dicen qué hay y dónde, no cuánta gente va.</p>
+    </div>
+
+    <ul class="kpis" data-reveal>
+      <li class="kpis__lead"><b>{fmt(observed.places)}</b><span>lugares que el portal puede recomendar, en {observed.withAssets} de {observed.municipalities} municipios</span></li>
+      <li><b>{observed.municipalities}</b><span>municipios registrados</span></li>
+      <li><b>{observed.destinations}</b><span>destinos con página publicada</span></li>
+      <li><b>{fmt(observed.museums + observed.venues)}</b><span>museos y recintos culturales ({observed.museums} museos)</span></li>
+      <li><b>{fmt(observed.lodging)}</b><span>hospedajes registrados</span></li>
+      <li><b>{observed.events}</b><span>festividades y experiencias de temporada</span></li>
+      <li><b>{observed.withoutAssets}</b><span>municipios sin atractivo puntuable <em>en la base</em></span></li>
+    </ul>
+    <p class="fig__note" style="margin-bottom:clamp(2.5rem,5vw,4rem)" data-reveal><strong>«Sin registro en la base» no significa «sin atractivo».</strong> Los {observed.withoutAssets} municipios sin atractivo puntuable son un vacío de investigación del portal: {observed.eventOnly} de ellos sí registran fiestas o eventos, y todos tienen página propia en <a href={href('municipalities')}>Municipios</a>.</p>
+
+    <div class="figs">
+      <figure class="fig fig--7" data-reveal>
+        <figcaption>
+          <h3 class="fig__q">¿Qué tipo de atractivos hay en cada región?</h3>
+          <p class="fig__note">Lugares recomendables por tipo y región. El tono de cada celda crece con el número; la cifra siempre está escrita.</p>
+        </figcaption>
+        <div class="fig__scroll" role="region" aria-label="Atractivos por tipo y región" tabindex="0">
+          <table class="heat">
+            <thead><tr><th scope="col">Tipo</th>{REGIONS.map((r) => <th scope="col">{REGION_LABEL[r]}</th>)}<th scope="col">Total</th></tr></thead>
+            <tbody>
+              {kindMatrix.map((row) => (
+                <tr><th scope="row">{row.label}</th>{row.by.map((v, i) => { const t = ramp(v, kindMatrixMax); return <td><span class="heat__c" style={`--t:${t}`} data-zero={v === 0 ? '' : undefined} data-hi={t >= 0.6 ? '' : undefined} data-tip={`${row.label} · ${REGION_LABEL[REGIONS[i]]}\n${v} ${v === 1 ? 'lugar' : 'lugares'}`}>{v}</span></td>; })}<td class="heat__total">{row.total}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="fig__hint">Desliza la tabla para ver las cuatro regiones.</p>
+        <p class="fig__src"><b>Unidad</b> lugares · <b>Fuente</b> Secretaría de Turismo de SLP, Secretaría de Cultura (SIC), INAH, CEFIM · <b>Corte</b> base del portal, 2026</p>
+      </figure>
+
+      <figure class="fig fig--5" data-reveal>
+        <figcaption>
+          <h3 class="fig__q">¿Cuántos municipios quedan cortos de información?</h3>
+          <p class="fig__note">Un cuadro por municipio, ordenados de más a menos tipos de registro. El tono baja con la cobertura.</p>
+        </figcaption>
+        <div class="waffle" role="img" aria-label={coverageSpread.map((s) => `${s.municipalities} municipios con ${s.types} tipos de registro`).join('; ')}>
+          {waffle.map((k) => <i style={`--t:${k / 6}`} data-zero={k === 0 ? '' : undefined}></i>)}
+        </div>
+        <table class="dtable">
+          <thead><tr><th scope="col">Tipos de registro (de 6)</th><th scope="col" class="num">Municipios</th></tr></thead>
+          <tbody>{coverageSpread.filter((s) => s.municipalities > 0).map((s) => <tr><th scope="row">{s.types}</th><td class="num">{s.municipalities}</td></tr>)}</tbody>
+        </table>
+        <p class="fig__src"><b>Unidad</b> municipios · <b>Fuente</b> base del portal · <b>Lectura</b> mide lo que el portal ha documentado, no lo que el municipio ofrece</p>
+      </figure>
+      <figure class="fig" data-reveal>
+        <figcaption>
+          <h3 class="fig__q">¿Dónde está el hospedaje registrado?</h3>
+          <p class="fig__note">Cada rectángulo es un municipio y su área es proporcional a sus registros de hospedaje. Los municipios con menos de {pct(MIN_SHARE)} del total se agrupan por región.</p>
+        </figcaption>
+        <ul class="legend">{lodgingByRegion.map((r) => <li data-viz-region={r.region}><i></i><b>{REGION_LABEL[r.region]}</b> {fmt(r.total)} · {pct(r.total / lodgingTotal)}</li>)}</ul>
+        <div class="tree">
+          {cells.map((c) => (
+            <div class="tree__cell" data-viz-region={c.region} data-size={size(c)} tabindex="0" style={`left:${p(c.x, W)};top:${p(c.y, H)};width:${p(c.w, W)};height:${p(c.h, H)}`} data-tip={`${c.data.name} · ${REGION_LABEL[c.region]}\n${fmt(c.value)} registros de hospedaje\n${pct(c.value / lodgingTotal)} del total estatal`} aria-label={`${c.data.name}, ${REGION_LABEL[c.region]}: ${c.value} registros de hospedaje`}>
+              <b>{c.data.name}</b><span>{fmt(c.value)}</span>
+            </div>
+          ))}
+        </div>
+        <details class="fig__table"><summary>Ver como tabla</summary>
+          <table><thead><tr><th scope="col">Región</th><th scope="col">Municipio</th><th scope="col" class="num">Registros</th></tr></thead>
+            <tbody>{lodgingByRegion.flatMap((r) => r.rows.map((m) => <tr><td>{REGION_LABEL[r.region]}</td><th scope="row">{m.name}</th><td class="num">{m.value}</td></tr>))}</tbody></table>
+        </details>
+        <p class="fig__src"><b>Unidad</b> establecimientos registrados (no cuartos ni ocupación) · <b>Fuente</b> INEGI DENUE y directorio Estadía de la Secretaría de Turismo de SLP · <b>Corte</b> consulta de octubre de 2026{lodgingUnassigned > 0 && ` · ${lodgingUnassigned} registros sin municipio del catálogo 2020 no se dibujan`}</p>
+      </figure>
+
+      <figure class="fig" data-reveal>
+        <figcaption>
+          <h3 class="fig__q">¿Qué experiencias sostiene la base?</h3>
+          <p class="fig__note">Lugares por interés. Un lugar cuenta en cada interés que tiene; la parte rayada es el interés que el proyecto dedujo del tipo oficial (por ejemplo, un museo cuenta como cultura).</p>
+        </figcaption>
+        <div class="fig__scroll" role="region" aria-label="Lugares por interés" tabindex="0">
+          <div class="cols" role="img" aria-label={`Lugares por interés: ${interestCounts.map((i) => `${i.label} ${i.total}`).join(', ')}`}>
+            {interestCounts.map((i) => (
+              <div class="cols__c" data-tip={`${i.label}\n${i.declared} declarados por la fuente\n${i.derived} derivados del tipo oficial`}>
+                <span class="cols__v">{i.total}</span>
+                <span class="cols__bar grow grow--up">
+                  {i.derived > 0 && <span class="cols__seg" data-derived style={`height:${(i.derived / colMax) * 100}%`}></span>}
+                  {i.declared > 0 && <span class="cols__seg" style={`height:${(i.declared / colMax) * 100}%`}></span>}
+                </span>
+                <span class="cols__l">{i.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <ul class="legend"><li><i></i>Declarado por la fuente</li><li><i data-derived></i>Derivado del tipo oficial</li></ul>
+        <details class="fig__table"><summary>Ver como tabla</summary>
+          <table><thead><tr><th scope="col">Interés</th><th scope="col" class="num">Declarados</th><th scope="col" class="num">Derivados</th><th scope="col" class="num">Total</th></tr></thead>
+            <tbody>{interestCounts.map((i) => <tr><th scope="row">{i.label}</th><td class="num">{i.declared}</td><td class="num">{i.derived}</td><td class="num">{i.total}</td></tr>)}</tbody></table>
+        </details>
+        <p class="fig__src"><b>Unidad</b> lugares (con repetición entre intereses) · <b>Fuente</b> etiquetas de la investigación del portal y tipo oficial del registro · <b>Corte</b> 2026</p>
+      </figure>
+
+      <figure class="fig" data-reveal>
+        <figcaption>
+          <h3 class="fig__q">¿Qué municipios están mejor documentados?</h3>
+          <p class="fig__note">Cobertura documental: cuántos de seis tipos de registro tiene cada municipio en la base. Un punto lleno indica que hay al menos un registro de ese tipo. Los 14 primeros de {observed.municipalities}.</p>
+        </figcaption>
+        <div class="fig__scroll" role="region" aria-label="Cobertura documental por municipio" tabindex="0">
+          <table class="dots">
+            <thead><tr><th scope="col">Municipio</th>{COVERAGE_TYPES.map((t) => <th scope="col">{t}</th>)}<th scope="col">Atractivos</th></tr></thead>
+            <tbody>
+              {coverageRows.map((m) => (
+                <tr><th scope="row">{m.href ? <a href={m.href}>{m.name}</a> : m.name}</th>{m.present.map((on) => <td><span class="dot" data-off={on ? undefined : ''}></span><span class="visually-hidden">{on ? 'sí' : 'no'}</span></td>)}<td class="num">{m.assets}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="fig__src"><b>Unidad</b> presencia de registros (sí / no) y número de atractivos puntuables · <b>Fuente</b> base del portal · <b>Corte</b> 2026</p>
+      </figure>
+
+    </div>
+  </div>
+</section>

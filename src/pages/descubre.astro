@@ -31,7 +31,7 @@ const factors = (Object.keys(WEIGHTS) as FactorId[]).map((id) => ({ label: FACTO
           <div class="dc__chips">
             {INTERESTS.map((i) => <button type="button" class="chip-btn" data-int={i} aria-pressed="false">{INTEREST_LABEL[i]}</button>)}
           </div>
-          <p class="seg__hint">Elige uno o varios. Sin intereses, la lista se ordena solo por contexto.</p>
+          <p class="seg__hint"><span data-int-count>Elige uno o varios.</span> Sin intereses, la lista se ordena solo por contexto. <button type="button" class="dc__reset" data-int-reset hidden>Quitar todos</button></p>
         </fieldset>
 
         <fieldset class="seg">
@@ -71,12 +71,13 @@ const factors = (Object.keys(WEIGHTS) as FactorId[]).map((id) => ({ label: FACTO
 
       <div class="dc__out">
         <div class="dc__head">
+          <p class="label">Selección personalizada</p>
           <h2 class="psec__title" id="dc-r">Para ti</h2>
           <p class="dc__status small" data-status aria-live="polite">Cargando recomendaciones…</p>
           <p class="tiny muted" data-climate></p>
           <p class="small" data-style hidden>Tu estilo de viaje en esta sesión: <strong data-style-name></strong>. <a href={href('segments')}>Cómo se calcula</a></p>
         </div>
-        <ul class="rk-list" data-results aria-labelledby="dc-r"></ul>
+        <ul class="rk-list rk-list--editorial" data-results aria-labelledby="dc-r"></ul>
         <p class="body muted" data-empty hidden>Ningún lugar de la base coincide con esa combinación. Quita un interés o amplía el tiempo de viaje.</p>
 
         <section class="dc__alt" data-alt hidden aria-labelledby="dc-alt-t">
@@ -139,6 +140,7 @@ const factors = (Object.keys(WEIGHTS) as FactorId[]).map((id) => ({ label: FACTO
   .dc__form { display: grid; gap: var(--sc-5); padding: var(--sc-5); border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: var(--slp-paper); min-width: 0; }
   .dc__form .psec__title { font-size: clamp(1.8rem, 1.5rem + 1vw, 2.3rem); }
   .dc__chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .dc__reset { border: 0; background: none; padding: 0.5rem 0; min-height: var(--slp-tap); color: inherit; font: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 0.2em; }
   .dc__origin { display: grid; gap: var(--sc-3); }
   .dc__field { display: grid; gap: 0.35rem; }
   .dc__field select { min-height: var(--slp-tap); padding: 0 0.6rem; border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: #fff; font: 600 0.9rem/1.2 var(--sc-font-text); color: var(--slp-charcoal); max-width: 100%; min-width: 0; }
