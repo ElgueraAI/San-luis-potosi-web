@@ -1,0 +1,243 @@
+{
+ "note": "Allow-list of what the proxy may request. Venues are official SIC museum records; BestTime coverage for them has NOT been verified (needs an account). Corridor points are municipal seats (INEGI): the flow endpoint answers for the nearest road segment.",
+ "airport": {
+  "iata": "SLP",
+  "icao": "MMSP",
+  "name": "Aeropuerto Internacional Ponciano Arriaga"
+ },
+ "venues": [
+  {
+   "id": "sic-museo-659",
+   "name": "Museo de las Culturas de Matehuala",
+   "address": "Hidalgo 703 Nte., Centro, 78700, Matehuala, San Luis Potosí, México",
+   "municipality": "Matehuala",
+   "region": "altiplano",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-1364",
+   "name": "Museo de Sitio de Salinas",
+   "address": "Juan Sarabia 10, Centro, 78600, Salinas, San Luis Potosí, México",
+   "municipality": "Salinas",
+   "region": "altiplano",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-1366",
+   "name": "Museo Interactivo de Astronomía El Meteorito",
+   "address": "San Onofre 117, Col. Cruz del Siglo, 78570, Charcas, San Luis Potosí, México",
+   "municipality": "Charcas",
+   "region": "altiplano",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-2583",
+   "name": "Casa Doña María Pons",
+   "address": "Av. de la Paz 216, Barrio de Tlaxcala, 78038, San Luis Potosí, San Luis Potosí, México",
+   "municipality": "San Luis Potosí",
+   "region": "centro",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-2467",
+   "name": "Museo Casa del Rebozo",
+   "address": "Pascual M. Hernández Segura 88, Centro, 79560, Santa María del Río, San Luis Potosí, México",
+   "municipality": "Santa María del Río",
+   "region": "centro",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-447",
+   "name": "Museo de Historia Natural José Vilet Brullet",
+   "address": "Carr. San Luis Potosí-Zacatecas km 22, 78400, Mexquitic de Carmona, San Luis Potosí, México",
+   "municipality": "Mexquitic de Carmona",
+   "region": "centro",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-1360",
+   "name": "Museo de los Exvotos del Saucito",
+   "address": "Av. Fray Diego de la Magdalena 80, Col. División del Norte, 78250, San Luis Potosí, San Luis Potosí, México",
+   "municipality": "San Luis Potosí",
+   "region": "centro",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-1515",
+   "name": "Museo Comunitario de Ciudad del Maiz",
+   "address": "Manuel José Othón 5, Centro, 79320, Ciudad del Maíz, San Luis Potosí, México",
+   "municipality": "Ciudad del Maíz",
+   "region": "zona-media",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-1127",
+   "name": "Museo Interactivo Colibrí",
+   "address": "Héroes Potosinos 444, Centro, 79650, Rioverde, San Luis Potosí, México",
+   "municipality": "Rioverde",
+   "region": "zona-media",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-1974",
+   "name": "Museo Municipal Profesor Miguel Ángel Herrera Bravo",
+   "address": "Rivas Guillén esq. Allende, Col. Centro, 79740, Rayón, San Luis Potosí, México",
+   "municipality": "Rayón",
+   "region": "zona-media",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-1954",
+   "name": "Museo Regional de Cerritos",
+   "address": "Calle Plaza Morelos o Pasaje Morelos 6, Zona Centro, 79402, Cerritos, San Luis Potosí, México",
+   "municipality": "Cerritos",
+   "region": "zona-media",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-2358",
+   "name": "Jardín Escultórico Edward James, Las Pozas",
+   "address": "Camino a las Pozas s/n, Barrio La Conchita, 79902, Xilitla, San Luis Potosí, México",
+   "municipality": "Xilitla",
+   "region": "huasteca",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-405",
+   "name": "Museo Comunitario Caich",
+   "address": "Chununtzen 1, 79893, Huehuetlán, San Luis Potosí, México",
+   "municipality": "Huehuetlán",
+   "region": "huasteca",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-845",
+   "name": "Museo de las Culturas de la Huasteca Tamuantzán",
+   "address": "Blvd. México-Laredo esq. Libramiento Sur s/n, Fracc. Lomas de San José, 79090, Ciudad Valles, San Luis Potosí, México",
+   "municipality": "Ciudad Valles",
+   "region": "huasteca",
+   "kind": "museum",
+   "coverage": "unverified"
+  },
+  {
+   "id": "sic-museo-2371",
+   "name": "Museo Edward James",
+   "address": "Camino a las Pozas s/n, Barrio La Conchita, 79900, Xilitla, San Luis Potosí, México",
+   "municipality": "Xilitla",
+   "region": "huasteca",
+   "kind": "museum",
+   "coverage": "unverified"
+  }
+ ],
+ "corridors": [
+  {
+   "id": "acceso-san-luis-potosi",
+   "name": "Acceso a San Luis Potosí",
+   "municipality": "San Luis Potosí",
+   "region": "centro",
+   "point": [
+    -100.977,
+    22.1517
+   ],
+   "bbox": [
+    -101.177,
+    21.9717,
+    -100.777,
+    22.3317
+   ]
+  },
+  {
+   "id": "acceso-matehuala",
+   "name": "Acceso a Matehuala",
+   "municipality": "Matehuala",
+   "region": "altiplano",
+   "point": [
+    -100.6442,
+    23.6464
+   ],
+   "bbox": [
+    -100.8442,
+    23.4664,
+    -100.4442,
+    23.8264
+   ]
+  },
+  {
+   "id": "acceso-rioverde",
+   "name": "Acceso a Rioverde",
+   "municipality": "Rioverde",
+   "region": "zona-media",
+   "point": [
+    -99.9929,
+    21.9324
+   ],
+   "bbox": [
+    -100.1929,
+    21.7524,
+    -99.7929,
+    22.1124
+   ]
+  },
+  {
+   "id": "acceso-ciudad-valles",
+   "name": "Acceso a Ciudad Valles",
+   "municipality": "Ciudad Valles",
+   "region": "huasteca",
+   "point": [
+    -99.0187,
+    21.9865
+   ],
+   "bbox": [
+    -99.2187,
+    21.8065,
+    -98.8187,
+    22.1665
+   ]
+  },
+  {
+   "id": "acceso-xilitla",
+   "name": "Acceso a Xilitla",
+   "municipality": "Xilitla",
+   "region": "huasteca",
+   "point": [
+    -98.9896,
+    21.3852
+   ],
+   "bbox": [
+    -99.1896,
+    21.2052,
+    -98.7896,
+    21.5652
+   ]
+  },
+  {
+   "id": "acceso-tamasopo",
+   "name": "Acceso a Tamasopo",
+   "municipality": "Tamasopo",
+   "region": "huasteca",
+   "point": [
+    -99.3922,
+    21.9239
+   ],
+   "bbox": [
+    -99.5922,
+    21.7439,
+    -99.1922,
+    22.1039
+   ]
+  }
+ ]
+}

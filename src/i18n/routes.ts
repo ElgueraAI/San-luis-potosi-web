@@ -39,6 +39,7 @@ const paths = {
   discover: { es: '/descubre/', en: '/en/discover/' },
   intelligence: { es: '/inteligencia-turistica/', en: '/en/tourism-intelligence/' },
   segments: { es: '/inteligencia-turistica/segmentos/', en: '/en/tourism-intelligence/segments/' },
+  signals: { es: '/inteligencia-turistica/senales/', en: '/en/tourism-intelligence/signals/' },
 } as const;
 
 export type RouteKey = keyof typeof paths;

@@ -16,6 +16,7 @@ const SIZES = [['m360', 360, 800], ['m390', 390, 844], ['t768', 768, 1024], ['d1
 const PAGES = [
   { name: 'inteligencia', path: '/inteligencia-turistica/', parts: ['#inicio', '#radiografia', '#mapa-oportunidades', '#calendario', '#diversificacion', '#escenario', '#arquitectura'] },
   { name: 'descubre', path: '/descubre/', parts: ['[data-discover]'], before: async (p) => { await p.click('[data-int="naturaleza"]'); await p.click('[data-int="agua"]'); await p.waitForTimeout(400); } },
+  { name: 'senales', path: '/inteligencia-turistica/senales/', parts: ['main'], before: async (p) => { await p.click('[data-sgl-roads-load]'); await p.click('[data-sgl-air-load]'); await p.waitForTimeout(500); } },
   { name: 'planner', path: '/planea-con-ia/', parts: ['main'], optional: true },
 ].filter((p) => !ONLY.length || ONLY.includes(p.name));
 

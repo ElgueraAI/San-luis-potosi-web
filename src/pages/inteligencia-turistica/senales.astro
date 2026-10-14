@@ -1,0 +1,148 @@
+---
+/**
+ * Señales externas (experimental): relative busyness (BestTime), road context
+ * (TomTom Traffic) and air connectivity (Flightradar24), behind adapters,
+ * quotas and feature flags. Without credentials every module runs on labelled
+ * example responses that describe no real place. Nothing on this page is
+ * presented as a live integration unless its provider is active.
+ */
+import '@/styles/intel.css';
+import '@/styles/dashboard.css';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
+import catalog from '../../../serverless/signals-proxy/catalog.json';
+import { DEMO_VENUES, DEMO_CORRIDORS } from '@/lib/signals/fixtures';
+import { DAYS_ES, TOMTOM } from '@/lib/signals/providers';
+import { PROVIDER_INFO, SIGNAL_STATUS_LABEL } from '@/lib/signals/types';
+import { REGION_LABEL } from '@/lib/intel/taxonomy';
+import { href } from '@/i18n/routes';
+
+const payload = {
+  venues: catalog.venues.map((v) => ({ id: v.id, name: v.name })), corridors: catalog.corridors.map((c) => ({ id: c.id, name: c.name })),
+  demoVenues: DEMO_VENUES.map((v) => ({ id: v.id, name: v.name })), demoCorridors: DEMO_CORRIDORS.map((c) => ({ id: c.id, name: c.name })), airport: catalog.airport,
+};
+const providers = [
+  { id: 'besttime', quota: 'Créditos de prueba limitados, cantidad no publicada; después, desde US$29 al mes más US$0.04 por crédito', est: '16 recintos × 2 créditos = 32 créditos por semana de previsión', cost: 'US$0 mientras siga simulada' },
+  { id: 'tomtom', quota: `${TOMTOM.freeMonthly.flow.toLocaleString('es-MX')} solicitudes de flujo y ${TOMTOM.freeMonthly.incidents.toLocaleString('es-MX')} de incidentes al mes, sin tarjeta`, est: '6 accesos × 2 consultas, con caché de 5 a 10 min y tope de 2,000 al mes en el servicio intermedio', cost: 'US$0 dentro de la cuota gratuita' },
+  { id: 'fr24', quota: 'Entorno de pruebas sin créditos (datos estáticos); datos reales solo con suscripción', est: '1 consulta por visita al módulo, caché de 1 hora', cost: 'US$0 en el entorno de pruebas' },
+  { id: 'open-meteo', quota: '10,000 llamadas al día, 5,000 por hora y 600 por minuto, uso no comercial, sin clave', est: '1 solicitud por página con clima, caché de 15 min', cost: 'US$0' },
+] as const;
+---
+<BaseLayout title="Señales externas" description="Concurrencia relativa, contexto vial y conectividad aérea para San Luis Potosí: qué proveedores se evaluaron, qué está activo, qué está simulado y cuánto costaría.">
+  <PageHeader label="Inteligencia turística · experimental" title="Señales externas" lede="Datos de terceros que podrían acompañar al recomendador: a qué hora conviene visitar, cómo están los accesos y cuántos vuelos conectan al estado. Aquí se ve qué está activo y qué es solo una demostración." tone="utility" ground="light" crumbs={[{ label: 'Inteligencia turística', href: href('intelligence') }, { label: 'Señales externas' }]} />
+
+  <div data-sgl>
+    <section class="psec psec--tight" data-ground="light" aria-labelledby="sg-st">
+      <div class="wrap sgl__stack">
+        <p class="sim__flag"><span aria-hidden="true">◇</span>{SIGNAL_STATUS_LABEL.simulated}</p>
+        <h2 id="sg-st" class="psec__title">Estado de cada integración</h2>
+        <p class="body">Ninguna integración con clave está activa en esta versión: BestTime, TomTom y Flightradar24 requieren una cuenta que el proyecto no ha creado. Los módulos de abajo usan <strong>respuestas de ejemplo con la forma que documenta cada proveedor</strong>, sobre recintos, tramos y un aeropuerto ficticios («de ejemplo»), para no poner una cifra inventada junto a un lugar real.</p>
+        <div class="fig__scroll" role="region" aria-label="Estado y presupuesto por proveedor" tabindex="0">
+          <table class="dtable" style="min-width:52rem">
+            <thead><tr><th scope="col">Proveedor</th><th scope="col">Estado de activación</th><th scope="col">Cuota oficial</th><th scope="col">Consultas consumidas</th><th scope="col">Consultas estimadas</th><th scope="col">Costo proyectado</th></tr></thead>
+            <tbody>
+              {providers.map((p) => (
+                <tr><th scope="row"><a href={PROVIDER_INFO[p.id].url} rel="noopener" target="_blank">{PROVIDER_INFO[p.id].name}</a></th><td data-sgl-mode={p.id}>—</td><td>{p.quota}</td><td data-sgl-used={p.id}>—</td><td>{p.est}</td><td>{p.cost}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="fig__src"><b>Servicio intermedio</b> <span data-sgl-proxy>—</span> · <b>Cuotas</b> leídas en la documentación oficial el 13 de octubre de 2026; pueden cambiar · <b>Consumo</b> contado en este navegador; el límite que obliga se aplica en el servicio intermedio · <a href={href('intelligence')}>Volver al tablero</a></p>
+      </div>
+    </section>
+
+    <section class="ch" data-ground="dark" data-tone="carbon" aria-labelledby="sg-1">
+      <div class="wrap">
+        <div class="ch__head">
+          <p class="ch__eyebrow"><span class="ch__num">BestTime</span><span class="dclass" data-class="simulado">Concurrencia relativa</span></p>
+          <h2 id="sg-1" class="ch__title">¿Cuándo conviene visitar?</h2>
+          <p class="ch__lede">Actividad prevista por hora en un establecimiento, <strong>relativa a su propio máximo semanal</strong>. No es un conteo de personas y no sirve para comparar un lugar con otro.</p>
+        </div>
+        <div class="sgl__tools">
+          <label>Establecimiento<select data-sgl-venue></select></label>
+          <label>Día<select data-sgl-day>{DAYS_ES.map((d, i) => <option value={i}>{d[0].toUpperCase() + d.slice(1)}</option>)}</select></label>
+        </div>
+        <div class="sgl__out" data-sgl-venue-out aria-live="polite"><p class="sgl__none">Cargando…</p></div>
+      </div>
+    </section>
+
+    <section class="ch" data-ground="dark" data-tone="teal" aria-labelledby="sg-2">
+      <div class="wrap">
+        <div class="ch__head">
+          <p class="ch__eyebrow"><span class="ch__num">TomTom Traffic</span><span class="dclass" data-class="simulado">Contexto vial</span></p>
+          <h2 id="sg-2" class="ch__title">Estado de las carreteras</h2>
+          <p class="ch__lede">Velocidad actual frente a la de flujo libre e incidentes reportados cerca de seis accesos. Es contexto para decidir: <strong>no recalcula ni optimiza las rutas del portal</strong>, que siguen usando el servicio de rutas sin tráfico.</p>
+        </div>
+        <button type="button" class="btn btn--light" data-sgl-roads-load>Consultar accesos</button>
+        <ul class="sgl__roads" data-sgl-roads aria-live="polite"></ul>
+      </div>
+    </section>
+
+    <section class="psec" data-ground="light" data-tone="editorial" aria-labelledby="sg-3">
+      <div class="wrap sgl__stack">
+        <p class="ch__eyebrow"><span class="ch__num">Flightradar24</span><span class="dclass" data-class="simulado">Conectividad aérea</span></p>
+        <h2 id="sg-3" class="psec__title">Conectividad aérea</h2>
+        <p class="body">Movimientos del {catalog.airport.name} ({catalog.airport.iata} / {catalog.airport.icao}). <strong>Un vuelo no es un número de pasajeros, y un pasajero no es un turista:</strong> el portal no estima ninguno de los dos a partir de vuelos.</p>
+        <p><button type="button" class="btn" data-sgl-air-load>Consultar movimientos de ejemplo</button></p>
+        <div class="sgl__out" data-sgl-air aria-live="polite"></div>
+        <p class="truth">Para estadística aeroportuaria con sustento (pasajeros por mes) resultan más útiles las fuentes públicas: la Agencia Federal de Aviación Civil (AFAC), DATATUR de la Secretaría de Turismo federal y los reportes de tráfico de Grupo Aeroportuario Centro Norte (OMA), que opera el aeropuerto. No están integradas; quedan como fuente recomendada.</p>
+      </div>
+    </section>
+
+    <section class="psec psec--tight" data-ground="ivory" aria-labelledby="sg-4">
+      <div class="wrap sgl__stack">
+        <h2 id="sg-4" class="psec__title">Piloto propuesto de concurrencia</h2>
+        <p class="body">{catalog.venues.length} museos del registro oficial (SIC), repartidos entre las cuatro regiones, con nombre y dirección publicados. <strong>La cobertura de BestTime para ellos no está verificada:</strong> comprobarla exige una cuenta y consume créditos.</p>
+        <div class="fig__scroll" role="region" aria-label="Establecimientos del piloto" tabindex="0">
+          <table class="dtable" style="min-width:38rem">
+            <thead><tr><th scope="col">Establecimiento</th><th scope="col">Municipio</th><th scope="col">Región</th><th scope="col">Cobertura del proveedor</th></tr></thead>
+            <tbody>{catalog.venues.map((v) => <tr><th scope="row">{v.name}</th><td>{v.municipality}</td><td>{REGION_LABEL[v.region]}</td><td>Sin verificar</td></tr>)}</tbody>
+          </table>
+        </div>
+        <p class="fig__src"><b>Fuente de los establecimientos</b> Sistema de Información Cultural (SIC), Secretaría de Cultura · <b>Método, límites y decisión por proveedor</b> en <code>docs/external-api-evaluation.md</code> y <code>docs/api-quota-budget.md</code></p>
+      </div>
+    </section>
+    <script type="application/json" data-sgl-catalog set:html={JSON.stringify(payload)} />
+  </div>
+</BaseLayout>
+
+<script>
+  import { initSignalsPage } from '@/scripts/signals/page';
+  const root = document.querySelector<HTMLElement>('[data-sgl]');
+  if (root) initSignalsPage(root);
+</script>
+
+<style is:global>
+  .sgl__stack { display: grid; gap: var(--sc-4); }
+  .sgl__tools { display: flex; flex-wrap: wrap; gap: var(--sc-4); margin-bottom: var(--sc-5); }
+  .sgl__tools label { display: grid; gap: 0.35rem; font: 700 0.6rem/1.2 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .sgl__tools select { min-height: var(--slp-tap); min-width: 12rem; max-width: 100%; padding: 0 0.7rem; border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: var(--sc-surface); color: var(--sc-ink); font: 600 0.9rem/1.2 var(--sc-font-text); text-transform: none; letter-spacing: 0; }
+  .sgl__out { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sc-4); min-height: 3rem; }
+  .sgl__out > * { min-width: 0; }
+  .sgl__out[aria-busy='true'], .sgl__roads[aria-busy='true'] { opacity: 0.55; }
+  .sgl__none { padding: 1rem 1.1rem; border: 1px dashed var(--sc-hairline-strong); border-radius: var(--sc-r-md); font-size: 0.92rem; max-width: 46rem; }
+  .sgl__badge { display: inline-block; padding: 0.3rem 0.6rem; border-radius: 999px; font: 700 0.62rem/1.2 var(--sc-font-text); letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid currentColor; }
+  .sgl__badge[data-status='simulated'] { border-style: dashed; color: #d9aab0; }
+  [data-ground='light'] .sgl__badge[data-status='simulated'], [data-ground='ivory'] .sgl__badge[data-status='simulated'] { color: var(--slp-centro-ink); }
+  .sgl__badge[data-status='live'], .sgl__badge[data-status='forecast'] { color: var(--slp-huasteca-lift); }
+  .sgl__hours { display: grid; grid-template-columns: repeat(24, minmax(0, 1fr)); gap: clamp(1px, 0.5vw, 3px); height: 11rem; align-items: end; max-width: 52rem; }
+  .sgl__h { display: grid; grid-template-rows: 1fr auto; height: 100%; gap: 0.3rem; min-width: 0; }
+  .sgl__h i { align-self: end; display: block; border-radius: 3px 3px 0 0; background: color-mix(in srgb, var(--viz-gold) 55%, transparent); min-height: 2px; }
+  .sgl__h[data-busy='busy'] i { background: var(--viz-gold); }
+  .sgl__h[data-busy='quiet'] i { background: color-mix(in srgb, var(--viz-gold) 28%, transparent); box-shadow: inset 0 0 0 1px var(--viz-gold); }
+  .sgl__h[data-busy='closed'] i { background: var(--sc-hairline-strong); }
+  .sgl__h small { font: 600 0.62rem/1 var(--sc-font-text); color: var(--sc-ink-soft); text-align: center; min-height: 0.7rem; overflow: hidden; }
+  .sgl__facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--sc-4); max-width: 60rem; }
+  .sgl__facts div { display: grid; gap: 0.3rem; align-content: start; padding-top: 0.7rem; border-top: 1px solid var(--sc-hairline-strong); }
+  .sgl__facts dt { font: 700 0.6rem/1.25 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .sgl__facts dd { margin: 0; font-size: 0.95rem; font-weight: 600; }
+  .sgl__meta { font-size: 0.78rem; line-height: 1.5; color: var(--sc-ink-soft); max-width: 68ch; }
+  .sgl__roads { list-style: none; display: grid; gap: var(--sc-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); margin-top: var(--sc-5); }
+  .sgl__road { display: grid; gap: 0.5rem; align-content: start; padding: 1.1rem 1.2rem; border-radius: var(--sc-r-lg); background: var(--sc-surface); }
+  .sgl__road h4 { font: 600 1.4rem/1.1 var(--sc-font-display); }
+  .sgl__speed { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+  .sgl__speed b { font: 600 2.2rem/1 var(--sc-font-display); font-variant-numeric: tabular-nums; }
+  .sgl__speed span { font-size: 0.78rem; color: var(--sc-ink-soft); }
+  .sgl__road[data-closed='true'] { box-shadow: inset 3px 0 0 var(--viz-gold); }
+  td[data-mode='mock'] { font-weight: 650; }
+</style>

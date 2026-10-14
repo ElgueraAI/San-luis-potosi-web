@@ -15,7 +15,8 @@
     "verify:pages": "node scripts/verify/pages.mjs",
     "test:geo": "node scripts/test-geo.mjs",
     "test:intel": "node scripts/test-geo.mjs tests/intel",
-    "test": "node scripts/test-geo.mjs && node scripts/test-geo.mjs tests/intel",
+    "test:signals": "node scripts/test-geo.mjs tests/signals",
+    "test": "node scripts/test-geo.mjs && node scripts/test-geo.mjs tests/intel && node scripts/test-geo.mjs tests/signals",
     "intel:report": "node scripts/intel/report.mjs",
     "verify:routing": "node scripts/verify/routing.mjs",
     "verify:navigation": "node scripts/verify/navigation.mjs"
