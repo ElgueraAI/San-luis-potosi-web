@@ -1,0 +1,850 @@
+[
+  {
+    "key": "cultural-venues|24028|auditorio rafael nieto",
+    "entity_ids": [
+      "sic-auditorio-750",
+      "sic-auditorio-1671"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24053|restaurante bar el tunel",
+    "entity_ids": [
+      "estadia-406",
+      "denue-10375678"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|callejon 7b",
+    "entity_ids": [
+      "estadia-250",
+      "denue-3691500"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|croque la vie",
+    "entity_ids": [
+      "estadia-244",
+      "denue-7965565"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|la posada del virrey",
+    "entity_ids": [
+      "estadia-216",
+      "denue-6393072"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|la oruga y la cebada",
+    "entity_ids": [
+      "estadia-176",
+      "denue-3710375"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24032|auxiliar de fonda mary carmen",
+    "entity_ids": [
+      "denue-3689252",
+      "denue-3689245"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|bodega de apoyo a establecimiento semifijo mariscos el gran amigo",
+    "entity_ids": [
+      "denue-7846817",
+      "denue-7846818"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|cafeteria y restaurante el pacifico",
+    "entity_ids": [
+      "denue-6393075",
+      "denue-6806466"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24035|cocina huasteca la tia coco",
+    "entity_ids": [
+      "denue-9646964",
+      "denue-8061961"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24036|comedor gbg",
+    "entity_ids": [
+      "denue-3729282",
+      "denue-3752303"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|comedor rossy",
+    "entity_ids": [
+      "denue-8780777",
+      "denue-8780773"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24057|comedor sin nombre",
+    "entity_ids": [
+      "denue-8321384",
+      "denue-11725785"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|el vaso cascarudo",
+    "entity_ids": [
+      "denue-11832460",
+      "denue-11247927"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24013|fonda sin nombre",
+    "entity_ids": [
+      "denue-7701953",
+      "denue-11465374"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|hong fat comida china",
+    "entity_ids": [
+      "denue-3684952",
+      "denue-3710111"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos",
+    "entity_ids": [
+      "denue-10036624",
+      "denue-7981261"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24035|mariscos",
+    "entity_ids": [
+      "denue-10674761",
+      "denue-10475116"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos chely",
+    "entity_ids": [
+      "denue-3708999",
+      "denue-3743765"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24020|mariscos el aliviane",
+    "entity_ids": [
+      "denue-8227702",
+      "denue-3692626"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos el amigo",
+    "entity_ids": [
+      "denue-7464304",
+      "denue-7965038",
+      "denue-3690683",
+      "denue-3717589",
+      "denue-3746910"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos el amigo de veracruz",
+    "entity_ids": [
+      "denue-3712270",
+      "denue-11335826"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24020|mariscos el chino",
+    "entity_ids": [
+      "denue-9751668",
+      "denue-3754463"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos el delfin",
+    "entity_ids": [
+      "denue-3713676",
+      "denue-3704722"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos el gran amigo",
+    "entity_ids": [
+      "denue-3673729",
+      "denue-8545627",
+      "denue-3716101"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos el guero",
+    "entity_ids": [
+      "denue-3715001",
+      "denue-3704741",
+      "denue-3740337",
+      "denue-3740297"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24035|mariscos enrique",
+    "entity_ids": [
+      "denue-10577104",
+      "denue-7938735"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24035|mariscos fredy",
+    "entity_ids": [
+      "denue-10849581",
+      "denue-11408338"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos guajardo",
+    "entity_ids": [
+      "denue-3708148",
+      "denue-3666791",
+      "denue-3669743",
+      "denue-7964611",
+      "denue-11726943",
+      "denue-3734770"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos jorge",
+    "entity_ids": [
+      "denue-3716408",
+      "denue-3742007"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24035|mariscos jorge",
+    "entity_ids": [
+      "denue-3676872",
+      "denue-8741672",
+      "denue-3699592"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos kevin",
+    "entity_ids": [
+      "denue-10167898",
+      "denue-10037858"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos la bocana",
+    "entity_ids": [
+      "denue-3669704",
+      "denue-3669293"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos playa azul",
+    "entity_ids": [
+      "denue-9878317",
+      "denue-3715240"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24059|mariscos playa azul",
+    "entity_ids": [
+      "denue-3685641",
+      "denue-7375054"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos sam",
+    "entity_ids": [
+      "denue-3734732",
+      "denue-3710613"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos sin nombre",
+    "entity_ids": [
+      "denue-11688510",
+      "denue-8741149"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24008|mariscos tampico",
+    "entity_ids": [
+      "denue-11656892",
+      "denue-10280031"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|mariscos yael",
+    "entity_ids": [
+      "denue-8764269",
+      "denue-9450619"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|pescaderia pueblo viejo",
+    "entity_ids": [
+      "denue-3691024",
+      "denue-11366338"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|pescado frito",
+    "entity_ids": [
+      "denue-9752710",
+      "denue-3708636"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24024|restaurante de mariscos el 7 mares",
+    "entity_ids": [
+      "denue-3742172",
+      "denue-9637420"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|restaurante dona blanca",
+    "entity_ids": [
+      "denue-7964757",
+      "denue-9902284"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|restaurante la panuquena",
+    "entity_ids": [
+      "denue-10057779",
+      "denue-11677851"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24013|restaurante la troje",
+    "entity_ids": [
+      "denue-3678200",
+      "denue-3680886"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24013|restaurante los picones",
+    "entity_ids": [
+      "denue-3678549",
+      "denue-8207605"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|restaurante puerto tampico",
+    "entity_ids": [
+      "denue-3717468",
+      "denue-11789282"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24058|restaurante rio paraiso",
+    "entity_ids": [
+      "denue-7635921",
+      "denue-3736875"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|restaurantes con servicio de preparacion de alimentos a la carta o de comida corrida sin nombre",
+    "entity_ids": [
+      "denue-10154047",
+      "denue-10268366",
+      "denue-9637048"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|restaurantes con servicio de preparacion de pescados y mariscos sin nombre",
+    "entity_ids": [
+      "denue-9741463",
+      "denue-7937414"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|subway",
+    "entity_ids": [
+      "denue-11726944",
+      "denue-12289948"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24013|venta de comida sin nombre",
+    "entity_ids": [
+      "denue-10488896",
+      "denue-8207312"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24035|venta de mariscos",
+    "entity_ids": [
+      "denue-9580383",
+      "denue-11243034"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|wings davo",
+    "entity_ids": [
+      "denue-3708132",
+      "denue-10878113"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|arandela barra de cafe",
+    "entity_ids": [
+      "denue-10482111",
+      "denue-9889017"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|cafeteria",
+    "entity_ids": [
+      "denue-10047940",
+      "denue-9883768"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24007|cafeteria black blossom",
+    "entity_ids": [
+      "denue-10013304",
+      "denue-11340985"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|cafeteria sin nombre",
+    "entity_ids": [
+      "denue-10824202",
+      "denue-7965603",
+      "denue-11448344"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24011|cafeteria sin nombre",
+    "entity_ids": [
+      "denue-9951537",
+      "denue-10323511"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|cielito querido cafe",
+    "entity_ids": [
+      "denue-9399084",
+      "denue-10446340"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|el encanto cafe",
+    "entity_ids": [
+      "denue-3706556",
+      "denue-7927671"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|el gato cafe",
+    "entity_ids": [
+      "denue-10004862",
+      "denue-11422001"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|o de luna cafe",
+    "entity_ids": [
+      "denue-7847037",
+      "denue-6749859"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24032|the italian coffee company",
+    "entity_ids": [
+      "denue-8781844",
+      "denue-8870519"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|the italian coffee company",
+    "entity_ids": [
+      "denue-3691689",
+      "denue-9276771",
+      "denue-3665323",
+      "denue-3709538"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|bar sin nombre",
+    "entity_ids": [
+      "denue-10959015",
+      "denue-9690855"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|botanas campesinas",
+    "entity_ids": [
+      "denue-11281581",
+      "denue-11300289"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|botanas sin nombre",
+    "entity_ids": [
+      "denue-10817248",
+      "denue-11165079"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24029|cantina",
+    "entity_ids": [
+      "denue-3759029",
+      "denue-3759128"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24042|cantina el bohio",
+    "entity_ids": [
+      "denue-3762534",
+      "denue-3762566"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24037|cerveceria la gaviota",
+    "entity_ids": [
+      "denue-11617903",
+      "denue-3757530"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24015|cerveceria sin nombre",
+    "entity_ids": [
+      "denue-3747490",
+      "denue-11509305",
+      "denue-3694551"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24010|cerveceria sin nombre",
+    "entity_ids": [
+      "denue-11457348",
+      "denue-11088783"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24037|cerveceria sin nombre",
+    "entity_ids": [
+      "denue-11555655",
+      "denue-3758335",
+      "denue-3758913"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24028|micheladas kiki",
+    "entity_ids": [
+      "denue-9492825",
+      "denue-10537228"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24055|micheladas sin nombre",
+    "entity_ids": [
+      "denue-10353913",
+      "denue-10686235"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24037|primas bar",
+    "entity_ids": [
+      "denue-9816244",
+      "denue-3758172"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "food-drink|24006|venta de botanas sin nombre",
+    "entity_ids": [
+      "denue-11800575",
+      "denue-10747953"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24032|hotel real del rio",
+    "entity_ids": [
+      "estadia-362",
+      "denue-10920281"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24032|hotel cuatro caminos",
+    "entity_ids": [
+      "estadia-352",
+      "denue-6392695"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24053|hotel axtla",
+    "entity_ids": [
+      "estadia-348",
+      "denue-6274656"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24053|hotel las brisas",
+    "entity_ids": [
+      "estadia-338",
+      "denue-6274655"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24053|hotel plaza bonita",
+    "entity_ids": [
+      "estadia-337",
+      "denue-9308871"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24053|hotel casa amarilla",
+    "entity_ids": [
+      "estadia-318",
+      "denue-3723303"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24053|hotel boutique la casona",
+    "entity_ids": [
+      "estadia-307",
+      "denue-9308853"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24053|hotel yolita",
+    "entity_ids": [
+      "estadia-302",
+      "denue-10563199"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24028|fiesta americana",
+    "entity_ids": [
+      "estadia-143",
+      "denue-9420359"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24006|hotel la quinta puesta del sol",
+    "entity_ids": [
+      "estadia-113",
+      "denue-6392078"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24006|hotel real del gorrion",
+    "entity_ids": [
+      "estadia-98",
+      "denue-11277747"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24028|hotel san francisco",
+    "entity_ids": [
+      "estadia-21",
+      "denue-6393295"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24025|hotel del valle",
+    "entity_ids": [
+      "denue-6274726",
+      "denue-6274907"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24020|hotel la casona",
+    "entity_ids": [
+      "denue-10919762",
+      "denue-11225342"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24011|hotel la huerta",
+    "entity_ids": [
+      "denue-6274756",
+      "denue-6274915"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24036|hotel la loma",
+    "entity_ids": [
+      "denue-10058253",
+      "denue-11681428"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24013|hotel quinta mar",
+    "entity_ids": [
+      "denue-6394570",
+      "denue-6392828"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24028|hotel real plaza",
+    "entity_ids": [
+      "denue-6274568",
+      "denue-3706123"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24028|hotel sin nombre",
+    "entity_ids": [
+      "denue-6393675",
+      "denue-6695170",
+      "denue-11220006",
+      "denue-7965605"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "lodging|24028|millenium plaza and suites",
+    "entity_ids": [
+      "denue-9337513",
+      "denue-10091152"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "museums|24028|museo de sitio de la universidad autonoma de san luis potosi",
+    "entity_ids": [
+      "sic-museo-2503",
+      "sic-museo-2170"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "services|24035|agencia de viajes",
+    "entity_ids": [
+      "denue-10750776",
+      "denue-3665846"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "services|24028|agencia de viajes",
+    "entity_ids": [
+      "denue-11752521",
+      "denue-11794131",
+      "denue-3680143",
+      "denue-9592808",
+      "denue-3667327",
+      "denue-10494662",
+      "denue-11048667"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "services|24028|agencia de viajes tu viaje",
+    "entity_ids": [
+      "denue-11508455",
+      "denue-7874627"
+    ],
+    "status": "review_only_no_merge"
+  },
+  {
+    "key": "services|24028|agencia turistica san luis rey",
+    "entity_ids": [
+      "denue-6161863",
+      "denue-3686470"
+    ],
+    "status": "review_only_no_merge"
+  }
+]

@@ -10,28 +10,36 @@
  */
 import type { Coord, IntelPlace, MuniFeatures, RegionId } from './types';
 import { asRegion } from './normalize';
+import { validMunicipalityKey } from '../municipality';
 
 export interface RawMunicipality {
   /** INEGI key; null for a municipality the 2020 census does not list yet (Villa de Pozos, created in 2024). */
   id: string | null; canonical_name: string; slug?: string; region?: string | null; population_2020?: number | null;
   seat?: { latitude: number; longitude: number } | null;
-  counts?: Partial<Record<'destinations' | 'museums' | 'venues' | 'archaeology' | 'events' | 'lodging' | 'food' | 'protected_areas', number>>;
+  counts?: Partial<Record<'destinations' | 'museums' | 'venues' | 'archaeology' | 'events' | 'lodging' | 'food' | 'protected_areas', number | null>>;
 }
 
 export const EXPOSURE_WEIGHTS = { lodging: 0.5, flagship: 0.3, puebloMagico: 0.2 } as const;
 export const POTENTIAL_WEIGHTS = { assets: 0.6, infrastructure: 0.4 } as const;
 const ASSET_KINDS = new Set(['destination', 'museum', 'archaeology', 'protected-area']);
+const COUNT_KEYS = ['destinations', 'museums', 'venues', 'archaeology', 'events', 'lodging', 'food', 'protected_areas'] as const;
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 const round = (v: number) => Math.round(v * 1000) / 1000;
 
 export function municipalityFeatures(munis: RawMunicipality[], places: IntelPlace[]): MuniFeatures[] {
+  // Unknown territorial keys/counts do not become zero-valued analytical rows.
+  munis = munis.filter((m) => validMunicipalityKey(m.id) && COUNT_KEYS.every((k) => {
+    const value = m.counts?.[k];
+    return typeof value === 'number' && Number.isInteger(value) && value >= 0;
+  }));
   const byMuni = new Map<string, IntelPlace[]>();
-  const key = (m: RawMunicipality) => m.id ?? `name:${m.canonical_name}`;
+  const key = (m: RawMunicipality) => m.id as string;
+  const known = new Set(munis.map(key));
   for (const p of places) {
-    const k = p.municipality_id ?? (p.municipality ? `name:${p.municipality}` : null);
-    if (k) byMuni.set(k, [...(byMuni.get(k) ?? []), p]);
+    const k = p.municipality_id;
+    if (validMunicipalityKey(k) && known.has(k)) byMuni.set(k, [...(byMuni.get(k) ?? []), p]);
   }
-  const c = (m: RawMunicipality, k: keyof NonNullable<RawMunicipality['counts']>) => m.counts?.[k] ?? 0;
+  const c = (m: RawMunicipality, k: keyof NonNullable<RawMunicipality['counts']>) => m.counts![k] as number;
   const maxLodging = Math.max(1, ...munis.map((m) => c(m, 'lodging')));
   const maxInfra = Math.max(1, ...munis.map((m) => c(m, 'lodging') + c(m, 'food')));
   const assetsOf = (m: RawMunicipality) => (byMuni.get(key(m)) ?? []).filter((p) => ASSET_KINDS.has(p.kind)).length;

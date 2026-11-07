@@ -1,0 +1,13 @@
+{
+  "evidence_class": "[DERIVADO]",
+  "date": "2026-11-07",
+  "scope": "Offline assertions against the existing local Pages build; not visual browser QA or deployment.",
+  "base_path": "/san-luis-potosi-web/",
+  "html_pages": 309,
+  "municipal_pages_preserved": 59,
+  "analytic_municipalities": 58,
+  "published_place_candidates": 154,
+  "published_event_pages_in_intel": 145,
+  "null_joined_pozos_archaeology_link": false,
+  "route_pages_present": true
+}

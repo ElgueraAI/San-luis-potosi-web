@@ -1,0 +1,121 @@
+{
+  "contract_id": "campaign-data-v1.0.0",
+  "contract_format": "field-catalog-and-exchange-rules-v1",
+  "status": "local_preparation_not_publication_certification",
+  "date": "2026-11-07",
+  "timezone": "America/Mexico_City",
+  "hash_representation": { "inputs": "representation declared per input: utf8_lf_no_bom or original_bytes_immutable", "raw_inputs": "original physical bytes", "outputs": "UTF-8 LF JSON with final newline", "historical_baselines": "original bytes preserved by -text Git attributes" },
+  "documentation": "../contrato-datos-v1.md",
+  "validator": "research/scripts/entities/integrity.mjs",
+  "transform": "scripts/academic/etl-mission03.mjs",
+  "evidence_classes": ["[OBSERVADO]", "[DERIVADO]", "[SIMULADO]", "[HIPÓTESIS]", "[SIN_DATOS]"],
+  "null_policy": {
+    "unknown": null,
+    "unknown_is_zero": false,
+    "null_join_allowed": false,
+    "name_based_municipal_imputation_allowed": false,
+    "coordinate_imputation_allowed": false,
+    "quarantine_policy": "retain original input bytes and path/hash/zero-based row locator; do not invent replacement keys",
+    "duplicate_policy": "quarantine every repeated entity ID; same-name candidates require review without automatic merge"
+  },
+  "types": {
+    "municipality_id": { "type": "string", "pattern": "^24[0-9]{3}$", "excluded": ["24000"], "unit": "INEGI key as declared", "catalog_membership_required": true, "temporal_validity_inferred": false },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "date": { "type": ["string", "null"], "format": "YYYY-MM-DD real calendar date" },
+    "latitude": { "type": ["number", "null"], "finite": true, "minimum": -90, "maximum": 90, "unit": "WGS84 decimal degrees" },
+    "longitude": { "type": ["number", "null"], "finite": true, "minimum": -180, "maximum": 180, "unit": "WGS84 decimal degrees" },
+    "inventory_count": { "type": ["integer", "null"], "minimum": 0, "unit": "inventory rows, never visitors", "zero_requires_executed_count": true }
+  },
+  "coordinate_rules": {
+    "pair": "both null or both finite numbers",
+    "admitted_bbox": { "min_lat": 21.11, "max_lat": 24.54, "min_lon": -102.35, "max_lon": -98.28 },
+    "precision_field": "coordinate_status_as_declared",
+    "statuses_as_declared": ["verified", "registry", "approximate", "municipal-seat", "unavailable", "unknown"],
+    "verification_field": "coordinate_verification",
+    "numeric_check_certifies_polygon_or_access": false
+  },
+  "products": {
+    "entity-snapshot.json": {
+      "grain": "provider/editorial entity seat in input snapshot; includes accepted municipal dimension rows",
+      "primary_key": ["entity_id"],
+      "required": ["entity_id", "dataset", "canonical_name", "entity_type", "municipality_id", "municipality_version_id", "latitude", "longitude", "coordinate_status_as_declared", "coordinate_verification", "source_ids", "source_snapshot_refs", "related_entity_ids_eligible", "related_entity_ids_withheld", "observation_period", "territory_basis", "measures_as_declared", "measure_evidence", "eligibility", "lineage", "evidence_class"],
+      "nonempty_strings": ["entity_id", "canonical_name"],
+      "nullable": ["subcategory", "region_as_declared", "municipality_name_as_declared", "latitude", "longitude", "last_verified_as_declared", "observation_period"],
+      "foreign_keys": [
+        { "field": "municipality_version_id", "target": "municipality-versions.json:municipality_version_id" },
+        { "field": "source_snapshot_refs[]", "target": "source-snapshots.json:source_snapshot_id", "minimum_items": 1 },
+        { "field": "related_entity_ids_eligible[]", "target": "entity-snapshot.json:entity_id" }
+      ],
+      "lineage_fields": { "input_path": "string", "input_sha256": "sha256", "input_row": "zero-based integer", "generated_as_declared": "date|null", "transformation_id": "string" },
+      "measure_fields": { "population_2020": "persons in original census geography|null", "counts": "legacy snapshot aggregates|null; use eligible-municipal-aggregates for analysis", "months": "integer[1..12][]|null", "start_date": "date|null", "end_date": "date|null", "date_status": "source declaration|null", "denue_activity": "SCIAN code string|null" },
+      "source_lineage_grain": "row; no field-level source attribution certified",
+      "eligibility": { "inventory_analysis": true, "municipal_key_grouping": true, "temporal_territorial_comparison": false, "map_numeric_point": "boolean; no verified access inference", "publication": false, "campaign_claim": false }
+    },
+    "municipality-versions.json": {
+      "grain": "municipal key in preserved legacy catalogue snapshot",
+      "primary_key": ["municipality_version_id"],
+      "alternate_key": ["municipality_id", "catalog_sha256"],
+      "required": ["municipality_version_id", "municipality_id", "name", "catalog_snapshot_date", "catalog_sha256", "boundary_version", "valid_from", "valid_to", "legal_source_id", "validity_status", "region", "region_source_id", "temporal_comparison_eligible"],
+      "nullable": ["valid_from", "valid_to", "legal_source_id", "region", "region_source_id"],
+      "current_boundary_certified": false,
+      "census_population_basis": "2020 original geography; no crosswalk or retrospective redistribution"
+    },
+    "source-snapshots.json": {
+      "grain": "source catalogue row variant, not the downloaded underlying resource",
+      "primary_key": ["source_snapshot_id"],
+      "alternate_key": ["registry_path", "snapshot_sha256", "registry_row"],
+      "required": ["source_snapshot_id", "source_id", "registry_path", "registry_row", "snapshot_sha256", "title", "institution", "url", "retrieved_at", "observation_period", "licence_id", "licence_url", "rights_review_status", "attribution", "publication_eligible"],
+      "nullable": ["title", "institution", "url", "retrieved_at", "observation_period", "licence_id", "licence_url", "attribution", "notes_as_declared"],
+      "variant_precedence": "none; all local variants retained",
+      "rights_review_status": "pending_resource_review",
+      "publication_eligible": false,
+      "future_rights_evidence_required": ["resource_url", "licence_id", "licence_url", "licence_checked_at", "rights_scope", "terms_version", "commercial_use", "redistribution_allowed", "attribution", "review_status"]
+    },
+    "quarantine.json": {
+      "grain": "rejected staging row with overlapping reasons",
+      "primary_key": ["staging_row_id"],
+      "required": ["staging_row_id", "entity_id", "municipality_id_as_declared", "reasons", "resolution_status", "lineage"],
+      "nullable": ["entity_id", "municipality_id_as_declared"],
+      "reasons_min_items": 1,
+      "resolution_status": "pending_evidence"
+    },
+    "duplicate-candidates.json": {
+      "grain": "same normalized name/dataset/municipal key review group",
+      "primary_key": ["key"],
+      "required": ["key", "entity_ids", "status"],
+      "status": "review_only_no_merge"
+    },
+    "municipal-aggregates.json": {
+      "grain": "municipal row in portal snapshot; includes unresolved row",
+      "purpose": "regression from all declared staged rows, including quarantine; not the eligible analysis universe",
+      "fields": { "municipality_id": "municipality_id|null", "related_entities": "string[]", "counts": "map<string,inventory_count>" },
+      "unknown_territory_count": null
+    },
+    "eligible-municipal-aggregates.json": {
+      "grain": "valid municipal key using accepted inventory rows only",
+      "primary_key": ["municipality_id"],
+      "source_universe": "accepted entity snapshots, excluding municipal dimension rows",
+      "fields": { "municipality_id": "municipality_id", "related_entities": "accepted destination IDs[]", "counts": "map<string,inventory_count>", "accepted_member_rows": "integer>=0", "declared_member_rows": "integer>=accepted_member_rows", "scope": "string", "unit": "inventory_records", "evidence_class": "[DERIVADO]" },
+      "count_keys": ["destinations", "museums", "venues", "archaeology", "events", "seasonal", "lodging", "food", "protected_areas"],
+      "temporal_comparison_eligible": false,
+      "count_formula_reference": "research/scripts/entities/integrity.mjs:aggregateMunicipalities",
+      "portal_feature_fields_required": ["destinations", "museums", "venues", "archaeology", "events", "lodging", "food", "protected_areas"]
+    },
+    "manifest.json": {
+      "required": ["contract_version", "transformation_version", "run_id", "inputs", "raw_inputs", "outputs", "determinism"],
+      "input_output_fields": ["path", "bytes", "sha256"],
+      "run_id": "first 20 hexadecimal characters of SHA256(JSON.stringify(inputs))",
+      "manifest_self_hash": "omitted to avoid recursive dependency"
+    },
+    "validation-report.json": { "purpose": "conservation, quarantine reasons, FK integrity, raw preservation and before/after comparison", "evidence_class": "[DERIVADO]" }
+  },
+  "uca_exchange": {
+    "01": { "input": "preserved local snapshots and catalogues", "output": "products and manifest defined above", "state": "executed local ETL" },
+    "02": { "input": "accepted entity snapshots and eligible municipal aggregates with exclusions", "output_required": ["dataset_version", "territory_basis", "municipality_id", "variable", "value", "unit", "denominator", "missing_count", "evidence_class", "formula_version", "input_hashes"], "state": "reserved exchange schema; analysis not executed" },
+    "03": { "input": "territorial features and documented coverage; observed target only if available", "output_required": ["model_version", "input_hashes", "feature_schema", "split_protocol", "metrics", "limitations"], "state": "reserved exchange schema; no ML training" },
+    "04": { "input": "documented observations or explicitly hypothetical scenario parameters", "output_required": ["scenario_id", "parameter_version", "distribution", "unit", "seed", "method", "input_hashes", "evidence_class", "interval"], "state": "reserved exchange schema; no simulated observations in inventory" },
+    "05": { "input": "eligible inventory, documented constraints, authorized budget, labelled scenarios", "output_required": ["allocation_version", "destination_id", "period", "channel", "amount_mxn", "objective", "constraints", "feasibility", "baseline", "input_hashes", "evidence_class"], "state": "reserved exchange schema; no optimized spend or measured ROI" },
+    "06": { "input": "reviewed claims, resource-specific rights, current operation and consented measurement", "output_required": ["piece_id", "destination_id", "claim_sources", "rights_status", "channel", "period", "utm_policy", "kpi_definition", "evidence_class"], "measurement_required": ["date", "channel", "piece_id", "impressions", "clicks", "intentions", "cost_mxn", "attribution_window", "timezone", "source_snapshot"], "measurement_missing_value": null, "state": "reserved exchange schema; campaign measurements unavailable" }
+  },
+  "prohibited_inferences": ["visitors from inventory counts", "current occupancy from directory rows", "municipal polygon membership from bounding box", "ecological carrying capacity from supply", "campaign ROI without observed costs and outcomes", "current territorial comparability from legacy key matches"]
+}

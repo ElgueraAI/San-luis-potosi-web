@@ -21,6 +21,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { unzipSync, strFromU8 } from 'fflate';
+import { isValidMunicipalityId, validMunicipalityJoin } from './integrity.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const R = (...p) => path.join(root, ...p);
@@ -96,7 +97,7 @@ const muniTotal = new Map(iter.filter((r) => r.LOC === '0000').map((r) => [`24${
 // the seat is locality 0001, or (Villa de Arista) the locality that carries the municipality's name
 const muniSeat = new Map(iter.filter((r) => r.LOC === '0001').map((r) => [`24${r.MUN}`, r]));
 for (const r of iter) if (r.LOC !== '0000' && r.NOM_LOC === r.NOM_MUN && !muniSeat.has(`24${r.MUN}`)) muniSeat.set(`24${r.MUN}`, r);
-const muniByCve = new Map(muniMap.municipalities.map((m) => [m.inegi_cve, m]));
+const muniByCve = new Map(muniMap.municipalities.filter((m) => isValidMunicipalityId(m.inegi_cve)).map((m) => [m.inegi_cve, m]));
 const muniName = (cve) => muniByCve.get(cve)?.municipality ?? null;
 const regionOf = (cve) => muniByCve.get(cve)?.region ?? null;
 const cveOf = (munId) => `24${String(munId).padStart(3, '0')}`;
@@ -412,7 +413,7 @@ for (const r of sicRead('frpintangible')) {
   const name = r.frpintangible_nombre.replace(/\s+/g, ' ').trim();
   if (!name || !/Fiesta|Semana Santa|Xantolo|peregrinaci|Danza|Todos Santos/i.test(name)) continue;
   const cve = cveOf(r.municipio_id);
-  const twin = events.find((e) => e.municipality_id === cve && /Santiago/i.test(name) && /Santiago/i.test(e.canonical_name));
+  const twin = events.find((e) => validMunicipalityJoin(e.municipality_id, cve) && /Santiago/i.test(name) && /Santiago/i.test(e.canonical_name));
   if (twin) { twin.source_ids.push(sicSrc('frpintangible')); continue; }
   events.push(evRecord({
     id: `sic-pci-${r.frpintangible_id}`, canonical_name: name, subcategory: 'Patrimonio cultural inmaterial',
@@ -476,11 +477,11 @@ const routes = [{ id: 'site-itineraries', canonical_name: 'Rutas sugeridas del s
 
 // --------------------------------------------------------- municipalities --
 const all = [...attractions, ...archaeology, ...museums, ...venues, ...events, ...estadiaRecs, ...Object.values(byClass).flat()];
-const countFor = (cve, pred) => all.filter((e) => e.municipality_id === cve && pred(e)).length;
+const countFor = (cve, pred) => isValidMunicipalityId(cve) ? all.filter((e) => validMunicipalityJoin(e.municipality_id, cve) && pred(e)).length : null;
 const municipalities = muniMap.municipalities.map((m) => {
   const t = muniTotal.get(m.inegi_cve), s = muniSeat.get(m.inegi_cve);
   const lat = s ? dms(s.LATITUD) : null, lon = s ? -dms(s.LONGITUD) : null;
-  const ds = attractions.filter((a) => a.municipality_id === m.inegi_cve && a.entity_type === 'destination').map((a) => a.id);
+  const ds = attractions.filter((a) => validMunicipalityJoin(a.municipality_id, m.inegi_cve) && a.entity_type === 'destination').map((a) => a.id);
   return base({
     id: m.inegi_cve, canonical_name: m.municipality, slug: slugify(m.municipality), entity_type: 'municipality', subcategory: m.microregion ?? null,
     municipality: m.municipality, municipality_id: m.inegi_cve, region: m.region,
@@ -490,7 +491,7 @@ const municipalities = muniMap.municipalities.map((m) => {
     source_ids: [m.source, 'inegi-iter-2020'], verification_status: m.verification_status, last_verified: TODAY,
     related_entities: ds,
     counts: {
-      destinations: ds.length,
+      destinations: isValidMunicipalityId(m.inegi_cve) ? ds.length : null,
       museums: countFor(m.inegi_cve, (e) => e.entity_type === 'museum' && e.source_ids[0]?.startsWith('sic')),
       venues: countFor(m.inegi_cve, (e) => e.entity_type === 'cultural-venue'),
       archaeology: countFor(m.inegi_cve, (e) => e.entity_type === 'archaeological-site'),

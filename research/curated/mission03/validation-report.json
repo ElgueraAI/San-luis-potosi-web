@@ -1,0 +1,162 @@
+{
+  "contract_version": "campaign-data-v1.0.0",
+  "transformation_version": "mission03-curation-v1.0.0",
+  "evidence_class": "[DERIVADO]",
+  "audit_date": "2026-11-07",
+  "timezone": "America/Mexico_City",
+  "input_rows": 4961,
+  "baseline_rows": 4961,
+  "accepted_rows": 4805,
+  "quarantined_rows": 156,
+  "conservation_passed": true,
+  "accepted_by_dataset": {
+    "archaeology": 2,
+    "attractions": 74,
+    "cultural-venues": 183,
+    "events": 148,
+    "food-drink": 3311,
+    "lodging": 699,
+    "mobility": 5,
+    "municipalities": 58,
+    "museums": 44,
+    "recreation": 27,
+    "services": 254
+  },
+  "quarantine_by_reason": {
+    "invalid_or_missing_municipality_id": 14,
+    "missing_source": 9,
+    "missing_name": 3,
+    "unmatched_municipality_id": 132,
+    "missing_id": 1,
+    "null_or_invalid_source_reference": 1
+  },
+  "source_rows": 112,
+  "unique_source_ids": 110,
+  "source_variant_ids": [
+    "inegi-iter-2020",
+    "inegi-denue"
+  ],
+  "duplicate_name_candidate_groups": 103,
+  "municipality_versions": 58,
+  "raw_files": 1160,
+  "raw_bytes": 701965348,
+  "raw_unchanged": true,
+  "municipal_changes": [
+    {
+      "name": "Villa de Pozos",
+      "municipality_id": null,
+      "delta": {
+        "related_entities": {
+          "before": [
+            "A03",
+            "A15",
+            "H02",
+            "H18"
+          ],
+          "after": []
+        },
+        "counts": {
+          "before": {
+            "destinations": 4,
+            "museums": 0,
+            "venues": 0,
+            "archaeology": 1,
+            "events": 4,
+            "seasonal": 0,
+            "lodging": 0,
+            "food": 0,
+            "protected_areas": 0
+          },
+          "after": {
+            "destinations": null,
+            "museums": null,
+            "venues": null,
+            "archaeology": null,
+            "events": null,
+            "seasonal": null,
+            "lodging": null,
+            "food": null,
+            "protected_areas": null
+          }
+        },
+        "integrity_status": {
+          "before": null,
+          "after": "quarantined_missing_municipality_key"
+        },
+        "corrective_transformation": {
+          "before": null,
+          "after": "mission03-null-join-v1.0.0"
+        }
+      }
+    }
+  ],
+  "municipal_aggregation_mismatches": [],
+  "eligible_aggregate_changes": [
+    {
+      "municipality_id": "24003",
+      "counts": {
+        "destinations": {
+          "all_declared": 5,
+          "eligible": 4
+        }
+      }
+    },
+    {
+      "municipality_id": "24006",
+      "counts": {
+        "destinations": {
+          "all_declared": 4,
+          "eligible": 3
+        }
+      }
+    },
+    {
+      "municipality_id": "24024",
+      "counts": {
+        "destinations": {
+          "all_declared": 4,
+          "eligible": 3
+        }
+      }
+    },
+    {
+      "municipality_id": "24028",
+      "counts": {
+        "destinations": {
+          "all_declared": 10,
+          "eligible": 6
+        }
+      }
+    },
+    {
+      "municipality_id": "24037",
+      "counts": {
+        "food": {
+          "all_declared": 73,
+          "eligible": 72
+        }
+      }
+    },
+    {
+      "municipality_id": "24054",
+      "counts": {
+        "lodging": {
+          "all_declared": 61,
+          "eligible": 60
+        }
+      }
+    }
+  ],
+  "accepted_related_refs_to_quarantine": 7,
+  "accepted_fk_integrity": true,
+  "publication_eligible_rows": 0,
+  "temporal_comparison_eligible_rows": 0,
+  "notes": [
+    "Counts are inventory records, never visitors.",
+    "Quarantine reasons overlap; count unique rows separately.",
+    "24059 is preserved as declared and quarantined pending an authoritative versioned catalog.",
+    "The 2020 census remains on its historical geography; no crosswalk is invented.",
+    "No source-version precedence is invented: all local variants are retained.",
+    "No row is certified for publication by this offline ETL."
+  ]
+}

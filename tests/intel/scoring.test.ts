@@ -160,6 +160,14 @@ test('events: a bonus for this month and this municipality; the date status is s
   assert.equal(best.event!.id, 'e2', 'the most certain date is the one shown');
 });
 
+test('events: two unknown or invalid municipal keys never create a local event bonus', () => {
+  for (const municipality_id of [null, '', '24000', '24ABC', 'name:Villa de Pozos']) {
+    const result = scorePlace(place({ municipality_id }), ctx({ events: [ev({ municipality_id })] }));
+    assert.equal(result.event, null, String(municipality_id));
+    assert.equal(result.eventBonus, 0, String(municipality_id));
+  }
+});
+
 test('support: only for overnight trips, and it never claims availability', () => {
   assert.equal(factor(scorePlace(place(), ctx()), 'support').value, null);
   const r = scorePlace(place(), ctx({ profile: profile({ duration: 'weekend' }) }));

@@ -1,0 +1,2502 @@
+[
+  {
+    "staging_row_id": "research/entities/archaeology/index.json#2",
+    "entity_id": "arq-tanute",
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "invalid_or_missing_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/archaeology/index.json",
+      "input_sha256": "d7dde2f188ec4c95b5c9c7d11857b916e6d7ab1e120f4dbf542449c29af9898a",
+      "input_row": 2,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/attractions/index.json#2",
+    "entity_id": "A03",
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "invalid_or_missing_municipality_id",
+      "missing_source"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/attractions/index.json",
+      "input_sha256": "93189b8138ba97278e5b5b6188b7fbb2b7bc04d541704b2556c390f1d935c8b6",
+      "input_row": 2,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/attractions/index.json#4",
+    "entity_id": "A05",
+    "municipality_id_as_declared": "24006",
+    "reasons": [
+      "missing_source"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/attractions/index.json",
+      "input_sha256": "93189b8138ba97278e5b5b6188b7fbb2b7bc04d541704b2556c390f1d935c8b6",
+      "input_row": 4,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/attractions/index.json#14",
+    "entity_id": "A15",
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "invalid_or_missing_municipality_id",
+      "missing_source"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/attractions/index.json",
+      "input_sha256": "93189b8138ba97278e5b5b6188b7fbb2b7bc04d541704b2556c390f1d935c8b6",
+      "input_row": 14,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/attractions/index.json#16",
+    "entity_id": "C02",
+    "municipality_id_as_declared": "24028",
+    "reasons": [
+      "missing_source"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/attractions/index.json",
+      "input_sha256": "93189b8138ba97278e5b5b6188b7fbb2b7bc04d541704b2556c390f1d935c8b6",
+      "input_row": 16,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/attractions/index.json#18",
+    "entity_id": "C04",
+    "municipality_id_as_declared": "24028",
+    "reasons": [
+      "missing_source"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/attractions/index.json",
+      "input_sha256": "93189b8138ba97278e5b5b6188b7fbb2b7bc04d541704b2556c390f1d935c8b6",
+      "input_row": 18,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/attractions/index.json#20",
+    "entity_id": "C06",
+    "municipality_id_as_declared": "24028",
+    "reasons": [
+      "missing_source"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/attractions/index.json",
+      "input_sha256": "93189b8138ba97278e5b5b6188b7fbb2b7bc04d541704b2556c390f1d935c8b6",
+      "input_row": 20,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/attractions/index.json#28",
+    "entity_id": "C14",
+    "municipality_id_as_declared": "24028",
+    "reasons": [
+      "missing_source"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/attractions/index.json",
+      "input_sha256": "93189b8138ba97278e5b5b6188b7fbb2b7bc04d541704b2556c390f1d935c8b6",
+      "input_row": 28,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/attractions/index.json#31",
+    "entity_id": "H02",
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "invalid_or_missing_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/attractions/index.json",
+      "input_sha256": "93189b8138ba97278e5b5b6188b7fbb2b7bc04d541704b2556c390f1d935c8b6",
+      "input_row": 31,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/attractions/index.json#32",
+    "entity_id": "H03",
+    "municipality_id_as_declared": "24003",
+    "reasons": [
+      "missing_source"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/attractions/index.json",
+      "input_sha256": "93189b8138ba97278e5b5b6188b7fbb2b7bc04d541704b2556c390f1d935c8b6",
+      "input_row": 32,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/attractions/index.json#47",
+    "entity_id": "H18",
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "invalid_or_missing_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/attractions/index.json",
+      "input_sha256": "93189b8138ba97278e5b5b6188b7fbb2b7bc04d541704b2556c390f1d935c8b6",
+      "input_row": 47,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/attractions/index.json#62",
+    "entity_id": "M15",
+    "municipality_id_as_declared": "24024",
+    "reasons": [
+      "missing_source"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/attractions/index.json",
+      "input_sha256": "93189b8138ba97278e5b5b6188b7fbb2b7bc04d541704b2556c390f1d935c8b6",
+      "input_row": 62,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/events/index.json#3",
+    "entity_id": "ev-xantolo",
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "invalid_or_missing_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/events/index.json",
+      "input_sha256": "e9dc97648deb849ed4e720b5aa584f660059e543ccf09348631549122de49818",
+      "input_row": 3,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/events/index.json#87",
+    "entity_id": "slp-gob-semana-santa-2026",
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "invalid_or_missing_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/events/index.json",
+      "input_sha256": "e9dc97648deb849ed4e720b5aa584f660059e543ccf09348631549122de49818",
+      "input_row": 87,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/events/index.json#127",
+    "entity_id": "sic-festival-1494",
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "invalid_or_missing_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/events/index.json",
+      "input_sha256": "e9dc97648deb849ed4e720b5aa584f660059e543ccf09348631549122de49818",
+      "input_row": 127,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/events/index.json#141",
+    "entity_id": "sic-festival-254",
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "invalid_or_missing_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/events/index.json",
+      "input_sha256": "e9dc97648deb849ed4e720b5aa584f660059e543ccf09348631549122de49818",
+      "input_row": 141,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#8",
+    "entity_id": "estadia-379",
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "invalid_or_missing_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 8,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#10",
+    "entity_id": "estadia-369",
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "invalid_or_missing_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 10,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#15",
+    "entity_id": "estadia-226",
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "invalid_or_missing_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 15,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#27",
+    "entity_id": "denue-12289596",
+    "municipality_id_as_declared": "24037",
+    "reasons": [
+      "missing_name"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 27,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#45",
+    "entity_id": "denue-9810133",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 45,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#87",
+    "entity_id": "denue-10238364",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 87,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#96",
+    "entity_id": "denue-8807694",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 96,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#99",
+    "entity_id": "denue-10800962",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 99,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#109",
+    "entity_id": "denue-3719997",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 109,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#129",
+    "entity_id": "denue-7374924",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 129,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#132",
+    "entity_id": "denue-9762132",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 132,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#161",
+    "entity_id": "denue-9996810",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 161,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#172",
+    "entity_id": "denue-10774642",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 172,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#199",
+    "entity_id": "denue-10071357",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 199,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#201",
+    "entity_id": "denue-11078637",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 201,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#227",
+    "entity_id": "denue-11489367",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 227,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#232",
+    "entity_id": "denue-8019314",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 232,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#403",
+    "entity_id": "denue-10620981",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 403,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#447",
+    "entity_id": "denue-11842551",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 447,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#501",
+    "entity_id": "denue-10665942",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 501,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#509",
+    "entity_id": "denue-11074428",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 509,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#528",
+    "entity_id": "denue-11117630",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 528,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#633",
+    "entity_id": "denue-11567472",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 633,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#652",
+    "entity_id": "denue-8074258",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 652,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#663",
+    "entity_id": "denue-10453804",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 663,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#669",
+    "entity_id": "denue-6720521",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 669,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#672",
+    "entity_id": "denue-9283311",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 672,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#682",
+    "entity_id": "denue-6393124",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 682,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#691",
+    "entity_id": "denue-11748533",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 691,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#703",
+    "entity_id": "denue-10617938",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 703,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#712",
+    "entity_id": "denue-9145765",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 712,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#722",
+    "entity_id": "denue-9542325",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 722,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#725",
+    "entity_id": "denue-6220422",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 725,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#732",
+    "entity_id": "denue-8019525",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 732,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#737",
+    "entity_id": "denue-11459601",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 737,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#746",
+    "entity_id": "denue-9788145",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 746,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#753",
+    "entity_id": "denue-3685686",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 753,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#762",
+    "entity_id": "denue-10428323",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 762,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#806",
+    "entity_id": "denue-9687162",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 806,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#809",
+    "entity_id": "denue-3685908",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 809,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#824",
+    "entity_id": "denue-11115294",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 824,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#843",
+    "entity_id": "denue-8807695",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 843,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#861",
+    "entity_id": "denue-10229336",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 861,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#862",
+    "entity_id": "denue-10492886",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 862,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#878",
+    "entity_id": "denue-3685625",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 878,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#903",
+    "entity_id": "denue-10439697",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 903,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#913",
+    "entity_id": "denue-9913566",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 913,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#922",
+    "entity_id": "denue-9577842",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 922,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#938",
+    "entity_id": "denue-11473455",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 938,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#940",
+    "entity_id": "denue-3718432",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 940,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#950",
+    "entity_id": "denue-3685647",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 950,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#973",
+    "entity_id": "denue-9802038",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 973,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1014",
+    "entity_id": "denue-11255278",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1014,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1018",
+    "entity_id": "denue-3685918",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1018,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1024",
+    "entity_id": "denue-3685794",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1024,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1043",
+    "entity_id": "denue-3683781",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1043,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1060",
+    "entity_id": "denue-8768595",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1060,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1061",
+    "entity_id": "denue-8807457",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1061,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1067",
+    "entity_id": "denue-3685015",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1067,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1072",
+    "entity_id": "denue-3685641",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1072,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1074",
+    "entity_id": "denue-7375054",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1074,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1107",
+    "entity_id": "denue-3685098",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1107,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1119",
+    "entity_id": "denue-11695584",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1119,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1128",
+    "entity_id": "denue-10483444",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1128,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1159",
+    "entity_id": "denue-11649510",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1159,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1193",
+    "entity_id": "denue-6800328",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1193,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1203",
+    "entity_id": "denue-10845443",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1203,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1254",
+    "entity_id": "denue-8074385",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1254,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1262",
+    "entity_id": "denue-9203222",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1262,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1331",
+    "entity_id": "denue-3713014",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1331,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1395",
+    "entity_id": "denue-8556716",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1395,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1458",
+    "entity_id": "denue-8019020",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1458,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1470",
+    "entity_id": "denue-10570964",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1470,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1569",
+    "entity_id": "denue-9353024",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1569,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1619",
+    "entity_id": "denue-10123660",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1619,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1652",
+    "entity_id": "denue-3685766",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1652,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1707",
+    "entity_id": "denue-11809505",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1707,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1737",
+    "entity_id": "denue-10270393",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1737,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1758",
+    "entity_id": "denue-11182173",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1758,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1880",
+    "entity_id": "denue-9641145",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1880,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1884",
+    "entity_id": "denue-10550112",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1884,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1890",
+    "entity_id": "denue-9314681",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1890,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1896",
+    "entity_id": "denue-8738772",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1896,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1926",
+    "entity_id": "denue-11262778",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1926,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1935",
+    "entity_id": "denue-3719357",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1935,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1937",
+    "entity_id": "denue-9649884",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1937,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1955",
+    "entity_id": "denue-9015971",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1955,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#1960",
+    "entity_id": "denue-3683608",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 1960,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2026",
+    "entity_id": "denue-10013823",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2026,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2035",
+    "entity_id": "denue-10893597",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2035,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2067",
+    "entity_id": "denue-8889830",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2067,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2206",
+    "entity_id": "denue-3685945",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2206,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2354",
+    "entity_id": "denue-8074426",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2354,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2383",
+    "entity_id": "denue-10497867",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2383,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2391",
+    "entity_id": "denue-9774675",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2391,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2395",
+    "entity_id": "denue-10380350",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2395,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2407",
+    "entity_id": "denue-12289437",
+    "municipality_id_as_declared": "24007",
+    "reasons": [
+      "missing_name"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2407,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2411",
+    "entity_id": "denue-9993806",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2411,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2412",
+    "entity_id": "denue-10490593",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2412,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2534",
+    "entity_id": "denue-10234673",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2534,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2629",
+    "entity_id": "denue-3684665",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2629,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2672",
+    "entity_id": "denue-7374876",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2672,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2683",
+    "entity_id": "denue-9767480",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2683,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2760",
+    "entity_id": "denue-11243378",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2760,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2931",
+    "entity_id": "denue-11562197",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2931,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#2992",
+    "entity_id": "denue-11219548",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 2992,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3015",
+    "entity_id": "denue-11336901",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3015,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3028",
+    "entity_id": "denue-9609427",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3028,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3057",
+    "entity_id": "denue-3712814",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3057,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3073",
+    "entity_id": "denue-11330738",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3073,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3092",
+    "entity_id": "denue-11430928",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3092,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3133",
+    "entity_id": "denue-9905504",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3133,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3209",
+    "entity_id": "denue-10182362",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3209,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3265",
+    "entity_id": "denue-10504444",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3265,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3286",
+    "entity_id": "denue-10558990",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3286,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3291",
+    "entity_id": "denue-10258907",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3291,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3330",
+    "entity_id": "denue-10130654",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3330,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3366",
+    "entity_id": "denue-10775256",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3366,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3372",
+    "entity_id": "denue-10354741",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3372,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3387",
+    "entity_id": "denue-3685748",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3387,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3389",
+    "entity_id": "denue-8019412",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3389,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/food-drink/index.json#3400",
+    "entity_id": "denue-11650945",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/food-drink/index.json",
+      "input_sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3",
+      "input_row": 3400,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/lodging/index.json#34",
+    "entity_id": "denue-12288934",
+    "municipality_id_as_declared": "24054",
+    "reasons": [
+      "missing_name"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/lodging/index.json",
+      "input_sha256": "55e8bcba3aa9223c985b9ead11461e5af51a4a9ae6a0a8caed75eb0d08220ca5",
+      "input_row": 34,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/lodging/index.json#79",
+    "entity_id": "denue-11412912",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/lodging/index.json",
+      "input_sha256": "55e8bcba3aa9223c985b9ead11461e5af51a4a9ae6a0a8caed75eb0d08220ca5",
+      "input_row": 79,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/lodging/index.json#237",
+    "entity_id": "denue-6392991",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/lodging/index.json",
+      "input_sha256": "55e8bcba3aa9223c985b9ead11461e5af51a4a9ae6a0a8caed75eb0d08220ca5",
+      "input_row": 237,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/lodging/index.json#262",
+    "entity_id": "denue-6710324",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/lodging/index.json",
+      "input_sha256": "55e8bcba3aa9223c985b9ead11461e5af51a4a9ae6a0a8caed75eb0d08220ca5",
+      "input_row": 262,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/lodging/index.json#352",
+    "entity_id": "denue-6392740",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/lodging/index.json",
+      "input_sha256": "55e8bcba3aa9223c985b9ead11461e5af51a4a9ae6a0a8caed75eb0d08220ca5",
+      "input_row": 352,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/lodging/index.json#559",
+    "entity_id": "denue-6810964",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/lodging/index.json",
+      "input_sha256": "55e8bcba3aa9223c985b9ead11461e5af51a4a9ae6a0a8caed75eb0d08220ca5",
+      "input_row": 559,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/lodging/index.json#588",
+    "entity_id": "denue-6507850",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/lodging/index.json",
+      "input_sha256": "55e8bcba3aa9223c985b9ead11461e5af51a4a9ae6a0a8caed75eb0d08220ca5",
+      "input_row": 588,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/lodging/index.json#621",
+    "entity_id": "denue-7374987",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/lodging/index.json",
+      "input_sha256": "55e8bcba3aa9223c985b9ead11461e5af51a4a9ae6a0a8caed75eb0d08220ca5",
+      "input_row": 621,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/lodging/index.json#630",
+    "entity_id": "denue-8019523",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/lodging/index.json",
+      "input_sha256": "55e8bcba3aa9223c985b9ead11461e5af51a4a9ae6a0a8caed75eb0d08220ca5",
+      "input_row": 630,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/lodging/index.json#705",
+    "entity_id": "denue-11401736",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/lodging/index.json",
+      "input_sha256": "55e8bcba3aa9223c985b9ead11461e5af51a4a9ae6a0a8caed75eb0d08220ca5",
+      "input_row": 705,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/municipalities/index.json#58",
+    "entity_id": null,
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "missing_id",
+      "invalid_or_missing_municipality_id",
+      "null_or_invalid_source_reference"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/municipalities/index.json",
+      "input_sha256": "cf99d99ac6d5f979fa48aa57823fb7bfc0baad3bea667ee5dc8d3192c19b7374",
+      "input_row": 58,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/services/index.json#4",
+    "entity_id": "denue-7375310",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/services/index.json",
+      "input_sha256": "44bde8693c9580600fa138b357827b94ea24584e09c796a4c194cd449ca5c908",
+      "input_row": 4,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/services/index.json#18",
+    "entity_id": "denue-11598673",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/services/index.json",
+      "input_sha256": "44bde8693c9580600fa138b357827b94ea24584e09c796a4c194cd449ca5c908",
+      "input_row": 18,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/services/index.json#56",
+    "entity_id": "denue-8074433",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/services/index.json",
+      "input_sha256": "44bde8693c9580600fa138b357827b94ea24584e09c796a4c194cd449ca5c908",
+      "input_row": 56,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/services/index.json#80",
+    "entity_id": "denue-10645156",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/services/index.json",
+      "input_sha256": "44bde8693c9580600fa138b357827b94ea24584e09c796a4c194cd449ca5c908",
+      "input_row": 80,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/services/index.json#90",
+    "entity_id": "denue-3719072",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/services/index.json",
+      "input_sha256": "44bde8693c9580600fa138b357827b94ea24584e09c796a4c194cd449ca5c908",
+      "input_row": 90,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/services/index.json#245",
+    "entity_id": "denue-11203620",
+    "municipality_id_as_declared": "24059",
+    "reasons": [
+      "unmatched_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/services/index.json",
+      "input_sha256": "44bde8693c9580600fa138b357827b94ea24584e09c796a4c194cd449ca5c908",
+      "input_row": 245,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  },
+  {
+    "staging_row_id": "research/entities/services/index.json#260",
+    "entity_id": "svc-sectur-guias",
+    "municipality_id_as_declared": null,
+    "reasons": [
+      "invalid_or_missing_municipality_id"
+    ],
+    "resolution_status": "pending_evidence",
+    "lineage": {
+      "input_path": "research/entities/services/index.json",
+      "input_sha256": "44bde8693c9580600fa138b357827b94ea24584e09c796a4c194cd449ca5c908",
+      "input_row": 260,
+      "generated_as_declared": "2026-10-06",
+      "transformation_id": "mission03-curation-v1.0.0"
+    }
+  }
+]

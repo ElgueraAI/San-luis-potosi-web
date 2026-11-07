@@ -19,6 +19,7 @@
  * Weights, formulas and limits: docs/recommendation-engine.md.
  */
 import { INTEREST_LABEL, MONTHS_ES, REGION_LABEL, reachKm, DURATIONS } from './taxonomy';
+import { sameMunicipality, validMunicipalityKey } from '../municipality';
 import type { Coord, EvidenceLevel, IntelEvent, IntelPlace, MuniFeatures, ProfileInterest, TouristProfile } from './types';
 
 export const WEIGHTS = {
@@ -186,8 +187,8 @@ function distanceFactor(p: IntelPlace, ctx: ScoreContext): { f: Omit<Factor, 'id
 
 /** Best event of the trip month in the municipality of the place (most certain date first), or null. */
 export function eventOf(p: IntelPlace, ctx: ScoreContext): IntelEvent | null {
-  if (!p.municipality_id) return null;
-  const evs = ctx.events.filter((e) => e.municipality_id === p.municipality_id && e.months.includes(ctx.month) && e.date_confidence !== 'unknown');
+  if (!validMunicipalityKey(p.municipality_id)) return null;
+  const evs = ctx.events.filter((e) => sameMunicipality(e.municipality_id, p.municipality_id) && e.months.includes(ctx.month) && e.date_confidence !== 'unknown');
   return [...evs].sort((x, y) => EVENT_BONUS[y.date_confidence] - EVENT_BONUS[x.date_confidence])[0] ?? null;
 }
 function eventReason(p: IntelPlace, e: IntelEvent, month: number): string {

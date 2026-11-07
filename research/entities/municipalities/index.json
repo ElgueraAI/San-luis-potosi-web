@@ -3421,28 +3421,25 @@
    "verification_status": "pending",
    "last_verified": "2026-10-06",
    "image_ids": [],
-   "related_entities": [
-    "A03",
-    "A15",
-    "H02",
-    "H18"
-   ],
+   "related_entities": [],
    "tags": [],
    "travel_notes": null,
    "slug": "villa-de-pozos",
    "seat": null,
    "population_2020": null,
    "counts": {
-    "destinations": 4,
-    "museums": 0,
-    "venues": 0,
-    "archaeology": 1,
-    "events": 4,
-    "seasonal": 0,
-    "lodging": 0,
-    "food": 0,
-    "protected_areas": 0
-   }
+    "destinations": null,
+    "museums": null,
+    "venues": null,
+    "archaeology": null,
+    "events": null,
+    "seasonal": null,
+    "lodging": null,
+    "food": null,
+    "protected_areas": null
+   },
+   "integrity_status": "quarantined_missing_municipality_key",
+   "corrective_transformation": "mission03-null-join-v1.0.0"
   }
  ]
 }

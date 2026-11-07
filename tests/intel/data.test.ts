@@ -5,11 +5,14 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
 import { normalizePlace, normalizeEvent, seasonIndex, coordConfidence, sourceConfidence, evidenceLevel, inSlp, validCoord, kindOf, provenance, type RawEntity } from '../../src/lib/intel/normalize';
 import { kindInterests, isOutdoor, reachKm, TAG_MAP, INTERESTS } from '../../src/lib/intel/taxonomy';
 import { municipalityFeatures, concentration, topShare } from '../../src/lib/intel/features';
 import { runQuality, coverage, levenshtein, norm, summarize } from '../../src/lib/intel/quality';
 import { buildDataset } from '../../src/lib/intel/dataset';
+import { municipalDestinations, sameMunicipality, validMunicipalityKey } from '../../src/lib/municipality';
 import attractions from '../../research/entities/attractions/index.json';
 import archaeology from '../../research/entities/archaeology/index.json';
 import museums from '../../research/entities/museums/index.json';
@@ -21,6 +24,50 @@ import seasonal from '../../research/generated/seasonal-calendar.json';
 import destIndex from '../../research/destinations/index.json';
 
 const ent = (o: Partial<RawEntity>): RawEntity => ({ id: 'x1', canonical_name: 'Lugar de prueba', entity_type: 'destination', ...o });
+
+test('municipal joins: null, malformed, non-SLP and state-total keys cannot match', () => {
+  for (const key of [null, undefined, '', '24', '24000', '2400', '240001', '24ABC', '99001', 24028]) {
+    assert.equal(validMunicipalityKey(key), false, String(key));
+    assert.equal(sameMunicipality(key, key), false, String(key));
+    assert.equal(sameMunicipality(key, '24028'), false, String(key));
+  }
+  assert.equal(sameMunicipality('24028', '24028'), true);
+  assert.equal(sameMunicipality('24028', '24003'), false);
+  assert.equal(validMunicipalityKey('24059'), true, 'syntax alone does not certify membership in a temporal catalogue');
+});
+
+test('municipal destination adapter: a matching name cannot substitute for a missing entity key', () => {
+  const named = [
+    { id: 'null', municipality: 'San Luis Potosí' },
+    { id: 'invalid', municipality: 'San Luis Potosí' },
+    { id: 'missing', municipality: 'San Luis Potosí' },
+    { id: 'other', municipality: 'San Luis Potosí' },
+    { id: 'valid', municipality: null },
+  ];
+  const sources = [
+    { id: 'null', municipality_id: null },
+    { id: 'invalid', municipality_id: '24000' },
+    { id: 'other', municipality_id: '24003' },
+    { id: 'valid', municipality_id: '24028' },
+  ];
+  assert.deepEqual(municipalDestinations(named, sources, '24028').map((row) => row.id), ['valid']);
+  assert.deepEqual(municipalDestinations(named, sources, null), []);
+});
+
+test('real municipal destination adapter: existing associations stay unchanged for all 58 valid keys', () => {
+  const slug = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const records = destIndex.destinations.map((destination) => {
+    const raw = JSON.parse(fs.readFileSync(path.resolve('research/destinations', `${destination.place_id}.json`), 'utf8'));
+    return { id: destination.place_id, municipality: raw.municipality?.status === 'verified' ? raw.municipality.value as string : null };
+  });
+  const known = municipalities.records.filter((municipality) => validMunicipalityKey(municipality.id));
+  assert.equal(known.length, 58);
+  for (const municipality of known) {
+    const previous = records.filter((record) => record.municipality && municipalities.records.find((candidate) => slug(candidate.canonical_name) === slug(record.municipality!))?.id === municipality.id).map((record) => record.id).sort();
+    const current = municipalDestinations(records, attractions.records as unknown as { id: string; municipality_id: string | null }[], municipality.id).map((record) => record.id).sort();
+    assert.deepEqual(current, previous, municipality.canonical_name);
+  }
+});
 
 // --------------------------------------------------------------- normalization --
 test('normalize: stated tags and derived interests are kept apart', () => {
@@ -124,13 +171,14 @@ test('taxonomy: reach grows with time and shrinks with slower modes', () => {
 
 // -------------------------------------------------------------------- features --
 test('features: indices stay in 0–1 and exposure follows lodging, flagships and Pueblo Mágico', () => {
+  const zeroCounts = { destinations: 0, museums: 0, venues: 0, archaeology: 0, events: 0, lodging: 0, food: 0, protected_areas: 0 };
   const munis = [
-    { id: '1', canonical_name: 'Grande', region: 'centro', counts: { destinations: 5, lodging: 150, food: 900, events: 10, museums: 5 } },
-    { id: '2', canonical_name: 'Discreto', region: 'centro', counts: { destinations: 2, lodging: 6, food: 20, events: 3 } },
-    { id: '3', canonical_name: 'Vacío', region: 'altiplano', counts: {} },
+    { id: '24001', canonical_name: 'Grande', region: 'centro', counts: { ...zeroCounts, destinations: 5, lodging: 150, food: 900, events: 10, museums: 5 } },
+    { id: '24002', canonical_name: 'Discreto', region: 'centro', counts: { ...zeroCounts, destinations: 2, lodging: 6, food: 20, events: 3 } },
+    { id: '24003', canonical_name: 'Vacío', region: 'altiplano', counts: { ...zeroCounts } },
   ];
   const place = (id: string, m: string, o: Partial<RawEntity> = {}) => normalizePlace(ent({ id, municipality_id: m, ...o }), { priority: new Map([['a1', 'A'], ['a2', 'A'], ['a3', 'A']]) })!;
-  const places = [place('a1', '1', { pueblo_magico: true }), place('a2', '1'), place('a3', '1'), place('b1', '2'), place('b2', '2')];
+  const places = [place('a1', '24001', { pueblo_magico: true }), place('a2', '24001'), place('a3', '24001'), place('b1', '24002'), place('b2', '24002')];
   const f = municipalityFeatures(munis, places);
   for (const m of f) for (const v of [m.infrastructure_index, m.exposure_proxy, m.diversification_potential, m.coverage_index, m.asset_share]) assert.ok(v >= 0 && v <= 1, `${m.name} ${v}`);
   const [big, quiet, empty] = f;
@@ -147,6 +195,35 @@ test('features: concentration measures', () => {
   assert.equal(concentration([5, 5]), 0.5);
   assert.equal(concentration([]), 0);
   assert.equal(topShare([6, 3, 1], 1), 0.6);
+});
+
+test('features: a name cannot assign null, malformed or unmatched municipal keys', () => {
+  const known = { id: '24028', canonical_name: 'San Luis Potosí', counts: { destinations: 1, museums: 0, venues: 0, archaeology: 0, events: 0, lodging: 2, food: 3, protected_areas: 0 } };
+  const unknown = { id: null, canonical_name: 'Villa de Pozos', counts: { destinations: 99, events: 99 } };
+  const places = [
+    ent({ id: 'null', municipality: 'San Luis Potosí', municipality_id: null }),
+    ent({ id: 'bad', municipality: 'San Luis Potosí', municipality_id: '24000' }),
+    ent({ id: 'orphan', municipality: 'San Luis Potosí', municipality_id: '24059' }),
+    ent({ id: 'pozos', municipality: 'Villa de Pozos', municipality_id: null }),
+    ent({ id: 'ok', municipality_id: '24028' }),
+  ].map((e) => normalizePlace(e)!);
+  const result = municipalityFeatures([known, unknown], places);
+  assert.equal(result.length, 1, 'unresolved municipal dimension rows cannot supply analytic features');
+  assert.equal(result[0].assets, 1, 'only the matching valid key supplies an asset');
+  assert.equal(result[0].asset_share, 1);
+});
+
+test('features: absent or invalid counts do not become measured zeroes', () => {
+  const counts = { destinations: 0, museums: 0, venues: 0, archaeology: 0, events: 0, lodging: 0, food: 0, protected_areas: 0 };
+  const result = municipalityFeatures([
+    { id: '24001', canonical_name: 'Missing' },
+    { id: '24002', canonical_name: 'Partial', counts: { lodging: 0 } },
+    { id: '24003', canonical_name: 'Invalid', counts: { ...counts, lodging: -1 } },
+    { id: '24004', canonical_name: 'Fractional', counts: { ...counts, lodging: 0.5 } },
+    { id: '24005', canonical_name: 'Measured empty', counts },
+  ], []);
+  assert.deepEqual(result.map((m) => m.id), ['24005']);
+  assert.equal(result[0].counts.lodging, 0);
 });
 
 // --------------------------------------------------------------------- quality --
@@ -193,7 +270,7 @@ const raw = {
 const ds = buildDataset(raw);
 
 test('real data: the dataset is complete and consistent', () => {
-  assert.equal(ds.municipalities.length, 59, '59 municipalities');
+  assert.equal(ds.municipalities.length, 58, '58 valid historical municipal keys; unresolved Villa de Pozos stays outside analytical features');
   assert.ok(ds.places.length > 120, `${ds.places.length} candidates`);
   assert.equal(new Set(ds.places.map((p) => p.id)).size, ds.places.length, 'unique ids');
   for (const p of ds.places) {
@@ -222,6 +299,6 @@ test('real data: municipality features', () => {
   assert.ok(by('San Luis Potosí').exposure_proxy > by('Tamuín').exposure_proxy);
   assert.ok(by('Catorce').exposure_proxy > by('Guadalcázar').exposure_proxy);
   assert.ok(ds.municipalities.every((m) => m.exposure_proxy >= 0 && m.exposure_proxy <= 1));
-  assert.ok(by('Villa de Pozos').id.startsWith('name:'), 'the 2024 municipality has no INEGI 2020 key and keeps a name key');
+  assert.equal(ds.municipalities.some((m) => m.name === 'Villa de Pozos'), false, 'no generated name key substitutes for an unresolved territorial key');
   assert.ok(ds.municipalities.filter((m) => m.assets === 0).length > 20, 'many municipalities have no scorable asset: the gap the project is about');
 });

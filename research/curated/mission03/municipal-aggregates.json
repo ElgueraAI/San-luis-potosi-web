@@ -1,0 +1,1026 @@
+[
+  {
+    "municipality_id": "24001",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 1,
+      "venues": 5,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 0,
+      "food": 13,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24002",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 2,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 1,
+      "food": 2,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24003",
+    "related_entities": [
+      "H01",
+      "H03",
+      "H04",
+      "H05",
+      "H06"
+    ],
+    "counts": {
+      "destinations": 5,
+      "museums": 0,
+      "venues": 4,
+      "archaeology": 0,
+      "events": 4,
+      "seasonal": 2,
+      "lodging": 11,
+      "food": 17,
+      "protected_areas": 2
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24004",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 4,
+      "food": 5,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24005",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 3,
+      "seasonal": 0,
+      "lodging": 3,
+      "food": 24,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24006",
+    "related_entities": [
+      "A01",
+      "A02",
+      "A04",
+      "A05"
+    ],
+    "counts": {
+      "destinations": 4,
+      "museums": 1,
+      "venues": 7,
+      "archaeology": 0,
+      "events": 6,
+      "seasonal": 0,
+      "lodging": 64,
+      "food": 23,
+      "protected_areas": 1
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24007",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 3,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 3,
+      "food": 15,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24008",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 1,
+      "venues": 2,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 7,
+      "food": 30,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24009",
+    "related_entities": [
+      "C10"
+    ],
+    "counts": {
+      "destinations": 1,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 1,
+      "food": 8,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24010",
+    "related_entities": [
+      "M09",
+      "M10",
+      "M11",
+      "M12"
+    ],
+    "counts": {
+      "destinations": 4,
+      "museums": 1,
+      "venues": 2,
+      "archaeology": 0,
+      "events": 7,
+      "seasonal": 0,
+      "lodging": 6,
+      "food": 19,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24011",
+    "related_entities": [
+      "M03",
+      "M04",
+      "M05",
+      "M06",
+      "M07",
+      "M08"
+    ],
+    "counts": {
+      "destinations": 6,
+      "museums": 0,
+      "venues": 4,
+      "archaeology": 0,
+      "events": 3,
+      "seasonal": 0,
+      "lodging": 11,
+      "food": 40,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24012",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 1,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 5,
+      "food": 10,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24013",
+    "related_entities": [
+      "H12",
+      "H17"
+    ],
+    "counts": {
+      "destinations": 2,
+      "museums": 2,
+      "venues": 7,
+      "archaeology": 0,
+      "events": 3,
+      "seasonal": 0,
+      "lodging": 80,
+      "food": 222,
+      "protected_areas": 1
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24014",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 1,
+      "food": 6,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24015",
+    "related_entities": [
+      "A11",
+      "A12"
+    ],
+    "counts": {
+      "destinations": 2,
+      "museums": 2,
+      "venues": 2,
+      "archaeology": 0,
+      "events": 3,
+      "seasonal": 0,
+      "lodging": 12,
+      "food": 17,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24016",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 2,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 7,
+      "food": 41,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24017",
+    "related_entities": [
+      "A08",
+      "A09",
+      "A10"
+    ],
+    "counts": {
+      "destinations": 3,
+      "museums": 1,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 3,
+      "food": 0,
+      "protected_areas": 1
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24018",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 1,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 3,
+      "food": 3,
+      "protected_areas": 1
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24019",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 0,
+      "archaeology": 0,
+      "events": 3,
+      "seasonal": 0,
+      "lodging": 0,
+      "food": 1,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24020",
+    "related_entities": [
+      "A06",
+      "A07"
+    ],
+    "counts": {
+      "destinations": 2,
+      "museums": 1,
+      "venues": 5,
+      "archaeology": 0,
+      "events": 5,
+      "seasonal": 0,
+      "lodging": 34,
+      "food": 70,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24021",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 1,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 1,
+      "food": 7,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24022",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 2,
+      "food": 14,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24023",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 1,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 2,
+      "food": 4,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24024",
+    "related_entities": [
+      "M01",
+      "M02",
+      "M14",
+      "M15"
+    ],
+    "counts": {
+      "destinations": 4,
+      "museums": 2,
+      "venues": 2,
+      "archaeology": 0,
+      "events": 4,
+      "seasonal": 1,
+      "lodging": 33,
+      "food": 92,
+      "protected_areas": 3
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24025",
+    "related_entities": [
+      "A13"
+    ],
+    "counts": {
+      "destinations": 1,
+      "museums": 2,
+      "venues": 4,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 6,
+      "food": 24,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24026",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 0,
+      "food": 2,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24027",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 2,
+      "archaeology": 0,
+      "events": 3,
+      "seasonal": 0,
+      "lodging": 2,
+      "food": 17,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24028",
+    "related_entities": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06",
+      "C07",
+      "C08",
+      "C09",
+      "C14"
+    ],
+    "counts": {
+      "destinations": 10,
+      "museums": 21,
+      "venues": 73,
+      "archaeology": 0,
+      "events": 23,
+      "seasonal": 0,
+      "lodging": 153,
+      "food": 995,
+      "protected_areas": 2
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24029",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 1,
+      "food": 11,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24030",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 2,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 0,
+      "food": 0,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24031",
+    "related_entities": [
+      "M13"
+    ],
+    "counts": {
+      "destinations": 1,
+      "museums": 0,
+      "venues": 3,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 0,
+      "food": 0,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24032",
+    "related_entities": [
+      "C11",
+      "C12"
+    ],
+    "counts": {
+      "destinations": 2,
+      "museums": 1,
+      "venues": 4,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 9,
+      "food": 61,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24033",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 0,
+      "food": 2,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24034",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 3,
+      "food": 14,
+      "protected_areas": 1
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24035",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 3,
+      "archaeology": 0,
+      "events": 3,
+      "seasonal": 0,
+      "lodging": 12,
+      "food": 130,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24036",
+    "related_entities": [
+      "H10",
+      "H11"
+    ],
+    "counts": {
+      "destinations": 2,
+      "museums": 0,
+      "venues": 2,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 41,
+      "food": 39,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24037",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 2,
+      "archaeology": 0,
+      "events": 3,
+      "seasonal": 0,
+      "lodging": 13,
+      "food": 73,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24038",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 0,
+      "food": 4,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24039",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 3,
+      "seasonal": 0,
+      "lodging": 4,
+      "food": 3,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24040",
+    "related_entities": [
+      "H16"
+    ],
+    "counts": {
+      "destinations": 1,
+      "museums": 0,
+      "venues": 2,
+      "archaeology": 2,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 11,
+      "food": 22,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24041",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 1,
+      "food": 4,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24042",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 0,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 6,
+      "food": 10,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24043",
+    "related_entities": [
+      "C13"
+    ],
+    "counts": {
+      "destinations": 1,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 1,
+      "food": 12,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24044",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 2,
+      "food": 2,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24045",
+    "related_entities": [
+      "A14"
+    ],
+    "counts": {
+      "destinations": 1,
+      "museums": 0,
+      "venues": 2,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 1,
+      "lodging": 6,
+      "food": 12,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24046",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 1,
+      "food": 8,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24047",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 0,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 0,
+      "food": 3,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24048",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 1,
+      "venues": 0,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 3,
+      "food": 3,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24049",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 2,
+      "food": 9,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24050",
+    "related_entities": [
+      "C15"
+    ],
+    "counts": {
+      "destinations": 1,
+      "museums": 0,
+      "venues": 4,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 7,
+      "food": 26,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24051",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 0,
+      "food": 6,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24052",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 1,
+      "seasonal": 0,
+      "lodging": 0,
+      "food": 4,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24053",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 25,
+      "food": 29,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24054",
+    "related_entities": [
+      "H07",
+      "H08",
+      "H09"
+    ],
+    "counts": {
+      "destinations": 3,
+      "museums": 3,
+      "venues": 6,
+      "archaeology": 0,
+      "events": 3,
+      "seasonal": 0,
+      "lodging": 61,
+      "food": 43,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24055",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 2,
+      "seasonal": 0,
+      "lodging": 0,
+      "food": 4,
+      "protected_areas": 1
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24056",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 0,
+      "seasonal": 0,
+      "lodging": 7,
+      "food": 15,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24057",
+    "related_entities": [],
+    "counts": {
+      "destinations": 0,
+      "museums": 0,
+      "venues": 1,
+      "archaeology": 0,
+      "events": 0,
+      "seasonal": 0,
+      "lodging": 7,
+      "food": 22,
+      "protected_areas": 0
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": "24058",
+    "related_entities": [
+      "H13",
+      "H14",
+      "H15"
+    ],
+    "counts": {
+      "destinations": 3,
+      "museums": 0,
+      "venues": 0,
+      "archaeology": 0,
+      "events": 4,
+      "seasonal": 2,
+      "lodging": 22,
+      "food": 16,
+      "protected_areas": 1
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  },
+  {
+    "municipality_id": null,
+    "related_entities": [],
+    "counts": {
+      "destinations": null,
+      "museums": null,
+      "venues": null,
+      "archaeology": null,
+      "events": null,
+      "seasonal": null,
+      "lodging": null,
+      "food": null,
+      "protected_areas": null
+    },
+    "scope": "regression_from_all_declared_rows_including_quarantine"
+  }
+]

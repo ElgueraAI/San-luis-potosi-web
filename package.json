@@ -16,7 +16,9 @@
     "test:geo": "node scripts/test-geo.mjs",
     "test:intel": "node scripts/test-geo.mjs tests/intel",
     "test:signals": "node scripts/test-geo.mjs tests/signals",
-    "test": "node scripts/test-geo.mjs && node scripts/test-geo.mjs tests/intel && node scripts/test-geo.mjs tests/signals",
+    "test:data": "node --test tests/data-integrity/*.test.mjs",
+    "data:prepare": "node scripts/academic/etl-mission03.mjs",
+    "test": "node scripts/test-geo.mjs && node scripts/test-geo.mjs tests/intel && node scripts/test-geo.mjs tests/signals && npm run test:data",
     "intel:report": "node scripts/intel/report.mjs",
     "verify:routing": "node scripts/verify/routing.mjs",
     "verify:navigation": "node scripts/verify/navigation.mjs"

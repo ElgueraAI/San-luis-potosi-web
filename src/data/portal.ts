@@ -13,6 +13,7 @@
  *  - Event dates carry their status; a past edition is never shown as 2026.
  */
 import { destinations, getDestination, hasMedia, type Destination, type RegionId } from './research';
+import { municipalDestinations, sameMunicipality, validMunicipalityKey } from '../lib/municipality';
 
 export type Contact = { address?: string | null; phone?: string | null; responsible?: string | null } | null;
 export type Entity = {
@@ -24,7 +25,7 @@ export type Entity = {
   image_ids: string[]; related_entities: string[]; tags: string[]; travel_notes: string | null;
   // class-specific
   slug?: string; seat?: { name: string; latitude: number; longitude: number; altitude_m: number | null; source: string } | null;
-  population_2020?: number | null; counts?: Record<string, number>;
+  population_2020?: number | null; counts?: Record<string, number | null>;
   access_status?: string; site_museum?: boolean; services?: string[];
   date_status?: string; date_pattern?: string | null; months?: number[]; confirmed_dates?: string | null; notes?: string | null;
   start_date?: string | null; end_date?: string | null; recurrence_rule?: string | null; seasonal_window?: { from: number | null; to: number | null; label: string } | null; all_year?: boolean; venue?: string | null; cultural_context?: string | null;
@@ -67,11 +68,11 @@ export const counts = {
 };
 
 // ------------------------------------------------------------ municipalities -
-export const muniById = new Map(municipalities.map((m) => [m.id, m]));
+export const muniById = new Map(municipalities.filter((m) => validMunicipalityKey(m.id)).map((m) => [m.id, m]));
 export const muniBySlug = new Map(municipalities.map((m) => [m.slug!, m]));
 export const muniByName = new Map(municipalities.map((m) => [slugify(m.canonical_name), m]));
 export const municipalityOf = (name: string | null | undefined) => (name ? muniByName.get(slugify(name)) ?? null : null);
-const inMuni = (list: Entity[], id: string) => list.filter((e) => e.municipality_id === id);
+const inMuni = (list: Entity[], id: string | null) => list.filter((e) => sameMunicipality(e.municipality_id, id));
 
 export type MuniView = {
   m: Entity; destinations: Destination[]; museums: Entity[]; venues: Entity[]; archaeology: Entity[]; events: Entity[];
@@ -79,13 +80,13 @@ export type MuniView = {
   image: string | null; puebloMagico: boolean;
 };
 export function muniView(m: Entity): MuniView {
-  const ds = destinations.filter((d) => municipalityOf(d.municipality)?.id === m.id);
+  const ds = municipalDestinations(destinations, attractionsAll, m.id);
   const image = ds.map((d) => d.media.hero ?? d.media.card).find(hasMedia) ?? null;
   // official listings first, then registry rows; alphabetical inside each group (no ranking)
   const byOfficial = (a: Entity, b: Entity) => Number(!!b.official_directory) - Number(!!a.official_directory) || a.canonical_name.localeCompare(b.canonical_name, 'es');
   return {
     m, destinations: ds, museums: inMuni(museums, m.id), venues: inMuni(venues, m.id), archaeology: inMuni(archaeology, m.id),
-    events: events.filter((e) => e.municipality_id === m.id),
+    events: inMuni(events, m.id),
     protected: inMuni(protectedAreas, m.id), heritage: inMuni(heritageDeclarations, m.id), cathedrals: inMuni(cathedrals, m.id),
     lodging: inMuni(lodging, m.id).sort(byOfficial), food: inMuni(food, m.id).sort(byOfficial),
     recreation: inMuni(recreation, m.id), mobility: inMuni(mobility, m.id),

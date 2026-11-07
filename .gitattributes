@@ -9,3 +9,9 @@
 *.webm binary
 *.pmtiles binary
 *.woff2 binary
+
+# Mission 03 generated text is UTF-8/LF. Historical evidence stays byte-exact.
+research/curated/mission03/*.json text eol=lf
+research/curated/mission03/baseline-audit.json -text whitespace=cr-at-eol
+research/curated/mission03/municipalities-before.json -text
+research/curated/mission03/raw-manifest-before.json -text

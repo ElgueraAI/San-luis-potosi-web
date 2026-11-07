@@ -1,0 +1,624 @@
+{
+  "audit_version": 1,
+  "evidence": "[DERIVADO] Counts from local JSON snapshots; not visitor statistics.",
+  "scope": "All research/entities/*/index.json except routes for field checks; four registries used by intelligence provenance. Context 2022 not included in entity totals.",
+  "datasets": [
+    {
+      "name": "archaeology",
+      "generated": "2026-10-06",
+      "records": 3
+    },
+    {
+      "name": "attractions",
+      "generated": "2026-10-06",
+      "records": 85
+    },
+    {
+      "name": "cultural-venues",
+      "generated": "2026-10-06",
+      "records": 183
+    },
+    {
+      "name": "events",
+      "generated": "2026-10-06",
+      "records": 152
+    },
+    {
+      "name": "food-drink",
+      "generated": "2026-10-06",
+      "records": 3433
+    },
+    {
+      "name": "lodging",
+      "generated": "2026-10-06",
+      "records": 709
+    },
+    {
+      "name": "mobility",
+      "generated": "2026-10-06",
+      "records": 5
+    },
+    {
+      "name": "municipalities",
+      "generated": "2026-10-06",
+      "records": 59
+    },
+    {
+      "name": "museums",
+      "generated": "2026-10-06",
+      "records": 44
+    },
+    {
+      "name": "recreation",
+      "generated": "2026-10-06",
+      "records": 27
+    },
+    {
+      "name": "routes",
+      "generated": "2026-10-06",
+      "records": 1
+    },
+    {
+      "name": "services",
+      "generated": "2026-10-06",
+      "records": 261
+    }
+  ],
+  "total_entity_rows": 4961,
+  "registry": {
+    "rows": 112,
+    "unique_ids": 110,
+    "duplicate_ids": [
+      "inegi-denue",
+      "inegi-iter-2020"
+    ],
+    "duplicate_variants": [
+      {
+        "id": "inegi-denue",
+        "previous": {
+          "source_id": "inegi-denue",
+          "institution": "INEGI",
+          "domain": "inegi.org.mx",
+          "title": "Directorio Estadístico Nacional de Unidades Económicas (DENUE) – San Luis Potosí",
+          "url": "https://www.inegi.org.mx/contenidos/masiva/denue/denue_24_csv.zip",
+          "source_type": "official-dataset",
+          "region": null,
+          "destination": null,
+          "retrieval_date": "2026-10-05",
+          "accessibility_status": "accessible",
+          "verification_status": "official",
+          "notes": "Establishment coordinates (museums, theatres, churches). File dated 2026-05-20. sha256 6e611e177ab4483d6777301bb39829ac04a5bbc820046f64f5bbf110d8947269.",
+          "registry": "research/source-registry/sources.json"
+        },
+        "next": {
+          "source_id": "inegi-denue",
+          "institution": "INEGI",
+          "domain": "inegi.org.mx",
+          "title": "Directorio Estadístico Nacional de Unidades Económicas (DENUE), San Luis Potosí, descarga masiva",
+          "url": "https://www.inegi.org.mx/app/descarga/?ti=6",
+          "source_type": "official-open-data",
+          "region": null,
+          "destination": null,
+          "retrieval_date": "2026-10-06",
+          "accessibility_status": "accessible",
+          "verification_status": "official",
+          "notes": "Bulk CSV for state 24; establishments registered by INEGI (fecha_alta up to 2025). Evidence of registration, not of current operation.",
+          "registry": "research/source-registry/sources-pass5.json"
+        }
+      },
+      {
+        "id": "inegi-iter-2020",
+        "previous": {
+          "source_id": "inegi-iter-2020",
+          "institution": "INEGI",
+          "domain": "inegi.org.mx",
+          "title": "Principales resultados por localidad (ITER), Censo de Población y Vivienda 2020 – San Luis Potosí",
+          "url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+          "source_type": "official-dataset",
+          "region": null,
+          "destination": null,
+          "retrieval_date": "2026-10-05",
+          "accessibility_status": "accessible",
+          "verification_status": "official",
+          "notes": "Locality coordinates (DMS) and altitude for 6,729 localities. Modified 2022-05-19. sha256 a7b71f3f0c833ed70d7e9ed99da39394c754b11ca59e317747abc84f929e3080 (research/raw/inegi).",
+          "registry": "research/source-registry/sources.json"
+        },
+        "next": {
+          "source_id": "inegi-iter-2020",
+          "institution": "INEGI",
+          "domain": "inegi.org.mx",
+          "title": "Censo de Población y Vivienda 2020, Principales resultados por localidad (ITER), San Luis Potosí",
+          "url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_24_cpv2020_csv.zip",
+          "source_type": "official-open-data",
+          "region": null,
+          "destination": null,
+          "retrieval_date": "2026-10-06",
+          "accessibility_status": "accessible",
+          "verification_status": "official",
+          "notes": "Municipal population 2020 and seat (cabecera) coordinates.",
+          "registry": "research/source-registry/sources-pass5.json"
+        }
+      }
+    ],
+    "explicit_licence_fields": 0,
+    "missing_retrieval_date": 0
+  },
+  "counts": {
+    "missing_municipality_id": 14,
+    "missing_coordinate_pair": 83,
+    "missing_source": 9,
+    "missing_region": 140,
+    "missing_name": 3,
+    "unknown_municipality_id": 132,
+    "missing_id": 1,
+    "null_source_reference": 1,
+    "duplicate_id": 0,
+    "unresolved_source_reference": 0,
+    "unresolved_entity_reference": 0,
+    "invalid_coordinate": 0,
+    "outside_slp_bbox": 0,
+    "malformed_verified_date": 0,
+    "invalid_month": 0,
+    "reversed_event_dates": 0
+  },
+  "duplicate_name_groups": 103,
+  "unresolved_sources": [],
+  "pozos": {
+    "id": null,
+    "municipality_id": null,
+    "counts": {
+      "destinations": 4,
+      "museums": 0,
+      "venues": 0,
+      "archaeology": 1,
+      "events": 4,
+      "seasonal": 0,
+      "lodging": 0,
+      "food": 0,
+      "protected_areas": 0
+    },
+    "related_entities": [
+      "A03",
+      "A15",
+      "H02",
+      "H18"
+    ],
+    "rows_with_24059": 132,
+    "null_key_memberships": [
+      {
+        "id": "arq-tanute",
+        "municipality": null,
+        "dataset": "archaeology"
+      },
+      {
+        "id": "A03",
+        "municipality": null,
+        "dataset": "attractions"
+      },
+      {
+        "id": "A15",
+        "municipality": null,
+        "dataset": "attractions"
+      },
+      {
+        "id": "H02",
+        "municipality": null,
+        "dataset": "attractions"
+      },
+      {
+        "id": "H18",
+        "municipality": null,
+        "dataset": "attractions"
+      },
+      {
+        "id": "ev-xantolo",
+        "municipality": "Huasteca (varios)",
+        "dataset": "events"
+      },
+      {
+        "id": "slp-gob-semana-santa-2026",
+        "municipality": null,
+        "dataset": "events"
+      },
+      {
+        "id": "sic-festival-1494",
+        "municipality": null,
+        "dataset": "events"
+      },
+      {
+        "id": "sic-festival-254",
+        "municipality": null,
+        "dataset": "events"
+      },
+      {
+        "id": "estadia-379",
+        "municipality": null,
+        "dataset": "food-drink"
+      },
+      {
+        "id": "estadia-369",
+        "municipality": null,
+        "dataset": "food-drink"
+      },
+      {
+        "id": "estadia-226",
+        "municipality": null,
+        "dataset": "food-drink"
+      },
+      {
+        "id": "svc-sectur-guias",
+        "municipality": null,
+        "dataset": "services"
+      }
+    ]
+  },
+  "examples": {
+    "missing_municipality_id": [
+      {
+        "dataset": "archaeology",
+        "id": "arq-tanute",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "A03",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "A15",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "H02",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "H18",
+        "detail": null
+      },
+      {
+        "dataset": "events",
+        "id": "ev-xantolo",
+        "detail": null
+      },
+      {
+        "dataset": "events",
+        "id": "slp-gob-semana-santa-2026",
+        "detail": null
+      },
+      {
+        "dataset": "events",
+        "id": "sic-festival-1494",
+        "detail": null
+      }
+    ],
+    "missing_coordinate_pair": [
+      {
+        "dataset": "archaeology",
+        "id": "arq-tanute",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "A03",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "A09",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "A15",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "C12",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "C14",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "H02",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "H09",
+        "detail": null
+      }
+    ],
+    "missing_source": [
+      {
+        "dataset": "attractions",
+        "id": "A03",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "A05",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "A15",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "C02",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "C04",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "C06",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "C14",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "H03",
+        "detail": null
+      }
+    ],
+    "missing_region": [
+      {
+        "dataset": "attractions",
+        "id": "A15",
+        "detail": null
+      },
+      {
+        "dataset": "attractions",
+        "id": "H18",
+        "detail": null
+      },
+      {
+        "dataset": "events",
+        "id": "slp-gob-semana-santa-2026",
+        "detail": null
+      },
+      {
+        "dataset": "food-drink",
+        "id": "estadia-379",
+        "detail": null
+      },
+      {
+        "dataset": "food-drink",
+        "id": "estadia-369",
+        "detail": null
+      },
+      {
+        "dataset": "food-drink",
+        "id": "estadia-226",
+        "detail": null
+      },
+      {
+        "dataset": "food-drink",
+        "id": "denue-9810133",
+        "detail": null
+      },
+      {
+        "dataset": "food-drink",
+        "id": "denue-10238364",
+        "detail": null
+      }
+    ],
+    "missing_name": [
+      {
+        "dataset": "food-drink",
+        "id": "denue-12289596",
+        "detail": null
+      },
+      {
+        "dataset": "food-drink",
+        "id": "denue-12289437",
+        "detail": null
+      },
+      {
+        "dataset": "lodging",
+        "id": "denue-12288934",
+        "detail": null
+      }
+    ],
+    "unknown_municipality_id": [
+      {
+        "dataset": "food-drink",
+        "id": "denue-9810133",
+        "detail": "24059"
+      },
+      {
+        "dataset": "food-drink",
+        "id": "denue-10238364",
+        "detail": "24059"
+      },
+      {
+        "dataset": "food-drink",
+        "id": "denue-8807694",
+        "detail": "24059"
+      },
+      {
+        "dataset": "food-drink",
+        "id": "denue-10800962",
+        "detail": "24059"
+      },
+      {
+        "dataset": "food-drink",
+        "id": "denue-3719997",
+        "detail": "24059"
+      },
+      {
+        "dataset": "food-drink",
+        "id": "denue-7374924",
+        "detail": "24059"
+      },
+      {
+        "dataset": "food-drink",
+        "id": "denue-9762132",
+        "detail": "24059"
+      },
+      {
+        "dataset": "food-drink",
+        "id": "denue-9996810",
+        "detail": "24059"
+      }
+    ],
+    "missing_id": [
+      {
+        "dataset": "municipalities",
+        "id": null,
+        "detail": null
+      }
+    ],
+    "null_source_reference": [
+      {
+        "dataset": "municipalities",
+        "id": null,
+        "detail": null
+      }
+    ]
+  },
+  "duplicate_name_examples": [
+    {
+      "key": "cultural-venues|24028|auditorio rafael nieto",
+      "ids": [
+        "sic-auditorio-750",
+        "sic-auditorio-1671"
+      ]
+    },
+    {
+      "key": "food-drink|24053|restaurante bar el tunel",
+      "ids": [
+        "estadia-406",
+        "denue-10375678"
+      ]
+    },
+    {
+      "key": "food-drink|24028|callejon 7b",
+      "ids": [
+        "estadia-250",
+        "denue-3691500"
+      ]
+    },
+    {
+      "key": "food-drink|24028|croque la vie",
+      "ids": [
+        "estadia-244",
+        "denue-7965565"
+      ]
+    },
+    {
+      "key": "food-drink|24028|la posada del virrey",
+      "ids": [
+        "estadia-216",
+        "denue-6393072"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "research/entities/archaeology/index.json",
+      "bytes": 5258,
+      "sha256": "d7dde2f188ec4c95b5c9c7d11857b916e6d7ab1e120f4dbf542449c29af9898a"
+    },
+    {
+      "path": "research/entities/attractions/index.json",
+      "bytes": 101607,
+      "sha256": "93189b8138ba97278e5b5b6188b7fbb2b7bc04d541704b2556c390f1d935c8b6"
+    },
+    {
+      "path": "research/entities/cultural-venues/index.json",
+      "bytes": 234098,
+      "sha256": "cd836d546801f1e6d8214029c2e96525ac82259631cb6cf99b70e5404f56acf6"
+    },
+    {
+      "path": "research/entities/events/index.json",
+      "bytes": 229572,
+      "sha256": "e9dc97648deb849ed4e720b5aa584f660059e543ccf09348631549122de49818"
+    },
+    {
+      "path": "research/entities/food-drink/index.json",
+      "bytes": 4494173,
+      "sha256": "dfd01b6b823b44fe3851c13a1b1215ade086a2979b87a3a487ba4a6bc88a05c3"
+    },
+    {
+      "path": "research/entities/lodging/index.json",
+      "bytes": 900552,
+      "sha256": "55e8bcba3aa9223c985b9ead11461e5af51a4a9ae6a0a8caed75eb0d08220ca5"
+    },
+    {
+      "path": "research/entities/mobility/index.json",
+      "bytes": 6642,
+      "sha256": "7671adf6119f0d22df6cba8c34f13e932a30dcaecd703aa069a60a4d6a161194"
+    },
+    {
+      "path": "research/entities/municipalities/index.json",
+      "bytes": 79410,
+      "sha256": "1bb30b193468ee799af36dfdbf1167acace83e25b5801b724594489e97c78d86"
+    },
+    {
+      "path": "research/entities/museums/index.json",
+      "bytes": 99667,
+      "sha256": "c526b7df545186cbc0ad3ae08fe37698b4b9493b29105da34f16e9ff6ae95623"
+    },
+    {
+      "path": "research/entities/recreation/index.json",
+      "bytes": 34927,
+      "sha256": "99800e3d7f77bc99e63642f0c727aa97bcd8b973b23be9450195c37ff1a35b37"
+    },
+    {
+      "path": "research/entities/routes/index.json",
+      "bytes": 414,
+      "sha256": "f7c23514a265ca88067d4f1f06dc677d37dea3ad748da7c5648c03adfb41b6f7"
+    },
+    {
+      "path": "research/entities/services/index.json",
+      "bytes": 327281,
+      "sha256": "44bde8693c9580600fa138b357827b94ea24584e09c796a4c194cd449ca5c908"
+    },
+    {
+      "path": "research/generated/seasonal-additions-pass4.json",
+      "bytes": 4966,
+      "sha256": "30d171e6821393d7fb7fba09a8aad9cc367504ae4b60891daf096dc9e3275e4f"
+    },
+    {
+      "path": "research/source-registry/sources-pass5.json",
+      "bytes": 11028,
+      "sha256": "e8cedd1d5c3a90aece7909b9efe147b1de76b145c51faa530d852098455c3071"
+    },
+    {
+      "path": "research/source-registry/sources-pass6.json",
+      "bytes": 8102,
+      "sha256": "9a1e298f06058361211c0e12de3051e6230ad36d406f3b85c04e31ab17f162c3"
+    },
+    {
+      "path": "research/source-registry/sources.json",
+      "bytes": 50597,
+      "sha256": "5fa82a8dff7b5381e6a4b8559dd0035314cc48d458692a3cb9042b9adcca64c6"
+    }
+  ],
+  "limitations": [
+    "No external URL availability or licences inferred.",
+    "Name duplicates are candidates for review, not proof of duplicate businesses.",
+    "Bounding-box checks are not polygon membership or municipal boundary validation.",
+    "Date format/order checked; not current event operation or full calendar validity.",
+    "No raw inputs changed and no network calls made."
+  ]
+}

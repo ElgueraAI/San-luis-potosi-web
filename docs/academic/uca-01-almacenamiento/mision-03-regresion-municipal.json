@@ -1,0 +1,46 @@
+{
+  "evidence_class": "[DERIVADO]",
+  "date": "2026-11-07",
+  "baseline_commit": "00d2ca39aeecf7feba863838c509bb15a6b80dba",
+  "legacy_features_sha256": "bd6dfa39ca7b0ef021ee23c0e284a8d7f09673ccb1a4e2bca9e59da4e4297e31",
+  "scope": "Features municipales con idénticas fichas normalizadas; snapshots municipales original checkpoint y corregido local. Orden por id; igualdad de todos los campos.",
+  "before_rows": 59,
+  "after_rows": 58,
+  "comparable_keys": 58,
+  "unchanged_comparable_keys": 58,
+  "baseline_comparable_sha256": "77ef56e72165004242d26eb4187b1c4b4d066ef1cd285c6fd929c534e314ca76",
+  "new_comparable_sha256": "77ef56e72165004242d26eb4187b1c4b4d066ef1cd285c6fd929c534e314ca76",
+  "differences": [],
+  "excluded_before": [
+    {
+      "id": "name:Villa de Pozos",
+      "name": "Villa de Pozos",
+      "slug": "villa-de-pozos",
+      "region": null,
+      "coord": null,
+      "population": null,
+      "counts": {
+        "destinations": 4,
+        "museums": 0,
+        "venues": 0,
+        "archaeology": 1,
+        "events": 4,
+        "lodging": 0,
+        "food": 0,
+        "protected_areas": 0,
+        "flagship": 0,
+        "pueblo_magico": 0
+      },
+      "assets": 0,
+      "asset_share": 0,
+      "infrastructure_index": 0,
+      "exposure_proxy": 0,
+      "diversification_potential": 0.3,
+      "coverage_index": 0.5
+    }
+  ],
+  "limits": [
+    "No certifica vigencia de catálogo contemporáneo, afluencia ni capacidad de carga.",
+    "La comparación mantiene idénticas fichas de lugares; no compara medidas de audiencia."
+  ]
+}
