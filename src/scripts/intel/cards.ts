@@ -114,6 +114,7 @@ export function recommendationCard(r: Recommendation, ds: Pick<IntelDataset, 'so
     <div class="rk__side">
       ${opt.compact ? `<p class="rk__score" aria-label="Puntaje ${r.score} de 100"><b>${r.score}</b><span aria-hidden="true">/ 100</span></p>` : ''}
       <p class="rk__ev" data-evidence="${r.evidence}">${EVIDENCE_TEXT[r.evidence]}</p>
+      ${p.url ? `<a class="arrow" href="${esc(p.url)}">Información del lugar</a>` : ''}
       ${routeButton(p)}
     </div>
   </li>`;

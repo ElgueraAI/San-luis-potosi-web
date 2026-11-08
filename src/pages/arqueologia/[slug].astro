@@ -4,15 +4,17 @@
  * hours and cost as read on Lugares INAH (dated); documented sites show only
  * what the publication says and an explicit "access not confirmed".
  */
+import PlaceFacts from '@/components/ui/PlaceFacts.astro';
+import { entityFacts } from '@/lib/place-facts';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/ui/PageHeader.astro';
 import DestinationCard from '@/components/ui/DestinationCard.astro';
 import EntityCard from '@/components/portal/EntityCard.astro';
 import MapView from '@/components/map/MapView.astro';
 import RouteButton from '@/components/ui/RouteButton.astro';
-import { archaeology, archSlug, ACCESS, muniById, muniView, near, lodging, type Entity } from '@/data/portal';
+import { archaeology, archSlug, ACCESS, muniById, near, lodging, type Entity } from '@/data/portal';
 import { getDestination, destinations } from '@/data/research';
-import { href, muniHref, destHref } from '@/i18n/routes';
+import { href, destHref } from '@/i18n/routes';
 
 export function getStaticPaths() {
   return archaeology.map((a) => ({ params: { slug: archSlug(a) }, props: { a } }));
@@ -35,18 +37,7 @@ const sister = archaeology.filter((x) => x.id !== a.id && x.access_status === 'O
     <div class="wrap ad">
       <h2 id="ad-t" class="psec__title">{open ? 'Visitar la zona' : 'Lo que se sabe'}</h2>
       {a.short_description && <p class="lede ad__text">{a.short_description}</p>}
-      <dl class="facts">
-        <div><dt>Acceso</dt><dd>{ACCESS[a.access_status!]}</dd></div>
-        {a.historical_context && <div><dt>{open ? 'Periodo' : 'Referencia'}</dt><dd>{a.historical_context}</dd></div>}
-        {muni && <div><dt>Municipio</dt><dd><a href={muniHref(muni.slug!)}>{muni.canonical_name}</a></dd></div>}
-        {a.opening_hours && <div><dt>Horario</dt><dd>{a.opening_hours}</dd></div>}
-        {a.price && <div><dt>Costo</dt><dd>{a.price}</dd></div>}
-        {a.site_museum != null && <div><dt>Museo de sitio</dt><dd>{a.site_museum ? 'Sí' : 'No'}</dd></div>}
-        {a.services && a.services.length > 0 && <div><dt>Servicios</dt><dd>{a.services.join(', ')}</dd></div>}
-        {a.official_contact?.address && <div class="facts__wide"><dt>Ubicación oficial</dt><dd>{a.official_contact.address}</dd></div>}
-        {a.official_contact?.responsible && <div><dt>Responsable</dt><dd>{a.official_contact.responsible}</dd></div>}
-        {a.official_url && <div class="facts__wide"><dt>Fuente oficial</dt><dd><a href={a.official_url} rel="noopener" target="_blank">{open ? 'Lugares INAH' : 'Publicación del INAH'}</a></dd></div>}
-      </dl>
+      <PlaceFacts model={entityFacts(a)} />
       {open ? <p class="truth">Horario y costo leídos en Lugares INAH el 6 de octubre de 2026. Pueden cambiar: confírmalos antes de ir.</p> : <p class="truth">{a.travel_notes}</p>}
       {place && <a class="arrow" href={destHref(place.slug)}>Más sobre {place.name}</a>}
     </div>

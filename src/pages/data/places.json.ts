@@ -1,3 +1,4 @@
+import { placeDetailsHref } from '@/lib/place-links';
 /**
  * One static JSON for the client (map panels, Mi Ruta): every published
  * destination plus every plotted map place, with a small image URL and its
@@ -37,11 +38,11 @@ export const GET: APIRoute = async () => {
   // `group` feeds the optional clustered layers of the discovery map (seats, culture, nature, lodging).
   const ent = (e: Entity, kind: string, url: string | null, lat = e.latitude, lon = e.longitude) => ({
     id: e.id, name: e.canonical_name, region: (e.region ?? 'centro') as RegionId, kind, municipality: e.municipality,
-    description: e.short_description ? e.short_description.slice(0, 220) : null, url, coords: [lon!, lat!] as [number, number],
+    description: e.short_description ? e.short_description.slice(0, 220) : null, url: placeDetailsHref(e.id) ?? url, coords: [lon!, lat!] as [number, number],
     status: e.coordinate_status === 'verified' ? 'ready' : 'provisional', interests: [], image: null, layer: 'entity',
     weather: (() => { const w = weatherPointFor({ id: e.id, region: (e.region ?? 'centro') as RegionId, municipality: e.municipality }); return { key: w.key, name: w.name, lat: w.lat, lon: w.lon }; })(),
   });
-  const muniUrl = (e: Entity) => (e.municipality_id ? muniHref(muniById.get(e.municipality_id)!.slug!) : null);
+  const muniUrl = (e: Entity) => (e.municipality_id && muniById.get(e.municipality_id)?.slug ? muniHref(muniById.get(e.municipality_id)!.slug!) : null);
   for (const m of municipalities) if (m.seat && m.region) out.push({ ...ent(m, 'Municipio (cabecera)', muniHref(m.slug!), m.seat.latitude, m.seat.longitude), group: 'seats' });
   for (const a of archaeology) if (a.latitude != null) out.push({ ...ent(a, 'Zona arqueológica', archHref(archSlug(a))), group: 'culture' });
   for (const v of [...museums, ...venues]) if (v.latitude != null && v.region) out.push({ ...ent(v, v.subcategory ?? 'Recinto cultural', `${href('museums')}?q=${encodeURIComponent(v.canonical_name)}`), group: 'culture' });

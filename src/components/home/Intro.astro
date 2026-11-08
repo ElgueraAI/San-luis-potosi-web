@@ -19,8 +19,7 @@ const figures = [
       <p class="tiny muted intro__cap">Semidesierto potosino, camino a Matehuala.</p>
     </div>
     <div class="intro__text" data-reveal>
-      <p class="label">Descubre</p>
-      <h2 id="intro-title" class="display display--lg">No es un solo destino.<br /><em>Es un descenso.</em></h2>
+      <h2 id="intro-title" class="display display--lg">Un estado.<br /><em>Muchas formas de sentirlo.</em></h2>
       <p class="lede">Real de Catorce está en lo alto de la sierra; Ciudad Valles, casi al nivel del río. Entre ambos, San Luis Potosí pasa del desierto a la cantera, de los manantiales a la selva.</p>
       <p class="body muted">Cuatro regiones con paisajes, climas y culturas distintas, que se pueden recorrer en un mismo viaje. Este sitio te ayuda a descubrirlas todas, no solo las más conocidas.</p>
     </div>
@@ -36,10 +35,13 @@ const figures = [
 </section>
 
 <style>
-  .intro__grid { display: grid; gap: var(--sc-7); align-items: end; }
+  .intro__grid { display: grid; gap: var(--sc-7); align-items: center; }
   @media (min-width: 900px) { .intro__grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: clamp(3rem, 6vw, 7rem); } }
   .intro__text { display: grid; gap: var(--sc-5); padding-bottom: var(--sc-4); }
   .intro__text h2 em { color: var(--slp-gold-deep); }
+  .intro__text h2 { font-size: clamp(2.8rem, 4.5vw, 5.1rem); line-height: .98; }
+  .intro__media { position: relative; }
+  @media (min-width: 900px) { .intro__media { padding-top: 4rem; } .intro__media::before { content: 'SAN LUIS POTOSÍ'; position: absolute; top: .2rem; left: 0; font: 650 .7rem/1 var(--sc-font-text); letter-spacing: .3em; color: var(--sc-ink-soft); } }
   .intro__cap { margin-top: 0.6rem; }
   .intro__figures {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 0;

@@ -31,13 +31,12 @@ const short = (name: string) => name.split(' – ')[0];
           <div class="xp__media">
             <Photo
               id={x.image}
-              ratio="4/5"
+              ratio={i === 0 ? '16/10' : i === 3 ? '4/5' : '4/3'}
               sizes="(max-width: 760px) 82vw, (max-width: 1100px) 45vw, 28rem"
               widths={[420, 640, 900, 1200]}
               fallback={{ label: `${x.d.name} · Experiencia`, subject: x.title, region: x.d.region, ratio: '4:5' }}
             />
             <span class="xp__cue"><span class="xp__dot" aria-hidden="true"></span>{x.interest}</span>
-            <span class="xp__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
           </div>
           <div class="xp__body">
             <p class="xp__meta"><span class="xp__reg">{REGION_NAME[x.d.region]}</span><span aria-hidden="true"> · </span>{short(x.d.name)}</p>
@@ -52,16 +51,20 @@ const short = (name: string) => name.split(' – ')[0];
 </section>
 
 <style>
-  .xps { background:
-    radial-gradient(70% 55% at 100% 0%, rgb(63 163 131 / 0.16), transparent 62%),
-    radial-gradient(60% 50% at 0% 100%, rgb(199 163 90 / 0.08), transparent 60%),
-    var(--sc-canvas); }
-  .xps__grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2.5rem, 4vw, 3.5rem) clamp(1rem, 2vw, 1.75rem); }
-  @media (max-width: 1100px) { .xps__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .xps { background: var(--sc-canvas); }
+  .xps__grid { list-style: none; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(3rem, 6vw, 6rem) clamp(1rem, 3vw, 3rem); align-items: start; }
+  .xps__grid > li { grid-column: span 4; }
+  .xps__grid > li:first-child { grid-column: span 8; }
+  .xps__grid > li:nth-child(2) { margin-top: 7rem; }
+  .xps__grid > li:nth-child(3) { grid-column: 1 / span 5; }
+  .xps__grid > li:nth-child(4) { grid-column: 8 / span 5; margin-top: 5rem; }
+  .xps__grid > li:nth-child(5) { grid-column: 1 / span 7; }
+  .xps__grid > li:nth-child(6) { grid-column: 9 / span 4; margin-top: 5rem; }
+  .xps__grid > li:first-child .xp__title { font-size: clamp(2.3rem, 3.2vw, 3.7rem); }
+  @media (min-width: 761px) and (max-width: 1100px) { .xps__grid > li { grid-column: span 6; } .xps__grid > li:first-child { grid-column: 1 / -1; } .xps__grid > li:nth-child(2) { margin-top: 0; } .xps__grid > li:nth-child(4) { grid-column: span 6; } .xps__grid > li:nth-child(5) { grid-column: span 6; margin-top: 0; } .xps__grid > li:nth-child(6) { grid-column: 1 / -1; } }
   @media (max-width: 760px) {
-    .xps__grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 82%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: var(--sc-3); }
-    .xps__grid::-webkit-scrollbar { display: none; }
-    .xps__grid > li { scroll-snap-align: start; }
+    .xps__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .xps__grid > li, .xps__grid > li:nth-child(n) { grid-column: auto; margin-top: 0; }
   }
 
   .xp { position: relative; display: grid; gap: var(--sc-4); height: 100%; grid-template-rows: auto 1fr; }
@@ -71,7 +74,6 @@ const short = (name: string) => name.split(' – ')[0];
   .xp__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(10 14 12 / 0.45), transparent 26%), linear-gradient(0deg, color-mix(in srgb, var(--slp-region-deep) 70%, transparent), transparent 34%); pointer-events: none; }
   .xp__media::before { content: ''; position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 3px; background: var(--slp-region-ui); }
   .xp__media :global(img) { filter: saturate(1.05) contrast(1.04); }
-  .xp__n { position: absolute; z-index: 1; right: 1rem; bottom: 0.8rem; font: 500 2.4rem/1 var(--sc-font-display); color: rgb(246 241 231 / 0.88); letter-spacing: 0.02em; }
   .xp__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-light); flex: none; }
   .xp__cue { position: absolute; z-index: 1; top: 0.9rem; left: 0.9rem; display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.75rem; border-radius: 999px; background: rgb(246 241 231 / 0.92); color: var(--slp-charcoal); font: 700 0.62rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; }
   .xp__body { display: grid; gap: 0.6rem; align-content: start; grid-template-rows: auto auto 1fr auto; }

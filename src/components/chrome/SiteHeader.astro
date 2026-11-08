@@ -22,14 +22,13 @@ const { overlay = false } = Astro.props;
       <button class="hdr__link hdr__desk" type="button" aria-expanded="false" aria-controls="explore-panel" data-explore-toggle>
         Destinos <span class="hdr__caret" aria-hidden="true"></span>
       </button>
-      <a class="hdr__link hdr__desk" href={href('discover')}>Descubre</a>
-      <a class="hdr__link hdr__desk" href={href('thingsToDo')}>Qué hacer</a>
-      <a class="hdr__link hdr__desk" href={href('events')}>Eventos</a>
+      <a class="hdr__link hdr__discover" href={href('discover')}>Descubre</a>
+      <a class="hdr__link hdr__desk hdr__intel" href={href('intelligence')}>Inteligencia</a>
       <a class="hdr__link hdr__desk" href={href('plan')}>Planea</a>
       <a class="hdr__link hdr__desk" href={href('map')}>Mapa</a>
       <a class="hdr__link hdr__search" href={href('search')} aria-label="Buscar en el sitio"><span class="hdr__glass" aria-hidden="true"></span></a>
-      <a class="hdr__link hdr__route" href={href('myRoute')}>
-        <span class="hdr__route-label">Mi Ruta</span>
+      <a class="hdr__link hdr__route" href={href('myRoute')} aria-label="Mi Ruta">
+        <span class="hdr__route-label"><span class="hdr__mi">Mi </span>Ruta</span>
         <span class="hdr__count" data-route-count aria-label="lugares guardados">0</span>
       </a>
       <span class="hdr__lang hdr__desk" title="Español. La versión en inglés está en preparación."><abbr title="Español">ES</abbr></span>
@@ -87,7 +86,7 @@ const { overlay = false } = Astro.props;
     position: absolute;
     inset: 0 0 -60%;
     z-index: -1;
-    background: linear-gradient(180deg, rgb(16 19 18 / 0.5), rgb(16 19 18 / 0));
+    background: linear-gradient(180deg, rgb(5 13 11 / 0.7), rgb(5 13 11 / 0.62) 60%, rgb(5 13 11 / 0));
     pointer-events: none;
   }
   /* Scrolling down hides the header; scrolling up brings it back. */
@@ -113,6 +112,8 @@ const { overlay = false } = Astro.props;
     border: 0;
     background: none;
     color: inherit;
+    white-space: nowrap;
+    flex-shrink: 0;
     font: 650 0.76rem/1 var(--sc-font-text);
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -156,6 +157,9 @@ const { overlay = false } = Astro.props;
     color: var(--slp-charcoal);
     box-shadow: var(--sc-e3);
     border-top: 1px solid var(--sc-hairline);
+    max-height: calc(100dvh - var(--slp-header-h));
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
   .explore__inner { width: var(--slp-wrap); margin-inline: auto; padding: var(--sc-6) 0 var(--sc-7); display: grid; gap: var(--sc-5); grid-template-columns: 1fr; }
   .explore__grid { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sc-5); }
@@ -171,6 +175,23 @@ const { overlay = false } = Astro.props;
   .hdr__search { width: var(--slp-tap); justify-content: center; }
   .hdr__glass { position: relative; width: 15px; height: 15px; border: 1.6px solid currentColor; border-radius: 50%; }
   .hdr__glass::after { content: ''; position: absolute; right: -5px; bottom: -4px; width: 7px; height: 1.6px; background: currentColor; transform: rotate(45deg); }
-  @media (max-width: 1280px) { .hdr__desk.hdr__link[href$="planea/"], .hdr__desk.hdr__link[href$="eventos/"] { display: none; } }
-  @media (max-width: 1040px) { .hdr__desk.hdr__link[href$="que-hacer/"] { display: none; } }
+  @media (max-width: 1160px) { .hdr__lang { display: none; } }
+  @media (max-width: 1040px) { .hdr__intel { display: none; } }
+  @media (max-width: 600px) {
+    .hdr__search { display: none; }
+    .hdr__bar { gap: 0.5rem; }
+    .hdr__nav { gap: 0.35rem; }
+    .hdr__discover { font-size: 0.7rem; padding-inline: 0.2rem; }
+    .hdr__menu { min-width: 44px; justify-content: center; }
+  }
+  @media (max-width: 360px) { .hdr__discover { display: none; } }
+  @media (max-width: 480px) {
+    .hdr__brand :global(.brand__mark) { display: none; }
+    .hdr__brand :global(.brand) { gap: 0; }
+    .hdr__mi { display: none; }
+    .hdr__nav { gap: 0.15rem; }
+    .hdr__link { padding-inline: 0.2rem; }
+  }
+  :global(html.hdr-hidden) .hdr:focus-within { transform: none; }
+  @media (prefers-reduced-motion: reduce) { .hdr, .explore__card :global(img), .hdr__link::after { transition: none; } }
 </style>

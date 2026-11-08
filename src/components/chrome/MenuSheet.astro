@@ -183,6 +183,7 @@ const trail = (p: Panel): string[] => (p.parent ? [...trail(byId.get(p.parent)!)
 
     <div class="menu__quick">
       <a href={href('discover')}>Descubre</a>
+      <a href={href('intelligence')}>Inteligencia turística</a>
       <a href={href('map')}>Mapa</a>
       <a href={href('seasons')}>Temporadas</a>
       <a href={href('experiences')}>Experiencias</a>
@@ -203,11 +204,12 @@ const trail = (p: Panel): string[] => (p.parent ? [...trail(byId.get(p.parent)!)
     display: grid; grid-template-rows: auto 1fr auto;
     padding: 0 clamp(1.25rem, 4vw, 3.25rem) var(--sc-5);
     background: var(--slp-charcoal);
+    overscroll-behavior: contain;
   }
   .menu__top { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: var(--sc-3); min-height: var(--slp-header-h); background: var(--slp-charcoal); }
   .menu__search { flex: 1; display: flex; align-items: center; border-bottom: 1px solid rgb(246 241 231 / 0.3); }
   .menu__search input { flex: 1; min-width: 0; min-height: var(--slp-tap); border: 0; background: none; color: inherit; font: 500 1rem/1.2 var(--sc-font-text); }
-  .menu__search input::placeholder { color: rgb(246 241 231 / 0.55); }
+  .menu__search input::placeholder { color: #bfbcb3; }
   .menu__search button { width: var(--slp-tap); height: var(--slp-tap); border: 0; background: none; color: inherit; font-size: 1.2rem; }
   .menu__close { width: var(--slp-tap); height: var(--slp-tap); border: 0; background: none; position: relative; color: inherit; flex: none; }
   .menu__close span::before, .menu__close span::after { content: ''; position: absolute; left: 11px; right: 11px; top: 50%; height: 1.5px; background: currentColor; transform: rotate(45deg); }

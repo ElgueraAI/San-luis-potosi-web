@@ -13,7 +13,7 @@ interface Props { name: 'lodging' | 'food' | 'culture'; items: Entity[]; types?:
 const { name, items, types = [], label, note, total } = Astro.props;
 const munis = municipalities.filter((m) => items.some((i) => i.municipality_id === m.id) || true);
 ---
-<div class="dir" data-dir data-dir-src={href('directoryData', { name })} data-muni-base={href('municipalities')}>
+<div class="dir" data-dir data-facts-base={href('placeFactsData', { id: '__ID__' })} data-dir-src={href('directoryData', { name })} data-muni-base={href('municipalities')}>
   <form class="dir__form" data-dir-form role="search" aria-label={`Filtrar ${label}`}>
     <label>Buscar<input type="search" name="q" placeholder="Nombre, dirección, municipio…" autocomplete="off" /></label>
     <label>Región

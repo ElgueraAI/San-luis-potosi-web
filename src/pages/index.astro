@@ -17,13 +17,11 @@ import Weather from '@/components/ui/Weather.astro';
 import SeasonModule from '@/components/season/SeasonModule.astro';
 import ResourceGroups from '@/components/guides/ResourceGroups.astro';
 import Practical from '@/components/plan/Practical.astro';
-import ManualAsset from '@/components/media/ManualAsset.astro';
 import Photo from '@/components/media/Photo.astro';
-import { href } from '@/i18n/routes';
-import { preloadFor } from '@/lib/media';
+import { href, asset } from '@/i18n/routes';
 import { mapPlaces } from '@/data/research';
 
-const preload = await preloadFor('wc-69780780', [640, 960, 1280, 1600, 2000, 2560]);
+const preload = { srcset: asset('media/hero-original-1080p-poster.png'), sizes: '100vw' };
 const nav = [
   { id: 'descubre', label: 'Descubre' },
   { id: 'regiones', label: 'Regiones' },
@@ -95,7 +93,7 @@ const jsonLd = {
         <p class="label">Guías y recursos</p>
         <h2 id="guides-title" class="display display--lg">Información oficial, a un clic.</h2>
         <p class="body muted">Folletos, mapas y el directorio de guías acreditados, enlazados a sus fuentes oficiales.</p>
-        <ManualAsset label="Guías y recursos · Retrato" ratio="3:2" subject="Guía de turistas acreditado trabajando con un grupo, con autorización de imagen." region="centro" class="guides__ph" />
+        <Photo id="wc-63495269" ratio="3/2" sizes="(max-width: 900px) 100vw, 30vw" class="guides__ph" />
         <a class="arrow" href={href('guides')}>Todos los recursos</a>
       </div>
       <ResourceGroups only={['folletos', 'mapas', 'guias-turisticos', 'movilidad']} />

@@ -44,6 +44,8 @@ export async function initDiscover(box: HTMLElement): Promise<void> {
     ds = await loadIntel(box.dataset.intelUrl!);
   } catch {
     status.textContent = 'No se pudieron cargar los datos del recomendador. Revisa tu conexión y recarga la página.';
+    box.removeAttribute('data-loading');
+    $('[data-discover-error]').hidden = false;
     return;
   }
   box.removeAttribute('data-loading');
@@ -93,6 +95,9 @@ export async function initDiscover(box: HTMLElement): Promise<void> {
     intCount.textContent = p.interests.length ? `${p.interests.length} ${p.interests.length === 1 ? 'interés elegido' : 'intereses elegidos'}.` : 'Elige uno o varios.';
     intReset.hidden = p.interests.length === 0;
     radios.forEach((r) => (r.checked = p[r.name as 'duration' | 'mode' | 'budget'] === r.value));
+    const summary = $('[data-profile-progress]');
+    const duration = DURATIONS.find((d) => d.id === p.duration)?.label;
+    summary.textContent = p.interests.length ? `${p.interests.length} ${p.interests.length === 1 ? 'interés' : 'intereses'} · ${duration ?? 'Tiempo por elegir'}. Tus sugerencias se actualizan abajo.` : 'Empieza por lo que te inspira. Puedes explorar sin completar todas las preferencias.';
   };
   chips.forEach((c) => c.addEventListener('click', () => {
     const id = c.dataset.int as ProfileInterest;

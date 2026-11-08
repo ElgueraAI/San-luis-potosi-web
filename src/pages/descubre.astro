@@ -19,12 +19,20 @@ const wx = weatherPoints.map((p) => ({ key: p.key, lat: p.lat, lon: p.lon }));
 const factors = (Object.keys(WEIGHTS) as FactorId[]).map((id) => ({ label: FACTOR_LABEL[id], pct: Math.round(WEIGHTS[id] * 100) }));
 ---
 <BaseLayout title="Descubre a tu medida" description="Elige tus intereses y el tiempo que tienes: el portal te sugiere lugares de San Luis Potosí y te explica por qué, con datos de fuentes oficiales." image="wc-45072628">
-  <PageHeader label="Descubre a tu medida" title="Dinos cómo viajas. Te decimos por qué ir." lede="Elige lo que te interesa y el tiempo que tienes. Cada sugerencia explica de dónde sale su puntaje: tus intereses, la temporada, la distancia, el clima de hoy y lo que pasa este mes." image="wc-45072628" crumbs={[{ label: 'Descubre a tu medida' }]} />
+  <PageHeader label="Descubre a tu medida" title="Tu próxima historia empieza aquí." lede="Elige tus intereses y el tiempo que tienes. Encuentra lugares para tu viaje, descubre por qué encajan contigo y guarda tus favoritos en Mi Ruta." image="wc-45072628" crumbs={[{ label: 'Descubre a tu medida' }]}>
+    <a class="btn btn--light" href="#tu-viaje">Encuentra tu lugar <span aria-hidden="true">↓</span></a>
+  </PageHeader>
+
+  <nav class="dc-journey wrap" aria-label="Cómo descubrir tu viaje">
+    <a href="#tu-viaje"><b>01</b><span>Elige lo que te mueve</span></a>
+    <a href="#dc-r"><b>02</b><span>Compara y descubre por qué</span></a>
+    <a href={href('myRoute')}><b>03</b><span>Guarda y arma Mi Ruta</span></a>
+  </nav>
 
   <section class="psec psec--tight" data-ground="light" data-discover data-loading data-intel-url={href('intelData')} data-wx={JSON.stringify(wx)} aria-labelledby="dc-t">
     <div class="wrap dc">
-      <form class="dc__form" aria-labelledby="dc-t" onsubmit="return false">
-        <h2 id="dc-t" class="psec__title">Tu viaje</h2>
+      <form id="tu-viaje" class="dc__form" aria-labelledby="dc-t" onsubmit="return false">
+        <div class="dc__form-head"><p class="label">01 · Tus preferencias</p><h2 id="dc-t" class="psec__title">Diseña tu viaje</h2><p class="small muted">Puedes cambiar de idea en cualquier momento.</p><p class="dc__profile-status small" data-profile-progress role="status">Empieza por lo que te inspira.</p><a class="dc__jump" href="#dc-r">Ver recomendaciones <span aria-hidden="true">↓</span></a></div>
 
         <fieldset class="seg">
           <legend class="label">Qué te interesa</legend>
@@ -71,9 +79,11 @@ const factors = (Object.keys(WEIGHTS) as FactorId[]).map((id) => ({ label: FACTO
 
       <div class="dc__out">
         <div class="dc__head">
-          <p class="label">Selección personalizada</p>
+          <p class="label">02 · Selección personalizada</p>
           <h2 class="psec__title" id="dc-r">Para ti</h2>
-          <p class="dc__status small" data-status aria-live="polite">Cargando recomendaciones…</p>
+          <p class="dc__status small" data-status role="status">Cargando recomendaciones…</p>
+          <p class="small" data-discover-error hidden><a href={href('discover')}>Volver a cargar los datos</a> · <a href={href('destinations')}>Explorar destinos</a></p>
+          <noscript><p class="small">Activa JavaScript para usar las recomendaciones. También puedes <a href={href('destinations')}>explorar todos los destinos</a> y sus fuentes.</p></noscript>
           <p class="tiny muted" data-climate></p>
           <p class="small" data-style hidden>Tu estilo de viaje en esta sesión: <strong data-style-name></strong>. <a href={href('segments')}>Cómo se calcula</a></p>
         </div>
@@ -136,7 +146,17 @@ const factors = (Object.keys(WEIGHTS) as FactorId[]).map((id) => ({ label: FACTO
 
 <style>
   .dc { display: grid; gap: var(--sc-7); }
-  @media (min-width: 1100px) { .dc { grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); align-items: start; } .dc__form { position: sticky; top: calc(var(--slp-header-h) + 1rem); max-height: calc(100svh - var(--slp-header-h) - 2rem); overflow-y: auto; } }
+  @media (min-width: 1100px) { .dc { grid-template-columns: minmax(0, 19rem) minmax(0, 1fr); align-items: start; gap: clamp(1.5rem, 3vw, 3rem); } }
+  @media (min-width: 1100px) and (min-height: 950px) { .dc__form { position: sticky; top: calc(var(--slp-header-h) + 1rem); max-height: calc(100svh - var(--slp-header-h) - 2rem); overflow-y: auto; scrollbar-gutter: stable; } }
+  .dc-journey { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--sc-hairline-strong); }
+  .dc-journey a { display: flex; align-items: center; gap: 1rem; min-height: 5.5rem; padding: 1rem; text-decoration: none; font-size: 0.82rem; font-weight: 650; }
+  .dc-journey a + a { border-left: 1px solid var(--sc-hairline-strong); }
+  .dc-journey b { font: 500 2rem/1 var(--sc-font-display); color: var(--slp-gold-deep); }
+  .dc__form-head { display: grid; gap: 0.6rem; }
+  .dc__profile-status { border-left: 2px solid var(--slp-gold-deep); padding-left: .8rem; color: var(--slp-forest); }
+  .dc__jump { display: flex; justify-content: space-between; align-items: center; min-height: 44px; color: var(--slp-forest); font-size: 0.8rem; font-weight: 700; }
+  .dc__form { scroll-margin-top: calc(var(--slp-header-h) + 1rem); }
+  #dc-r { scroll-margin-top: calc(var(--slp-header-h) + 2rem); }
   .dc__form { display: grid; gap: var(--sc-5); padding: var(--sc-5); border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: var(--slp-paper); min-width: 0; }
   .dc__form .psec__title { font-size: clamp(1.8rem, 1.5rem + 1vw, 2.3rem); }
   .dc__chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
@@ -145,7 +165,9 @@ const factors = (Object.keys(WEIGHTS) as FactorId[]).map((id) => ({ label: FACTO
   .dc__field { display: grid; gap: 0.35rem; }
   .dc__field select { min-height: var(--slp-tap); padding: 0 0.6rem; border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm); background: #fff; font: 600 0.9rem/1.2 var(--sc-font-text); color: var(--slp-charcoal); max-width: 100%; min-width: 0; }
   .dc__out { display: grid; gap: var(--sc-5); min-width: 0; }
-  .dc__head { display: grid; gap: 0.5rem; }
+  .dc__head { display: grid; gap: 0.65rem; padding: clamp(1.2rem, 3vw, 2rem); background: var(--slp-forest-2); color: var(--slp-ivory); border-top: 3px solid var(--slp-gold); }
+  .dc__head .label, .dc__head .muted { color: #c1cfc8; }
+  .dc__head .psec__title { font-size: clamp(2rem, 1.6rem + 2vw, 3.2rem); }
   .dc__status { max-width: 70ch; }
   .dc__alt { display: grid; gap: var(--sc-3); padding-top: var(--sc-5); }
   .dc__alt[hidden] { display: none; }
@@ -165,4 +187,11 @@ const factors = (Object.keys(WEIGHTS) as FactorId[]).map((id) => ({ label: FACTO
   .dc-priv { display: grid; gap: var(--sc-4); }
   .dc-priv__list { display: grid; gap: 0.5rem; padding-left: 1.1rem; max-width: 70ch; }
   .dc-priv__acts { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
+  @media (max-width: 600px) {
+    .dc-journey { grid-template-columns: 1fr; }
+    .dc-journey a { min-height: 3.5rem; padding: 0.6rem 0; }
+    .dc-journey a + a { border-left: 0; border-top: 1px solid var(--sc-hairline); }
+    .dc-journey b { font-size: 1.6rem; }
+    .dc-priv__acts .btn { white-space: normal; text-align: center; padding-block: 0.75rem; }
+  }
 </style>

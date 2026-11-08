@@ -33,6 +33,7 @@ const paths = {
   about: { es: '/acerca/', en: '/en/about/' },
   destinations: { es: '/destinos/', en: '/en/destinations/' },
   directoryData: { es: '/data/{name}.json', en: '/data/{name}.json' },
+  placeFactsData: { es: '/data/place-facts/{id}.json', en: '/data/place-facts/{id}.json' },
   placesData: { es: '/data/places.json', en: '/data/places.json' },
   routeContextData: { es: '/data/route-context.json', en: '/data/route-context.json' },
   intelData: { es: '/data/intel.json', en: '/data/intel.json' },

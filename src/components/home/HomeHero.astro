@@ -1,128 +1,161 @@
 ---
-/**
- * Home hero. Real de Catorce panorama (strongest approved asset; the layered
- * Altiplano dawn plates are still NEEDS_MANUAL_ASSET) with restrained depth:
- * the photograph, the shade and the measured terrain line move at different
- * rates (src/scripts/hero.ts). Static under reduced motion.
- */
+/** Owned travel reel and separate manual regional photographs.
+ * Inactive photos in templates make no browser requests until selected. */
 import Photo from '@/components/media/Photo.astro';
-import { href, regionHref } from '@/i18n/routes';
-import { REGIONS } from '@/data/regions';
-import { profileGeometry } from '@/lib/profile';
-import { mediaRecord } from '@/lib/media';
+import { href, regionHref, asset } from '@/i18n/routes';
+import { HERO_REGIONS, HERO_REEL } from '@/data/heroRegions';
+import { mediaRecord, thumbUrl } from '@/lib/media';
+// The reviewed manifest names local derivatives prepared from the owned file.
+const reelReady = HERO_REEL.rightsReviewed && HERO_REEL.sources.length > 0;
+const reelPoster = asset(HERO_REEL.poster);
 
-const HERO = 'wc-69780780';
-const rec = mediaRecord(HERO)!;
-const g = profileGeometry(1600, 140, { tolerance: 10, ceil: 3100 });
+const regions = await Promise.all(HERO_REGIONS.map(async (r) => ({
+  ...r, credit: mediaRecord(r.photo)!,
+  poster: r.video ? await thumbUrl(r.photo, 1600) : null,
+})));
+const widths = [640, 960, 1280, 1600, 2000, 2560];
 ---
-<section class="hero" data-ground="dark" data-hero-depth aria-labelledby="hero-title">
-  <div class="hero__media" data-depth="0.18">
-    <Photo id={HERO} fill eager focal="50% 62%" mobileFocal="36% 62%" sizes="100vw" widths={[640, 960, 1280, 1600, 2000, 2560]} />
+<section class="hero" data-ground="dark" data-hero-depth data-current={reelReady ? 'reel' : '0'} aria-labelledby="hero-title">
+  <div class="hero__stage" data-hero-stage aria-hidden="true">
+    {reelReady && <div class="hero__scene" data-hero-scene="reel" data-active>
+      <img class="hero__poster" src={reelPoster} alt="" width="1920" height="1080" fetchpriority="high" />
+      <video data-hero-video autoplay muted loop playsinline preload="none" poster={reelPoster} aria-hidden="true" tabindex="-1">
+        {HERO_REEL.sources.map((s) => <source data-src={asset(s.path)} data-media={s.media} type={s.type} />)}
+      </video>
+    </div>}
+    {!reelReady && (
+    <div class="hero__scene" data-hero-scene="0" data-active>
+      <Photo id={regions[0].photo} fill eager alt="" focal={regions[0].focal} mobileFocal={regions[0].mobileFocal} sizes="100vw" widths={widths} />
+      {regions[0].video?.rightsReviewed && (
+        <video data-hero-video autoplay muted loop playsinline preload="none" poster={regions[0].poster ?? undefined} aria-hidden="true" tabindex="-1">
+          {regions[0].video.sources.map((s) => <source data-src={asset(s.path)} type={s.type} />)}
+        </video>
+      )}
+    </div>
+    )}
+    {regions.map((r, i) => (reelReady || i > 0) && (
+      <template data-hero-template={i}>
+        <div class="hero__scene" data-hero-scene={i}>
+          <Photo id={r.photo} fill alt="" focal={r.focal} mobileFocal={r.mobileFocal} sizes="100vw" widths={widths} />
+          {r.video?.rightsReviewed && (
+            <video data-hero-video autoplay muted loop playsinline preload="none" poster={r.poster ?? undefined} aria-hidden="true" tabindex="-1">
+              {r.video.sources.map((s) => <source data-src={asset(s.path)} type={s.type} />)}
+            </video>
+          )}
+        </div>
+      </template>
+    ))}
   </div>
   <div class="hero__shade" aria-hidden="true"></div>
 
-  <svg class="hero__line" data-depth="0.32" viewBox="0 0 1600 140" preserveAspectRatio="none" aria-hidden="true">
-    <path d={g.line} vector-effect="non-scaling-stroke" />
-  </svg>
-
-  <div class="hero__copy wrap" data-depth="-0.08">
-    <p class="label hero__kicker">San Luis Potosí · México</p>
+  <div class="hero__body wrap">
     <h1 id="hero-title" class="display hero__title">
       <span>Cuatro mundos.</span>
       <span><em>Un</em> San Luis Potosí.</span>
     </h1>
-    <p class="hero__lede">Del desierto alto a la selva de la Huasteca: un solo estado que cambia de paisaje, de luz y de cultura cuatro veces.</p>
-    <div class="hero__ctas">
-      <a class="btn btn--light" href="#regiones">Explora San Luis Potosí</a>
-      <a class="btn btn--outline-light" href={href('plan')}>Planea tu viaje</a>
+    <div class="visually-hidden" aria-hidden="true">
+      {reelReady && <div data-hero-reel-place><h2>Video original de San Luis Potosí</h2></div>}
+      {regions.map((r, i) => <div data-hero-place={i} hidden={reelReady || i !== 0}><h2>{r.name} · {r.place}</h2></div>)}
     </div>
   </div>
 
   <div class="hero__foot wrap">
-    <ul class="hero__regions" aria-label="Las cuatro regiones">
-      {REGIONS.map((r) => (
-        <li data-region={r.id}><a href={regionHref(r.slug)}><span class="hero__dot" aria-hidden="true"></span>{r.name}</a></li>
-      ))}
-    </ul>
-    <p class="hero__caption tiny">
-      Real de Catorce, Altiplano · Foto: {rec.author}, {rec.licence}
-      <span class="hero__pending" title="home-01-hero: escena por capas al amanecer (Altiplano). Needs manual asset.">· Escena por capas pendiente</span>
-    </p>
+    <div class="hero__navigation" data-hero-controls inert aria-hidden="true">
+      <details class="hero__region-menu" data-hero-region-menu>
+        <summary title="Cambiar de región">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m16 8-2 6-6 2 2-6z"/></svg>
+          <span data-hero-region-label>Regiones</span>
+        </summary>
+        <div class="hero__region-panel">
+          <div class="hero__regions" role="group" aria-label="Selecciona una región">
+            {regions.map((r, i) => <div class="hero__region-row" data-region={r.id}>
+              <button class="hero__region" type="button" data-hero-select={i} aria-pressed={!reelReady && i === 0} aria-label={`Mostrar fotografía de ${r.name}: ${r.place}`}><span class="hero__region-dot" aria-hidden="true"></span>{r.name}</button>
+              <a class="hero__region-link" href={regionHref(r.id)} aria-label={`Explorar la región ${r.name}`} title={`Explorar ${r.name}`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+            </div>)}
+          </div>
+        </div>
+      </details>
+
+      <div class="hero__transport">
+        {reelReady && <button class="hero__icon" type="button" data-hero-return aria-label="Volver al video" title="Volver al video" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7zM4 5v14"/></svg></button>}
+        <button class="hero__pause hero__icon" type="button" data-hero-pause hidden aria-pressed="false" aria-label="Pausar video" title="Pausar o reanudar video"><span data-hero-pause-icon aria-hidden="true">Ⅱ</span><span class="visually-hidden" data-hero-pause-label>Pausar</span></button>
+        {reelReady && <details class="hero__credit" data-hero-reel-credit>
+          <summary class="hero__icon" aria-label="Autoría y licencia del video" title="Autoría y licencia"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 10v7M12 6v1"/></svg></summary>
+          <div class="hero__credit-body"><p>{HERO_REEL.title} · {HERO_REEL.author}.</p><p>{HERO_REEL.licence}. Archivo original Full HD completo, sin recodificar. Reproducción silenciada.</p><a href={href('credits', {}, 'es', 'video')}>Créditos y fuentes</a></div>
+        </details>}
+        {regions.map((r, i) => <details class="hero__credit" data-hero-credit={i} hidden={reelReady || i !== 0}>
+          <summary class="hero__icon" aria-label={`Autoría y licencia de la fotografía de ${r.name}`} title="Autoría y licencia"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 10v7M12 6v1"/></svg></summary>
+          <div class="hero__credit-body"><p><a href={r.credit.source_url} target="_blank" rel="noopener noreferrer">{r.credit.subject}</a> · {r.credit.author}.</p><p><a href={r.credit.licence_url} target="_blank" rel="noopener noreferrer">{r.credit.licence}</a>. WebP redimensionado y encuadrado.{r.credit.share_alike && ' La fotografía adaptada conserva esta licencia.'}</p><a href={href('credits')}>Todos los créditos y fuentes</a></div>
+        </details>)}
+      </div>
+    </div>
+    <div class="hero__video-status" data-hero-video-status hidden>
+      <progress data-hero-progress value="0" max="100" aria-label="Progreso del video"></progress>
+      <p class="hero__message" data-hero-media-message role="status" hidden></p>
+      <button class="hero__retry" type="button" data-hero-retry hidden>Reintentar video</button>
+    </div>
+    <span class="visually-hidden" aria-hidden="true" data-hero-format></span>
+    <p class="visually-hidden" data-hero-announcement aria-live="polite" aria-atomic="true"></p>
+    <noscript><nav class="hero__fallback" aria-label="Explora las cuatro regiones">{regions.map((r) => <a href={regionHref(r.id)}>{r.name}</a>)}</nav></noscript>
   </div>
 </section>
 
 <style>
-  .hero {
-    position: relative;
-    height: 100svh;
-    min-height: 36rem;
-    max-height: 70rem;
-    overflow: hidden;
-    isolation: isolate;
-    background: var(--slp-night);
-  }
-  .hero__media { position: absolute; inset: -6% 0 -6%; will-change: transform; }
-  .hero__media :global(img) { transform: scale(1.04); }
-  .hero__shade {
-    position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background:
-      linear-gradient(90deg, rgb(15 18 17 / 0.62) 0%, rgb(15 18 17 / 0.28) 42%, rgb(15 18 17 / 0) 70%),
-      linear-gradient(0deg, rgb(15 18 17 / 0.72) 0%, rgb(15 18 17 / 0) 38%);
-  }
-  .hero__line {
-    position: absolute; left: 0; right: 0; bottom: 12%; z-index: 2;
-    width: 100%; height: clamp(70px, 12vh, 130px);
-    fill: none; stroke: rgb(246 241 231 / 0.55); stroke-width: 1.25px;
-    pointer-events: none; will-change: transform;
-  }
-  .hero__copy {
-    position: absolute; z-index: 3; left: 0; right: 0;
-    bottom: clamp(9rem, 24vh, 15rem);
-    display: grid; gap: var(--sc-4); justify-items: start;
-  }
-  .hero__kicker { color: rgb(246 241 231 / 0.86); }
-  .hero__title {
-    font-size: clamp(2.9rem, 1.2rem + 4.6vw, 6.4rem);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    display: grid;
-    white-space: nowrap;
-    text-shadow: 0 2px 30px rgb(10 12 11 / 0.35);
-  }
+  .hero { position: relative; isolation: isolate; display: flex; flex-direction: column; min-height: 36rem; height: 100svh; padding-top: var(--slp-header-h); overflow: clip; background: #10201b; }
+  .hero__stage, .hero__scene, .hero__shade { position: absolute; inset: 0; }
+  .hero__stage { z-index: -2; }
+  .hero__scene { opacity: 0; visibility: hidden; transition: opacity 650ms ease, visibility 650ms; }
+  .hero__scene[data-active] { opacity: 1; visibility: visible; }
+  .hero__poster, .hero__scene video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+  .hero__scene video { position: absolute; inset: 0; opacity: 0; }
+  .hero__scene[data-video-playing] video { opacity: 1; transition: opacity 450ms; }
+  .hero__shade { z-index: -1; pointer-events: none; background: linear-gradient(90deg, rgb(5 13 11 / .56), rgb(5 13 11 / .18) 42%, transparent 66%), linear-gradient(0deg, rgb(5 13 11 / .52), transparent 22%); }
+  .hero__body { flex: 1; display: flex; align-items: end; padding-block: 4rem clamp(3rem, 8vh, 6rem); min-width: 0; }
+  .hero__title { display: grid; gap: .05em; max-width: 100%; font-size: clamp(2.4rem, 5.6vw, 6.7rem); line-height: .98; letter-spacing: -.025em; text-shadow: 0 2px 20px rgb(0 0 0 / .55), 0 1px 3px rgb(0 0 0 / .45); }
   .hero__title em { font-weight: 500; }
-  .hero__lede { max-width: 34rem; font-size: var(--sc-t-lg); line-height: 1.5; color: rgb(246 241 231 / 0.92); }
-  .hero__ctas { display: flex; flex-wrap: wrap; gap: var(--sc-3); margin-top: var(--sc-2); }
-  .hero__foot {
-    position: absolute; z-index: 3; left: 0; right: 0; bottom: var(--sc-5);
-    display: flex; justify-content: space-between; align-items: flex-end; gap: var(--sc-4);
+  .hero__foot { position: relative; padding-block: 0 max(1.4rem, env(safe-area-inset-bottom)); }
+  .hero__navigation { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 44px; }
+  .hero__transport { display: flex; align-items: center; gap: .25rem; }
+  .hero__icon, .hero__region-menu > summary { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 44px; min-width: 44px; padding: .6rem; color: #fffaf0; background: rgb(8 18 15 / .28); border: 1px solid transparent; border-radius: 2px; text-decoration: none; cursor: pointer; list-style: none; }
+  .hero__icon svg, .hero__region-menu > summary svg, .hero__region-link svg { display: block; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .hero__icon:hover, .hero__region-menu > summary:hover { border-color: rgb(255 250 240 / .6); }
+  .hero__pause { font: 500 1.2rem/1 var(--sc-font-text); }
+  .hero__region-menu { position: relative; }
+  .hero__region-menu > summary { padding-inline: .7rem; font: 650 .72rem/1.2 var(--sc-font-text); letter-spacing: .08em; }
+  summary::-webkit-details-marker { display: none; }
+  .hero__region-panel, .hero__credit-body { position: absolute; bottom: calc(100% + .75rem); z-index: 8; padding: .65rem; color: #f6f1e7; background: #10241e; border: 1px solid #68776c; box-shadow: 0 12px 30px rgb(0 0 0 / .22); }
+  .hero__region-panel { left: 0; width: min(19rem, 86vw); }
+  .hero__regions { display: grid; gap: .15rem; }
+  .hero__region-row { display: grid; grid-template-columns: minmax(0, 1fr) 44px; }
+  .hero__region { display: flex; align-items: center; gap: .7rem; min-height: 44px; padding: .65rem; border: 0; background: none; text-align: left; color: inherit; font: 600 .88rem/1.3 var(--sc-font-text); }
+  .hero__region-dot { width: 7px; height: 7px; border: 1px solid #c7cfc5; border-radius: 50%; }
+  .hero__region[aria-pressed='true'] { color: #e8c787; background: #1f382d; }
+  .hero__region[aria-pressed='true'] .hero__region-dot { background: currentColor; border-color: currentColor; }
+  .hero__region-link { display: grid; place-items: center; color: inherit; }
+  .hero__credit { position: relative; }
+  .hero__credit-body { right: 0; width: min(24rem, 86vw); padding: 1rem; font: 450 .8rem/1.6 var(--sc-font-text); }
+  .hero__credit-body p { margin-bottom: .6rem; }
+  .hero__credit-body a { text-underline-offset: .2em; }
+  .hero__video-status { display: flex; align-items: center; gap: 1rem; position: absolute; bottom: 2.7rem; left: 50%; transform: translateX(-50%); }
+  .hero__video-status progress { width: 5rem; height: 2px; accent-color: #e4dfcf; opacity: .7; }
+  .hero__message { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .hero[data-playback='error'] .hero__video-status { bottom: 5rem; padding: .7rem; background: #10241e; width: min(30rem, 90vw); }
+  .hero[data-playback='error'] .hero__message { position: static; width: auto; height: auto; clip-path: none; font-size: .8rem; }
+  .hero__retry { min-height: 44px; padding: .5rem .8rem; color: #fffaf0; background: transparent; border: 1px solid #9ca99c; font: 600 .75rem/1.3 var(--sc-font-text); }
+  .hero__fallback { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
+  .hero__fallback a { display: inline-flex; align-items: center; min-height: 44px; font-size: .8rem; }
+  .hero :is(button, a, summary):focus-visible { outline: 2px solid #fffaf0; outline-offset: 3px; }
+  .hero [hidden] { display: none !important; }
+  :global(html:not([data-js])) .hero__navigation { display: none; }
+  @media (max-width: 600px) {
+    .hero { min-height: 30rem; }
+    .hero__title { font-size: clamp(2.1rem, 8.9vw, 3.4rem); }
+    .hero__body { padding-block: 3rem 4rem; }
+    .hero__foot { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+    .hero__video-status { bottom: 2.3rem; }
+    .hero__video-status progress { width: 3rem; }
+    .hero__shade { background: linear-gradient(90deg, rgb(5 13 11 / .45), transparent 90%), linear-gradient(0deg, rgb(5 13 11 / .55), transparent 40%); }
   }
-  .hero__regions { list-style: none; display: flex; gap: clamp(0.75rem, 2.5vw, 2.25rem); }
-  .hero__regions a {
-    display: inline-flex; align-items: center; gap: 0.5rem; min-height: var(--slp-tap);
-    font: 700 0.72rem/1 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;
-  }
-  .hero__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-dark); }
-  .hero__caption { color: rgb(246 241 231 / 0.78); text-align: right; max-width: 26rem; }
-  .hero__pending { white-space: nowrap; }
-
-  @media (max-width: 760px) {
-    .hero { min-height: 34rem; }
-    .hero__shade {
-      background:
-        linear-gradient(0deg, rgb(15 18 17 / 0.85) 0%, rgb(15 18 17 / 0.45) 45%, rgb(15 18 17 / 0.15) 75%),
-        linear-gradient(180deg, rgb(15 18 17 / 0.35), transparent 30%);
-    }
-    .hero__copy { bottom: 7.2rem; }
-    .hero__title { font-size: clamp(2.3rem, 10.6vw, 3.4rem); }
-    .hero__lede { font-size: 1.02rem; }
-    .hero__ctas { width: 100%; }
-    .hero__ctas .btn { flex: 1 1 100%; }
-    .hero__line { bottom: 5.4rem; height: 56px; }
-    .hero__regions { display: none; }
-    .hero__caption { text-align: left; font-size: 0.66rem; }
-    .hero__pending { display: none; }
-  }
-  @media (max-width: 760px) and (max-height: 700px) {
-    .hero__lede { display: none; }
-  }
+  @media (prefers-reduced-motion: reduce) { .hero__scene, .hero__scene[data-video-playing] video { transition: none; } }
+  :global(html[data-motion='static']) .hero__scene { transition: none; }
 </style>

@@ -12,6 +12,7 @@ export function initMenu(): void {
   const panels = [...menu.querySelectorAll<HTMLElement>('[data-menu-panel]')];
   const get = (id: string) => panels.find((p) => p.dataset.menuPanel === id)!;
   let current = 'root';
+  let previousOverflow = '';
   const origin = new Map<string, string>();
 
   const show = (id: string, focusSel?: string) => {
@@ -26,11 +27,13 @@ export function initMenu(): void {
   opener.addEventListener('click', () => {
     show('root');
     menu.showModal();
+    previousOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
     opener.setAttribute('aria-expanded', 'true');
     menu.querySelector<HTMLElement>('#mp-root-t')?.focus();
   });
   menu.querySelector('[data-menu-close]')?.addEventListener('click', () => menu.close());
-  menu.addEventListener('close', () => { opener.setAttribute('aria-expanded', 'false'); opener.focus(); });
+  menu.addEventListener('close', () => { document.documentElement.style.overflow = previousOverflow; opener.setAttribute('aria-expanded', 'false'); opener.focus({ preventScroll: true }); });
   menu.addEventListener('click', (e) => {
     if (e.target === menu) return menu.close();
     const go = (e.target as Element).closest<HTMLElement>('[data-menu-go]');

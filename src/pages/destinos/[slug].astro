@@ -19,8 +19,9 @@ import {
 import { recViews } from '@/data/seasons';
 import { regionMeta, REGION_NAME, REGIONS } from '@/data/regions';
 import { ITINERARIES } from '@/data/itineraries';
-import { destHref, href, regionHref, muniHref, experienceHref } from '@/i18n/routes';
-import { municipalityOf } from '@/data/portal';
+import { href, regionHref, experienceHref } from '@/i18n/routes';
+import PlaceFacts from '@/components/ui/PlaceFacts.astro';
+import { destinationFacts } from '@/lib/place-facts';
 import { ALL_EXPERIENCES } from '@/data/experiences';
 import { preloadFor, mediaRecord } from '@/lib/media';
 
@@ -131,16 +132,9 @@ const SECTIONS = [
           </div>
         )}
       </div>
-      <aside class="dsum__facts" aria-label="Datos verificados">
-        <p class="label">Datos verificados</p>
-        <dl>
-          <div><dt>Región</dt><dd><a class="link" href={regionHref(meta.slug)}>{meta.officialName}</a></dd></div>
-          {d.municipality && <div><dt>Municipio</dt><dd>{municipalityOf(d.municipality) ? <a href={muniHref(municipalityOf(d.municipality)!.slug!)}>{d.municipality}</a> : d.municipality}</dd></div>}
-          {ALL_EXPERIENCES.filter((x) => x.d.id === d.id).map((x) => <div><dt>Experiencia</dt><dd><a href={experienceHref(x.slug)}>{x.title}</a></dd></div>)}
-          {d.puebloMagico && <div><dt>Distinción</dt><dd>Pueblo Mágico</dd></div>}
-          {d.facts.map((f) => <div><dt>{f.label}</dt><dd>{f.value}<span class="dsum__src">{sourceLabel(f.source)}</span></dd></div>)}
-          <div><dt>Ubicación</dt><dd>{d.mapStatus === 'ready' ? <><span class="status-dot status-dot--ready" aria-hidden="true"></span>Verificada con fuente oficial</> : d.mapStatus === 'provisional' ? <><span class="status-dot status-dot--provisional" aria-hidden="true"></span>Aproximada (OpenStreetMap)</> : 'Sin punto en el mapa'}</dd></div>
-        </dl>
+      <aside class="dsum__facts" aria-label="Información del lugar">
+        <PlaceFacts model={destinationFacts(d)} />
+        {ALL_EXPERIENCES.filter((x) => x.d.id === d.id).map((x) => <a class="arrow" href={experienceHref(x.slug)}>{x.title}</a>)}
         <RouteButton id={d.id} name={d.name} variant="solid" />
       </aside>
     </div>
@@ -288,13 +282,13 @@ const SECTIONS = [
   .dnav__list a { display: inline-flex; align-items: center; min-height: 46px; font: 700 0.68rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--sc-ink-soft); white-space: nowrap; }
   .dsum__grid { display: grid; gap: var(--sc-7); }
   @media (min-width: 960px) { .dsum__grid { grid-template-columns: 1.5fr 1fr; gap: var(--sc-9); } }
-  .dsum__text { display: grid; gap: var(--sc-4); align-content: start; }
-  .dsum__lead { font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.6rem); line-height: 1.2; }
+  .dsum__text { max-width: 66ch;  display: grid; gap: var(--sc-4); align-content: start; }
+  .dsum__lead { font-size: clamp(1.35rem, 1.1rem + .8vw, 1.9rem); line-height: 1.45; }
   .dsum__disputed, .dsum__ethics { padding: var(--sc-3) var(--sc-4); background: var(--sc-surface); border-radius: var(--sc-r-sm); }
   .dsum__todo { margin-top: var(--sc-4); display: grid; gap: var(--sc-3); }
   .dsum__todo ul { list-style: none; border-top: 1px solid var(--sc-hairline); }
   .dsum__todo li { padding: 0.65rem 0; border-bottom: 1px solid var(--sc-hairline); }
-  .dsum__facts { display: grid; gap: var(--sc-4); align-content: start; padding: var(--sc-5); background: var(--sc-surface); border-radius: var(--sc-r-sm); }
+  .dsum__facts { display: grid; gap: var(--sc-4); align-content: start; padding: 0; }
   .dsum__facts dl { margin: 0; }
   .dsum__facts dl div { display: grid; gap: 0.15rem; padding: 0.7rem 0; border-bottom: 1px solid var(--sc-hairline); }
   .dsum__facts dt { font: 700 0.64rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); }

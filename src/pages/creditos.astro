@@ -9,6 +9,7 @@ import PageHeader from '@/components/ui/PageHeader.astro';
 import lib from '@/data/generated/media.json';
 import { sources, profile, weatherConfig, mapAttribution } from '@/data/research';
 import { REGION_NAME } from '@/data/regions';
+import { HERO_REEL } from '@/data/heroRegions';
 
 type Rec = (typeof lib.assets)[keyof typeof lib.assets];
 const assets = Object.values(lib.assets as Record<string, Rec>).sort((a, b) => (a.place_id ?? '').localeCompare(b.place_id ?? ''));
@@ -41,9 +42,21 @@ const official = sources.filter((s) => s.url && /gob|inegi|inah|sectur|slp|conan
         <div class="cr__note">
           <h3 class="display display--sm">Derechos de terceros</h3>
           <p class="small">Algunas fotografías muestran obras o sitios con derechos propios: las esculturas de Leonora Carrington, el jardín escultórico de Las Pozas (que exige permiso para filmar) y monumentos arqueológicos bajo custodia del INAH. Se usan aquí con fines académicos y editoriales, con crédito a su autor fotográfico; un uso comercial requeriría los permisos correspondientes.</p>
+          <ul class="cr__rights small">
+            {thirdParty.map((a) => <li><a href={`#${a.id}`}>{a.subject} · {a.id}</a>: <span lang="en">{a.third_party_rights}</span></li>)}
+          </ul>
+          <p class="small">La licencia de una fotografía no resuelve por sí sola los derechos de obras, marcas o diseños tradicionales representados. Las reservas anteriores se conservan tal como fueron documentadas; requieren revisión antes de un uso promocional nuevo.</p>
         </div>
       )}
       <p class="small muted">Las imágenes marcadas en el sitio como «Needs manual asset» son espacios reservados para fotografía o video que aún debe producirse o licenciarse.</p>
+    </div>
+  </section>
+
+  <section id="video" class="section section--tight" data-ground="ivory" aria-labelledby="video-t">
+    <div class="wrap cr">
+      <h2 id="video-t" class="display display--md">Video de portada</h2>
+      <p class="body">«{HERO_REEL.title}» · {HERO_REEL.author}. {HERO_REEL.licence}, según confirmación de autoría recibida el 8 de noviembre de 2026.</p>
+      <p class="small muted">Archivo original Full HD de 1920 × 1080 píxeles y aproximadamente 2:29 minutos, sin recodificar ni recortar, reproducido sin sonido. Las escenas del video no se presentan como capítulos geográficos verificados; las fotografías de cada región conservan sus créditos individuales.</p>
     </div>
   </section>
 
@@ -69,6 +82,7 @@ const official = sources.filter((s) => s.url && /gob|inegi|inah|sectur|slp|conan
 <style>
   .cr { display: grid; gap: var(--sc-6); }
   .cr__intro { display: grid; gap: var(--sc-3); max-width: 50rem; }
+  .cr__rights { display: grid; gap: 0.6rem; padding-left: 1.2rem; margin-block: 1rem; overflow-wrap: anywhere; }
   .cr__t { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
   .cr__t th, .cr__t td { text-align: left; padding: 0.6rem 0.6rem 0.6rem 0; border-bottom: 1px solid var(--sc-hairline); vertical-align: top; }
   .cr__t thead th { font: 700 0.64rem/1 var(--sc-font-text); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft); }

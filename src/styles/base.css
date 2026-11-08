@@ -4,6 +4,7 @@
    ========================================================================== */
 html {
   background: var(--slp-paper);
+  scrollbar-gutter: stable;
   scroll-padding-top: calc(var(--slp-header-h) + var(--slp-subnav-h) + 1rem);
 }
 body {
@@ -255,3 +256,8 @@ html:not([data-motion]) :is([data-sc-in], [data-sc-stagger] > *, [data-sc-cue]) 
 
 /* [hidden] always wins over component display rules. */
 [hidden] { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+  .chnav, .grow, .meter i, .segc button, .chip-btn, .btn, .rk img { transition: none !important; }
+}

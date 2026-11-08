@@ -7,16 +7,16 @@ import Photo from '@/components/media/Photo.astro';
 import { href } from '@/i18n/routes';
 ---
 <section id="a-tu-medida" class="psec dband" data-ground="ivory" aria-labelledby="db-t">
-  <div class="wrap split split--flip">
-    <div class="split__media"><Photo id="wc-76389273" ratio="4/3" sizes="(min-width: 900px) 50vw, 100vw" widths={[640, 960, 1280]} /></div>
-    <div class="dband__text">
+  <div class="wrap dband__spread">
+    <div class="dband__media" data-reveal><Photo id="wc-76389273" ratio="4/5" sizes="(min-width: 900px) 50vw, 100vw" widths={[640, 960, 1280]} /><p class="dband__caption">Manantial de la Media Luna · Zona Media</p></div>
+    <div class="dband__text" data-reveal>
       <p class="label">A tu medida</p>
-      <h2 id="db-t" class="psec__title">Dinos cómo viajas. Te decimos por qué ir.</h2>
-      <p class="body">Elige lo que te interesa y cuánto tiempo tienes. El portal ordena los lugares del estado con datos de fuentes oficiales y explica cada sugerencia: qué coincide contigo, si es buena temporada, qué tan lejos queda y qué se celebra este mes.</p>
+      <h2 id="db-t" class="display dband__title">Tu próximo viaje comienza con lo que <em>te inspira.</em></h2>
+      <p class="body">Agua, caminos de sierra o una plaza para detenerte. Elige lo que te mueve y el tiempo que tienes; encuentra destinos que encajen contigo y guarda los que quieras recorrer.</p>
       <ul class="dband__list small">
-        <li>Sin cuenta y sin datos personales.</li>
-        <li>Cada puntaje muestra cómo se calculó.</li>
-        <li>También propone alternativas fuera de los destinos emblemáticos.</li>
+        <li>Elige tus intereses.</li>
+        <li>Descubre lugares y por qué se sugieren.</li>
+        <li>Llévalos contigo en Mi Ruta.</li>
       </ul>
       <p class="dband__cta"><a class="btn" href={href('discover')}>Descubrir a mi medida</a></p>
     </div>
@@ -25,6 +25,16 @@ import { href } from '@/i18n/routes';
 
 <style>
   .dband__text { display: grid; gap: var(--sc-4); align-content: center; }
-  .dband__list { display: grid; gap: 0.35rem; padding-left: 1.1rem; color: var(--sc-ink-soft); }
+  .dband { background: #e8e7dc; padding-block: clamp(4rem, 9vw, 9rem); }
+  .dband__spread { display: grid; gap: clamp(2rem, 6vw, 6rem); }
+  .dband__media { position: relative; }
+  .dband__caption { margin-top: .8rem; font-size: .72rem; color: var(--sc-ink-soft); }
+  .dband__title { font-size: clamp(2.8rem, 4.5vw, 5rem); line-height: .98; max-width: 13ch; }
+  .dband__title em { color: var(--slp-forest); }
+  .dband__list { list-style: none; display: grid; gap: 0; color: var(--sc-ink-soft); counter-reset: steps; }
+  .dband__list li { counter-increment: steps; display: flex; align-items: center; gap: 1rem; padding: .8rem 0; border-bottom: 1px solid var(--sc-hairline-strong); }
+  .dband__list li::before { content: counter(steps); color: var(--slp-forest); font: 500 1.5rem/1 var(--sc-font-display); }
   .dband__cta { display: flex; flex-wrap: wrap; gap: var(--sc-4); align-items: center; }
+  @media (min-width: 900px) { .dband__spread { grid-template-columns: 1.05fr 1fr; align-items: center; } .dband__text { padding-block: 2rem; } .dband__media { margin-top: -7rem; } }
+  @media (max-width: 899px) { .dband__media :global(.photo) { aspect-ratio: 4/3 !important; } .dband__title { max-width: 18ch; } }
 </style>

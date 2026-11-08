@@ -11,7 +11,8 @@ import path from 'node:path';
 const argv = process.argv.slice(2);
 const bi = argv.indexOf('--base');
 const BASE = bi > -1 && argv[bi + 1] ? `/${argv[bi + 1].replace(/^\/|\/$/g, '')}` : '';
-const DIST = path.resolve('dist');
+const di = argv.indexOf('--dir');
+const DIST = path.resolve(di > -1 && argv[di + 1] ? argv[di + 1] : 'dist');
 const files = [];
 (function walk(d) {
   for (const f of fs.readdirSync(d)) {

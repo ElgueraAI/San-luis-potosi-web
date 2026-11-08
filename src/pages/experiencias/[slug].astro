@@ -5,6 +5,8 @@
  * seasonal records; nearby places, events and lodging come from data. No
  * duration is shown because no official source gives one.
  */
+import PlaceFacts from '@/components/ui/PlaceFacts.astro';
+import { destinationFacts, municipalityForDestination } from '@/lib/place-facts';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/ui/PageHeader.astro';
 import DestinationCard from '@/components/ui/DestinationCard.astro';
@@ -15,7 +17,7 @@ import Photo from '@/components/media/Photo.astro';
 import { ALL_EXPERIENCES, type Experience } from '@/data/experiences';
 import { alternativesFor, sourceLabel, sourceUrl, MONTHS_ES } from '@/data/research';
 import { recViews } from '@/data/seasons';
-import { municipalityOf, events, lodging, near, eventSlug, REGION_LABEL } from '@/data/portal';
+import { events, lodging, near, eventSlug, REGION_LABEL } from '@/data/portal';
 import { href, destHref, muniHref, eventHref, experienceHref, regionHref } from '@/i18n/routes';
 import { REGIONS } from '@/data/regions';
 
@@ -24,11 +26,9 @@ export function getStaticPaths() {
 }
 const { x } = Astro.props as { x: Experience };
 const d = x.d;
-const muni = municipalityOf(d.municipality);
+const muni = municipalityForDestination(d.id);
 const region = REGIONS.find((r) => r.id === d.region)!;
 const recs = recViews.filter((r) => r.places.some((p) => p.id === d.id));
-const monthsSet = [...new Set(recs.flatMap((r) => r.months))].sort((a, b) => a - b);
-const when = d.season?.value ?? (monthsSet.length >= 12 ? 'Todo el año' : monthsSet.length ? monthsSet.map((m) => MONTHS_ES[m - 1]).join(', ') : null);
 const lat = d.coords?.[1] ?? muni?.latitude ?? null, lon = d.coords?.[0] ?? muni?.longitude ?? null;
 const relEvents = events.filter((e) => (muni && e.municipality_id === muni.id) || e.related_entities.includes(d.id)).slice(0, 4);
 const regEvents = relEvents.length ? [] : events.filter((e) => e.region === d.region && e.date_status !== 'DATE_PENDING').slice(0, 3);
@@ -53,12 +53,8 @@ const sources = [...new Set([x.source, ...d.officialSources, ...recs.map((r) => 
         <p class="label">La historia</p>
         <h2 id="st-t" class="psec__title">{d.name.split(' – ')[0]}</h2>
         <p class="lede">{d.description}</p>
-        <dl class="facts">
-          <div><dt>Dónde</dt><dd>{muni ? <a href={muniHref(muni.slug!)}>{muni.canonical_name}</a> : d.municipality ?? '—'}, {region.name}</dd></div>
-          {when && <div><dt>Cuándo ir</dt><dd>{when}</dd></div>}
-          <div><dt>Tipo</dt><dd>{d.kind}</dd></div>
-          <div><dt>Duración</dt><dd class="muted">Sin dato oficial</dd></div>
-        </dl>
+        <PlaceFacts model={destinationFacts(d)} />
+        <p class="tiny muted">Duración: sin dato oficial.</p>
         <a class="arrow" href={destHref(d.slug)}>Toda la información de {d.name.split(' – ')[0]}</a>
       </div>
       {x.image && <div class="split__media"><Photo id={x.image} ratio="4/5" sizes="(max-width: 900px) 92vw, 40vw" widths={[480, 800, 1200]} /></div>}

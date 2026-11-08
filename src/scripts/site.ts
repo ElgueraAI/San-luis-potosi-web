@@ -28,13 +28,14 @@ if (header?.classList.contains('hdr--overlay')) {
     requestAnimationFrame(() => {
       const y = scrollY;
       const down = y > last + 4, up = y < last - 4;
-      if (down && y > 320 && !header?.hasAttribute('data-open')) root.classList.add('hdr-hidden');
+      if (down && y > 320 && !header?.hasAttribute('data-open') && !header?.contains(document.activeElement)) root.classList.add('hdr-hidden');
       else if (up || y < 120) root.classList.remove('hdr-hidden');
       last = y;
       ticking = false;
     });
   }, { passive: true });
 }
+header?.addEventListener('focusin', () => root.classList.remove('hdr-hidden'));
 
 // ---- Explorar panel ---------------------------------------------------------
 const exploreBtn = document.querySelector<HTMLButtonElement>('[data-explore-toggle]');
@@ -49,6 +50,10 @@ if (exploreBtn && explorePanel && header) {
   exploreBtn.addEventListener('click', () => set(explorePanel.hasAttribute('hidden')));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !explorePanel.hidden) { set(false); exploreBtn.focus(); } });
   document.addEventListener('click', (e) => { if (!explorePanel.hidden && !header.contains(e.target as Node)) set(false); });
+  header.addEventListener('focusout', () => {
+    requestAnimationFrame(() => { if (!header.contains(document.activeElement)) set(false); });
+  });
+  matchMedia('(max-width: 860px)').addEventListener('change', (e) => { if (e.matches) set(false); });
 }
 
 // ---- menu dialog (hierarchical portal menu) ---------------------------------

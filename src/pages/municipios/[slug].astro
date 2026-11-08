@@ -5,6 +5,8 @@
  * municipality with little documented tourism gets a short page (identity,
  * map, what is recorded, neighbours, sources), never filler.
  */
+import PlaceFacts from '@/components/ui/PlaceFacts.astro';
+import { entityFacts } from '@/lib/place-facts';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/ui/PageHeader.astro';
 import DestinationCard from '@/components/ui/DestinationCard.astro';
@@ -15,7 +17,7 @@ import MapView from '@/components/map/MapView.astro';
 import RouteButton from '@/components/ui/RouteButton.astro';
 import Photo from '@/components/media/Photo.astro';
 import { municipalities, muniView, richness, nearbyMunicipalities, REGION_LABEL, mobility, km, eventSlug, archSlug, type Entity } from '@/data/portal';
-import { distances, gastronomyFor, sourceLabel, sourceUrl, MONTHS_ES, type RegionId } from '@/data/research';
+import { distances, gastronomyFor, sourceLabel, sourceUrl, type RegionId } from '@/data/research';
 import { ALL_EXPERIENCES } from '@/data/experiences';
 import { href, regionHref, eventHref, archHref, experienceHref } from '@/i18n/routes';
 import { REGIONS } from '@/data/regions';
@@ -86,14 +88,8 @@ const nav = [
           {seatName && <> Su cabecera es {seatName}{m.seat?.altitude_m ? `, a ${m.seat.altitude_m.toLocaleString('es-MX')} m de altitud` : ''}.</>}
           {m.population_2020 && <> {m.population_2020.toLocaleString('es-MX')} habitantes según el Censo 2020 (INEGI).</>}
         </p>
-        <dl class="facts">
-          <div><dt>Región</dt><dd>{region ? REGION_LABEL[region] : 'Por confirmar'}</dd></div>
-          {seatName && <div><dt>Cabecera</dt><dd>{seatName}</dd></div>}
-          {m.population_2020 && <div><dt>Población 2020</dt><dd>{m.population_2020.toLocaleString('es-MX')}</dd></div>}
-          {m.seat?.altitude_m && <div><dt>Altitud de la cabecera</dt><dd>{m.seat.altitude_m.toLocaleString('es-MX')} m</dd></div>}
-          {v.puebloMagico && <div><dt>Nombramiento</dt><dd>Pueblo Mágico</dd></div>}
-          <div><dt>Clave INEGI</dt><dd>{m.id ?? 'Sin clave'}</dd></div>
-        </dl>
+        <PlaceFacts model={entityFacts(m)} />
+        {v.puebloMagico && <p class="tiny muted">[DERIVADO] El inventario vinculado incluye un destino con nombramiento Pueblo Mágico; consulta su ficha en Lugares.</p>}
         {!rich && (
           <p class="truth">Las fuentes oficiales consultadas documentan poca información turística de {name}. Esta página muestra solo lo registrado: {[v.destinations.length && 'destinos', v.venues.length && 'recintos culturales', v.museums.length && 'museos', v.events.length && 'fiestas', v.lodging.length && 'hospedaje', v.food.length && 'establecimientos de comida'].filter(Boolean).join(', ') || 'su ubicación y municipios vecinos'}.</p>
         )}

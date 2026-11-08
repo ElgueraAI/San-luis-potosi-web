@@ -1,3 +1,4 @@
+import { placeDetailsHref } from '@/lib/place-links';
 /**
  * Site adapter of the intelligence layer: runs the pure pipeline
  * (src/lib/intel) over the portal's collections and adds what only the site
@@ -12,10 +13,10 @@ import { buildDataset } from '@/lib/intel/dataset';
 import type { IntelDataset, IntelPlace } from '@/lib/intel/types';
 import type { RawEntity, RawSeasonRecord } from '@/lib/intel/normalize';
 import type { RawMunicipality } from '@/lib/intel/features';
-import { attractionsAll, archaeology, museums, venues, recreation, eventsAll, municipalities, events, muniById, slugify } from './portal';
+import { attractionsAll, archaeology, museums, venues, recreation, eventsAll, municipalities, events } from './portal';
 import { getDestination, seasonRecords, climate, sources as sourceRegistry, sourceLabel, sourceUrl } from './research';
 import { thumbUrl } from '@/lib/media';
-import { href, destHref, archHref, muniHref, eventHref } from '@/i18n/routes';
+import { destHref, eventHref } from '@/i18n/routes';
 import destIndex from '../../research/destinations/index.json';
 
 const base = buildDataset({
@@ -30,7 +31,6 @@ const base = buildDataset({
   priorities: destIndex.destinations,
 });
 
-const dirUrl = (name: string) => `${href('museums')}?q=${encodeURIComponent(name)}`;
 /** Kinds that /data/places.json carries, so «Añadir a Mi Ruta» works for them. */
 const IN_PLACES = new Set(['archaeology', 'museum', 'gallery', 'craft', 'protected-area']);
 
@@ -40,11 +40,7 @@ function enrich(p: IntelPlace): IntelPlace | null {
     if (!d) return null; // no published page (no verified description, or low-key by request of the source)
     return { ...p, name: d.name, description: d.description, url: destHref(d.slug), image: d.media.card, route_id: d.id };
   }
-  const muni = p.municipality_id ? muniById.get(p.municipality_id) : null;
-  const url = p.kind === 'archaeology' ? archHref(slugify(p.name))
-    : p.kind === 'museum' || p.kind === 'gallery' || p.kind === 'craft' ? dirUrl(p.name)
-    : muni ? muniHref(muni.slug!) : null;
-  return { ...p, description: p.description ? p.description.slice(0, 240) : null, url, route_id: IN_PLACES.has(p.kind) && p.coord && p.region ? p.id : null };
+  return { ...p, description: p.description ? p.description.slice(0, 240) : null, url: placeDetailsHref(p.id), route_id: IN_PLACES.has(p.kind) && p.coord && p.region ? p.id : null };
 }
 
 export const intelPlaces: IntelPlace[] = base.places.map(enrich).filter((p): p is IntelPlace => !!p);

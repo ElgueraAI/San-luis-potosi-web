@@ -24,20 +24,38 @@ function initTooltips(): void {
   const place = (x: number, y: number) => {
     const r = tip.getBoundingClientRect();
     tip.style.left = `${Math.max(8, Math.min(innerWidth - r.width - 8, x + 14))}px`;
-    tip.style.top = `${y + r.height + 24 > innerHeight ? Math.max(8, y - r.height - 12) : y + 16}px`;
+    const top = y + r.height + 24 > innerHeight ? y - r.height - 12 : y + 16;
+    tip.style.top = `${Math.max(8, Math.min(innerHeight - r.height - 8, top))}px`;
   };
   const show = (el: Element, x: number, y: number) => {
+    if (owner && owner !== el) removeDescription(owner);
     const [head, ...rest] = (el.getAttribute('data-tip') ?? '').split('\n');
     tip.innerHTML = `<b>${esc(head)}</b>${esc(rest.join('\n'))}`;
-    tip.hidden = false; owner = el; place(x, y);
+    tip.hidden = false; owner = el;
+    el.setAttribute('aria-describedby', [...new Set([...(el.getAttribute('aria-describedby') ?? '').split(' ').filter(Boolean), tip.id])].join(' '));
+    place(x, y);
   };
-  const hide = () => { tip.hidden = true; owner = null; };
-  document.addEventListener('pointerover', (e) => { const el = (e.target as Element).closest?.('[data-tip]'); if (el) show(el, e.clientX, e.clientY); else if (owner) hide(); });
-  document.addEventListener('pointermove', (e) => { if (owner && e.pointerType === 'mouse') place(e.clientX, e.clientY); });
+  const removeDescription = (el: Element) => {
+    const ids = (el.getAttribute('aria-describedby') ?? '').split(' ').filter(id => id && id !== tip.id);
+    if (ids.length) el.setAttribute('aria-describedby', ids.join(' '));
+    else el.removeAttribute('aria-describedby');
+  };
+  const hide = () => { tip.hidden = true; if (owner) removeDescription(owner); owner = null; };
+  document.addEventListener('pointerover', (e) => { if (owner === document.activeElement) return; const el = (e.target as Element).closest?.('[data-tip]'); if (el) show(el, e.clientX, e.clientY); else if (owner) hide(); });
+  document.addEventListener('pointermove', (e) => { if (owner && owner !== document.activeElement && e.pointerType === 'mouse') place(e.clientX, e.clientY); });
   document.addEventListener('focusin', (e) => { const el = (e.target as Element).closest?.('[data-tip]'); if (el) { const r = el.getBoundingClientRect(); show(el, r.left + r.width / 2, r.bottom - 8); } });
   document.addEventListener('focusout', hide);
+  document.addEventListener('click', (e) => {
+    const el = (e.target as Element).closest?.('[data-tip]');
+    if (el) { const r = el.getBoundingClientRect(); show(el, r.left + r.width / 2, r.bottom); }
+  });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
-  addEventListener('scroll', hide, { passive: true });
+  addEventListener('scroll', () => {
+    if (owner && owner === document.activeElement) {
+      const r = owner.getBoundingClientRect();
+      place(r.left + r.width / 2, r.bottom - 8);
+    } else hide();
+  }, { passive: true });
 }
 
 // ---------------------------------------------------------- chapter index ---

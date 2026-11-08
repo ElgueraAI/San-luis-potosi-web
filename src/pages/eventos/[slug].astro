@@ -5,17 +5,18 @@
  * (destinations, lodging, food in the same municipality). A photograph only
  * when it shows the event or its place (src/data/eventsText.ts).
  */
+import PlaceFacts from '@/components/ui/PlaceFacts.astro';
+import { entityFacts } from '@/lib/place-facts';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/ui/PageHeader.astro';
 import DestinationCard from '@/components/ui/DestinationCard.astro';
 import EntityCard from '@/components/portal/EntityCard.astro';
 import MapView from '@/components/map/MapView.astro';
 import Photo from '@/components/media/Photo.astro';
-import { events, muniById, muniView, DATE_STATUS, REGION_LABEL, fmtConfirmed, near, lodging, eventSlug } from '@/data/portal';
-import { getDestination, sourceLabel, sourceUrl, MONTHS_ES } from '@/data/research';
+import { events, muniById, muniView, DATE_STATUS, near, lodging, eventSlug } from '@/data/portal';
+import { getDestination, MONTHS_ES } from '@/data/research';
 import { EVENT_TEXT, EVENT_IMAGE } from '@/data/eventsText';
-import { href, muniHref, regionHref, eventHref, destHref } from "@/i18n/routes";
-import { REGIONS } from '@/data/regions';
+import { href, eventHref, destHref } from "@/i18n/routes";
 
 export function getStaticPaths() {
   return events.map((e) => ({ params: { slug: e.slug }, props: { e } }));
@@ -23,16 +24,12 @@ export function getStaticPaths() {
 const { e } = Astro.props as { e: (typeof events)[number] };
 const muni = e.municipality_id ? muniById.get(e.municipality_id) ?? null : null;
 const v = muni ? muniView(muni) : null;
-const region = REGIONS.find((r) => r.id === e.region) ?? null;
 const status = DATE_STATUS[e.date_status!];
 const dest = e.related_entities.map((id) => getDestination(id)).find(Boolean) ?? null;
 const img = EVENT_IMAGE[e.id] ?? null;
 // research notes on ev-* records are English working notes; pass-6 notes are written for visitors
 const text = EVENT_TEXT[e.id] ?? e.travel_notes ?? (e.id.startsWith('ev-') ? null : e.notes ?? null);
-const confirmed = fmtConfirmed(e.confirmed_dates);
 const months = (e.months ?? []).map((m) => MONTHS_ES[m - 1]);
-const src = e.source_ids[0];
-const srcUrl = e.official_url ?? (src ? sourceUrl(src) : null);
 const beds = muni ? near(lodging, muni.latitude ?? null, muni.longitude ?? null, 20, 4) : [];
 const sameMonth = events.filter((o) => o.id !== e.id && o.months?.some((m) => e.months?.includes(m))).slice(0, 3);
 ---
@@ -53,15 +50,7 @@ const sameMonth = events.filter((o) => o.id !== e.id && o.months?.some((m) => e.
         <h2 id="ev-t" class="visually-hidden">Información del evento</h2>
         <p class:list={['evd__status', `is-${status.tone}`]}>{status.label}</p>
         {text && <p class="lede evd__text">{text}</p>}
-        <dl class="facts">
-          {confirmed && <div class="facts__wide"><dt>Fechas confirmadas</dt><dd>{confirmed}</dd></div>}
-          {e.date_pattern && <div><dt>Cuándo</dt><dd>{e.date_pattern}</dd></div>}
-          {months.length > 0 && <div><dt>Meses</dt><dd>{months.join(', ')}</dd></div>}
-          <div><dt>Dónde</dt><dd>{muni ? <a href={muniHref(muni.slug!)}>{muni.canonical_name}</a> : e.municipality ?? 'Varios municipios'}</dd></div>
-          {region && <div><dt>Región</dt><dd><a href={regionHref(region.slug)}>{region.name}</a></dd></div>}
-          <div><dt>Categoría</dt><dd>{e.subcategory ?? 'Evento'}</dd></div>
-          <div class="facts__wide"><dt>Fuente oficial</dt><dd>{srcUrl ? <a href={srcUrl} rel="noopener" target="_blank">{src ? sourceLabel(src) : 'Fuente'}</a> : src ? sourceLabel(src) : '—'}</dd></div>
-        </dl>
+        <PlaceFacts model={entityFacts(e)} />
         {e.date_status !== 'CONFIRMED_CURRENT_YEAR' && <p class="truth">Antes de viajar, confirma la fecha con la fuente oficial o el municipio: {status.label.toLowerCase()}.</p>}
         {dest && <a class="arrow" href={destHref(dest.slug)}>Sobre {dest.name.split(' – ')[0]}</a>}
       </div>

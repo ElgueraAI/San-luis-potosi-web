@@ -5,6 +5,8 @@
  * and the type label carry the identity. Shows only fields a source published,
  * the source note, and "Añadir a Mi Ruta" when the entity has a point.
  */
+import PlaceFacts from '@/components/ui/PlaceFacts.astro';
+import { entityFacts } from '@/lib/place-facts';
 import RouteButton from '@/components/ui/RouteButton.astro';
 import { muniHref } from '@/i18n/routes';
 import { REGION_LABEL, muniById, bizNote, DATE_STATUS, ACCESS, type Entity } from '@/data/portal';
@@ -19,7 +21,7 @@ const status = e.date_status ? DATE_STATUS[e.date_status] : null;
 const access = e.access_status ? ACCESS[e.access_status] : null;
 const sourceLine = note !== undefined ? note : isBiz ? bizNote(e) : e.source_ids?.some((s) => s.startsWith('sic')) ? 'Fuente: Sistema de Información Cultural (Secretaría de Cultura)' : e.source_ids?.some((s) => s.startsWith('inah')) ? 'Fuente: INAH' : null;
 ---
-<article class:list={['ecard', { 'ecard--compact': compact }]} data-region={e.region ?? undefined}>
+<article id={`place-${e.id}`} class:list={['ecard', { 'ecard--compact': compact }]} data-region={e.region ?? undefined}>
   <p class="ecard__type">{e.subcategory ?? e.entity_type}</p>
   <H class="ecard__name">{link ? <a href={link}>{e.canonical_name}</a> : e.canonical_name}</H>
   {showMuni && (e.municipality || e.region) && (
@@ -39,6 +41,7 @@ const sourceLine = note !== undefined ? note : isBiz ? bizNote(e) : e.source_ids
       {e.official_contact?.phone && <span class="ecard__phone">Tel. {e.official_contact.phone}</span>}
     </p>
   )}
+  {!link && <details class="ecard__details"><summary>Información del lugar</summary><PlaceFacts model={entityFacts(e)} compact /></details>}
   <div class="ecard__foot">
     {sourceLine && <p class="ecard__src">{sourceLine}</p>}
     {e.latitude != null && <RouteButton id={e.id} name={e.canonical_name} variant="icon" />}
@@ -46,6 +49,7 @@ const sourceLine = note !== undefined ? note : isBiz ? bizNote(e) : e.source_ids
 </article>
 
 <style is:global>
+  .ecard__details > summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-size: .82rem; font-weight: 650; }
   .ecard { position: relative; display: grid; gap: 0.4rem; align-content: start; height: 100%; min-width: 0; overflow-wrap: anywhere; padding: 1.1rem 1.1rem 0.9rem 1.25rem; border-radius: var(--sc-r-sm); background: var(--sc-surface); box-shadow: inset 3px 0 0 var(--slp-region-ui, var(--sc-hairline-strong)); }
   .ecard__type { font: 700 0.62rem/1.3 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--slp-region-text, var(--sc-ink-soft)); }
   .ecard__name { font: 600 1.3rem/1.15 var(--sc-font-display); text-wrap: balance; }

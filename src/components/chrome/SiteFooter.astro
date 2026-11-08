@@ -6,6 +6,7 @@ import Brand from './Brand.astro';
 const year = 2026;
 ---
 <footer class="ftr" data-ground="dark">
+  <div class="wrap ftr__invitation"><p class="display">Elige dónde empieza tu historia.</p><a class="arrow" href={href('discover')}>Descubre a tu medida</a></div>
   <div class="wrap ftr__grid">
     <div class="ftr__brand">
       <Brand />
@@ -21,6 +22,7 @@ const year = 2026;
     <nav aria-label="Descubre y planea">
       <p class="label">Descubre y planea</p>
       <ul>
+        <li><a href={href('discover')}>Descubre a tu medida</a></li>
         <li><a href={href('map')}>Mapa</a></li>
         <li><a href={href('seasons')}>Temporadas</a></li>
         <li><a href={href('routes')}>Rutas</a></li>
@@ -32,6 +34,7 @@ const year = 2026;
     <div>
       <p class="label">Datos y créditos</p>
       <ul>
+        <li><a href={href('intelligence')}>Inteligencia turística</a></li>
         <li><a href={href('credits')}>Créditos fotográficos y licencias</a></li>
         <li><a href={href('credits', {}, 'es', 'fuentes')}>Fuentes oficiales</a></li>
       </ul>
@@ -50,12 +53,14 @@ const year = 2026;
 
 <style>
   .ftr { padding: var(--sc-9) 0 var(--sc-6); }
+  .ftr__invitation { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 3rem; padding-bottom: clamp(2rem, 5vw, 4rem); margin-bottom: clamp(2rem, 5vw, 4rem); border-bottom: 1px solid rgb(246 241 231 / .25); }
+  .ftr__invitation p { font-size: clamp(2rem, 3.5vw, 3.5rem); line-height: 1.05; max-width: 23ch; }
   .ftr__grid { display: grid; gap: var(--sc-7); grid-template-columns: 1fr; }
   @media (min-width: 900px) { .ftr__grid { grid-template-columns: 1.4fr 0.8fr 1fr 1.3fr; } }
   .ftr__brand { display: grid; gap: var(--sc-4); align-content: start; }
   .ftr__tag { font-size: var(--sc-t-xl); }
   .ftr ul { list-style: none; margin-top: var(--sc-3); }
-  .ftr li a { display: inline-flex; align-items: center; min-height: 40px; text-decoration: none; font-weight: 550; }
+  .ftr li a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; font-weight: 550; }
   .ftr li[data-region] a::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--slp-region-dark); margin-right: 0.6rem; }
   @media (hover: hover) and (pointer: fine) { .ftr li a:hover { text-decoration: underline; text-underline-offset: 0.3em; } }
   .ftr__note { margin-top: var(--sc-4); max-width: 34ch; }

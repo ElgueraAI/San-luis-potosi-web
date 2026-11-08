@@ -1,0 +1,207 @@
+{
+  "verified_date": "2026-11-08",
+  "scope": "One owner-provided reel authorized for local portal integration; geographic chapters remain unverified",
+  "videos": [
+    {
+      "id": "hero-alti",
+      "region": "altiplano",
+      "place": "Real de Catorce",
+      "author": null,
+      "official_url": null,
+      "rights_holder": null,
+      "licence": null,
+      "authorization_evidence": null,
+      "permitted_transformations": null,
+      "credit_requirements": null,
+      "local_path": null,
+      "resolution": null,
+      "original_bytes": null,
+      "optimized_bytes": null,
+      "duration_seconds": null,
+      "verification_date": "2026-11-07",
+      "status": "PENDING_AUTHORIZED_ORIGINAL",
+      "production_use": false
+    },
+    {
+      "id": "hero-centro",
+      "region": "centro",
+      "place": "Centro histórico de San Luis Potosí",
+      "author": null,
+      "official_url": null,
+      "rights_holder": null,
+      "licence": null,
+      "authorization_evidence": null,
+      "permitted_transformations": null,
+      "credit_requirements": null,
+      "local_path": null,
+      "resolution": null,
+      "original_bytes": null,
+      "optimized_bytes": null,
+      "duration_seconds": null,
+      "verification_date": "2026-11-07",
+      "status": "PENDING_AUTHORIZED_ORIGINAL",
+      "production_use": false
+    },
+    {
+      "id": "hero-media",
+      "region": "zona-media",
+      "place": "Manantial de la Media Luna",
+      "author": null,
+      "official_url": null,
+      "rights_holder": null,
+      "licence": null,
+      "authorization_evidence": null,
+      "permitted_transformations": null,
+      "credit_requirements": null,
+      "local_path": null,
+      "resolution": null,
+      "original_bytes": null,
+      "optimized_bytes": null,
+      "duration_seconds": null,
+      "verification_date": "2026-11-07",
+      "status": "PENDING_AUTHORIZED_ORIGINAL",
+      "production_use": false
+    },
+    {
+      "id": "hero-huasteca",
+      "region": "huasteca",
+      "place": "Cascada de Tamul",
+      "author": null,
+      "official_url": null,
+      "rights_holder": null,
+      "licence": null,
+      "authorization_evidence": null,
+      "permitted_transformations": null,
+      "credit_requirements": null,
+      "local_path": null,
+      "resolution": null,
+      "original_bytes": null,
+      "optimized_bytes": null,
+      "duration_seconds": null,
+      "verification_date": "2026-11-07",
+      "status": "PENDING_AUTHORIZED_ORIGINAL",
+      "production_use": false
+    }
+  ],
+  "reel": {
+    "id": "hero-owned-reel",
+    "author": "Propietario del video (usuario)",
+    "title": "Descubre las maravillas de San Luis Potosí",
+    "official_url": null,
+    "rights_holder": "Usuario: autoría declarada",
+    "licence": "Permiso directo del titular para edición y uso en el portal",
+    "authorization_evidence": {
+      "date": "2026-11-08",
+      "channel": "Respuesta en este chat",
+      "declaration": "ES MIO"
+    },
+    "permitted_transformations": [
+      "Recorte temporal",
+      "Recorte de barras y encuadre móvil",
+      "Codificación MP4/WebM",
+      "Eliminación de audio",
+      "Poster"
+    ],
+    "credit_requirements": "Material del propietario",
+    "original": {
+      "filename": "Descubre las maravillas de San Luis Potosí.mp4",
+      "sha256": "6bcb7dbec0c42868a210f62752db48d4d07b9ef5d55d7adb34f2530afda24f82",
+      "bytes": 5027736,
+      "duration_seconds": 60.070023,
+      "resolution": [
+        640,
+        360
+      ]
+    },
+    "edit": {
+      "segments_seconds": [
+        [
+          6,
+          11
+        ],
+        [
+          18,
+          23
+        ],
+        [
+          25,
+          30
+        ],
+        [
+          39,
+          44
+        ]
+      ],
+      "duration_seconds": 20,
+      "crop": [
+        640,
+        264,
+        0,
+        46
+      ],
+      "mobile_crop": [
+        148,
+        264,
+        246,
+        0
+      ],
+      "mobile_output": [
+        180,
+        320
+      ],
+      "audio": false
+    },
+    "files": [
+      {
+        "local_path": "public/media/hero-reel-desktop.mp4",
+        "bytes": 2790517,
+        "sha256": "5008d1277cf5ed11d0061adf123cf867d7b789eabf34e4c9f98f0a611c741c71"
+      },
+      {
+        "local_path": "public/media/hero-reel-desktop.webm",
+        "bytes": 2460824,
+        "sha256": "aa49b65ddf6e7fc5c8327df26793e1d25e01d61c9101c3c38f0bd8edf20a4e32"
+      },
+      {
+        "local_path": "public/media/hero-reel-mobile.mp4",
+        "bytes": 752641,
+        "sha256": "67df8aff61f09459407a2392941a222466687c8750bc7d05f2be825a807648e4"
+      },
+      {
+        "local_path": "public/media/hero-reel-mobile.webm",
+        "bytes": 662851,
+        "sha256": "d944d85b6839c9562ba225fd2707500a04672e728dd3a340854b0688958eed22"
+      },
+      {
+        "local_path": "public/media/hero-reel-poster.webp",
+        "bytes": 46364,
+        "sha256": "10c966475d0c5111222f5c240f849c0e6a2beb3969fe59e50c950046cbec6ece"
+      }
+    ],
+    "verification_date": "2026-11-08",
+    "production_use": false,
+    "publication_performed": false,
+    "region_chapters_verified": false,
+    "status": "SUPERSEDED_BY_ORIGINAL_FULL_HD"
+  },
+  "active_video": {
+    "id": "hero-original-1080p",
+    "title": "San Luis Potosí, CHINGON",
+    "author": "Material del propietario",
+    "authorization_evidence": "Archivo proporcionado por el usuario para sustituir el reel y conservar el original Full HD",
+    "local_path": "public/media/hero-original-1080p.mp4",
+    "resolution": [
+      1920,
+      1080
+    ],
+    "duration_seconds": 149.54,
+    "bytes": 78331246,
+    "sha256": "bdddcb29b3d0ddcd3d804e32ccfac0d5e57a2b9dc26af1a3b81c8888c95eca96",
+    "transformations": [],
+    "audio_preserved": true,
+    "autoplay_muted": true,
+    "verification_date": "2026-11-08",
+    "production_use": true,
+    "publication_performed": false
+  }
+}

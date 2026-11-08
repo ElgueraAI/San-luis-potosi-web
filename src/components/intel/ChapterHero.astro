@@ -22,34 +22,52 @@ const rec = mediaRecord(PHOTO);
     </nav>
     <p class="label ih__label">Inteligencia turística · San Luis Potosí</p>
     <h1 class="display ih__title">Inteligencia para descubrir mejor</h1>
-    <p class="ih__story">Repartir mejor el viaje, sin empeorarlo.</p>
+    <p class="ih__story">Leer el territorio. Abrir posibilidades.</p>
     <p class="lede ih__lede">Un sistema que conecta la oferta turística registrada, las recomendaciones, las rutas y las oportunidades del territorio, y que explica cada cifra: qué se observó, qué se calculó y qué se simuló.</p>
+    <a class="ih__start" href="#radiografia">Explorar los datos <span aria-hidden="true">↗</span></a>
     <ol class="ih__index" aria-label="Capítulos">
       {chapters.map((c) => <li><a href={`#${c.id}`}><b>{c.letter}</b><span>{c.title}</span></a></li>)}
     </ol>
   </div>
   {rec && <p class="ih__credit tiny">{rec.subject} · <a href={rec.source_url} rel="noopener" target="_blank">{rec.attribution_text}</a></p>}
+  <div class="ih__evidence wrap" aria-label="Cómo leer este tablero">
+    <p><span class="dclass" data-class="observado">Observado</span><span>Lo que registran las fuentes.</span></p>
+    <p><span class="dclass" data-class="derivado">Derivado</span><span>Indicadores con fórmula visible.</span></p>
+    <p><span class="dclass" data-class="simulado">Simulado</span><span>Escenarios, sin visitantes reales.</span></p>
+    <p><span class="dclass" data-class="sin_datos">Sin datos</span><span>Lo que la base aún no permite afirmar.</span></p>
+  </div>
 </header>
 
 <style>
-  .ih { position: relative; isolation: isolate; overflow: hidden; min-height: min(92svh, 56rem); display: grid; align-content: end; padding: calc(var(--slp-header-h) + var(--sc-8)) 0 clamp(3rem, 6vw, 5rem); background: var(--slp-night); }
-  .ih__shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgb(8 22 19 / 0.96) 0%, rgb(8 22 19 / 0.78) 38%, rgb(8 22 19 / 0.3) 72%, rgb(8 22 19 / 0.55) 100%); }
+  .ih { position: relative; isolation: isolate; overflow: hidden; min-height: min(96svh, 64rem); display: grid; align-content: end; padding: calc(var(--slp-header-h) + var(--sc-7)) 0 0; background: #0f2a25; }
+  .ih > :global(.photo) { left: 36%; }
+  .ih__shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, #0f2a25 8%, rgb(15 42 37 / 0.96) 32%, rgb(15 42 37 / 0.48) 65%, rgb(15 42 37 / 0.16)), linear-gradient(0deg, #0f2a25, transparent 60%); }
   .ih__in { position: relative; z-index: 2; display: grid; gap: var(--sc-4); justify-items: start; }
   .ih__crumbs ol { list-style: none; display: flex; flex-wrap: wrap; }
   .ih__crumbs li + li::before { content: '/'; margin: 0 0.45rem; opacity: 0.6; }
   .ih__crumbs, .ih__label { color: rgb(248 244 234 / 0.86); }
   .ih__crumbs a { color: inherit; }
-  .ih__title { font-size: clamp(3rem, 1.5rem + 6.4vw, 7.4rem); line-height: 0.93; max-width: 13ch; text-wrap: balance; }
+  .ih__title { font-size: clamp(3rem, 1.5rem + 5.6vw, 6.8rem); line-height: 0.93; max-width: 13ch; text-wrap: balance; }
   .ih__story { font: 500 italic clamp(1.5rem, 1.2rem + 1.4vw, 2.4rem)/1.1 var(--sc-font-display); color: var(--viz-gold); }
-  .ih__lede { max-width: 44rem; }
+  .ih__lede { max-width: 36rem; font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem); color: #e1e8e1; }
+  .ih__start { display: inline-flex; align-items: center; gap: 2rem; min-height: 44px; color: #f6f1e7; border-bottom: 1px solid #c8a45c; text-decoration: none; font-size: 0.82rem; font-weight: 700; }
+  .ih__start span { color: #c8a45c; font-size: 1.4rem; }
+  .ih__evidence { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; padding-block: 1.5rem; margin-top: 1.5rem; border-top: 1px solid rgb(248 244 234 / 0.2); }
+  .ih__evidence p { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; font-size: 0.78rem; color: #d0dbd4; }
   .ih__index { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: 0; width: 100%; margin-top: var(--sc-5); border-top: 1px solid rgb(248 244 234 / 0.3); }
   .ih__index a { display: grid; gap: 0.35rem; align-content: start; min-height: 4.5rem; padding: 0.9rem 0.9rem 0.9rem 0; color: inherit; text-decoration: none; border-bottom: 1px solid rgb(248 244 234 / 0.16); transition: color var(--sc-d-fast) var(--sc-ease-out); }
   .ih__index b { font: 700 0.64rem/1 var(--sc-font-text); letter-spacing: 0.2em; color: var(--viz-gold); }
   .ih__index span { font: 600 1.2rem/1.1 var(--sc-font-display); }
   .ih__index a:hover span, .ih__index a:focus-visible span { text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
-  .ih__credit { position: absolute; z-index: 2; right: var(--sc-gutter); top: calc(var(--slp-header-h) + 0.6rem); max-width: 60%; text-align: right; color: rgb(248 244 234 / 0.7); }
+  .ih__credit { position: absolute; z-index: 2; right: var(--sc-gutter); top: calc(var(--slp-header-h) + 0.6rem); max-width: 45%; text-align: right; color: #f8f4ea; background: rgb(8 22 19 / 0.8); padding: 0.45rem 0.65rem; }
   .ih__credit a { color: inherit; }
-  @media (max-width: 700px) { .ih__credit { position: relative; right: auto; top: auto; max-width: none; text-align: left; width: var(--slp-wrap); margin: var(--sc-4) auto 0; } }
+  @media (max-width: 700px) {
+    .ih > :global(.photo) { left: 0; }
+    .ih__shade { background: linear-gradient(0deg, #0f2a25 5%, rgb(15 42 37 / 0.92) 48%, rgb(15 42 37 / 0.66)); }
+    .ih__credit { position: relative; right: auto; top: auto; max-width: none; text-align: left; width: var(--slp-wrap); margin: var(--sc-4) auto 0; }
+    .ih__evidence { grid-template-columns: 1fr; gap: 0.8rem; }
+    .ih__index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
 
   /* one orchestrated entrance; nothing moves for reduced motion */
   @keyframes ih-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }

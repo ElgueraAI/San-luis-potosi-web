@@ -1,0 +1,8 @@
+---
+import type { PlaceFacts } from '@/lib/place-facts';
+import { renderPlaceFacts } from '@/lib/render-place-facts';
+import '@/styles/place-facts.css';
+interface Props { model: PlaceFacts; compact?: boolean }
+const { model, compact = false } = Astro.props;
+---
+<Fragment set:html={renderPlaceFacts(model, compact)} />
